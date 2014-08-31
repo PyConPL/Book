@@ -1,4 +1,4 @@
-** SCRUM for Teams - workshop made by Agata Maron, 
+**SCRUM for Teams - workshop made by Agata Maron, 
 STX Next Advocate & Head of Communication Team 
 Time: 2h**
 
