@@ -8,11 +8,11 @@ gracze chcieliby grać. W trakci nauki programowania możliwości nasze znacznie
 Na zajęciach postaramy się napisać grę, która zostanie stworzona w naszym ulubionym języku oraz przy użyciu biblioteki pygame.[1]
 Ale zanim to następi, zaczniemy krótkim teoretyczny wstępem, abyśmy mogli podjeść do tematu jak najbardziej profesjonalnie.
 
-*Czym tak naprawdę jest gra?*
+#### *Czym tak naprawdę jest gra?*
 Gra jest to zabawa, która ma swoje zasady, dzięki którym możemy regulować jej stan, rozgrywkę oraz wygrać lub przegrać. [2]
 Po zapoznaniu się z terminem słowa gra, możemy usiąść i zabrać się za przygotowanie zasad, świata, postaci czy rodzaju gry.
 
-*I co dalej?*
+#### *I co dalej?*
 Jak zapewne wiecie, nie ma "przepisu" na dobrą grę, która osiągnie niesamowity sukces. Większość z nas podczas rozgrywki
 chciała zmienić reguły gry czy dodać coś co wzbogaciłoby rozgrywkę. Dowdzi to, że każdy z nas ma pomysł, który nic nie kosztuje, 
 a może stworzyć nową grę czy też wzbogacić nas o doświadczenie jak dana rzecz faktycznie zadziała i czy zadziała poprawnie.
@@ -21,7 +21,7 @@ stworzenie GDD (Game Design Document)[3], czyli dokumentu opisującego funkcjona
 rozpisany dokument i zadać sobie pytanie: *Czy chcielibyśmy sami zagrać w tę grę?*, pozwoli to nam na określenie grywalności gry wg.
 własnego uznania - *Jeżeli nie tworzymy gry w którą chcielibyśmy zagrać to po co wogóle to robić?*.
 
-*Jak to ma się w świecie gier komputerowych?*
+#### *Jak to ma się w świecie gier komputerowych?*
 Jak powszechnie wiadomo w grach komputerowych królują inne język jako te w których się je tworzy, najbardziej popularne to C++, C#, JavaScript, HTML5 
 czy Flash. Natomiast języki takie jak python czy lua, często są wykorzystywane jako języki pomocniczne do pisania szybkich skryptów, ale niestety samo 
 pisanie gry w tych języka często jest mniej optymalne niż w wyżej wymienionych. Język C++ jest najczęściej wykorzystywany do tworzenia silników gry 
