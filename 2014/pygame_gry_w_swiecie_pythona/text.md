@@ -33,7 +33,8 @@ najbardziej popularnych silników jest LOVE.[7]
 
 Na naszych zajęciach wykorzystami bibliotekę pythonową *pygame*.[1] Zapoznamy się z funkcjami tej biblioteki oraz spróbujemy stworzyć grę.
 W trakcie warsztatów również poruszymy kwestię jak w łatwy sposób stworzyć grę przy użyciu mechaniki oraz wykorzystania gotowych rzeczy, które
-można znaleźć w sieci.
+można znaleźć w sieci tj. assety (dźwięku, grafikę). Wybierzemy również jeden z rodzajów gier na którym się skupimy i postaramy się w ciągu
+kilku godzin stworzyć pierwsze arcydzieło. :)
 
 ### Rodzaje gier:
 * gry rekreacyjne
@@ -48,6 +49,14 @@ można znaleźć w sieci.
 * gry symulacyjne
 * survival horrory
 * gry edukacyjne
+
+### Podsumowanie
+
+Aby napisać grę wystarczy pomysł, mechanika oraz grafika i dźwięk. W przypadku, gdy brakuje nam umiejętności do stworzenia grafiki, muzyki czy dźwięków,
+istnieją serwis, gdzie można pobrać i wykorzystać całkowicie za darmo. Odpowiednio stworzony dokument GDD oraz zbalansowanie świata gry, pozwoli na 
+stworzenie gry, która będzie grywalna. Oczywiście wszystkie elementy z którymi się zapoznamy nie dadzą nam możliwości stworzenia gier jak GTA, BattleField
+czy nawet mniej znanych tytułów, ale od czegoś trzeba zacząć, a przy okazji pobawimy się pythonem i mam nadzieję, że stworzymy w pełni funkcjonalne i grywalne
+gry. Być może uda się wspólnie wypracować dzieło, którym będziemy mogli się pochawlić na następnym PyConie. :)
 
 ### Referencje
 
