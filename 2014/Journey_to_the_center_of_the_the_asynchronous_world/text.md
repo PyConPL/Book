@@ -167,7 +167,7 @@ for i in yieldfrom(x, y):
 
 Expected output is series of numbers starting from 1 until 6. What happened here
 is that both these `yield from` statements took values from both lists, consumed
-them and joined them as if they were one list. So in it's simplest form, these can
+them and joined them as if they were one list. So in its simplest form, these can
 be seen as hidden for loops, but soon you'll see there's more to it. What else
 can be done from here is generator chaining, meaning iteration can be delegated
 even further. Let's create something more complicated:
