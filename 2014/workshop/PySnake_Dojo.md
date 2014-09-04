@@ -47,6 +47,6 @@ Wybieramy więc dowolny z punktów A lub B oraz szukamy ich sąsiedztwa wraz z n
 W naszej grze jednak planszą są same węże, więc ulega ona zmianie podczas każdej tury. Pozostawia to pole do popisu dla uczestników przy programowaniu. Można postawić kilka pytań, np. jak powinien się zachować nasz wąż w sytuacji, gdy jest całkowicie odgrodzony od pożywienia? Albo czy można napisać algorytm, który zamiast poszukiwać jedzenia będzie starał się przeciąć drogę przeciwnikowi albo uwięzić go na zamkniętym obszarze planszy.
 
 Same warsztaty będą podzielone na trzy części:
-1. Powitanie, wstęp teoretyczny, wybranie zespołów (ok. 30 minut)
-2. Pracę nad własnym algorytmem (ok. 2 godziny).
-3. Rozgrywki oraz wyłonienie zwycięzcy (ok. 30 minut)
+1.  Powitanie, wstęp teoretyczny, wybranie zespołów (ok. 30 minut)
+2.  Pracę nad własnym algorytmem (ok. 2 godziny).
+3.  Rozgrywki oraz wyłonienie zwycięzcy (ok. 30 minut)
