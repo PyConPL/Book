@@ -8,7 +8,7 @@ usprawnienia w już istniejących modułach oraz wiele usprawnień "pod maską".
 Ta pozorna stagnacja w rozwoju języka została zaplanowana oraz wprowadzona
 w życie z pełną premedytacją (PEP 3003 o złowróżebnym tytule *Python Language Moratorium*)
 i ma ona na celu umożliwienie "dogonienia" bazowej implementacji (CPython) przez inne
-implementacje języka takie jak Jython czy PyPy.
+implementacje języka, takie jak Jython czy PyPy.
 
 Brak zmian w składni nie oznacza jednak, że przeciętny pythonista nie dostanie
 do rąk nowych zabawek, ciekawych narządzi, a jego życie nie stanie się jeszcze
@@ -30,7 +30,7 @@ standardowej otwiera wiele nowych możliwości.
 Szczegółowy opis biblioteki wykracza daleko poza ramy niniejszego
 artykułu, dlatego wymienię tylko główne różnice pomiędzy Twisted i `asyncio`:
 
-* `asyncio` jest prostsze i składa się z mniejszej ilości modułów. Z jednej strony
+* `asyncio` jest prostsze i składa się z mniejszej liczby modułów. Z jednej strony
   `asyncio` nie ma wszystkich możliwości Twisted, z drugiej jednak powinno być łatwiejsze
   w użyciu i nowy użytkownik powinien móc się szybciej wdrożyć (korzystniejsza krzywa uczenia się).
 * Dokumentacja `asyncio` jest przejrzysta i ułożona w sposób intuicyjny dla
@@ -304,7 +304,7 @@ na to, ile dobrego kryje się za tą mętną definicją:
 	... 
 	>>> @fun.register(Sequence)
 	... def _(arg):
-	...     print("Sekwencja o dugości ", len(arg))
+	...     print("Sekwencja o długości ", len(arg))
 	... 
 	>>> @fun.register(tuple)
 	... def _(arg):
@@ -313,13 +313,13 @@ na to, ile dobrego kryje się za tą mętną definicją:
 	>>> fun(11)
 	Mamy numerek!
 	>>> fun("tekścik")
-	Sekwencja o dugości  7
+	Sekwencja o długości  7
 	>>> fun([1, 3, 5])
-	Sekwencja o dugości  3
+	Sekwencja o długości  3
 	>>> fun((3, 4))
 	Nie lubię tupli!
 	>>> fun(set())
-	Łapię całą resztę, tym razem by to <class 'set'>
+	Łapię całą resztę, tym razem był to <class 'set'>
 
 
 #### Poprawa bezpieczeństwa
@@ -332,7 +332,7 @@ z licznych zmian, wpływających korzystnie na bezpieczeństwo nowego Pythona.
 ### Podsumowanie
 
 Python 3.4 zdaje się być bardzo dobrym wydaniem, pomimo braku (a może dzięki brakowi?)
-zmian w składni. Wprowadza on sereg usprawnień oraz oddaje w ręce użytkownika
+zmian w składni. Wprowadza on szereg usprawnień oraz oddaje w ręce użytkownika
 kilka bardzo dobrych bibliotek wbudowanych, które z pewnością znajdą sobie
 miejsce w wielu plikach z rozszerzeniem `.py`.
 
@@ -351,3 +351,5 @@ też nastręczać problemów przy aktualizacji<sup>*</sup>.
 * http://hg.python.org/cpython/ - repozytorium zawierające źródła
   (oraz nader ciekawe commit-logi) Pythona.
 * http://legacy.python.org/dev/peps/ - propozycje usprawnień Pythona.
+
+<!-- Przeczytane: Piotr Kasprzyk -->
