@@ -93,7 +93,7 @@ Dyno Manager zwróci status 503. Należy mieć na uwadze, że pomimo wysłania s
 przetwarzać zapytanie, w tym przeprowadzać rozpoczęte operacje na bazie danych, co może prowadzić do niespójności.
 * 512MB pamięci operacyjnej - jeśli aplikacja potrzebuje dużej ilości pamięci operacyjnej, Heroku nie jest najlepszym
 wyborem - po przekroczeniu 512MB Heroku zacznie używać pliku wymiany (SWAP), co drastycznie wpłynie na wydajność.
-* usypianie dyno - jeśli nasza aplikacja wykorzystuje tylko jedno Dyno i w ciagu godziny nie było wykonane żadne zapytanie, Dyno zostaje uśpione. Uśpione Dyno nie pracuje, więc jeśli zostanie wysłane do niego zapytanie to Dyno Manager musi je najpierw wybudzić, co powoduje, że pierwsze zapytania mogą mieć dłuższy czas oczekiwania na odpowiedź.
+* usypianie Dyno - jeśli nasza aplikacja wykorzystuje tylko jedno Dyno i w ciagu godziny nie było wykonane żadne zapytanie, Dyno zostaje uśpione. Uśpione Dyno nie pracuje, więc jeśli zostanie wysłane do niego zapytanie to Dyno Manager musi je najpierw wybudzić, co powoduje, że pierwsze zapytania mogą mieć dłuższy czas oczekiwania na odpowiedź.
 
 Niewątpliwym plusem Heroku jest natomiast minimalna ilość pracy jaką należy wykonać, aby uruchomić aplikację. Dodatkowo Heroku oferuje bardzo dużo dodatków, np.
 
