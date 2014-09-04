@@ -1,4 +1,5 @@
-# Tornado and Friends workshop
+# Tornado and Friends workshop - Wesley Mason
+
 ## Learn how to write fast asynchronous web services with Tornado and Python
 
 The world isn't blocking; why should your app be?
