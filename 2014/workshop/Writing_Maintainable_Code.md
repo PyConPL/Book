@@ -39,7 +39,7 @@ During the workshop, we'll practice refactoring code to become better structured
 
 My hope is that workshop will help you write code that is easier to read, to understand, and to extend, and that this will help protect you from that violent psychopath who knows where you live!
 
-[0] http://stackoverflow.com/questions/876089
-[1] http://www.cs.nott.ac.uk/~cah/G51ISS/Documents/NoSilverBullet.html
-[2] "Essence", from a Latin word meaning "to be"
-[3] "Accidence", from a Latin word meaning "to happen alongside"
+[0] http://stackoverflow.com/questions/876089  
+[1] http://www.cs.nott.ac.uk/~cah/G51ISS/Documents/NoSilverBullet.html  
+[2] "Essence", from a Latin word meaning "to be"  
+[3] "Accidence", from a Latin word meaning "to happen alongside"  
