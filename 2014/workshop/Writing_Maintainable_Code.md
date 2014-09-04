@@ -1,7 +1,6 @@
 Authors: Peter Inglesby
 
-# Writing Maintainable Code
-### Peter Inglesby
+# Writing Maintainable Code - Peter Inglesby
 
 
 A few thought on maintainability and complexity
