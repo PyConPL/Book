@@ -5,24 +5,25 @@ Wyobraźmy sobię osobę związaną z branżą IT, która nie spotkała się jes
 Nie da się. Słowa *as a Service* robią ogromną karierę i cieszą się rosnacą popularnością. 
 Z chmur korzysta coraz więcej użytkowników, od małych developerów po wielkie korporacje. 
 Jeśli ktoś myśli, że chmury obliczeniowe nie są dla niego, najprawdopodobniej jest w błędzie. 
-Jeśli ktoś myśli, że nie używa ich na codzień, również najprawdopodobniej nie ma racji. 
+Jeśli ktoś uważa, że nie używa ich na codzień, również najprawdopodobniej nie ma racji. 
 Serwisy takie jak Facebook albo Gmail to typowe usługi chmurowe. Dropbox i Dysk Google to niemal książkowe przykłady
-chmury oferującej usługę przechowywania danych. Przykłady można długo mnożyć, skupmy się jednak na tym, jak
-wykorzystać *cloud computing* do rozwijania własnych Pythonowych aplikacji. Na początek jednak krótka notka historyczna. 
+chmury oferującej usługę przechowywania danych. Przykłady można mnożyć. Skupmy się jednak na tym, jak
+wykorzystać *cloud computing* do rozwijania własnych Pythonowych aplikacji. Na początek jednak krótka nota historyczna. 
 
 ## Krótka historia
-Mogłoby się wydawać, że chmury obliczeniowe to wynalazek ostatnich kilku lat. A jednak ich idea sięga końcówki lat 60-tych ubiegłego wieku i zakłada istnienie rozproszonych, skalowalnych systemów, dostępnych z dowolnego miejsca na świecie. Przez lata jednak niewiele się działo w tym kierunku, przynajmniej w sferze rozwiązań
+Mogłoby się wydawać, że chmury obliczeniowe to wynalazek ostatnich kilku lat. A jednak... Ich idea sięga końca lat 60-tych ubiegłego wieku i zakłada istnienie rozproszonych, skalowalnych systemów, dostępnych z dowolnego miejsca na świecie. Przez lata jednak niewiele się działo w tym kierunku, przynajmniej w sferze rozwiązań
 dostepnych publicznie. W 1999 roku firma Salesforce zaczęła dostarczać swoje produkty przez przeglądarkę - był to 
 kamień milowy i prekursor do modelu *Software as a Service*. Następny kamień położył Amazon, startując w 2002 roku
-z Amazon Web Services a 4 lata później udostępniajac usługę *Elastic Cloud Computing* (EC2), będącą udzieleniem
+z Amazon Web Services, a 4 lata później udostępniajac usługę *Elastic Cloud Computing* (EC2) będącą udzieleniem
 dostępu do maszyny wirtualnej pracującej w chmurze. Od tego dnia Internet nie był już taki sam. W 2009 roku do wyścigu
-dołączył Google a chwilę później Microsoft. Następnie nastąpił boom na różne usługi dostępne w modelu chmury obliczeniowej i ten boom trwa po dzień dzisiejszy.
+dołączył Google, a chwilę później Microsoft. Następnie nastąpił boom na różne usługi dostępne w modelu chmury obliczeniowej i trwa on po dzień dzisiejszy.
 
 ## Chmura obliczeniowa
 Czym więc jest w obecnym czasie chmura? Najprościej - usługą. Usługą przechowywania plików, albo usługą 
-serwisu bazodanowego. Może to byc też usługa udostępnienia maszyny wirtualnej, albo przeprowadzania obliczeń.
+serwisu bazodanowego. Może to być też usługa udostępnienia maszyny wirtualnej, albo przeprowadzania obliczeń.
 Może to być jakakolwiek usługa, możliwa do dostarczenia przez Internet, za jaką użytkownicy będą skłonni
-zapłacić. Obecnie chmury możemy podzielić na trzy typy:
+zapłacić. 
+Obecnie chmury możemy podzielić na trzy typy:
 
 * Infrastructure as a Service (IaaS) - w tym modelu usługą jest najczęściej maszyna wirtualna
 * Platform as a Service (PaaS) - dostęp do platformy, na której możemy uruchamiać aplikacje
@@ -38,8 +39,8 @@ oprogramowaniem dostępnym przez przeglądarkę. Oprogramowanie tego typu jest b
 Koszty usług chmurowych są bardzo zróżnicowane i każdy operator ma swój cennik za poszczególne produkty.
 Panuje jednak jedna zasada - klient jest rozliczany z używanych zasobów. Dla przykładu jeśli trzeba przeprowadzić
 skomplikowane obliczenia, można utworzyć kilka maszyn wirtualnych, połączyć je w macierz i po zakończeniu obliczeń
-je wyłaczyć. Koszty będą generowane tylko podczas pracy tych maszyn. Jest to ogromna zaleta chmur, bez których
-konieczny byłby zakup fizycznych komputerów, które byłyby wykorzystywane sporadycznie a koszt ich zakupu i 
+je wyłączyć. Koszty będą generowane tylko podczas pracy tych maszyn. Jest to ogromna zaleta chmur, bez których
+konieczny byłby zakup fizycznych komputerów, które byłyby wykorzystywane sporadycznie, a koszt ich zakupu i 
 konserwacji znacząco przewyższałby koszty takiego samego zestawu w chmurze.
 
 ## Przygotowania
@@ -49,11 +50,11 @@ np. Django czy Flask. Możemy również sami zaimplementować nasz serwer używa
 biblioteki standardowej. Dla dalszych rozważań przyjmijmy, że nasza aplikacja będzie korzystała z Django. Ta aplikacja
 będzie korzystała z relacyjnej bazy danych Postgresql (choć może być też np. MySQL) i będzie umożliwiała 
 użytkownikom wgrywanie plików do 30MB. Komunikację będziemy prowadzili po protokole HTTPS. Mamy wykupioną własną domenę
-oraz certyfikat SSL. Spodziewamy się umiarkowanego ruchu, który z czasem będzie wzrastał. Fajnie. Co dalej?
+oraz certyfikat SSL. Spodziewamy się umiarkowanego ruchu, który z czasem będzie wzrastał. Dobrze i co dalej?
 
 Musimy teraz wybrać typ chmury z jakiej chcemy korzystać oraz jej dostawcę. Dla naszej aplikacji rozważmy wady
 i zalety modeli IaaS oraz PaaS. Jako reprezentantów obu modeli przyjmijmy: Amazon EC2 dla infrastruktury oraz Heroku
-dla platformy. Sprawdźmy najpierw jak dokładnie działają obydwa te serwisy.
+dla platformy. Sprawdźmy najpierw, jak dokładnie działają obydwa te serwisy.
 
 ### Amazon EC2
 Usługa Elastic Cloud Computing jest niczym innym, jak udostępnianiem wirtualnych maszyn. Możemy zatem utworzyć maszynę
@@ -72,7 +73,7 @@ stałego adresu musimy przystąpić do konfiguracji, czyli m.in.
 * wgrać, skonfigurować i uruchomić naszą aplikację i wszystkie jej komponenty
 
 Jak widać, na uruchomienie aplikacji na EC2 należy poświecić nieco czasu i pracy, jednak w zamian mamy pełną kontrolę 
-nad tym co się właściwie dzieje i jedyne ograniczenia wynikają głównie z możliwości utworzonej maszyny.
+nad tym, co się właściwie dzieje. Jedyne ograniczenia wynikają głównie z możliwości utworzonej maszyny.
 
 ### Heroku
 Heroku jest platformą uruchomieniową dla aplikacji napisanych w różnych językach - Ruby, Python, Java, NodeJS i innych.
@@ -92,7 +93,7 @@ Dyno Manager zwróci status 503. Należy mieć na uwadze, że pomimo wysłania s
 przetwarzać zapytanie, w tym przeprowadzać rozpoczęte operacje na bazie danych, co może prowadzić do niespójności.
 * 512MB pamięci operacyjnej - jeśli aplikacja potrzebuje dużej ilości pamięci operacyjnej, Heroku nie jest najlepszym
 wyborem - po przekroczeniu 512MB Heroku zacznie używać pliku wymiany (SWAP), co drastycznie wpłynie na wydajność.
-* usypianie dyno - jeśli nasza aplikacja wykorzustuje tylko jedno Dyno i w ciagu godziny nie było wykonane żadne zapytanie, Dyno zostaje uśpione. Uśpione Dyno nie pracuje, więc jeśli zostanie wysłane do niego zapytanie to Dyno Manager musi je najpierw wybudzić, co powoduje, że pierwsze zapytania mogą mieć dłuższy czas oczekiwania na odpowiedź.
+* usypianie dyno - jeśli nasza aplikacja wykorzystuje tylko jedno Dyno i w ciagu godziny nie było wykonane żadne zapytanie, Dyno zostaje uśpione. Uśpione Dyno nie pracuje, więc jeśli zostanie wysłane do niego zapytanie to Dyno Manager musi je najpierw wybudzić, co powoduje, że pierwsze zapytania mogą mieć dłuższy czas oczekiwania na odpowiedź.
 
 Niewątpliwym plusem Heroku jest natomiast minimalna ilość pracy jaką należy wykonać, aby uruchomić aplikację. Dodatkowo Heroku oferuje bardzo dużo dodatków, np.
 
@@ -125,11 +126,11 @@ Service* - **RDS**. Wybór wariantu nie jest prosty - w przypadku instalacji na 
 problemy ze skalowalnością, ale korzystając z RDS generujemy dodatkowe koszta w przypadku używania tylko jednej 
 instancji EC2 dla obsługi naszej aplikacji.
 
-Na Heroku sprawa jest rozwiązana za nas. Baza danych dostępna jest jako dodatek a my musimy jedynie wybrać plan cenowy. Na początek wystarczy plan darmowy, ale posiada on limit 10 000 wierszy. Po przekroczeniu tej ilości baza przestanie dodawać nowe rekordy i będziemy zmuszeni do zmiany planu na płatny.
+Na Heroku sprawa jest rozwiązana za nas. Baza danych dostępna jest jako dodatek, a my musimy jedynie wybrać plan cenowy. Na początek wystarczy plan darmowy, ale posiada on limit 10 000 wierszy. Po przekroczeniu tej ilości baza przestanie dodawać nowe rekordy i będziemy zmuszeni do zmiany planu na płatny.
 
 ### Wgrywanie plików do 30 MB
 To jest kluczowy punkt w specyfikacji wymagań. Umożliwienie wgrania plików przez użytkowników oznacza, że musimy je gdzieś przechowywać, a ich rozmiar będzie rósł wraz z ilością użytkowników. Jeśli pamiętamy ograniczenia zarówno 
-EC2 jak Heroku, dochodzimy do wniosku, że żadne z nich nam nie wystarczy. Jeśli wybierzemy EC2 to prędzej czy później 
+EC2 jak i Heroku, dochodzimy do wniosku, że żadne z nich nam nie wystarczy. Jeśli wybierzemy EC2 to prędzej czy później 
 wyczerpie nam się miejsce na dysku. W przypadku Heroku system plików jest ulotny, więc wgrane pliki są nietrwałe. 
 Rozwiązaniem obydwu problemów będzie skorzystanie z kolejnej usługi - *Amazon Secure Storage Service* (Amazon **S3**).
 Ta usługa jest również polecana przez Heroku do przechowywania plików. S3 jest, jak nazwa mówi, usługą przechowywania 
@@ -138,21 +139,21 @@ Do wgrywania plików na S3 możemy użyć modułu `boto`.
 
 ### Obsługa HTTPS na własnej domenie.
 Obydwa serwisy umożliwiają bezpieczną komunikację. Na EC2 należy wgrać certyfikaty na serwer WWW i odpowiednio go 
-skonfigurować. Na Heroku niestety, chcąc korzystać z HTTPS z własną domeną, poza wgraniem certyfikatów jesteśmy zmuszeni do dokupienia dodatku *SSL Endpoint* w cenie 20$/miesiąc.
+skonfigurować. Niestety na Heroku, chcąc korzystać z HTTPS z własną domeną, poza wgraniem certyfikatów jesteśmy zmuszeni do dokupienia dodatku *SSL Endpoint* w cenie 20$/miesiąc.
 
 ### Skalowalność
-Skalowalność jest bardzo ważym aspektem aplikacji i obywa serwisy oferują wsparcie. Tak samo jak w przypadku innych 
-wymagań zapewnienie skalowalności na EC2 sprawa jest bardziej złożona i wymaga dodania maszyny typu *Load Balancer* 
+Skalowalność jest bardzo ważnym aspektem aplikacji, obydwa serwisy oferują wsparcie. Tak samo, jak w przypadku innych 
+wymagań, zapewnienie skalowalności na EC2 jest bardziej złożone i wymaga dodania maszyny typu *Load Balancer* 
 oraz utworzenia żądanej ilości maszyn z pracującą aplikacją. Na Heroku można zmienić ilość używanych Dynos korzystając z przeglądarki i ustawiając żądaną ilosć w konfiguracji aplikacji.
 
 ### Konkluzja
-Obydwa serwisy jak najbardziej nadają się do serwowania aplikacji pythonowych a ich różnice wynikają w dużej mierze z 
+Obydwa serwisy jak najbardziej nadają się do serwowania aplikacji pythonowych, a ich różnice wynikają w dużej mierze z 
 wyboru modelu, w jakich pracują. W ogólnym rozliczeniu EC2 w modelu IaaS będzie wypadało korzystniej pod kątem 
 miesięcznych opłat, lecz będzie wymagało większych nakładów na konfiguracje i utrzymanie systemu. Heroku jest wygodniejsze w obsłudze, jednak w środowisku produkcyjnym zapewne będzie droższe od EC2.
 
 ## Podsumowanie
 Jak widać wybór serwisu chmurowego dla naszej aplikacji nie jest sprawą prostą i wymaga bardzo indywidualnego 
-podejścia. Pod uwagę należy wziać zarówno obecne wymagania funkcjonalne i pozafunkcjonalne oprogramowania, perspektywy rozwoju i budżet jakim dysponujemy.
+podejścia. Pod uwagę należy wziąć zarówno obecne wymagania funkcjonalne i pozafunkcjonalne oprogramowania, perspektywy rozwoju oraz budżet jakim dysponujemy.
 
 ### Źródła
 
