@@ -1,37 +1,40 @@
-# Pygame - gry w swiecie pythona
+# Pygame - gry w świecie Pythona - Łukasz Jagodziński
 
-### Jak zacząć?
+## Jak zacząć?
 
 Od najmłodszych lat, każdy z nas ma doczynienia z grami planszowymi, komputerowymi, konsolowymi czy innym rodzajem gier.
 W późniejszym wieku lub nawet w młodszych latach, niektórzy z nas, bądź większość, chciała stworzyć własną grę w którą
 gracze chcieliby grać. W trakci nauki programowania możliwości nasze znacznie się zwiększyły, aby stworzyć grę komputerową.
 Na zajęciach postaramy się napisać grę, która zostanie stworzona w naszym ulubionym języku oraz przy użyciu biblioteki pygame.[1]
-Ale zanim to następi, zaczniemy krótkim teoretyczny wstępem, abyśmy mogli podjeść do tematu jak najbardziej profesjonalnie.
+Ale zanim to nastąpi, zaczniemy krótkim teoretyczny wstępem, abyśmy mogli podjeść do tematu jak najbardziej profesjonalnie.
 
-#### *Czym tak naprawdę jest gra?*
+## Czym tak naprawdę jest gra?
+
 Gra jest to zabawa, która ma swoje zasady, dzięki którym możemy regulować jej stan, rozgrywkę oraz wygrać lub przegrać. [2]
 Po zapoznaniu się z terminem słowa gra, możemy usiąść i zabrać się za przygotowanie zasad, świata, postaci czy rodzaju gry.
 
-#### *I co dalej?*
+## I co dalej?
+
 Jak zapewne wiecie, nie ma "przepisu" na dobrą grę, która osiągnie niesamowity sukces. Większość z nas podczas rozgrywki
-chciała zmienić reguły gry czy dodać coś co wzbogaciłoby rozgrywkę. Dowdzi to, że każdy z nas ma pomysł, który nic nie kosztuje, 
+chciała zmienić reguły gry czy dodać coś co wzbogaciłoby rozgrywkę. Dowodzi to, że każdy z nas ma pomysł, który nic nie kosztuje, 
 a może stworzyć nową grę czy też wzbogacić nas o doświadczenie jak dana rzecz faktycznie zadziała i czy zadziała poprawnie.
 W pewien sposób jest to wstęp do projektowania gier czy też samej produkcji gry. Jedną z metody rozpoczęcia pracy nad grą jest
-stworzenie GDD (Game Design Document)[3], czyli dokumentu opisującego funkcjonalność i opis samej gry. Następnie można sprawdzić
+stworzenie GDD (Game Design Document)[3]. Dokumentu opisującego funkcjonalność i opis samej gry. Następnie można sprawdzić
 rozpisany dokument i zadać sobie pytanie: *Czy chcielibyśmy sami zagrać w tę grę?*, pozwoli to nam na określenie grywalności gry wg.
 własnego uznania - *Jeżeli nie tworzymy gry w którą chcielibyśmy zagrać to po co wogóle to robić?*.
 
-#### *Jak to ma się w świecie gier komputerowych?*
+## Jak to ma się w świecie gier komputerowych?
+
 Jak powszechnie wiadomo w grach komputerowych królują inne język jako te w których się je tworzy, najbardziej popularne to C++, C#, JavaScript, HTML5 
-czy Flash. Natomiast języki takie jak python czy lua, często są wykorzystywane jako języki pomocniczne do pisania szybkich skryptów, ale niestety samo 
+czy Flash. Natomiast języki takie jak Python czy Lua, często są wykorzystywane jako języki pomocnicze do pisania szybkich skryptów, ale niestety samo 
 pisanie gry w tych języka często jest mniej optymalne niż w wyżej wymienionych. Język C++ jest najczęściej wykorzystywany do tworzenia silników gry 
-(ang. game engine)[4], a python jest użyty, aby oskryptować odpowiednie narzędzia silnika graficznego. Oczywiście dla lua czy python istnieją również silniki 
+(ang. game engine)[4], a Python jest użyty, aby oskryptować odpowiednie narzędzia silnika graficznego. Oczywiście dla języków Lua czy Python istnieją również silniki 
 czy biblioteki, aby wspomóc te języki w programowanie gier. Istnieją odpowiedni silnik w zależności od naszych potrzeb tj. do gier 2D i 3D.
-Dla python najpopularniejsze silniki zostały przedstawione na wiki pythonowym.[5] A jeżeli chodzi o język lua tutaj mamy trochę gorszą sytuację, gdyż tych 
-silników jest mniej, a niestety nie ma ich wszystkich spisanych, prawdopodobnie przyczyną jest mniejsza popularność niż pythona.[6] Natomiast jednym z 
+Dla python najpopularniejsze silniki zostały przedstawione na wiki pythonowym.[5] A jeżeli chodzi o język Lua tutaj mamy trochę gorszą sytuację, gdyż tych 
+silników jest mniej, a niestety nie ma ich wszystkich spisanych, prawdopodobnie przyczyną jest mniejsza popularność niż Pythona.[6] Natomiast jednym z 
 najbardziej popularnych silników jest LOVE.[7]
 
-Na naszych zajęciach wykorzystami bibliotekę pythonową *pygame*.[1] Zapoznamy się z funkcjami tej biblioteki oraz spróbujemy stworzyć grę.
+Na naszych zajęciach wykorzystamy bibliotekę *Pygame*.[1] Zapoznamy się z funkcjami tej biblioteki oraz spróbujemy stworzyć grę.
 W trakcie warsztatów również poruszymy kwestię jak w łatwy sposób stworzyć grę przy użyciu mechaniki oraz wykorzystania gotowych rzeczy, które
 można znaleźć w sieci tj. assety (dźwięku, grafikę). Wybierzemy również jeden z rodzajów gier na którym się skupimy i postaramy się w ciągu
 kilku godzin stworzyć pierwsze arcydzieło. :)
