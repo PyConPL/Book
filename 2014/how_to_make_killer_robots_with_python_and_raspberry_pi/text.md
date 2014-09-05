@@ -53,7 +53,7 @@ need to comment out the blacklisted modules from
 need any fancy settings or permissions, you will still need to make it run at
 system startup, or have some other way to start it.
 
-I won't write much about the actual code here. You are a programmer, after all,
+I won't write much about the actual code here. After all, you are a programmer and
 it's what you want to solve by yourself. Just a few hints. Look for "inverse
 kinematics" -- that's what you will need to translate the coordinates of the
 leg tips into actual servomotor angles. And the position of the robot's body
