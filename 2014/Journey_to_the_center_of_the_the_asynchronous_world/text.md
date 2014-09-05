@@ -1,15 +1,15 @@
-Journey to the center of the the asynchronous world
+Journey to the center of the asynchronous world
 ===================================================
 
 Introduction
 ------------
 
-One of the hottest topics, most frequently mentioned since python3.4 was
+One of the hottest topics, most frequently mentioned since Python3.4 was
 released, is [asyncio](https://docs.python.org/3/library/asyncio.html) module,
 introduced in [PEP 3156](http://legacy.python.org/dev/peps/pep-3156/).
 In the following short article I'll try to show you some cool stuff that lies
 at the core of this module. But before we dig in, one warning, most of the
-samples presented in this article are written in python3.4, so make sure to use
+samples presented in this article are written in Python3.4, so make sure to use
 at least that version when running examples which are available at
 [my github account](https://github.com/soltysh/talks/tree/master/coroutines_generators/examples).
 
@@ -100,7 +100,7 @@ Got:  Hello
 This was introduced in [PEP 342](http://legacy.python.org/dev/peps/pep-0342/),
 where the idea of coroutines appeared for the first time. This PEP extended the functionality
 of generators presented in the first example with possibility to send values
-to the generators. So basically any function having `yield` statement in it's
+to the generators. So basically any function having `yield` statement in its
 body is actually a generator. Meaning it's not gonna to execute, instead it'll
 return a generator object, which provides the following operations:
 * `next()` - advance code to `yield` statement and emit value, if such was
@@ -115,7 +115,7 @@ return a generator object, which provides the following operations:
   to `yield` statement.
 
 In Python 3.4 specifically you can have both `yield` and `return` statement,
-in previous python versions that was syntax error. Currently if you write,
+in previous Python versions that was syntax error. Currently if you write,
 [generator3.py](https://github.com/soltysh/talks/tree/master/coroutines_generators/examples/generator3.py):
 
 ```python
@@ -220,7 +220,7 @@ with tempdir() as dirname:
 ```
 
 This sample context manager will create a temporary directory, whose name will be
-printed and then it'll check for it's existence. Thanks to awesome python core
+printed and then it'll check for its existence. Thanks to awesome Python core
 developers, `yield` and `@contextmanager` decorator the above code can be
 rewritten as follows,
 [contextmanager2.py](https://github.com/soltysh/talks/tree/master/coroutines_generators/examples/contextmanager2.py):
@@ -293,12 +293,12 @@ the reader.
 `asyncio` basics
 ----------------
 
-OK, we've reached a point where I've showed you a couple of cool tricks with
+OK, we've reached a point where I've shown you a couple of cool tricks with
 generators, but you may ask how it's useful? What can we do with it? Let's then
 move to the final part where I'll show you how using previous parts we can
-bypass certain python limitations and create `asyncio` core functionality.
+bypass certain Python limitations and create `asyncio` core functionality.
 
-Let's start with creating a task object, which is basically what I've showed you
+Let's start with creating a task object, which is basically what I've shown you
 just before, but this time, we'll put the idea into a reusable object,
 [task1.py](https://github.com/soltysh/talks/tree/master/coroutines_generators/examples/task1.py):
 
@@ -331,7 +331,7 @@ feed ourselves with the result to proceed execution to the next `yield`
 statement.
 
 So let's create a recursive function, to show that using above tricks we can
-bypass python's recursion limit which by default is
+bypass Python's recursion limit which by default is
 [1000](http://hg.python.org/cpython/file/3.4/Python/ceval.c#l687).
 
 ```python
@@ -341,14 +341,14 @@ def recursive(pool, n):
     Task(recursive(pool, n+1)).step()
 ```
 
-If you run it long enough, you'll notice that using this little trick python
+If you run it long enough, you'll notice that using this little trick Python
 doesn't have any more stack limit. What's more, the execution does not provide
 any overhead when run. You should definitely check it if you don't believe me.
 
 There's still one more modification to our `Task` object I'd like to show you.
 So far this class can only process background tasks, but how to return something
 from that background task? Let's use `concurrent.futures.Future` object as a
-base class for our `Task`. To do it we need to do little python patching,
+base class for our `Task`. To do it we need to do little Python patching,
 meaning we need to make `Task` class to be iterable to be used inside `yield from`
 statement:
 
@@ -420,3 +420,5 @@ I also would like to thank him for giving me the chance to use his materials as
 an input for my article and presentation. So definitely you should check that
 out as well as his awesome mind-blowing book
 [Python Cookbook](http://shop.oreilly.com/product/0636920027072.do).
+
+<!-- Przeczytane: Piotr Kasprzyk -->
