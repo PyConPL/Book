@@ -35,7 +35,7 @@ I²C, depending on what you get. You can even make your own out of an Arduino,
 especially if you need some custom functionality.
 
 Now, suppose you have all the parts, and you start assembling it all together.
-It's easy to just glue everything together and solder all the wires. But then,
+It's easy to just glue everything together and solder all the wires. But
 then you realize, that you attached one of the legs up-side down, one of the
 servomotors is fried and you need a larger capacitor. So you have to break it
 all apart again. What a pain! Better to use gold pins, plugs, screws, and even
