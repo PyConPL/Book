@@ -19,9 +19,9 @@ W przypadku snake, zarówno graf jak i heurystka zostają zredukowane do płaszc
 	else:
 		munch_munch()
 
-Jednak nasz graf posiada przeszkody, miejsca zabronione i niedostępne. Wracając więc do algorytmu A* : dla każdego punktu nasz wąż ma co najwyżej trzy możliwe punkty wyboru drogi. Jeżeli ilość możliwości wynosi 0, zwiastuje to szybki koniec węża. Początkiem startowym jest głowa, natomiast końcowym jedzenie. Dla każdego punktu planszy można w bardzo prosty sposób obliczyć heurystykę, a najlepiej w przestrzeni dwuwymiarowej sprawdzi się do tego twierdzenie pitagorasa. Znając odległości punktu i jedzenia na obu osiach, x i y nie jest problemem obliczenie odległości pomiędzy tymi dwoma węzłami. Jeżeli więc jedzenie znajduje się w punkcie (22, 36), wartość heurystyki dla punktu (10, 12) będzie wynosić pierwiastek z (22-10 + 36-12), czyli 6. Sposób liczenia heurystyki jest umowny - ważne, aby był stały dla każdego punktu. Czyli zamiast faktycznej odległości liczonej za pomocą twierdzenia pitagorasa, równie dobrze możemy liczyć sumę odległości liczonej po obu osiach, która dla powyższego przykładu będzie wynosić 36.
+Jednak nasz graf posiada przeszkody, miejsca zabronione i niedostępne. Wracając więc do algorytmu A* : dla każdego punktu nasz wąż ma co najwyżej trzy możliwe punkty wyboru drogi. Jeżeli liczba możliwości wynosi 0, zwiastuje to szybki koniec węża. Początkiem startowym jest głowa, natomiast końcowym jedzenie. Dla każdego punktu planszy można w bardzo prosty sposób obliczyć heurystykę, a najlepiej w przestrzeni dwuwymiarowej sprawdzi się do tego twierdzenie Pitagorasa. Znając odległości punktu i jedzenia na obu osiach, x i y nie jest problemem obliczenie odległości pomiędzy tymi dwoma węzłami. Jeżeli więc jedzenie znajduje się w punkcie (22, 36), wartość heurystyki dla punktu (10, 12) będzie wynosić pierwiastek z (22-10 + 36-12), czyli 6. Sposób liczenia heurystyki jest umowny - ważne, aby był stały dla każdego punktu. Czyli zamiast faktycznej odległości liczonej za pomocą twierdzenia Pitagorasa, równie dobrze możemy liczyć sumę odległości liczonej po obu osiach, która dla powyższego przykładu będzie wynosić 36.
 
-Tak więc zaczynając od głowy węża. dla każdego z osiągalnych punktów liczymy odległość potrzebną do pokonania tego dystansu powiększoną o wartość heurystyki danego punktu. Spośród wszystkich punktów znajdujemy ten, dla którego obliczony koszt jest najniższy. Następnie do listy osiągalnych punktów dodajemy wszystkie punkty, które są osiągalne z tego właśnie dodanego. Wracając do powyższego przkładu, w którym głowa znajduje się w punkcie (10, 12), a jedzenie w punkcie (22, 36):
+Tak więc zaczynając od głowy węża, dla każdego z osiągalnych punktów liczymy odległość potrzebną do pokonania tego dystansu powiększoną o wartość heurystyki danego punktu. Spośród wszystkich punktów znajdujemy ten, dla którego obliczony koszt jest najniższy. Następnie do listy osiągalnych punktów dodajemy wszystkie punkty, które są osiągalne z tego właśnie dodanego. Wracając do powyższego przykładu, w którym głowa znajduje się w punkcie (10, 12), a jedzenie w punkcie (22, 36):
  1. Osiągalne punkty wraz z odległościami od głowy węża g():
  - A (11, 12) i g(A) = 1
  - B (10, 11) i g(B) = 1
@@ -31,7 +31,7 @@ Tak więc zaczynając od głowy węża. dla każdego z osiągalnych punktów lic
  - h(A) = 5.92
  - h(B) = 6.08
  - h(C) = 6.08
-3. Wybrany zostaje punkt A, dla którego suma odległości i heurystyki wynosi 6.92, jednocześnie otwierając drogę na nowy punkty:
+3. Wybrany zostaje punkt A, dla którego suma odległości i heurystyki wynosi 6.92, jednocześnie otwierając drogę na nowe punkty:
 - D (11, 13) i g(D) = 2
 - E (12, 12) i g(E) = 2
 - F (11, 11) i g(F) = 2
@@ -51,3 +51,5 @@ Same warsztaty będą podzielone na trzy części:
 1.  Powitanie, wstęp teoretyczny, wybranie zespołów (ok. 30 minut)
 2.  Pracę nad własnym algorytmem (ok. 2 godziny).
 3.  Rozgrywki oraz wyłonienie zwycięzcy (ok. 30 minut)
+
+<!-- Przeczytane: Piotr Kasprzyk -->
