@@ -96,3 +96,6 @@ prepared!
 
 Now go forth and create robots! It's great fun. It's also addictive, expensive
 and takes all your free time -- a perfect hobby.
+
+
+<!-- Przeczytane: Kuba Janoszek -->
