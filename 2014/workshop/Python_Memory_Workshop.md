@@ -19,7 +19,7 @@ what if you encounter such problems?
 
 What if your program:
   * never releases memory,
-  * allocates way to much memory,
+  * allocates way too much memory,
   * or you suspect that it is memory inefficient ?
 
 
@@ -81,3 +81,5 @@ this will cover very advanced topics:
   * Python memory fragmentation
   * mallloc replacement considerations
   * testing memory problems with CPython 3.4 custom memory allocator
+
+<!-- Przeczytane: Piotr Kasprzyk -->
