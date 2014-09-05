@@ -3,7 +3,7 @@ Authors: Peter Inglesby
 # Writing Maintainable Code - Peter Inglesby
 
 
-A few thought on maintainability and complexity
+A few thoughts on maintainability and complexity
 
 "Always write code as if the person who ends up maintaining it is a violent psychopath who knows where you live..." [0]
 
@@ -43,3 +43,5 @@ My hope is that workshop will help you write code that is easier to read, to und
 [1] http://www.cs.nott.ac.uk/~cah/G51ISS/Documents/NoSilverBullet.html  
 [2] "Essence", from a Latin word meaning "to be"  
 [3] "Accidence", from a Latin word meaning "to happen alongside"  
+
+<!-- Przeczytane: Piotr Kasprzyk -->
