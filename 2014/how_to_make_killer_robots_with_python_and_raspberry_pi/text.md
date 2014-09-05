@@ -59,8 +59,8 @@ kinematics" -- that's what you will need to translate the coordinates of the
 leg tips into actual servomotor angles. And the position of the robot's body
 into the positions of individual legs. Then, remember that animating a physical
 thing is very similar to animating computer graphics -- just instead of writing
-pixels to the screen, you send the commands to the servos. You are on your own
-with the rest.
+pixels to the screen, you are sending commands to the servos. You are on your
+own with the rest.
 
 Controlling your robot can also be a challenge. You might try to go fully
 autonomous, give it a lot of sensors, connected over ISP, I²C, 1Wire, TTL, USB
