@@ -1,4 +1,4 @@
-Journey to the center of the the asynchronous world
+Journey to the center of the asynchronous world
 ===================================================
 
 Introduction
@@ -109,7 +109,7 @@ operations:
 * `send()` - sends a value to the `yield` statement, making it produce a value instead
   of emitting one. Remember to call `next()` beforehand.
 * `close()` - a way to inform the generator that it should finish its work.
-  It generates the `GeneartorExit` exception upon calling the `yield` statement.
+  It generates the `GeneratorExit` exception upon calling the `yield` statement.
 * `throw()` - gives you the opportunity to send an error to generator upon a call
   to the `yield` statement.
 
@@ -418,3 +418,5 @@ recommend reading David Beazley's trilogy on this topic:
 I also would like to thank him for giving me the chance to use his materials as
 an input for my article and presentation. Additionally, check out his awesome,
 mind-blowing book [Python Cookbook](http://shop.oreilly.com/product/0636920027072.do).
+
+<!-- Przeczytane: Piotr Kasprzyk -->
