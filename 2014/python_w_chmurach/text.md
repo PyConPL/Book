@@ -2,7 +2,7 @@
 ## Dariusz Aniszewski
 
 Wyobraźmy sobię osobę związaną z branżą IT, która nie spotkała się jeszcze z terminem *chmura obliczeniowa*.
-Nie da się. Słowa *as a Service* robią ogromną karierę i cieszą się rosnacą popularnością.
+Nie da się. Słowa *as a Service* robią ogromną karierę i cieszą się rosnącą popularnością.
 Z chmur korzysta coraz więcej użytkowników, od małych developerów po wielkie korporacje.
 Jeśli ktoś myśli, że chmury obliczeniowe nie są dla niego, najprawdopodobniej jest w błędzie.
 Jeśli ktoś uważa, że nie używa ich na co dzień, również najprawdopodobniej nie ma racji.
@@ -12,9 +12,9 @@ wykorzystać *cloud computing* do rozwijania własnych Pythonowych aplikacji. Na
 
 ## Krótka historia
 Mogłoby się wydawać, że chmury obliczeniowe to wynalazek ostatnich kilku lat. A jednak... Ich idea sięga końca lat 60-tych ubiegłego wieku i zakłada istnienie rozproszonych, skalowalnych systemów, dostępnych z dowolnego miejsca na świecie. Przez lata jednak niewiele się działo w tym kierunku, przynajmniej w sferze rozwiązań
-dostepnych publicznie. W 1999 roku firma Salesforce zaczęła dostarczać swoje produkty przez przeglądarkę - był to
+dostępnych publicznie. W 1999 roku firma Salesforce zaczęła dostarczać swoje produkty przez przeglądarkę - był to
 kamień milowy i prekursor do modelu *Software as a Service*. Następny kamień położył Amazon, startując w 2002 roku
-z Amazon Web Services, a 4 lata później udostępniajac usługę *Elastic Cloud Computing* (EC2) będącą udzieleniem
+z Amazon Web Services, a 4 lata później udostępniając usługę *Elastic Cloud Computing* (EC2) będącą udzieleniem
 dostępu do maszyny wirtualnej pracującej w chmurze. Od tego dnia Internet nie był już taki sam. W 2009 roku do wyścigu
 dołączył Google, a chwilę później Microsoft. Następnie nastąpił boom na różne usługi dostępne w modelu chmury obliczeniowej i trwa on po dzień dzisiejszy.
 
@@ -30,9 +30,9 @@ Obecnie chmury możemy podzielić na trzy typy:
 * Software as a Service (SaaS) - oprogramowanie dostępne przez przeglądarki
 
 Idąc po kolei, w modelu *IaaS* klient dostaje dostęp do pewnej części infrastruktury teleinformatycznej. Najczęściej
-jest to po prostu maszyna wirtualna, ale mogą to być też np. serwery SMTP czy baza danych. Konfiguracja i instalacja
+jest to po prostu maszyna wirtualna, ale mogą to być też np. serwery SMTP, czy baza danych. Konfiguracja i instalacja
 oprogramowania spoczywa na kliencie. Model *PaaS* jest rozwinięciem infrastruktury, w której operator dostarcza już
-pewne mechanizmy odciążające użytkowników z instalacji oprogramowania czy konfiguracji serwerów. Klient musi jedynie
+pewne mechanizmy odciążające użytkowników z instalacji oprogramowania, czy konfiguracji serwerów. Klient musi jedynie
 wgrać swoją aplikację oraz wskazać plaftormie sposób jej uruchomienia. *SaaS* jest natomiast niczym innym jak
 oprogramowaniem dostępnym przez przeglądarkę. Oprogramowanie tego typu jest bardzo zróżnicowane - mogą to być pakiety biurowe, programy graficzne, księgowe i wiele innych.
 
@@ -46,7 +46,7 @@ konserwacji znacząco przewyższałby koszty takiego samego zestawu w chmurze.
 ## Przygotowania
 Skoro wiemy już co nieco o chmurach, czas je wykorzystać w praktyce. W chmurze możemy serwować wszelkie aplikacje
 Pythonowe posiadające wywołania po protokole HTTP. Możemy zatem użyć dowolnego frameworka do aplikacji internetowych,
-np. Django czy Flask. Możemy również sami zaimplementować nasz serwer używając np. modułu *SimpleHTTPServer* z
+np. Django, czy też Flask. Możemy również sami zaimplementować nasz serwer używając np. modułu *SimpleHTTPServer* z
 biblioteki standardowej. Dla dalszych rozważań przyjmijmy, że nasza aplikacja będzie korzystała z Django. Ta aplikacja
 będzie korzystała z relacyjnej bazy danych PostgreSQL (choć może być też np. MySQL) i będzie umożliwiała
 użytkownikom wgrywanie plików do 30MB. Komunikację będziemy prowadzili po protokole HTTPS. Mamy wykupioną własną domenę
@@ -58,7 +58,7 @@ dla platformy. Sprawdźmy najpierw, jak dokładnie działają obydwa te serwisy.
 
 ### Amazon EC2
 Usługa Elastic Cloud Computing jest niczym innym, jak udostępnianiem wirtualnych maszyn. Możemy zatem utworzyć maszynę
-posiadającą określoną moc obliczeniową czy dysk twardy. Dodatkowo wybieramy system operacyjny, jaki ma na niej
+posiadającą określoną moc obliczeniową, czy dysk twardy. Dodatkowo wybieramy system operacyjny, jaki ma na niej
 zostać zainstalowany oraz generujemy parę kluczy RSA, potrzebnych do połączenia się z maszyną przez SSH. Jeśli chcemy
 wykorzystać swój zestaw kluczy, możemy podać swój klucz publiczny zamiast generować nową parę. W obecnej
 chwili możemy wybierać z systemów UNIXowych, np. Ubuntu, Debian, CentOS oraz Microsoft Server. Każda
@@ -95,7 +95,7 @@ przetwarzać zapytanie, w tym przeprowadzać rozpoczęte operacje na bazie danyc
 wyborem - po przekroczeniu 512MB Heroku zacznie używać pliku wymiany (SWAP), co drastycznie wpłynie na wydajność.
 * usypianie Dyno - jeśli nasza aplikacja wykorzystuje tylko jedno Dyno i w ciągu godziny nie było wykonane żadne zapytanie, Dyno zostaje uśpione. Uśpione Dyno nie pracuje, więc jeśli zostanie wysłane do niego zapytanie to Dyno Manager musi je najpierw wybudzić, co powoduje, że pierwsze zapytania mogą mieć dłuższy czas oczekiwania na odpowiedź.
 
-Niewątpliwym plusem Heroku jest natomiast minimalna ilość pracy jaką należy wykonać, aby uruchomić aplikację. Dodatkowo Heroku oferuje bardzo dużo dodatków, np.:
+Niewątpliwym plusem Heroku jest natomiast minimalna ilość pracy, jaką należy wykonać, aby uruchomić aplikację. Dodatkowo Heroku oferuje bardzo dużo dodatków, np.:
 
 * bazy danych: relacyjne i NoSQL
 * monitoring
@@ -137,7 +137,7 @@ Ta usługa jest również polecana przez Heroku do przechowywania plików. S3 je
 plików, w której miejsce jest nieograniczone. Rozliczani jesteśmy z ilości danych, jakie przechowujemy oraz transferu.
 Do wgrywania plików na S3 możemy użyć modułu `boto`.
 
-### Obsługa HTTPS na własnej domenie.
+### Obsługa HTTPS na własnej domenie
 Obydwa serwisy umożliwiają bezpieczną komunikację. Na EC2 należy wgrać certyfikaty na serwer WWW i odpowiednio go
 skonfigurować. Niestety na Heroku, chcąc korzystać z HTTPS z własną domeną, poza wgraniem certyfikatów jesteśmy zmuszeni do dokupienia dodatku *SSL Endpoint* w cenie 20$/miesiąc.
 
@@ -162,7 +162,7 @@ używane na co dzień.
 * http://www.computerweekly.com/feature/A-history-of-cloud-computing - historia chmur obliczeniowych
 * https://aws.amazon.com/marketplace/search?page=1&category=2649367011 - dostępne systemy na EC2
 * https://devcenter.heroku.com/categories/language-support - języki programowania wspierane na Heroku
-* https://devcenter.heroku.com/articles/dynos - co to jest Dyno
+* https://devcenter.heroku.com/articles/dynos - opis kontenerów Dyno
 * https://addons.heroku.com/ - dodatki do Heroku
 * Wykorzystanie technologii chmury obliczeniowej do zwiększenia zasięgu oprogramowania desktopowego - praca dyplomowa magisterska, autor mgr inż. Dariusz Aniszewski, promotor dr inż. Piotr Helt
 
