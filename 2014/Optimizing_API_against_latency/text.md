@@ -1,16 +1,3 @@
----
-layout: heartbeat
-category: blog
-tags: [android, iOS, open-source]
-date: 2014-06-24 00:00:00
-title: Optimizing API against latency
-author:
- - id: wojtek_erbetowski
-description: |
-    We share our experiences of optimizing mobile-dedicated, practical-REST API avoiding latency problems with merging responses, HATEOAS and HTTP cache
-
----
-
 Designing an API is an incredibly important moment for a project’s future. 
 Every change made in the future will be accompanied by having to support multiple versions of an API, modifying docs, server-side code and the client. 
 Because of this laundry list of changes to keep track of, we try to solve as many design problems as possible up front.  
