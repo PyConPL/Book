@@ -3,7 +3,7 @@
 
 Python w wersji 3.4 światło dzienne ujrzał 16 marca 2014. To wydanie nie wprowadza
 żadnych zmian do samego języka, zamiast tego mamy kilka nowych bibliotek,
-usprawnienia w już istniejących modułach oraz wiele usprawnień "pod maską".
+usprawnienia w już istniejących modułach oraz wiele ulepszeń "pod maską".
 
 Ta pozorna stagnacja w rozwoju języka została zaplanowana oraz wprowadzona
 w życie z pełną premedytacją (PEP 3003 o złowróżebnym tytule *Python Language Moratorium*)
@@ -11,7 +11,7 @@ i ma ona na celu umożliwienie "dogonienia" bazowej implementacji (CPython) prze
 implementacje języka, takie jak Jython czy PyPy.
 
 Brak zmian w składni nie oznacza jednak, że przeciętny pythonista nie dostanie
-do rąk nowych zabawek, ciekawych narządzi, a jego życie nie stanie się jeszcze
+do rąk nowych zabawek, ciekawych narzędzi, a jego życie nie stanie się jeszcze
 prostsze.
 
 ### Nowe biblioteki
@@ -61,7 +61,7 @@ cykl wydawniczy.
 #### `enum`
 
 Po wielu latach i po wielu niezależnych implementacjach, Python doczekał się
-w końcu swoich własnych typów typów wyliczeniowych. Dzięki nim można teraz pisać
+w końcu swoich własnych typów wyliczeniowych. Dzięki nim można teraz pisać
 elegancki i mniej podatny na błędy kod.
 
 W myśl zasady, że jedna linijka kodu znaczy więcej, niż tysiąc słów,
@@ -115,7 +115,7 @@ Klasy biblioteki podzielone są na dwie odrębne części:
 * Konkretne ścieżki (*concrete paths*) - dodające jeszcze operacje we/wy.
 
 Ponadto, moduł udostępnia dwa warianty klas, jeden dla systemów POSIXowych i
-jeden dla ścieżek Windowsowych, ale przeciętny użytkownik do szczęścia
+jeden dla ścieżek Windowsowych, ale zwykły zjadacz chleba do szczęścia
 potrzebuje tylko jednej klasy `Path`, która reprezentuje konkretną ścieżkę
 zgodną z aktualnym systemem operacyjnym.
 
@@ -169,15 +169,15 @@ Moduł ten udostępnia wysokopoziomowe mechanizmy przełączania we/wy. Jest to
 abstrakcyjny i w pełni obiektowy, a co za tym idzie łatwiejszy w użyciu odpowiednik
 niskopoziomowej biblioteki `select`.
 
-Trik z parą bibliotek służących do realizacji tego samego zadania nie
+Trik z parą modułów służących do realizacji tego samego zadania nie
 jest niczym nowym w Pythonie, zastosowano go już wcześniej do obsługi
 wielowątkowości (niskopoziomowy `_thread` i wysokopoziomowy `threading`).
 
 Programista otrzymuje do ręki (między innymi) klasę `DefaultSelector`, która
 jest abstrakcją najbardziej efektywnej implementacji selektora dla danej
-platformy, a dzięki wspólnej klasie bazowej `BaseSelector`, dostarczony
+platformy, a dzięki wspólnej klasie bazowej `BaseSelector`, dostępny
 jest jednolity interfejs obsługi, co przekłada się na czytelny, niezależny
-od platformy kod, bez niepotrzebnych klauzuli `if`.
+od platformy kod, bez niepotrzebnych klauzul `if`.
 
 #### `statistics`
 
@@ -189,7 +189,7 @@ pokroju wariancji.
 Wśród wszystkich tych funkcji, na szczególną uwagę zasługuje `mode()`,
 wyszukująca najczęściej występujący element w dyskretnym zbiorze danych (lub
 rzucająca wyjątkiem `StatisticsError`, jeśli takiego elementu nie ma).
-Funkcja `mode()` bywa przydatna nie tylko dla księgowych i może czasem
+Funkcja `mode()` bywa przydatna nie tylko księgowym i może czasem
 zaoszczędzić kilka linijek kodu.
 
 Moduł zapewne będzie się jeszcze rozwijał, obrastając w nowe funkcje, gdyż na
@@ -255,7 +255,7 @@ jednak to wszystko nic w porównaniu z rozmiarem słownika. Tego rodzaju dane mo
 być nieocenione przy debugowaniu oraz podczas optymalizacji kodu.
 
 Na koniec muszę ostrzec, że `tracemalloc` dość mocno spowalnia wykonywanie
-kodu, więc po pierwsze -- żeby otrzymać wyniki czasem trzeba uzbroić się w cierpliwość,
+programu, więc po pierwsze -- żeby otrzymać wyniki czasem trzeba uzbroić się w cierpliwość,
 a po drugie -- nie należy stosować `tracemalloc` w środowisku produkcyjnym.
 
 ### Inne, co ciekawsze zmiany
