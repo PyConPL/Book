@@ -63,10 +63,10 @@ gry. Być może uda się wspólnie wypracować dzieło, którym będziemy mogli 
 
 ### Referencje
 
-* [1] Oficjalna strona biblioteki http://www.pygame.org/
-* [2] Znaczenie słowa "gra" wg. wikipedii http://pl.wikipedia.org/wiki/Gra
-* [3] Jak stworzyć Game Design Document http://www.gamasutra.com/view/feature/131632/creating_a_great_design_document.php
-* [4] Co to jest silnik gry http://en.wikipedia.org/wiki/Game_engine
-* [5] Silniki pythonowe https://wiki.python.org/moin/PythonGames
-* [6] Silniki dla lua http://www.gamefromscratch.com/post/2012/09/21/Battle-of-the-Lua-Game-Engines-Corona-vs-Gideros-vs-Love-vs-Moai.aspx
-* [7] Love2D http://love2d.org/
+* [1] [Oficjalna strona biblioteki PyGame](http://www.pygame.org/)
+* [2] [Znaczenie słowa "gra" wg. wikipedii](http://pl.wikipedia.org/wiki/Gra)
+* [3] [Jak stworzyć Game Design Document](http://www.gamasutra.com/view/feature/131632/creating_a_great_design_document.php)
+* [4] [Co to jest silnik gry](http://en.wikipedia.org/wiki/Game_engine)
+* [5] [Silniki pythonowe](https://wiki.python.org/moin/PythonGames)
+* [6] [Silniki dla lua](http://www.gamefromscratch.com/post/2012/09/21/Battle-of-the-Lua-Game-Engines-Corona-vs-Gideros-vs-Love-vs-Moai.aspx)
+* [7] [Oficjalna strona Love2D](http://love2d.org/)
