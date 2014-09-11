@@ -79,7 +79,7 @@ nad tym, co się właściwie dzieje. Jedyne ograniczenia wynikają głównie z m
 Heroku jest platformą uruchomieniową dla aplikacji napisanych w różnych językach - Ruby, Python, Java, NodeJS i innych.
 Heroku do swojego działania wykorzystuje wirtualizowane kontenery UNIXowe, marketingowo zwane *Dyno*. Dla uproszczenia
 można przyjąć, że jedno *Dyno* to odpowiednik jednej maszyny, choć w praktyce na jednej wirtualnej maszynie może
-istnieć wiele wyizolowanych kontenerów. Aby uruchomić aplikację na Heroku, należy poinformować platformę, jak należy to zrobić. W przypadku Pythona należy wykonać dwa kroki:
+istnieć wiele wyizolowanych kontenerów. Aby uruchomić aplikację na Heroku, należy poinformować platformę, jak należy to zrobić. W przypadku Pythona należy wykonać dwa kroki:
 
 1. dostarczyć plik **requirements.txt** z wylistowanymi paczkami Pythonowymi, jakie muszą zostać zainstalowane
 2. dostarczyć plik **Procfile**, w którym podamy komendę uruchamiającą aplikację, np. ```web: python manage.py runserver 0.0.0.0:$PORT```
