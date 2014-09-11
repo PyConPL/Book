@@ -85,7 +85,7 @@ But since there's no real reason to make both of those calls, let's try to save 
 {
   "name": "John Doe",
   "age": 25,
-  "counry": "US"
+  "country": "US"
 }
 ```
 
@@ -110,7 +110,7 @@ We need to prepare a request that specifies which fields to display (and embed f
   "name": "John Doe",
   "age": 25,
   "address": {
-    "counry": "US"
+    "country": "US"
   }
 }
 ```
