@@ -4,9 +4,9 @@ Zadaniem uczestników jest napisanie programu, który pokieruje wężem w zaprop
 
 Jako wstęp do warsztatów zapoznamy uczestników z podstawami algorytmów wyszukiwania ścieżek z wyróżnieniem algorytmu A*.
 
-Algorytm A* operuje na grafie węzłów, w którym każdy posiada określoną wartość heurystki, a dodatkowo posiadamy dwa wyróżnione węzły - węzeł początkowy i końcowy. Heurystyka oznacza szacunkową wartość pomiędzy danym węzłem, a naszym wyznaczonym celem. Dla przykładu, stosując algorytm A* w wyszukiwaniu optymalnej trasy pomiędzy dwoma rzeczywistymi mapami heurystyką dla każdego miasta jest geograficzna odległość pomiędzy nim samym, a celem. Tak więc odległość heurystki dla Gdyni, podczas gdy chcemy się dostać do Sztokholmu wynosi 536 km. Heurystka jednak nie uwzględnia faktu, że auto nie pojedzie przez Bałtyk i prawdziwa odległość może być znacznie większa.
+Algorytm A* operuje na grafie węzłów, w którym każdy posiada określoną wartość heurystyki, a dodatkowo posiadamy dwa wyróżnione węzły - węzeł początkowy i końcowy. Heurystyka oznacza szacunkową wartość pomiędzy danym węzłem, a naszym wyznaczonym celem. Dla przykładu, stosując algorytm A* w wyszukiwaniu optymalnej trasy pomiędzy dwoma rzeczywistymi mapami heurystyką dla każdego miasta jest geograficzna odległość pomiędzy nim samym, a celem. Tak więc odległość heurystyki dla Gdyni, podczas gdy chcemy się dostać do Sztokholmu wynosi 536 km. Heurystyka jednak nie uwzględnia faktu, że auto nie pojedzie przez Bałtyk i prawdziwa odległość może być znacznie większa.
 
-W przypadku snake, zarówno graf jak i heurystka zostają zredukowane do płaszczyzny punktów, z których każdy posiada odpowiednik liczbowy na osi x i osi y. Gdyby zlikwidować własny ogon i całego węża przeciwnika, algorytm znajdywania jedzenia można by sprowadzić do:
+W przypadku snake, zarówno graf jak i heurystyka zostają zredukowane do płaszczyzny punktów, z których każdy posiada odpowiednik liczbowy na osi x i osi y. Gdyby zlikwidować własny ogon i całego węża przeciwnika, algorytm znajdywania jedzenia można by sprowadzić do:
 
 	if your.x < food.x:
 		go_up()

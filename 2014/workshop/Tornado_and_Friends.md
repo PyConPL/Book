@@ -17,7 +17,7 @@ Tornado is an asynchronous networking library that can handle tens of thousands 
  * Decide where and when to use Tornado and its components
  * Make a kitten smile (*subject to availability of kitten*)
 
-## Prequisites
+## Prerequisites
 
  * A laptop (or desktop, but I'm not helping carry it.)
  * Working knowledge of Python (somewhere just above **Hello World!**)
