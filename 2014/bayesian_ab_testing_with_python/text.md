@@ -33,7 +33,7 @@ To control the false positive rate we use $\alpha$ (usually $5\%$), which actual
 
 Frequentist treats a probability as a frequency of an event's occurrence in a number of repeated experiments. Frequentist techniques rely greatly on the Law of Large Numbers and Central Limit Theorem. For A/B testing we would want to get the results as quickly as possible, possibly before the CLT can be applied.
 
-There's also a philosophical issue with hypothesis testing: it answers the wrong question. For the example above, what we would like to do is estimate the true population parameters based on the observed data. In other words, we want to know something like $\text{P}(p_A > p_B~|~X)$. That formula doesn't make much sense within the frequentist paradigm, since probability is a frequency of an event in series of repeated experiments, yet $p_A$ and $p_B$ are *fixed* values, they're not outcomes of any experiments, not random variables, therefore, you can't make any probabilistic statements about them. The only thing hypothesis testing can provide is the likelihood of the data given the hypothesis, $\text{P}(X~|~p_A > p_B)$. We need to pick a hypothesis, then check how well the obtained data supports it. That makes sense, but the inverse $P(H~|~X)$ would fit our question so much better. In fact, the two probabilities $\text{P}(X~|~H)$ and $\text{P}(H~|~X)$ are connected by the Bayes rule, but one first has to change the definition of probability to apply it.
+There's also a philosophical issue with hypothesis testing: it answers the wrong question. For the example above, what we would like to do is estimate the true population parameters based on the observed data. In other words, we want to know something like $\text{P}(p_A > p_B~|~X)$. That formula doesn't make much sense within the frequentist paradigm, since probability is a frequency of an event in series of repeated experiments, yet $p_A$ and $p_B$ are *fixed* values, they're not outcomes of any experiments, not random variables, therefore, you can't make any probabilistic statements about them. The only thing hypothesis testing can provide is the likelihood of the data given the hypothesis, $\text{P}(X~|~p_A > p_B)$. We need to pick a hypothesis, then check how well the obtained data supports it. That makes sense, but the inverse $\text{P}(H~|~X)$ would fit our question so much better. In fact, the two probabilities $\text{P}(X~|~H)$ and $\text{P}(H~|~X)$ are connected by the Bayes rule, but one first has to change the definition of probability to apply it.
 
 From a Bayesian perspective, probability is nothing but a degree of belief on a scale from 0 to 1. This interpretation not only drops the requirement for large repeated experiments, but allows to answer the question directly: what are our best estimates on population parameters given what we can observe. 
 
@@ -42,16 +42,14 @@ From a Bayesian perspective, probability is nothing but a degree of belief on a 
 Whereas $p_A, p_B$ where fixed population parameters in the previous model, for Bayesian approach let $p_A, p_B$ be independent random variables. The data now should be considered fixed. Previously, it was vice versa: parameters were fixed, and data was random; now parameters are random variables, and data is fixed.
 
 Let _prior_ distributions of $p_A$ and $p_B$ be Beta-distributed:
-$$ p_A \sim \text{Beta}(\alpha_A, \beta_A),\ p_B \sim \text{Beta}(\alpha_B, \beta_B) $$ The choice of Beta distribution will be explained  later. Let number of sign-ups $k_A = |\{x_A^{(i)}=1\}|$, number of page views $n_A = |X_A|$. Assume that the likelihood of data obtained by logging views and sign-ups is binomial:  $ \text{P}(X_A ~|~ p_A) = \text{Binomial}(k_A; n_A, p_A)$. Analogically, for B.
+$$p_A \sim \text{Beta}(\alpha_A, \beta_A),\ p_B \sim \text{Beta}(\alpha_B, \beta_B)$$ The choice of Beta distribution will be explained  later. Let number of sign-ups $k_A = |\{x_A^{(i)}=1\}|$, number of page views $n_A = |X_A|$. Assume that the likelihood of data obtained by logging views and sign-ups is binomial:  $\text{P}(X_A ~|~ p_A) = \text{Binomial}(k_A; n_A, p_A)$. Analogically, for B.
 
 Applying Bayes theorem, we can find the posterior:
-$$
 \begin{eqnarray*}
 \text{P}(p_A ~|~ X_A) &=& \frac{\text{P}(X_A ~|~ p_A) \cdot \text{P}(p_A)}{\text{P}(X_A)} \propto \text{P}(X_A ~|~ p_A) \cdot \text{P}(p_A) \\
 &=& {n_A\choose k_A} p_A^{k_A} (1-p_A)^{n_A - k_A}\ \frac{1}{B(\alpha_A, \beta_A) p_A^{1-\alpha_A} (1-p_A)^{1-\beta_A}} \\
 &=& \text{Beta}(\alpha_A + k_A, \beta_A + n_A - k_A)
 \end{eqnarray*}
-$$
 
 The nice result in the final step occurs because Beta is a conjugate prior to Bernoulli and Binomial distributions, and this is the reason why it was chosen as a prior for $p_A$ and $p_B$. 
 
