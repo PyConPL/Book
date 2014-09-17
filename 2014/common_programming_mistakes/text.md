@@ -98,7 +98,7 @@ Closures are *late binding*. The values of variables used in closures are looked
     >>>
 
 #### Solution
-As mentioned in #1, Python evaluates early the default arguments of a function, so we can create a closure that binds immediately to its argumets by using default arg:
+As mentioned in #1, Python evaluates early the default arguments of a function, so we can create a closure that binds immediately to its arguments by using default arg:
 
     >>> def create_multipliers():
     ...     return [lambda x, i=i : i * x for i in range(5)]
