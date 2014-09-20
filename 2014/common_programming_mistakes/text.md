@@ -116,11 +116,11 @@ As mentioned in #1, Python evaluates early the default arguments of a function, 
 
 But, even better idea is change it to explicit:
 
-    def get_func(i):
-    ... return lambda x: i * x
+    >>> def get_func(i):
+    ...     return lambda x: i * x
     ...
-    def create_multipliers():
-    ... return [get_func(i) for i in range(5)]
+    >>> def create_multipliers():
+    ...     return [get_func(i) for i in range(5)]
     ...
     >>> for multiplier in create_multipliers():
     ...     print (multiplier(2))
@@ -266,7 +266,7 @@ The same happens, when we change line `i += 1` to `i = i + 1` It doesn't matter 
 Python scope resolution is based on LEGB:
 
 * Local - names assigned in any way within a function (*def* or *lambda*) and not declared global in that function;
-* Enclosing function locals - name in the local	scope of any and all enclosing (*def* or *lambda*), form inner to outer;
+* Enclosing function locals - name in the local scope of any and all enclosing (*def* or *lambda*), from inner to outer;
 * Global (module) - names assigned at the top-level of a module file, or declared global in a *def* within the file;
 * Built-in (Python) - names preassigned in a built-in names module: *open*, *range*, *SyntaxError*, ...
 
