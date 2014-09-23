@@ -1,8 +1,6 @@
-Journey to the center of the asynchronous world
-===================================================
+#Journey to the center of the asynchronous world - Maciej Szulik
 
-Introduction
-------------
+##Introduction
 
 Since the release of Python 3.4, one of the hottest and most frequently mentioned
 topics is the [asyncio](https://docs.python.org/3/library/asyncio.html) module,
@@ -14,8 +12,7 @@ at least that version when running the examples. These can be found at
 [my github account](https://github.com/soltysh/talks/tree/master/coroutines_generators/examples).
 
 
-Generators
-----------
+##Generators
 
 Let's start with this sample piece of code,
 [generator1.py](https://github.com/soltysh/talks/tree/master/coroutines_generators/examples/generator1.py):
@@ -144,8 +141,7 @@ statement is actually passed as a value of the `StopIteration` exception.
 Interesting, isn't it?
 
 
-Delegating to a subgenerator
---------------------------
+##Delegating to a subgenerator
 
 [PEP 380](http://legacy.python.org/dev/peps/pep-0380/) proposed the syntax for a
 generator to delegate part, or all, of its work to another generator. This
@@ -180,13 +176,12 @@ In the above example, the outermost call will delegate iteration to the inner
 generators until we reach a single value that will be yielded.
 
 
-Context managers
-----------------
+##Context managers
 
 Let's leave the generator and coroutines topic for a bit and look at something
 different. I'm hoping the reader is familiar with these constructs:
 
-```
+```python
 file = open()
 # do some stuff with file
 file.close()
@@ -248,8 +243,7 @@ solution runs ~9% slower than its class counterpart, but think of how much easie
 to read the decorator solution is.
 
 
-Asynchronous processing
------------------------
+##Asynchronous processing
 
 Finally we've reached the last part - asynchronous processing. The usual way
 of processing in such cases is: we have some main thread; in it we run some
@@ -288,8 +282,7 @@ returned when getting the result. Testing this will be left as an exercise to
 the reader.
 
 
-`asyncio` basics
-----------------
+##`asyncio` basics
 
 OK, we've reached a point where I've shown you a couple of cool tricks with
 generators, but you may be asking "How is this useful? What can we do with it?"
@@ -395,8 +388,7 @@ if __name__ == '__main__':
     print("Got ", t.result())
 ```
 
-Summary
--------
+#Summary
 
 The attentive reader might say at this point, "We're at the summary already, but
 you've promised to show what `asyncio` internals look like!" But I just did that:

@@ -1,4 +1,4 @@
-# Journey to the center of the the asynchronous world
+#Journey to the center of the the asynchronous world
 
 
-### Maciej Szulik
+##Maciej Szulik
