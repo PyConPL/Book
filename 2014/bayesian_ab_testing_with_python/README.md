@@ -1,3 +1,3 @@
-# Bayesian A/B Testing with Python
+#Bayesian A/B Testing with Python
 
-### Bogdan Kulynych
+##Bogdan Kulynych

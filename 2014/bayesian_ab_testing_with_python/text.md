@@ -1,5 +1,4 @@
-Bayesian A/B testing with Python
-================================
+#Bayesian A/B testing with Python - Bogdan Kulynych
 
 ## Introduction
 
@@ -95,7 +94,7 @@ $ \text{P}(1.00\% < p_A < 14.41\%) = 0.95 $,
 $\text{P}(7.07\% < p_B < 21.28\%) = 0.95 $
 
 Monte Carlo approach to compute $P(p_B > p_A~|~X) \approx \frac{1}{n}\sum_i \mathbb{I}[y_A^{i} > y_B^{i}]$ and expected lift:
-```
+```python
 import numpy as np
 
 sample_size = 10000
