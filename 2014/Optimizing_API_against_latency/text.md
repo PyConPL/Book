@@ -1,3 +1,5 @@
+#Artykul (???) - Autor (???)
+
 Designing an API is an incredibly important moment for a project’s future. 
 Every change made in the future will be accompanied by having to support multiple versions of an API, modifying docs, server-side code and the client. 
 Because of this laundry list of changes to keep track of, we try to solve as many design problems as possible up front.  
@@ -41,7 +43,7 @@ We could even go so far as to spend [25 million dollars](http://www.extremetech.
 However, this article is addressing a rather specific part connected to API design. 
 So, how can we influence the latency by API design?
 
-### Merging responses
+## Merging responses
 
 First, let's make a use of an example. Let's say we have a view that says user name, age and country. 
 Name and age are a part of `/users/{id}` resource:
@@ -93,7 +95,7 @@ Now instead of making two separate calls we may just call a single endpoint and 
 But remember that there is a tradeoff. To get a more robust API we're stepping away from a REST design pattern 
 and binding together two related entities - user and address.
 
-### Expansion
+## Expansion
 
 We don't always know the way in which our API will be used. 
 In the last example we implicitly assumed that we knew what information was being displayed. 
@@ -118,13 +120,13 @@ We need to prepare a request that specifies which fields to display (and embed f
 This is a pretty neat mechanism for merging responses, although it has it's own limitations as well. 
 If API consumers are using relations, we won't be able to change the resource hierarchy without breaking clients.
 
-### Keep-alive
+## Keep-alive
 
 The closing trick is to make sure your service supports the HTTP keep-alive option. 
 By default, all mobile HTTP clients will try to sustain the HTTP connection between different calls so it makes perfect sense to utilize this. 
 If the server will agree to keep the connection, the next requests will omit several handshakes and directly be sent to server within an opn connection.
 
-### Closing word
+## Closing word
 
 In Polidea we are developing mobile apps and supporting them with backend services.
 The last couple of years has taught us that you may not achieve a proper user experience without slick HTTP communication.
