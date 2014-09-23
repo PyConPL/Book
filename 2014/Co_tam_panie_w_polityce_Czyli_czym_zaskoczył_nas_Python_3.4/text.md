@@ -1,5 +1,4 @@
-# Co tam, panie, w polityce? Czyli czym zaskoczył nas Python 3.4
-## Marcin Bardź
+# Co tam, panie, w polityce? Czyli czym zaskoczył nas Python 3.4 - Marcin Bardź
 
 Python w wersji 3.4 światło dzienne ujrzał 16 marca 2014. To wydanie nie wprowadza
 żadnych zmian do samego języka, zamiast tego mamy kilka nowych bibliotek,
@@ -14,12 +13,12 @@ Brak zmian w składni nie oznacza jednak, że przeciętny pythonista nie dostani
 do rąk nowych zabawek, ciekawych narzędzi, a jego życie nie stanie się jeszcze
 prostsze.
 
-### Nowe biblioteki
+## Nowe biblioteki
 
 Najnowsza odsłona naszego ulubionego gada raczy nas pokaźną baterią całkiem
 nowych bibliotek, wśród których każdy użytkownik powinien znaleźć coś dla siebie.
 
-#### `asyncio`
+### `asyncio`
 
 Potężna biblioteka umożliwiająca tworzenie kodu współbieżnego, przełączany
 dostęp do zasobów we/wy, uruchamianie klientów/serwerów sieciowych, a to
@@ -38,7 +37,7 @@ artykułu, dlatego wymienię tylko główne różnice pomiędzy Twisted i `async
 * `asyncio` wspiera najnowsze wersje Pythona i potrafi wykorzystać jego
   dobrodziejstwa (np. składnię `yield from`).
 
-#### `ensurepip`
+### `ensurepip`
 
 Zaczęło się od PEP 453, który namaścił `pip` jako rekomendowane narzędzie
 zarządzania bibliotekami. Gdy już PEP został zaakceptowany, należało się
@@ -58,7 +57,7 @@ Przeciętny użytkownik może nie musieć w ogóle igrać z modułem `ensurepip`
 cyrk wynika z faktu, że `pip` jest niezależnym projektem, posiadającym własny
 cykl wydawniczy.
 
-#### `enum`
+### `enum`
 
 Po wielu latach i po wielu niezależnych implementacjach, Python doczekał się
 w końcu swoich własnych typów wyliczeniowych. Dzięki nim można teraz pisać
@@ -66,7 +65,7 @@ elegancki i mniej podatny na błędy kod.
 
 W myśl zasady, że jedna linijka kodu znaczy więcej, niż tysiąc słów,
 przedstawiam poniżej próbkę możliwości modułu:
-
+```python
 	>>> from enum import Enum
 	>>> class Osoba(Enum):
 	...     ja = 1
@@ -100,9 +99,9 @@ przedstawiam poniżej próbkę możliwości modułu:
 	Osoba.on_ona_ono
 	>>> Osoby['oni_one']
 	<Osoby.oni_one: 3>
+```
 
-
-#### `pathlib`
+### `pathlib`
 
 Kolejna obszerna biblioteka, przenosząca operacje na ścieżkach i plikach z prehistorii
 do świata programowania obiektowego. Moduł łączy w sobie funkcjonalności `os.path`,
@@ -125,7 +124,7 @@ to cudeńko pojawiło się w bibliotece standardowej dopiero teraz.
 
 Oto kilka przykładów użycia `pathlib`:
 
-
+```python
 	>>> from pathlib import Path
 	>>> p = Path('/')
 	>>> p.is_dir()
@@ -161,9 +160,9 @@ Oto kilka przykładów użycia `pathlib`:
 	ValueError: '/etc/resolv.conf' does not start with '/home'
 	>>> list(q.parent.glob('a*.conf'))
 	[PosixPath('/etc/asl.conf'), PosixPath('/etc/autofs.conf')]
+```
 
-
-#### `selectors`
+### `selectors`
 
 Moduł ten udostępnia wysokopoziomowe mechanizmy przełączania we/wy. Jest to
 abstrakcyjny i w pełni obiektowy, a co za tym idzie łatwiejszy w użyciu odpowiednik
@@ -179,7 +178,7 @@ platformy, a dzięki wspólnej klasie bazowej `BaseSelector`, dostępny
 jest jednolity interfejs obsługi, co przekłada się na czytelny, niezależny
 od platformy kod, bez niepotrzebnych klauzul `if`.
 
-#### `statistics`
+### `statistics`
 
 Tym modułem twórcy Pythona starają się uszczęśliwić statystyków, księgowych,
 maklerów oraz wszystkich pozostałych im podobnych. Znajdziemy tu funkcje liczące
@@ -210,7 +209,7 @@ Moduł udostępnia trzy rodzaje informacji:
 Poniższy plik (nazwałem go `t.py`) pokazuje przykładowe użycie niektórych
 funkcji biblioteki:
 
-
+```python
 	01  import tracemalloc
 	02
 	03  tracemalloc.start()
@@ -234,11 +233,11 @@ funkcji biblioteki:
 	21  print()
 	22  for stat in top2[:2]:
 	23      print(stat)
-
+```
 
 A tak wygląda efekt uruchomienia powyższego pliku:
 
-
+```bash
 	$ python3.4 t.py
 	t.py:9: size=74.7 MiB, count=999744, average=78 B
 	t.py:8: size=58.7 MiB, count=999745, average=62 B
@@ -248,7 +247,7 @@ A tak wygląda efekt uruchomienia powyższego pliku:
 
 	t.py:16: size=35.3 MiB (+35.3 MiB), count=999745 (+999745), average=37 B
 	t.py:17: size=15.3 MiB (+15.3 MiB), count=1 (+1), average=15.3 MiB
-
+```
 
 Wszystko jest widoczne jak na dłoni, litera `ź` zajmuje więcej miejsca niż `A`,
 jednak to wszystko nic w porównaniu z rozmiarem słownika. Tego rodzaju dane mogą
@@ -258,15 +257,15 @@ Na koniec muszę ostrzec, że `tracemalloc` dość mocno spowalnia wykonywanie
 programu, więc po pierwsze -- żeby otrzymać wyniki czasem trzeba uzbroić się w cierpliwość,
 a po drugie -- nie należy stosować `tracemalloc` w środowisku produkcyjnym.
 
-### Inne, co ciekawsze zmiany
+## Inne, co ciekawsze zmiany
 
-#### Tryb izolowany
+### Tryb izolowany
 
 Pythona można teraz uruchomić z parametrem `-I`, który odcina interpreter
 od `site-packages`, jak i od wszelkiego dostępu do zewnętrznych bibliotek.
 Użycie tego trybu jest zalecane przy zastosowaniu Pythona w skryptach systemowych.
 
-#### Nowy format `pickle` i `marshal`
+### Nowy format `pickle` i `marshal`
 
 Python 3.4 wprowadza nowe formaty dla `pickle` i `marshal` (odpowiednio 4 i 3).
 
@@ -281,7 +280,7 @@ Jeśli chodzi o `marshal`, to dzięki uniknięciu powielania niektórych obiekt�
 zmniejszył się rozmiar plików `.pyc` (i `.pyo`), a co za tym idzie, spadła
 ilość pamięci zajmowanej przez moduły wczytane z tychże plików.
 
-#### *Single-dispatch* w `functools`
+### *Single-dispatch* w `functools`
 
 W module `functools` pojawił się niepozorny dekorator `singledispatch()`,
 który pozwala na zdefiniowanie funkcji generycznej, posiadającej różną
@@ -290,7 +289,7 @@ implementację w zależności od typu argumentu.
 Bez wdawania się w dywagacje, poniższy przykład powinien rzucić nieco światła
 na to, ile dobrego kryje się za tą mętną definicją:
 
-
+```python
 	>>> from collections.abc import Sequence
 	>>> from functools import singledispatch
 	>>> @singledispatch
@@ -320,16 +319,16 @@ na to, ile dobrego kryje się za tą mętną definicją:
 	Nie lubię tupli!
 	>>> fun(set())
 	Łapię całą resztę, tym razem był to <class 'set'>
+```
 
-
-#### Poprawa bezpieczeństwa
+### Poprawa bezpieczeństwa
 
 Nowy, bezpieczny, algorytm hashowania, obsługa TLS v1.1 i v1.2, możliwość
 pobierania certyfikatów z Windows system cert store, obsługa serwerowego SNI
 (Server Name Indication), bezpieczniejsze deskryptory plików. To tylko niektóre
 z licznych zmian, wpływających korzystnie na bezpieczeństwo nowego Pythona.
 
-### Podsumowanie
+## Podsumowanie
 
 Python 3.4 zdaje się być bardzo dobrym wydaniem, pomimo braku (a może dzięki brakowi?)
 zmian w składni. Wprowadza on szereg usprawnień oraz oddaje w ręce użytkownika
@@ -342,7 +341,7 @@ też nastręczać problemów przy aktualizacji<sup>*</sup>.
 
 <sup>*</sup> Oczywiście chodzi o aktualizację z Pythona 3.3 ;)
 
-### Źródła
+## Źródła
 
 * https://docs.python.org/3/whatsnew/3.4.html - oficjalny dokument "what's new"
   dla Pythona 3.4.
