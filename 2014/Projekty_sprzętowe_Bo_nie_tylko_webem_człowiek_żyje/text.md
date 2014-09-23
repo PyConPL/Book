@@ -1,6 +1,4 @@
-Projekty sprzętowe – bo nie tylko webem człowiek żyje
-=====================================================
-
+#Projekty sprzętowe – bo nie tylko webem człowiek żyje - Piotr Maliński
 
 Rozwój urządzeń mobilnych i postępująca cyfryzacja naszego życia, czy popularyzacja bezprzewodowego dostępu dostępu do Internetu i bezprzewodowej komunikacji otaczających nas urządzeń tworzą nowe rynki, na których twórcy i ich startupy odnoszą sukcesy oferując nowe urządzenia i usługi. Projekty sprzętowe otwierają przed nami nowy segment rynku, czy też stanowią przyjemną odskocznię od np. webowej rutyny.
 
