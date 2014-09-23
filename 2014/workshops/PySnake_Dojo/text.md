@@ -1,4 +1,4 @@
-# PySnake Dojo - Kuba Wasielak, Grzegorz Nosek 
+#PySnake Dojo - Kuba Wasielak, Grzegorz Nosek 
 
 Zadaniem uczestników jest napisanie programu, który pokieruje wężem w zaproponowanej przez nas grze przypominającej tradycyjnego snake'a, lecz z dwoma wężami na planszy. Zadaniem węża, oprócz tradycyjnego zjadania kropek, będzie doprowadzenie do takiej sytuacji, w której wąż przeciwnika uderzy w ścianę albo w ogon któregokolwiek z węży. Początkowym zadaniem uczestników będzie stworzenie takich algorytmów poruszania wężami, w których uda im się pokonać przygotowanych przez organizatorów przeciwników. Później natomiast, wszyscy uczestnicy wezmą udział w wielkim turnieju, gdzie ich węże zmierzą się ze sobą parami, aby wyłonić najsilniejszego spośród nich.
 
@@ -8,6 +8,7 @@ Algorytm A* operuje na grafie węzłów, w którym każdy posiada określoną wa
 
 W przypadku snake, zarówno graf jak i heurystyka zostają zredukowane do płaszczyzny punktów, z których każdy posiada odpowiednik liczbowy na osi x i osi y. Gdyby zlikwidować własny ogon i całego węża przeciwnika, algorytm znajdywania jedzenia można by sprowadzić do:
 
+```python
 	if your.x < food.x:
 		go_up()
 	elif your.x > food.x:
@@ -18,6 +19,7 @@ W przypadku snake, zarówno graf jak i heurystyka zostają zredukowane do płasz
 		go_left()
 	else:
 		munch_munch()
+```
 
 Jednak nasz graf posiada przeszkody, miejsca zabronione i niedostępne. Wracając więc do algorytmu A* : dla każdego punktu nasz wąż ma co najwyżej trzy możliwe punkty wyboru drogi. Jeżeli liczba możliwości wynosi 0, zwiastuje to szybki koniec węża. Początkiem startowym jest głowa, natomiast końcowym jedzenie. Dla każdego punktu planszy można w bardzo prosty sposób obliczyć heurystykę, a najlepiej w przestrzeni dwuwymiarowej sprawdzi się do tego twierdzenie Pitagorasa. Znając odległości punktu i jedzenia na obu osiach, x i y nie jest problemem obliczenie odległości pomiędzy tymi dwoma węzłami. Jeżeli więc jedzenie znajduje się w punkcie (22, 36), wartość heurystyki dla punktu (10, 12) będzie wynosić pierwiastek z (22-10 + 36-12), czyli 6. Sposób liczenia heurystyki jest umowny - ważne, aby był stały dla każdego punktu. Czyli zamiast faktycznej odległości liczonej za pomocą twierdzenia Pitagorasa, równie dobrze możemy liczyć sumę odległości liczonej po obu osiach, która dla powyższego przykładu będzie wynosić 36.
 

@@ -1,6 +1,4 @@
-# How to make killer robots with Python and Raspberry Pi
-
-Radomir Dopieralski
+# How to make killer robots with Python and Raspberry Pi - Radomir Dopieralski
 
 Robots in popular culture differ substantially from what is available today.
 You may see yourself in a role of a mad scientist constructing an army of

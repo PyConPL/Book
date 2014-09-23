@@ -1,6 +1,4 @@
-# Proper code reviews
-
-## Tomasz Maćkowiak
+#Proper code reviews - Tomasz Maćkowiak
 
 Code quality is the ultimate goal that every programmer (and his manager) strives for.
 High code quality means fewer bugs, better performance and easier maintenance.

@@ -1,4 +1,4 @@
-# SCRUM for Teams - Agata Maron
+#SCRUM for Teams - Agata Maron
 
 Imagine teams in which projects are done on time. Problems are communicated early, so they’re solved quickly. People are engaged in their work and loyal. Teams are self-organized and self-starting. 
 

@@ -1,4 +1,4 @@
-# Pygame - gry w świecie Pythona - Łukasz Jagodziński
+#Pygame - gry w świecie Pythona - Łukasz Jagodziński
 
 ## Jak zacząć?
 

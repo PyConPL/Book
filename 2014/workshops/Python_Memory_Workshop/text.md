@@ -1,4 +1,4 @@
-# Python Memory Workshop - Tomasz Paczkowski, Piotr Przymus
+#Python Memory Workshop - Tomasz Paczkowski, Piotr Przymus
 
 A short “hands on” workshop on Python memory management. This workshop
 will  cover  basics  of  CPython   memory  usage  and  show  essential

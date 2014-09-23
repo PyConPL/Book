@@ -1,5 +1,4 @@
-# Python w Chmurach
-## Dariusz Aniszewski
+#Python w Chmurach - Dariusz Aniszewski
 
 Wyobraźmy sobię osobę związaną z branżą IT, która nie spotkała się jeszcze z terminem *chmura obliczeniowa*.
 Nie da się. Słowa *as a Service* robią ogromną karierę i cieszą się rosnącą popularnością.
