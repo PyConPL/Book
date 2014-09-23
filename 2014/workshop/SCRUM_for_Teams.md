@@ -1,6 +1,5 @@
 # SCRUM for Teams - Agata Maron
 
-
 Imagine teams in which projects are done on time. Problems are communicated early, so they’re solved quickly. People are engaged in their work and loyal. Teams are self-organized and self-starting. 
 
 These are the markings of teams that have adopted agile. There are amazing benefits to agile management practices, and at STX Next, we have experience transitioning dozens of teams to a fast and efficient agile development cycle. 
