@@ -1,1 +1,1 @@
-Workshops
+Warsztaty
