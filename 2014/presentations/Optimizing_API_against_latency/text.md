@@ -1,4 +1,4 @@
-#Artykul (???) - Autor (???)
+#Designing API for mobile apps - Wojtek Erbetowski
 
 Designing an API is an incredibly important moment for a project’s future. 
 Every change made in the future will be accompanied by having to support multiple versions of an API, modifying docs, server-side code and the client. 
