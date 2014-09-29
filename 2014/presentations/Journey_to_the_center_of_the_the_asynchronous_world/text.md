@@ -234,7 +234,7 @@ example, the decorator is creating the context manager for you, and `yield` retu
 temporary directory. If you look under the covers you'll see that calling
 `tempdir()` in the first example will return `<__main__.tempdir object at 0x7f3e4778f5a0>`
 whereas the later - `<contextlib._GeneratorContextManager object at 0x7fd94c7ce538>`.
-Do you see the difference? If you look closely at the `@contextmanger` decorator
+Do you see the difference? If you look closely at the `@contextmanager` decorator
 you'll find out that it sets up the `__enter__()` and `__exit__()` methods,
 with some additional error checking, see:
 [contextlib.py#96](http://hg.python.org/cpython/file/3.4/Lib/contextlib.py#l96).

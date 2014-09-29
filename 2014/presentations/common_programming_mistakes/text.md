@@ -1,7 +1,7 @@
 # Common programming mistakes in Python - Dariusz Śmigiel
 
 ## Introduction
-Python is known as one of the simplest programming languages. You need to know syntax, some basic things like intendation and voilà! You're a developer! But... not so fast. Often it turns out that that's not everything that you need to know about Python to be an efficient developer. You need to know some subtle things. Without this, you can have big problems, because behaviour that you have, is different than expected.
+Python is known as one of the simplest programming languages. You need to know syntax, some basic things like indentation and voilà! You're a developer! But... not so fast. Often it turns out that that's not everything that you need to know about Python to be an efficient developer. You need to know some subtle things. Without this, you can have big problems, because behaviour that you have, is different than expected.
 
 ### Full disclosure
 Idea for this talk was taken from work done by Martin Chikilian, originally published at [www.toptal.com/python/top-10-mistakes-that-python-programmers-make][1]
