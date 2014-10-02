@@ -388,7 +388,7 @@ if __name__ == '__main__':
     print("Got ", t.result())
 ```
 
-#Summary
+##Summary
 
 The attentive reader might say at this point, "We're at the summary already, but
 you've promised to show what `asyncio` internals look like!" But I just did that:
