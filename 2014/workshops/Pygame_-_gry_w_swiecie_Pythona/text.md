@@ -64,7 +64,7 @@ gry. Być może uda się wspólnie wypracować dzieło, którym będziemy mogli 
 ### Referencje
 
 * [1] [Oficjalna strona biblioteki PyGame](http://www.pygame.org/)
-* [2] [Znaczenie słowa "gra" wg. wikipedii](http://pl.wikipedia.org/wiki/Gra)
+* [2] [Znaczenie słowa "gra" wg wikipedii](http://pl.wikipedia.org/wiki/Gra)
 * [3] [Jak stworzyć Game Design Document](http://www.gamasutra.com/view/feature/131632/creating_a_great_design_document.php)
 * [4] [Co to jest silnik gry](http://en.wikipedia.org/wiki/Game_engine)
 * [5] [Silniki Pythonowe](https://wiki.python.org/moin/PythonGames)
