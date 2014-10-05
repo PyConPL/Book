@@ -1,0 +1,16 @@
+--- o/krotkie.tex	2013-10-15 21:55:37.719700428 +0200
++++ krotkie.tex	2013-10-15 21:56:07.879849988 +0200
+@@ -2,10 +2,10 @@
+ \starttext
+ 
+ 
+-\section[krótkie-wprowadzenie-do-metaprogramowania-w-pythonie]{Krótkie
++\Title{Krótkie
+ wprowadzenie do metaprogramowania w Pythonie,}
+-
+-\subsection[piotr-przymus]{Piotr Przymus}
++\Author{Piotr Przymus}
++\MakeTitlePage
+ 
+ \section[czyli-o-tym-jak-ułatwić-utrudnić-programowanie-sobie-i-innym]{Czyli
+ o tym jak ułatwić (utrudnić) programowanie sobie i innym}

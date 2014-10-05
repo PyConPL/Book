@@ -1,0 +1,11 @@
+--- o/rzemioslo.tex	2013-10-08 19:00:45.682415137 +0200
++++ rzemioslo.tex	2013-10-08 19:01:23.622603283 +0200
+@@ -4,5 +4,5 @@
+ 
+-\section[rzemiosło-programowania]{Rzemiosło programowania}
+-
+-\subsection[adam-kaliński]{Adam Kaliński}
++\Title{Rzemiosło programowania}
++\Author{Adam Kaliński}
++\MakeTitlePage
+ 

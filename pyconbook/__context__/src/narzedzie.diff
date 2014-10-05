@@ -1,0 +1,18 @@
+--- o/narzedzie.tex	2013-10-15 21:00:53.691415807 +0200
++++ narzedzie.tex	2013-10-15 21:05:11.040691939 +0200
+@@ -1,11 +1,10 @@
+ \usemodule[pycon-2013]
+ \starttext
+ 
+-
+-\section[narzędzie-do-automatyzacji-pracy-z-nieograniczoną-ilością-serwerów]{Narzędzie
+-do automatyzacji pracy z nieograniczoną ilością serwerów}
+-
+-\subsection[marek-glijer]{Marek Glijer}
++\Title {Narzędzie
++do~automatyzacji pracy z~nieograniczoną ilością serwerów}
++\Author{Marek Glijer}
++\MakeTitlePage
+ 
+ Automatyzacja zmian w plikach konfiguracyjnych przydaje się zawsze,
+ kiedy dysponujesz więcej niż jedną maszyną produkcyjną lub instancją

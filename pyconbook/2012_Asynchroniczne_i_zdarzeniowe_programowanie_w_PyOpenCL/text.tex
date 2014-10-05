@@ -1,0 +1,234 @@
+\enableregime[latin2]
+\usemodule[pi2008]
+
+\starttext
+
+\Author{Tomasz Rybak}
+\Title{Asynchroniczne i zdarzeniowe programowanie w PyOpenCL}
+
+
+\startabstract
+
+OpenCL to biblioteka umo¿liwiaj±ca przeprowadzanie równoleg³ych obliczeñ; PyOpenCL umo¿liwia u¿ycie jej w~Pythonie.  Napisanie programu, który wydajnie dzia³a³by na jak najwiêkszym zbiorze dostêpnych urz±dzeñ jest jednak bardzo trudne. Mo¿emy jednak spróbowaæ rozwi±zaæ ten problemu inaczej, wykorzystuj±c podej¶cie znane z~baz danych. Przekazuj±c bibliotece, co chcemy uzyskaæ (a~nie w~jaki sposób) oraz podaj±c zale¿no¶ci obecne w~danych dajemy mo¿liwo¶æ wyboru najbardziej wydajnego rozwi±zania dla tego konkretnego systemu. W~przypadku OpenCL mo¿emy tak zrobiæ wykorzystuj±c programowanie zdarzeniowe i~asynchroniczne.
+
+\stopabstract
+
+
+\MakeTitlePage
+
+
+\section{Wprowadzenie do OpenCL i PyOpenCL}
+
+Nieustanny rozwój elektroniki sprawia, ¿e uk³ady scalone mog± sk³adaæ siê z~coraz wiêkszej liczby tranzystorów, jednak ograniczenia fizyczne, takie jak przekazanie mocy, konieczno¶æ ch³odzenia, prêdko¶æ ¶wiat³a, sprawiaj±, ¿e zwiêkszanie czêstotliwo¶ci uk³adów zosta³o zatrzymane. Zamiast zwiêkszania czêstotliwo¶ci producenci procesorów zwiêkszaj± mo¿liwo¶æ równoleg³ego wykonywania kodu oraz wprowadzaj± zró¿nicowanie uk³adów[1]. Zbytnie zró¿nicowanie uk³adów obliczeniowych utrudni³oby jednak naukê programowania i~sprawi³oby, ¿e programy by³yby nieprzeno¶ne. Z~tego wzglêdu firmy takie jak Intel, AMD, NVIDIA, czy Apple zgromadzone pod egid± organizacji Khronos stworzy³y OpenCL[2], bibliotekê, API (Application Programming Interface) oraz jêzyk programowania przeznaczone do programowania równoleg³ych uk³adów obliczeniowych. OpenCL jest podobne w~za³o¿eniach do OpenGL, równie¿ zarz±dzanego przez organizacjê Khronos.
+
+OpenCL nie zak³ada, ¿e uk³ad obliczeniowy jest ¶ci¶le powi±zany z~komputerem. Wyró¿nione s± dwie strony: gospodarz (host), na którym uruchomiony jest program zarz±dzaj±cy obliczeniami, oraz urz±dzenie obliczeniowe (device), wykonuj±ce niezbêdne obliczenia i~posiadaj±ce w³asn± pamiêæ, niezale¿n± od pamiêci gospodarza. Program uruchomiony na gospodarzu ma za zadanie przygotowaæ urz±dzenie (tworz±c kontekst zarz±dzania), wczytaæ dane, przes³aæ je do urz±dzenia, za¿±daæ wykonania obliczeñ i~pobraæ ich wyniki.
+
+OpenCL prezentuje hierarchiczny model udostêpnianego sprzêtu. Gospodarz mo¿e mieæ dostêp do wielu platform; ka¿da z~nich jest zarz±dzana przez bibliotekê klienck± (ICD), czêsto dostarczan± przez niezale¿ne firmy. Ka¿da platforma mo¿e posiadaæ wiele urz±dzeñ (Computing Device). Ka¿de urz±dzenie sk³ada siê z~bloków (Computing Unit), z~których ka¿dy mo¿e wykonywaæ równolegle obliczenia na ró¿nych danych, korzystaj±c z~pojedynczych uk³adów wykonawczych (Processing Element). Bloki mog± dzia³aæ niezale¿nie od siebie, co oznacza, ¿e ka¿dy mo¿e wykonywaæ inny program; uk³ady wykonawcze nale¿±ce do jednego bloku musz± jednak wykonywaæ ten sam program. Blok (Computing Unit) jest najmniejszym obiektem, którym mo¿emy zarz±dzaæ z~poziomu gospodarza; uk³adami obliczeniowymi zarz±dza sterownik urz±dzenia. Model ten do¶æ ¶ci¶le odpowiada fizycznej budowie procesorów graficznych GPU[3], jest jednak na tyle ogólny, ¿e umo¿liwia programowanie równoleg³e sprzêtu innego typu.
+
+Aby móc przeprowadzaæ obliczenia przy pomocy OpenCL nale¿y stworzyæ kontekst obliczeniowy. Kontekst mo¿e u¿ywaæ jedynie jednej platformy (nie mo¿e rozci±gaæ siê na kilka platform), lecz mo¿e wspó³dzieliæ wszystkie urz±dzenia nale¿±ce do tej jednej konkretnej platformy. Z~kontekstem zwi±zane s± funkcje wykonywane na urz±dzeniach (kernel), obiekty w~pamiêci oraz kolejki wykonania. Kolejka zawsze nale¿y do jednego konkretnego urz±dzenia; nie mo¿na jej wspó³dzieliæ tak jak kontekstu.
+
+Ca³o¶æ OpenCL jest opisana z~poziomu jêzyka~C. Nie wymaga to u¿ycia zaawansowanych paradygmatów jak programowanie obiektowe czy funkcyjne i~u³atwia u¿ycie OpenCL w~ró¿nych jêzykach, w~których istnieje mo¿liwo¶æ wywo³ania bibliotek w~jêzyku~C. Jednak jak zauwa¿yli Jonathan Parri et al. w~[4], nawet tak prosty pomys³ jak SIMD (Single Instruction Multiple Data), umo¿liwiaj±cy równoleg³e wykonanie prostych obliczeñ na danych w~tablicy, oferowany przez MMX i~SSE, nie jest wykorzystywany w~jêzykach wysokiego poziomu. Z~kolei u¿ycie biblioteki pisanej z~my¶l± o~jêzyku~C w~innym (obiektowym lub funkcyjnym) jêzyku wprowadza poczucie \quotation{obco¶ci}, jako ¿e biblioteka taka nie umo¿liwia korzystania z~idiomów danego jêzyka. Z~tego wzglêdu Andreas Kloeckner zacz±³ pracê nad PyOpenCL[5], bibliotek± umo¿liwiaj±c± u¿ycie OpenCL z~poziomu Pythona, a~jednocze¶nie oferuj±c± wszystkie zalety, do których Python nas przyzwyczai³: automatyczne zarz±dzanie pamiêci± (Garbage Collection), dynamizm, jak najwiêksza kompatybilno¶æ 
+z~numpy. Wykorzystanie PyOpenCL znacznie u³atwia i~przyspiesza pisanie programów wykorzystuj±cych OpenCL.
+
+
+\section{Zdarzenia}
+
+Najprostsze u¿ycie OpenCL przebiega wed³ug schematu:
+\startitemize
+ \item gospodarz inicjalizuje urz±dzenie;
+ \item gospodarz wczytuje dane i~przesy³a je do urz±dzenia;
+ \item gospodarz instruuje urz±dzenie, jakie operacje wykonaæ na danych;
+ \item gospodarz oczekuje na zakoñczenie obliczeñ;
+ \item gospodarz pobiera z~urz±dzenia wynik obliczeñ.
+\stopitemize
+Jest to prosty przypadek (Program~1), obrazuj±cy równocze¶nie bierno¶æ urz±dzenia, które oczekuje na instrukcje ze strony gospodarza.
+
+\starttyping
+    context = pyopencl.create_some_context()
+    queue = pyopencl.CommandQueue(context)
+    a = numpy.zeros(1000).astype(numpy.float32)
+    b = numpy.zeros(1000).astype(numpy.float32)
+    a_gpu = pyopencl.array.Array(context, hostbuf=a)
+    program = pyopencl.Program(context, """
+        __kernel void increase(__global float *a)
+        {
+            int gid = get_global_id(0);
+            a[gid] = a[gid]+1.0;
+        }
+    """).build()
+    program.increase(queue, a.shape, None, a_gpu)
+    pyopencl.enqueue_copy(queue, a_gpu, b)
+\stoptyping
+\midaligned{{\bf Program 1.} Przyk³adowy program PyOpenCL} \crlf
+
+Zosta³a tu u¿yta jedna kolejka. W~domy¶lnej konfiguracji OpenCL wykonuje zadania w~takiej kolejno¶ci, w~jakiej umie¶cili¶my je w~kolejce. Je¶li zadania zosta³y umieszczone w~poprawnej kolejno¶ci, urz±dzenie nie bêdzie próbowa³o wykonaæ obliczeñ na danych, których jeszcze nie ma w~pamiêci. Musimy jednak zwróciæ uwagê na to, aby ¿adna funkcja nie zaczê³a siê wykonywaæ, zanim poprzednia siê nie skoñczy³a~---~szczególne ryzyko le¿y w~transferze danych. W~wiêkszo¶ci przypadków dba o~to PyOpenCL.
+
+\starttyping
+    context = pyopencl.create_some_context()
+    queue = pyopencl.CommandQueue(context)
+    a = numpy.zeros(1000).astype(numpy.float32)
+    b = numpy.zeros(1000).astype(numpy.float32)
+    a_gpu = pyopencl.array.Array(context, shape=a.shape)
+    pyopencl.enqueue_copy(queue, a, a_gpu)
+    queue.flush()
+    program = pyopencl.Program(context, """
+        __kernel void increase(__global float *a)
+        {
+            int gid = get_global_id(0);
+            a[gid] = a[gid]+1.0;
+        }
+    """).build()
+    queue.flush()
+    program.increase(queue, a.shape, None, a_gpu)
+    queue.flush()
+    pyopencl.enqueue_copy(queue, a_gpu, b)
+    queue.flush()
+\stoptyping
+\midaligned{{\bf Program 2.} Przyk³adowy program u¿ywaj±cy synchronizacji} \crlf
+
+Najprostszym sposobem jawnej synchronizacji jest ¿±danie zakoñczenia wszystkich zadañ oczekuj±cych w~kolejce przed umieszczeniem kolejnego (Program~2). Czekanie na opró¿nienie kolejki po wywo³aniu ka¿dej funkcji OpenCL nie jest jednak efektywne. W~ten sposób niepotrzebnie zajmujemy gospodarza, który zamiast wykonywaæ co¶ po¿ytecznego (np.~³adowaæ dane z~dysku) musi biernie i~bezproduktywnie czekaæ na zakoñczenie obliczeñ na urz±dzeniu. W~ten sposób nie bêdziemy równie¿ w~stanie efektywnie wykorzystaæ wielu urz±dzeñ.
+
+W~obu powy¿szych przypadkach jedyna równoleg³o¶æ wystêpuje w~punkcie~3 (linia \type{program.increase}), gdzie obliczenia wykonywane s± równolegle przez wiele uk³adów obliczeniowych. Je¶li jednak mamy mniej danych ni¿ uk³adów wykonawczych, lub te¿ musimy wykonywaæ obliczenia w~pêtli, to zarówno urz±dzenie jak i~gospodarz przez du¿± czê¶æ czasu nie wykonuj± ¿adnych obliczeñ, czekaj±c jedno na drugie.
+
+\starttyping
+    context = pyopencl.create_some_context()
+    queue = pyopencl.CommandQueue(context)
+    a = numpy.zeros(1000).astype(numpy.float32)
+    b = numpy.zeros(1000).astype(numpy.float32)
+    a_gpu = pyopencl.array.Array(context, shape=a.shape)
+    event = pyopencl.enqueue_copy(queue, a, a_gpu)
+    event.wait()
+    program = pyopencl.Program(context, """
+        __kernel void increase(__global float *a)
+        {
+            int gid = get_global_id(0);
+            a[gid] = a[gid]+1.0;
+        }
+    """).build()
+    event = program.increase(queue, a.shape, None, a_gpu)
+    while event.get_info(pyopencl.event_info.COMMAND_EXECUTION_STATUS)
+            != pyopencl.command_execution_status.COMPLETE:
+        pass
+    event = pyopencl.enqueue_copy(queue, a_gpu, b)
+    event.wait()
+\stoptyping
+\midaligned{{\bf Program 3.} Program u¿ywaj±cy w±tków do synchronizacji} \crlf
+
+Lepszym rozwi±zaniem jest wykorzystanie zdarzeñ (Program~3). Umieszczamy ¿±danie w~kolejce i~pobieramy obiekt zdarzenia (Event). Nastêpnie co jaki¶ czas sprawdzamy, czy zdarzenie nie zmieni³o stanu na \quotation{wykonane} (COMPLETE); w~takim wypadku umieszczamy nastêpne ¿±danie w~kolejce. Pozwala to na równoleg³e wykonywanie obliczeñ na urz±dzeniu i~gospodarzu.
+
+Zamiast regularnego sprawdzania stanu zdarzenia lepiej za¿±daæ wykonania kodu przy zmianie stanu zdarzenia. OpenCL umo¿liwia podanie wska¼nika na funkcjê, która zostanie wywo³ana, je¶li zmieni siê stan zdarzenia. Mo¿emy w~takiej funkcji za¿±daæ wykonania innych instrukcji, np.~umieszczenia kolejnego zdarzenia w~kolejce. Funkcjonalno¶æ ta jest jednak niedostêpna w~PyOpenCL. OpenCL wymaga podania wska¼nika do funkcji w~C, a~nie w~Pythonie. Poza tym wywo³ywana funkcja musi byæ jak najprostsza, bez gwarancji kolejno¶ci wywo³ania, ani w±tku w~jakim zostanie wykonana.
+
+\starttyping
+    context = pyopencl.create_some_context()
+    queue = pyopencl.CommandQueue(context)
+    a = numpy.zeros(1000).astype(numpy.float32)
+    b = numpy.zeros(1000).astype(numpy.float32)
+    a_gpu = pyopencl.array.Array(context, shape=a.shape)
+    event0 = pyopencl.enqueue_copy(queue, a, a_gpu)
+    program = pyopencl.Program(context, """
+        __kernel void increase(__global float *a)
+        {
+            int gid = get_global_id(0);
+            a[gid] = a[gid]+1.0;
+        }
+    """).build()
+    event1 = program.increase(queue, a.shape, None, a_gpu, wait_for=[event0])
+    event2 = pyopencl.enqueue_copy(queue, a_gpu, b, wait_for=[event1])
+    event2.wait()
+\stoptyping
+\midaligned{{\bf Program 4.} Program instruuj±cy OpenCL o zale¿no¶ci pomiêdzy zadaniami} \crlf
+
+Lepsz± mo¿liwo¶ci± jest pozwolenie OpenCL na synchronizowanie zadañ. Ka¿da funkcja umieszczaj±ca zadanie w~kolejce zwraca zdarzenie zwi±zane z~tym zadaniem (o~czym wspomnia³em powy¿ej), ale równie¿ przyjmuje listê zdarzeñ, od których zale¿y to zadanie. OpenCL wykorzystuje tê listê do zapewnienia, ¿e zadanie zostanie wykonane dopiero wówczas, gdy wszystkie zadania zale¿ne zosta³y zakoñczone. Dziêki temu nie musimy siê martwiæ o~czekanie na zakoñczenie transferu danych: OpenCL rozpocznie obliczenia jedynie wówczas, gdy wszystkie niezbêdne dane znajd± siê w~pamiêci urz±dzenia. Oczywi¶cie zale¿y to od tego, czy powiadomili¶my o~tych danych przekazuj±c odpowiednie zdarzenia jako argument wait\_for.
+
+Najkorzystniejsze jest wykorzystanie zdarzeñ oraz kolejki out-of-order. Taka kolejka wykorzystuje mechanizm znany z~procesorów: je¶li instrukcja mo¿e byæ wykonana (gdy¿ nie zale¿y od instrukcji jeszcze nie wykonanych) i~mo¿emy j± wykonaæ (gdy¿ mamy wolne zasoby) mo¿emy tak zrobiæ, zmniejszaj±c ca³kowity czas wykonania. OpenCL wykorzystuje tê technikê na wy¿szym poziomie abstrakcji, przeszukuj±c kolejkê i~wykonuj±c ca³e zadania, takie jak transmisja danych lub wykonanie obliczeñ. W~takiej sytuacji jednak nale¿y bezwzglêdnie korzystaæ ze zdarzeñ; w~przeciwnym razie OpenCL bêdzie zak³ada³o, ¿e ¿adne zadanie nie zale¿y od poprzedniego i~bêdzie je wykonywa³o w~dowolnej kolejno¶ci, zwracaj±c niepoprawne wyniki.
+
+\starttyping
+    context = pyopencl.create_some_context()
+    queue0 = pyopencl.CommandQueue(context)
+    queue1 = pyopencl.CommandQueue(context)
+    a = numpy.zeros(1000).astype(numpy.float32)
+    b = numpy.zeros(1000).astype(numpy.float32)
+    a_gpu = pyopencl.array.Array(context, shape=a.shape)
+    event0 = pyopencl.enqueue_copy(queue0, a, a_gpu)
+    program = pyopencl.Program(context, """
+        __kernel void increase(__global float *a)
+        {
+            int gid = get_global_id(0);
+            a[gid] = a[gid]+1.0;
+        }
+    """).build()
+    event1 = program.increase(queue1, a.shape, None, a_gpu, wait_for=[event0])
+    event2 = pyopencl.enqueue_copy(queue0, a_gpu, b, wait_for=[event1])
+    event2.wait()
+\stoptyping
+\midaligned{{\bf Program 5.} Program wykorzystuj±cy wiele kolejek} \crlf
+
+Nie wszystkie implementacje OpenCL udostêpniaj± kolejkê out-of-order. W~takim wypadku mo¿emy sobie jednak radziæ tworz±c kilka kolejek (Program~5). Zadania umieszczone w~ka¿dej z~nich bêd± wykonywane w kolejno¶ci umieszczenia, ale w~przypadku wolnych mocy przerobowych OpenCL przejrzy wszystkie kolejki i~wybierze zadanie z~dowolnej z~nich.
+
+U¿ycie wielu kolejek mo¿e zwiêkszyæ wydajno¶æ programu w~przypadku wykonywania zadañ, które nie wykorzystuj± wszystkich bloków (wówczas mo¿na uruchomiæ dwa lub wiêcej zadañ obliczeniowych), lub transferu danych z~wykorzystaniem specjalizowanych uk³adów; wówczas transfer danych i~obliczenia, oczywi¶cie nie na tych¿e danych, mog± przebiegaæ równolegle. Jak zauwa¿y³ David Patterson[6], zwiêkszeniu szybko¶ci uk³adów nie towarzyszy³o zwiêkszenie prêdko¶ci przesy³ania danych (tzw.~memory wall), zatem ka¿de zmniejszenie czasu oczekiwania na dane niezbêdne do obliczeñ jest cenne.
+
+\starttyping
+    platfoms = pyopencl.get_platforms()
+    devices = platforms[0].get_devices()
+    context = pyopencl.Context(devices)
+    queue0 = pyopencl.CommandQueue(context, device=devices[0])
+    queue1 = pyopencl.CommandQueue(context, device=devices[1])
+    a = numpy.zeros(1000).astype(numpy.float32)
+    b = numpy.zeros(1000).astype(numpy.float32)
+    a_gpu = pyopencl.array.Array(context, shape=a.shape)
+    b_gpu = pyopencl.array.Array(context, shape=a.shape)
+    event0 = pyopencl.enqueue_copy(queue, a, a_gpu)
+    event1 = pyopencl.enqueue_copy(queue, b, b_gpu)
+    program = pyopencl.Program(context, """
+        __kernel void increase(__global float *a)
+        {
+            int gid = get_global_id(0);
+            a[gid] = a[gid]+1.0;
+        }
+    """).build()
+    event2 = program.increase(queue, a.shape, None, a_gpu, wait_for=[event0])
+    event3 = program.increase(queue, b.shape, None, a_gpu, wait_for=[event1])
+    event4 = pyopencl.enqueue_copy(queue, a_gpu, a, wait_for=[event2])
+    event5 = pyopencl.enqueue_copy(queue, b_gpu, b, wait_for=[event3])
+    event4.wait()
+    event5.wait()
+\stoptyping
+\midaligned{{\bf Program 6.} Program wykorzystuj±cy dwa urz±dzenia} \crlf
+
+Bardziej skomplikowana sytuacja ma miejsce, gdy mamy kilka urz±dzeñ (Program~6). Wówczas mo¿emy równolegle wykonywaæ obliczenia na ró¿nych danych. Tu jednak wa¿niejsze jest podzielenie danych na takie niezale¿ne fragmenty, aby ka¿de urz±dzenie mog³o sobie poradziæ z obliczeniami, oraz takie umieszczenie danych, aby jak najbardziej ograniczyæ transfery. Do¶wiadczanie podpowiada, ¿e czêsto to transfer danych, a~nie czas obliczeñ, staje siê czynnikiem ograniczaj±cym wydajno¶æ.
+
+Zdarzenia s± równie¿ przydatne przy wspó³pracy OpenCL z~innymi bibliotekami. Jednym z~przyk³adów jest wykorzystanie zdarzeñ do koordynacji wspó³pracy OpenCL i~OpenGL, gdy np.~chcemy wizualizowaæ dane, na których dokonujemy obliczeñ. Wa¿ne jest wówczas, aby nie próbowaæ wy¶wietlaæ wci±¿ transferowanych danych, jak równie¿ by nie wykonywaæ obliczeñ na danych, które s± obecnie wy¶wietlane i~vice versa.
+
+
+\section{Rozszerzenia}
+
+Pisz±c o~OpenGL w~kontek¶cie OpenCL nie sposób nie wspomnieæ o~rozszerzeniach (extensions). OpenCL jest równie¿ w~tym wzglêdzie bardzo podobne do OpenGL. OpenCL zosta³o zaimplementowane na ró¿nych urz±dzeniach, które oferuj± ró¿ne mo¿liwo¶ci.  Uwzglêdnienie tych wszystkich mo¿liwo¶ci w~standardzie jest niemo¿liwe, lecz producenci sprzêtu powinni móc udostêpniæ jego wszystkie mo¿liwo¶ci programistom. Z~tego wzglêdu OpenCL posiada model rozszerzeñ wzorowany na rozszerzeniach OpenGL.  Programista mo¿e pobraæ listê udostêpnianych rozszerzeñ, a~nastêpne pobraæ wska¼nik na funkcjê implementuj±c± konkretne rozszerzenie. Poniewa¿ jednak mechanizm ten zak³ada korzystanie z~jêzyka C, jego u¿ycie w PyOpenCL jest ograniczone.
+
+
+\section{Podsumowanie}
+
+OpenCL jest wci±¿ m³od±, rozwijan± technologi±. Nie wszyscy producenci udostêpniaj± pe³ne mo¿liwo¶ci (np.~kolejki out-of-order) lub najnowsze wersje bibliotek (w~chwili pisania tego artyku³u NVIDIA wci±¿ nie udostêpni³a OpenCL~1.2, pomimo ¿e minê³o ju¿ 9~miesiêcy od opublikowania standardu). Moim zdaniem jednak OpenCL ma powa¿ne szanse staæ siê standardem w~programowaniu, zw³aszcza ¿e pojawiaj± siê mo¿liwo¶ci jego u¿ycia na urz±dzeniach przeno¶nych (komórki), gdzie jego u¿ycie przyczynia siê od oszczêdno¶ci energii.
+
+OpenCL umo¿liwia programowanie ró¿nych uk³adów: CPU, GPU, FPGA oraz bardziej specjalizowanych uk³adów. Zgodnie z~przewidywaniami Shekhara Borkara et al.[7], pracowników firmy Intel, rozwój uk³adów bêdzie zmierza³ w~stronê heterogenizacji. Na jednej ko¶ci bêdzie wiele uk³adów ró¿nych typów: kilka rdzeni ogólnego zastosowania, wiele szybkich, lecz ograniczonych uk³adów zdolnych do przeprowadzania obliczeñ, specjalizowane uk³ady kryptograficzne, etc. Ju¿ teraz mo¿emy to zauwa¿yæ w~przypadku uk³adów SoC (System on Chip) u¿ywanych w~telefonach komórkowych. Podobny trend jest prezentowany przez AMD w~architekturze Fusion, gdzie na jednej ko¶ci jest CPU oraz GPU. Trend ten obrazuje konieczno¶æ korzystania z~bibliotek (takich jak OpenCL) u³atwiaj±cych pisanie programów wykorzystuj±cych tak ró¿ne orpgramowanie. Same biblioteki jednak nie wystarcz±: konieczne bêdzie u¿ycie nowych, równoleg³ych struktur danych[8] oraz innych modeli programowania.
+
+
+\section{Literatura}
+
+\noindent [1] Theo Ungerer, Borut Robi\v{c}, Jurij \v{S}ilc. \em{A survey of processors with explicit multithreading}. ACM, 2003.
+
+\crlf \noindent [2] \em{The OpenCL Specification Version 1.2}. \URL{http://www.khronos.org/registry/cl/specs/opencl-1.2.pdf}
+
+\crlf \noindent [3] Kayvon Fatahalian and Mike Houston. \em{A closer look at GPUs}. ACM, 2008.
+
+\crlf \noindent [4] Jonathan Parri, Daniel Shapiro, Miodrag Bolic and Voicu Groza. \em{Returning control to the programmer: SIMD intrinsics for virtual machines}. ACM, 2011.
+
+\crlf \noindent [5] Andreas Kl{\"o}ckner, Nicolas Pinto, Yunsup Lee, B. Catanzaro, Paul Ivanov and Ahmed Fasih. \em{PyCUDA and PyOpenCL: A Scripting-Based Approach to GPU Run-Time Code Generation}. Scientific Computing Group, Brown University, 2009.
+
+\crlf \noindent [6] David A. Patterson. \em{Latency lags bandwidth}. ACM Press, 2004.
+
+\crlf \noindent [7] Shekhar Borkar and Andrew A. Chien. \em{The future of microprocessors}. ACM, 2011.
+
+\crlf \noindent [8] Nir Shavit. \em{Data structures in the multicore age}. ACM, 2011.
+
+
+\stoptext

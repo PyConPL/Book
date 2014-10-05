@@ -1,0 +1,13 @@
+--- o/vagrant.tex	2013-10-08 20:44:12.097396283 +0200
++++ vagrant.tex	2013-10-08 20:44:38.305526199 +0200
+@@ -3,7 +3,6 @@
+ 
+-
+-\section[twoja-wirtualna-piaskownica-dzięki-narzędziu-vagrant]{Twoja
++\Title{Twoja
+ wirtualna piaskownica dzięki narzędziu Vagrant}
+-
+-\subsection[piotr-banaszkiewicz]{Piotr Banaszkiewicz}
++\Author{Piotr Banaszkiewicz}
++\MakeTitlePage
+ 

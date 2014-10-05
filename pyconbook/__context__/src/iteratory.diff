@@ -1,0 +1,12 @@
+--- o/iteratory.tex	2013-10-08 19:57:15.675430467 +0200
++++ iteratory.tex	2013-10-08 19:57:45.687579247 +0200
+@@ -4,6 +4,6 @@
+ 
+-\section[następny-proszę-iteratory-i-generatory-pod-lupą]{Następny
++\Title{Następny
+ proszę: iteratory i generatory pod lupą}
+-
+-\subsection[jan-kaliszewski]{Jan Kaliszewski}
++\Author{Jan Kaliszewski}
++\MakeTitlePage
+ 

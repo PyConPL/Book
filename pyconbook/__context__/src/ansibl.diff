@@ -1,0 +1,18 @@
+--- o/ansibl.tex	2013-10-08 18:50:07.355249848 +0200
++++ ansibl.tex	2013-10-08 18:50:56.843495228 +0200
+@@ -4,8 +4,9 @@
+ 
+-\section[automatyzacja-z-ansible]{Automatyzacja z Ansible}
+-
+-\subsection[jak-zrobić-żeby-zrobić-i-się-nie-narobić]{Jak zrobić, żeby
+-zrobić i się nie narobić}
+-
+-Wiktor Kołodziej, Deployed.pl Grzegorz Nosek, MegiTeam
++  
++\Title{Automatyzacja z Ansiblem}
++\Author{Wiktor Kołodziej}
++\AuthAffil{Deployed.pl}
++\Author{Grzegorz Nosek}
++\AuthAffil{MegiTeam}
++\MakeTitlePage
+ 

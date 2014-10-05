@@ -1,0 +1,11 @@
+--- o/pyriddle.tex	2013-10-08 20:09:35.927101076 +0200
++++ pyriddle.tex	2013-10-08 20:10:55.531495812 +0200
+@@ -4,5 +4,5 @@
+ 
+-\section[pyriddle]{PyRiddle}
+-
+-\subsection[tomasz-maćkowiak]{Tomasz Maćkowiak}
++\Title{PyRiddle}
++\Author{Tomasz Maćkowiak}
++\MakeTitlePage
+ 

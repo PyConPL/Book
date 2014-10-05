@@ -1,0 +1,15 @@
+--- o/dystrybucja.tex	2013-10-15 21:59:41.556909546 +0200
++++ dystrybucja.tex	2013-10-15 22:00:17.193086265 +0200
+@@ -2,9 +2,10 @@
+ \starttext
+ 
+ 
+-\section[dystrybucja-kodu-w-pythonie]{Dystrybucja kodu w Pythonie}
++\Title{Dystrybucja kodu w~Pythonie}
+ 
+-\subsection[radosław-jankiewicz]{Radosław Jankiewicz}
++\Author{Radosław Jankiewicz}
++\MakeTitlePage
+ 
+ Napisanie kodu nie jest ostatnim krokiem w procesie tworzenia
+ oprogramowania. W celu dostarczenia wytworzonego kodu wymagane jest

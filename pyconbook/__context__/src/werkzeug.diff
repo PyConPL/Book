@@ -1,0 +1,13 @@
+--- o/werkzeug.tex	2013-10-08 19:18:26.051673197 +0200
++++ werkzeug.tex	2013-10-08 19:19:00.635844712 +0200
+@@ -3,7 +3,5 @@
+ 
+-
+-\section[werkzeug---debugowanie-aplikacji-internetowych-w-sytuacjach-ekstremalnych]{Werkzeug
+-- debugowanie aplikacji internetowych w sytuacjach ekstremalnych}
+-
+-\subsection[marcin-karkocha]{Marcin Karkocha}
++\Title{Werkzeug~-- debugowanie aplikacji internetowych w sytuacjach ekstremalnych}
++\Author{Marcin Karkocha}
++\MakeTitlePage
+ 

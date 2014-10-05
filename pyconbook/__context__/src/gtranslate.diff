@@ -1,0 +1,16 @@
+--- o/gtranslate.tex	2013-10-15 22:03:42.682105227 +0200
++++ gtranslate.tex	2013-10-15 22:04:17.114275971 +0200
+@@ -2,10 +2,11 @@
+ \starttext
+ 
+ 
+-\section[google-translate-tu-nie-pomoże]{Google Translate tu nie
++\Title{Google Translate tu nie
+ pomoże!}
+ 
+-\subsection[łukasz-taczuk]{Łukasz Taczuk}
++\Author{Łukasz Taczuk}
++\MakeTitlePage
+ 
+ Załóżmy, że mamy przed sobą skompilowany program w postaci pliku exe. Po
+ jego uruchomieniu okazuje się, że wszystkie widoczne teksty są w języku

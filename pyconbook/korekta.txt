@@ -1,0 +1,22 @@
+- Sebastian Pawluś: 2012_Asynchroniczne_i_zdarzeniowe_programowanie_w_PyOpenCL
+- Sebastian Pawluś: 2012_Pyramid_zarys-najwazniejszych_idei
+- Sebastian Pawluś: 2012_Wysoko-skalowalne_serwisy_pythonowe_w_OnetPoczcie
+- Jakub Janoszek: krotkie_wprowadzenie_do_metaprogramowania_w_pythonie
+- Dawid Romaldowski: dystrybucja_kodu_w_pythonie
+- Dawid Romaldowski: google_translate_tu_nie_pomoze
+
+Poprawione:
+- Maciej Wiśniowski: rzemioslo_programowania
+- Maciej Wiśniowski: przetwarzanie_jezyka_naturalnego_w_praktyce
+- Jakub Janoszek: python_w_sluzbie_jej_krolewskiej_mosci
+- Jakub Janoszek: werkzeug_debugowanie_aplikacji_internetowych
+- Jakub Janoszek: packaging_python_applications
+- Jakub Janoszek: how_to_test_it
+- Sebastian Pawluś: Następny proszę: iteratory i generatory pod lupą
+- Sebastian Pawluś: NoCaptcha
+- Sebastian Pawluś: PyRiddle
+- Sebastian Pawluś: Mechanizm importowania w języku Python
+- Sebastian Pawluś: Automatyzacja z Ansible
+- Sebastian Pawluś: Narzędzie do automatyzacji pracy z nieograniczoną ilością serwerów
+- Sebastian Pawluś: 2012 | Twoja wirtualna piaskownica dzięki narzędziu Vagrant
+- Jakub Wiśniowski: Zrób sobie słownik

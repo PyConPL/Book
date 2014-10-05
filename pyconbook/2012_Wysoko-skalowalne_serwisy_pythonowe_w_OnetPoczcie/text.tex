@@ -1,0 +1,104 @@
+\enableregime[latin2]
+\usemodule[pi2008]
+
+\starttext
+
+\Author{Igor Waligóra}
+\Title{Wysoko skalowalne serwisy pythonowe w OnetPoczcie}
+
+
+\startabstract
+
+Poczta elektroniczna jest jedn± z~najstarszych, a~zarazem najbardziej popularnych us³ug oferowanych przez internet. Przed dostawcami tego typu us³ug stoi nie lada wyzwanie zwi±zane z~zapewnieniem szybko¶ci dzia³ania, bezpieczeñstwa oraz niezawodno¶ci skrzynek pocztowych swoich u¿ytkowników. W~tym artykule chcia³bym nakre¶liæ architekturê OnetPoczty, jednego z~najwiêkszych systemów poczty elektronicznej na rodzimym rynku, obs³uguj±cego przesz³o dwa miliony u¿ytkowników. Przedstawiê rozwi±zania, które umo¿liwiaj± p³ynne dzia³anie systemu dostarczaj±cego dziennie kilkudziesiêciu milionów wiadomo¶ci, filtruj±c jednocze¶nie ruch przychodz±cy, zapewniaj±c bezpieczeñstwo danych oraz szybko¶æ dzia³ania.
+
+\stopabstract
+
+
+\MakeTitlePage
+
+
+\section{Czym jest poczta elektroniczna}
+
+Przesy³anie wiadomo¶ci jest jedn± z~najstarszych us³ug, które pojawi³y siê wraz z~rozwojem sieci komputerowych, sam dokument opisuj±cy standard wiadomo¶ci elektronicznej liczy sobie 30 lat i~mimo wprowadzanych zmian, nadal obowi±zuje (RFC822). U¿ytkownicy Internetu szybko przyzwyczaili siê do tego sposobu komunikacji, wykorzystuj±c go nie tylko do wymiany korespondencji, ale równie¿ przesy³ania dokumentów, zdjêæ, a~nawet muzyki czy filmów. Wraz z~rozwojem sieci ros³y wymagania stawiane przed systemami obs³ugi poczty elektronicznej, w~szczególno¶ci na froncie z~liczb± dostarczanych wiadomo¶ci, oraz walki ze spamem, który sta³ siê plag± tej us³ugi. U¿ytkownicy wymagaj± od dostawcy poczty przede wszystkim niezawodno¶ci, wygodnego, szybkiego interfejsu, braku ograniczeñ co do pojemno¶ci skrzynki i~dobrego filtru odrzucaj±cego niechcian± korespondencjê. Budowa systemu, który móg³by sprostaæ tym wymaganiom, nie jest spraw± trywialn±, wymaga czêsto daleko id±cej optymalizacji przechowywania wielkiego wolumenu 
+danych w~sposób pozwalaj±cy na b³yskawiczny do nich dostêp.
+
+Podstawowym wyzwaniem, jakie stoi przed systemem OnetPoczty, jest wolumen ruchu, jaki musi byæ obs³ugiwany. Przeciêtnego dnia system dostarcza kilkana¶cie milionów wiadomo¶ci, ka¿d± z~nich przetwarzaj±c przez wielowarstwowy system antyspamowy. Statystyki te nie obejmuj± niechcianych wiadomo¶ci odrzucanych jeszcze przed przyjêciem ich do kolejki. ¦redni ruch, który musi byæ obs³u¿ony przez OnetPocztê, to kilka milionów unikalnych u¿ytkowników dziennie loguj±cych siê przez interfejs WWW oraz kilkaset tysiêcy u¿ytkowników protoko³ów POP3 i~IMAP.
+
+
+\section{Przechowywanie danych}
+
+Rozmiar danych generowanych przez u¿ytkowników systemów poczty elektronicznej jest jednym z~podstawowych problemów tego typu us³ug. Chocia¿ cena przechowywania jednego megabajta danych nie jest ju¿ zaporowa i~mo¿liwe jest oferowanie skrzynek o~nieograniczonej pojemno¶ci, problemem jest struktura zapisu tych danych, która umo¿liwia b³yskawiczny dostêp do wybranych skrzynek, wiadomo¶ci, czy zapisanych metadanych. Optymalizacja mechanizmu przechowywania wiadomo¶ci jest kluczow± spraw±, dziêki której mo¿liwe jest tworzenie indeksów skrzynek u¿ytkowników, tak aby dostêp do listy wiadomo¶ci, wyszukiwanie, czy te¿ synchronizacja skrzynki przez protokó³ IMAP by³a dla systemu zadaniem lekkim i~wykonywanym b³yskawicznie.
+
+Struktura zapisu skrzynek oraz wiadomo¶ci w~OnetPoczcie jest podzielona, podstawowe informacje o~skrzynce oraz zapisane na niej wiadomo¶ci przechowywane s± w~dwóch miejscach:
+\startitemize
+ \item Same wiadomo¶ci u¿ytkowników przechowywane s± na dedykowanym do tego celu klastrze serwerów, z~zapewnion± redundancj± danych oraz tworzon± poza dzia³aj±cym systemem kopi± zapasow±.
+ \item Struktura wiadomo¶ci w~skrzynce oraz metadane o~wiadomo¶ciach przechowywane s± w~relacyjnych bazach danych, co umo¿liwia wydajne pobieranie informacji o~liczbie nieprzeczytanych wiadomo¶ci, li¶cie wiadomo¶ci w~folderach oraz innych metadanych, szczególnie tych istotnych przy operacjach grupowych na skrzynce.
+\stopitemize
+
+Opisany powy¿ej mechanizm oddzielenia metadanych od samych wiadomo¶ci do poprawnego dzia³ania wymaga warstwy po¶redniej, ujednolicaj±cej interfejs systemu za fasad± spójnego API. W~tym miejscu stoj± jedne z najbardziej kluczowych mechanizmów OnetPoczty, odpowiedzialne za dostêp do informacji o~strukturze danych i~osobne mechanizmy odpowiedzialne za parsowanie i~dostêp do tre¶ci wiadomo¶ci pobranych z~zapisanych plików.
+
+Jednym z~ciekawszych mechanizmów jest zastosowanie mechanizmu s³u¿±cego do parsowania wybranych danych z~wiadomo¶ci bezpo¶rednio na serwerach ich po³o¿enia. Mechanizm ten stworzony jest w~oparciu o~serwer asynchroniczny Tornado, wystawiaj±c interfejs JSON-RPC, lekki i~przyjemny w u¿yciu sposób komunikacji z~us³ug±. Umiejscowienie serwisów parsuj±cych wiadomo¶ci na serwerach przechowuj±cych dane wyklucza potrzebê przesy³ania, czêsto sporych rozmiarów, plików prze sieæ, daj±c jednocze¶nie mo¿liwo¶æ otrzymania jedynie interesuj±cych nas sk³adowych wiadomo¶ci, jak wybrane nag³ówki, tre¶æ wiadomo¶ci, w~formacie oryginalnym, czy nawet w postaci tre¶ci, wyodrêbnionej z~kodowania HTML, potrzebnej na przyk³ad do wyszukiwania. Si³a tego mechanizmu szczególnie widoczna jest przy przetwarzaniu wiadomo¶ci z~za³±cznikami, gdzie daje nam mo¿liwo¶æ pobrania samej tre¶ci (do podgl±du wiadomo¶ci przez WWW), przy czym maksymalnie oszczêdzamy ruch sieciowy nie przesy³aj±c wa¿±cego niejednokrotnie kilkadziesi±t megabajtów pliku. 
+Z~drugiej strony mechanizm ten daje nam mo¿liwo¶æ pobrania samego za³±cznika, oczywi¶cie przy za³o¿eniu, ¿e dane o~strukturze wiadomo¶ci zapisane s± w~relacyjnej bazie danych.
+
+Z uwagi na charakterystykê wykorzystania systemu pocztowego, gdzie bardzo czêst± operacj± jest listowanie zawarto¶ci skrzynki, lub poszczególnych folderów, informacje te przechowywane s± w~relacyjnej bazie danych. Logicznie spójna baza danych podzielona jest horyzontalnie, a~przekierowaniem na konkretn± bazê danych zajmuje siê osobny mechanizm.
+
+
+\section{Rozproszenie funkcjonalne systemu}
+
+Ze wzglêdu na z³o¿ono¶æ systemu oraz wolumen danych do przetworzenia system OnetPoczty dzia³a na blisko 100 serwerach, podzielonych funkcjonalnie na klastry odpowiedzialne za kolejne warstwy lub podsystemy. W~szczególno¶ci funkcjonalnie spójne elementy, takie jak parsowanie wiadomo¶ci, system filtrowania korespondencji czy podawania za³±czników, wydzielone zosta³y jako oddzielne aplikacje, dzia³aj±ce na okre¶lonej klasie maszyn fizycznych. Podej¶cie takie umo¿liwia dok³adn± analizê obci±¿enia konkretnych systemów, dok³adny profiling podsystemów i~planowanie wzmacniania konkretnych jego elementów.
+
+Us³ugi warstwy aplikacyjnej tworzone s± w~¶rodowisku programistycznym jêzyka Python, z~wykorzystaniem zarówno w³asnych, tworzonych na miarê serwerów aplikacyjnych, jak i~dostêpnych publicznie rozwi±zañ takich jak Tornado.
+
+Aby skutecznie zarz±dzaæ mnogo¶ci± us³ug niezbêdny jest jasny i~niezawodny system wdro¿eñ oraz zarz±dzania zale¿no¶ciami. W~OnetPoczcie stosujemy wirtualne ¶rodowiska Pythona, tak aby uniezale¿niæ od siebie ró¿ne us³ugi dzia³aj±ce na tych samych maszynach. Zabezpiecza to te¿ przed niejawnym podnoszeniem wersji bibliotek w~aplikacjach niejako przy okazji wdra¿ania kolejnych serwisów.
+
+
+\section{Wspólne API}
+
+Dostêp do baz danych oraz plików wiadomo¶ci mo¿liwy musi byæ z~trzech g³ównych elementów funkcjonalnych systemu:
+\startitemize
+ \item mechanizmu MTA (Mail Transport Agent) --- czyli aplikacji dostarczaj±cej wiadomo¶ci na skrzynki naszych u¿ytkowników,
+ \item serwera POP3/IMAP --- umo¿liwiaj±cego pobieranie lub synchronizacjê skrzynki z~terminalem u¿ytkownika,
+ \item interfejsu WWW OnetPoczty --- aplikacji webowej udostêpnionej u¿ytkownikom.
+\stopitemize
+
+Ka¿dy z~wymienionych kana³ów dostêpu ma w³asn± charakterystykê, co by³o brane pod uwagê przy wyborze technologii, w~której zosta³ stworzony. Mechanizmy dostarczania wiadomo¶ci MTA oraz serwer POP3/IMAP s± serwerami stworzonymi w~¶rodowisku jêzyka~C, co wymusza udostêpnienie podsystemów przechowywania i~parsowania danych w~tym¿e ¶rodowisku. Z~drugiej strony warstwa aplikacyjna interfejsu WWW, a~tak¿e mechanizmy serwisowe (stosowane do migracji, indeksowania, itp.) stworzone s± w~jêzyku Python.
+
+Aby ujednoliciæ logikê dzia³ania oraz ograniczyæ koszt utrzymania, wszystkie mechanizmy dotycz±ce komunikacji z~podsystemami OnetPoczty stworzone s± jako biblioteki w~jêzyku~C, których API jest eksportowane do Pythona. Eksport ten pozwala jednocze¶nie na stosowanie technik programowania obiektowego oraz Pythonowe podej¶cie podczas u¿ywania powsta³ych bibliotek. Takie rozwi±zanie ma dodatkowe zalety, jak na przyk³ad mo¿liwo¶æ stworzenia zaawansowanych testów w~jêzyku Python, które sprawdzaj± logikê dzia³ania biblioteki w~samym jêzyku~C. Przyk³ad zastosowanego eksportu zamieszczony jest poni¿ej.
+
+\starttyping
+    /* nap.h */
+    int nap_init(int flags, void (*logger)(int, const char *, va_list));
+
+    struct nap_mparser_out {
+        char *content;
+        char *attch_names;
+        char *subject;
+        char *frm;
+        [...]
+    };
+
+    int nap_mparser_fetch_from_ghost([...], unsigned int content_mask, struct nap_mparser_out *result);
+    void nap_mparser_out_destroy(struct nap_mparser_out *result);
+\stoptyping
+
+\starttyping
+    class MParser(object):
+        def __init__(MParser self, mparser_slug='/mparser', mparser_port=12345,
+                     [...]):
+            [...]
+
+        def parse_message(MParser self, message_path, content_types=None):
+            [...]
+\stoptyping
+
+Powsta³e w~ten sposób biblioteki mo¿na zautomatycznie wdra¿aæ na wielu maszynach, przy u¿yciu repozytoriów paczek (PyPI) oraz wirtualizacji Pythona, aby zapewniæ wzajemn± niezale¿no¶æ dzia³aj±cych na jednym serwerze us³ug.
+
+Do samego eksportu oraz opakowania bibliotek napisanych w~C w~ich Pythonowe odpowiedniki wykorzystali¶my Cythona, który okaza³ siê bardzo wygodnym narzêdziem. Dziêki zastosowaniu tego rozwi±zania mo¿liwa jest kompilacja kodu w~C na serwerach ró¿ni±cych siê architektur±, czy te¿ wersj± systemu operacyjnego.
+
+
+\section{Wydajno¶æ}
+
+Opisany powy¿ej system jest w~stanie obs³u¿yæ ruch rzêdu kilkudziesiêciu milionów wiadomo¶ci dziennie, zachowuj±c przy tym ¶redni czas jej doj¶cia na skrzynkê na poziomie jednej sekundy. Ka¿dy z~elementów systemu jest monitorowany, co umo¿liwia analizê zagro¿eñ, planowanie wzmacniania oraz wczesne wykrycie ewentualnych awarii systemu. Podzia³ taki daje równie¿ pewne zabezpieczenie przed chwilow± niewydolno¶ci± niektórych systemów, nie blokuj±c dzia³ania ca³o¶ci. Jest to szczególnie wa¿ne, aby nasi u¿ytkownicy mieli ci±g³y i~nieprzerwany dostêp do swojej poczty.
+
+
+\stoptext

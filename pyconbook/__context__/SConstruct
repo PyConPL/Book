@@ -1,0 +1,77 @@
+# Get articles and directories list
+
+import os, glob
+
+if 'TEXINPUTS' not in os.environ:
+    os.environ['TEXINPUTS']=''
+os.environ['TEXINPUTS'] = (
+   ".:..:../..:../../sty:" +
+   os.environ['TEXINPUTS'] )
+env = Environment( ENV=os.environ)
+
+articles = []
+artlist = 'artlist.txt'
+build = "build"
+for line in open(artlist):
+    line = line.split('%')[0].split();
+    if line:
+       articles.append( line[:2] )
+
+final_pdfs = map((lambda x: "{}/{}/{}.pdf".format(build,x[0],x[0])),articles)
+
+env.Command("pyconbook-2013.pdf",
+        final_pdfs,
+        "texexec --pdfcopy --result=$TARGET $SOURCES")
+
+for a in articles:
+    root = "{}/{}/{}".format(build,a[0],a[0])
+    env.Command( root + ".pdf",
+                 [ root + ".tex",
+                   artlist,
+                   build + "/artpages.inc",
+                   glob.glob("sty/*"),
+                   glob.glob("src/"+a[0]+"/*")
+               ],
+                 [
+                     "pwd",
+                     "[ -L src ] || ln -s ../../src/"+a[0]+" src",
+                     # "env TEXINPUTS=.:..:../..:../../sty:../../src/"+a[0]+": " +
+                     "texexec --pdf " + a[0],
+                     "mv artpages.inc .. 2>/dev/null || true"
+                 ],
+                chdir = "%s/%s" % (build,a[0]) )
+    loc_src  = "src/"+a[0]+"/text.tex"
+    main_src = "../"+a[1]+"/text.tex"
+    main_md  = "../"+a[1]+"/text.md"
+    diffsrc  = glob.glob("src/"+a[0]+".diff")
+    if os.path.exists(loc_src):
+        env.Command( root + ".tex", loc_src,
+                     Copy('$TARGET','$SOURCE') )
+    elif os.path.exists(main_src):
+        env.Command( root + ".tex", main_src,
+                     Copy('$TARGET','$SOURCE') )
+    elif os.path.exists(main_md):
+        print ">>>" + main_md
+        env.Command( root + ".tex", 
+                     [main_md] + diffsrc + Glob("src/*.inc.tex"),
+                     [ Delete(".tmp"),
+
+                       Mkdir(".tmp"),
+                       ( "pandoc -t context --template=src/template.pandoc " + main_md +
+                         "| sed -e s/subsubsection/section/ > " +
+                         ".tmp/${TARGET.file}" ),
+                       "cat " + (diffsrc + ["/dev/null"])[0] +
+                       " | patch -d .tmp ",
+                       Copy("$TARGET", ".tmp/${TARGET.file}") ] )
+    else:
+        print "Thing ", main_md
+        raise "Gulp"
+                       
+
+env.Command("build/artpages.inc",[],[])
+
+# Local Variables:
+# mode: python
+# End:
+
+

@@ -1,0 +1,1 @@
+artykul_vagrant.rst

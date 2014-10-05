@@ -1,0 +1,16 @@
+--- o/slownik.tex	2013-10-15 21:11:22.882535805 +0200
++++ slownik.tex	2013-10-15 21:11:52.562682975 +0200
+@@ -1,10 +1,8 @@
+ \usemodule[pycon-2013]
+ \starttext
+-
+-
+-\section[zrób-sobie-słownik]{Zrób sobie słownik}
+-
+-\subsection[szymon-pyżalski]{Szymon Pyżalski}
++\Title{Zrób sobie słownik}
++\Author{Szymon Pyżalski}
++\MakeTitlePage
+ 
+ Niektórzy programiści Pythona zdają się nie zauważać możliwości, jakie
+ im daje model obiektowy. Tymczasem w wielu sytuacjach stworzenie klasy

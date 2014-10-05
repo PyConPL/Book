@@ -1,0 +1,103 @@
+\usemodule[pycon-2013]
+
+\starttext
+
+\Author{Igor Waligóra}
+\Title{Wysoko skalowalne serwisy pythonowe w OnetPoczcie}
+
+
+\startabstract
+
+Poczta elektroniczna jest jedną z~najstarszych, a~zarazem najbardziej popularnych usług oferowanych przez internet. Przed dostawcami tego typu usług stoi nie lada wyzwanie związane z~zapewnieniem szybkości działania, bezpieczeństwa oraz niezawodności skrzynek pocztowych swoich użytkowników. W~tym artykule chciałbym nakreślić architekturę OnetPoczty, jednego z~największych systemów poczty elektronicznej na rodzimym rynku, obsługującego przeszło dwa miliony użytkowników. Przedstawię rozwiązania, które umożliwiają płynne działanie systemu dostarczającego dziennie kilkudziesięciu milionów wiadomości, filtrując jednocześnie ruch przychodzący, zapewniając bezpieczeństwo danych oraz szybkość działania.
+
+\stopabstract
+
+
+\MakeTitlePage
+
+
+\section{Czym jest poczta elektroniczna}
+
+Przesyłanie wiadomości jest jedną z~najstarszych usług, które pojawiły się wraz z~rozwojem sieci komputerowych, sam dokument opisujący standard wiadomości elektronicznej liczy sobie 30 lat i~mimo wprowadzanych zmian, nadal obowiązuje (RFC822). Użytkownicy Internetu szybko przyzwyczaili się do tego sposobu komunikacji, wykorzystując go nie tylko do wymiany korespondencji, ale również przesyłania dokumentów, zdjęć, a~nawet muzyki czy filmów. Wraz z~rozwojem sieci rosły wymagania stawiane przed systemami obsługi poczty elektronicznej, w~szczególności na froncie z~liczbą dostarczanych wiadomości, oraz walki ze spamem, który stał się plagą tej usługi. Użytkownicy wymagają od dostawcy poczty przede wszystkim niezawodności, wygodnego, szybkiego interfejsu, braku ograniczeń co do pojemności skrzynki i~dobrego filtru odrzucającego niechcianą korespondencję. Budowa systemu, który mógłby sprostać tym wymaganiom, nie jest sprawą trywialną, wymaga często daleko idącej optymalizacji przechowywania wielkiego wolumenu 
+danych w~sposób pozwalający na błyskawiczny do nich dostęp.
+
+Podstawowym wyzwaniem, jakie stoi przed systemem OnetPoczty, jest wolumen ruchu, jaki musi być obsługiwany. Przeciętnego dnia system dostarcza kilkanaście milionów wiadomości, każdą z~nich przetwarzając przez wielowarstwowy system antyspamowy. Statystyki te nie obejmują niechcianych wiadomości odrzucanych jeszcze przed przyjęciem ich do kolejki. Średni ruch, który musi być obsłużony przez OnetPocztę, to kilka milionów unikalnych użytkowników dziennie logujących się przez interfejs WWW oraz kilkaset tysięcy użytkowników protokołów POP3 i~IMAP.
+
+
+\section{Przechowywanie danych}
+
+Rozmiar danych generowanych przez użytkowników systemów poczty elektronicznej jest jednym z~podstawowych problemów tego typu usług. Chociaż cena przechowywania jednego megabajta danych nie jest już zaporowa i~możliwe jest oferowanie skrzynek o~nieograniczonej pojemności, problemem jest struktura zapisu tych danych, która umożliwia błyskawiczny dostęp do wybranych skrzynek, wiadomości, czy zapisanych metadanych. Optymalizacja mechanizmu przechowywania wiadomości jest kluczową sprawą, dzięki której możliwe jest tworzenie indeksów skrzynek użytkowników, tak aby dostęp do listy wiadomości, wyszukiwanie, czy też synchronizacja skrzynki przez protokół IMAP była dla systemu zadaniem lekkim i~wykonywanym błyskawicznie.
+
+Struktura zapisu skrzynek oraz wiadomości w~OnetPoczcie jest podzielona, podstawowe informacje o~skrzynce oraz zapisane na niej wiadomości przechowywane są w~dwóch miejscach:
+\startitemize
+ \item Same wiadomości użytkowników przechowywane są na dedykowanym do tego celu klastrze serwerów, z~zapewnioną redundancją danych oraz tworzoną poza działającym systemem kopią zapasową.
+ \item Struktura wiadomości w~skrzynce oraz metadane o~wiadomościach przechowywane są w~relacyjnych bazach danych, co umożliwia wydajne pobieranie informacji o~liczbie nieprzeczytanych wiadomości, liście wiadomości w~folderach oraz innych metadanych, szczególnie tych istotnych przy operacjach grupowych na skrzynce.
+\stopitemize
+
+Opisany powyżej mechanizm oddzielenia metadanych od samych wiadomości do poprawnego działania wymaga warstwy pośredniej, ujednolicającej interfejs systemu za fasadą spójnego API. W~tym miejscu stoją jedne z najbardziej kluczowych mechanizmów OnetPoczty, odpowiedzialne za dostęp do informacji o~strukturze danych i~osobne mechanizmy odpowiedzialne za parsowanie i~dostęp do treści wiadomości pobranych z~zapisanych plików.
+
+Jednym z~ciekawszych mechanizmów jest zastosowanie mechanizmu służącego do parsowania wybranych danych z~wiadomości bezpośrednio na serwerach ich położenia. Mechanizm ten stworzony jest w~oparciu o~serwer asynchroniczny Tornado, wystawiając interfejs JSON-RPC, lekki i~przyjemny w użyciu sposób komunikacji z~usługą. Umiejscowienie serwisów parsujących wiadomości na serwerach przechowujących dane wyklucza potrzebę przesyłania, często sporych rozmiarów, plików prze sieć, dając jednocześnie możliwość otrzymania jedynie interesujących nas składowych wiadomości, jak wybrane nagłówki, treść wiadomości, w~formacie oryginalnym, czy nawet w postaci treści, wyodrębnionej z~kodowania HTML, potrzebnej na przykład do wyszukiwania. Siła tego mechanizmu szczególnie widoczna jest przy przetwarzaniu wiadomości z~załącznikami, gdzie daje nam możliwość pobrania samej treści (do podglądu wiadomości przez WWW), przy czym maksymalnie oszczędzamy ruch sieciowy nie przesyłając ważącego niejednokrotnie kilkadziesiąt megabajtów pliku. 
+Z~drugiej strony mechanizm ten daje nam możliwość pobrania samego załącznika, oczywiście przy założeniu, że dane o~strukturze wiadomości zapisane są w~relacyjnej bazie danych.
+
+Z uwagi na charakterystykę wykorzystania systemu pocztowego, gdzie bardzo częstą operacją jest listowanie zawartości skrzynki, lub poszczególnych folderów, informacje te przechowywane są w~relacyjnej bazie danych. Logicznie spójna baza danych podzielona jest horyzontalnie, a~przekierowaniem na konkretną bazę danych zajmuje się osobny mechanizm.
+
+
+\section{Rozproszenie funkcjonalne systemu}
+
+Ze względu na złożoność systemu oraz wolumen danych do przetworzenia system OnetPoczty działa na blisko 100 serwerach, podzielonych funkcjonalnie na klastry odpowiedzialne za kolejne warstwy lub podsystemy. W~szczególności funkcjonalnie spójne elementy, takie jak parsowanie wiadomości, system filtrowania korespondencji czy podawania załączników, wydzielone zostały jako oddzielne aplikacje, działające na określonej klasie maszyn fizycznych. Podejście takie umożliwia dokładną analizę obciążenia konkretnych systemów, dokładny profiling podsystemów i~planowanie wzmacniania konkretnych jego elementów.
+
+Usługi warstwy aplikacyjnej tworzone są w~środowisku programistycznym języka Python, z~wykorzystaniem zarówno własnych, tworzonych na miarę serwerów aplikacyjnych, jak i~dostępnych publicznie rozwiązań takich jak Tornado.
+
+Aby skutecznie zarządzać mnogością usług niezbędny jest jasny i~niezawodny system wdrożeń oraz zarządzania zależnościami. W~OnetPoczcie stosujemy wirtualne środowiska Pythona, tak aby uniezależnić od siebie różne usługi działające na tych samych maszynach. Zabezpiecza to też przed niejawnym podnoszeniem wersji bibliotek w~aplikacjach niejako przy okazji wdrażania kolejnych serwisów.
+
+
+\section{Wspólne API}
+
+Dostęp do baz danych oraz plików wiadomości możliwy musi być z~trzech głównych elementów funkcjonalnych systemu:
+\startitemize
+ \item mechanizmu MTA (Mail Transport Agent) --- czyli aplikacji dostarczającej wiadomości na skrzynki naszych użytkowników,
+ \item serwera POP3/IMAP --- umożliwiającego pobieranie lub synchronizację skrzynki z~terminalem użytkownika,
+ \item interfejsu WWW OnetPoczty --- aplikacji webowej udostępnionej użytkownikom.
+\stopitemize
+
+Każdy z~wymienionych kanałów dostępu ma własną charakterystykę, co było brane pod uwagę przy wyborze technologii, w~której został stworzony. Mechanizmy dostarczania wiadomości MTA oraz serwer POP3/IMAP są serwerami stworzonymi w~środowisku języka~C, co wymusza udostępnienie podsystemów przechowywania i~parsowania danych w~tymże środowisku. Z~drugiej strony warstwa aplikacyjna interfejsu WWW, a~także mechanizmy serwisowe (stosowane do migracji, indeksowania, itp.) stworzone są w~języku Python.
+
+Aby ujednolicić logikę działania oraz ograniczyć koszt utrzymania, wszystkie mechanizmy dotyczące komunikacji z~podsystemami OnetPoczty stworzone są jako biblioteki w~języku~C, których API jest eksportowane do Pythona. Eksport ten pozwala jednocześnie na stosowanie technik programowania obiektowego oraz Pythonowe podejście podczas używania powstałych bibliotek. Takie rozwiązanie ma dodatkowe zalety, jak na przykład możliwość stworzenia zaawansowanych testów w~języku Python, które sprawdzają logikę działania biblioteki w~samym języku~C. Przykład zastosowanego eksportu zamieszczony jest poniżej.
+
+\starttyping
+    /* nap.h */
+    int nap_init(int flags, void (*logger)(int, const char *, va_list));
+
+    struct nap_mparser_out {
+        char *content;
+        char *attch_names;
+        char *subject;
+        char *frm;
+        [...]
+    };
+
+    int nap_mparser_fetch_from_ghost([...], unsigned int content_mask, struct nap_mparser_out *result);
+    void nap_mparser_out_destroy(struct nap_mparser_out *result);
+\stoptyping
+
+\starttyping
+    class MParser(object):
+        def __init__(MParser self, mparser_slug='/mparser', mparser_port=12345,
+                     [...]):
+            [...]
+
+        def parse_message(MParser self, message_path, content_types=None):
+            [...]
+\stoptyping
+
+Powstałe w~ten sposób biblioteki można zautomatycznie wdrażać na wielu maszynach, przy użyciu repozytoriów paczek (PyPI) oraz wirtualizacji Pythona, aby zapewnić wzajemną niezależność działających na jednym serwerze usług.
+
+Do samego eksportu oraz opakowania bibliotek napisanych w~C w~ich Pythonowe odpowiedniki wykorzystaliśmy Cythona, który okazał się bardzo wygodnym narzędziem. Dzięki zastosowaniu tego rozwiązania możliwa jest kompilacja kodu w~C na serwerach różniących się architekturą, czy też wersją systemu operacyjnego.
+
+
+\section{Wydajność}
+
+Opisany powyżej system jest w~stanie obsłużyć ruch rzędu kilkudziesięciu milionów wiadomości dziennie, zachowując przy tym średni czas jej dojścia na skrzynkę na poziomie jednej sekundy. Każdy z~elementów systemu jest monitorowany, co umożliwia analizę zagrożeń, planowanie wzmacniania oraz wczesne wykrycie ewentualnych awarii systemu. Podział taki daje również pewne zabezpieczenie przed chwilową niewydolnością niektórych systemów, nie blokując działania całości. Jest to szczególnie ważne, aby nasi użytkownicy mieli ciągły i~nieprzerwany dostęp do swojej poczty.
+
+
+\stoptext

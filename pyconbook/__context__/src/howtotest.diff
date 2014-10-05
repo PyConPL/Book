@@ -1,0 +1,17 @@
+--- o/howtotest.tex	2013-10-15 20:50:26.172304105 +0200
++++ howtotest.tex	2013-10-15 20:51:10.440523625 +0200
+@@ -1,10 +1,11 @@
+ \usemodule[pycon-2013]
+ \starttext
+ 
++\Title{How to test it?}
++\Author{Szymon Pyżalski}
++\MakeTitlePage
+ 
+-\section[how-to-test-it]{How to test it?}
+-
+-\subsection[szymon-pyżalski]{Szymon Pyżalski}
++\english
+ 
+ Everyone knows that it is good to write unit tests. But how to write
+ good ones? The key is first to understand what the unit tests are for.

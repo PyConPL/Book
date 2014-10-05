@@ -1,0 +1,1 @@
+# Rzemiosło programowania, Adam Kaliński

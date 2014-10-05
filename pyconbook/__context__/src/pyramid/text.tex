@@ -1,0 +1,77 @@
+\usemodule[pycon-2013]
+
+\starttext
+
+\Author{Szymon Pyżalski}
+\Title{Pyramid~-- zarys najważniejszych idei}
+
+
+\startabstract
+
+Framework Pyramid powstał z~połączenia dwóch przedsięwzięć. Pierwszy z~nich to projekt repoze, mający na celu przeniesienie udanych koncepcji z~serwera aplikacji Zope do środowiska WSGI. W~jego ramach stworzono miniframework repoze.bfg z~hasłem {\em pay for what you eat}. Drugi z~nich to framework Pylons. Ekipa tworząca ten ostatni podczas prac nad wersją~2.0 doszła do wniosku, że ich wizja coraz bardziej przypomina repoze.bfg. Obecnie nazwa Pylons została przyjęta dla większego projektu mającego obejmować wiele aplikacji (podobnie jak np.~projekt pocoo), a~nowy framework nosi nazwę Pyramid.
+
+\stopabstract
+
+
+\MakeTitlePage
+
+
+\section{Architektura RV}
+
+Architektura aplikacji w~Pyramidzie jest wariacją architektury Model-View-Controller. Pyramid nie ma kontrolerów, których rolę spełniają funkcje widoku ({\em view} rozumiane podobnie jak w~Django). Jest też elastyczny jeśli chodzi o~model danych, nie narzucając, z~jakiego backendu powinniśmy korzystać (gotowe szablony aplikacji oparte są o~SQLAlchemy i~ZODB). Modelowi odpowiada koncepcja zasobu ({\em resource}).
+
+
+\section{Traversal}
+
+Koncepcją zaczerpniętą z~Zope, jest drzewo zasobów, które przeglądamy przez użycie URL-i podobnie jak statyczne katalogi na dysku. Aby zasoby mogły być w ten sposób przeglądane, wystarczy że implementują metodę \type{__getitem__}. Jeśli np.~wyślemy do naszej aplikacji zapytanie pod url \URL{http://www.example.com/spam/eggs}, Pyramid stworzy z~podanej przez nas w~konfiguracji fabryki zasób \type{root} i~spróbuje znaleźć zasób \type{root['spam']['eggs']}. Następnie postara się dobrać funkcję widoku dla tego zasobu kierując się oprócz typu zasobu także innymi przesłankami, które możemy dowolnie dobierać (np.~konfiguracja widoków po typie zasobu i~metodzie HTTP idealnie pasuje do aplikacji REST).
+
+Użycie {\em traversal} nie jest obowiązkowe. Możemy dobierać widoki do URL-i~w sposób znany z~Pylons czy Django ({\em url matching}), a~także mieszać obie techniki.
+
+
+\section{Dekoratory z opóźnionym działaniem}
+
+Nasze funkcje widoku możemy pisać podobnie jak w~Django:
+\starttyping
+    from pyramid.renderers import render_to_response
+    from pyramid.view import view_config
+
+    @view_config(route_name='home')
+    def someview(request):
+        return render_to_response(
+            'someapp:templates/sometmpl.mako', {'somedata':'xyz'})
+\stoptyping
+
+Jednak lepszą metodą będzie:
+\starttyping
+    @view_config(route_name='home', renderer='someapp:templates/sometmpl.mako',
+    def someview(request):
+        return {'somedata': 'xyz'}
+\stoptyping
+
+Dlaczego? Dekorator \type{@view_config} ma opóźnione działanie (jest to idea zaczerpnięta z~frameworka grok) i~samo jego użycie nie zmienia w~żaden sposób wartości, którą zwraca nasza funkcja. To oznacza, że możemy łatwiej pisać testy jednostkowe, w~których nie musimy analizować obiektu odpowiedzi, czy parsować HTML-a. Jeśli zaimportujemy w~teście jednostkowym funkcję \type{someview()}, będzie ona zwracać słownik \type{\{'somedata': 'xyz'\}}. Pełną funkcjonalność nabierze nasza funkcja dopiero w~czasie tzw.~skanu aplikacji, który wykonamy przy jej starcie.
+
+
+\section{Polityka uwierzytelniania i autoryzacji, ACL}
+
+Uwierzytelnianie i~autoryzacja to bardzo mocna strona Pyramida. W~pakiecie otrzymujemy potężną i~elastyczną politykę autoryzacji opartą o~{\em access control lists}. Każdy zasób pytany jest o~atrybut \type{__acl__}, który następnie analizowany jest z~listą ról ({\em principals}) zwróconą przez politykę uwierzytelniania oraz nazwą uprawnienia. Możemy przy jej pomocy tworzyć bardzo granularny model autoryzacji dowolnie przydzielać dostęp do określonych akcji na pojedynczych zasobach. Jeśli ta polityka z~jakiegoś powodu nam nie odpowiada, możemy łatwo wpiąć własną (interfejs polityki uwierzytelniania i~autoryzacji jest prosty i~dobrze udokumentowany).
+
+
+\section{Zasoby statyczne}
+
+Zasobami statycznymi ({\em assets}) nazywamy w~pyramidzie wszystko to, co znajduje się w~paczkach pythona i~ich podkatalogach, ale nie jest kodem pythona. Mogą to być statycznie serwowane pliki, jak i~szablony. Framework oferuje nam dwa ułatwienia. Po pierwsze --- notację umożliwiającą wskazanie położenia pliku względem paczki. Np.~\type{myapp.images:icons/arrow.png} oznacza plik \type{arrow.png} znajdujący się w~katalogu \type{icons} (nie będący paczką), który z~kolei znajduje się w~będącym paczką katalogu \type{images}. To ułatwienie zachęca nas do umieszczania plików wraz z~kodem aplikacji, co ułatwia jej przenoszenie między maszynami.
+
+Drugim ułatwieniem jest metoda \type{override_asset()} umożliwiająca nadpisanie zasobu statycznego, co umożliwia nam dostosowanie gotowych modułów do naszych potrzeb.
+
+
+\section{Menedżer transakcji}
+
+Menedżer transakcji to koncepcja zaczerpnięta z~Zope. Zarządza on transakcjami bazodanowymi, z~których korzystamy w~zapytaniu i~odpowiada za zacommitowanie ich na jego końcu. Oprócz banalnego ułatwienia, jakim jest brak konieczności commitowania ręcznego, daje on nam gwarancję atomowości wszystkich operacji w~ramach jednego żądania (także jeśli korzystamy z~kilku backendów obsługujących commit dwufazowy) oraz cofnięcia transakcji, nawet jeśli błąd wystąpił po opuszczeniu przez aplikację kodu widoku.
+
+
+\section{Inne koncepcje}
+
+Pyramid posiada też system zdarzeń, tj.~architekturę {\em publisher-subscriber} (znaną w~Django jako signals). Oferuje możliwość pisania \quotation{tweenów} (elementy podobne do {\em WSGI middleware}, jednak bardziej wysokopoziomowe). Oferuje też {\em out of the box} rozwiązania dotyczące internacjonalizacji.
+
+Czy Pyramid jest frameworkiem dla Was i~czy rzeczywiście uważacie go za idealne rozwiązanie zarówno dla małych, jak i~dla dużych aplikacji, to już decyzja, którą musicie podjąć sami po poznaniu jego możliwości i~specyfiki w czasie warsztatu.
+
+\stoptext

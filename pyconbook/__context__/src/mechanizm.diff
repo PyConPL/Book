@@ -1,0 +1,12 @@
+--- o/mechanizm.tex	2013-10-08 20:18:37.413786150 +0200
++++ mechanizm.tex	2013-10-08 20:20:44.554416613 +0200
+@@ -4,6 +4,6 @@
+ 
+-\section[mechanizm-importowania-w-języku-python]{Mechanizm importowania
++\Title{Mechanizm importowania
+ w języku Python}
+-
+-\subsection[konrad-hałas]{Konrad Hałas}
++\Author{Konrad Hałas}
++\MakeTitlePage
+ 

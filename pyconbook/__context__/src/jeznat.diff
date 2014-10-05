@@ -1,0 +1,13 @@
+--- o/jeznat.tex	2013-10-08 20:45:44.793855874 +0200
++++ jeznat.tex	2013-10-08 21:54:23.142277673 +0200
+@@ -4,6 +4,6 @@
+ 
+-\section[przetwarzanie-języka-naturalnego-w-praktyce]{Przetwarzanie
+-języka naturalnego w praktyce}
+-
+-\subsection[dr-inż.-krzysztof-dorosz]{dr inż. Krzysztof Dorosz}
++\Title{Przetwarzanie
++języka naturalnego w~praktyce}
++\Author{dr inż. Krzysztof Dorosz}
++\MakeTitlePage
+ 

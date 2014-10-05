@@ -1,0 +1,55 @@
+% Cokolwiek jest po procencie, jest pijane i jest nieuwzglêdniane
+% bez TeX-a i bez mejka te¿ nie.
+% puste wiersze s± ok.
+
+% To jest w zasadzie agenda i najlepiej by³oby, ¿eby trzymaæ to
+% w tej samej kolejno¶ci co i agendê
+% je¶li kto¶ uwa¿a, ¿e powinno siê raczej parsowaæ agendê, to w
+% zasadzie te¿ siê to da zrobiæ, ale mo¿e po prostu bêdziemy ten
+% plik pilnowaæ.
+
+% Pierwszy powinien byæ ,,referat'' pycon2013, bo wstêp i spis
+% tre¶ci
+%% UPDATE:
+%% Pycon 2013 wymy¶li³ potwornie d³ugie nazwy. TeX tego nie ³yka
+%% Zatem pierwsza jest nazwa TeX-owa, druga nazwa z katalogu
+
+pycon2013 pycon2013
+rzemioslo rzemioslo_programowania
+jeznat przetwarzanie_jezyka_naturalnego_w_praktyce
+hermajesty python_w_sluzbie_jej_krolewskiej_mosci
+werkzeug werkzeug_debugowanie_aplikacji_internetowych
+packaging packaging_python_applications
+howtotest how_to_test_it
+iteratory Nastepny_prosze_iteratory_i_generatory_pod_lupa
+nocaptcha NoCaptcha
+pyriddle  PyRiddle
+mechanizm mechanizm_importowania_w_jezyku_python
+ansibl automatyzacja_z_ansiblem
+narzedzie narzedzie_do_automatyzacji_pracy_z_nieograniczona_iloscia_serwerow
+vagrant 2012_twoja_wirtualna_piaskownica_dzieki_narzedziu_vagrant
+slownik zrob_sobie_slownik
+
+async 2012_Asynchroniczne_i_zdarzeniowe_programowanie_w_PyOpenCL
+pyramid 2012_Pyramid
+onetpoczta onetpoczta
+krotkie krotkie_wprowadzenie_do_metaprogramowania_w_pythonie
+dystrybucja dystrybucja_kodu_w_pythonie
+gtranslate google_translate_tu_nie_pomoze
+
+% 2012_Pyramid_zarys-najwazniejszych_idei
+% 2012_twoja_wirtualna_piaskownica_dzieki_narzedziu_vagrant
+% 2012_Wysoko-skalowalne_serwisy_pythonowe_w_OnetPoczcie
+% dystrybucja_kodu_w_pythonie
+% google_translate_tu_nie_pomoze
+% how_to_test_it
+% krotkie_wprowadzenie_do_metaprogramowania_w_pythonie
+% mechanizm_importowania_w_jezyku_python
+% narzedzie_do_automatyzacji_pracy_z_nieograniczona_iloscia_serwerow
+% NoCaptcha
+% packaging_python_applications
+% przetwarzanie_jezyka_naturalnego_w_praktyce
+% PyRiddle
+% rzemioslo_programowania
+% werkzeug_debugowanie_aplikacji_internetowych
+% zrob_sobie_slownik

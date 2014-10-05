@@ -1,0 +1,15 @@
+--- o/packaging.tex	2013-10-15 20:41:24.437617803 +0200
++++ packaging.tex	2013-10-15 20:42:35.081968109 +0200
+@@ -2,9 +2,9 @@
+ \starttext
+ 
+ 
+-\section[packaging-python-applications]{Packaging Python applications}
+-
+-\subsection[piotr-banaszkiewicz]{Piotr Banaszkiewicz}
++\Title{Packaging Python applications}
++\Author{Piotr Banaszkiewicz}
++\MakeTitlePage
+ 
+ \section[wstęp]{Wstęp}
+ 

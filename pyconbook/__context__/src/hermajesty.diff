@@ -1,0 +1,15 @@
+--- o/hermajesty.tex	2013-10-08 19:14:22.562465819 +0200
++++ hermajesty.tex	2013-10-08 19:15:04.342673446 +0200
+@@ -4,7 +4,7 @@
+ 
+-\section[python-w-służbie-jej-królewskiej-mości---czyli-o-parsowaniu-stron-i-szpiegowaniu-użytkowników-słów-kilka]{Python
+-w służbie jej królewskiej mości - czyli o parsowaniu stron i
+-szpiegowaniu użytkowników słów kilka}
+-
+-\subsection[marcin-karkocha]{Marcin Karkocha}
++\Title{Python
++w~służbie jej królewskiej mości~-- czyli o parsowaniu stron
++i~szpiegowaniu użytkowników słów kilka}\HeaderTitle{Python w służbie jej królewskiej mości}
++\Author{Marcin Karkocha}
++\MakeTitlePage
+ 
