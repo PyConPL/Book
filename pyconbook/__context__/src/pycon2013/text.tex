@@ -236,11 +236,18 @@ Gardzielewskiego.
 \blank[2*big]
 \toks0={}
 
+\newread \testarticle
 \def \Article#1#2{\message{**ARTICLE: #1 ***}%
      \toks0=\expandafter{\the\toks0\relax\Article{#1}}
      \toks1={}% Authors
      \toks2={}% Title
-     \expandafter \ScanArt \normalinput #1/#1.tex\relax\ScanArt}
+     \openin \testarticle=#1/#1.tex\relax
+     \ifeof \testarticle
+        \closein \testarticle
+     \else
+        \closein \testarticle
+        \expandafter \ScanArt \normalinput #1/#1.tex\relax\ScanArt
+     \fi}
 
 \def \ScanArt {\afterassignment \ScanArtA \let \next}
 \def \ScanArtA{%
