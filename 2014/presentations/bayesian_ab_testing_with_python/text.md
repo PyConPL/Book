@@ -62,20 +62,19 @@ In the end, this approach doesn't suffer from the problems outlined previously. 
 
 Suppose we've gathered some data. Say, variation A was viewed 44 times, and produced 2 sign-ups, and variation B was viewed 96 times and produced 11 sign-ups. Let's use `scipy` to calculate some statistics. 
 
-```python
-from scipy import stats
+    from scipy import stats
 
-data = {
-    'A': { 'views': 42, 'signups': 2 },
-    'B': { 'views': 85, 'signups': 11 }
-}
+    data = {
+        'A': { 'views': 42, 'signups': 2 },
+        'B': { 'views': 85, 'signups': 11 }
+    }
 
-posteriors = {
-    variation: stats.beta(logs['signups'], 
-        logs['views'] - logs['signups'])
-    for variation, logs in data.items()
-}
-```
+    posteriors = {
+        variation: stats.beta(logs['signups'],
+            logs['views'] - logs['signups'])
+        for variation, logs in data.items()
+    }
+
 Calculate expected sign-up rate $\text{E}[p_A~|~X]$:
 
 ```python
