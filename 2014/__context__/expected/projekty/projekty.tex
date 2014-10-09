@@ -1,0 +1,336 @@
+\usemodule[pycon-2014]
+\starttext
+
+
+\section[projekty-sprzętowe-bo-nie-tylko-webem-człowiek-żyje---piotr-maliński]{Projekty
+sprzętowe -- bo nie tylko webem człowiek żyje - Piotr Maliński}
+
+Rozwój urządzeń mobilnych i postępująca cyfryzacja naszego życia, czy
+popularyzacja bezprzewodowego dostępu dostępu do Internetu i
+bezprzewodowej komunikacji otaczających nas urządzeń, tworzą nowe rynki,
+na których twórcy i ich startupy odnoszą sukcesy oferując nowe
+urządzenia i usługi. Projekty sprzętowe otwierają przed nami nowy
+segment rynku oraz stanowią przyjemną odskocznię od np. webowej rutyny.
+
+Żeby skryptować elektronikę i tworzyć nowe urządzenia, czy sprzętowe
+usługi, nie trzeba już znać się na programowaniu mikrokontrolerów. Nie
+trzeba wkuwać wielkich ksiąg poświęconych poszczególnym układom. Rozwój
+narzędzi deweloperskich pozwala nam już skryptować elektronikę z poziomu
+Pythona, czy nawet JavaScriptu. Czego więc potrzebujemy, by zacząć
+przygodę ze sprzętowymi projektami?
+
+\subsection[pierwsze-kroki-i-prototypowanie]{Pierwsze kroki i
+prototypowanie}
+
+Osoby stawiające pierwsze kroki ze skryptowaniem elektroniki zapewne
+natrafią na Raspberry Pi, czy Arduino. Są to obecnie chyba
+najpopularniejsze marki w branży {\em sprzętowej}.
+
+{\bf Raspberry Pi} to mini komputer, na którym po uruchomieniu Linuksa
+możemy tworzyć np. aplikacje desktopowe zintegrowane z peryferiami USB,
+czy też tymi podłączonymi za pomocą pinów GPIO. Dostępne na rynku mini
+komputery (a jest ich wiele) pozwalają tworzyć nowe urządzenia i usługi
+integrujące biblioteki i możliwości komputera z elektroniką taką jak
+czujniki, wyświetlacze, czy różnego rodzaju silniki.
+
+{\bf Arduino} to przedstawiciel mikrokontrolerów. Płytka Arduino możemy
+przypominać Raspberry Pi, ale nie dostajemy na niej procesora, tylko
+znacznie prostszy mikrokontroler. Za pomocą dostarczanego SDK i edytora
+jesteśmy w stanie zaprogramować mikrokontroler na płytce. Zazwyczaj
+oznacza to, że np. odpada nam obsługa peryferiów USB, czy też możliwość
+wykorzystania bibliotek znanych z Linuksa. Z drugiej strony
+mikrokontrolery są znacznie bardziej energooszczędne i tańsze (nawet od
+Raspberry Pi). Świetnie sprawdzają się w projektach, w których musimy
+zasilać układ z baterii przez długi okres czasu, lub kiedy ważną rolę
+odgrywają koszty, a zastosowanie komputera nie jest potrzebne.
+
+Na rynku dostępnych jest wiele mikrokontrolerów i mini komputerów. Nie
+wszystkie oferują biblioteki i API dla Pythona. Spośród mini komputerów
+przyjazne dla Pythona jest np. Raspberry Pi, Beaglebone Black, czy
+PcDuino. W przypadku mikrokontrolerów nadal króluje C (Arduino), czy C++
+(mbed), ale Python też zaczyna coraz częściej zaznaczać swoją obecność.
+MicroPython (pyboard), czy PyMCU to płytki skryptowane z poziomu
+Pythona. PyBoard posiada własną (ograniczoną) implementację Pythona na
+mikrokontrolery, natomiast PyMCU jest skryptowane z poziomu Pythona na
+komputerze, do którego jest podłączona. Także Arduino w pewnym zakresie
+można skryptować Pythonem (za pomocą PyFirmata i nakładek). Dodatkowo
+wymienić można projekty takie jak TinkerForge, Phidgets, czy Synapse
+Snap.
+
+Jeżeli {\bf chcesz zacząć} przygodę z elektroniką, to polecam wybranie
+jakiegoś zestawu startowego. Nauka to nic innego jak budowanie kolejnych
+prostych układów i skryptowanie ich. Czy to będzie miganie diodą LED,
+poruszanie serwomechanizmami, silnikami krokowymi, albo DC, czy też
+wykorzystanie wyświetlaczy LCD, komunikacja szeregowa z innymi złożonymi
+układami. Jak opanujesz API danej platformy, będziesz w stanie łączyć
+działanie poszczególnych elementów ze sobą, np. będziesz mógł zbudować
+samojezdnego robota, który będzie unikał przeszkód dzięki czujnikom
+zbliżeniowym.
+
+Co do {\bf startowej platformy} to możliwości jest co najmniej kilka.
+Dla PyMCU opublikowałem już szereg artykułów. PyBoard zapewne też
+niebawem stanie się popularny, bo m.in. może działać bez podłączenia do
+PC. Arduino z poziomu Pythona nie oferuje wszystkich możliwości, ale
+proste układy da się w nim obsłużyć (biblioteka BreakfastSerial). Pośród
+mini PC mamy Raspberry Pi, ale także Beaglebone Black, czy PcDuino -
+choć do tych dwóch ostatnich liczba tutoriali i przykładów będzie
+mniejsza niż w przypadku Raspberry Pi. Ich zalety to np. większa liczba
+pinów GPIO, czy też silniejszy procesor.
+
+\subsection[rozwiązania-praktyczne]{Rozwiązania praktyczne}
+
+W pewnym momencie będziesz chciał przejść z poziomu prototypu na płytce
+stykowej do bardziej praktycznej wersji swojego układu. W zależności od
+tego, czy to ma być jeden układ, czy też produkcja masowa dla szerszej
+grupy odbiorców, czeka Cię szereg kroków, jakie należy wykonać, by
+osiągnąć wyznaczony cel. Nikt nie kupi Twojego urządzenia jeżeli będzie
+drogie, czy nieporęczne, bo np. siedzi w nim Raspberry Pi, płytka
+stykowa i szereg przewodów.
+
+\section[produkty-masowe---podbijamy-światowe-rynki]{Produkty
+masowe - podbijamy światowe rynki}
+
+Zacznijmy od produktów masowych, które mają dość wyraźne cechy i
+wymagania. Załóżmy, że masz gotowy układ kamery z monochromatyczną
+matrycą i filtrami do fotografii w ultrafiolecie i podczerwieni, czyli
+coś, czego zwykły aparat fotograficzny nie potrafi. Zrobiłeś wstępną
+analizę i wynika z niej, że taki produkt znajdzie wystarczającą liczbę
+nabywców. Załóżmy, że działa to tak: mini PC, jak np. Raspberry Pi,
+steruje małą kamerą przemysłową oraz poprzez GPIO prostym kołem
+filtrowym zmieniającym filtry. Do tego zasilanie z akumulatora,
+wyświetlacz i inne komponenty. {\bf Jak z płytki stykowej przejść do
+produktu konsumenckiego?}
+
+Proces przejścia od prototypu do gotowego produktu nie będzie ani
+krótki, ani tani. Aparat musi być relatywnie mały i trwały. Oznacza to,
+że elektronika powinna być zintegrowana na płytce PCB, tak by nie było
+konieczności stosowania różnego rodzaju przewodów i innych nietrwałych
+lub nieporęcznych konstrukcji. Tworzeniem projektów i wykonaniem płytek
+PCB zajmują się wyspecjalizowane fabryki, w których automaty potrafią
+budować tysiące, jak nie setki tysięcy, gotowych układów w krótkim
+okresie czasu. Twoim pierwszym krokiem powinno być nawiązanie współpracy
+z taką fabryką - w celu stworzenia i zoptymalizowania PCB dla układu, a
+następnie by rozpocząć produkcję. Jako etap pośredni można skorzystać z
+sieciowych usług, takich jak
+\useURL[url1][http://123d.circuits.io/circuits/][][123d.circuits.io]\from[url1],
+gdzie możesz narysować swój układ, a następnie wygenerować projekt PCB i
+zamówić kilka sztuk, czy też poprosić społeczność o porady przy
+podstawowej optymalizacji płytki.
+
+Prędzej czy później dojdziesz do etapu składania zamówienia w fabryce na
+PCB. Problem w tym, że takie fabryki przyjmują zamówienia na duże
+ilości, by było to opłacalne. W zależności od skomplikowania układu mogą
+to być setki, a nawet tysiące sztuk. 5000 sztuk po 50 zł każda to już
+250 tysięcy złotych. Bez zewnętrznego wsparcia finansowego mało który
+startup sprzętowy byłby w stanie wyłożyć takie pieniądze. Na szczęście
+na ratunek przychodzi {\bf crowdfunding}, czyli zbiórki na
+Kickstarterze, Indiegogo i podobnych serwisach. Dzięki takim zbiórkom
+udało zrealizować się wiele projektów, które inaczej nie byłyby w stanie
+sfinansować budowy. Dodatkowa zaleta to weryfikacja produktu w oczach
+przyszłych konsumentów - jeżeli dobrze przeprowadzona zbiórka nie
+przekłada się na prognozowany poziom zainteresowania to może jednak Twój
+pomysł nie jest aż tak dobry?
+
+Projekt Kano zebrał półtora miliona dolarów (zestaw edukacyjny złożony z
+Raspberry Pi, pomarańczowej klawiatury i materiałów edukacyjnych). Udoo,
+czyli połączenie Arduino z dość silnym mini PC zebrał 650 tysięcy, choć
+jako minimum wyznaczył sobie jedynie 27 tysięcy. Z drugiej strony są też
+projekty, które nie osiągnęły swoich kwot minimalnych. W chwili pisania
+tego artykułu na Kickstarterze trwa zbiórka na projekt SnaPiCam - czyli
+aparat cyfrowy na bazie Raspberry Pi i dedykowanego modułu kamery. Za 30
+funtów (jakieś 150 zł) możemy dostać obudowę. Do tego musimy doliczyć
+koszt Raspberry Pi, modułu kamery, wyświetlacza, akumulatora i innych
+niezbędnych części. Czy nie byłoby prościej kupić gotową i lepszą
+cyfrówkę w sklepie? Dla wielu konsumentów tak zapewne jest i nic nie
+wskazuje, by ten projekt osiągnął dobry wynik (o ile dojdzie do
+minimum). Jeżeli uważasz, jako programista i twórca, że twój produkt
+jest dobry, to {\bf zainwestuj też w ludzi od marketingu i finansów}.
+Bez tego nie sprzedasz efektywnie produktu w crowdfundingu, jak i możesz
+mieć problemy z wyceną całego przedsięwzięcia. Dobre {\em opakowanie}
+jest kluczowe.
+
+Jeżeli tworzysz nowe urządzenie i chcesz {\bf wprowadzić je do obrotu},
+to czeka Cię jeszcze spełnienie wymogów prawnych. Znaczek zgodności CE
+na urządzeniach jakie znajdziesz w sklepach, nie bierze się sam z
+siebie. Musisz znaleźć regulacje prawne dopuszczenia do obrotu urządzeń
+z danej kategorii i upewnić się, że Twoje urządzenie spełnia wszystkie
+wymagania. W przypadku kontroli urządzenia nie spełniające tych wymagań
+mogą marnie skończyć. Zainteresowanym polecam np.
+\useURL[url2][http://www.uke.gov.pl/uke-skontrolowal-rynek-tabletow-13185][][wyniki
+kontroli]\from[url2] tabletów przeprowadzonej przez UKE. Wyobraź sobie
+sytuację, w której musisz wymienić zasilacze dołączone do każdego
+tabletu, a tych na magazynie masz np. tysiące. Musisz więc uwzględnić
+{\bf obsługę prawną} twojego przedsięwzięcia.
+
+Niektóre projekty sprzętowe stosują swego rodzaju optymalizację
+{\bf wykorzystując istniejące urządzenia}. Najłatwiej o to, gdy tworzysz
+nową usługę w oparciu o istniejące urządzenia, np. do sieci klubów
+wprowadzasz karty lojalnościowe oparte o układ RFID. Potrzebujesz więc
+kart RFID, jak i czytników i terminali. Można połączyć np. gotowy
+czytnik RFID i np. tablet, by stworzyć działający terminal. Dzięki temu
+nie musisz wprowadzać produktu do obrotu, a jedynie tworzysz
+oprogramowanie, czy też optymalizujesz dobór sprzętu. W przypadku
+działalności międzynarodowej możesz korzystać ze sprzętu dostępnego na
+danym lokalnym rynku. Odpada logistyka oraz cło i podatki przy
+przekraczaniu granicy UE. Tworząc dedykowane urządzenie można by zadbać
+o dodatkowe funkcjonalności, czy lepszy interfejs, ale nie zawsze jest
+to opłacalne, bo zyskać można niewiele, a wydać trzeba wtedy bardzo
+dużo. Przykładem takiego produktu może być
+\useURL[url3][http://socialwifi.com/pl/][][Social WiFi]\from[url3],
+który wykorzystuje istniejące na rynku routery, by dostarczyć nowe
+usługi, wcześniej nieobecne dla tego typu urządzeń.
+
+Ręczna drukarka 3D {\bf 3D Simo} przeszła odwrotną drogę. Jest zupełnie
+nowym produktem i musiała przejść całą drogę, jaką opisałem w
+poprzednich paragrafach. Dopiero po kilku zbiórkach crowdfundingowych,
+po wykonaniu szeregu prototypów, twórcy mogli zacząć produkcję
+urządzenia i wysyłkę do osób, którzy zakupili je w zbiórkach - z
+kilkumiesięcznym opóźnieniem. Tutaj głównym problemem nie była
+elektronika, ale np. wykonanie form do bicia obudów, czy zamawianie
+części od różnych dostawców (np. dysz, czy układów grzewczych). Znaczek
+CE też pojawił się na obudowie drukarki. Odbiorca produktu tego nie
+widzi, ale dla twórców były to długie miesiące ciężkiej i czasami
+zapewne stresującej pracy. Z drugiej strony weszli na rynek z nowym
+produktem, a to już jest coś.
+
+\section[produkty-unikatowe---czyli-radosna-twórczość-na-małą-skalę]{Produkty
+{\em unikatowe} - czyli radosna twórczość na małą skalę}
+
+Ręcznie tworzone urządzenia, czy usługi na nich oparte zdarzają się
+znacznie częściej niż projekty na masową skalę. Chcesz rozwiązać jakiś
+problem, dostarczyć jakieś proste urządzenie dla jednego klienta? Wtedy
+sprawa jest prostsza, bo odpadają wysokie koszty, problemy prawne czy
+technologiczne. Wystarczy, że stworzysz urządzenie i/lub oprogramowanie,
+upewnisz się, że wytrzyma trudy pracy i gotowe. Twórcza i niecodzienna
+praca może być bardzo wciągająca.
+
+Możesz zapytać {\bf czy jest zapotrzebowanie na takie projekty?}. Otóż
+jest, choć może niezbyt duże. Wspomniałem już o terminalu z RFID. Jedna
+firma, z którą kiedyś współpracowałem, używała technologii RFID na
+przyjęciach organizowanych z jednym z ich klientów. Niestety dość
+rzadko, bo firma zapewniająca obsługę RFID wysoko się ceniła. Z drugiej
+strony wymagania stawiane RFID na tych imprezach były bardzo proste - po
+odczytaniu tagu sparować go z kontem Facebooka użytkownika, czyli dać
+stronę logowania Facebooka. Tablet, czy mini PC z czytnikiem podłączonym
+na USB (np. udającym klawiaturę), dałoby się łatwo oprogramować, by
+zapewnić takie funkcjonalności niskim kosztem.
+
+Kolejny przykład to panel reklamowy, który miał za zadanie wyświetlać
+zdjęcia produktu po zeskanowaniu jego kodu kreskowego. Można to zrobić
+stosując prosty czytnik kodów kreskowych (który udając klawiaturę jest
+łatwy do oprogramowania), albo też tablet z kamerą i zewnętrznym ekranem
+na HDMI (gdzie wbudowana kamera wykrywa i skanuje kod kreskowy).
+
+\subsection[dobór-sprzętu]{Dobór sprzętu}
+
+W {\em amatorskich} projektach na niską skalę można poświęcić nieco
+czasu na dobór komponentów. Może to znacznie ułatwić stworzenie gotowego
+urządzenia oraz zredukować koszty. Jeżeli jesteś w stanie zrobić coś bez
+użycia mini PC, tylko za pomocą samego mikrokontrolera, to warto do tego
+się przyłożyć. Z drugiej strony mini PC mogą mieć przewagę, jeżeli
+możesz skorzystać z gotowych urządzeń USB i systemowych bibliotek do ich
+obsługi. Krótszy czas poświęcony na napisanie oprogramowania też
+zmniejsza koszty.
+
+Praktyczność łączy się z pomysłowością, innowacyjnością. Nie jestem w
+stanie podać na to wzoru, reguły. To już zależy od Ciebie i Twojego
+projektu. Mogę jedynie podać Ci kilka przykładów, czy pomysłów, jakie
+możesz wykorzystać, czy też użyć jako punkt wyjścia.
+
+Raspberry Pi może być mini komputerem, o jakim pomyślisz w pierwszej
+kolejności, gdy zajdzie potrzeba wykorzystania takowego. A co, jeśli
+będziesz potrzebował czegoś mocniejszego, albo mniejszego? Są inne mini
+komputery z silniejszymi procesorami, ale takie rozwiązania są droższe.
+A gdyby zamiast mini komputera dla miłośników elektroniki użyć mini
+komputera dostępnego powszechnie na rynku konsumenckim? Androidowe
+dongle HDMI są takim urządzeniem. Te wyposażone w znacznie wydajniejszy
+czterordzeniowy układ RK3188 z 2GB RAM nie dość, że są już tańsze od
+Raspberry Pi (ceny w chińskim sklepie dx.com), to oferują nam Androida,
+czy też zwykłego Linuksa (Picuntu, Linuxium), choć z nieco ograniczoną
+obsługą (brak obsługi VPU, czyli Video Processing Unit). W małej
+obudowie kryje się moduł WiFi, a na USB możemy podłączyć np. potrzebny
+nam czytnik. Wyjście HDMI możemy podłączyć od razu do monitora. Nieco
+droższe i większe dongle zaoferują nam też złącze Ethernetowe.
+
+Androidowe dongle, czy też tablety, albo taniejące nettopy z procesorami
+Intela, czy AMD, mogą dostarczyć nam potrzebnej wydajności, ale nie
+zaoferują nam pinów GPIO. Wybranie odpowiednio silnego mini PC z pinami
+GPIO może okazać się problematycznym wyborem - np. mini PC Radxa Rock da
+nam ten sam układ RK3188 co dongle, ale przynajmniej na chwilę obecną
+obsługa GPIO tego mini komputera zostawia wiele do życzenia pod względem
+dokumentacji, bibliotek, czy przykładowego kodu. Co wtedy? Na ratunek
+mogą przyjść nam płytki z mikrokontrolerami. Możemy podłączyć je poprzez
+USB, czy w przypadku tabletów (lub smartphonów) bez odpowiedniej obsługi
+USB host i z brakiem sterowników do układów UART możemy skorzystać z
+komunikacji poprzez Bluetooth (gdzie mikrokontroler wykorzystać będzie
+układ do komunikacji szeregowej poprzez Bluetooth).
+
+Jeżeli jesteś w stanie przeboleć użycie C, to otwiera się przed tobą
+świat Arduino - od dużych płytek do prototypowania aż po małe płytki do
+urządzeń miniaturowych. Jeżeli potrzebujesz obsługi Ethernetu, WiFi lub
+Bluetooth, to też coś się znajdzie. Arduino oferuje SDK dla wielu
+różnych płytek, podczas gdy Raspberry Pi trzyma się jednego urządzenia.
+
+Rodzina mikrokontrolerów na platformie mbed wykorzystuje C++, choć nie
+jest to kluczową cechą. Największa zaleta to programowanie przez
+przeglądarkę za pomocą webowego IDE i zdalnego kompilatora, który
+przygotuje nam plik, jaki należy wrzucić na nasz mikrokontroler.
+Przydatne jest też duże zróżnicowanie płytek dostępnych na tej
+platformie. Za najbardziej rozbudowane (np. te z obsługą USB Host i
+Ethernetem) zapłacimy kilkaset złotych. Natomiast za najprostsze bez
+takich funkcjonalności około 50 - 60 zł.
+
+MicroPython jest opcją dla chcących wykorzystać Pythona. Obecnie
+dostępna jest tylko płytka PyBoard za około 30 funtów. Jeżeli Chińczycy
+zaimplementują MicroPythona na jednej ze swoich płytek z kompatybilnym
+mikrokontrolerem, to wtedy powinny pojawić się tańsze płytki. PyMCU jest
+tańsze, ale wymaga połączenia z komputerem, by działać. Obie Pythonowe
+platformy niestety nie oferują tylu bibliotek i przykładów, co Arduino.
+Może to mieć kluczowe znaczenie, gdy będziesz musiał wykorzystać inne
+układy komunikujące się za pomocą SPI, czy I2C.
+
+Czasami można zupełnie odejść od mikrokontrolerów i takiej elektroniki
+\quotation{dla twórców}. Jeżeli potrzebujesz bardziej złożonego
+urządzenia, np. kamery przemysłowej, czy laboratoryjnej, to nie zrobisz
+jej z prostych modułów dla Arduino. Gotowe kamery tego typu nie
+dostarczają na ogół bibliotek do Pythona, ale też muszą wystawiać jakieś
+API, żeby aplikacje mogły z nich korzystać. Pod MS Windows dość często
+jest to API dla .NET. Jeżeli tak się dzieje, to możemy wykorzystać
+IronPythona do oskryptowania urządzenia. Sprzęt astronomiczny operuje na
+standardzie ASCOM, który dostarcza API nie tylko dla .NET, ale też
+wystawia obiekty COM, które można wykorzystać w zwykłym Pythonie. Dzięki
+temu możesz zyskać dostęp do zaawansowanych kamer, czy kół filtrowych.
+Jeżeli pod Linuksem twórca sprzętu daje binarny plik *.so z interfejsem
+do urządzenia, to też da się go wykorzystać z poziomu Pythona za pomocą
+modułu ctypes.cdll.
+
+\subsection[na-zakończenie]{Na zakończenie}
+
+Mam nadzieję, że zainteresowałem Ciebie elektroniką i możliwościami,
+jakie dają projekty sprzętowe - czy to dla własnej zabawy, czy dla
+nowych klientów Twojej firmy. Zaprezentowałem różne przykłady, różne
+platformy sprzętowe. Możesz użyć ich jako punkt wyjścia we własnych
+przygodach z elektroniką. Rynek rozwija się dość dynamicznie i za parę
+miesięcy nie wszystkie zawarte tu informacje mogą być już aktualne.
+
+\subsection[w-sieci]{W sieci}
+
+\startitemize
+\item
+  http://www.dx.com/c/electrical-tools-499/arduino-scm-supplies-436 -
+  chiński sklep z ogromną ilością elektroniki do Arduino i przyjaciół.
+\item
+  http://kamami.pl, http://nettigo.pl, http://botland.com.pl,
+  http://electropark.pl, http://arduinosolutions.com - polskie sklepy z
+  elektroniką i komponentami
+\item
+  http://www.circuitsforfun.com - strona PyMCU
+\item
+  http://micropython.org - strona MicroPythona i PyBoard
+\item
+  http://www.python.rk.edu.pl/w/p/elektronika-i-python/ - moja strona
+  poświęcona Pythonowi {\em w elektronice}
+\stopitemize
+
+
+\stoptext
