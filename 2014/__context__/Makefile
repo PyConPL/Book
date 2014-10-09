@@ -1,5 +1,6 @@
 all:
 	scons
+	echo Running twice is required to make good table of contents.
 test:
 	./test_pl.py
 compare:
