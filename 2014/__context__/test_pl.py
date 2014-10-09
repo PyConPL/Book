@@ -27,6 +27,15 @@ class TestPL(unittest.TestCase):
             'pandoc -t context --template=src/template.pandoc a| sed -e s/subsubsection/section/ > .tmp/${TARGET.file}',
             )
 
+    def test_linking_source_directory(self):
+        '''
+        TestPL:
+        '''
+        self.assertEqual(
+            pl_txt.link_src(alias='a'),
+            '[ -L src ] || ln -s ../../src/a src',
+            )
+
 def make_tests():
     suite = unittest.TestSuite()
     suite.addTest(unittest.makeSuite(TestPL))

@@ -10,3 +10,10 @@ def run_pandoc(main_md):
         "| sed -e s/subsubsection/section/ > " +
         ".tmp/${TARGET.file}"
         )
+
+def link_src(alias):
+    '''
+    Current directory: build/a
+    Link to src/a directory, assuming it exists.
+    '''
+    return "[ -L src ] || ln -s ../../src/" + alias + " src"
