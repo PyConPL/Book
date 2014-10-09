@@ -20,6 +20,6 @@ def link_src(alias):
     Link to src/a directory, assuming it exists.
     '''
     source = art_src_dir(alias)
-    return "[ -L src || ! -d %(source)s ] || ln -s %(source)s src" % dict(
+    return "[ -L src -o ! -d %(source)s ] || ln -s %(source)s src" % dict(
         source=source,
         )
