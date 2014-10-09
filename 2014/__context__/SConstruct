@@ -7,8 +7,8 @@ import os, glob
 if 'TEXINPUTS' not in os.environ:
     os.environ['TEXINPUTS']=''
 os.environ['TEXINPUTS'] = (
-   ".:..:../..:../../sty:" +
-   os.environ['TEXINPUTS'] )
+    ".:..:../..:../../sty:" +
+    os.environ['TEXINPUTS'] )
 env = Environment( ENV=os.environ)
 
 articles = []
@@ -17,31 +17,34 @@ build = "build"
 for line in open(artlist):
     line = line.split('%')[0].split();
     if line:
-       articles.append( line[:2] )
+        articles.append( line[:2] )
 
 final_pdfs = map((lambda x: "{}/{}/{}.pdf".format(build,x[0],x[0])),articles)
 
 env.Command("pyconbook-2013.pdf",
-        final_pdfs,
-        "texexec --pdfcopy --result=$TARGET $SOURCES")
+    final_pdfs,
+    "texexec --pdfcopy --result=$TARGET $SOURCES")
 
 for alias, location in articles:
     root = "{}/{}/{}".format(build, alias, alias)
-    env.Command( root + ".pdf",
-                 [ root + ".tex",
-                   artlist,
-                   build + "/artpages.inc",
-                   glob.glob("sty/*"),
-                   glob.glob("src/" + alias + "/*")
-               ],
-                 [
-                     "pwd",
-                     "[ -L src ] || ln -s ../../src/" + alias + " src",
-                     # "env TEXINPUTS=.:..:../..:../../sty:../../src/" + alias + ": " +
-                     "texexec --pdf " + alias,
-                     "mv artpages.inc .. 2>/dev/null || true"
-                 ],
-                chdir = "%s/%s" % (build, alias) )
+    env.Command(
+        root + ".pdf",
+        [
+            root + ".tex",
+            artlist,
+            build + "/artpages.inc",
+            glob.glob("sty/*"),
+            glob.glob("src/" + alias + "/*")
+            ],
+        [
+            "pwd",
+            "[ -L src ] || ln -s ../../src/" + alias + " src",
+            # "env TEXINPUTS=.:..:../..:../../sty:../../src/" + alias + ": " +
+            "texexec --pdf " + alias,
+            "mv artpages.inc .. 2>/dev/null || true"
+            ],
+        chdir = "%s/%s" % (build, alias),
+        )
     loc_src  = "src/" + alias + "/text.tex"
     main_src = "../" + location + "/text.tex"
     main_md  = "../" + location + "/text.md"
@@ -54,26 +57,28 @@ for alias, location in articles:
                      Copy('$TARGET','$SOURCE') )
     elif os.path.exists(main_md):
         print ">>>" + main_md
-        env.Command( root + ".tex", 
-                     [main_md] + diffsrc + Glob("src/*.inc.tex"),
-                     [ Delete(".tmp"),
-
-                       Mkdir(".tmp"),
-                       ( "pandoc -t context --template=src/template.pandoc " + main_md +
-                         "| sed -e s/subsubsection/section/ > " +
-                         ".tmp/${TARGET.file}" ),
-                       "cat " + (diffsrc + ["/dev/null"])[0] +
-                       " | patch -d .tmp ",
-                       Copy("$TARGET", ".tmp/${TARGET.file}") ] )
+        env.Command(
+            root + ".tex",
+            [main_md] + diffsrc + Glob("src/*.inc.tex"),
+            [
+                Delete(".tmp"),
+                Mkdir(".tmp"),
+                (
+                    "pandoc -t context --template=src/template.pandoc " + main_md +
+                    "| sed -e s/subsubsection/section/ > " +
+                    ".tmp/${TARGET.file}"
+                    ),
+                "cat " + (diffsrc + ["/dev/null"])[0] + " | patch -d .tmp ",
+                Copy("$TARGET", ".tmp/${TARGET.file}"),
+                ],
+           )
     else:
         print "Thing ", main_md
         raise "Gulp"
-                       
+
 
 env.Command("build/artpages.inc",[],[])
 
 # Local Variables:
 # mode: python
 # End:
-
-
