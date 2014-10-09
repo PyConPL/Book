@@ -1,0 +1,15 @@
+--- pygame.tex
++++ expected/pygame/pygame.tex	2014-10-09 11:59:29.785490880 +0200
+@@ -1,9 +1,9 @@
+ \usemodule[pycon-2014]
+ \starttext
+ 
+-
+-\section[pygame---gry-w-świecie-pythona---łukasz-jagodziński]{Pygame -
+-gry w świecie Pythona - Łukasz Jagodziński}
++\Title{Pygame - gry w świecie Pythona}
++\Author{Łukasz Jagodziński}
++\MakeTitlePage
+ 
+ \subsection[jak-zacząć]{Jak zacząć?}
+ 

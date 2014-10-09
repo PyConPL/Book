@@ -1,0 +1,16 @@
+--- robots.tex
++++ expected/robots/robots.tex	2014-10-09 12:01:12.281484944 +0200
+@@ -1,10 +1,9 @@
+ \usemodule[pycon-2014]
+ \starttext
+ 
+-
+-\section[how-to-make-killer-robots-with-python-and-raspberry-pi---radomir-dopieralski]{How
+-to make killer robots with Python and Raspberry Pi - Radomir
+-Dopieralski}
++\Title{How to make killer robots with Python and Raspberry Pi}
++\Author{Radomir Dopieralski}
++\MakeTitlePage
+ 
+ Robots in popular culture differ substantially from what is available
+ today. You may see yourself in a role of a mad scientist constructing an

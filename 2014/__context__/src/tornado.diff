@@ -1,0 +1,15 @@
+--- tornado.tex
++++ expected/tornado/tornado.tex	2014-10-09 12:00:15.593488431 +0200
+@@ -1,9 +1,9 @@
+ \usemodule[pycon-2014]
+ \starttext
+ 
+-
+-\section[tornado-and-friends-workshop---wesley-mason]{Tornado and
+-Friends workshop - Wesley Mason}
++\Title{Tornado and Friends workshop}
++\Author{Wesley Mason}
++\MakeTitlePage
+ 
+ \subsection[learn-how-to-write-fast-asynchronous-web-services-with-tornado-and-python]{Learn
+ how to write fast asynchronous web services with Tornado and Python}

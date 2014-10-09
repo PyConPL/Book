@@ -1,0 +1,15 @@
+--- polityka.tex
++++ expected/polityka/polityka.tex	2014-10-09 12:02:51.961481153 +0200
+@@ -2,9 +2,9 @@
+ \starttext
+ 
+ 
+-\section[co-tam-panie-w-polityce-czyli-czym-zaskoczył-nas-python-3.4---marcin-bardź]{Co
+-tam, panie, w polityce? Czyli czym zaskoczył nas Python 3.4 - Marcin
+-Bardź}
++\Title{Co tam, panie, w polityce? Czyli czym zaskoczył nas Python 3.4}
++\Author{Marcin Bardź}
++\MakeTitlePage
+ 
+ Python w wersji 3.4 światło dzienne ujrzał 16 marca 2014. To wydanie nie
+ wprowadza żadnych zmian do samego języka, zamiast tego mamy kilka nowych

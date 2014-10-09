@@ -1,0 +1,15 @@
+--- visualizing.tex
++++ expected/visualizing/visualizing.tex	2014-10-09 12:06:22.605472017 +0200
+@@ -1,9 +1,9 @@
+ \usemodule[pycon-2014]
+ \starttext
+ 
+-
+-\section[learn-django-and-redis-by-visualizing-twitter-data---haris-ibrahim-k-v]{Learn
+-Django and Redis by Visualizing Twitter data - Haris Ibrahim K V}
++\Title{Learn Django and Redis by Visualizing Twitter data}
++\Author{Haris Ibrahim K V}
++\MakeTitlePage
+ 
+ Autobots, transform and roll out!
+ 

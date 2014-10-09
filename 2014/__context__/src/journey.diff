@@ -1,0 +1,15 @@
+--- journey.tex
++++ expected/journey/journey.tex	2014-10-09 12:04:07.801477443 +0200
+@@ -1,9 +1,9 @@
+ \usemodule[pycon-2014]
+ \starttext
+ 
+-
+-\section[journey-to-the-center-of-the-asynchronous-world---maciej-szulik]{Journey
+-to the center of the asynchronous world - Maciej Szulik}
++\Title{Journey to the center of the asynchronous world}
++\Author{Maciej Szulik}
++\MakeTitlePage
+ 
+ \subsection[introduction]{Introduction}
+ 

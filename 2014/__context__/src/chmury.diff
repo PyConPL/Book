@@ -1,0 +1,15 @@
+--- chmury.tex
++++ expected/chmury/chmury.tex	2014-10-09 11:58:42.441492610 +0200
+@@ -1,9 +1,9 @@
+ \usemodule[pycon-2014]
+ \starttext
+ 
+-
+-\section[python-w-chmurach---dariusz-aniszewski]{Python w Chmurach -
+-Dariusz Aniszewski}
++\Title{Python w Chmurach}
++\Author{Dariusz Aniszewski}
++\MakeTitlePage
+ 
+ Wyobraźmy sobię osobę związaną z branżą IT, która nie spotkała się
+ jeszcze z terminem {\em chmura obliczeniowa}. Nie da się. Słowa {\em as

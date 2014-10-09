@@ -1,0 +1,15 @@
+--- optimizing.tex
++++ expected/optimizing/optimizing.tex	2014-10-09 12:05:09.081474761 +0200
+@@ -1,9 +1,9 @@
+ \usemodule[pycon-2014]
+ \starttext
+ 
+-
+-\section[designing-api-for-mobile-apps---wojtek-erbetowski]{Designing
+-API for mobile apps - Wojtek Erbetowski}
++\Title{Designing API for mobile apps}
++\Author{Wojtek Erbetowski}
++\MakeTitlePage
+ 
+ Designing an API is an incredibly important moment for a project's
+ future. Every change made in the future will be accompanied by having to

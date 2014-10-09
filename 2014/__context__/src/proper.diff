@@ -1,0 +1,15 @@
+--- proper.tex
++++ expected/proper/proper.tex	2014-10-09 12:05:41.721473842 +0200
+@@ -1,9 +1,9 @@
+ \usemodule[pycon-2014]
+ \starttext
+ 
+-
+-\section[proper-code-reviews---tomasz-maćkowiak]{Proper code reviews -
+-Tomasz Maćkowiak}
++\Title{Proper code reviews}
++\Author{Tomasz Maćkowiak}
++\MakeTitlePage
+ 
+ Code quality is the ultimate goal that every programmer (and his
+ manager) strives for. High code quality means fewer bugs, better

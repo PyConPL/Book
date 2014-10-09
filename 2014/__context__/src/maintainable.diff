@@ -1,0 +1,15 @@
+--- maintainable.tex
++++ expected/maintainable/maintainable.tex	2014-10-09 12:08:20.697465741 +0200
+@@ -1,9 +1,9 @@
+ \usemodule[pycon-2014]
+ \starttext
+ 
+-
+-\section[writing-maintainable-code---peter-inglesby]{Writing
+-Maintainable Code - Peter Inglesby}
++\Title{Writing Maintainable Code}
++\Author{Peter Inglesby}
++\MakeTitlePage
+ 
+ A few thoughts on maintainability and complexity
+ 
