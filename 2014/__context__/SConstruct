@@ -51,6 +51,7 @@ for alias, location in articles:
             ],
         [
             "pwd",
+            "[ ${TARGET.file} != optimizing.pdf ] || cp ../../../presentations/Optimizing_API_against_latency/cisco.png .",
             pl_txt.link_src(alias),
             # "env TEXINPUTS=.:..:../..:../../sty:../../src/" + alias + ": " +
             "texexec --pdf " + alias,
