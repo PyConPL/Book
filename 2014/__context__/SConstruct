@@ -31,7 +31,7 @@ if only_first_article_for_testing:
 
 final_pdfs = map((lambda x: "{}/{}/{}.pdf".format(build,x[0],x[0])),articles)
 
-env.Command("pyconbook-2013.pdf",
+env.Command("pyconbook-2014.pdf",
     final_pdfs,
     "texexec --pdfcopy --result=$TARGET $SOURCES")
 
