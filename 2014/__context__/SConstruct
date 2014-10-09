@@ -74,7 +74,7 @@ for alias, location in articles:
            )
     else:
         print "Thing ", main_md
-        raise "Gulp"
+        raise RuntimeError("Gulp")
 
 
 env.Command("build/artpages.inc",[],[])
