@@ -28,6 +28,6 @@ At the end of the workshop every participant will know what does really mean wor
 
 Additional values from workshop? We know that agile is also for sharing passion and simply having fun. So we want to integrate and spending nice time together during the conference!
 
-You are more than welcome to join "SCRUM for Teams"
+You are more than welcome to join "SCRUM for Teams".
 
 <!-- Przeczytane: Piotr Kasprzyk -->
