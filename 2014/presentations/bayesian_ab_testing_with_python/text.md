@@ -81,7 +81,7 @@ Calculate expected sign-up rate $\text{E}[p_A~|~X]$:
 posteriors['A'].mean()
 ```
 
-Get $ \text{E}[p_A~|~X] = 5.81\%$, $\text{E}[p_B~|~X] = 13.37\% $.
+Get $\text{E}[p_A~|~X] = 5.81\%$, $\text{E}[p_B~|~X] = 13.37\%$.
 
 Calculate 95%-credible intervals:
 
