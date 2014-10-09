@@ -5,6 +5,8 @@
 import os
 import glob
 
+import pl_txt
+
 only_first_article_for_testing = 1
 
 if 'TEXINPUTS' not in os.environ:
@@ -79,7 +81,7 @@ for alias, location in articles:
                     "| sed -e s/subsubsection/section/ > " +
                     ".tmp/${TARGET.file}"
                     ),
-                "cat " + (diffsrc + ["/dev/null"])[0] + " | patch -d .tmp ",
+                pl_txt.apply_patch(diffsrc),
                 Copy("$TARGET", ".tmp/${TARGET.file}"),
                 ],
            )
