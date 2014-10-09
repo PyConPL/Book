@@ -37,7 +37,7 @@ class TestPL(unittest.TestCase):
             )
         self.assertEqual(
             pl_txt.link_src(alias='a'),
-            '[ -L src ] || ln -s ../../src/a src',
+            '[ -L src || ! -d ../../src/a ] || ln -s ../../src/a src',
             )
 
 def make_tests():
