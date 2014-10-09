@@ -51,7 +51,7 @@ for alias, location in articles:
             ],
         [
             "pwd",
-            "[ -L src ] || ln -s ../../src/" + alias + " src",
+            pl_txt.link_src(alias),
             # "env TEXINPUTS=.:..:../..:../../sty:../../src/" + alias + ": " +
             "texexec --pdf " + alias,
             "mv artpages.inc .. 2>/dev/null || true"
