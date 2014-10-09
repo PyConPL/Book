@@ -4,6 +4,8 @@
 
 import os, glob
 
+only_first_article_for_testing = 1
+
 if 'TEXINPUTS' not in os.environ:
     os.environ['TEXINPUTS']=''
 os.environ['TEXINPUTS'] = (
@@ -23,6 +25,9 @@ for line in open(artlist):
     if words:
         alias, location = words[:2]
         articles.append([alias, location])
+
+if only_first_article_for_testing:
+    articles = articles[:1]
 
 final_pdfs = map((lambda x: "{}/{}/{}.pdf".format(build,x[0],x[0])),articles)
 
