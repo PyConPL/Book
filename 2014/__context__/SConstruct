@@ -23,27 +23,27 @@ env.Command("pyconbook-2013.pdf",
         final_pdfs,
         "texexec --pdfcopy --result=$TARGET $SOURCES")
 
-for a in articles:
-    root = "{}/{}/{}".format(build,a[0],a[0])
+for alias, location in articles:
+    root = "{}/{}/{}".format(build, alias, alias)
     env.Command( root + ".pdf",
                  [ root + ".tex",
                    artlist,
                    build + "/artpages.inc",
                    glob.glob("sty/*"),
-                   glob.glob("src/"+a[0]+"/*")
+                   glob.glob("src/" + alias + "/*")
                ],
                  [
                      "pwd",
-                     "[ -L src ] || ln -s ../../src/"+a[0]+" src",
-                     # "env TEXINPUTS=.:..:../..:../../sty:../../src/"+a[0]+": " +
-                     "texexec --pdf " + a[0],
+                     "[ -L src ] || ln -s ../../src/" + alias + " src",
+                     # "env TEXINPUTS=.:..:../..:../../sty:../../src/" + alias + ": " +
+                     "texexec --pdf " + alias,
                      "mv artpages.inc .. 2>/dev/null || true"
                  ],
-                chdir = "%s/%s" % (build,a[0]) )
-    loc_src  = "src/"+a[0]+"/text.tex"
-    main_src = "../"+a[1]+"/text.tex"
-    main_md  = "../"+a[1]+"/text.md"
-    diffsrc  = glob.glob("src/"+a[0]+".diff")
+                chdir = "%s/%s" % (build, alias) )
+    loc_src  = "src/" + alias + "/text.tex"
+    main_src = "../" + location + "/text.tex"
+    main_md  = "../" + location + "/text.md"
+    diffsrc  = glob.glob("src/" + alias + ".diff")
     if os.path.exists(loc_src):
         env.Command( root + ".tex", loc_src,
                      Copy('$TARGET','$SOURCE') )
