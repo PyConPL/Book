@@ -93,19 +93,18 @@ $\text{P}(7.07\% < p_B < 21.28\%) = 0.95$
 
 <!-- Kwadrat: Zamienilem mathbb na blackboard dla ConTeXt -->
 Monte Carlo approach to compute $P(p_B > p_A~|~X) \approx \frac{1}{n}\sum_i \blackboard{I}[y_A^{i} > y_B^{i}]$ and expected lift:
-```python
-import numpy as np
 
-sample_size = 10000
-samples = {
-    variation: posterior.sample(sample_size) \
-    for variation, posterior in posteriors.items()
-}
+    import numpy as np
 
-dominance = np.mean(samples['B'] > samples['A'])
-lift = np.mean((samples['B'] - samples['A']) \
-    / samples['A'])
-```
+    sample_size = 10000
+    samples = {
+        variation: posterior.sample(sample_size) \
+        for variation, posterior in posteriors.items()
+    }
+
+    dominance = np.mean(samples['B'] > samples['A'])
+    lift = np.mean((samples['B'] - samples['A']) \
+        / samples['A'])
 
 Variation B performs better, so $P(p_B > p_A) = 92.90\%$. Expected lift of sign-up rate under variation B is $+271.68\%$.
 
