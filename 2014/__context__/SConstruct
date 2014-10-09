@@ -76,11 +76,7 @@ for alias, location in articles:
             [
                 Delete(".tmp"),
                 Mkdir(".tmp"),
-                (
-                    "pandoc -t context --template=src/template.pandoc " + main_md +
-                    "| sed -e s/subsubsection/section/ > " +
-                    ".tmp/${TARGET.file}"
-                    ),
+                pl_txt.run_pandoc(main_md),
                 pl_txt.apply_patch(diffsrc),
                 Copy("$TARGET", ".tmp/${TARGET.file}"),
                 ],
