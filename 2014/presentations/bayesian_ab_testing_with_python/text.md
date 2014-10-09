@@ -124,19 +124,16 @@ test.update({
 Statistics supported by `trials` for Bernoulli experiments: expected posterior, posterior CI, expected lift, lift CI, empirical lift, dominance.
 
 $\text{P}(p_A > p_B ~|~ X)$:
-```python
-dominances = test.evaluate('dominance')
-```
+
+    dominances = test.evaluate('dominance')
 
 Expected lift $\text{E}(\frac{p_B - p_A}{p_A} ~|~ X)$:
-```python
-lifts = test.evaluate('expected lift')
-```
+
+    lifts = test.evaluate('expected lift')
 
 Lift 95%-credible interval:
-```python
-intervals = test.evaluate('lift CI', level=95)
-```
+
+    intervals = test.evaluate('lift CI', level=95)
 
 ## Conclusion
 
