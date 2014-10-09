@@ -86,10 +86,9 @@ Get $ \text{E}[p_A~|~X] = 5.81\%$, $\text{E}[p_B~|~X] = 13.37\% $.
 
 Calculate 95%-credible intervals:
 
-```python
-lower = posteriors['A'].ppf(0.025)
-upper = posteriors['A'].ppf(0.975)
-```
+    lower = posteriors['A'].ppf(0.025)
+    upper = posteriors['A'].ppf(0.975)
+
 $ \text{P}(1.00\% < p_A < 14.41\%) = 0.95 $, 
 $\text{P}(7.07\% < p_B < 21.28\%) = 0.95 $
 
