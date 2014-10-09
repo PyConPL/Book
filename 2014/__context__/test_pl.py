@@ -18,6 +18,15 @@ class TestPL(unittest.TestCase):
             'cat /dev/null | patch -d .tmp',
             )
 
+    def test_md_to_tex_conversion(self):
+        '''
+        TestPL:
+        '''
+        self.assertEqual(
+            pl_txt.run_pandoc(main_md='a'),
+            'pandoc -t context --template=src/template.pandoc a| sed -e s/subsubsection/section/ > .tmp/${TARGET.file}',
+            )
+
 def make_tests():
     suite = unittest.TestSuite()
     suite.addTest(unittest.makeSuite(TestPL))
