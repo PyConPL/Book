@@ -32,6 +32,10 @@ class TestPL(unittest.TestCase):
         TestPL:
         '''
         self.assertEqual(
+            pl_txt.art_src_dir(alias='a'),
+            '../../src/a',
+            )
+        self.assertEqual(
             pl_txt.link_src(alias='a'),
             '[ -L src ] || ln -s ../../src/a src',
             )

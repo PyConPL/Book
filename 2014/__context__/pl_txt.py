@@ -11,6 +11,9 @@ def run_pandoc(main_md):
         ".tmp/${TARGET.file}"
         )
 
+def art_src_dir(alias):
+    return "../../src/" + alias
+
 def link_src(alias):
     '''
     Current directory: build/a
