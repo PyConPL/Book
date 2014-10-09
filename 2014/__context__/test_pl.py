@@ -5,7 +5,7 @@ import unittest
 import pl_txt
 
 class TestPL(unittest.TestCase):
-    def test_functions(self):
+    def test_patching(self):
         '''
         TestPL:
         '''
