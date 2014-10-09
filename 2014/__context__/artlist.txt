@@ -31,4 +31,5 @@ pygame workshops/Pygame_-_gry_w_swiecie_Pythona
 pysnake workshops/PySnake_Dojo
 memory workshops/Python_Memory_Workshop
 maintainable workshops/Writing_Maintainable_Code
-scrum workshops/SCRUM_for_Teams
+% Zmiana nazwy z 'scrum' na 'r', bo byl problem z \par, ale nie wiem, dlaczego
+r workshops/SCRUM_for_Teams
