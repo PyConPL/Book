@@ -18,9 +18,10 @@ articles = []
 artlist = 'artlist.txt'
 build = "build"
 for line in open(artlist):
-    line = line.split('%')[0].split();
-    if line:
-        alias, location = line[:2]
+    line = remove_comments(line)
+    words = line.split()
+    if words:
+        alias, location = words[:2]
         articles.append([alias, location])
 
 final_pdfs = map((lambda x: "{}/{}/{}.pdf".format(build,x[0],x[0])),articles)
