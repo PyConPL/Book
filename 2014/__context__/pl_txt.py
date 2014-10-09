@@ -19,4 +19,7 @@ def link_src(alias):
     Current directory: build/a
     Link to src/a directory, assuming it exists.
     '''
-    return "[ -L src ] || ln -s ../../src/" + alias + " src"
+    source = art_src_dir(alias)
+    return "[ -L src ] || ln -s %(source)s src" % dict(
+        source=source,
+        )
