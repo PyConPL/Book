@@ -11,6 +11,9 @@ os.environ['TEXINPUTS'] = (
     os.environ['TEXINPUTS'] )
 env = Environment( ENV=os.environ)
 
+def remove_comments(line):
+    return line.split('%')[0]
+
 articles = []
 artlist = 'artlist.txt'
 build = "build"
