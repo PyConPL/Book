@@ -88,8 +88,8 @@ Calculate 95%-credible intervals:
     lower = posteriors['A'].ppf(0.025)
     upper = posteriors['A'].ppf(0.975)
 
-$ \text{P}(1.00\% < p_A < 14.41\%) = 0.95 $, 
-$\text{P}(7.07\% < p_B < 21.28\%) = 0.95 $
+$\text{P}(1.00\% < p_A < 14.41\%) = 0.95$,
+$\text{P}(7.07\% < p_B < 21.28\%) = 0.95$
 
 <!-- Kwadrat: Zamienilem mathbb na blackboard dla ConTeXt -->
 Monte Carlo approach to compute $P(p_B > p_A~|~X) \approx \frac{1}{n}\sum_i \blackboard{I}[y_A^{i} > y_B^{i}]$ and expected lift:
