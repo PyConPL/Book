@@ -2,7 +2,8 @@
 # -*- coding: UTF-8 -*-
 # Get articles and directories list
 
-import os, glob
+import os
+import glob
 
 only_first_article_for_testing = 1
 
