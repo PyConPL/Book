@@ -7,7 +7,7 @@ import glob
 
 import pl_txt
 
-only_first_article_for_testing = 1
+only_first_article_for_testing = 0
 
 if 'TEXINPUTS' not in os.environ:
     os.environ['TEXINPUTS']=''
