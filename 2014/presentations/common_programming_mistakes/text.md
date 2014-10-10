@@ -168,7 +168,7 @@ And, again. Something goes wrong.
     UnboundLocalError: local variable 'x' referenced before assignment
 ```
 
-### What's happening
+### What's happening?
 While parsing this code, Python sees the assignment to `x` and decides that `x` will be a local variable in the function. But later, when the function is actually run, the assignment hasn't yet happened when the print executes, so Python raises an undefined name error.
 
 ### Solution
@@ -340,7 +340,7 @@ Often we need to do something with lists. For instance, remove all odd values fr
     IndexError: list index out of range
 ```
 
-### What's happening
+### What's happening?
 We're iterating over this list, and when value is odd, we're removing it from list. In the same time list is shrinking, so after few iterations, list is shorter than expected.
 
 ### Solution
@@ -410,7 +410,7 @@ When we're trying to run this application, we've receiving `ImportError`
     ImportError: No module named mime.multipart
 ```
 
-### What's happening
+### What's happening?
 We've mixed Standard Library module called `email` with local module `email.py`. In this case, application sees local module, and imports it, instead of expected one.
 
 ### Solution
@@ -472,7 +472,7 @@ Simple thing can make a big difference. Python 3 handles exception in [local sco
     UnboundLocalError: local variable 'e' referenced before assignment
 ```
 
-### What's happening
+### What's happening?
 When an exception has been assigned to a variable name using `as target`, it is cleared at the end of the except clause:
 
 ```python
