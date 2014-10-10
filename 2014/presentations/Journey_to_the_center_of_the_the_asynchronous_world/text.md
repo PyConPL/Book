@@ -100,6 +100,7 @@ to send values to the generators. Essentially any function having the `yield`
 statement in its body is actually a generator. This means that it is not going
 to execute, but rather it will return a generator object, which provides the following
 operations:
+
 * `next()` - advance code to the `yield` statement and emit a value, if such was
   passed as a parameter. That's the only operation you can call after creating
   the generator.
