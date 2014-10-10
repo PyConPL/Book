@@ -109,8 +109,8 @@ obiektową otoczkę.
 
 Klasy biblioteki podzielone są na dwie odrębne części:
 
-* Czyste ścieżki (*pure paths*) - umożliwiające operacje na samych ścieżkach.
-* Konkretne ścieżki (*concrete paths*) - dodające jeszcze operacje we/wy.
+* czyste ścieżki (*pure paths*) - umożliwiające operacje na samych ścieżkach,
+* konkretne ścieżki (*concrete paths*) - dodające jeszcze operacje we/wy.
 
 Ponadto, moduł udostępnia dwa warianty klas, jeden dla systemów POSIXowych i
 jeden dla ścieżek Windowsowych, ale zwykły zjadacz chleba do szczęścia
