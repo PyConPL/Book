@@ -18,9 +18,10 @@ what if you encounter such problems?
 
 
 What if your program:
-  * never releases memory,
-  * allocates way too much memory,
-  * or you suspect that it is memory inefficient ?
+
+* never releases memory,
+* allocates way too much memory,
+* or you suspect that it is memory inefficient ?
 
 
 This workshop will introduce you to the basics of Python Memory model,
@@ -37,49 +38,53 @@ series of practical exercises.
 ### Basic memory model
 
 This topic will cover most of the memory basics:
-  * Basic objects memory  representation - what is the  actual size of
-    basic types, how to check it, various types features
-  * Differences in basic objects  representations among various Python
-    implementations - PyPy, Stackless Python, Jython
-  * Different  data   representations  and  how  they   affect  memory
-    consumption - this will cover:
-    * Old style  classes, New  style classes,  New style  classes with
-      slots, Named tuples, tuples, lists and dictionaries
+
+* Basic objects memory  representation - what is the  actual size of
+  basic types, how to check it, various types features
+* Differences in basic objects  representations among various Python
+  implementations - PyPy, Stackless Python, Jython
+* Different  data   representations  and  how  they   affect  memory
+  consumption - this will cover:
+  * Old style  classes, New  style classes,  New style  classes with
+    slots, Named tuples, tuples, lists and dictionaries
 
 
 ### Advanced memory topics
 
 Here some advanced concepts will be introduced, like:
-  * Object  and  String interning  -  this  will explain  objects  are
-     preallocated and are  shared instead of new  allocation. And more
-     importantly this also will cover what are the motivations of this
-     approach.
-  * Mutable Containers Memory Allocation  Strategy - this will explain
-     basics of memory strategy for  containers. Examples for lists and
-     dictionaries will be provided.
-  * Notes with  examples on Python garbage  collector, reference count
-    and cycles.
-  * Differences   in   garbage    collector   among   various   Python
-    implementations - PyPy, Stackless Python, Jython
+
+* Object  and  String interning  -  this  will explain  objects  are
+   preallocated and are  shared instead of new  allocation. And more
+   importantly this also will cover what are the motivations of this
+   approach.
+* Mutable Containers Memory Allocation  Strategy - this will explain
+   basics of memory strategy for  containers. Examples for lists and
+   dictionaries will be provided.
+* Notes with  examples on Python garbage  collector, reference count
+  and cycles.
+* Differences   in   garbage    collector   among   various   Python
+  implementations - PyPy, Stackless Python, Jython
 
 
 ### Basic memory profiling and debugging tools
 
 This topic will be entirely divided to various Python memory debugging
 and profiling tools:
-  * Memory usage  monitoring tools, such as:  psutil, memory_profiler,
-    run_snake_run
-  * Object reference counting investigation: objgraph
-  * Python heap analysis: Meliae, Heapy
+
+* Memory usage  monitoring tools, such as:  psutil, memory_profiler,
+  run_snake_run
+* Object reference counting investigation: objgraph
+* Python heap analysis: Meliae, Heapy
 
 
 ### CPython memory allocator introduction
 
 This topic will go down to  the internals of Python memory management,
 this will cover very advanced topics:
-  * Memory fixing techniques
-  * Python memory fragmentation
-  * mallloc replacement considerations
-  * testing memory problems with CPython 3.4 custom memory allocator
+
+* Memory fixing techniques
+* Python memory fragmentation
+* mallloc replacement considerations
+* testing memory problems with CPython 3.4 custom memory allocator
 
 <!-- Przeczytane: Piotr Kasprzyk -->
