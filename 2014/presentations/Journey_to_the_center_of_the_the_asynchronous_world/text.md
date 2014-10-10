@@ -195,6 +195,7 @@ lock.release()
 These constructs are currently nicely handled by context managers, introduced in
 [PEP 343](http://legacy.python.org/dev/peps/pep-0343/) - the `with` statement.
 Context managers are basically normal objects implementing two methods:
+
 * `__enter__(self)` - start work with your object, returning it
 * `__exit__(self, exc, val, tb)` - release the object, or handle the exception
 
