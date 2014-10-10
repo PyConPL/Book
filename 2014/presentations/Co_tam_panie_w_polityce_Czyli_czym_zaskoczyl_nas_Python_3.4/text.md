@@ -201,9 +201,9 @@ migawek (*snapshot*) alokowanych bloków pamięci oraz przetwarzanie ich na ró�
 
 Moduł udostępnia trzy rodzaje informacji:
 
-* Traceback miejsca alokacji obiektu.
-* Statystyki przydzielonej pamięci (dla pliku, dla linii kodu).
-* Porównywanie migawek w celu wykrycia wycieków.
+* traceback miejsca alokacji obiektu,
+* statystyki przydzielonej pamięci (dla pliku, dla linii kodu),
+* porównywanie migawek w celu wykrycia wycieków.
 
 Poniższy plik (nazwałem go `t.py`) pokazuje przykładowe użycie niektórych
 funkcji biblioteki:
