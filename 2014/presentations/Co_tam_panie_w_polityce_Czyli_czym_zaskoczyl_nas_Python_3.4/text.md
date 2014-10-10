@@ -65,7 +65,7 @@ elegancki i mniej podatny na błędy kod.
 
 W myśl zasady, że jedna linijka kodu znaczy więcej, niż tysiąc słów,
 przedstawiam poniżej próbkę możliwości modułu:
-```python
+
 	>>> from enum import Enum
 	>>> class Osoba(Enum):
 	...     ja = 1
@@ -99,7 +99,6 @@ przedstawiam poniżej próbkę możliwości modułu:
 	Osoba.on_ona_ono
 	>>> Osoby['oni_one']
 	<Osoby.oni_one: 3>
-```
 
 ### `pathlib`
 
