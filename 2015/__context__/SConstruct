@@ -1,0 +1,94 @@
+#!/usr/bin/python
+# -*- coding: UTF-8 -*-
+# Get articles and directories list
+
+import os
+import glob
+
+import pl_txt
+
+only_first_article_for_testing = 0
+
+if 'TEXINPUTS' not in os.environ:
+    os.environ['TEXINPUTS']=''
+os.environ['TEXINPUTS'] = (
+    ".:..:../..:../../sty:" +
+    os.environ['TEXINPUTS'] )
+env = Environment( ENV=os.environ)
+
+def remove_comments(line):
+    return line.split('%')[0]
+
+articles = []
+artlist = 'artlist.txt'
+build = "build"
+for line in open(artlist):
+    line = remove_comments(line)
+    words = line.split()
+    if words:
+        alias, location = words[:2]
+        articles.append([alias, location])
+
+if only_first_article_for_testing:
+    articles = articles[:1]
+
+final_pdfs = map((lambda x: "{}/{}/{}.pdf".format(build,x[0],x[0])),articles)
+
+env.Command("pyconbook-2014.pdf",
+    final_pdfs,
+    "texexec --pdfcopy --result=$TARGET $SOURCES")
+
+for alias, location in articles:
+    root = "{}/{}/{}".format(build, alias, alias)
+    env.Command(
+        root + ".pdf",
+        [
+            root + ".tex",
+            artlist,
+            build + "/artpages.inc",
+            glob.glob("sty/*"),
+            glob.glob("src/" + alias + "/*")
+            ],
+        [
+            "pwd",
+            "[ ${TARGET.file} != optimizing.pdf ] || cp ../../../presentations/Optimizing_API_against_latency/cisco.png .",
+            pl_txt.link_src(alias),
+            # "env TEXINPUTS=.:..:../..:../../sty:../../src/" + alias + ": " +
+            "texexec --pdf " + alias,
+            "mv artpages.inc .. 2>/dev/null || true"
+            ],
+        chdir = "%s/%s" % (build, alias),
+        )
+    loc_src  = "src/" + alias + "/text.tex"
+    main_src = "../" + location + "/text.tex"
+    main_md  = "../" + location + "/text.md"
+    diffsrc  = glob.glob("src/" + alias + ".diff")
+    if os.path.exists(loc_src):
+        env.Command( root + ".tex", loc_src,
+                     Copy('$TARGET','$SOURCE') )
+    elif os.path.exists(main_src):
+        env.Command( root + ".tex", main_src,
+                     Copy('$TARGET','$SOURCE') )
+    elif os.path.exists(main_md):
+        print ">>>" + main_md
+        env.Command(
+            root + ".tex",
+            [main_md] + diffsrc + Glob("src/*.inc.tex"),
+            [
+                Delete(".tmp"),
+                Mkdir(".tmp"),
+                pl_txt.run_pandoc(main_md),
+                pl_txt.apply_patch(diffsrc),
+                Copy("$TARGET", ".tmp/${TARGET.file}"),
+                ],
+           )
+    else:
+        print "Thing ", main_md
+        raise RuntimeError("Gulp")
+
+
+env.Command("build/artpages.inc",[],[])
+
+# Local Variables:
+# mode: python
+# End:
