@@ -5,7 +5,7 @@ Form and size:
   for example it can be strictly aligned with what he wants to pass to attendees during the talk/workshop or it can be
   a supplement of the topic. Also it can contain elements that don't present well or are to fit on slides - for example
   bigger chunks of code.
-  * Article should contain between 800 and 2500 characters. In case of longer articles we reserve the right to cut some
+  * Article should contain between 800 and 2500 words. In case of longer articles we reserve the right to cut some
   less important parts (with author's agreement)
   * At the end of article please provide the sources, that were used while writing the article (some where used for sure!).
   You can also recommend to reader some websites and books related to the topic.
