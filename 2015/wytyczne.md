@@ -1,3 +1,9 @@
+Licencja
+---
+
+Wszystkie artukuły zostaną opublikowane na licencji CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0)
+
+
 Forma i objętość:
 ---
   * Artykuł powinien zawierać krótkie streszczenie na początku (zalecane około 4-6 zdań).
