@@ -1,3 +1,9 @@
+License
+---
+
+Permission is granted to copy, distribute and/or modify all the articles according to the terms in Creative Commons License, Attribution-ShareAlike 4.0. The full text of this license may be found here: https://creativecommons.org/licenses/by-sa/4.0/
+
+
 Form and size:
 ---
   * Article should contain short abstract at the beginning (4-6 sentences recommended).
