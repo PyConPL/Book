@@ -1,0 +1,74 @@
+# Teoria Kolejek - matematyka i efektywne wytwarzanie oprogramowania - Wiktor Żołnowski
+Przez ostatnich kilka lat, pomagając różnym organizacjom jako Agile Coach i niezależny konsultant zauważyłem, że często ta sama metoda/proces wytwarzania oprogramowania w niektórych organizacjach i zespołach działa, a w innych nie. Podobnie zbierając materiały do książki “Mity i Problemy w Agile” podczas organizowanych przez nas spotkań z cyklu Bring Your Own Problem wielokrotnie słyszałem wypowiedzi uczestników, którzy stosując podobne podejścia osiągali zaskakująco różne efekty. By odkryć dlaczego tak się dzieje probowałem również przypomnieć sobie, jak to było gdy sam pracowałem jako QA i developer w zespołach, które raczej działały bardzo sprawnie i efektywnie, oraz jak pracowaliśmy w zespołach. Poza oczywistymi różnicami, takimi jak np. inni ludzie w zespole i organizacji ciężko było mi znaleźć ogólne czynniki, które mogły by mieć realny wpływ na to dlaczego dany zespół wykazywał się lepszą efektywnością i przewidywalnością oraz rozwijał się znacznie szybciej niż inne. Do czasu aż zupełnie przypadkiem, szukając informacji na temat tego jak policzyć maksymalną wydajność jednego z budowanych przez nas systemów odświerzałem sobie informacje na temat Teorii Kolejek i Prawa Little’a...
+
+## Podstawy Teorii Kolejek i Prawo Little’a
+Dlaczego akurat Teoria Kolejek? Coraz częściej mamy do czynienia z systemami przetwarzającymi duże ilości danych, komunikującyim się z innymi systemami, czy też po prostu działającymi asynchronicznie. W takich systemach stosuje się różnego typu kolejki (mniej lub bardziej bezpośrednio - w końcu komputery, procesory, RAM, czy dyski twarde też działają w oparciu o pewnego rodzaju kolejki). W takich systemach można, na podstawie danych które zazwyczaj jesteśmy w stanie zebrać, oszacować na podstawie wzorób Teorii Kolejek oszacować maksymalne obicążenie systemu, czy też policzyć czasy procesowania dużej ilości danych w zależności od ilości procesów lub wątków. Jest to temat bardzo szeroki i poświęcono mu już całe książki i prace naukowe. 
+
+W moim przypadku teoria ta znalazła zastosowanie do czegoś innego. Takim (nie)typowym systemem kolejkowym jest przecież zespół developerski do którego spływają wymagania. Jak by nie było wymagania te czy to w postaci karteczek na tablicy, stories w Jirze, czy tasków w Trello układają się w kolejki. 
+
+Pomocne w zrozumieniu tego dlaczego dany proces/system działa a inny nie okazło się również Prawo Little'a mówiące o tym, że średnia liczba rzeczy/klientów w systemie jest równa iloczynowi średniego czasu przebywania w systemie oraz średniego tempa ich przybywania.
+
+##Dlaczego Scrum i Kanban (czy jakikolwiek inny proces wytwarzania oprogramowania) działają?
+
+Jako Agile Coach miałem już na koncie kilka udanych wdrożeń Scrum i Kanban w różnych zespołach. Oczywiście wiedziałem jak istotny w Scrum jest Sprint Planning oraz Backlog Refinement. Wiedziałęm też, że kluczowym czynnikiem efektywnego zastosowania Kanban jest zastosowanie limitu Work in Process (WIP). Wiedza o tym, co jest kluczowe do działania danego procesu nie jest jednoznaczna z wiedzą na temat tego dlaczego akurat te, a nie inne czynniki są tak ważne. 
+
+Czy próbowaliście przekonać kiedyś, kogoś do stosowanie danej metody tylko poprzez stwierdzenie, że “powinniśmy stosować tą metodę bo z mojego doświadczenia wynika, że ona zadziała”? Albo “wszyscy tak robią i u nich działa, więc u nas też będzie - spróbujmy”? Czasami się udaje, ale częściej mamy do czynienia ze zdrowym sceptycyzmem. 
+
+Jako ludzie bardzo często opieramy się temu czego nie rozumiemy - wręcz rzeczy niezrozumiałe wzbudzają w nas poczucie strachu przed nieznanym. Wystarczy spojrzeć na naszą mitologię i historię - jeśli nie wiemy jak i dlaczego coś działa, bardzo szybko przypisujemy temu nadprzyrodzone moce - potrzebujemy wyjaśnienia. 
+
+Prawo Little’a jest dobrym wyjaśnieniem tego czemu limit WIP i dobre planowanie w Sprincie są tak ważne. Ale o tym za chwilę.
+
+## Zastosowanie Teorii Kolejek - kilka bardziej przyziemnych przykładów
+
+Zanim przejdziemy do rzeczy, chcialbym abyście zastanowili się przez chwilę nad odpowiedzią na poniższe pytania dotyczące utylizacji zasobów.
+
+* Jak wygląda autostrada zutylizowana w 100%?
+* Jak działa komputer, w którym procesor jest wykorzystany w 100%?
+* Jak efektywny jest zespół którego zasoby czasowe są wykorzystane w 100%?
+
+Pracując ostatnio z jednym zespółów zauważyłem, że mają oni problem z “dowożeniem” tego co sobie zaplanują w Sprintach. Po kilku Sprintach jasne dla mnie było gdzie tkwi problem. Otóż zespół ten przeważnie zbyt optymistycznie podchodził do Planowania Spintu. Dodatkowo problemem było to, że praktycznie zawsze do Sprintu wpadało coś z poprzedniej iteracji, co było “w połowie skończone”. Ten nadmierny optymizm wynikał również z tego, że zespół praktycznie nie robił Backlog Refinementu (Groomingu) więc planowanie polegało na niekończących się dyskusjach, o tym co należy w danym zadaniu zrobić. Zazwyczaj kończyło się to tym, że conajmneij połowa wymagań/zadań polegała na “Researchu”. Jak dobrze wiecie - tego typu zadania nie wnoszą zazwyczaj zbyt dużej wartości do produktu. Liczy się to co jest zaimplementowane i działa. Na pytania dlaczego nie robią tego “Researchu” podczas Backlog Refinementu (i dlaczego w ogóle nie robią Refinementu, na który powinni przeznaczać do 10% czasu w Sprincie) odpowiedzią było oczywiście, że: “nie mają na to czasu - przecież mają problem z dowożeniem tego co zaplanują, więc dodatkowe spotkania w Sprincie mogą ten problem jedynie pogłębić”. Jak zapewne zauważacie błędne koło się zamyka. 
+
+Zeszło mi trochę czasu na przekonywaniu i udowadnianiu bezsensowności ich działań, ale w końcu udało się doprowadzić do sytuacji, w której zespół ten dowiózł wszystko co zaplanował po raz pierwszy w swojej historii. W następnym Sprincie został już przewidziany czas na Refinement i od tej pory wszystko zaczęło się (oczywiście z kilkoma potknięciami) układać tak jak powinno. 
+
+## Teoria Kolejek a straty w wytwarzaniu oprogramowania 
+
+Analizując zastosowanie wzorów Teorii Kolejek i Prawa Little’a można szybko wyciągnąć wniosek, że każdym systemie kolejkowym można znaleźć pewien stan (określony przez ilość elementów będących w danej chwili procesowanych), w którym system ten działa najbardziej efektywnie. Podobnie dla każdego zespołu developerskiego można wyliczyć (lub raczej podejść do tego eksperymentalnie) pewną optymalną ilość równolegle przetwarzanych zadań.
+
+Praktyka pokazuje, że liczba ta jest zazwyczaj mniejsza niż ilość osób w zespole. Może to się wydawać nieintuicyjne. Bo przeciez jak to? Ktoś ma nie mieć przypisanego taska? I co ma robić- nudzić się, oglądac filmiki na JoeMonster? Po pierwsze - inteligentni ludzie się nie nudzą, po drugie, jeśli firma zatrudnia ludzi, którzy na każdym kroku szukają okazji do tego by oszukiwać swojego pracodwacę to raczej ma większy problem niż to, że zespół jest mało-efektywny. 
+
+Mały eksperyment myślowy - czy zdarzyło Ci się kiedyś czekać na to, aż ktoś zrobi Ci Code Review? Co wtedy zrobiłeś? Pewnie zacząłeś pracę nad kolejnym zadaniem? Gdy ktoś akurat znalazł czas na Code Review to Ty już byłeś zajęty, więc odbyło się ono asynchronicznie poprzez komentarze w kodzie lub co gorsza uwagi w mailu. Mało tego, wracając do uwag po takim review musisz ponownie zmienić kontekst. Jak bardzo to jest efektywne? A przecież wszyscy wiemy, że najlepsze jest Code Review, podczas którego rozmawiamy o zmianach w kodzie i najlepiej, jeśli to możliwe od razu wprowadzamy poprawki i współnie poprawiamy jakość tego, co zrobiliśmy. No ale jak to osiągnąć, gdy wszyscy są skupieni na swoich zadaniach i trzeba czekać na to, aż będą wolni. Albo Ty będziesz musiał czekać, albo oni będą musieli zmienić kontekst. W obu przypadkach, któreś z wykonywanych zadań będzie czekało w kolejce, nie będzie w danym momencie procesowane - w Lean nazywamy to przestojem produkcyjnym i jest to jeden z największych czynników generujących straty w procesie wytwórczym. 
+
+Czy nie było by łatwiej gdybyśmy zawsze mieli, kogoś, kto nie pracuje w danym momencie nad niczym konkretnym i może bardzo szybko przejrzeć Twoje zmiany? Szczerze - nie wiem jak będzie w przypadku Twojego zespółu - ale z pewnością warto by było spróbować i zmierzyć wyniki takiego eksperymentu.
+
+## Proste rozwiązanie
+
+Wielu managerów i dyrektorów oczekuje od swoich podwładnych tego, że będą wykazywali incjatywę, że będą innowacyjni, że będą się rozwijać i usprawniać całą organizację - ja się pytam kiedy mają to robić, jeśli ich czas jest zaalokowany w 100%? 
+
+Jak zatem zoptymalizować proces wytwarzania w każdej organizacji. Kilkukrotnie już udało mi się z powodzeniem wykorzystać pewną prostą metodę polegającą na tym, że:
+* Mierzymy przez określony okres czasu (np. Sprint) ile mniej więcej zespół jest w stanie skończyć zadań, albo Story Pointów, albo czegoś innego mierzalnego (czyli Velocity w Scrum). Istotne jest to by mierzyć tylko to co jest skończone, a nie rozgrzebane.
+* W następnej iteracji planujemy 80% tego, co udało się skończyć w poprzedniej. 
+Jeśli uda się wszystkie zaplanowane zadania skończyć przed końcem iteracji to dobieramy kolejne, aż skończy się iteracja. 
+* W kolejnej iteracji powtarzamy poprzednie kroki - znowu bierzemy 80% tego co udało się skończyć w poprzedniej iteracji. 
+
+Logika podpowiada Wam zapewne, że w ten sposób z iteracji na iterację zespół będzie brał coraz mniej. Praktyka pokazuje jednak, że zazwyczaj te 80% rzeczy udaje się skończyć przed końcem iterazji i zespół dobiera kolejne zadania. W efekcie często skutkuje to tym, że w kolejnych iteracjach udaj się skończyć mniej więcej tyle samo, co w poprzednich iteracjach. Czasem zdarza się, że uda sie skończyć więcej i Velocity stopniowo rośnie.
+
+## Konkluzja
+
+Powiecie zapewne, że to u mnie nie zadziała. W naszej organizacji się nie da. Nikt tego nie zrozumie. Nam ktoś każe brać cały czas więcej etc… 
+
+Jeśli, ktoś Wam każe brać więcej do Sprintu to zadajcie mu proste pytanie: Czy chce abyście brali więcej, czy może jednak woli żebyście dowozili więcej?
+
+## Źródła
+https://www.youtube.com/watch?v=rSZWig173xM - Wprowadzenie do Teorii Kolejek
+https://www.youtube.com/watch?v=VU8TUSnQ-vw - WIP limit i Prawo Little'a
+https://dzone.com/articles/lean-tools-queuing-theory - Lean i Teoria Kolejek
+http://irh.inf.unideb.hu/user/jsztrik/education/09/english/3f.html - Tablice wzorów w Teorii Kolejek
+http://www.supositorio.com/rcalc/rcalclite.htm - Kalkulator przydatny w eksperymentach nad Teorią Kolejek
+http://www.referenceforbusiness.com/encyclopedia/Pro-Res/Queuing-Theory.html - Wstęp do Teorii Kolejek
+http://less.works/less/principles/queueing_theory.html - Zarządzanie kolejkami
+
+
+
+
+
+
