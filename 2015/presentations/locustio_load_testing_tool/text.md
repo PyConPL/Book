@@ -159,7 +159,6 @@ from locust import HttpLocust, TaskSet, task
 
 
 class MyCustomBehaviourTaskSet(TaskSet):
-
     # Klasa reprezentująca zestaw zadań jaki ma zostać
     # wykonany przez użytkownika
 
