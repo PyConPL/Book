@@ -109,48 +109,63 @@ always looking for SNMP variables either by querying SNMP Agents or
 listening for notifications they may produce whenever something happens to
 them. 
 
-PySNMP structure
-----------------
+Library orientation
+-------------------
 
-<table border="1" style="width:70%">
-  <tr>
-    <td>
-      ASN.1 Types and Codecs
-    </td>
-  </tr>
-  <tr>
-    <td>
-      SNMP Packet Structures
-    </td>
-  </tr>
-  <tr>
-    <td>
-      SNMPv3 Security Modules
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <table border="1" style="width:70%">
-        <tr>
-          <td>
-            SNMPv3 Message Processing Modules
-          </td>
-          <td>
-            SNMPv3 Security Modules
-          </td>
-        </tr>
-      </table>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      SNMP Engine & Network Transports
-    </td>
-  </tr>
-  <tr>
-    <td>
-      Standard SNMP Applications
-    </td>
-  </tr>
-</table>
+The PySNMP library is structured internally along the lines of 
+[RFC3411](http://www.ietf.org/rfc/rfc3411.txt). Components that are not
+unique to SNMP are put into stand-alone Python packages to promote
+reusability.
+
+SNMP protocol is defined in terms of ASN.1 data structures, SNMP messages
+travelling the wire are encoded in BER. For those purposes PySNMP relies on
+generic implementation of ASN.1 types and codecs distributed as a dedicated
+Python package under the name of [PyASN1](http://pyasn1.sf.net).
+
+SNMP-level data processing is performed by a collection of SNMP Message 
+Processing ([RFC3412](http://www.ietf.org/rfc/rfc3412.txt)) and Security
+([RFC3414](http://www.ietf.org/rfc/rfc3414.txt)) modules living in 
+*pysnmp.proto...* sub-package. All crypto operations are offloaded to
+the third-party [PyCrypto](https://www.dlitz.net/software/pycrypto/)
+package.
+
+Base classes acting as a wireframe for SMI objects
+([RFC2587](http://www.ietf.org/rfc/rfc2578.txt)) are defined in
+*pysnmp.smi.*... They carry out both of MIB purposes:
+for SNMP Manager apps, it's a hierarchical database of MIB variables
+served by remote SNMP Agent. Agents can use PySNMP SMI objects for
+interfacing with backend host or system being managed.
+
+PySNMP is designed to run in asynchronous I/O environment.  Its I/O
+subsystem is built around a set of abstract classes (*pysnmp.carrier...*)
+whose purpose is to facilitate basing SNMP engine on top of a third-party
+I/O framework. The library is shipped with a handful of ready-to-use
+bindings to popular asynchronous cores including *asyncore*, *asyncio* and
+*Twisted*.
+
+All SNMP services are delivered through and components are orchestrated
+by the SNMP Engine entity (*pysnmp.entity.engine*).
+
+So called Standard SNMP Applications
+[RFC3413](http://www.ietf.org/rfc/rfc3413.txt) are shipped in
+*pysnmp.entity.erf3413...*. They all employ SNMP Engine instance for their
+operations.
+
+A more concise and higher-level programming interface to most frequently
+used Standard SNMP Applications is offered via
+*pysnmp.entity.rfc3413.oneliner...* modules. We will use their API
+throughout this article.
+
+At this point we end up with a fully-functional SNMP entity that can run in
+standard Manager, Agent and Proxy roles. However one SNMP feature is
+still missing and that is MIB support. More often than not, MIBs are used
+in the context of SNMP operations. However, other uses are not impossible.
+For example one may want to transform MIB structures into XML/HTML form or
+generate code in some programming language implementing MIB features. That
+was the rationale behind PySNMP developers' decision to isolate MIB parsing
+from SNMP Engine implementation and put it into a dedicated Python package
+called [PySMI]{http://pysmi.sf.net).
+
+
+
 
