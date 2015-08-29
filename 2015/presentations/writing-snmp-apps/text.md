@@ -112,14 +112,45 @@ them.
 PySNMP structure
 ----------------
 
-|:---------------------------------:|
-|       ASN.1 Types and Codecs      |
-|       SNMP Packet Structures      |
-|      SNMPv3 Security Modules      |
-| SNMPv3 Message Processing Modules |
-|  SNMP Engine & Network Transports |
-|     Standard SNMP Applications    |
-|                |                  |
-|                                   |
-
+<table border="1" style="width:70%">
+  <tr>
+    <td>
+      ASN.1 Types and Codecs
+    </td>
+  </tr>
+  <tr>
+    <td>
+      SNMP Packet Structures
+    </td>
+  </tr>
+  <tr>
+    <td>
+      SNMPv3 Security Modules
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <table border="1" style="width:70%">
+        <tr>
+          <td>
+            SNMPv3 Message Processing Modules
+          </td>
+          <td>
+            SNMPv3 Security Modules
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      SNMP Engine & Network Transports
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Standard SNMP Applications
+    </td>
+  </tr>
+</table>
 
