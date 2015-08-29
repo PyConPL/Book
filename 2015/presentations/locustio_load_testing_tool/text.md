@@ -15,12 +15,12 @@ czego szukają).
 * Google analizując ruch w internecie stwierdziło, że pół sekundowe opóźnienie
 w ładowaniu strony skutkuje spadkiem ruchu na poziomie 20%
 * Amazon podczas A/B testów zauważył, że wzrost czasów odpowiedzi o 100 ms
-skutkował w ich przypadku spadkiem sprzedaży na poziomie 1% (co w przypadku
-tak dużej firmie jest znaczącą wartością)
+skutkował w ich przypadku spadkiem sprzedaży na poziomie 1% (co dla tak dużej
+firmy jest znaczącą wartością)
 
 
 Typowy odwiedzający nie dba również o stronę techniczną, bo po
-prostu się an tym nie zna. Aplikacja może cachować dużo danych, autoskalować się,
+prostu się na tym nie zna. Aplikacja może cachować dużo danych, autoskalować się,
 zepewniać failover - to wszystko nie ma wielkiego znaczenia jeżeli jest po prostu
 wolne. Naturalnym wydaje się więc posiadanie możliwości symulacji dużego ruchu,
 który sprawdzi możliwości naszej aplikacji i pokaże jak cały stos sprawuje się
@@ -321,12 +321,11 @@ class NanomsgUser(Locust):
 
 Wnioski nasuwają się same - locust nie ogranicza się do pracy wyłącznie z serwisami
 wspierającymi protokół HTTP. Testowanie architektur mikroserwisów korzystających
-z Rabbitmq (nameko), Zeromq (lymph) czy nanomsg (nanoservice, omnomnom) jest
-banalnie prostym zadaniem. W kontekście samych mikroserwisów locust idealnie
-nadaje się do znajdywania elementów będących bottleneckiem naszej aplikacji,
-znajdywania single point of failure czy też sprawdzanie jak nasza architektura
-poradzi sobie, gdy jeden z serwisów przestanie być responsywny lub całkowicie
-padnie.
+z Rabbitmq, zeromq czy nanomsg jest banalnie prostym zadaniem. W kontekście 
+samych mikroserwisów locust idealnie nadaje się do znajdywania elementów będących
+słabym punktem naszej aplikacji, znajdywania single point of failure czy też 
+sprawdzania jak nasza architektura poradzi sobie, gdy jeden z serwisów przestanie
+być responsywny lub całkowicie przestanie działać.
 
 
 
