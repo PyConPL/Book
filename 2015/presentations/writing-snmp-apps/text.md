@@ -60,7 +60,8 @@ be performed right from your Python prompt:
             print(' = '.join([x.prettyPrint() for x in varBind ]))
 
 That code is somewhat verbose for a reason: PySNMP API exposes many SNMP
-details to programmer giving her great power and flexibility. But before we
+details to programmer giving her great power and flexibility (attentive
+readers may have spotted a Python generator in the code). But before we
 dive into the details let me remind our readers basic SNMP design and how
 PySNMP architecture maps into it.
 
@@ -100,7 +101,7 @@ variables from hosts or applications being managed.
 
 With SNMP architecture, managed host or application should have a component
 called SNMP Agent. It acts as an intermediate having access to
-host/application internals and being able providing that information over
+host/application internals and being able to funnel that information over
 SNMP to interested parties in form of SNMP variables. 
 
 The other part of the system is called SNMP Manager, this component is
@@ -110,5 +111,15 @@ them.
 
 PySNMP structure
 ----------------
+
+|:---------------------------------:|
+|       ASN.1 Types and Codecs      |
+|       SNMP Packet Structures      |
+|      SNMPv3 Security Modules      |
+| SNMPv3 Message Processing Modules |
+|  SNMP Engine & Network Transports |
+|     Standard SNMP Applications    |
+|                |                  |
+|                                   |
 
 
