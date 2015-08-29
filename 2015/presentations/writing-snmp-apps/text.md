@@ -20,10 +20,10 @@ technology. Others are pure-Python modules addressing specific SNMP features.
 Among many SNMP libraries in existence in the Python landscape, right
 from the start, PySNMP project aims at complete and universal SNMP
 implementation offering its users full power of SNMP technology across
-all computing platforms. Having taken this project seriously, PySNMP
-developers also designed a couple of foundation libraries:
-[PyASN1] (http://pyasn1.sf.net) and [PySMI](http://pysmi.sf.net) as a
-byproduct of their PySNMP work.
+all computing platforms. Having taken this project seriously,
+[PySNMP](http://pysnmp.sf.net) developers also designed a couple of 
+foundation libraries: [PyASN1] (http://pyasn1.sf.net) and 
+[PySMI](http://pysmi.sf.net) as a byproduct of their PySNMP work.
 
 Hello, SNMP world!
 ------------------
@@ -164,8 +164,80 @@ For example one may want to transform MIB structures into XML/HTML form or
 generate code in some programming language implementing MIB features. That
 was the rationale behind PySNMP developers' decision to isolate MIB parsing
 from SNMP Engine implementation and put it into a dedicated Python package
-called [PySMI]{http://pysmi.sf.net).
+called [PySMI](http://pysmi.sf.net).
 
+Being optional, PySMI will be discovered and automatically used by Manager
+applications, running on top of high-level PySNMP API, for MIB variable
+names and types resolution.
 
+Common operations
+-----------------
+
+Besides reading known scalar variables we mentioned earlier, SNMP is able
+to fetch a range of variable including those not known in advance. The
+following code fetches all variables related to host's interface table:
+
+    from pysnmp.entity.rfc3413.oneliner.cmdgen import *
+
+    for errorIndication, \
+        errorStatus, \
+        errorIndex, \
+        varBinds in nextCmd(SnmpEngine(),
+                            CommunityData('public'),
+                            UdpTransportTarget(('demo.snmplabs.com', 161)),
+                            ContextData(),
+                            ObjectType(ObjectIdentity('IF-MIB', 'ifDescr')),
+                            ObjectType(ObjectIdentity('IF-MIB', 'ifType'))):
+
+        if errorIndication:
+            print(errorIndication)
+            break
+        elif errorStatus:
+            print('%s at %s' % (errorStatus.prettyPrint(),
+                                varBinds[int(errorIndex)-1][0]
+                                if errorIndex else '?'
+                )
+            )
+            break
+        else:
+            for varBind in varBinds:
+                print(' = '.join([ x.prettyPrint() for x in varBind ]))
+
+In this example we iterate remote SNMP Agent over two MIB variables
+(*IF-MIB::ifDescr* and *IF-MIB::ifType*) which are in fact two columns 
+of SNMP table.
+
+Any operation carried out through high-level API involves Python generator.
+Each invocation of such generator translates into SNMP message being sent 
+and response processed. Generator functions are specific to SNMP message
+type and are uniformly initialized with:
+
+* SNMP Engine object: this is the umbrella object coordinating all
+  SNMP operations. It's used by SNMP applications like Command Generator
+  application featured in example.
+* SNMP authentication method: that can be SNMPv1/v2c Community Name or
+  [RFC3414](http://www.ietf.org/rfc/rfc3414.txt) *UsmUser* object
+  conveying USM username, encryption and ciphering keys.
+* Kind of I/O to use for this communication, endpoints addresses and
+  other transport-specific options
+* SNMP Context Engine ID and Context Name: these are only applicable
+  to SNMPv3 operations and can be used to identify a non-default remote
+  SNMP Engine instance or specific instance of MIB variables collection 
+  behind remote SNMP Engine.
+* Sequence of MIB variables to query. Sometimes MIB variable name should
+  be accompanied with a value to transfer to remote SNMP entity. Such value
+  could be passes through *ObjectType()* initializer.
+
+As for return values, on each iteration generator give us a tuple of
+result items:
+
+* errorIndication: if evaluates to True, it indicates some fatal problem
+  occurred to local or remote SNMP engine. Most likely a timeout or
+  authentication problem.
+* errorStatus and errorIndex: if errorIndex is not zero, that indicates
+  a problem with particular MIB variable put into request. The errorStatus
+  object provides more information on the nature of the problem.
+* varBinds: is a list of two-element tuples, each correspond to MIB variable
+  and its value.
 
 
