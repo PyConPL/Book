@@ -2,7 +2,7 @@
 Writing SNMP Apps in Python
 ===========================
 
-*Ilya Etingof <ietingof@redhat.com>*
+*Ilya Etingof, ietingof@redhat.com*
 
 Introduction
 ------------
@@ -416,8 +416,41 @@ provisioning your own instance of MIB Controller object to SNMP Agent:
     GetCommandResponder(snmpEngine, snmpContext)
     SetCommandResponder(snmpEngine, snmpContext)
 
-Complete SNMP apps
-------------------
+Real-world applications
+-----------------------
 
+Over the years PySNMP developers created a couple of software products
+based on PySNMP library. That kind of reality check experience influenced
+PySNMP design a great deal.
 
+[SNMP Simulator](http://snmpsim.sf.net) is probably the most sophisticated
+free and open source SNMP Agent emulation software at the time being. This
+tool can create an illusion that large SNMP-managed network of various
+devices exists in your virtual laboratory. Emulated devices try to look live
+by reporting changing data. MIB variables can be configured to change
+according to some formula. Modified data can be made persistent by keeping
+MIB variables in SQL or noSQL database. 
 
+SNMP simulation toolkit also offers utilities that can capture SNMP traffic
+from real SNMP Agents, store captured MIB variables so that they could then
+be replayed by SNMP simulator. Another way to gather a collection of MIB
+variables to simulate is to populate MIB it from ASN.1 MIB file.
+
+Another large project is [SNMP Proxy Forwarded](http://snmpfwd.sf.net). That
+tool is designed to work as transparent, application-level firewall passing
+SNMP traffic between open and protected network segments. SNMP protocol
+version translation could be performed on the fly, sophisticated SNMP data
+filtering and modification could be performed, response caching and request
+rate limiting could be set up to reduce SNMP load on end devices.
+
+Finally, we ship a pure-Python version of SNMP
+[command-line tools](https://pypi.python.org/pypi/pysnmp-apps)
+that try to mimic their Net-SNMP prototypes.
+
+References
+----------
+
+1. [PySNMP project site](http://pysnmp.sf.net)
+2. [SNMP RFCs](http://www.snmp.com/protocol/snmp_rfcs.shtml)
+3. [Practical Guide to SNMPv3 and Network Management](http://www.amazon.com/Practical-Guide-Snmpv3-Network-Management/dp/0130214531/ref=pd_sim_14_4?ie=UTF8&refRID=0KNXDXE2XYXV13SX137H)
+4. [Understanding SNMP MIBs](http://www.amazon.com/Understanding-SNMP-MIBs-David-Perkins/dp/0134377087/ref=pd_sim_14_3?ie=UTF8&refRID=1N65YA65G01KJAKR6PD1)
