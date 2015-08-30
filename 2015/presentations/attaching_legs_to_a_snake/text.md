@@ -6,6 +6,8 @@ Python is a powerful language by itself. The robust standard library and the myr
 
 This artice will show you how to write, build and run an extension; what C API you can use in it and what to remember about; how to link to shared libraries and what does Boost.Python simplify.
 
+Full source codes for all example modules below can be found on github [1].
+
 ## Overview of the extension's anatomy
 
 ### Head
@@ -122,7 +124,7 @@ if (!PyArg_ParseTuple(args, "sI", &name, &age)) {
 }
 // Parameters parsed, carry on ...
 ```
-The description of the formatting parameters can be found in the docs. ```s``` means *convert to C string* (```char *```). ```I``` means convert to ```unsigned```. ```O``` would mean pass a Python object and the parameter could be placed into a ```PyObject *``` variable.
+The description of the formatting parameters can be found in the docs [2]. ```s``` means *convert to C string* (```char *```). ```I``` means convert to ```unsigned```. ```O``` would mean pass a Python object and the parameter could be placed into a ```PyObject *``` variable.
 
 Notice that you are passing addresses of the variables (using the ```&``` operator) - this is what enables Python to write the values into your variables in a return-parameter manner.
 
@@ -162,7 +164,7 @@ Some functions (for example ```__init__``` C implementation) are supposed to ret
 
 ## Bones - API
 
-The API you can use in your Python C extensions if quite vast. You can read all about it in the Python docs. API is split into section, so all functions dealing with ```str``` are in one section (funny fact: in the API ```str``` is still refered to as ```Unicode```, for example ```PyUnicode_FromString```), etc. You can find the equivalent calls for your Python constructs. Here are some examples:
+The API you can use in your Python C extensions if quite vast. You can read all about it in the Python docs [2]. API is split into section, so all functions dealing with ```str``` are in one section (funny fact: in the API ```str``` is still refered to as ```Unicode```, for example ```PyUnicode_FromString```), etc. You can find the equivalent calls for your Python constructs. Here are some examples:
 
 To get a item under given key in a dictionary (```category_sequence = mapping[category]```) use:
 ```
@@ -516,6 +518,7 @@ boost = Extension(
     library_dirs=[os.path.join(BOOST_DIR, 'lib')],
 )
 ```
+Notice that we specify here that our extension should be linked to the ```boost_python``` shared library.
 
 *Boost.Python* also allows you to define classes in a simplified syntax.
 ```
@@ -548,5 +551,13 @@ BOOST_PYTHON_MODULE(boost)
 
 ## Summary
 
+Python extensions are a great tool for pushing the boundaries of what Python can do. Whether we want to code some calculations to work faster without the interpreter's overhead of if we want to integrate with a shared library, extensions provide us a way of doing it while still keeping the usual package installation procedure.
+
+Extensions are powerful and you can implement some really cool stuff with them [3], but you need to be very careful. Dealing with low level C is dangerous on it's own and dealing with Python's internals at the same time is adding to the complexity. One ```PyDECREF``` missing and you will have memory leaks, one ```PyDECREF``` too many and your extension will crash the whole interpreter with a core dump. Good luck!
+
 ## References
+
+* [1] [GitHub repo with full source code of all examples](https://github.com/kurazu/pyext)
+* [2] [Python/C API Reference Manual](https://docs.python.org/3/c-api/index.html)
+* [3] [GitHub repo of a Python-SpiderMonkey integration library](https://github.com/kurazu/bridge)
 
