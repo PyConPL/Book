@@ -160,21 +160,98 @@ return NULL;
 
 Some functions (for example ```__init__``` C implementation) are supposed to return an ```int``` status. To signal an encountered exception set the exception info using ```PyErr_SetString``` (or leave the one already set if the exception is coming from a deeper Python function call) and return ```-1``` from your function.
 
-## Other solutions - or - you don't always need an extension module
+## API
 
-## Basic anatomy of an extension
+The API you can use in your Python C extensions if quite vast. You can read all about it in the Python docs. API is split into section, so all functions dealing with ```str``` are in one section (funny fact: in the API ```str``` is still refered to as ```Unicode```, for example ```PyUnicode_FromString```), etc. You can find the equivalent calls for your Python constructs. Here are some examples:
 
-## Configuration and building
+To get a item under given key in a dictionary (```category_sequence = mapping[category]```) use:
+```
+/* GetItem returns a new reference that needs to be decremented */
+PyObject * category_sequence = PyObject_GetItem(mapping, category);
+if (category_sequence == NULL) {
+    return NULL;
+}
+// Deal with the object ...
+Py_DECREF(category_sequence);
+```
 
-## Python C API
+To check if a sequence contains given item (```contains = item in category_sequence```) use:
+```
+int contains = PySequence_Contains(category_sequence, item);
+if (contains == -1) {
+    return NULL; // error, for example KeyError
+} elif (contains == 0) {
+    ... // doesn't contain
+} else {
+    ... // does contain
+}
+```
 
-## Linking to a library
+## Population size
 
-## Boost.Python
+Python automatically manages memory using **reference counting** and a cyclic garbage collector. Reference counting means that for each Python object (```PyObject```) the interpreter stores a count of how many other object are referencing it. Say you have two dictionaries:
+```
+dict_a = {'a': 'VALUE'}
+dict_b = {}
+```
+The ```str``` object ```'VALUE'``` has reference count of ```1``` - only the object ```dict_a``` is referencing it. Once we do:
+```
+dict_b['b'] = dict['a']
+```
+then our ```str``` object is referenced by both ```dict_a``` and ```dict_b``` so it's reference count is raising to ```2```. If we remove both references:
+```
+del dict_a['a']
+del dict_b['b']
+```
+then our ```str``` is no longer referenced by anything, it's reference count drops to ```0``` and the interpreter knows that this object is no longer used, so the memory it occupied can be freed and later on reused.
+
+This process of counting references is happening automatically in pure Python, but requires manual support when dealing with Python objects in C extensions.
+
+We need to manually increase the reference count on an object using
+```
+Py_INCREF(result);
+```
+and decrease it using
+```
+Py_DECREF(category_sequence);
+```
+macros.
+
+Knowing when to increase ref. count and when to decrease it is one of the hardest things to get right. When using any Python API function we need to read if it returns *new reference* or *borrowed reference*. The former means that the object returned by the API function already has the reference count increased, so we need to decrease it when we are done dealing with it. In the latter case the reference count was not increased - our code didn't become one of the owner's of the object's reference, so there is no need to decrease it when we are done dealing with it. But if we would like to return it from our function or store it, we need to increase the reference count to make sure that Python will not deallocate that object.
+
+Check out the example of dealing with references:
+```
+PyObject * mapping = ...;
+PyObject * item = ...;
+PyObject * category = ...;
+
+/* GetItem returns a new reference that needs to be decremented */
+PyObject * category_sequence = PyObject_GetItem(mapping, category);
+if (category_sequence == NULL) {
+    return NULL;
+}
+
+int contains = PySequence_Contains(category_sequence, item);
+Py_DECREF(category_sequence); // We will no longer need this object.
+if (contains == -1) {
+    return NULL;
+}
+
+PyObject * result = contains ? Py_True : Py_False;
+// True and False are singleton-like objects, if we want to return them
+// from our code, we need to increase their ref. count
+Py_INCREF(result);
+
+return result;
+```
+
+## Objects
+
+## GIL and threading
+
+## Boost
 
 ## References
-
-## Threading
 
 ## Summary
 
