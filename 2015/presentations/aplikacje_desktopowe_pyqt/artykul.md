@@ -96,6 +96,16 @@ Z pliku close.py importujemy nasz widget. Nie zmieniałem jego nazwy więc domy�
 Oto prosty przykład obsługi sygnałów i slotów. Po kliknięciu przycisku, którego nazwałem `closeButton` odpali się nasz slot - `_close`, który wykona swoją logikę.
 
 
+Dystrybucja aplikacji PyQt
+--------------------------
+
+Aplikacje napisane z pomocą PyQt mogą bez problemu działać na popularnych desktopowych systemach operacyjnych, ale będą też wymagać zainstalowania całego środowiska developerskiego. Na szczęście da się "zamrozić" nasze aplikacje do wersji niezależnej - czy to za pomocą py2exe, czy py2app. W przypadki Windowsa nieduża aplikacja wraz z dołączonymi bibliotekami Pythona i PyQt da co najmniej 10-15 MB aplikację.
+
+Od pewnego czasu istnieje także pyqtdeploy - aplikacja do dystrybucji aplikacji PyQt na Windows, Linuksa, OSX a także Androida i iOS. Jeżeli interesuje was Tizen (Maemo), czy Sailfish OS to PyQt jest też tam obecne. Także Windows RT / Windows Phone 8, czy Blackberry 10 / QNX są listowane jako wspierane. Niemniej w przypadku systemów mobilnych nie wszystko musi być dostępne, czy działać tak samo jak w wersji desktopowej (szczególnie wygląd interfejsu).
+
+PyQt dostępna jest też na Raspberry Pi i praktycznie każdym innym mini komputerze na płytce. Takie zestawienie może przydać się, gdy tworzymy rozwiązania digital signage, czy automaty z graficznym interfejsem wystawianym użytkownikowi.
+
+
 Co dalej?
 ---------
 
