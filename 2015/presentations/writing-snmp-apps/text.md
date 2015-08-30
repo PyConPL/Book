@@ -2,6 +2,8 @@
 Writing SNMP Apps in Python
 ===========================
 
+**Ilya Etingof <ietingof@redhat.com>**
+
 Introduction
 ------------
 
@@ -303,4 +305,64 @@ of the above notification (from IF-MIB.txt):
                 state).  This other state is indicated by the included value
                 of ifOperStatus."
         ::= { snmpTraps 3 }
+
+Looking up MIBs
+---------------
+
+Surprisingly, SNMP can work without MIBs! Protocol itself does not depend
+on them. MIBs are designed as a complimentary database to make SNMP
+data more human readable and convenient to deal with.
+
+PySNMP library is designed to work without MIBs. You can always refer to
+a MIB variable via Object Identifier:
+
+    ObjectType(ObjectIdentity('1.3.6.1.2.1.1.1.0'), OctetString('my host')) 
+
+Whenever data type has to be specified, that can be done by passing
+corresponding PyASN1 type. Otherwise both variable identifier and
+data type associated with a variable would be looked up at MIB.
+
+    ObjectType(ObjectIdentity('SNMPv2-MIB', 'sysDescr', 0), 'my host') 
+
+For MIB resolution to work PySNMP application must load up MIB module
+being looked up. Internally, PySNMP represents MIBs as Python modules
+containing objects each representing MIB variable:
+
+    # pysnmp/smi/mibs/SNMPv2-MIB.py:
+    # ...
+    sysDescr = MibScalar((1, 3, 6, 1, 2, 1, 1, 1), DisplayString().subtype(subtypeSpec=ValueSizeConstraint(0, 255))).setMaxAccess("readonly")
+
+Convertion of original, ASN.1 MIB text files into PySNMP-compliant Python
+modules can be done behind the scenes by PySMI. Normally, PySNMP users do not
+need to bother explicitly invoking PySMI services. PySNMP would call PySMI
+automatically provided PySMI package is installed and requested MIB module
+is available.
+
+Users can point their PySNMP applications to their local MIB repositories
+or use remote ones accessible through HTTP or FTP:
+
+    from pysnmp.entity.rfc3413.oneliner.cmdgen import *
+
+    errorIndication, errorStatus, errorIndex, varBinds = next(
+        getCmd(SnmpEngine(),
+               CommunityData('public'),
+               UdpTransportTarget(('demo.snmplabs.com', 161)),
+               ContextData(),
+               ObjectType(ObjectIdentity('IF-MIB', 'ifInOctets', 1).addAsn1MibSource('file:///usr/share/snmp', 'http://mibs.snmplabs.com/asn1/@mib@'))
+       )
+    )
+
+To figure out what MIBs are implemented by particular SNMP Agent, Manager
+could query *SNMPv2-MIB::sysORTable*:
+
+    $ snmpwalk -v2c -c public demo.snmplabs.com sysORTable
+    SNMPv2-MIB::sysORID.1 = OID: SNMPv2-MIB::snmpMIB
+    SNMPv2-MIB::sysORID.2 = OID: SNMP-VIEW-BASED-ACM-MIB::vacmBasicGroup
+    SNMPv2-MIB::sysORID.3 = OID: SNMP-MPD-MIB::snmpMPDCompliance
+    SNMPv2-MIB::sysORID.4 = OID: SNMP-USER-BASED-SM-MIB::usmMIBCompliance
+    SNMPv2-MIB::sysORID.5 = OID: SNMP-FRAMEWORK-MIB::snmpFrameworkMIBCompliance
+    ...
+
+An efficient Manager could then optimize its behavior by fetching required
+MIBs and querying MIB variables from supported MIBs.
 
