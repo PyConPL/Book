@@ -37,7 +37,7 @@ done with snmpget tool:
     $ snmpget -v2c -c public demo.snmplabs.com sysDescr.0
     SNMPv2-MIB::sysDescr.0 = STRING: SunOS zeus.snmplabs.com 4.1.3_U1 1 sun4m
 
-Here we queried publically available SNMP Manager at *demo.snmplabs.com*
+Here we queried publicly available SNMP Manager at *demo.snmplabs.com*
 for a value of MIB variable named *sysDescr.0*. The same operation can
 be performed right from your Python prompt:
         
@@ -149,7 +149,7 @@ All SNMP services are delivered through and components are orchestrated
 by the SNMP Engine entity (*pysnmp.entity.engine*).
 
 So called Standard SNMP Applications
-[RFC3413](http://www.ietf.org/rfc/rfc3413.txt) are shipped in
+([RFC3413](http://www.ietf.org/rfc/rfc3413.txt)) are shipped in
 *pysnmp.entity.erf3413...*. They all employ SNMP Engine instance for their
 operations.
 
