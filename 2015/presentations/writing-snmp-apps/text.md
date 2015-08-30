@@ -114,7 +114,7 @@ them.
 Library orientation
 -------------------
 
-The PySNMP library is structured internally along the lines of 
+The PySNMP library is internally structured along the lines of 
 [RFC3411](http://www.ietf.org/rfc/rfc3411.txt). Components that are not
 unique to SNMP are put into stand-alone Python packages to promote
 reusability.
@@ -142,8 +142,9 @@ PySNMP is designed to run in asynchronous I/O environment.  Its I/O
 subsystem is built around a set of abstract classes (*pysnmp.carrier...*)
 whose purpose is to facilitate basing SNMP engine on top of a third-party
 I/O framework. The library is shipped with a handful of ready-to-use
-bindings to popular asynchronous cores including *asyncore*, *asyncio* and
-*Twisted*.
+bindings to popular asynchronous cores including *asyncore*,
+*[asyncio](https://docs.python.org/3/library/asyncio.html)* and
+*[Twisted](http://www.twistedmatrix.com)*.
 
 All SNMP services are delivered through and components are orchestrated
 by the SNMP Engine entity (*pysnmp.entity.engine*).
@@ -305,6 +306,10 @@ of the above notification (from IF-MIB.txt):
                 state).  This other state is indicated by the included value
                 of ifOperStatus."
         ::= { snmpTraps 3 }
+
+Note the OBJECTS clause: it makes SNMP Notification Originator application
+gathering *ifIndex*, *ifAdminStatus*, *ifOperStatus* objects from its
+MIB variables store and reporting their values in the notification.
 
 Referring to MIBs
 -----------------
