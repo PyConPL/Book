@@ -465,9 +465,69 @@ gil_calc_release(PyObject * self, PyObject * args)
 
     return PyLong_FromLong(result);
 }
-``` 
+```
 
 ## Boost
+A popular C++ library *Boost* provides the *Boost.Python* module for easier writing of Python extensions in C++.
+
+With *Boost* a different header is used:
+```
+#include <boost/python.hpp>
+
+using namespace boost::python;
+```
+
+Function can be declared with C++ arguments that will be automatically parsed by *Boost.Python*:
+```
+bool has_letter(const char * text, const char letter) {
+    const char * ptr = text;
+    while (char c = *(ptr++)) {
+        if (c == letter) {
+            return true;
+        }
+    }
+    return false;
+}
+```
+To register such a function we don't need to create a module definition or module members structure, all we need is the module initialization function:
+```
+BOOST_PYTHON_MODULE(boost)
+{
+    def("has_letter", has_letter);
+}
+```
+
+```
+struct Native
+{
+    std::string name;
+    long number;
+    std::string pointer;
+
+    Native(std::string name, long number, bool yes): name(name), number(number) {
+        this->pointer = std::string(yes ? "YES" : "NO");
+    }
+
+    std::string summary() {
+        std::stringstream ss;
+        ss << "Native " << this->name << " number " << this->number << " pointer " << pointer;
+        return ss.str();
+    }
+};
+
+BOOST_PYTHON_MODULE(boost)
+{
+    def("has_letter", has_letter);
+
+    class_<Native>("Native", init<std::string, long, bool>())
+        .def_readwrite("name", &Native::name)
+        .def_readwrite("number", &Native::number)
+        .def_readonly("pointer", &Native::pointer)
+        .def("summary", &Native::summary)
+    ;
+
+}
+```
 
 ## Summary
 
