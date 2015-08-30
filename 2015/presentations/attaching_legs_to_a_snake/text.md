@@ -160,7 +160,7 @@ return NULL;
 
 Some functions (for example ```__init__``` C implementation) are supposed to return an ```int``` status. To signal an encountered exception set the exception info using ```PyErr_SetString``` (or leave the one already set if the exception is coming from a deeper Python function call) and return ```-1``` from your function.
 
-## API
+## Bones - API
 
 The API you can use in your Python C extensions if quite vast. You can read all about it in the Python docs. API is split into section, so all functions dealing with ```str``` are in one section (funny fact: in the API ```str``` is still refered to as ```Unicode```, for example ```PyUnicode_FromString```), etc. You can find the equivalent calls for your Python constructs. Here are some examples:
 
@@ -187,7 +187,7 @@ if (contains == -1) {
 }
 ```
 
-## Population size
+## Population size - reference counting
 
 Python automatically manages memory using **reference counting** and a cyclic garbage collector. Reference counting means that for each Python object (```PyObject```) the interpreter stores a count of how many other object are referencing it. Say you have two dictionaries:
 ```
@@ -245,13 +245,231 @@ Py_INCREF(result);
 return result;
 ```
 
-## Objects
+## Species - classes
+
+It is possible to have classes implemented in C. It requires extending the code of your extension module with additional elements.
+
+An additional header needs to be included:
+```
+#include <structmember.h>
+```
+
+Then the structure (fields) of the class objects needs to be defined:
+```
+typedef struct {
+    PyObject_HEAD // Required header fields
+    char * pointer;
+    long number;
+    PyObject * name;
+} Native;
+```
+The structure needs to start with the required fields from ```PyObject_HEAD``` macro, but the the rest of the members can be defined freely by the developer.
+The fields can reference other Python objects (```PyObject *```), can be primitive types (```long```), pointers (```char *```) or any other type, even if Python will not be able to apply any default conversion to it.
+
+Once we define the structure, we can also define a Python mapping of fields, so that we will be able to access them straight from Python (```obj = Native(...); obj.name```):
+```
+static PyMemberDef Native_members[] = {
+    {"name", T_OBJECT_EX, offsetof(Native, name), 0, "Name"},
+    {"number", T_LONG, offsetof(Native, number), 0, "Number"},
+    {"pointer", T_STRING, offsetof(Native, pointer), READONLY, "Pointer"},
+    {NULL}  /* Sentinel */
+};
+```
+For each member we define a name, type, offset in class structure, flags and a docstring.
+
+We can also define what methods will be available on our objects:
+```
+static PyMethodDef Native_methods[] = {
+    {"summary", (PyCFunction)Native_summary, METH_NOARGS, "Return the name and the other attributes formatted"},
+    {NULL}  /* Sentinel */
+};
+```
+
+The methods will be receiving a pointer to a ```Native``` instance as first parameter:
+```
+static PyObject *
+Native_summary(Native* self)
+{
+    if (self->name == NULL) {
+        PyErr_SetString(PyExc_AttributeError, "name");
+        return NULL;
+    }
+
+    return PyUnicode_FromFormat(
+        "Native %S number %li pointer %s",
+        self->name, self->number, self->pointer
+    );
+}
+```
+
+The most important bit is the class definition:
+```
+static PyTypeObject NativeType = {
+    PyVarObject_HEAD_INIT(NULL, 0)
+    "obj.Native",              /* tp_name */
+    sizeof(Native),            /* tp_basicsize */
+    0,                         /* tp_itemsize */
+    (destructor)Native_dealloc,/* tp_dealloc */
+    0,                         /* tp_print */
+    0,                         /* tp_getattr */
+    0,                         /* tp_setattr */
+    0,                         /* tp_reserved */
+    0,                         /* tp_repr */
+    0,                         /* tp_as_number */
+    0,                         /* tp_as_sequence */
+    0,                         /* tp_as_mapping */
+    0,                         /* tp_hash  */
+    0,                         /* tp_call */
+    0,                         /* tp_str */
+    0,                         /* tp_getattro */
+    0,                         /* tp_setattro */
+    0,                         /* tp_as_buffer */
+    Py_TPFLAGS_DEFAULT |
+        Py_TPFLAGS_BASETYPE,   /* tp_flags */
+    "Native objects",          /* tp_doc */
+    0,                         /* tp_traverse */
+    0,                         /* tp_clear */
+    0,                         /* tp_richcompare */
+    0,                         /* tp_weaklistoffset */
+    0,                         /* tp_iter */
+    0,                         /* tp_iternext */
+    Native_methods,            /* tp_methods */
+    Native_members,            /* tp_members */
+    0,                         /* tp_getset */
+    0,                         /* tp_base */
+    0,                         /* tp_dict */
+    0,                         /* tp_descr_get */
+    0,                         /* tp_descr_set */
+    0,                         /* tp_dictoffset */
+    (initproc)Native_init,     /* tp_init */
+    0,                         /* tp_alloc */
+    Native_new,                /* tp_new */
+};
+```
+In this structure we can define some of the special functions that we implement for our type. Most common ones would be implementing ```__new__```, ```__init__``` and object deallocation.
+
+A sample ```__new__``` implementation:
+```
+static PyObject *
+Native_new(PyTypeObject *type, PyObject *args, PyObject *kwargs)
+{
+    Native *self;
+    /* Call the base allocator */
+    self = (Native *)type->tp_alloc(type, 0);
+    if (self == NULL) {
+        return NULL; // Failed to allocate.
+    }
+    self->number = 0;
+    self->name = PyUnicode_FromString("");
+    if (self->name == NULL) {
+        Py_DECREF(self);
+        return NULL;
+    }
+    self->number = 0;
+    self->pointer = (char *)malloc(sizeof(char) * 4);
+    if (self->pointer == NULL) {
+        Py_DECREF(self->name);
+        Py_DECREF(self);
+        return PyErr_NoMemory();
+    }
+    strcpy(self->pointer, "?");
+
+    return (PyObject *)self;
+}
+```
+
+A sample ```__init__``` implementation:
+```
+static int
+Native_init(Native *self, PyObject *args, PyObject *kwargs)
+{
+    PyObject * name = NULL;
+    PyObject * tmp;
+    int yes_no;
+
+    static char *kwlist[] = {"name", "number", "yes", NULL};
+
+    if (!PyArg_ParseTupleAndKeywords( // l = long, p = boolean evaluation
+        args, kwargs, "Olp", kwlist, &name, &self->number, &yes_no
+    )) {
+        return -1;
+    }
+
+    if (name) {
+        tmp = self->name;
+        Py_INCREF(name);
+        self->name = name;
+        Py_XDECREF(tmp);
+    }
+
+    strcpy(self->pointer, yes_no ? "YES" : "NO");
+
+    return 0;
+}
+```
+Notice how this function returns an ```int``` - ```__init__``` cannot return any other object but is used to initialize the ```self``` object.
+
+Sample deallocation implementation:
+```
+static void
+Native_dealloc(Native * self)
+{
+    Py_XDECREF(self->name);
+    if (self->pointer != NULL) {
+        free(self->pointer);
+    }
+    Py_TYPE(self)->tp_free((PyObject *)self);
+}
+```
+
+The last thing that remains is to initialize and connect our type when module loads:
+```
+PyMODINIT_FUNC
+PyInit_obj(void)
+{
+    PyObject * module;
+
+    if (PyType_Ready(&NativeType) < 0) {
+        return NULL;
+    }
+
+    module = PyModule_Create(&obj_module);
+    if (module == NULL) {
+        return NULL;
+    }
+
+    Py_INCREF(&NativeType);
+    PyModule_AddObject(module, "Native", (PyObject *)&NativeType);
+
+    return module;
+}
+```
 
 ## GIL and threading
+Python has the Global Interpreter Lock - only one thread at a time can be executing Python code. This property of the language is making it better for multi-process setups than multi-thread setups. But inside the code of our extension module we can declare a block as not-using-Python - not executing **any** Python API functions and not operating on any Python structures passed to it as arguments etc. Such code can be executed *while* some other tread *is* executing different Python code **at the same time**. We should be releasing the interpreter whenever a blocking operation is being executed as long as it doesn't use any Python structures.
+
+Here is an example of how to wrap computations so they don't hold the interpreter and so that they can be executed in threads in paralell with other Python code:
+```
+static PyObject *
+gil_calc_release(PyObject * self, PyObject * args)
+{
+    long n;
+    if (!PyArg_ParseTuple(args, "l", &n)) {
+        return NULL;
+    }
+    long result;
+
+    Py_BEGIN_ALLOW_THREADS
+    result = fibonacci(n);
+    Py_END_ALLOW_THREADS
+
+    return PyLong_FromLong(result);
+}
+``` 
 
 ## Boost
 
-## References
-
 ## Summary
+
+## References
 
