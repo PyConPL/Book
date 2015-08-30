@@ -2,7 +2,7 @@
 Writing SNMP Apps in Python
 ===========================
 
-**Ilya Etingof <ietingof@redhat.com>**
+*Ilya Etingof <ietingof@redhat.com>*
 
 Introduction
 ------------
@@ -306,11 +306,11 @@ of the above notification (from IF-MIB.txt):
                 of ifOperStatus."
         ::= { snmpTraps 3 }
 
-Looking up MIBs
----------------
+Referring to MIBs
+-----------------
 
 Surprisingly, SNMP can work without MIBs! Protocol itself does not depend
-on them. MIBs are designed as a complimentary database to make SNMP
+on them. MIBs are designed as complimentary database to make SNMP
 data more human readable and convenient to deal with.
 
 PySNMP library is designed to work without MIBs. You can always refer to
@@ -332,14 +332,14 @@ containing objects each representing MIB variable:
     # ...
     sysDescr = MibScalar((1, 3, 6, 1, 2, 1, 1, 1), DisplayString().subtype(subtypeSpec=ValueSizeConstraint(0, 255))).setMaxAccess("readonly")
 
-Convertion of original, ASN.1 MIB text files into PySNMP-compliant Python
-modules can be done behind the scenes by PySMI. Normally, PySNMP users do not
+Conversion of original, ASN.1 MIB text files into PySNMP-compliant Python
+modules is done behind the scenes by PySMI. Normally, PySNMP users do not
 need to bother explicitly invoking PySMI services. PySNMP would call PySMI
 automatically provided PySMI package is installed and requested MIB module
 is available.
 
-Users can point their PySNMP applications to their local MIB repositories
-or use remote ones accessible through HTTP or FTP:
+Users can point their PySNMP applications to either local MIB repositories
+or remote ones that are accessible through HTTP or FTP:
 
     from pysnmp.entity.rfc3413.oneliner.cmdgen import *
 
@@ -353,7 +353,7 @@ or use remote ones accessible through HTTP or FTP:
     )
 
 To figure out what MIBs are implemented by particular SNMP Agent, Manager
-could query *SNMPv2-MIB::sysORTable*:
+could query *SNMPv2-MIB::sysORTable* MIB variables:
 
     $ snmpwalk -v2c -c public demo.snmplabs.com sysORTable
     SNMPv2-MIB::sysORID.1 = OID: SNMPv2-MIB::snmpMIB
@@ -364,5 +364,60 @@ could query *SNMPv2-MIB::sysORTable*:
     ...
 
 An efficient Manager could then optimize its behavior by fetching required
-MIBs and querying MIB variables from supported MIBs.
+MIBs and querying MIB variables from those MIBs.
+
+SNMP Agents
+-----------
+
+PySNMP could act as a full-blown SNMP Agent supporting most of standard
+SNMP features pretty much out out the box. When building SNMP Agent, most
+development efforts normally go into establishing mapping between
+something to be monitored and MIB variable to be reported back to SNMP
+Manager.
+
+Multiple solutions exist at different levels of PySNMP library. Probably
+the simplest approach is to subclass *MibScalarInstance()*, representing
+specific MIB variable, so that relevant information is returned when
+queried or some action is performed when MIB variable is modified:
+
+    # __MY_MIB.py:
+    # ...
+    class FileStorage(MibScalarInstance):
+        file = '/var/run/agent/store'
+
+        def getValue(self, name, idx):
+            with f in open(self.file):
+                return self.getSyntax().clone(f.read())
+
+        def setValue(self, value, name, idx):
+            with f in open(self.file, 'w'):
+                f.write(value)
+            return self.getValue(name, idx)
+
+    # Register our MIB variable implementation
+    mibBuilder.exportSymbols(
+        '__MY_MIB', FileStorage((1,3,6,5,1,1,2,3,1), (0,), OctetString())
+    )
+
+Sometimes it is easier to bypass most of PySNMP SMI implementation by
+provisioning your own instance of MIB Controller object to SNMP Agent:
+
+    class EchoMibInstrumController(AbstractMibInstrumController):
+        def readVars(self, varBinds, acInfo):
+                return [ (ov[0], OctetString('Would read OID %s' % varBind[0])) for varBind in varBinds]
+
+        def writeVars(self, varBinds, acInfo):
+                return [ (varBind[0], OctetString('Would set OID %s to %s' % varBind)) for varBind in varBinds]
+
+    snmpContext.registerContextName(
+        OctetString('my-context'), EchoMibInstrumController()
+    )
+
+    GetCommandResponder(snmpEngine, snmpContext)
+    SetCommandResponder(snmpEngine, snmpContext)
+
+Complete SNMP apps
+------------------
+
+
 
