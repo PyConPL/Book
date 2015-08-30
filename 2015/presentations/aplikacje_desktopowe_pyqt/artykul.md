@@ -106,6 +106,14 @@ Od pewnego czasu istnieje także pyqtdeploy - aplikacja do dystrybucji aplikacji
 PyQt dostępna jest też na Raspberry Pi i praktycznie każdym innym mini komputerze na płytce. Takie zestawienie może przydać się, gdy tworzymy rozwiązania digital signage, czy automaty z graficznym interfejsem wystawianym użytkownikowi.
 
 
+Konkurencja
+-----------
+
+PyQt, czy wspomniane PySide nie są jedynymi bibliotekami do tworzenia aplikacji z graficznym interfejsem. W bibliotece standardowej Pythona znajdziemy `tk` - znacznie prostszą bibliotekę, której interfejs graficzny może wyglądać nie za ciekawie. Niemniej jest dostępna i działa. Z zewnętrznych bibliotek mamy też PyGTK, WxPython i Pythoncard, czy biblioteki bardziej wyspecjalizowane jak PyGame, czy Kivy.
+
+Jak dla mnie PyQt jest bardzo dobrą biblioteką i dlatego jakiś czas temu wybrałem ją zamiast innych. Przenośność między platformami, czytelny sposób programowania, czy spora grupa programistów pracujących nad rozwojem Qt to duże atuty. Niemniej Twój projekt może mieć wymagania, które lepiej spełnić może inna biblioteka.
+
+
 Co dalej?
 ---------
 
