@@ -424,7 +424,7 @@ based on PySNMP library. That kind of reality check experience influenced
 PySNMP design a great deal.
 
 [SNMP Simulator](http://snmpsim.sf.net) is probably the most sophisticated
-free and open source SNMP Agent emulation software at the time being. This
+free and open source [SNMP Agent emulation software](https://en.wikipedia.org/wiki/SNMP_simulator) at the time being. This
 tool can create an illusion that large SNMP-managed network of various
 devices exists in your virtual laboratory. Emulated devices try to look live
 by reporting changing data. MIB variables can be configured to change
@@ -436,16 +436,25 @@ from real SNMP Agents, store captured MIB variables so that they could then
 be replayed by SNMP simulator. Another way to gather a collection of MIB
 variables to simulate is to populate MIB it from ASN.1 MIB file.
 
-Another large project is [SNMP Proxy Forwarded](http://snmpfwd.sf.net). That
-tool is designed to work as transparent, application-level firewall passing
-SNMP traffic between open and protected network segments. SNMP protocol
-version translation could be performed on the fly, sophisticated SNMP data
-filtering and modification could be performed, response caching and request
-rate limiting could be set up to reduce SNMP load on end devices.
+You can experience SNMP Simulator yourself by talking to it on the Internet.
+Configuration details could be found
+[here](http://snmpsim.sourceforge.net/public-snmp-simulator.html).
+
+Another large project is [SNMP Proxy Forwarder](http://snmpfwd.sf.net). That
+tool is designed to work as cross-platform, transparent, application-level
+firewall passing SNMP traffic between open and protected network segments.
+The system is split into client and server parts connected with each other
+over encrypted channel. Typically, server part resides on public network
+responding to SNMP queries, while client part sits in DMZ talking to SNMP
+devices on protected network. SNMP protocol version translation could be 
+performed on the fly, sophisticated SNMP data filtering and modification
+could be performed, response caching and request rate limiting could be 
+set up to reduce SNMP load on end devices.
 
 Finally, we ship a pure-Python version of SNMP
 [command-line tools](https://pypi.python.org/pypi/pysnmp-apps)
 that try to mimic their Net-SNMP prototypes.
+Just do *pip install pysnmp-apps* and off you go!
 
 References
 ----------
