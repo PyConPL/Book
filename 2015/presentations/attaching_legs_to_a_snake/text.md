@@ -98,6 +98,8 @@ As you can see there are no special commands needed for installing packages that
 
 ## Digestive system - parsing parameters
 
+### Positional parameters
+
 To parse position parameter you need to define your function with ```METH_VARARGS``` flag in the module's function declarations:
 ```
 {"hello",  param_hello, METH_VARARGS, "Say hello."},
@@ -123,6 +125,30 @@ if (!PyArg_ParseTuple(args, "sI", &name, &age)) {
 The description of the formatting parameters can be found in the docs. ```s``` means *convert to C string* (```char *```). ```I``` means convert to ```unsigned```. ```O``` would mean pass a Python object and the parameter could be placed into a ```PyObject *``` variable.
 
 Notice that you are passing addresses of the variables (using the ```&``` operator) - this is what enables Python to write the values into your variables in a return-parameter manner.
+
+### Keywords parameters
+
+If you want to give your users more freedom in passing parameters to your extension function, you can use keyword parameters. You need to declare the appropriate flag for your function:
+```
+{"belongs",  (PyCFunction)key_belongs, METH_VARARGS | METH_KEYWORDS, "..."},
+```
+thus making Python pass it one more ```PyObject *```:
+```
+static PyObject *
+key_belongs(PyObject *self, PyObject * args, PyObject * kwargs) {
+    ...
+```
+You need to define the names of the incoming parameters:
+```
+static char * keywords[] = {"mapping", "item", "category", NULL};
+```
+and then you can use ```PyArg_ParseTupleAndKeywords``` function passing it both positional and keyword arguments:
+```
+if (!PyArg_ParseTupleAndKeywords(args, kwargs, "OOO", keywords, &mapping, &item, &category)) {
+    return NULL;
+}
+// Carry on ...
+```
 
 ## Hiccups - exceptions
 
