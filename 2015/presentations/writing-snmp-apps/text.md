@@ -91,7 +91,7 @@ and fault-tolerant communication channel between parties.  SNMP data model
 maps all interesting nuances of host or application internals to named
 variables organized into hierarchy. Concrete collection of variables is
 domain-specific, it is formally defined in MIBs -- files written in a
-domain-specific language.
+special domain-specific language, subset of ASN.1.
 
 Although SNMP designers were trying to kill two birds with one stone,
 offering both information collection and versatile remote configuration
@@ -179,10 +179,8 @@ following code fetches all variables related to host's interface table:
 
     from pysnmp.entity.rfc3413.oneliner.cmdgen import *
 
-    for errorIndication, \
-        errorStatus, \
-        errorIndex, \
-        varBinds in nextCmd(SnmpEngine(),
+    for errorIndication, errorStatus, errorIndex, varBinds in \
+            nextCmd(SnmpEngine(),
                             CommunityData('public'),
                             UdpTransportTarget(('demo.snmplabs.com', 161)),
                             ContextData(),
@@ -240,4 +238,69 @@ result items:
 * varBinds: is a list of two-element tuples, each correspond to MIB variable
   and its value.
 
+As we can send data back into running generator, our script could be 
+modified to cherry-pick smaller sequences of adjacent MIB variables or even
+individual scalars:
+
+    from pysnmp.entity.rfc3413.oneliner.cmdgen import *
+
+    queue = [ [ ObjectType(ObjectIdentity('IF-MIB', 'ifInOctets')) ],
+              [ ObjectType(ObjectIdentity('IF-MIB', 'ifOutOctets')) ] ]
+
+    iter = nextCmd(SnmpEngine(),
+                   UsmUserData('usr-md5-none', 'authkey1'),
+                   UdpTransportTarget(('demo.snmplabs.com', 161)),
+                   ContextData())
+
+    next(iter)
+
+    while queue:
+        errorIndication, errorStatus, errorIndex, varBinds = iter.send(queue.pop())
+        if errorIndication:
+            print(errorIndication)
+        elif errorStatus:
+            print('%s at %s' % (
+                    errorStatus.prettyPrint(),
+                    varBinds[int(errorIndex)-1][0] if errorIndex else '?'
+                )
+            )
+        else:
+            for varBind in varBinds:
+                print(' = '.join([ x.prettyPrint() for x in varBind ]))
+
+At any moment SNMP Agent may consider reporting specific events to
+SNMP Manager.  Such SNMP Notification message might include relevant
+variables that help both Manager software and human reader learning
+the details of the event being reported.
+
+    from pysnmp.entity.rfc3413.oneliner.ntforg import *
+
+    errorIndication, errorStatus, errorIndex, varBinds = next(
+        sendNotification(SnmpEngine(),
+                         UsmUserData('usr-md5-des', 'authkey1', 'privkey1'),
+                         UdpTransportTarget(('demo.snmplabs.com', 162)),
+                         ContextData(),
+                         'trap',
+                         NotificationType(ObjectIdentity('IF-MIB', 'linkDown'))
+    )
+
+    if errorIndication:
+        print(errorIndication)
+
+Like MIB variables, SNMP Notifications are identified by Object Identifier
+(OID). Notifications are specified in MIBs along with MIB variables
+that should be reported in notification message. This is MIB specification
+of the above notification (from IF-MIB.txt):
+
+    linkDown NOTIFICATION-TYPE
+        OBJECTS { ifIndex, ifAdminStatus, ifOperStatus }
+        STATUS  current
+        DESCRIPTION
+                "A linkDown trap signifies that the SNMP entity, acting in
+                an agent role, has detected that the ifOperStatus object for
+                one of its communication links is about to enter the down
+                state from some other state (but not from the notPresent
+                state).  This other state is indicated by the included value
+                of ifOperStatus."
+        ::= { snmpTraps 3 }
 
