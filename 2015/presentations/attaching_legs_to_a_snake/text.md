@@ -470,6 +470,8 @@ gil_calc_release(PyObject * self, PyObject * args)
 ## Boost
 A popular C++ library *Boost* provides the *Boost.Python* module for easier writing of Python extensions in C++.
 
+### C++ code
+
 With *Boost* a different header is used:
 ```
 #include <boost/python.hpp>
@@ -477,7 +479,7 @@ With *Boost* a different header is used:
 using namespace boost::python;
 ```
 
-Function can be declared with C++ arguments that will be automatically parsed by *Boost.Python*:
+Functions can be declared with C++ arguments that will be automatically parsed by *Boost.Python*:
 ```
 bool has_letter(const char * text, const char letter) {
     const char * ptr = text;
@@ -489,6 +491,7 @@ bool has_letter(const char * text, const char letter) {
     return false;
 }
 ```
+
 To register such a function we don't need to create a module definition or module members structure, all we need is the module initialization function:
 ```
 BOOST_PYTHON_MODULE(boost)
@@ -497,6 +500,24 @@ BOOST_PYTHON_MODULE(boost)
 }
 ```
 
+Extensions written using *Boost.Python* can be much more concise.
+
+### Compiling
+
+*Boost.Python* comes as a shared library. That means that during compilation and executing of our extension Python needs to be able to read the library's files. If the library is installed system-wide, you don't have to worry about paths. If the library is installed locally, you need to remember to pass the correct includes path and library path during compilation and to have the ```LD_LIBRARY_PATH``` system variable correctly set during running.
+
+The ```setup.py``` for a *Boost.Python* extension can look like this:
+```
+boost = Extension(
+    'boost',
+    sources=['src/boost_mod/boost.cpp'],
+    include_dirs=[os.path.join(BOOST_DIR, 'include')],
+    libraries=["boost_python"],
+    library_dirs=[os.path.join(BOOST_DIR, 'lib')],
+)
+```
+
+*Boost.Python* also allows you to define classes in a simplified syntax.
 ```
 struct Native
 {
@@ -517,15 +538,11 @@ struct Native
 
 BOOST_PYTHON_MODULE(boost)
 {
-    def("has_letter", has_letter);
-
     class_<Native>("Native", init<std::string, long, bool>())
         .def_readwrite("name", &Native::name)
         .def_readwrite("number", &Native::number)
         .def_readonly("pointer", &Native::pointer)
-        .def("summary", &Native::summary)
-    ;
-
+        .def("summary", &Native::summary);
 }
 ```
 
