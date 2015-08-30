@@ -329,7 +329,7 @@ data type associated with a variable would be looked up at MIB.
 
     ObjectType(ObjectIdentity('SNMPv2-MIB', 'sysDescr', 0), 'my host') 
 
-For MIB resolution to work PySNMP application must load up MIB module
+For MIB resolution to work, PySNMP application must load up MIB module
 being looked up. Internally, PySNMP represents MIBs as Python modules
 containing objects each representing MIB variable:
 
