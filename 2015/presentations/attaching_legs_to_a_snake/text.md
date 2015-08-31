@@ -134,7 +134,7 @@ Notice that you are passing addresses of the variables (using the ```&``` operat
 
 If you want to give your users more freedom in passing parameters to your extension function, you can use keyword parameters. You need to declare the appropriate flag for your function:
 ```
-{"belongs",  (PyCFunction)key_belongs, METH_VARARGS | METH_KEYWORDS, "..."},
+{"belongs", (PyCFunction)key_belongs, METH_VARARGS | METH_KEYWORDS, "..."},
 ```
 thus making Python pass it one more ```PyObject *```:
 ```
@@ -156,7 +156,11 @@ if (!PyArg_ParseTupleAndKeywords(args, kwargs, "OOO", keywords, &mapping, &item,
 
 ## Hiccups - exceptions
 
-Most of Python API functions can indicate a failure. If the function is supposed to return a ```PyObject *```, it will return ```NULL``` when it fails. The details of the exception are set in the per-thread interpreter state. If we detect an failed function call, we can just return the same ```NULL``` from our function. The details of the original exception are still stored within the interpreter, so if we don't modify the exception state, the original exception will be used. For example the ```PyArg_ParseTuple``` function can return ```NULL``` if you pass an ```int``` where you were supposed to pass a ```str```. It will set the exception state to a ```TypError``` with message ```'must be str, not int'```. We can also set our own exception:
+Most of Python API functions can indicate a failure. If the function is supposed to return a ```PyObject *```, it will return ```NULL``` when it fails. The details of the exception are set in the per-thread interpreter state.
+
+If we detect an failed function call, we can just return the same ```NULL``` from our function. The details of the original exception are still stored within the interpreter, so if we don't modify the exception state, the original exception will be used.
+
+For example the ```PyArg_ParseTuple``` function can return ```NULL``` if you pass an ```int``` where you were supposed to pass a ```str```. It will set the exception state to a ```TypError``` with message ```'must be str, not int'```. We can also set our own exception:
 ```
 PyErr_SetString(PyExc_RuntimeError, "Cannot format output");
 return NULL;
@@ -166,17 +170,15 @@ Some functions (for example ```__init__``` C implementation) are supposed to ret
 
 ## Bones - API
 
-The API you can use in your Python C extensions if quite vast. You can read all about it in the Python docs [2]. API is split into section, so all functions dealing with ```str``` are in one section (funny fact: in the API ```str``` is still refered to as ```Unicode```, for example ```PyUnicode_FromString```), etc. You can find the equivalent calls for your Python constructs. Here are some examples:
+The API you can use in your Python C extensions if quite vast. You can read all about it in the Python docs [2]. API is split into sections, so all functions dealing with ```str``` are in one section (funny fact: in the API ```str``` is still refered to as ```Unicode```, for example ```PyUnicode_FromString```), etc. You can find the equivalent calls for your Python constructs. Here are some examples:
 
-To get a item under given key in a dictionary (```category_sequence = mapping[category]```) use:
+To get an item under given key in a dictionary (```category_sequence = mapping[category]```) use:
 ```
-/* GetItem returns a new reference that needs to be decremented */
 PyObject * category_sequence = PyObject_GetItem(mapping, category);
 if (category_sequence == NULL) {
     return NULL;
 }
 // Deal with the object ...
-Py_DECREF(category_sequence);
 ```
 
 To check if a sequence contains given item (```contains = item in category_sequence```) use:
@@ -193,7 +195,7 @@ if (contains == -1) {
 
 ## Population size - reference counting
 
-Python automatically manages memory using **reference counting** and a cyclic garbage collector. Reference counting means that for each Python object (```PyObject```) the interpreter stores a count of how many other object are referencing it. Say you have two dictionaries:
+Python automatically manages memory using **reference counting** and a cyclic garbage collector. Reference counting means that for each Python object (```PyObject```) the interpreter stores a count of how many other objects are referencing it. Say you have two dictionaries:
 ```
 dict_a = {'a': 'VALUE'}
 dict_b = {}
@@ -221,7 +223,11 @@ Py_DECREF(category_sequence);
 ```
 macros.
 
-Knowing when to increase ref. count and when to decrease it is one of the hardest things to get right. When using any Python API function we need to read if it returns *new reference* or *borrowed reference*. The former means that the object returned by the API function already has the reference count increased, so we need to decrease it when we are done dealing with it. In the latter case the reference count was not increased - our code didn't become one of the owner's of the object's reference, so there is no need to decrease it when we are done dealing with it. But if we would like to return it from our function or store it, we need to increase the reference count to make sure that Python will not deallocate that object.
+Knowing when to increase ref. count and when to decrease it is one of the hardest things to get right. When using any Python API function we need to read if it returns *new reference* or *borrowed reference*.
+
+The former means that the object returned by the API function already has the reference count increased, so we need to decrease it when we are done dealing with it.
+
+In the latter case the reference count was not increased - our code didn't become one of the owners of the object's reference, so there is no need to decrease it when we are done dealing with it. But if we would like to return it from our function or store it, we need to increase the reference count to make sure that Python will not deallocate that object.
 
 Check out the example of dealing with references:
 ```
@@ -229,7 +235,7 @@ PyObject * mapping = ...;
 PyObject * item = ...;
 PyObject * category = ...;
 
-/* GetItem returns a new reference that needs to be decremented */
+/* GetItem returns a new reference so the object's ref. count needs to be decremented */
 PyObject * category_sequence = PyObject_GetItem(mapping, category);
 if (category_sequence == NULL) {
     return NULL;
