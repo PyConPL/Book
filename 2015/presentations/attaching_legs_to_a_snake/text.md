@@ -200,21 +200,23 @@ if (contains == -1) {
 
 ## Population size - reference counting
 
-Python automatically manages memory using **reference counting** and a cyclic garbage collector. Reference counting means that for each Python object (```PyObject```) the interpreter stores a count of how many other objects are referencing it. Say you have two dictionaries:
+Python automatically manages memory using **reference counting** and a cyclic garbage collector. Reference counting means that for each Python object (```PyObject```) the interpreter stores a count of how many other objects are referencing it.
+
+Supposing we have two dictionaries:
 ```
 dict_a = {'a': 'VALUE'}
 dict_b = {}
 ```
-The ```str``` object ```'VALUE'``` has reference count of ```1``` - only the object ```dict_a``` is referencing it. Once we do:
+The ```str``` object ```'VALUE'``` has a reference count of ```1```; only the object ```dict_a``` is referencing it. Once we do:
 ```
 dict_b['b'] = dict['a']
 ```
-then our ```str``` object is referenced by both ```dict_a``` and ```dict_b``` so it's reference count is raising to ```2```. If we remove both references:
+our ```str``` object is referenced by both ```dict_a``` and ```dict_b``` so its reference count is raising to ```2```. If we remove both references:
 ```
 del dict_a['a']
 del dict_b['b']
 ```
-then our ```str``` is no longer referenced by anything, it's reference count drops to ```0``` and the interpreter knows that this object is no longer used, so the memory it occupied can be freed and later on reused.
+then our ```str``` is no longer referenced by anything, its reference count drops to ```0``` and the interpreter knows that this object is no longer used, so the memory it occupied can be freed and reused later on.
 
 This process of counting references is happening automatically in pure Python, but requires manual support when dealing with Python objects in C extensions.
 
@@ -228,11 +230,11 @@ Py_DECREF(category_sequence);
 ```
 macros.
 
-Knowing when to increase ref. count and when to decrease it is one of the hardest things to get right. When using any Python API function we need to read if it returns *new reference* or *borrowed reference*.
+Knowing when to increase ref. count and when to decrease it is one of the hardest things to get right. When using any Python API function we need to check (in the docs [2]) if it returns *new reference* or *borrowed reference*.
 
-The former means that the object returned by the API function already has the reference count increased, so we need to decrease it when we are done dealing with it.
+The former means that the object returned by the API function already has the reference count increased, so we need to decrease it when we are done with it.
 
-In the latter case the reference count was not increased - our code didn't become one of the owners of the object's reference, so there is no need to decrease it when we are done dealing with it. But if we would like to return it from our function or store it, we need to increase the reference count to make sure that Python will not deallocate that object.
+In the latter case the reference count was not increased - our code didn't become one of the owners of the object's reference, so there is no need to decrease it when we are done with it. But if we would like to return it from our function or store it, we need to increase the reference count to make sure that Python will not deallocate that object.
 
 Check out the example of dealing with references:
 ```
@@ -260,7 +262,7 @@ Py_INCREF(result);
 return result;
 ```
 
-There are also ```Py_XINCREF``` and  ```Py_XDECREF``` macros that first of all are checking if the pointer is not ```NULL``` and when it is, they are a no-op.
+There are also ```Py_XINCREF``` and  ```Py_XDECREF``` macros that, first of all, check if the pointer is not ```NULL```, and when it is, they are a no-op.
 
 ## Species - classes
 
