@@ -175,9 +175,9 @@ Some functions (for example ```__init__``` C implementation) are supposed to ret
 
 ## Bones - API
 
-The API you can use in your Python C extensions if quite vast. You can read all about it in the Python docs [2]. API is split into sections, so all functions dealing with ```str``` are in one section (funny fact: in the API ```str``` is still refered to as ```Unicode```, for example ```PyUnicode_FromString```), etc. You can find the equivalent calls for your Python constructs. Here are some examples:
+The API we can use in our Python C extensions is quite vast. We can read all about it in the Python docs [2]. API is split into sections, so all functions dealing with ```str``` are in one section (fun fact: in the API ```str``` is still refered to as ```Unicode```, for example ```PyUnicode_From...```), etc. We can find the equivalent calls for our Python constructs. Here are some examples:
 
-To get an item under given key in a dictionary (```category_sequence = mapping[category]```) use:
+To get an item under a given key in a dictionary (```category_sequence = mapping[category]```), we use:
 ```
 PyObject * category_sequence = PyObject_GetItem(mapping, category);
 if (category_sequence == NULL) {
@@ -186,7 +186,7 @@ if (category_sequence == NULL) {
 // Deal with the object ...
 ```
 
-To check if a sequence contains given item (```contains = item in category_sequence```) use:
+To check if a sequence contains a given item (```contains = item in category_sequence```), we use:
 ```
 int contains = PySequence_Contains(category_sequence, item);
 if (contains == -1) {
