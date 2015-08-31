@@ -20,7 +20,7 @@ We usually only need to include one file:
 
 ### Body
 
-Most Python function are taking ```PyObject``` pointer argument (sometimes more of them) and are returning a ```PyObject``` pointer. This is the Python's *everything is an object* put into practice.
+Most Python function are taking ```PyObject``` pointer argument (sometimes more of them) and are returning a ```PyObject``` pointer. This is Python's *everything is an object* put into practice.
 ```
 static PyObject *
 basic_hello(PyObject *self)
@@ -29,21 +29,22 @@ basic_hello(PyObject *self)
     return PyUnicode_FromString(msg);
 }
 ```
-In case of this module-level function, ```self``` parameter will be the reference to the extension module the function if attached to.
+In case of this module-level function, ```self``` parameter will be the reference to the extension module the function is attached to.
 
 ### Limbs
 
-We need to declare what functions our module exposes. We declare the name under which the function will be visible, the pointer to the function itself, type of arguments it expects (no arguments, positional arguments or keyword arguments) and a docstring:
+We need to declare what functions our module exposes: 
 ```
 static PyMethodDef basic_methods[] = {
     {"hello", (PyCFunction)basic_hello, METH_NOARGS, "Return hello world."},
     {NULL, NULL, 0, NULL}        /* Sentinel */
 };
 ```
+We declare the name under which the function will be visible, the pointer to the function itself, type of arguments it expects (no arguments, positional arguments or keyword arguments) and a docstring.
 
 ### Nervous system
 
-We need to define the module itself: it's name, docstring, optional size of the module-state, function definitions:
+We need to define the module itself:
 ```
 static struct PyModuleDef basic_module = {
    PyModuleDef_HEAD_INIT,
@@ -54,10 +55,11 @@ static struct PyModuleDef basic_module = {
    basic_methods
 };
 ```
+ We pass it's name, docstring, size of the optional module state memory block and function definitions.
 
 ### Hearth
 
-The most important though is the module initialisation function that creates module based on the module definition:
+The most important though is the module initialisation function that creates the module based on the module definition:
 ```
 PyMODINIT_FUNC
 PyInit_basic(void)
@@ -68,7 +70,7 @@ PyInit_basic(void)
 
 ## Animation - how to make it come alive
 
-The extensions are easy to build (on most platforms). One needs a compiler and Python development libraries:
+The extensions are easy to build (on most platforms). One needs a compiler and Python development library:
 ```
 sudo apt-get install python3-dev build-essential
 ```
@@ -96,13 +98,13 @@ If you want to install it into your system or virtualenv, execute
 ```
 python3 setup.py install
 ```
-As you can see there are no special commands needed for installing packages that have C extension modules. The extensions are automatically build even if your package is just a dependency of another Python package.
+As you can see there are no special commands needed for installing packages that have C extension modules. The extensions are automatically built even if your package is just a dependency of another Python package.
 
 ## Digestive system - parsing parameters
 
 ### Positional parameters
 
-To parse position parameter you need to define your function with ```METH_VARARGS``` flag in the module's function declarations:
+To parse positional parameters you need to define your function with ```METH_VARARGS``` flag in the module's functions declaration:
 ```
 {"hello",  param_hello, METH_VARARGS, "Say hello."},
 ```
@@ -128,7 +130,7 @@ The description of the formatting parameters can be found in the docs [2]. ```s`
 
 Notice that you are passing addresses of the variables (using the ```&``` operator) - this is what enables Python to write the values into your variables in a return-parameter manner.
 
-### Keywords parameters
+### Keyword parameters
 
 If you want to give your users more freedom in passing parameters to your extension function, you can use keyword parameters. You need to declare the appropriate flag for your function:
 ```
