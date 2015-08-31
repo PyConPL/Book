@@ -566,15 +566,17 @@ BOOST_PYTHON_MODULE(boost)
 }
 ```
 
+More information about *Boost.Python* can be found in the library's docs [4].
+
 ## Summary
 
-Python extensions are a great tool for pushing the boundaries of what Python can do. Whether we want to code some calculations to work faster without the interpreter's overhead of if we want to integrate with a shared library, extensions provide us a way of doing it while still keeping the usual package installation procedure.
+Python extensions are a great tool for pushing the boundaries of what Python can do. Whether we want to code some calculations to work faster without the interpreter's overhead or we want to integrate with a shared library, extensions provide us with a way of doing it while still keeping the usual package installation procedure.
 
-Extensions are powerful and you can implement some really cool stuff with them [3], but you need to be very careful. Dealing with low level C is dangerous on it's own and dealing with Python's internals at the same time is adding to the complexity. One ```PyDECREF``` missing and you will have memory leaks, one ```PyDECREF``` too many and your extension will crash the whole interpreter with a core dump. Good luck!
+Extensions are powerful and we can implement some really cool stuff with them [3], but we need to be very careful. Dealing with low level C is dangerous on its own and dealing with Python's internals at the same time adds to the complexity. One ```PyDECREF``` missing and we will have memory leaks. One ```PyDECREF``` too many and our extension will crash the whole interpreter with a core dump. Good luck!
 
 ## References
 
 * [1] [GitHub repo with full source code of all examples](https://github.com/kurazu/pyext)
 * [2] [Python/C API Reference Manual](https://docs.python.org/3/c-api/index.html)
 * [3] [GitHub repo of a Python-SpiderMonkey integration library](https://github.com/kurazu/bridge)
-
+* [4] [Boost.Python documentation](http://www.boost.org/doc/libs/1_59_0/libs/python/doc/)
