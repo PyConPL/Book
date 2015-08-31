@@ -76,7 +76,7 @@ sudo apt-get install python3-dev build-essential
 ```
 or an equivalent command for our system.
 
-Extensions are declared in the ```setup.py``` file of your package:
+Extensions are declared in the ```setup.py``` file of our package:
 ```
 from setuptools import find_packages, setup, Extension
 
@@ -90,42 +90,44 @@ setup(
     package_dir={'': 'src'},
 )
 ```
-Once you have this, you can build your extension using
+Once we have this, we can build our extension using
 ```
 python3 setup.py build
 ```
-If you want to install it into your system or virtualenv, execute
+If we want to install it into the system or virtualenv, we need to execute
 ```
 python3 setup.py install
 ```
-As you can see there are no special commands needed for installing packages that have C extension modules. The extensions are automatically built even if your package is just a dependency of another Python package.
+As we can see no special commands are needed for installing packages that have C extension modules. The extensions are automatically built even if the package is just a dependency of another Python package.
 
 ## Digestive system - parsing parameters
 
 ### Positional parameters
 
-To parse positional parameters you need to define your function with ```METH_VARARGS``` flag in the module's functions declaration:
+To parse positional parameters we need to define our function with ```METH_VARARGS``` flag in the module's functions definition:
 ```
 {"hello",  param_hello, METH_VARARGS, "Say hello."},
 ```
-With such declaration your function will get one more parameter, similar to ```*args``` construct in pure Python:
+With such a declaration our function will get one more parameter, similar to ```*args``` construct in pure Python:
 ```
 static PyObject *
 param_hello(PyObject *self, PyObject * args) {
     ...
 ```
-To parse the incoming parameters you can use the ```PyArg_ParseTuple``` function. You pass into the function the incoming arguments object, format string specifying what arguments you expect and a set of pointers where the data parsed from the parameters should be inserted. Before you call ```PyArg_ParseTuple``` you need to allocate space for the variables the parameters will be placed into:
+To parse the incoming parameters we can use the ```PyArg_ParseTuple``` function. We need to pass into the function the incoming arguments object and format string specifying what arguments you expect and a set of pointers where the data parsed from the parameters should be inserted. Before we call ```PyArg_ParseTuple```, we need to allocate space for the variables the parameters will be placed into:
 ```
 const char * name;
 unsigned age;
 ```
-Only then you can attempt to parse parameters:
+
+Only then can we attempt to parse parameters:
 ```
 if (!PyArg_ParseTuple(args, "sI", &name, &age)) {
     return NULL;
 }
 // Parameters parsed, carry on ...
 ```
+
 The description of the formatting parameters can be found in the docs [2]. ```s``` means *convert to C string* (```char *```). ```I``` means convert to ```unsigned```. ```O``` would mean pass a Python object and the parameter could be placed into a ```PyObject *``` variable.
 
 Notice that you are passing addresses of the variables (using the ```&``` operator) - this is what enables Python to write the values into your variables in a return-parameter manner.
