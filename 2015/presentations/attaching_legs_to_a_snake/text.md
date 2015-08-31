@@ -465,9 +465,9 @@ PyInit_obj(void)
 ```
 
 ## GIL and threading
-Python has the Global Interpreter Lock - only one thread at a time can be executing Python code. This property of the language is making it better for *multi-process* setups than *multi-thread* setups. But inside the code of our extension module we can declare a block as *not-using-Python* - not executing **any** Python API functions and not operating on any Python structures passed to it as arguments, etc. Such code can be executed *while* some other tread *is* executing different Python code **at the same time**. We should be releasing the interpreter whenever a blocking operation is being executed as long as it doesn't use any Python structures.
+Python has the Global Interpreter Lock; only one thread at a time can be executing any Python code. This property of the language is making it better suited for *multi-process* setups than for *multi-thread* setups. But inside the code of our extension module we can declare a block as *not-using-Python* - not executing **any** Python API functions and not operating on any Python structures passed to it as arguments, etc. Such code can be executed *while* some other thread *is* executing different Python code **at the same time**. We should be releasing the interpreter whenever a blocking operation is being executed as long as it doesn't use any Python structures.
 
-Here is an example of how to wrap computations so they don't hold the interpreter and so that they can be executed in threads in paralell with other Python code:
+Here is an example of how to wrap computations so that they don't hold the interpreter and so that they can be executed in threads in paralell with other Python code:
 ```
 static PyObject *
 gil_calc_release(PyObject * self, PyObject * args)
@@ -511,7 +511,7 @@ bool has_letter(const char * text, const char letter) {
 }
 ```
 
-To register such a function we don't need to create a module definition or module members structure, all we need is the module initialization function:
+To register such a function we don't need to create a module definition or module members structure. All we need is the module initialization function:
 ```
 BOOST_PYTHON_MODULE(boost)
 {
@@ -523,7 +523,7 @@ Extensions written using *Boost.Python* can be much more concise.
 
 ### Compiling and linking
 
-*Boost.Python* comes as a shared library. That means that during compilation and executing of our extension Python needs to be able to read the library's files. If the library is installed system-wide, you don't have to worry about paths. If the library is installed locally, you need to remember to pass the correct includes path and library path during compilation and to have the ```LD_LIBRARY_PATH``` system variable correctly set during running.
+*Boost.Python* comes as a shared library. That means that during compilation and executing of our extension Python needs to be able to read the library's files. If the library is installed system-wide, we don't have to worry about paths. If the library is installed locally, we need to remember to pass the correct include path and library path during compilation and to have the ```LD_LIBRARY_PATH``` system variable correctly set during running.
 
 The ```setup.py``` for a *Boost.Python* extension can look like this:
 ```
@@ -535,9 +535,9 @@ boost = Extension(
     library_dirs=[os.path.join(BOOST_DIR, 'lib')],
 )
 ```
-Notice that we specify here that our extension should be linked to the ```boost_python``` shared library.
+Please note that we specify here that our extension should be linked to the ```boost_python``` shared library.
 
-*Boost.Python* also allows you to define classes in a simplified syntax.
+*Boost.Python* also allows us to define classes in a simplified syntax.
 ```
 struct Native
 {
