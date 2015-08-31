@@ -4,15 +4,15 @@
 
 Python is a powerful language by itself. The robust standard library and the myriad of additional packages make it a Swiss Army knife of programming languages. But sometimes it is not enough. When you need to integrate with a low-level C API or execute heavy computations without the interpreter overhead, writing a Python extension module might be a good idea.
 
-This artice will show you how to write, build and run an extension; what C API you can use in it and what to remember about; how to link to shared libraries and what does Boost.Python simplify.
+This article will show you how to write, build and run an extension; what C API you can use in it and what to remember about; how to link to shared libraries and what does Boost.Python simplify.
 
-Full source codes for all example modules below can be found on github [1].
+Full source codes for all example modules below can be found on GitHub [1].
 
 ## Overview of the extension's anatomy
 
 ### Head
 
-As any code written in C, Python extensions must load the appropriate header file to let the compiler know what functions of the Python C API are available.
+Like any code written in C, Python extensions must load the appropriate header file to let the compiler know what functions of the Python C API are available.
 We usually only need to include one file:
 ```
 #include <Python.h>
@@ -20,7 +20,7 @@ We usually only need to include one file:
 
 ### Body
 
-Most Python function are taking ```PyObject``` pointer argument (sometimes more of them) and are returning a ```PyObject``` pointer. This is Python's *everything is an object* put into practice.
+Most Python functions take ```PyObject``` pointer argument (sometimes more of them) and return a ```PyObject``` pointer. This is Python's *everything is an object* put into practice.
 ```
 static PyObject *
 basic_hello(PyObject *self)
@@ -29,7 +29,7 @@ basic_hello(PyObject *self)
     return PyUnicode_FromString(msg);
 }
 ```
-In case of this module-level function, ```self``` parameter will be the reference to the extension module the function is attached to.
+In the case of this module-level function, ```self``` parameter will be the reference to the extension module the function is attached to.
 
 ### Limbs
 
@@ -40,7 +40,7 @@ static PyMethodDef basic_methods[] = {
     {NULL, NULL, 0, NULL}        /* Sentinel */
 };
 ```
-We declare the name under which the function will be visible, the pointer to the function itself, type of arguments it expects (no arguments, positional arguments or keyword arguments) and a docstring.
+We declare a name under which the function will be visible, a pointer to the function itself, type of arguments it expects (no arguments, positional arguments or keyword arguments) and a docstring.
 
 ### Nervous system
 
@@ -55,11 +55,11 @@ static struct PyModuleDef basic_module = {
    basic_methods
 };
 ```
- We pass it's name, docstring, size of the optional module state memory block and function definitions.
+ We pass its name, docstring, size of the optional module state memory block and function definitions.
 
 ### Hearth
 
-The most important though is the module initialisation function that creates the module based on the module definition:
+The most important, though, is the module initialisation function that creates the module on the basis of the module definition:
 ```
 PyMODINIT_FUNC
 PyInit_basic(void)
@@ -70,11 +70,11 @@ PyInit_basic(void)
 
 ## Animation - how to make it come alive
 
-The extensions are easy to build (on most platforms). One needs a compiler and Python development library:
+The extensions are easy to build (on most platforms). We need a compiler and Python development library:
 ```
 sudo apt-get install python3-dev build-essential
 ```
-or equivalent command for your system.
+or an equivalent command for our system.
 
 Extensions are declared in the ```setup.py``` file of your package:
 ```
