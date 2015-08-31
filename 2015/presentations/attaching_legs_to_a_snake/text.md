@@ -255,6 +255,8 @@ Py_INCREF(result);
 return result;
 ```
 
+There are also ```Py_XINCREF``` and  ```Py_XDECREF``` macros that first of all are checking if the pointer is not ```NULL``` and when it is, they are a no-op.
+
 ## Species - classes
 
 It is possible to have classes implemented in C. It requires extending the code of your extension module with additional elements.
@@ -295,7 +297,7 @@ static PyMethodDef Native_methods[] = {
 };
 ```
 
-The methods will be receiving a pointer to a ```Native``` instance as first parameter:
+The methods will be receiving a pointer to a ```Native``` instance as the first parameter:
 ```
 static PyObject *
 Native_summary(Native* self)
@@ -456,7 +458,7 @@ PyInit_obj(void)
 ```
 
 ## GIL and threading
-Python has the Global Interpreter Lock - only one thread at a time can be executing Python code. This property of the language is making it better for multi-process setups than multi-thread setups. But inside the code of our extension module we can declare a block as not-using-Python - not executing **any** Python API functions and not operating on any Python structures passed to it as arguments etc. Such code can be executed *while* some other tread *is* executing different Python code **at the same time**. We should be releasing the interpreter whenever a blocking operation is being executed as long as it doesn't use any Python structures.
+Python has the Global Interpreter Lock - only one thread at a time can be executing Python code. This property of the language is making it better for *multi-process* setups than *multi-thread* setups. But inside the code of our extension module we can declare a block as *not-using-Python* - not executing **any** Python API functions and not operating on any Python structures passed to it as arguments, etc. Such code can be executed *while* some other tread *is* executing different Python code **at the same time**. We should be releasing the interpreter whenever a blocking operation is being executed as long as it doesn't use any Python structures.
 
 Here is an example of how to wrap computations so they don't hold the interpreter and so that they can be executed in threads in paralell with other Python code:
 ```
@@ -477,7 +479,7 @@ gil_calc_release(PyObject * self, PyObject * args)
 }
 ```
 
-## Boost
+## Boost.Python
 A popular C++ library *Boost* provides the *Boost.Python* module for easier writing of Python extensions in C++.
 
 ### C++ code
@@ -512,7 +514,7 @@ BOOST_PYTHON_MODULE(boost)
 
 Extensions written using *Boost.Python* can be much more concise.
 
-### Compiling
+### Compiling and linking
 
 *Boost.Python* comes as a shared library. That means that during compilation and executing of our extension Python needs to be able to read the library's files. If the library is installed system-wide, you don't have to worry about paths. If the library is installed locally, you need to remember to pass the correct includes path and library path during compilation and to have the ```LD_LIBRARY_PATH``` system variable correctly set during running.
 
