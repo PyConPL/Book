@@ -551,7 +551,7 @@ struct Native
 
     std::string summary() {
         std::stringstream ss;
-        ss << "Native " << this->name << " number " << this->number << " pointer " << pointer;
+        ss << "Native " << this->name << " number " << this->number << " pointer " << this->pointer;
         return ss.str();
     }
 };
