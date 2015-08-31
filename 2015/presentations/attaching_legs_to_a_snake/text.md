@@ -128,27 +128,30 @@ if (!PyArg_ParseTuple(args, "sI", &name, &age)) {
 // Parameters parsed, carry on ...
 ```
 
-The description of the formatting parameters can be found in the docs [2]. ```s``` means *convert to C string* (```char *```). ```I``` means convert to ```unsigned```. ```O``` would mean pass a Python object and the parameter could be placed into a ```PyObject *``` variable.
+The description of the formatting parameters can be found in the docs [2]. ```s``` means *convert to C string* (```char *```). ```I``` means convert to ```unsigned```. ```O``` means pass a Python object and the parameter can be placed into a ```PyObject *``` variable.
 
-Notice that you are passing addresses of the variables (using the ```&``` operator) - this is what enables Python to write the values into your variables in a return-parameter manner.
+Notice that we are passing addresses of the variables (using the ```&``` operator); this is what enables Python to write the values into our variables in a return-parameter manner.
 
 ### Keyword parameters
 
-If you want to give your users more freedom in passing parameters to your extension function, you can use keyword parameters. You need to declare the appropriate flag for your function:
+If we want to give our users more freedom in passing parameters to our extension function, we can use keyword parameters. We need to declare the appropriate flag for our function:
 ```
 {"belongs", (PyCFunction)key_belongs, METH_VARARGS | METH_KEYWORDS, "..."},
 ```
+
 thus making Python pass it one more ```PyObject *```:
 ```
 static PyObject *
 key_belongs(PyObject *self, PyObject * args, PyObject * kwargs) {
     ...
 ```
-You need to define the names of the incoming parameters:
+
+We need to define the names of the incoming parameters:
 ```
 static char * keywords[] = {"mapping", "item", "category", NULL};
 ```
-and then you can use ```PyArg_ParseTupleAndKeywords``` function passing it both positional and keyword arguments:
+
+and then we can call ```PyArg_ParseTupleAndKeywords``` function, passing it both positional and keyword arguments:
 ```
 if (!PyArg_ParseTupleAndKeywords(args, kwargs, "OOO", keywords, &mapping, &item, &category)) {
     return NULL;
@@ -160,15 +163,15 @@ if (!PyArg_ParseTupleAndKeywords(args, kwargs, "OOO", keywords, &mapping, &item,
 
 Most of Python API functions can indicate a failure. If the function is supposed to return a ```PyObject *```, it will return ```NULL``` when it fails. The details of the exception are set in the per-thread interpreter state.
 
-If we detect an failed function call, we can just return the same ```NULL``` from our function. The details of the original exception are still stored within the interpreter, so if we don't modify the exception state, the original exception will be used.
+If we detect a failed function call, we can just return the same ```NULL``` from our function. The details of the original exception are still stored within the interpreter, so if we don't modify the exception state, the original exception will be used.
 
-For example the ```PyArg_ParseTuple``` function can return ```NULL``` if you pass an ```int``` where you were supposed to pass a ```str```. It will set the exception state to a ```TypError``` with message ```'must be str, not int'```. We can also set our own exception:
+For example the ```PyArg_ParseTuple``` function can return ```NULL``` if we pass an ```int``` where we were supposed to pass a ```str```. It will set the exception state to a ```TypError``` with message ```'must be str, not int'```. We can also set our own exception:
 ```
 PyErr_SetString(PyExc_RuntimeError, "Cannot format output");
 return NULL;
 ```
 
-Some functions (for example ```__init__``` C implementation) are supposed to return an ```int``` status. To signal an encountered exception set the exception info using ```PyErr_SetString``` (or leave the one already set if the exception is coming from a deeper Python function call) and return ```-1``` from your function.
+Some functions (for example ```__init__``` C implementation) are supposed to return an ```int``` status. To signal an encountered exception we set the exception info using ```PyErr_SetString``` (or leave the one already set if the exception is coming from a deeper Python function call) and return ```-1``` from our function.
 
 ## Bones - API
 
