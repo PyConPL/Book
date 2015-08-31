@@ -266,7 +266,7 @@ There are also ```Py_XINCREF``` and  ```Py_XDECREF``` macros that, first of all,
 
 ## Species - classes
 
-It is possible to have classes implemented in C. It requires extending the code of your extension module with additional elements.
+It is possible to have classes implemented in C. It requires extending the code of our extension module with additional elements.
 
 An additional header needs to be included:
 ```
@@ -282,8 +282,8 @@ typedef struct {
     PyObject * name;
 } Native;
 ```
-The structure needs to start with the required fields from ```PyObject_HEAD``` macro, but the the rest of the members can be defined freely by the developer.
-The fields can reference other Python objects (```PyObject *```), can be primitive types (```long```), pointers (```char *```) or any other type, even if Python will not be able to apply any default conversion to it.
+The structure needs to start with the required fields from ```PyObject_HEAD``` macro, but the rest of the members can be defined freely by the developer.
+The fields can reference other Python objects (```PyObject *```), they can be primitive types (```long```), pointers (```char *```) or any other type, even if Python is not be able to apply any default conversion to it.
 
 Once we define the structure, we can also define a Python mapping of fields, so that we will be able to access them straight from Python (```obj = Native(...); obj.name```):
 ```
@@ -304,7 +304,7 @@ static PyMethodDef Native_methods[] = {
 };
 ```
 
-The methods will be receiving a pointer to a ```Native``` instance as the first parameter:
+The methods will receive a pointer to a ```Native``` instance as the first parameter:
 ```
 static PyObject *
 Native_summary(Native* self)
@@ -365,7 +365,7 @@ static PyTypeObject NativeType = {
     Native_new,                /* tp_new */
 };
 ```
-In this structure we can define some of the special functions that we implement for our type. Most common ones would be implementing ```__new__```, ```__init__``` and object deallocation.
+In this structure we can define some of the special functions that we implement for our type. In the most common case we implement ```__new__```, ```__init__``` and object deallocation.
 
 A sample ```__new__``` implementation:
 ```
@@ -426,7 +426,7 @@ Native_init(Native *self, PyObject *args, PyObject *kwargs)
     return 0;
 }
 ```
-Notice how this function returns an ```int``` - ```__init__``` cannot return any other object but is used to initialize the ```self``` object.
+Notice how this function returns an ```int```; ```__init__``` cannot return any other object but is used to initialize the ```self``` object.
 
 Sample deallocation implementation:
 ```
