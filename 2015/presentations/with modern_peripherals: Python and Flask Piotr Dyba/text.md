@@ -34,19 +34,22 @@ application, an all-in-one solution and I really like using the simplicity of fl
 The beauty of the @app.route decorators  was applied to that extension, so 
 it is possible to use it in the similar way @socketio.on().
 
-Flask decorator:```python
+Flask decorator:
+```python
 @app.route('/')
 def index():
     return render_template('leap_motion.html')
 ```
 
-Event in backend activated from frontend and SocketIO decorator:```python
+Event in backend activated from frontend and SocketIO decorator:
+```python
 @socketio.on(‘connect’, namespace='/test')
 def disconnect():
     print('Client connected’)
 ```
 
-Event event on frontend activated from backend:```python
+Event event on frontend activated from backend:
+```python
 def send_msg(msg):
     emit('msg_event', msg)
 ```
@@ -55,7 +58,8 @@ The front end is an out-of-the-box solution and usage is as simple as attaching
 single \<script\> tag library. When using with Flask-SocketIO we have to use 
 0.9.16 version of JS SocketIO library, because of incompatibility with 1.0.
 
-Frontend code:```javascript
+Frontend code:
+```javascript
 $(document).ready(function() {
     var namespace = '/test';
     var socket = io.connect('http://' + document.domain + ':' + location.port + namespace);
@@ -192,15 +196,10 @@ more common.
 
 ##Sources
 [Myo Armband](https://www.thalmic.com/myo/)
-
 [Leap Motion](https://www.leapmotion.com) 
-
 [EyeTribe](https://theeyetribe.com)
-
 [flask-SocketIO documentation](https://flask-socketio.readthedocs.org/en/latest/)
-
 [Flask docs](http://flask.pocoo.org/docs/0.10/)
-
 [Socket.IO](http://socket.io)
 
 ####Pictures
