@@ -37,7 +37,19 @@ Once you install it now we can start writing our first simple rules engine. The 
 
 # Basics
 
+## Registering Python function
 
+We can regiester python function which later on we can call from CLIPS engine whenever any of the facts match anyof specified rules. Example
+
+    import clips
+    
+    class RulesEngine:
+        def __init__(self):
+            clips.Conserve = True
+            clips.RegisterPythonFunction(self.myDebug, 'myDebug')
+            
+        def myDebug(self, msg):
+            print "my debug message with content: {0}" .format(msg)
 
 
 ## Final note
