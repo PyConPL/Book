@@ -23,7 +23,7 @@ This may be a dangerous practice that will impact on your productivity, readabil
 So it is important to learn how to do proper assessment of your code in terms of optimisation needs. 
 (Remember that strong felling that your code falls into the remaining 3% does not count!)
 
-Yet do not be discoraged from learning the proper way of optimising your code, and remember about second part of the previous quote:
+Yet do not be discouraged from learning the proper way of optimising your code, and remember about second part of the previous quote:
 
 *Yet we should not pass up our opportunities in that critical 3%.* **Donald Knuth**
 
