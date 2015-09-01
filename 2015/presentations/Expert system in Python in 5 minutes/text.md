@@ -126,7 +126,7 @@ Below function can be started as a dedicated thread which has to go into ininity
 
     def reactor():
         self.log.info('Start processing')
-        rules_fired = clips.Run(5000)
+        rules_fired = clips.Run(5000) # max rules to fire for that loop
         self.log.info('CLIPS fired %s rules' % (rules_fired))
         # here you can dump output to debug what was happening
 
