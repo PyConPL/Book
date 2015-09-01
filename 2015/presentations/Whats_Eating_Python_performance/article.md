@@ -1,33 +1,33 @@
 #  What's Eating Python performance - Piotr Przymus
-Have you ever wondered how to speed up your code in Python? This presentation will show you how to start. I will begin with a guide how to locate performance bottlenecks and then give you some tips how to speed up your code. Also I would like to discuss how to avoid premature optimization as it may be ‘the root of all evil’ (at least according to D. Knuth). 
+Have you ever wondered how to speed up your code in Python? This presentation will show you how to start. I will begin with a guide how to locate performance bottlenecks and then give you some tips how to speed up your code. Also I would like to discuss how to avoid premature optimisation as it may be ‘the root of all evil’ (at least according to D. Knuth). 
 
 ## Introduction
 
-Code optimization is an important aspect of development process, but when done improperly it may do more harm than good.
-This talk is intended as a gentle introduction into good practices in Python code optimization. 
-Certainly this does not exhaust the topic, and there are various great resources where you can find more on Python optimization, see references for some starting points.
+Code optimisation is an important aspect of development process, but when done improperly it may do more harm than good.
+This talk is intended as a gentle introduction into good practices in Python code optimisation. 
+Certainly this does not exhaust the topic, and there are various great resources where you can find more on Python optimisation, see references for some starting points.
 
-This talk mainly focuses on Cpython (both >= 2.7 and >= 3.4) Python implementation.
+This talk mainly focuses on CPython (both >= 2.7 and >= 3.4) Python implementation.
 
 ## Improving the performance: overview
 
-### The root of all evil: premature optimization 
+### The root of all evil: premature optimisation 
 
-*Programmers waste enormous amounts of time thinking about, or worrying about, the speed of noncritical parts of their programs, and these attempts at efficiency actually have a strong negative impact when debugging and maintenance are considered. We should forget about small efficiencies, say about 97% of the time: premature optimization is the root of all evil. ~ *
+*Programmers waste enormous amounts of time thinking about, or worrying about, the speed of noncritical parts of their programs, and these attempts at efficiency actually have a strong negative impact when debugging and maintenance are considered. We should forget about small efficiencies, say about 97% of the time: premature optimisation is the root of all evil. ~ *
 **Donald Knuth**, "Structured Programming With Go To Statements".
 
-In short premature optimization may be stated as optimizing code before knowing that we need to. 
+In short premature optimisation may be stated as optimising code before knowing that we need to. 
 This may be a dangerous practice that will impact on your productivity, readability of the code and ease of maintenance and debugging
 (it also may contradict many points of The Zen of Python).
 
-So it is important to learn how to do proper assessment of your code in terms of optimization needs. 
+So it is important to learn how to do proper assessment of your code in terms of optimisation needs. 
 (Remember that strong felling that your code falls into the remaining 3% does not count!)
 
-Yet do not be discoraged from learning the proper way of optimizing your code, and remember about second part of the previous quote:
+Yet do not be discoraged from learning the proper way of optimising your code, and remember about second part of the previous quote:
 
 *Yet we should not pass up our opportunities in that critical 3%.* **Donald Knuth**
 
-It also worth noting, that certain optimizations are part of good programming style and good practices, and therefore should not be considered as premature.
+It also worth noting, that certain optimisations are part of good programming style and good practices, and therefore should not be considered as premature.
 For example moving computations that do not depend on the loop, outside the loop, as this also improve code readability.
 
 #### Think before doing (Think before coding)
@@ -35,18 +35,18 @@ For example moving computations that do not depend on the loop, outside the loop
 Going for higher performance without a deeper reason may be just a waste of your time.
 So start with:
 
-  * stating your reasons (why do you need higher performance ?),
-  * defining your goals (what would be an acceptable speed of your code?),
+  * stating your reasons (Why do you need higher performance ?),
+  * defining your goals (What would be an acceptable speed of your code?),
   * estimating time and resources you are willing to spend to achieve defined goals.
 
 Re-evaluate all the pros and cons.
 
 ## Test, Measure, Track Down bottlenecks, Fix
 
-A starting point for optimization is a running code which gives correct results. 
-Having that you should prepare a regression test suite, which will stand on guard of the correctness of your code during the optimization.
+A starting point for optimisation is a running code which gives correct results. 
+Having that you should prepare a regression test suite, which will stand on guard of the correctness of your code during the optimisation.
 
-Then rest of the optimization process may be summarized as: 
+Then rest of the optimisation process may be summarized as: 
  
   1. Test if the code works correctly.
   2. Measure execution time and if code is not fast enough use profiler to identify the bottlenecks.
@@ -56,7 +56,7 @@ Then rest of the optimization process may be summarized as:
 ### Regression test suite
 
 Before you start it is crucial to prepare regression test suite that is comprehensive but yet quick-to-run.
-As test will be ran very often it is important that it in a reasonably amount of time.
+As test will be ran very often it is important that it will run in a reasonably amount of time.
 Consider, breaking the tests into fast and slow categories, if running full test suite takes too much time.
 
 ### Measuring execution time and tracking down the bottlenecks: Measuring and profiling tools 
@@ -65,45 +65,45 @@ Next, you should measure execution time of your code.
 This is important because:
 
   * it allows you to check how does current execution time relates to desired execution time (i.e. acceptable speed),
-  * secondly, it allows you to compare various version of your code.
+  * secondly, it allows you to compare various version of optimisations in code.
 
 There are various tools to do that, among them:
 
-  * pythons timeit module,
-  * custom made timer using pythons time module,
+  * Pythons timeit module,
+  * custom made timer using Pythons time module,
   * unix time (use /usr/bin/time as time is also a common shell built in).
 
 Notes on measuring:
 
-  * Try to measure multiple independent repetitions of your code (this will help you to establish the lower band of your execution time).
-  * Preapare a testing enviroment that will allow you to get comparable results.
+  * Try to measure multiple independent repetitions of your code (this will help you to establish the lower bound of your execution time).
+  * Prepare a testing environment that will allow you to get comparable results.
   * Consider writing a micro benchmark to check various alternative solutions of some algorithm.
-  * Be carefull when measuring algorithm speed using artificial data, re-validate using real data.
+  * Be careful when measuring algorithm speed using artificial data, re-validate using real data.
 
 
 Profiling tools will give you a more in depth view of your code performance.
-This will allow you to take a viewm of your program internals in terms of execution time and used memory.
+This will allow you to take a view of your program internals in terms of execution time and used memory.
 
 There are various possible tools, like:
 
-  * cProfile - a profiling module avalible in python standard library,
-  * line_profiler - an external line-by line profiler,
+  * cProfile - a profiling module available in Python standard library,
+  * line\_profiler - an external line-by line profiler,
   * tools for visualizing profiling results - for example, runsnakerun.
 
 #### IO bound vs compute bound
 It is important that you learn how to classify types of performance bounds of your code.
 **The compute bound** case occurs when large number of instructions is making your code slow, the **I/O bound** case takes place when your code is slow because of various I/O operations, like network  delays or disk access.  
-Depending on the type of the performance bound, different optimization strategies will apply.
+Depending on the type of the performance bound, different optimisation strategies will apply.
 
 ### Fixing the cause: Performance Tips
 
 #### Algorithms and data structures
 
-Improving your algorithms time complexity is probably the best thing that you could do to optimize your code.
-Using micro optimization tricks will not bring you any wear near to the speed boost you could get from improving time complexity of algorithm.
+Improving your algorithms time complexity is probably the best thing that you could do to optimise your code.
+Using micro optimisation tricks will not bring you any wear near to the speed boost you could get from improving time complexity of algorithm.
 
 It is very common that innocently looking searching or lookup code placed in a large loop generates a performance issue.
-Often a trivial change, like changing list to set, may a key to solving the problem.
+Often a trivial change, like changing list to set, may be a key to solving the problem.
 
 That said be sure to check page [Time complexity](https://wiki.python.org/moin/TimeComplexity) from Python's wiki and confront it with data structures used in your algorithms.  
 The big **O** notation matters!
@@ -129,7 +129,7 @@ There are also other techniques, like improving function/method/variable/attribu
 #### Memory and I/O bounds 
 
 Some performance issues may be memory related, so checking memory utilization is also a good idea.
-Typical symptoms that your code have memory problems:
+Typical symptoms that indicate that your code may have memory problems:
 
   * your program never releases memory,
   * or your program allocates way too much memory.
@@ -142,12 +142,12 @@ Depending on the problem there may be various solutions, consider using:
 
   * asynchronous I/O with Python (for example see "Journey to the center of the asynchronous world"),
   * compressed data structures and lightweight compression algorithms (i.e. algorithms that are primarily intended for real-time applications, which favours compression/decompression speed over compression ratio),
-  * probabilistic data structures (like Bloom instead of real data).
+  * probabilistic data structures (like Bloom filters instead of real data).
 
 #### Notes on the special cases
 
-When your code involves numerics consider changing to numpy and scipy. 
-Those libraries provide highly optimized routines (usually based on external scientific libraries).
+When your code involves numerics consider using numpy and scipy. 
+Those libraries provide highly optimised routines (usually based on external scientific libraries).
 
 Some problems may just need more computing power, so it may be a good idea to:
   
@@ -155,12 +155,13 @@ Some problems may just need more computing power, so it may be a good idea to:
   * or scale your code to multiple machines (task queues, spark, grid like environment),
   * or using hardware accelerators (pyOpenCL, pyCuda, pyMIC, etc.)
 
-	
-Remember to check your code with PyPy, you may be pleasantly suprised.
+You may also consider pushing performance-critical code into C.
+
+Remember to check your code with PyPy, you may be pleasantly surprised.
 
 ## Summary
 
-Hopefully, this talk will help you start with python optimization. 
+Hopefully, this talk will help you start with Python optimisation. 
 
 For more, checkout slides and source code examples that may be found on my website przymus.org, under "What's Eating Python performance".
 
