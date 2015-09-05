@@ -169,7 +169,7 @@ Pseudokod mechanizmu autoskalowania:
 
     elif overloaded_instances <= 0.5 * total_instances:
         total_instances -= 2
-        if total_instances <= MIN_INSTANCES_COUNT:
+        if total_instances >= MIN_INSTANCES_COUNT:
             scale_app(instances_count=total_instances)
 
 Powyższy pseudokod przedstawia sytuację, w której w zależności od ilości
