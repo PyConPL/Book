@@ -6,13 +6,13 @@
 
 Testowanie obciążenia aplikacji webowych to temat bardzo złożony, który nabiera
 na znaczeniu, jeżeli pod uwagę weźmiemy skalowalne architektury. Coraz częściej
-spotyka się statystyki, które pokazują jak wielu użytkowników rezygnuje ze
+spotyka się statystyki, które pokazują, jak wielu użytkowników rezygnuje ze
 skorzystania z danej aplikacji, jeżeli czasy odpowiedzi są wyższe niż pewien
 (niski) próg. Im szybsze odpowiedzi, tym więcej użytkowników wejdzie na naszą
-stronę (ponieważ szybciej będą w stanie ocenić czy znajduje się na niej to,
-czego szukają).
+stronę, ponieważ szybciej będą w stanie ocenić czy znajduje się na niej to,
+czego szukają.
 
-* Google analizując ruch w internecie stwierdziło, że pół sekundowe opóźnienie
+* Google analizując ruch w internecie stwierdziło, że półsekundowe opóźnienie
 w ładowaniu strony skutkuje spadkiem ruchu na poziomie 20%
 * Amazon podczas A/B testów zauważył, że wzrost czasów odpowiedzi o 100 ms
 skutkował w ich przypadku spadkiem sprzedaży na poziomie 1% (co dla tak dużej
@@ -21,9 +21,9 @@ firmy jest znaczącą wartością)
 
 Typowy odwiedzający nie dba również o stronę techniczną, bo po
 prostu się na tym nie zna. Aplikacja może cachować dużo danych, autoskalować się,
-zepewniać failover - to wszystko nie ma wielkiego znaczenia jeżeli jest po prostu
+zepewniać failover - to wszystko nie ma wielkiego znaczenia, jeżeli jest po prostu
 wolne. Naturalnym wydaje się więc posiadanie możliwości symulacji dużego ruchu,
-który sprawdzi możliwości naszej aplikacji i pokaże jak cały stos sprawuje się
+który sprawdzi możliwości naszej aplikacji i pokaże, jak cały stos sprawuje się,
 gdy zostanie "nawiedzony" przez tysiące użytkowników jednocześnie.
 
 
@@ -72,7 +72,7 @@ Instalacja locusta sprowadza się do zainstalowania jednej paczki:
 pip install locustio
 ```
 
-Cała logika testowa znajduję się w pliku *locustfile.py*, który po wpisaniu 
+Cała logika testowa znajduje się w pliku *locustfile.py*, który po wpisaniu 
 komendy *locust* jest użyty do skonfigurowania środowiska.
 
 
@@ -83,7 +83,7 @@ locust -f locustfile.py
 Po uruchomieniu środowiska możemy przystąpić do konfiguracji testu. Do tego celu
 locust dostarcza panel webowy dostępny standardowo pod adresem *localhost:8089*,
 w którym zostaniemy poproszeni o podanie liczby użytkowników oraz hatch rate -
-parametru, który odpowiada za częstotliwość przyrostu liczby użytkowników na sekunde
+parametru, który odpowiada za częstotliwość przyrostu liczby użytkowników na sekundę,
 aż do osiągnięcia zadanej liczby. Przykładowo podanie liczb 1000 i 50 skutkuje
 dwudziestosekundową 'rozgrzewką' do właściwej symulacji dla tysiąca użytkowników.
 
@@ -118,7 +118,7 @@ Komponenty:
 żeby locust poprawnie się uruchomił. Instancje tej klasy reprezentują
 użytkowników systemu (symulacja ruchu dla 5000 użytkowników spowoduje 5000 
 instancji klasy Locust). Jeżeli nasz serwis działa na podstawie protokołu
-HTTP to możemy wykorzystać klasę *HttpLocust*, która dodatkowo zapewni
+HTTP, to możemy wykorzystać klasę *HttpLocust*, która dodatkowo zapewni
 obsługę sesji oraz ciasteczek.
 
 
@@ -229,7 +229,7 @@ class MySocket(nanomsg.Socket):
 
 
 class NanomsgClient(object):
-    # Właścicwy klient nanomsg, pracujący w trybie komunikacji
+    # Właściwy klient nanomsg, pracujący w trybie komunikacji
     # REQ - REP (request - response)
     # więcej informacji o trybach komunikacji można znaleźć
     # w oficjalnej dokumentacji: http://nanomsg.org/
@@ -253,7 +253,7 @@ class NanomsgClient(object):
     def get(self, msg):
         # metoda wysyła zserializowaną do formatu json
         # wiadomość i czeka na odpowiedź z serwisu, dodatkowo
-        # wysyłając informację o czasacj requestu do locusta
+        # wysyłając informację o czasach requestu do locusta
         # poprzez użycie komponentu Event
         start_time = time.time()
         
@@ -286,7 +286,7 @@ class NanomsgUser(Locust):
     endpoint = "tcp://127.0.0.1:5001"
 
     # Parametry reprezentujące (w milisekundach) minimalny
-    # i maksylany czas jaki użytkownik powinien odczekać przed
+    # i maksymalny czas, jaki użytkownik powinien odczekać przed
     # wykonaniem kolejnego zadania.
 
     min_wait = 100
@@ -324,7 +324,7 @@ wspierającymi protokół HTTP. Testowanie architektur mikroserwisów korzystaj�
 z Rabbitmq, zeromq czy nanomsg jest banalnie prostym zadaniem. W kontekście 
 samych mikroserwisów locust idealnie nadaje się do znajdywania elementów będących
 słabym punktem naszej aplikacji, znajdywania single point of failure czy też 
-sprawdzania jak nasza architektura poradzi sobie, gdy jeden z serwisów przestanie
+sprawdzania, jak nasza architektura poradzi sobie, gdy jeden z serwisów przestanie
 być responsywny lub całkowicie przestanie działać.
 
 
