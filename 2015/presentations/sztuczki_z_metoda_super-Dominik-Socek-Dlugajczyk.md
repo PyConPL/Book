@@ -2,7 +2,7 @@
 # Autor: Dominik "Socek" Długajczyk
 Jest jedna funkcjonalność Pythona, której wszyscy używają bardzo często, acz szczątkowo, gdyż panuje opinia iż nadużywanie jej może doprowadzić do nieokreślonego działania aplikacji. Tą funkcjonalnością jest wielodziedziczenie. Postaram się w kilku słowach pokazać jak działa "Method Resolution Order" w Pythonie (wybaczcie, nie znalazłem dobrego tłumaczenia tej nazwy). Postaram się wam pokazać jak można użyć "super()", aby zamockować i przetestować przykładową klasę.
 
-Zacznijmy jednak od teorii. W programowaniu panuje przekonanie, że wielodziedziczenie jest złe, gdyż może występować "the diamond problem", czyli sytuacja, w której klasa dziedziczy po dwóch klasach, a te dwie klasy dziedziczą po jednej i tej samej. Gdybyśmy w takiej sytuacji (powiedzmy w C++) we wszystkich klasach zaimplementowali taką samą metodę, to język nie wiedziałby w jakiej kolejności wykonać dane metody.  W Pythonie ten problem nie występuje dzięki MRO, który to jest implementacją algorytmu "C3 linearization"*. Wprowadzono go w wersji 2.3 (new style classes) oraz w językach Perl 5 i Parrot. Niestety nie są znane mi inne języki, które by implementowały ten algorytm.
+Zacznijmy jednak od teorii. W programowaniu panuje przekonanie, że wielodziedziczenie jest złe, gdyż może występować "the diamond problem", czyli sytuacja, w której klasa dziedziczy po dwóch klasach, a te dwie klasy dziedziczą po jednej i tej samej. Gdybyśmy w takiej sytuacji (powiedzmy w C++) we wszystkich klasach zaimplementowali taką samą metodę, to język nie wiedziałby w jakiej kolejności wykonać dane metody.  W W Pythonie ten problem nie występuje dzięki algorytmowi "C3 linearization", który został wykorzystany do implementacji MRO.*. Wprowadzono go w wersji 2.3 (new style classes) oraz w językach Perl 5 i Parrot. Niestety nie są znane mi inne języki, które by implementowały ten algorytm.
 
 Dodatkowym atutem Pythona jest fakt, iż wywołanie metody rodzica, jest jawne w metodzie potomka. Dzięki temu, można kod rodzica uruchomić nie tylko przed wywołaniem własnej metody, ale na przykład w środku. Daje nam to większą władzę oraz naprawdę duże pole do manewru.
 ![graph.new.png](graph.new.png)
@@ -20,7 +20,7 @@ Tutaj wprawdzie jest już zastosowane dziedziczenie po wielu klasach bazowych, j
 
 Tym diagramem chciałem natomiast pokazać, iż w Pythonie nie występuje "the diamond problem". Jest jeszcze jedna bardzo ważna cecha tego algorytmu: dziecko nigdy nie wie która metoda zostanie wykonana, gdy użyjemy super(). Zwróćcie proszę uwagę na klasę FanstaticController (z numerkiem 3). Dziedziczy ona jedynie po klasie BaseController, a nic nie wie o klasie FormskitController (z numerkiem 4), która będzie wykonana zaraz po niej. Jest tak tylko dlatego, że klasa Controller dziedziczy po tych dwóch klasach.
 
-Ta konkretna funkcjonalność daje nam bardzo ciekawą możliwość. Mieliście kiedyś problem o nazwie "jak zmockować funkcję super() ?". Czyli w testach chcecie wykonać kod z jednej klasy, ale nie chcecie wykonywać kodu rodziców. Można to zrobić bardzo prosto: wybierzmy klasę do testów, w tym przypadku "OrdersListController". Następnie tworzymy klasę MockedOrderListController, która będzie dziedziczyłą po tych samych klasach co OrderListController. A następnie robimy pustą klasę OrdersListControllerEx, która dziedziczy po OrdersListController oraz MockedOrderListController (w tej kolejności). Dzięki czemu najpierw zostanie wykonana metoda z klasy OrdersListController, a potem MockedOrderListController. W samym MockedOrderListController po prostu nie wywołujemy metody super(), dzięki czemu nie zostanie wykonany żaden kod rodziców.
+Ta konkretna funkcjonalność daje nam bardzo ciekawą możliwość. Mieliście kiedyś problem o nazwie "jak zmockować funkcję super()?". Czyli w testach chcecie wykonać kod z jednej klasy, ale nie chcecie wykonywać kodu rodziców. Można to zrobić bardzo prosto: wybierzmy klasę do testów, w tym przypadku "OrdersListController". Następnie tworzymy klasę MockedOrderListController, która będzie dziedziczyłą po tych samych klasach co OrderListController. A następnie robimy pustą klasę OrdersListControllerEx, która dziedziczy po OrdersListController oraz MockedOrderListController (w tej kolejności). Dzięki czemu najpierw zostanie wykonana metoda z klasy OrdersListController, a potem MockedOrderListController. W samym MockedOrderListController po prostu nie wywołujemy metody super(), dzięki czemu nie zostanie wykonany żaden kod rodziców.
 
 Niestety taka sztuczka ma sens tylko w testach, gdyż wtedy wiemy dokładnie jaką klasę blokujemy i jak MRO się zachowa (oraz jak struktura się zmienii). Jeśli byśmy chcieli jeszcze raz podziedziczyć po wielu klasach, to hierarchia MRO może ulec zmianie i nasz kod przestanie działać. Tak samo nie możemy zablokować kodu konkretnej klasy w hierarchii, już nie mówiąc o tym, że trzeba by przepisać wszystkie te klasy, po których nasza klasa będzie dziedziczona, aby zmienić strukturę dziedziczenia (co jest niewykonalne, gdyż nigdy nie wiemy co będzie dziedziczyło po naszej klasie).
 
@@ -50,7 +50,7 @@ class One(object):
 class Two(One):
 
     def method(self):
-        print(super().method)
+        print(super(Two, self).method)
 
 Two().method()
 ```
