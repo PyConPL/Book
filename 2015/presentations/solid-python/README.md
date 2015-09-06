@@ -1,0 +1,3 @@
+# SOLID Python
+
+## Ignacy Sokołowski
