@@ -29,7 +29,7 @@ Example syntax of CLIPS
     )
 
 
-# Installtion and first steps
+# Installation and first steps
 
 The easiest way to install pyclips package is going to be by using pip
 
@@ -137,7 +137,7 @@ We can also send singnal to the engine about some changes of facts, so engine is
     
 ## Let the fire burn
 
-Once you know how to register Python functions and assign facts it is time to see how exactly you are going to use rules engine. Again to simplify the description I will assume that you alredy assigned facts, loaded rules and python functions so let's focus only on the execution of the rules.
+Once you know how to register Python functions and assign facts it is time to see how exactly you are going to use rules engine. Again to simplify the description I will assume that you already assigned facts, loaded rules and python functions so let's focus only on the execution of the rules.
 
 Below function can be started as a dedicated thread which has to go into infinite loop so we are going to keep processing rules over and over again (based on changeable facts)
 
@@ -150,12 +150,12 @@ Below function can be started as a dedicated thread which has to go into infinit
         
 ## Warning
 
-Now as for debug. From my prsonal experience. It is very important to remember that if debug is actually enabled the whole engine is going to be few times slower (in some cases), which of course is not recommended in production use. Another thing... debug being on can make engine to leak. It does not happen always and it stronlgy depends on numbers of loaded facts (few thousands and more). But that is the story for another article.
+Now as for debug. From my personal experience. It is very important to remember that if debug is actually enabled the whole engine is going to be few times slower (in some cases), which of course is not recommended in production use. Another thing... debug being on can make engine to leak. It does not happen always and it strongly depends on numbers of loaded facts (few thousands and more). But that is the story for another article.
 
 
 ## Final note
 
-Of course I am fully aware of the fact that pyCLIPS project is not being updated since 2008. This is not the main point in that article. I just wanted to show how to use C module for Python with external laguage and its semi-engine (something like LISP) which allows you to write much simpler and cleaner code for expert systems.
+Of course I am fully aware of the fact that pyCLIPS project is not being updated since 2008. This is not the main point in that article. I just wanted to show how to use C module for Python with external language and its semi-engine (something like LISP) which allows you to write much simpler and cleaner code for expert systems.
 
 ## Sources
 
