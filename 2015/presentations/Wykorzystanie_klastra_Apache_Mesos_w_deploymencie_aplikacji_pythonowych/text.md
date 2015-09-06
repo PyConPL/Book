@@ -1,6 +1,6 @@
 # Wykorzystanie klastra Apache Mesos w deploymencie aplikacji pythonowych - Kamil Warguła
 
-Dzisiejsze aplikację internetowe poddawane są zróżnicowanemu obciążeniu w
+Dzisiejsze aplikacje internetowe poddawane są zróżnicowanemu obciążeniu w
 ciągu tygodni, dni a nawet godzin. Wykorzystanie zasobów jest ważną kwestią
 w utrzymywaniu aplikacji i panowaniu nad budżetem.
 
@@ -17,7 +17,7 @@ w przypadku awarii jednego serwera w klastrze, o wszystko zadba Mesos.
 ## Przygotowanie aplikacji
 
 W celu zademonstrowania deploymentu na klaster Mesos zbudujmy prostą
-aplikację, która będzie wystawiała proste REST API. Poniżej
+aplikację, która będzie wystawiała REST API. Poniżej
 fragment pliku `api.py` [3]:
 
     import falcon
@@ -37,7 +37,7 @@ do napisania aplikacji WSGI, która w połączeniu z serwerem Gunicorn pozwoli
 serwować nasze API.
 
 Do przygotowania paczki z naszą aplikacją wykorzystamy narzędzie PEX [5],
-które dostarczy nam virtualne środowisko Pythona wraz zależnościami w
+które dostarczy nam wirtualne środowisko Pythona wraz zależnościami w
 postaci jednego wykonywalnego pliku. Aby zbudować takie środowisko należy
 wykonać następujące polecenie:
 
@@ -75,7 +75,7 @@ Poniżej przykładowa zawartość opisująca aplikację:
 
 Komenda, która zostałą wykorzystana do uruchomienia aplikacji zawiera
 zmienną środowiskową `$PORT0`, jest to zmienna określająca port przydzielony
-automatycznie przez Marathona pod, którym zostanie zbindowana nasza aplikacja.
+automatycznie przez Marathona, pod którym zostanie zbindowana nasza aplikacja.
 
 Marathon po otrzymaniu informacji o definicji aplikacji przystąpi do procesu
 deploymentu. Zdefiniowana przez nas paczka zostanie pobrana na serwer
@@ -86,10 +86,10 @@ Informację o wszystkich uruchomionych aplikacjach na klastrze Mesos możemy
 zobaczyć w interfejsie Marathona dostępnym poprzez stronę WWW,
 a także za pomocą REST API [6] wystawionego pod zasobem `/v2/apps`.
 
-W przypadku wystąpienia awarii serwera na, którym uruchomiony jest nasz program,
+W przypadku wystąpienia awarii serwera, na którym uruchomiony jest nasz program,
 Marathon automatycznie przystapi do procesu redeploymentu naszej aplikacji na
 innym serwerze wchodzącym w skład klastra Mesos. Dzięki temu mechanizmowi
-w automatyczny sposób możemy uzyskać odporną na awarie infrastrukture
+w automatyczny sposób możemy uzyskać odporną na awarie infrastrukturę
 naszej aplikacji.
 
 ## Skalowanie manualne
@@ -103,13 +103,13 @@ zasób naszej aplikacjii dostępny poprzez REST API. Jest to wygodny i bardzo
 szybki sposób na obsłużenie dużej ilości użytkowników
 
 Request dzięki któremu zeskalujemy naszą aplikację powinien być typu `PUT`
-oraz musimy zostać wysłany pod zasób `/v2/apps/` wraz z nazwą naszej aplikacji.
+oraz musi zostać wysłany pod zasób `/v2/apps/` wraz z nazwą naszej aplikacji.
 W naszym przypadku będzie to `/v2/apps/rest_app`.
 Zawartość przesłanego żadania wygląda następująco:
 
-{
-    "instances":10
-}
+    {
+        "instances":10
+    }
 
 Marathon po otrzymaniu takiego żądania, przystąpi do procesu uruchomienia
 zadeklarowanej przez nas ilości instancji na klastrze. Nie musimy się martwić
@@ -118,7 +118,7 @@ automatycznie bez naszej ingerencji.
 
 ## Skalowanie automatyczne
 
-Serwer pełniący role slave, będący częścią klastra Mesos udostepnia informację
+Serwer pełniący role slave'a, będący częścią klastra Mesos, udostepnia informację
 o aktualnym wykorzystaniu zasobów przez aplikacje, które zostały na nim
 uruchomione. Dane te są dostępne poprzez REST API pod zasobem
 `/monitor/statistics.json`.
@@ -185,8 +185,8 @@ w stanie znaleźć optymalne dla nas wartości.
 
 Klaster Apache Mesos w połączeniu z Marathonem umożliwa szybkie i wygodne
 deployowanie aplikacji napisanych w Pythonie. Dzięki niemu możemy w łatwy
-sposób możemy zarządzać ilością instancji a także zasobami używanymi przez
-aplikacje, a wszystko to dzięki prostocie działania i możliwością
+sposób zarządzać ilością instancji, a także zasobami używanymi przez
+aplikacje, a wszystko to dzięki prostocie działania i możliwościom
 przeprowadzania wszystkich operacji poprzez REST API.
 
 
