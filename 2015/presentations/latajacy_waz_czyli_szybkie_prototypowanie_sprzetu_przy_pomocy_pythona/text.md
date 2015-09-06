@@ -6,15 +6,15 @@ Artykuł ten dotyczy prototypowania sprzętu na platformie MicroPython. W pierws
 
 Czasami zdarzają się projekty bardziej skomplikowane niż inne. Takie, gdzie nie do końca wiadomo w jaki sposób osiągnąć oczekiwany rezultat. Takie, gdzie potrzeba trochę pracy badawczej i testów, bo zagadnienie nad którym pracujemy nie ma oczywistego rozwiązania. Często też nie wiadomo jaki rezultat będzie najbardziej użyteczny i praktyczny. Chcielibyśmy wtedy mieć możliwość zrobienia prototypu, który stale będziemy ulepszać. Dobrze jeśli kolejne zmiany nie będą obarczone dużym kosztem, ich wprowadzenie będzie szybkie. Może nawet chcielibyśmy przetestować kilka algorytmów jednocześnie?
 
-### Inteligenta łazienka
+### Inteligentna łazienka
 
-Nie musi to być od razu ogromny system, po prostu, niewielki problem do rozwiązania. Przykładem może być kwestia włączania ogrzewania i wyciągu (wentylatora) w inteligentej łazience. Po wzięciu prysznica chcielibyśmy, żeby ręcznik odwieszony na grzejnik jak najszybciej wysechł, a wentylator jak najszybciej pozbył się wilgoci z łazienki. Wbrew pozorom nie jest to takie banalne.  W jaki sposób wykryć, że ktoś wziął prysznic? Odpowiednio długo zapalone światło, podwyższona wilgotność w łazience? Jaka zmiana wilgotności świadczy o wziętym prysznicu? A może właśnie zostało rozwieszone pranie? Jak długo grzejnik powinien być włączony aby ręcznik wysechł? Jak długo powinien działać wentylator? Powinien uruchomić się od razu, czy po wyjściu z łazienki?
+Nie musi to być od razu ogromny system, lecz po prostu, niewielki problem do rozwiązania. Przykładem może być kwestia włączania ogrzewania i wyciągu (wentylatora) w inteligentnej łazience. Po wzięciu prysznica chcielibyśmy, żeby ręcznik odwieszony na grzejnik jak najszybciej wysechł, a wentylator jak najszybciej pozbył się wilgoci z łazienki. Wbrew pozorom nie jest to takie banalne.  W jaki sposób wykryć, że ktoś wziął prysznic? Odpowiednio długo zapalone światło, podwyższona wilgotność w łazience? Jaka zmiana wilgotności świadczy o wziętym prysznicu? A może właśnie zostało rozwieszone pranie? Jak długo grzejnik powinien być włączony aby ręcznik wysechł? Jak długo powinien działać wentylator? Powinien uruchomić się od razu, czy po wyjściu z łazienki?
 
 Chyba nalepiej zrobić prototyp, w którym później można „wyregulować” kilka parametrów, aby dostosować go idealnie do potrzeb.
 
 ## Micropython i pyBoard
 
-Od dłuższczego czasu powstają kolejne projekty, mające na celu uprościć programowanie sprzętu: Arduino, SparkCore (obecnie Particle) czy chociażby Raspbery Pi. Od ponad roku dostępny jest również MicroPython, czyli implementacja języka Python na mikrokontrolery z rodziny ARM. Projektowi temu toważyszy pyBoard, czyli projekt prostej płytki prototypowej na której działa MicroPython.
+Od dłuższego czasu powstają kolejne projekty, mające na celu uprościć programowanie sprzętu: Arduino, SparkCore (obecnie Particle) czy chociażby Raspberry Pi. Od ponad roku dostępny jest również MicroPython, czyli implementacja języka Python na mikrokontrolery z rodziny ARM. Projektowi temu towarzyszy pyBoard, czyli projekt prostej płytki prototypowej na której działa MicroPython.
 
 ### Język i dostępne biblioteki
 
@@ -29,7 +29,7 @@ W mikrokontroler wbudowane są również poniższe standardowe biblioteki:
  - sys
  - time
 
-Należy wspomnieć, że bardzo dymanicznie, tworzone są nowe mikrobiblioteki. Mamy do dyspozycji chociażby moduły do wyrażeń regularnych, dekodowania i kodowania JSON, kompresję zlib, i wiele więcej. Temat ten jest bardzo żywy. W momencie pisania artykułu ostatnie zmiany w repozytorium `micropython/micropython-lib` na Githubie miały miejsce kilka godzin temu.
+Należy wspomnieć, że bardzo dynamicznie tworzone są nowe mikrobiblioteki. Mamy do dyspozycji chociażby moduły do wyrażeń regularnych, dekodowania i kodowania JSON, kompresję zlib, i wiele więcej. Temat ten jest bardzo żywy. W momencie pisania artykułu ostatnie zmiany w repozytorium `micropython/micropython-lib` na Githubie miały miejsce kilka godzin temu.
 
 ### Część sprzętowa - moduł pyb
 
@@ -46,13 +46,13 @@ Aby zobrazować różnice w szybkości działania i zajętości pamięci przy u�
  - natywny: 126 bajtów pamięci, czas 6,3 sekundy
  - „viper”: 114 bajtów pamięci, czas 5,0 sekundy
 
-Dla porównania, odpowiedni kod napisany w C na Arduino (16MHz) wykonuje się około 7 sekund, a na RaspberyPi (700MHz) około 300 ms. Natomiat odpowiedni kod napisany w Pythonie również na RaspberyPi wykonuje się niespełna 20 sekund!
+Dla porównania, odpowiedni kod napisany w C na Arduino (16MHz) wykonuje się około 7 sekund, a na Raspberry Pi (700MHz) około 300 ms. Natomiat odpowiedni kod napisany w Pythonie również na Raspberry Pi wykonuje się niespełna 20 sekund!
 
 Podandto istnieje czwarty emiter przydatny dla krytycznych fragmentów, który pozwala pisać wstawki bezpośrednio w assemblerze. Niestety nie ma możliwości pisania wstawek w języku C.
 
 ## Drony latające
 
-Mikrośmigłowce wielowirnikowe zwane potocznie dronami czy quarokopterami stały się w ostatnim czasie bardzo popularne w wielu zastosowaniach. Bezzałogowe statki powietrzne swoje początki zawdzięczają celom militarnym, ale dzięki stabilności i łatwości kontroli dronów wielowirnikowych, urządzenia te zyskują popularność w zastosowaniach cywilnych, jak na przykład kinematografia.
+Mikrośmigłowce wielowirnikowe zwane potocznie dronami czy quadrokopterami stały się w ostatnim czasie bardzo popularne w wielu zastosowaniach. Bezzałogowe statki powietrzne swoje początki zawdzięczają celom militarnym, ale dzięki stabilności i łatwości kontroli dronów wielowirnikowych, urządzenia te zyskują popularność w zastosowaniach cywilnych, jak na przykład kinematografia.
 
 ### Budowa dronów i fizyka silników
 
