@@ -1,6 +1,6 @@
 # Expert system in Python in 5 minutes by Hubert Piotrowski
 
-As all we know Python is known for many of its features, felxibility, scalibility and simplicity for sure. What is actually the most powerful feature of Python language to me? We can write Python extension modules which comunicate with another languages.
+As all we know Python is known for many of its features, flexibility, scalability and simplicity for sure. What is actually the most powerful feature of Python language to me? We can write Python extension modules which communicate with other languages.
 
 The example of such an extension which I am going to briefly describe here is pyCLIPS, which is a wrapper for CLIPS (C Language Integrated Production System) "language". It is framework written in such a way that its user interface closely resembles that of the programming language **Lisp**.
 
