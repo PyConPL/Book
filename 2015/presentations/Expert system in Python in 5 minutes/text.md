@@ -1,10 +1,12 @@
 # Expert system in Python in 5 minutes by Hubert Piotrowski
 
-Python is known for many of its features, no doubts about that for sure. What is actually the most powerful feature or better though - the main key feature of any language itself to me - is the fact that we can write 3rd party modules which talk to another languages or to some 3rd party frameworks.
+As all we know Python is known for many of its features, felxibility, scalibility and simplicity for sure. What is actually the most powerful feature of Python language to me? We can write Python extension modules which comunicate with another languages.
 
-The example of such a extension which I am going to briefly describe here is going to be pyCLIPS, which is a wrapper for CLIPS (C Language Integrated Production System) "language". It is framework written in such a way that its user interface closely resembles that of the programming language **Lisp**
+The example of such an extension which I am going to briefly describe here is pyCLIPS, which is a wrapper for CLIPS (C Language Integrated Production System) "language". It is framework written in such a way that its user interface closely resembles that of the programming language **Lisp**.
 
-It uses rules and facts which are being processed to get rules fired based on facts which in the end call for instance call assigned python functions.
+Before we will continue, please threat this article as an example of how to build expert system by using Python. It is not any kind of a try to convince you to use expert systems for building complex software. It is more like showing you the other way of solving some design problems.
+
+## CLIPS
 
 ![alt text](http://clipsrules.sourceforge.net/clips.gif "CLIPS Logo")
 
@@ -33,19 +35,19 @@ The easiest way to install pyclips package is going to be by using pip
 
     pip install pyclips
 
-Once you install it now we can start writing our first simple rules engine. The module fully embeds the CLIPS engine, with COOL (Clips Object Oriented Language) and environments support. This allows you to use very clear and easy to read syntax to write very complex expert systems.
+Once you install it we can start writing our first simple rules engine. The module fully embeds the CLIPS engine, with COOL (Clips Object Oriented Language). This allows you to use very clear and easy to read syntax to write very complex expert systems.
 
 # Dive into..
 
 ## Registering Python function
 
-We can register Python function which we later on can call from CLIPS engine whenever any of the facts match any of rules. Example:
+We can register Python function as a callback that will be called by CLIPS engine whenever any of the facts match any of the rules. Example:
 
     import clips
     
     class RulesEngine:
         def __init__(self):
-            clips.Conserve = True
+            clips.Conserve = True # important to be True to be able to start catching output from CLIPS
             clips.RegisterPythonFunction(self.myDebug, 'myDebug')
             
         def myDebug(self, msg):
@@ -81,7 +83,7 @@ Loading such a rules files can be done like this
 ## Debug
 
 
-Now if we want to debug any of the rules that Clipe Enigne is firing or what kind of state is being updated you can dump them by adding dumping method, example:
+If we want to debug any of the rules that CLIPS Engine is firing or get to know what kind of state is being updated we can dump them by adding dumping method, eg.:
 
     def dumpOutput(self):
         result = clips.TraceStream.Read()
@@ -99,7 +101,22 @@ Now if we want to debug any of the rules that Clipe Enigne is firing or what kin
 
 ## Facts
 
-Before we are going to dive into details how to process facts and take some actions what first comes first - loading facts. To simplify this article let's assume that fact is a very simple state which is going to be checked by rules engine. If some states of an entity are going to match any of the rules then that particular rule(s) is going to be fired. Fired means that engine can modify any of its internal objects (another facts) or for example call one of the registered before Python functions.
+Before we are going to dive into details how to process facts and take some actions what first comes first - loading facts. To simplify this article let's assume that fact is a very simple state which is going to be checked by rules engine. If some states of an entity are going to match any of the rules then that particular rule(s) is going to be fired. Fired means that engine can modify any of its internal objects (another facts) or call one of the previously registered Python functions.
+
+Example class definition which describes an object can look like this
+
+    (defclass MY_BASE_CLASS (role concrete)
+       (slot row-source (type STRING))
+       (slot row-time (type INTEGER))
+    )
+
+Naturally also we can use inheritance:
+
+    (defclass MY_OBJECT (is-a MY_BASE_CLASS) (role concrete)
+       (slot some_hash_field (type STRING))
+       (slot param_1 (type STRING))
+       (slot param_2 (type STRING))
+    )
 
 How to load fact into rules engine from Python, example:
 
@@ -107,11 +124,11 @@ How to load fact into rules engine from Python, example:
     
 Now modify facts
 
-    instance.Slots['some_attribute'] = serializable_python_variable
+    instance.Slots['param_1'] = serializable_python_variable
     
 We can also assign a fact which is a reference to another instance
 
-    instance.Slots['some_attribute'] = clips.FindInstance(another_object_hash)
+    instance.Slots['some_hash_field'] = clips.FindInstance(another_object_hash)
     
 We can also send singnal to the engine about some changes of facts, so engine is going to be aware of our assigning process.
 
@@ -122,15 +139,18 @@ We can also send singnal to the engine about some changes of facts, so engine is
 
 Once you know how to register Python functions and assign facts it is time to see how exactly you are going to use rules engine. Again to simplify the description I will assume that you alredy assigned facts, loaded rules and python functions so let's focus only on the execution of the rules.
 
-Below function can be started as a dedicated thread which has to go into ininity loop so we are going to keep processing rules over and over again (based on changeable facts)
+Below function can be started as a dedicated thread which has to go into infinite loop so we are going to keep processing rules over and over again (based on changeable facts)
 
     def reactor():
         self.log.info('Start processing')
         rules_fired = clips.Run(5000) # max rules to fire for that loop
         self.log.info('CLIPS fired %s rules' % (rules_fired))
         # here you can dump output to debug what was happening
+        self.myDebug()
+        
+## Warning
 
-Now as for debug. It is very important to notice that if debug is actually enabled the whole engine is going to be few times slowe, which of course is not recommended in production use. Another thing...it leaks realy badly with debug being on.
+Now as for debug. From my prsonal experience. It is very important to remember that if debug is actually enabled the whole engine is going to be few times slower (in some cases), which of course is not recommended in production use. Another thing... debug being on can make engine to leak. It does not happen always and it stronlgy depends on numbers of loaded facts (few thousands and more). But that is the story for another article.
 
 
 ## Final note
