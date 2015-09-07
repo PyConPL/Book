@@ -1,5 +1,3 @@
-#What’s Eating Python performance 
+# What’s Eating Python performance
 
-
-##Piotr Przymus
-
+## Piotr Przymus
