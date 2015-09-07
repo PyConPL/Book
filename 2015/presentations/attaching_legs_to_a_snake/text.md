@@ -2,9 +2,9 @@
 
 ## Introduction
 
-Python is a powerful language by itself. The robust standard library and the myriad of additional packages make it a Swiss Army knife of programming languages. But sometimes it is not enough. When you need to integrate with a low-level C API or execute heavy computations without the interpreter overhead, writing a Python extension module might be a good idea.
+Python is a powerful language by itself. The robust standard library and the myriad of additional packages make it a Swiss Army knife for any programming task. But sometimes it is not enough. When you need to integrate with a low-level C API or execute heavy computations without the interpreter overhead, writing a Python extension module might be a good idea.
 
-This article will show you how to write, build and run an extension; what C API you can use in it and what to remember about; how to link to shared libraries and what does Boost.Python simplify.
+This article will show you how to write, build and run an extension; what C API you can use in it and what to remember; how to link to shared libraries and what does Boost.Python simplify.
 
 Full source codes for all example modules below can be found on GitHub [1].
 
@@ -14,37 +14,43 @@ Full source codes for all example modules below can be found on GitHub [1].
 
 Like any code written in C, Python extensions must load the appropriate header file to let the compiler know what functions of the Python C API are available.
 We usually only need to include one file:
+
 ```
 #include <Python.h>
 ```
 
 ### Body
 
-Most Python functions take ```PyObject``` pointer argument (sometimes more of them) and return a ```PyObject``` pointer. This is Python's *everything is an object* put into practice.
+Most Python functions take `PyObject` pointer argument (sometimes more of them) and return a `PyObject` pointer. This is Python's *everything is an object* put into practice.
+
 ```
 static PyObject *
 basic_hello(PyObject *self)
 {
-    const char * msg = "Hello world";
+    const char *msg = "Hello world";
     return PyUnicode_FromString(msg);
 }
 ```
-In the case of this module-level function, ```self``` parameter will be the reference to the extension module the function is attached to.
+
+In the case of this module-level function, `self` parameter will be the reference to the extension module the function is attached to.
 
 ### Limbs
 
-We need to declare what functions our module exposes: 
+We need to declare what functions our module exposes:
+
 ```
 static PyMethodDef basic_methods[] = {
     {"hello", (PyCFunction)basic_hello, METH_NOARGS, "Return hello world."},
     {NULL, NULL, 0, NULL}        /* Sentinel */
 };
 ```
+
 We declare a name under which the function will be visible, a pointer to the function itself, type of arguments it expects (no arguments, positional arguments or keyword arguments) and a docstring.
 
 ### Nervous system
 
 We need to define the module itself:
+
 ```
 static struct PyModuleDef basic_module = {
    PyModuleDef_HEAD_INIT,
@@ -55,11 +61,13 @@ static struct PyModuleDef basic_module = {
    basic_methods
 };
 ```
- We pass its name, docstring, size of the optional module state memory block and function definitions.
 
-### Hearth
+We pass its name, docstring, size of the optional module state memory block and function definitions.
 
-The most important, though, is the module initialisation function that creates the module on the basis of the module definition:
+### Heart
+
+The most important, though, is the module initialization function that creates the module on the basis of the module definition:
+
 ```
 PyMODINIT_FUNC
 PyInit_basic(void)
@@ -68,15 +76,18 @@ PyInit_basic(void)
 }
 ```
 
-## Animation - how to make it come alive
+## Animation - how to make it alive
 
 The extensions are easy to build (on most platforms). We need a compiler and Python development library:
+
 ```
 sudo apt-get install python3-dev build-essential
 ```
-or an equivalent command for our system.
 
-Extensions are declared in the ```setup.py``` file of our package:
+or an equivalent command for your system.
+
+Extensions are declared in the `setup.py` file of our package:
+
 ```
 from setuptools import find_packages, setup, Extension
 
@@ -90,37 +101,48 @@ setup(
     package_dir={'': 'src'},
 )
 ```
+
 Once we have this, we can build our extension using
+
 ```
 python3 setup.py build
 ```
+
 If we want to install it into the system or virtualenv, we need to execute
+
 ```
 python3 setup.py install
 ```
+
 As we can see no special commands are needed for installing packages that have C extension modules. The extensions are automatically built even if the package is just a dependency of another Python package.
 
 ## Digestive system - parsing parameters
 
 ### Positional parameters
 
-To parse positional parameters we need to define our function with ```METH_VARARGS``` flag in the module's functions definition:
+To parse positional parameters we need to define our function with `METH_VARARGS` flag in the module's functions definition:
+
 ```
-{"hello",  param_hello, METH_VARARGS, "Say hello."},
+{"hello", param_hello, METH_VARARGS, "Say hello."},
 ```
-With such a declaration our function will get one more parameter, similar to ```*args``` construct in pure Python:
+
+With such a declaration, our function will get one more parameter, similar to `*args` construct in pure Python:
+
 ```
 static PyObject *
 param_hello(PyObject *self, PyObject * args) {
     ...
 ```
-To parse the incoming parameters we can use the ```PyArg_ParseTuple``` function. We need to pass into the function the incoming arguments object and format string specifying what arguments you expect and a set of pointers where the data parsed from the parameters should be inserted. Before we call ```PyArg_ParseTuple```, we need to allocate space for the variables the parameters will be placed into:
+
+To parse the incoming parameters we can use the `PyArg_ParseTuple` function. We need to pass into the function the incoming arguments object and format string specifying what arguments you expect and a set of pointers where the data parsed from the parameters should be inserted. Before we call `PyArg_ParseTuple`, we need to allocate space for the variables the parameters will be placed into:
+
 ```
 const char * name;
 unsigned age;
 ```
 
 Only then can we attempt to parse parameters:
+
 ```
 if (!PyArg_ParseTuple(args, "sI", &name, &age)) {
     return NULL;
@@ -128,30 +150,34 @@ if (!PyArg_ParseTuple(args, "sI", &name, &age)) {
 // Parameters parsed, carry on ...
 ```
 
-The description of the formatting parameters can be found in the docs [2]. ```s``` means *convert to C string* (```char *```). ```I``` means convert to ```unsigned```. ```O``` means pass a Python object and the parameter can be placed into a ```PyObject *``` variable.
+The description of the formatting parameters can be found in the docs [2]. `s` means *convert to C string* (`char *`). `I` means convert to `unsigned`. `O` means pass a Python object and the parameter can be placed into a `PyObject *` variable.
 
-Notice that we are passing addresses of the variables (using the ```&``` operator); this is what enables Python to write the values into our variables in a return-parameter manner.
+Notice that we are passing addresses of the variables (using the `&` operator); this is what enables Python to write the values into our variables in a return-parameter manner.
 
 ### Keyword parameters
 
 If we want to give our users more freedom in passing parameters to our extension function, we can use keyword parameters. We need to declare the appropriate flag for our function:
+
 ```
 {"belongs", (PyCFunction)key_belongs, METH_VARARGS | METH_KEYWORDS, "..."},
 ```
 
 thus making Python pass it one more ```PyObject *```:
+
 ```
 static PyObject *
-key_belongs(PyObject *self, PyObject * args, PyObject * kwargs) {
+key_belongs(PyObject *self, PyObject *args, PyObject *kwargs) {
     ...
 ```
 
 We need to define the names of the incoming parameters:
+
 ```
 static char * keywords[] = {"mapping", "item", "category", NULL};
 ```
 
-and then we can call ```PyArg_ParseTupleAndKeywords``` function, passing it both positional and keyword arguments:
+and then we can call `PyArg_ParseTupleAndKeywords` function, passing it both positional and keyword arguments:
+
 ```
 if (!PyArg_ParseTupleAndKeywords(args, kwargs, "OOO", keywords, &mapping, &item, &category)) {
     return NULL;
@@ -161,23 +187,25 @@ if (!PyArg_ParseTupleAndKeywords(args, kwargs, "OOO", keywords, &mapping, &item,
 
 ## Hiccups - exceptions
 
-Most of Python API functions can indicate a failure. If the function is supposed to return a ```PyObject *```, it will return ```NULL``` when it fails. The details of the exception are set in the per-thread interpreter state.
+Most of Python API functions can indicate a failure. If the function is supposed to return a `PyObject *`, it will return `NULL` when it fails. The details of the exception are set in the per-thread interpreter state.
 
-If we detect a failed function call, we can just return the same ```NULL``` from our function. The details of the original exception are still stored within the interpreter, so if we don't modify the exception state, the original exception will be used.
+If we detect a failed function call, we can just return the same `NULL` from our function. The details of the original exception are still stored within the interpreter, so if we don't modify the exception state, the original exception will be used.
 
-For example the ```PyArg_ParseTuple``` function can return ```NULL``` if we pass an ```int``` where we were supposed to pass a ```str```. It will set the exception state to a ```TypError``` with message ```'must be str, not int'```. We can also set our own exception:
+For example the `PyArg_ParseTuple` function can return `NULL` if we pass an `int` where we were supposed to pass a `str`. It will set the exception state to a `TypError` with message `'must be str, not int'`. We can also set our own exception:
+
 ```
 PyErr_SetString(PyExc_RuntimeError, "Cannot format output");
 return NULL;
 ```
 
-Some functions (for example ```__init__``` C implementation) are supposed to return an ```int``` status. To signal an encountered exception we set the exception info using ```PyErr_SetString``` (or leave the one already set if the exception is coming from a deeper Python function call) and return ```-1``` from our function.
+Some functions (for example `__init__` C implementation) are supposed to return an `int` status. To signal an encountered exception we set the exception info using `PyErr_SetString` (or leave the one already set if the exception is coming from a deeper Python function call) and return `-1` from our function.
 
 ## Bones - API
 
-The API we can use in our Python C extensions is quite vast. We can read all about it in the Python docs [2]. API is split into sections, so all functions dealing with ```str``` are in one section (fun fact: in the API ```str``` is still refered to as ```Unicode```, for example ```PyUnicode_From...```), etc. We can find the equivalent calls for our Python constructs. Here are some examples:
+The API we can use in our Python C extensions is quite vast. We can read all about it in the Python docs [2]. API is split into sections, so all functions dealing with `str` are in one section (fun fact: in the API `str` is still referred to as `Unicode`, for example `PyUnicode_From...`), etc. We can find the equivalent calls for our Python constructs. Here are some examples:
 
-To get an item under a given key in a dictionary (```category_sequence = mapping[category]```), we use:
+To get an item under a given key in a dictionary (`category_sequence = mapping[category]`), we use:
+
 ```
 PyObject * category_sequence = PyObject_GetItem(mapping, category);
 if (category_sequence == NULL) {
@@ -186,7 +214,8 @@ if (category_sequence == NULL) {
 // Deal with the object ...
 ```
 
-To check if a sequence contains a given item (```contains = item in category_sequence```), we use:
+To check if a sequence contains given item (`contains = item in category_sequence`), we use:
+
 ```
 int contains = PySequence_Contains(category_sequence, item);
 if (contains == -1) {
@@ -200,34 +229,44 @@ if (contains == -1) {
 
 ## Population size - reference counting
 
-Python automatically manages memory using **reference counting** and a cyclic garbage collector. Reference counting means that for each Python object (```PyObject```) the interpreter stores a count of how many other objects are referencing it.
+Python automatically manages memory using **reference counting** and a cyclic garbage collector. Reference counting means that for each Python object (`PyObject`) the interpreter stores a count of how many other objects are referencing it.
 
 Supposing we have two dictionaries:
+
 ```
 dict_a = {'a': 'VALUE'}
 dict_b = {}
 ```
-The ```str``` object ```'VALUE'``` has a reference count of ```1```; only the object ```dict_a``` is referencing it. Once we do:
+
+The `str` object `'VALUE'` has a reference count of `1`; only the object `dict_a` is referencing it. Once we do:
+
 ```
 dict_b['b'] = dict['a']
 ```
-our ```str``` object is referenced by both ```dict_a``` and ```dict_b``` so its reference count is raising to ```2```. If we remove both references:
+
+our `str` object is referenced by both `dict_a` and `dict_b` so its reference count is raising to `2`. If we remove both references:
+
 ```
 del dict_a['a']
 del dict_b['b']
 ```
-then our ```str``` is no longer referenced by anything, its reference count drops to ```0``` and the interpreter knows that this object is no longer used, so the memory it occupied can be freed and reused later on.
+
+then our `str` is no longer referenced by anything, its reference count drops to `0` and the interpreter knows that this object is no longer used, so the memory it occupied can be freed and reused later on.
 
 This process of counting references is happening automatically in pure Python, but requires manual support when dealing with Python objects in C extensions.
 
 We need to manually increase the reference count on an object using
+
 ```
 Py_INCREF(result);
 ```
+
 and decrease it using
+
 ```
 Py_DECREF(category_sequence);
 ```
+
 macros.
 
 Knowing when to increase ref. count and when to decrease it is one of the hardest things to get right. When using any Python API function we need to check (in the docs [2]) if it returns *new reference* or *borrowed reference*.
@@ -237,13 +276,14 @@ The former means that the object returned by the API function already has the re
 In the latter case the reference count was not increased - our code didn't become one of the owners of the object's reference, so there is no need to decrease it when we are done with it. But if we would like to return it from our function or store it, we need to increase the reference count to make sure that Python will not deallocate that object.
 
 Check out the example of dealing with references:
+
 ```
-PyObject * mapping = ...;
-PyObject * item = ...;
-PyObject * category = ...;
+PyObject *mapping = ...;
+PyObject *item = ...;
+PyObject *category = ...;
 
 /* GetItem returns a new reference so the object's ref. count needs to be decremented */
-PyObject * category_sequence = PyObject_GetItem(mapping, category);
+PyObject *category_sequence = PyObject_GetItem(mapping, category);
 if (category_sequence == NULL) {
     return NULL;
 }
@@ -262,18 +302,20 @@ Py_INCREF(result);
 return result;
 ```
 
-There are also ```Py_XINCREF``` and  ```Py_XDECREF``` macros that, first of all, check if the pointer is not ```NULL```, and when it is, they are a no-op.
+There are also `Py_XINCREF` and  `Py_XDECREF` macros that, first of all, check if the pointer is not `NULL`, and when it is, they are a no-op.
 
 ## Species - classes
 
 It is possible to have classes implemented in C. It requires extending the code of our extension module with additional elements.
 
 An additional header needs to be included:
+
 ```
 #include <structmember.h>
 ```
 
 Then the structure (fields) of the class objects needs to be defined:
+
 ```
 typedef struct {
     PyObject_HEAD // Required header fields
@@ -282,10 +324,12 @@ typedef struct {
     PyObject * name;
 } Native;
 ```
-The structure needs to start with the required fields from ```PyObject_HEAD``` macro, but the rest of the members can be defined freely by the developer.
-The fields can reference other Python objects (```PyObject *```), they can be primitive types (```long```), pointers (```char *```) or any other type, even if Python is not be able to apply any default conversion to it.
 
-Once we define the structure, we can also define a Python mapping of fields, so that we will be able to access them straight from Python (```obj = Native(...); obj.name```):
+The structure needs to start with the required fields from `PyObject_HEAD` macro, but the rest of the members can be defined freely by the developer.
+The fields can reference other Python objects (`PyObject *`), they can be primitive types (`long`), pointers (`char *`) or any other type, even if Python is not be able to apply any default conversion to it.
+
+Once we define the structure, we can also define a Python mapping of fields, so that we will be able to access them straight from Python (`obj = Native(...); obj.name`):
+
 ```
 static PyMemberDef Native_members[] = {
     {"name", T_OBJECT_EX, offsetof(Native, name), 0, "Name"},
@@ -294,9 +338,11 @@ static PyMemberDef Native_members[] = {
     {NULL}  /* Sentinel */
 };
 ```
+
 For each member we define a name, type, offset in class structure, flags and a docstring.
 
-We can also define what methods will be available on our objects:
+We can also define which methods will be available on our objects:
+
 ```
 static PyMethodDef Native_methods[] = {
     {"summary", (PyCFunction)Native_summary, METH_NOARGS, "Return the name and the other attributes formatted"},
@@ -304,10 +350,11 @@ static PyMethodDef Native_methods[] = {
 };
 ```
 
-The methods will receive a pointer to a ```Native``` instance as the first parameter:
+The methods will receive a pointer to a `Native` instance as the first parameter:
+
 ```
 static PyObject *
-Native_summary(Native* self)
+Native_summary(Native *self)
 {
     if (self->name == NULL) {
         PyErr_SetString(PyExc_AttributeError, "name");
@@ -322,6 +369,7 @@ Native_summary(Native* self)
 ```
 
 The most important bit is the class definition:
+
 ```
 static PyTypeObject NativeType = {
     PyVarObject_HEAD_INIT(NULL, 0)
@@ -365,9 +413,11 @@ static PyTypeObject NativeType = {
     Native_new,                /* tp_new */
 };
 ```
-In this structure we can define some of the special functions that we implement for our type. In the most common case we implement ```__new__```, ```__init__``` and object deallocation.
 
-A sample ```__new__``` implementation:
+In this structure we can define some of the special functions that we implement for our type. In the most common case we implement `__new__`, `__init__` and object deallocation.
+
+A sample `__new__` implementation:
+
 ```
 static PyObject *
 Native_new(PyTypeObject *type, PyObject *args, PyObject *kwargs)
@@ -397,7 +447,8 @@ Native_new(PyTypeObject *type, PyObject *args, PyObject *kwargs)
 }
 ```
 
-A sample ```__init__``` implementation:
+A sample `__init__` implementation:
+
 ```
 static int
 Native_init(Native *self, PyObject *args, PyObject *kwargs)
@@ -426,9 +477,11 @@ Native_init(Native *self, PyObject *args, PyObject *kwargs)
     return 0;
 }
 ```
-Notice how this function returns an ```int```; ```__init__``` cannot return any other object but is used to initialize the ```self``` object.
+
+Notice how this function returns an `int`; `__init__` cannot return any other object but is used to initialize the `self` object.
 
 Sample deallocation implementation:
+
 ```
 static void
 Native_dealloc(Native * self)
@@ -441,12 +494,13 @@ Native_dealloc(Native * self)
 }
 ```
 
-The last thing that remains is to initialize and connect our type when module loads:
+The last thing that remains, is to initialize and connect our type when module loads:
+
 ```
 PyMODINIT_FUNC
 PyInit_obj(void)
 {
-    PyObject * module;
+    PyObject *module;
 
     if (PyType_Ready(&NativeType) < 0) {
         return NULL;
@@ -465,12 +519,14 @@ PyInit_obj(void)
 ```
 
 ## GIL and threading
+
 Python has the Global Interpreter Lock; only one thread at a time can be executing any Python code. This property of the language is making it better suited for *multi-process* setups than for *multi-thread* setups. But inside the code of our extension module we can declare a block as *not-using-Python* - not executing **any** Python API functions and not operating on any Python structures passed to it as arguments, etc. Such code can be executed *while* some other thread *is* executing different Python code **at the same time**. We should be releasing the interpreter whenever a blocking operation is being executed as long as it doesn't use any Python structures.
 
-Here is an example of how to wrap computations so that they don't hold the interpreter and so that they can be executed in threads in paralell with other Python code:
+Here is an example of how to wrap computations so that they don't hold the interpreter and so that they can be executed in threads in parallel with other Python code:
+
 ```
 static PyObject *
-gil_calc_release(PyObject * self, PyObject * args)
+gil_calc_release(PyObject *self, PyObject *args)
 {
     long n;
     if (!PyArg_ParseTuple(args, "l", &n)) {
@@ -487,11 +543,13 @@ gil_calc_release(PyObject * self, PyObject * args)
 ```
 
 ## Boost.Python
+
 A popular C++ library *Boost* provides the *Boost.Python* module for easier writing of Python extensions in C++.
 
 ### C++ code
 
 With *Boost* a different header is used:
+
 ```
 #include <boost/python.hpp>
 
@@ -499,6 +557,7 @@ using namespace boost::python;
 ```
 
 Functions can be declared with C++ arguments that will be automatically parsed by *Boost.Python*:
+
 ```
 bool has_letter(const char * text, const char letter) {
     const char * ptr = text;
@@ -512,6 +571,7 @@ bool has_letter(const char * text, const char letter) {
 ```
 
 To register such a function we don't need to create a module definition or module members structure. All we need is the module initialization function:
+
 ```
 BOOST_PYTHON_MODULE(boost)
 {
@@ -523,9 +583,10 @@ Extensions written using *Boost.Python* can be much more concise.
 
 ### Compiling and linking
 
-*Boost.Python* comes as a shared library. That means that during compilation and executing of our extension Python needs to be able to read the library's files. If the library is installed system-wide, we don't have to worry about paths. If the library is installed locally, we need to remember to pass the correct include path and library path during compilation and to have the ```LD_LIBRARY_PATH``` system variable correctly set during running.
+*Boost.Python* comes as a shared library. That means that during compilation and executing of our extension, Python needs to be able to read the library's files. If the library is installed system-wide, we don't have to worry about paths. If the library is installed locally, we need to remember to pass the correct include path and library path during compilation and to have the `LD_LIBRARY_PATH` system variable correctly set during running.
 
-The ```setup.py``` for a *Boost.Python* extension can look like this:
+The `setup.py` for a *Boost.Python* extension can look like this:
+
 ```
 boost = Extension(
     'boost',
@@ -535,9 +596,11 @@ boost = Extension(
     library_dirs=[os.path.join(BOOST_DIR, 'lib')],
 )
 ```
-Please note that we specify here that our extension should be linked to the ```boost_python``` shared library.
+
+Please note, we specify here that our extension should be linked to the ```boost_python``` shared library.
 
 *Boost.Python* also allows us to define classes in a simplified syntax.
+
 ```
 struct Native
 {
@@ -572,7 +635,7 @@ More information about *Boost.Python* can be found in the library's docs [4].
 
 Python extensions are a great tool for pushing the boundaries of what Python can do. Whether we want to code some calculations to work faster without the interpreter's overhead or we want to integrate with a shared library, extensions provide us with a way of doing it while still keeping the usual package installation procedure.
 
-Extensions are powerful and we can implement some really cool stuff with them [3], but we need to be very careful. Dealing with low level C is dangerous on its own and dealing with Python's internals at the same time adds to the complexity. One ```PyDECREF``` missing and we will have memory leaks. One ```PyDECREF``` too many and our extension will crash the whole interpreter with a core dump. Good luck!
+Extensions are powerful and we can implement some really cool stuff with them [3], but we need to be very careful. Dealing with low level C is dangerous on its own and dealing with Python's internals at the same time adds to the complexity. One `PyDECREF` missing and we will have memory leaks. One `PyDECREF` too many and our extension will crash the whole interpreter with a core dump. Good luck!
 
 ## References
 
