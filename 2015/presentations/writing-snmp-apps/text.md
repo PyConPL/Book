@@ -16,12 +16,12 @@ As we all know, many organizations around the world use Python for
 their IT automation needs, including network management. Over the
 course of last decade, many SNMP implementations appeared. Some are
 Python bindings to C-based [Net-SNMP library](http://www.net-snmp.org),
-which is by many considered being a reference implementation for SNMP 
+which is considered by many a reference implementation for SNMP 
 technology. Others are pure-Python modules addressing specific SNMP features.
 
-Among many SNMP libraries in existence in the Python landscape, right
+Among many SNMP libraries existing in the Python landscape, right
 from the start, PySNMP project aims at complete and universal SNMP
-implementation offering its users full power of SNMP technology across
+implementation, offering its users full power of SNMP technology across
 all computing platforms. Having taken this project seriously,
 [PySNMP](http://pysnmp.sf.net) developers also designed a couple of 
 foundation libraries: [PyASN1] (http://pyasn1.sf.net) and 
@@ -61,19 +61,19 @@ be performed right from your Python prompt:
         for varBind in varBinds:
             print(' = '.join([x.prettyPrint() for x in varBind ]))
 
-That code is somewhat verbose for a reason: PySNMP API exposes many SNMP
-details to programmer giving her great power and flexibility (attentive
-readers may have spotted a Python generator in the code). But before we
-dive into the details let me remind our readers basic SNMP design and how
-PySNMP architecture maps into it.
+That code is somewhat verbose for a reason: PySNMP API exposes many
+SNMP details, giving programmer great power and flexibility
+(attentive readers may have spotted a Python generator in the code).
+But before we dive into the details let me remind our readers basic
+SNMP design and how PySNMP architecture maps into it.
 
 A bit of background
 -------------------
 
-Back in early days of computer networking, as local networks grew in size
+In the early days of computer networking, as local networks grew in size
 and complexity, keeping an eye on expanding farm of computers, applications
 and other network equipment became a hassle to system administrators.
-Besides simple ping-like methods of testing hosts and services
+Besides simple ping-like methods for testing hosts and services
 availability, it became a necessity to gather more detailed information on
 systems health.  Manual configuration of increasing number of networked
 boxes did not scale well.
@@ -87,7 +87,7 @@ management they offered SNMP, which remains principal technology even
 today.
 
 As a technology, SNMP defines application layer protocol, data model and
-data objects. The protocol, which evolved a great deal since its initial
+data objects. The protocol, which evolved greatly since its initial
 introduction in early 80's, serves as a more or less secure, lightweight
 and fault-tolerant communication channel between parties.  SNMP data model
 maps all interesting nuances of host or application internals to named
@@ -108,8 +108,7 @@ SNMP to interested parties in form of SNMP variables.
 
 The other part of the system is called SNMP Manager, this component is
 always looking for SNMP variables either by querying SNMP Agents or
-listening for notifications they may produce whenever something happens to
-them. 
+listening for notifications they may produce whenever something happens.
 
 Library orientation
 -------------------
@@ -120,9 +119,11 @@ unique to SNMP are put into stand-alone Python packages to promote
 reusability.
 
 SNMP protocol is defined in terms of ASN.1 data structures, SNMP messages
-travelling the wire are encoded in BER. For those purposes PySNMP relies on
-generic implementation of ASN.1 types and codecs distributed as a dedicated
-Python package under the name of [PyASN1](http://pyasn1.sf.net).
+travelling the wire are encoded in
+[BER](https://en.wikipedia.org/wiki/X.690#BER_encoding). For those purposes
+PySNMP relies on generic implementation of ASN.1 types and codecs distributed
+as a dedicated Python package under the name of 
+[PyASN1](http://pyasn1.sf.net).
 
 SNMP-level data processing is performed by a collection of SNMP Message 
 Processing ([RFC3412](http://www.ietf.org/rfc/rfc3412.txt)) and Security
@@ -131,12 +132,12 @@ Processing ([RFC3412](http://www.ietf.org/rfc/rfc3412.txt)) and Security
 the third-party [PyCrypto](https://www.dlitz.net/software/pycrypto/)
 package.
 
-Base classes acting as a wireframe for SMI objects
+Base classes representing SMI types
 ([RFC2587](http://www.ietf.org/rfc/rfc2578.txt)) are defined in
-*pysnmp.smi.*... They carry out both of MIB purposes:
-for SNMP Manager apps, it's a hierarchical database of MIB variables
+*pysnmp.smi.*... They administer both of MIB purposes: for SNMP 
+Manager apps, it's a hierarchical database of MIB variables
 served by remote SNMP Agent. Agents can use PySNMP SMI objects for
-interfacing with backend host or system being managed.
+interfacing with backend host or application being managed.
 
 PySNMP is designed to run in asynchronous I/O environment.  Its I/O
 subsystem is built around a set of abstract classes (*pysnmp.carrier...*)
@@ -219,7 +220,7 @@ type and are uniformly initialized with:
 * SNMP authentication method: that can be SNMPv1/v2c Community Name or
   [RFC3414](http://www.ietf.org/rfc/rfc3414.txt) *UsmUser* object
   conveying USM username, encryption and ciphering keys.
-* Kind of I/O to use for this communication, endpoints addresses and
+* Type of I/O to use for communication, endpoints addresses and
   other transport-specific options
 * SNMP Context Engine ID and Context Name: these are only applicable
   to SNMPv3 operations and can be used to identify a non-default remote
@@ -375,7 +376,7 @@ SNMP Agents
 -----------
 
 PySNMP could act as a full-blown SNMP Agent supporting most of standard
-SNMP features pretty much out out the box. When building SNMP Agent, most
+SNMP features pretty much out the box. When building SNMP Agent, most
 development efforts normally go into establishing mapping between
 something to be monitored and MIB variable to be reported back to SNMP
 Manager.
