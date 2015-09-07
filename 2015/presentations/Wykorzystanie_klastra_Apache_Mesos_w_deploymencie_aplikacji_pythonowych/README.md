@@ -1,3 +1,3 @@
-#Wykorzystanie klastra Apache Mesos w deploymencie aplikacji pythonowych
+# Wykorzystanie klastra Apache Mesos w deploymencie aplikacji pythonowych
 
-##Kamil Warguła
+## Kamil Warguła
