@@ -1,3 +1,3 @@
-# Kosmiczny Python. #
+# Kosmiczny Python
 +
-+## Sławomir Piasecki ##
++## Sławomir Piasecki
