@@ -1,11 +1,6 @@
+# Writing SNMP Apps in Python - Ilya Etingof
 
-Writing SNMP Apps in Python
-===========================
-
-*Ilya Etingof, ietingof@redhat.com*
-
-Introduction
-------------
+## Introduction
 
 Network management is important for keeping your ever growing network
 infrastructure healthy and secure. SNMP is a well established
@@ -16,19 +11,18 @@ As we all know, many organizations around the world use Python for
 their IT automation needs, including network management. Over the
 course of last decade, many SNMP implementations appeared. Some are
 Python bindings to C-based [Net-SNMP library](http://www.net-snmp.org),
-which is considered by many a reference implementation for SNMP 
+which is considered by many a reference implementation for SNMP
 technology. Others are pure-Python modules addressing specific SNMP features.
 
 Among many SNMP libraries existing in the Python landscape, right
 from the start, PySNMP project aims at complete and universal SNMP
 implementation, offering its users full power of SNMP technology across
 all computing platforms. Having taken this project seriously,
-[PySNMP](http://pysnmp.sf.net) developers also designed a couple of 
-foundation libraries: [PyASN1] (http://pyasn1.sf.net) and 
+[PySNMP](http://pysnmp.sf.net) developers also designed a couple of
+foundation libraries: [PyASN1](http://pyasn1.sf.net) and
 [PySMI](http://pysmi.sf.net) as a byproduct of their PySNMP work.
 
-Hello, SNMP world!
-------------------
+## Hello, SNMP world!
 
 Most frequent and well understood SNMP operation is about fetching a
 value for a SNMP variable. In UNIX environment it is traditionally
@@ -40,7 +34,7 @@ done with snmpget tool:
 Here we queried publicly available SNMP Manager at *demo.snmplabs.com*
 for a value of MIB variable named *sysDescr.0*. The same operation can
 be performed right from your Python prompt:
-        
+
     from pysnmp.entity.rfc3413.oneliner.cmdgen import *
 
     errorIndication, errorStatus, errorIndex, varBinds = next(
@@ -67,8 +61,7 @@ SNMP details, giving programmer great power and flexibility
 But before we dive into the details let me remind our readers basic
 SNMP design and how PySNMP architecture maps into it.
 
-A bit of background
--------------------
+## A bit of background
 
 In the early days of computer networking, as local networks grew in size
 and complexity, keeping an eye on expanding farm of computers, applications
@@ -99,21 +92,20 @@ Although SNMP designers were trying to kill two birds with one stone,
 offering both information collection and versatile remote configuration
 features, the latter never really enjoyed much popularity among
 implementers. Thus most frequently, SNMP is used for gathering some or all
-variables from hosts or applications being managed. 
+variables from hosts or applications being managed.
 
 With SNMP architecture, managed host or application should have a component
 called SNMP Agent. It acts as an intermediate having access to
 host/application internals and being able to funnel that information over
-SNMP to interested parties in form of SNMP variables. 
+SNMP to interested parties in form of SNMP variables.
 
 The other part of the system is called SNMP Manager, this component is
 always looking for SNMP variables either by querying SNMP Agents or
 listening for notifications they may produce whenever something happens.
 
-Library orientation
--------------------
+## Library orientation
 
-The PySNMP library is internally structured along the lines of 
+The PySNMP library is internally structured along the lines of
 [RFC3411](http://www.ietf.org/rfc/rfc3411.txt). Components that are not
 unique to SNMP are put into stand-alone Python packages to promote
 reusability.
@@ -122,19 +114,19 @@ SNMP protocol is defined in terms of ASN.1 data structures, SNMP messages
 travelling the wire are encoded in
 [BER](https://en.wikipedia.org/wiki/X.690#BER_encoding). For those purposes
 PySNMP relies on generic implementation of ASN.1 types and codecs distributed
-as a dedicated Python package under the name of 
+as a dedicated Python package under the name of
 [PyASN1](http://pyasn1.sf.net).
 
-SNMP-level data processing is performed by a collection of SNMP Message 
+SNMP-level data processing is performed by a collection of SNMP Message
 Processing ([RFC3412](http://www.ietf.org/rfc/rfc3412.txt)) and Security
-([RFC3414](http://www.ietf.org/rfc/rfc3414.txt)) modules living in 
+([RFC3414](http://www.ietf.org/rfc/rfc3414.txt)) modules living in
 *pysnmp.proto...* sub-package. All crypto operations are offloaded to
 the third-party [PyCrypto](https://www.dlitz.net/software/pycrypto/)
 package.
 
 Base classes representing SMI types
 ([RFC2587](http://www.ietf.org/rfc/rfc2578.txt)) are defined in
-*pysnmp.smi.*... They administer both of MIB purposes: for SNMP 
+*pysnmp.smi...*. They administer both of MIB purposes: for SNMP
 Manager apps, it's a hierarchical database of MIB variables
 served by remote SNMP Agent. Agents can use PySNMP SMI objects for
 interfacing with backend host or application being managed.
@@ -174,8 +166,7 @@ Being optional, PySMI will be discovered and automatically used by Manager
 applications, running on top of high-level PySNMP API, for MIB variable
 names and types resolution.
 
-Common operations
------------------
+## Common operations
 
 Besides reading known scalar variables we mentioned earlier, SNMP is able
 to fetch a range of variable including those not known in advance. The
@@ -206,11 +197,11 @@ following code fetches all variables related to host's interface table:
                 print(' = '.join([ x.prettyPrint() for x in varBind ]))
 
 In this example we iterate remote SNMP Agent over two MIB variables
-(*IF-MIB::ifDescr* and *IF-MIB::ifType*) which are in fact two columns 
+(*IF-MIB::ifDescr* and *IF-MIB::ifType*) which are in fact two columns
 of SNMP table.
 
 Any operation carried out through high-level API involves Python generator.
-Each invocation of such generator translates into SNMP message being sent 
+Each invocation of such generator translates into SNMP message being sent
 and response processed. Generator functions are specific to SNMP message
 type and are uniformly initialized with:
 
@@ -224,7 +215,7 @@ type and are uniformly initialized with:
   other transport-specific options
 * SNMP Context Engine ID and Context Name: these are only applicable
   to SNMPv3 operations and can be used to identify a non-default remote
-  SNMP Engine instance or specific instance of MIB variables collection 
+  SNMP Engine instance or specific instance of MIB variables collection
   behind remote SNMP Engine.
 * Sequence of MIB variables to query. Sometimes MIB variable name should
   be accompanied with a value to transfer to remote SNMP entity. Such value
@@ -242,7 +233,7 @@ result items:
 * varBinds: is a list of two-element tuples, each correspond to MIB variable
   and its value.
 
-As we can send data back into running generator, our script could be 
+As we can send data back into running generator, our script could be
 modified to cherry-pick smaller sequences of adjacent MIB variables or even
 individual scalars:
 
@@ -312,8 +303,7 @@ Note the OBJECTS clause: it makes SNMP Notification Originator application
 gathering *ifIndex*, *ifAdminStatus*, *ifOperStatus* objects from its
 MIB variables store and reporting their values in the notification.
 
-Referring to MIBs
------------------
+## Referring to MIBs
 
 Surprisingly, SNMP can work without MIBs! Protocol itself does not depend
 on them. MIBs are designed as complimentary database to make SNMP
@@ -322,13 +312,13 @@ data more human readable and convenient to deal with.
 PySNMP library is designed to work without MIBs. You can always refer to
 a MIB variable via Object Identifier:
 
-    ObjectType(ObjectIdentity('1.3.6.1.2.1.1.1.0'), OctetString('my host')) 
+    ObjectType(ObjectIdentity('1.3.6.1.2.1.1.1.0'), OctetString('my host'))
 
 Whenever data type has to be specified, that can be done by passing
 corresponding PyASN1 type. Otherwise both variable identifier and
 data type associated with a variable would be looked up at MIB.
 
-    ObjectType(ObjectIdentity('SNMPv2-MIB', 'sysDescr', 0), 'my host') 
+    ObjectType(ObjectIdentity('SNMPv2-MIB', 'sysDescr', 0), 'my host')
 
 For MIB resolution to work, PySNMP application must load up MIB module
 being looked up. Internally, PySNMP represents MIBs as Python modules
@@ -372,11 +362,10 @@ could query *SNMPv2-MIB::sysORTable* MIB variables:
 An efficient Manager could then optimize its behavior by fetching required
 MIBs and querying MIB variables from those MIBs.
 
-SNMP Agents
------------
+## SNMP Agents
 
 PySNMP could act as a full-blown SNMP Agent supporting most of standard
-SNMP features pretty much out the box. When building SNMP Agent, most
+SNMP features pretty much out of the box. When building SNMP Agent, most
 development efforts normally go into establishing mapping between
 something to be monitored and MIB variable to be reported back to SNMP
 Manager.
@@ -422,8 +411,7 @@ provisioning your own instance of MIB Controller object to SNMP Agent:
     GetCommandResponder(snmpEngine, snmpContext)
     SetCommandResponder(snmpEngine, snmpContext)
 
-Real-world applications
------------------------
+## Real-world applications
 
 Over the years PySNMP developers created a couple of software products
 based on PySNMP library. That kind of reality check experience influenced
@@ -435,7 +423,7 @@ tool can create an illusion that large SNMP-managed network of various
 devices exists in your virtual laboratory. Emulated devices try to look live
 by reporting changing data. MIB variables can be configured to change
 according to some formula. Modified data can be made persistent by keeping
-MIB variables in SQL or noSQL database. 
+MIB variables in SQL or noSQL database.
 
 SNMP simulation toolkit also offers utilities that can capture SNMP traffic
 from real SNMP Agents, store captured MIB variables so that they could then
@@ -452,9 +440,9 @@ firewall passing SNMP traffic between open and protected network segments.
 The system is split into client and server parts connected with each other
 over encrypted channel. Typically, server part resides on public network
 responding to SNMP queries, while client part sits in DMZ talking to SNMP
-devices on protected network. SNMP protocol version translation could be 
+devices on protected network. SNMP protocol version translation could be
 performed on the fly, sophisticated SNMP data filtering and modification
-could be performed, response caching and request rate limiting could be 
+could be performed, response caching and request rate limiting could be
 set up to reduce SNMP load on end devices.
 
 Finally, we ship a pure-Python version of SNMP
@@ -462,10 +450,10 @@ Finally, we ship a pure-Python version of SNMP
 that try to mimic their Net-SNMP prototypes.
 Just do *pip install pysnmp-apps* and off you go!
 
-References
-----------
+## References
 
 1. [PySNMP project site](http://pysnmp.sf.net)
 2. [SNMP RFCs](http://www.snmp.com/protocol/snmp_rfcs.shtml)
 3. [Practical Guide to SNMPv3 and Network Management](http://www.amazon.com/Practical-Guide-Snmpv3-Network-Management/dp/0130214531/ref=pd_sim_14_4?ie=UTF8&refRID=0KNXDXE2XYXV13SX137H)
 4. [Understanding SNMP MIBs](http://www.amazon.com/Understanding-SNMP-MIBs-David-Perkins/dp/0134377087/ref=pd_sim_14_3?ie=UTF8&refRID=1N65YA65G01KJAKR6PD1)
+
