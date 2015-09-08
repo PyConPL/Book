@@ -19,7 +19,7 @@ review (or code inspection, how it is often called) requires preparation, skill
 and training. The time spent on review has to come from somewhere, and it
 usually comes from the time normally used to write that code in the first
 place. And you can't just have a dedicated, less skilled person hired specially
-to do it -- it have to be the same programmers who are actually writing that
+to do it -- it has to be the same programmers who are actually writing that
 code in the first place -- otherwise you do not get those benefits.
 
 Another problem is that many programmers don't like doing it, and will complain
