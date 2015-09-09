@@ -139,4 +139,6 @@ Example plPython code
     LANGUAGE plpythonu VOLATILE;
 
 
-    
+## Business logic
+
+The idea of storing business logic in database is pretty simpe in its basics.
