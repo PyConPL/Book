@@ -61,11 +61,49 @@ Also on some systems if you try to run Python and you’re getting this kind of 
 
 **bin/python2.7: error while loading shared libraries: libpython2.7.so.1.0: cannot open shared object file: No such file or directory**
 
-Then you need to add lib path of your newly compiled python to system lib path
+Then you need to add lib path of your newly compiled python to the system lib path
 
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/py/lib
     
 ## PostgreSQL with Python support
+
+Download source code.
+
+    wget https://ftp.postgresql.org/pub/source/v9.4.4/postgresql-9.4.4.tar.bz2
+
+Compile with Python support from */opt/py* directory
+
+    ./configure –prefix=/opt/pgsql —with-python PYTHON=/opt/py/bin/python
+    make
+    make install
+
+Now compile and install PostgreSQL plugins
+
+    cd ~/stuff/postgresql-9.4.3/contrib
+    make
+    make install
+
+## Create DB
+
+Now it is time to start PostgreSQL. First you have to initialize name space.
+
+    mkdir /opt/pg_data
+    /opt/pgsql/bin/initdb /opt/pg_data
+
+and start DB…
+
+    /opt/pgsql/bin/postmaster -p 5432 -D /opt/pg_data/
+
+Create new DB.
+
+    /opt/pgsql/bin/createdb -h localhost  -E utf8 pie
+
+Please remember about the correct encoding for DB! Now create new language for database pie
+
+    /opt/pgsql/bin/createlang -h localhost  -d pie plpythonu
+    
+And that's it. Simple as that. Your new DB has full Python support and we can start orginizing business logic in there.
+
 
 
 
