@@ -10,12 +10,12 @@ najstarszych dziedzin nauki. Przez wieki jedynym sposobem badania
 wszechświata było spoglądanie w niebo każdej nocy gołym okiem. Milowym krokiem
 w badaniach kosmosu okazał się wynalazek Galileusza.
 
-Teleskop ze szklanymi soczewkami umożliwił siegnąć głębiej wzrokiem w
-nieboskłon. Mogliśmy odkryć jowiszowe księżyce oraz kolejne planety w
-układzie słonecznym. Następnym krokiem w badaniu wszechświata okazało się
-wynalezienie fotografii, dzięki której można było zaobserwoać wiele asteroid
-poruszających się w układzie słonecznym. Najnowsza astronomia nie
-może się obejść bez komputerów, a co za tym idzie również bez programowania.
+Teleskop ze szklanymi soczewkami umożliwił głębsze sięgnięcie wzrokiem w
+nieboskłon. Mogliśmy odkryć księżyce Jowisza oraz kolejne planety w
+Układzie Słonecznym. Następnym krokiem w badaniu wszechświata okazało się
+wynalezienie fotografii, dzięki której zaobserwowano wiele asteroid
+poruszających się w Układzie Słonecznym. Najnowsza astronomia nie
+może się obejść bez komputerów, a co za tym idzie, również bez programowania.
 Najczęściej używanym językiem programowania w astronomii jest Fortran, który
 został stworzony do obliczeń numerycznych. Jego największą zaletą jest
 szybkość oraz szeroki zasób dodatkowych bibliotek.
@@ -29,12 +29,12 @@ numerycznych takich jak Mathematica czy MatLab.
 ## Python w Astronomii
 
 Mimo dominującej roli Fortrana i C w Astronomii coraz więcej osób korzysta do
-obliczeń Pythona. Mimo, iż jest to język interpretowany, a więc dużo wolniejszy
+obliczeń z języka Python. Mimo, iż jest to język interpretowany, a więc dużo wolniejszy
 od wcześniej wspomnianych, ma bardzo wielką zaletę, jest bardzo prosty do nauki.
 Astronomowie nie mają w swoim programie nauczania wystarczającej ilości godzin
 na naukę programowania, stąd Python, ze względu na swoją składnię oraz bardzo
 bogatą dokumentację, jest bardzo przyjazny początkującym i zdobywa coraz więcej
-zwolenników. Moduł matplotlib przypadł do gustów naukowcom i służy jako główne
+zwolenników. Moduł matplotlib przypadł do gustu naukowcom i służy jako główne
 narzędzie do wykreślania danych. Kolejnym atutem przemawiającym za Pythonem
 jest możliwość zintegrowania z już istniejącym kodem napisanym w C/C++ lub
 Fortranie.
@@ -42,21 +42,21 @@ Fortranie.
 ### AstroPy
 
 W astronomii najważniejsze są obserwacje, to dzięki nim weryfikowane są
-teorie które rodzą się w umysłach fizyków i astronomów. Obserwacje polegają
+teorie, które rodzą się w umysłach fizyków i astronomów. Obserwacje polegają
 głównie na detekcji fal elektromagnetycznych w całym zakresie.
 Badanie światła widzialnego, które do nas dociera, odbywa się z wykorzystaniem
-kamer CCD (Charge-Coupled Device). Każda kamera (również kamery CCD) ze względu
-na swoją budowe emituje róznego rodzaje szumy. Aby uzyskać wartościowe zdjęcie,
+kamer CCD (Charge-Coupled Device). Każda kamera (również kamery CCD), ze względu
+na swoją budowę, emituje różnego rodzaju szumy. Aby uzyskać wartościowe zdjęcie,
 które może posłużyć do badań, musimy pozbyć się tych szumów. Takie
-zdjęcie/ramkeę należy jeszcze skalibrować, czyli usunąć szum termiczny (DARK),
+zdjęcie/ramkę należy jeszcze skalibrować, czyli usunąć szum termiczny (DARK),
 który pojawia się podczas wykonywania zdjęcia, oraz podczas szczytywania (BIAS).
 Ostatnim elementem potrzebnym do kalibracji jest FLATFIELD, czyli
-zarejestrowana czułość pikseli, która jest normowana do 1 (najaśniejszy piksel).
-Podsumowywując, każde zdjęcie ma 'zanieczyszczenia' które muszą zostać
+zarejestrowana czułość pikseli, która jest normowana do 1 (najjaśniejszy piksel).
+Podsumowując, każde zdjęcie ma 'zanieczyszczenia', które muszą zostać
 usunięte, aby uzyskać wartościowe zdjęcie do dalszej analizy.
-Cały proces nie jest łatwy, gdyż ramek BIAS czy FLATFIELD robi się od kilku
+Cały proces nie jest łatwy, gdyż ramek BIAS, czy FLATFIELD, robi się od kilku
 do kilkunastu sztuk podczas obserwacji. Pierwsze ramki są uśredniane, a drugie
-sumowane, a następnie ramki są odejmowane od orginalnego zdjecia. Każde zdjęcie
+sumowane, a następnie ramki są odejmowane od orginalnego zdjęcia. Każde zdjęcie
 ma od kilku do kilkunastu megapikseli, więc wykonanie takich redukcji ręcznie
 jest niemożliwe.
 
@@ -71,7 +71,7 @@ wystarczy znany wszystkim układ kartezjański, potrzeba układu współrzędnyc
 wzbogaconych o pomiar czasu. Układy opisane poniżej to najczęściej używane w
 astronomii układy sferyczne, aby podać współrzędne obiektu najpierw taki układ
 musi być dobrze zdefiniowany. Każdy z układów posiada określone koło wielkie
-oraz punkt na tym kole od którego zaczynamy liczyć daną współrzędną. Drugą
+oraz punkt na tym kole, od którego zaczynamy liczyć daną współrzędną. Drugą
 wartość otrzymamy przez dodanie płaszczyzny prostopadłej do koła wielkiego.
 Druga płaszczyzna wyznacza na sferze dwa bieguny, a południk początkowy to ten,
 który przecina punkt początkowy.
@@ -86,22 +86,22 @@ to Azymut astronomiczny \bf{A}, mierzony w stopniach
 
 Kolejny układ współrzędnych wykorzystywany w astronomii nazywa się
 godzinowy. Współrzędne to kąt godzinny \b{t} mierzony w godzinach
-($0^{h}$-$24^{h}$). Deklinacja $\delta$ to druga współrzędna podawana jest w stopniach
+($0^{h}$-$24^{h}$). Deklinacja $\delta$ to druga współrzędna, która podawana jest w stopniach
 w zakresie [$-90^{\circ}$-$90^{\circ}$]. Są one zdefiniowane dzięki kołu wielkiemu
 przechodzącemu przez równik niebieski. Bieguny tego układu będą się pokrywać z
 osią obrotu ziemi.
 
 Układ współrzędnych równikowych równonocnych jest zdefiniowany jak godzinowy z
-tą różnicą, że punktem początkowym jest punkt barana, a współrzędne to
-deklinacja $\delta$ [$-90^{\circ}$-$90^{\circ}$] oraz rektascencja
+tą różnicą, że punktem początkowym jest punkt Barana, a współrzędne to
+deklinacja $\delta$ [$-90^{\circ}$-$90^{\circ}$] oraz rektascensja
 $\alpha$ mierzona jako kąt godzinny w przedziale 0^{h}, 24^{h}.
 
-Koło wielkie, po którym pozornie porusza się Słońce to ekliptyka, i jest on
+Koło wielkie, po którym pozornie porusza się Słońce, to ekliptyka, i jest ono
 podstawowym kołem w układzie ekliptycznym. Długość ekliptyczna $\lambda$
 oraz szerokość ekliptyczna $\Beta$ są liczone w stopniach
 (0^{\circ}, 360^{\circ}).
 
-Ostatnim układem będzie galaktyczny, jak łatwo się domyślić podstawową
+Ostatnim układem będzie galaktyczny, jak łatwo się domyślić, podstawową
 płaszczyzną będzie płaszczyzna galaktyki. I podobnie jak w ekliptycznym układzie
 mamy tutaj długość i szerokość galaktyczną [$-90^{\circ}$-$90^{\circ}$].
 
@@ -115,27 +115,27 @@ dostępne w module AstroPy.
 
 ### MatPlotLib
 
-Jest to moduł do rysowania wykresów, które tak często pojwaiają się w
-publikacjach. Biblioteka umożliwia rysowanie bardzo prostych w $2D$ lini,
-diagramów, aż po bardziej skomplikowane histogramy i kontury. Dołaczona jest również
+Jest to moduł do rysowania wykresów, które tak często pojawiają się w
+publikacjach. Biblioteka umożliwia rysowanie bardzo prostych w $2D$ linii,
+diagramów, aż po bardziej skomplikowane histogramy i kontury. Dołączona jest również
 biblioteka do wykresów $3D$, dzięki której wykreślimy atraktory, powierzchnie i
 wiele innych. Jednocześnie mamy wpływ na wszystkie elementy wykresów od opisów,
 przez osie, wielkość podziałki na osiach. Możemy wprowadzać wzory matematyczne,
-manipulować czcionką, wykreślać kilka a nawet kilkanaście wykresów. Na jednym
+manipulować czcionką, wykreślać kilka, a nawet kilkanaście wykresów. Na jednym
 obrazku możemy łączyć wykresy gęstości $2D$ z histogramami $1D$. Matplotlib daje
-nam naprawde bardzo dużo swobody w tworzeniu różnorakich wykresów.
+nam bardzo dużo swobody w tworzeniu różnorakich wykresów.
 
 ### AUTO
 
-Bifurykacja (rozdwojenie) jest to zjawisko skokowej zmiany własności modelu
-matematycznego, przy drobnej nawet zmianie parametrów. W mechanice nieba jednej
-z dziedzin astronomi bifurykacja następuje wtedy, gdy zmienia się liczba
-rozwiązań równania różniczkowego, podczas zmian parametru równania. Rozdwojenie
+Bifurkacja (rozdwojenie) jest to zjawisko skokowej zmiany własności modelu
+matematycznego, przy drobnej nawet zmianie parametrów. W mechanice nieba, jednej
+z dziedzin astronomii, bifurkacja następuje wtedy, gdy zmienia się liczba
+rozwiązań równania różniczkowego podczas zmian parametru równania. Rozdwojenie
 przedstawione na wykresie pozwala na wykrycie zachowań okresowych od
 chaotycznych. Dla takich przypadków zostało stworzone oprogramowanie o nazwie
-AUTO. AUTO jesto hybrydą Fortrana i Pythona, która jest wstanie wyznaczać punkty
-bifurykacji, wyznaczać stabilne i niestabilne rodziny periodycznych rozwiązań
-zwyczajnych równań róźniczkowych.
+AUTO. AUTO jesto hybrydą Fortrana i Pythona, która jest w stanie wyznaczać punkty
+bifurkacji, wyznaczać stabilne i niestabilne rodziny periodycznych rozwiązań
+zwyczajnych równań różniczkowych.
 
 Model Matematyczny oraz równania różniczkowe
 zapisujemy w Pythonie, również wszelkie ustawienia dotyczące sposobu obliczeń
@@ -144,10 +144,10 @@ Fortranie na podstawie danych zapisanych wcześniej.
 
 ## Zakończenie
 
-Niniejszy tekst niech posłuży jako słowniczek, odnośnik który ma za zadanie
-w najprostszy sposób wyjaśniać poszczególne zagadnienia o których będzie mowa
-podczas prezentacji. Mam nadzieje, że po przeczytaniu, słuchacz będzie miał
-większą świadomość o czym jest prezentacja.
+Niniejszy tekst niech posłuży jako słowniczek, odnośnik, który ma za zadanie
+w najprostszy sposób wyjaśniać poszczególne zagadnienia, o których będzie mowa
+podczas prezentacji. Mam nadzieję, że po przeczytaniu słuchacz będzie miał
+większą świadomość, o czym jest prezentacja.
 
 ## Bibiografia
 
