@@ -40,3 +40,32 @@ Some developers prefer to have business logic as a bunch of classes and function
 ## Why not ORM?
 
 Using ORM as a business logic container definitely has a lot of pros, although there is one serious problem with it. If you have a project which uses DB that is shared with other projects and those use different languages...then... You are going to use API for such a interactions with third-party software projects. How about if you have to deal with legacy code where there is not such an option to have API? Where to have business logic with one source of truth. How about using DB as a main source of trust?
+
+## Python
+
+Compiling Python is not a difficult process. Let me show you in few simples steps how to do it.
+
+Download python source code
+
+    wget https://www.python.org/ftp/python/2.7.10/Python-2.7.10.tgz
+
+Compile it. Warning, Please pay attention about –enable-shared flag!
+
+    ~/stuff/Python-2.7.10% ./configure —PREFIX=/opt/py –enable-shared
+
+Now it is very important to remember to compile python with **–enable-shared** option. Without it during PostgreSQL compilation you're not going to be able to use compiled Python as procedural language extension.
+
+Also on some systems if you try to run Python and you’re getting this kind of error
+
+    py ➤ bin/python2.7
+
+**bin/python2.7: error while loading shared libraries: libpython2.7.so.1.0: cannot open shared object file: No such file or directory**
+
+Then you need to add lib path of your newly compiled python to system lib path
+
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/py/lib
+    
+## PostgreSQL with Python support
+
+
+
