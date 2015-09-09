@@ -82,8 +82,8 @@ $(document).ready(function() {
 
 ##Eye Tribe
 
-EyeTribe is eye tracker hardware that is advertised as a cheap solution 
-but despite the self-describing name. What is eye tracking?
+EyeTribe is an eye tracker hardware that is advertised as a cheap solution, 
+despite the self-describing name, what is eye tracking?
 Eye tracking is the process of using sensors to estimate where someone 
 is looking – a point of gaze. Eye tribe uses infrared sensors for that purpose.
 Eye tracking can be used in a wide variety of applications typically 
