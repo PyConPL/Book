@@ -34,7 +34,7 @@ The key ingredient to ensemble is to select the base models with significant div
 ###Motivation Example
 Before going into the various ways of ensembling, let's take a step back and realize that ensembles do work with a simple example.
 
-Let's consider an example of classifying a credit card transaction as fradulent or not. The prediction has to be made on 10 transactions. Let's take the case where we already know those 10 cases to be fradulent. Encoding 1 as fradulent and 0 as not-fraudulent, let there be three base model ouputs, one each from Logistic Regression, Random Forest and Gradient Boosting, each having 70% accuracy.
+Let's consider an example of classifying a credit card transaction as fraudulent or not. The prediction has to be made on 10 transactions. Let's take the case where we already know those 10 cases to be fraudulent. Encoding 1 as fraudulent and 0 as non-fraudulent, let there be three base model outputs, one each from Logistic Regression, Random Forest and Gradient Boosting, each having 70% accuracy.
 
 While individual models have 70% accuracy, consider a simple way of ensembling them: Majority voting. Using majority voting scheme as the ensembling function, the prediction accuracy is boosted from 70% to 90%. Case 6 alone will remain mis-classified, as shown in Table 1.
 
@@ -55,7 +55,7 @@ While individual models have 70% accuracy, consider a simple way of ensembling t
 | 0           | 1       |      1            | 1  |
 
 
-A key point to be stressed again is that model diversity is important. If the models were similar, the output would've been similar and there would've been no improvement i the output.
+A key point to be stressed again is that model diversity is important. If the models were similar, the output would've been similar and there would've been no improvement in the output.
 
 ###Advantages
  Some of the advantages of using ensemble models are:
@@ -68,10 +68,7 @@ A key point to be stressed again is that model diversity is important. If the mo
 * **Reduces overfitting**
 
 
-
-
 ### Different ways to create ensemble models
-
 
 ####Base Models
 
@@ -79,9 +76,9 @@ Let's now discuss some of the ways to create the base models, to ensure that the
 
 1. **Different training sets**: If there's enough data, the same model can be run on different training examples. In practice, transformation of original training set is carried out to create multiple training sets. (*Widely used*)
 2. **Different algorithms/algorithm diversity**: Choose diverse algorithms. `LinearRegression`, `LogisticRegression` are diverse from `DecisionTree`, `RandomForest` etc (Regression Vs Tree-based). `SVM` is another class of algorithms. Also, `Regression` could be L1 or L2. The basis function for `SVM` could be radial or linear.  (*Widely used*)
-3. **Different parameter setups**: Called the hyperparameters, the parameters of the model can be varied to obtained different model outputs. An example would be to build `RandomForest` with shallow trees versus building it with denser trees (less trees vs more trees) (*Widely used*)
+3. **Different parameter setups**: Called the hyperparameters, the parameters of the model can be varied to obtain different model outputs. An example would be to build `RandomForest` with shallow trees versus building it with denser trees (less trees vs more trees) (*Widely used*)
 4. **Algorithm randomization**: A lot of the models have randomness playing a key part and the model can be run with different random initialization. (*Not so widely used*)
-5. **Feature Sampling** Using subset of columns for different model runs produce different model outputs and can help in estimating and containing variance of model predictions(*Widely used*)
+5. **Feature Sampling** Using subset of columns for different model runs, produce different model outputs and can help in estimating and containing variance of model predictions(*Widely used*)
 
 
 #### Model Aggregation
