@@ -128,19 +128,20 @@ nam bardzo dużo swobody w tworzeniu różnorakich wykresów.
 ### AUTO
 
 Bifurkacja (rozdwojenie) jest to zjawisko skokowej zmiany własności modelu
-matematycznego, przy drobnej nawet zmianie parametrów. W mechanice nieba, jednej
+matematycznego, nawet przy drobnej zmianie parametrów. W mechanice nieba, jednej
 z dziedzin astronomii, bifurkacja następuje wtedy, gdy zmienia się liczba
 rozwiązań równania różniczkowego podczas zmian parametru równania. Rozdwojenie
-przedstawione na wykresie pozwala na wykrycie zachowań okresowych od
-chaotycznych. Dla takich przypadków zostało stworzone oprogramowanie o nazwie
-AUTO. AUTO jesto hybrydą Fortrana i Pythona, która jest w stanie wyznaczać punkty
-bifurkacji, wyznaczać stabilne i niestabilne rodziny periodycznych rozwiązań
-zwyczajnych równań różniczkowych.
+przedstawione na wykresie pozwala na odróżnienie zachowań okresowych od
+chaotycznych. Dla takich przypadków powstało oprogramowanie AUTO, używające
+języków Fortran i Python. AUTO jest w stanie określać punkty
+bifurkacji, a także wyznaczać stabilne i niestabilne rodziny periodycznych
+rozwiązań zwyczajnych równań różniczkowych.
 
-Model Matematyczny oraz równania różniczkowe
-zapisujemy w Pythonie, również wszelkie ustawienia dotyczące sposobu obliczeń
-znajdują się w postaci listy. Obliczenia wykonywane są natomiast we
-Fortranie na podstawie danych zapisanych wcześniej.
+Model matematyczny oraz równania różniczkowe zapisuje się w języku Python, a
+do przechowania wszelkich ustawień dotyczących sposobu obliczeń stosuje się
+strukturę listy.
+Obliczenia wykonywane są natomiast we Fortranie na podstawie zapisanych
+wcześniej danych.
 
 ## Zakończenie
 
