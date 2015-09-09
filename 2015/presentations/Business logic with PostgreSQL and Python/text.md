@@ -35,4 +35,8 @@ Example piece of pseudo code in Django ORM
 
 By this simple example you can see how easly it is to customize save method in Django ORM. By having such a custom code you can put some business logic in there. For instance you are able to prevalidate data before saving or modify data before save takes an action. There are unlimited options.
 
+Some developers prefer to have business logic as a bunch of classes and functionalities stored in them. That is also a good solution as long as you keep attention and always in your code there is only one source of truth (code/functionality repetitions).
 
+## Why not ORM?
+
+Using ORM as a business logic container definitely has a lot of pros, although there is one serious problem with it. If you have a project which uses DB that is shared with other projects and those use different languages...then... You are going to use API for such a interactions with third-party software projects. How about if you have to deal with legacy code where there is not such an option to have API? Where to have business logic with one source of truth. How about using DB as a main source of trust?
