@@ -8,21 +8,21 @@ are getting more and more popular, especially in web development.
 While it's hard to beat the convenience of using an ORM, they lure us into
 thinking about a database as a simple "object storage". One of the problems is
 the fact that in most ORMs, querying the database happens pretty much
-exclusively via a model class, which constrains the set of results to known
+exclusively via a model class, which constrains the set of results to a known
 attributes of our objects.
 
 This might be one of the reasons why NoSQL approaches are more alluring: just
 throw your objects into a bin and save them on the disk. Indeed, there is no
 need to worry about tables, constraints and indexes if all you do is load data
-from the storage and process it inside the app!
+from the storage and process it inside the application!
 
-I think the "object storage" way of thinking servely limits our ability to
+I think the "object storage" way of thinking severely limits our ability to
 process the data. In a relational model, columns are computed ad-hoc, when
 returning query result, not when defining the schema. This is one of the
 aspects of so-called "object-relational impedance mismatch" that results in
-much headache for people smarter than us.
+headaches for people smarter than us.
 
-In this article, I'd like to show a few features of relational model which,
+In this article, I'd like to show a few features of a relational model which,
 while mapping poorly to object-oriented world, give the programmer very
 powerful data manipulation tools.
 
@@ -34,8 +34,9 @@ like Python.
 
 ## Views
 
-Consider an university schedule. There are buildings, room and lectures
-happening in these rooms. The schema is a fairly straightforward one:
+Consider an university schedule. There are buildings, rooms and lectures
+happening in these rooms. The schema is a fairly straightforward one (all of
+the samples are using Django ORM):
 
 ```python
 class Room(models.Model):
@@ -80,7 +81,9 @@ result is going to be something like this:
 ```
 
 Then, partition the result by building name, within each partition order rows
-by number of lectures, then fetch first and last value of "month" column:
+by number of lectures, then fetch first and last value of "month" column
+(be sure to use a real relational DBMS, MySQL can't do any of the presented
+sql snippets):
 
 ```sql
 with "busy_months" as (
@@ -149,7 +152,7 @@ class BusyMonths(models.Model):
         ordering = ('building',)
 ```
 
-There's one shotcoming though: Django requires all models to have a
+There's one shortcoming though: Django requires all models to have a
 single-column primary key. In our case, building names are unique in the result,
 so we can tell Django to just use that. This is not always the case though, and
 you might end up with adding superficial auto-incrementing column just to make
@@ -164,7 +167,7 @@ create view "needs_id" as
 ```
 
 The only remaining thing is creating a schema migration that would install
-our SQL view in the database. This can be done by just executing an SQL script
+our SQL view in the database. This can be done by executing an SQL script
 via `migrations.RunSQL` operation. You can find the details in the sample
 project.
 
@@ -192,7 +195,7 @@ Now, we would like to know who of the students is improving over time and who's
 getting worse. One way of doing that is a "least squares method", which
 interpolates a set of points with a straight line.
 
-As said before, to do that in your app, you would need to fetch *all* grades
+As said before, to do that in your application, you would need to fetch *all* grades
 from the database, group them by student *yourself* and run `numpy` or
 something on each set. What if you could write an ORM query that looks like
 this?
@@ -234,7 +237,7 @@ create aggregate linear_fit(float)
 );
 ```
 
-This allows us to write a following query:
+This allows us to write the following query:
 
 ```sql
 select
@@ -245,12 +248,12 @@ left join "grades_grade" on "grades_grade"."student_id" = "auth_user"."id"
 ```
 
 Looks good, but as with the view, we still need to map this to ORM somehow.
-This is slightly more complex, as we need to define an ORM wrapper for our
+This is slightly more complex, we need to define an ORM wrapper for our
 custom aggregation function. This is similar to what Django already provides:
 `Count` wraps the `count()`, `Avg` wraps `avg` and so on. We need to make our
 own `LinearFit` that wraps `linear_fit`.
 
-This is a little complicated, as we need to dig deeper into the ORM...
+This is little complicated, as we need to dig deeper into the ORM...
 
 Long story short: when we write a query, Django constructs a tree of
 "expressions" to reflect our wishes.  Then, this tree is "compiled" to SQL
@@ -260,6 +263,7 @@ table to a set of `Model` instances.
 To add a custom aggregate, we need to define a custom "expression". Luckily, we
 can base it on built-in base expression classes. There is one for database-side
 functions, appropriately named `Func`. Unfortunately, it doesn't support
+
 ```sql
 select aggregate_function(column order by another_column)
 ```
@@ -332,8 +336,6 @@ I would like to encourage everyone dealing with databases to dig a bit deeper
 into the relational world and stop relying exclusively on the ORM. The two
 examples are just a tip of an iceberg, there is *much* more in SQL than you
 think.
-
-PS: Just be sure to use a real relational DBMS. MySQL can't do any of the above.
 
 ## Further reading
 
