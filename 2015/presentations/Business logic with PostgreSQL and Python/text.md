@@ -104,6 +104,39 @@ Please remember about the correct encoding for DB! Now create new language for d
     
 And that's it. Simple as that. Your new DB has full Python support and we can start orginizing business logic in there.
 
+## First function
+
+Before you are going to create your first plPython (PostgreSQL stored Python functions) you have to know how it works. Your newly compiled Python and its modules are fully accessible from plPython. That means that all the big library of Python modules is fully open for your access when you're going to write your business logic.
+
+Example plPython code
+
+    create or replace function logic.get_active_bills()
+    returns text as
+    $$
+    
+    import redis
+    from cPickle import loads
+    from cjson import encode
+    
+    in_server = '127.0.0.1'
+    in_port = 6379
+    
+    POOL = redis.ConnectionPool(host=in_server, port = in_port if in_port is not None else 6379, db = 1)
+    r = redis.Redis(connection_pool = POOL)
+    
+    status = {'msg' : '', 'status' : False } # let False means error, True - all OK
+    bills = r.keys('bill_active:*')
+    all_bills = []
+    for k in bills if bills else []:
+        out = r.get(k)
+        if out is None:
+            continue
+        data = loads(out)
+        all_bills.append(data)
+    
+    return encode({'status' : status, 'data' : all_bills})
+    $$
+    LANGUAGE plpythonu VOLATILE;
 
 
-
+    
