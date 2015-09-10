@@ -2,13 +2,13 @@
 
 ## Introduction
 
-In my opinion PostgreSQL is the most advanced open source database. It has so many powerful features that is really difficult to put all of them here in this one acticle.
+In my opinion PostgreSQL is the most advanced open source database. It has so many powerful features that is really difficult to put all of them in this one acticle.
 
-Here below I'm going to show you the least known feature of PostgreSQL which is procedural languages and stored functions. By using those stored procedures we are going to build business logic step by step.
+Below I'm going to show you the least known features of PostgreSQL which is procedural languages and stored functions. By using stored procedures we are going to build business logic step by step.
 
 ## Business logic
 
-By this term we are going to call all of those blocks of code which are responsible for making calculations and taking decisions about data flow. In many cases most of developers decide to build business logic as a part ORM models. It is pretty convenient. Whenever data is being used from database ORM can take control and decide how data is going to be returned to upper objects. Some ORM frameworks like Django allow us to extend base model and start building our own logic in a very complex way.
+This term we are going to call all of those blocks of code which are responsible for making calculations and taking decisions about data flow. In many cases most of developers decide to build business logic as part ORM models. It is pretty convenient. Whenever data is being used from database ORM can take control and decide how data is going to be returned to upper objects. Some ORM frameworks like Django allow us to extend base model and start building our own logic in a very complex way.
 
 Example piece of pseudo code in Django ORM
 
@@ -33,13 +33,13 @@ Example piece of pseudo code in Django ORM
           # also we can have another level of customization here
           super(History, self).save(*args, **kwargs)
 
-By this simple example you can see how easly it is to customize save method in Django ORM. By having such a custom code you can put some business logic in there. For instance you are able to prevalidate data before saving or modify data before save takes an action. There are unlimited options.
+This simple example you can see how easly it is to customize save method in Django ORM. By having such a custom code you can put some business logic in there. For instance you are able to prevalidate data before saving or modify data before save takes an action. There are unlimited options.
 
-Some developers prefer to have business logic as a bunch of classes and functionalities stored in them. That is also a good solution as long as you keep attention and always in your code there is only one source of truth (code/functionality repetitions).
+Some developers prefer to have business logic as a bunch of classes and functionalities stored in them. That is also a good solution as long as you keep attention and always is only one source of truth (code/functionality repetitions).
 
 ## Why not ORM?
 
-Using ORM as a business logic container definitely has a lot of pros, although there is one serious problem with it. If you have a project which uses DB that is shared with other projects and those use different languages...then... You are going to use API for such a interactions with third-party software projects. How about if you have to deal with legacy code where there is not such an option to have API? Where to have business logic with one source of truth. How about using DB as a main source of trust?
+Using ORM as a business logic container definitely has a lot of pros, although there is one serious problem with it. If you have a project which uses DB that is shared with other projects and those use different languages...then... You are going to use API for such interactions with third-party software projects. How about if you have to deal with legacy code where there is not such option to have API? Where to have business logic with one source of truth. How about using DB as a main source of trust?
 
 ## Python
 
@@ -53,7 +53,7 @@ Compile it. Warning, Please pay attention about –enable-shared flag!
 
     ~/stuff/Python-2.7.10% ./configure —PREFIX=/opt/py –enable-shared
 
-Now it is very important to remember to compile python with **–enable-shared** option. Without it during PostgreSQL compilation you're not going to be able to use compiled Python as procedural language extension.
+It is very important to remember to compile python with **–enable-shared** option. Without it during PostgreSQL compilation you're not going to be able to use compiled Python as procedural language extension.
 
 Also on some systems if you try to run Python and you’re getting this kind of error
 
@@ -106,7 +106,7 @@ And that's it. Simple as that. Your new DB has full Python support and we can st
 
 ## First function
 
-Before you are going to create your first plPython (PostgreSQL stored Python functions) you have to know how it works. Your newly compiled Python and its modules are fully accessible from plPython. That means that all the big library of Python modules is fully open for your access when you're going to write your business logic.
+Before you are going to create your first plPython (PostgreSQL stored Python functions) you have to know how it works. Your newly compiled Python and its modules are fully accessible from plPython. This means that the entire Python standard library is fully accessible when writing your business logic. Also you can install any kind of module which you may use later from your functions.
 
 Example plPython code
 
@@ -139,6 +139,9 @@ Example plPython code
     LANGUAGE plpythonu VOLATILE;
 
 
-## Business logic
+## Business logic basics
 
-The idea of storing business logic in database is pretty simpe in its basics.
+For bulding business logic I will use trigger functions on tables that I am going to create. Doesn't matter if tables are going to be controlled by any ORM or they are going to get access by using pure SQL. Each time data is being changed trigger is going to be used and corresponding function is going to be called. Of course when 
+
+## Summary
+
