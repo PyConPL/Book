@@ -1,14 +1,14 @@
 # Dokku. Build your own PaaS - Sergey Parkhomenko
 
 ## Introduction
-Don’t ike configuring and satisfying system requirements? Your dream is to deploy applications in one click? 
+Don’t like configuring and satisfying system requirements? Your dream is to deploy applications in one click? 
 PaaS is the solution! During the year 2014, we all did a great dive into the world of development automatisation and 
 optimisation. Riding this curve, there are a lot of cloud PaaS providers. The most famous are Heroku,
-Google Apps Engine etc. Each of them offers great opportunities for deploying, running and scaling your application,
+Google Apps Engine, etc. Each of them offers great opportunities for deploying, running and scaling your application,
 but the first and the biggest issue is that they don’t offer enough flexibility in environment configuration.
-Every developer had a situation when he need something more from provider who gives you limited bunch of features.
+Every developer had a situation when he needed something more from provider, who gives you limited bunch of features.
 Another issue is cost. PaaS providers, mentioned above, cost money. This is not bad, because they do their job well,
-but it’s possible to avoid those expenses. And now is time to say one word: “Dokku”.
+but it is possible to avoid those expenses. And now is time to say one word: “Dokku”.
 
 ## Definitions
 **Platform as a service (PaaS)** is a category of cloud computing services that provides a platform allowing customers
@@ -26,7 +26,7 @@ installed in private data centers or public infrastructure as a service and mana
 Docker images and Dockerfiles
 
 ## PaaS use case
-Lets imagine that you have a small blog written in Django which you need to deploy fast an easy. Also this blog is
+Let'ts imagine that you have a small blog written in Django which you need to deploy fast an easy. Also this blog is
 under development and you are going to roll out updates every day during the upcoming month. Simultaneously, lets
 imagine default actions which you do when you need to match such requirements. You purchase a new virtual or
 dedicated server, or buy a new EC2 instance, set up a new environment for the project, or adopt your existing
