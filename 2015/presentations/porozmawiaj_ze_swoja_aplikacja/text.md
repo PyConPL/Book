@@ -48,7 +48,7 @@ Nie zawsze stworzenie własnego Call Center wymaga pracy programistów, w prosty
 Jedną z bardziej popularnych, jeśli nie najpopularniejszą platformą umożliwiającą implementację "interfejsu telefonicznego" we własnych projektach jest - jak już wspomnieliśmy - Twilio. Rzut okiem na listę firm i organizacji korzystających z ich rozwiązań rozwiewa ewentualne wątpliwości - figurują tam m.in. ebay, Uber, airbnb, a nawet filadelfijska policja.
 Z pewnością istotną rolę w zdobywaniu popularności odgrywa dostępność i przystępność produktów spod szyldu Twilio. Oferowane w modelu IaaS, pozwalają wzbogacić system o funkcjonalność wykonywania i odbierania połączeń (do wykorzystania out-of-the-box syntezator mowy w wielu językach) oraz wysyłania i odbierania wiadomości tekstowych w sposób dziecinnie prosty. A to daje szerokie pole do popisu - powiadomienia SMS, telekonferencje, alarmy, automatyczna infolinia, autoryzacja i wiele, wiele innych, gotowe do użycia w przeciągu kilku godzin. Najważniejsze jest to, że nie trzeba się martwić o skomplikowaną infrastrukturę. Oczywiście usługi nie są darmowe, jednak ich ceny wydają się rozsądne nawet dla prywatnych projektów czy małych firm, nie wspominając o porównaniu do kosztów zbudowania podobnych rozwiązań od podstaw. Warto przy okazji zauważyć, że Twilio dość aktywnie wspiera developerów i uczestniczy m.in. w organizacji hackathonów - na takiej formie promocji korzystają obie strony.
 
-Połączenia i wiadomości wysłane za pośrednictwem Twilio dotrą do niemal 200 krajów na całym świecie, natomiast odbiór poprzez lokalne numery możliwy jest w ponad 40 krajach. Możemy więc założyć kilka numerów i udostępnić własną aplikację na lokalnych rynkach w Polsce, Niemczech, Meksyku, Portoryko i Hong Kongu. :)
+Połączenia i wiadomości wysłane za pośrednictwem Twilio dotrą do niemal 200 krajów na całym świecie, natomiast odbiór poprzez lokalne numery możliwy jest w ponad 40 krajach. Możemy więc założyć kilka numerów i udostępnić własną aplikację na lokalnych rynkach w Polsce, Niemczech, Meksyku, Portoryko i Hong Kongu.
 
 Komunikacja z Twilio odbywa się dwukierunkowo. Akcje wykonywane przez aplikację wywołują metody RESTowego API (`api.twilio.com`). Za reakcję na zdarzenia odpowiedzialne jest już nasze własne API, do którego zapytania kieruje Twilio, oczekując odpowiednich komunikatów XML.
 Korzystanie z obu wymienionych ułatwia udostępniona przez Twilio biblioteka (`pip install twilio`). Moduł `twilio.rest` wykorzystujemy np. w celu zainicjowania połączenia czy wysłania wiadomości. Zaś do generowania XML-owych… tzn. TwiML-owych odpowiedzi obsługujących odbiór połączeń i wiadomości, używamy `twilio.twiml`.
@@ -62,7 +62,7 @@ Krótki przykład najlepiej zobrazuje tę prostotę, którą tak się zachwycamy
 >>> client.messages.create(to='+48123456789', from_=MY_NUMBER, body='Hello world!')
 ```
 
-Tym sposobem zostało wykonane zapytanie do RESTowego API, co z kolei poskutkowało wysłaniem SMSa. Easy peasy lemon squeze.
+Tym sposobem zostało wykonane zapytanie do RESTowego API, co z kolei poskutkowało wysłaniem SMSa.
 
 IVR wymaga już nieco więcej wkładu, niemniej nadal jest stosunkowo łatwy do zaimplementowania. Poniżej fragment kodu - widok Django - stanowiący bazę pod IVR. Dzwoniący wybiera dział, z którym chce się połączyć. Po dokonaniu wyboru rozmowa zostaje przekierowana na odpowiedni numer.
 
@@ -117,7 +117,7 @@ class IVR(View):
 
 Dzięki prostej obsłudze przekierowań aplikację można dowolnie rozbudowywać, dokładając kolejne widoki zwracające komunikaty TwiML. A kiedy głos Alice stanie się męczący, nic nie stoi na przeszkodzie, by nagrać własne komunikaty. 
 
-Co dalej? Twilio przygotowało dość obszerną dokumentację. I choć nawigacja wydaje się umiarkowanie intuicyjna, dokumentacja pokrywa zdecydowaną większość dostępnych funkcjonalności oraz ich kombinacji i stanowi dobry materiał do dalszej eksploracji tematu. Do czego gorąco zachęcamy. ;)
+Co dalej? Twilio przygotowało dość obszerną dokumentację. I choć nawigacja wydaje się umiarkowanie intuicyjna, dokumentacja pokrywa zdecydowaną większość dostępnych funkcjonalności oraz ich kombinacji i stanowi dobry materiał do dalszej eksploracji tematu. Do czego gorąco zachęcamy.
 
 
 
