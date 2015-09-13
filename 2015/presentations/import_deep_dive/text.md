@@ -53,14 +53,14 @@ Suppose there is an extensible sound editor, where individual filters
 (like "echo", "reverb" and "speedup") are implemented as Python modules,
 and can be installed individually.
 
-"Individually" means "to different locations".
-Your `sys.path` will usually include several kinds of locations. On a Unixy
+"Individually" means "in different locations".
+Your `sys.path` will usually include several kinds of locations. On a Linux
 machine, the path will typically have:
 
 * Directories from `$PYTHONPATH`, and the current directory
 * The Python standard library (e.g. `/usr/lib/python3.4`)
-* User-specific locations (such as `~/.local/lib/python3.4/site-packages`)
-* A place for packages installed system-wide (like `/usr/lib/python3.4/site-packages`)
+* User-specific locations (e.g. `~/.local/lib/python3.4/site-packages`)
+* A place for system-wide installed packages (e.g. `/usr/lib/python3.4/site-packages`)
 
 Suppose you install the editor and a built-in "echo" filter system-wide,
 a private "reverb" filter to your home directory, and you have "speedup"
@@ -87,7 +87,7 @@ Remember that adding an `__init__.py` to *any* of the `sound_editor_filters`
 directories will cancel the magic. Any directory with `__init__` is a regular
 package, its `__init__`-less siblings are ignored.
 
-Long before namespace packages were added to core Python, `setuptools` contained
+Long before namespace packages were added to CPython, `setuptools` contained
 [an utility](https://pythonhosted.org/setuptools/setuptools.html#namespace-packages)
 to declare namespaces manually and explicitly.
 Of course, this still works – and if you need to support Python 2,
@@ -101,11 +101,11 @@ how to extend importlib to do new, exciting things?
 
 If you're interested in this, I'll just direct you to
 [importlib documentation](https://docs.python.org/3/library/importlib.html).
-Now that you know the terminology and and the "normal" way of how things are
+Now that you know the terminology and the "normal" way of how things are
 done, those docs should make much more sense.
 
 Instead, I'll mention some real-world projects that use custom import hooks,
-which you can use as inspiration about what's possible.
+which you can use as an inspiration about what's possible.
 
 Hy (hy.readthedocs.org) allows you to import modules written in a dialect of
 Lisp. Or as its docs put it, it's "lisp-stick on a Python".
@@ -117,7 +117,7 @@ This is a good approach for any project that wants to embed a custom language
 in the Python runtime.
 
 The Macropy project uses a similar technique to add syntactic macros to
-Python code. Conceptually, it's the same as Hy, except the language is a bit
+Python code. Conceptually, it's the same as Hy, except that the language is a bit
 more similar to Python.
 
 Perhaps most widely used of import customizations is Cython's `pyximport`,
@@ -144,7 +144,7 @@ filesystem, a common approach is to do:
     >>> with open(filename, 'rb') as f:
     ...     data = f.read()
 
-However, this will only work when the module and data is loaded from regular
+However, this will only work when the module and data are loaded from regular
 files. If they were, for example, distributed in a zip file, the `open`
 function would fail.
 
@@ -173,8 +173,8 @@ any language that can export C-like functions, such as
 C++ or Rust, will do.)
 Anyway, how are extension modules loaded?
 
-An extension is a shared library – a DLL on Windows, a `.so` file on Unixoid
-systems. It exports one function called `PyInit_<modulename>`.
+An extension is a shared library, such as a DLL on Windows or a `.so` file on
+Linux. It exports one function called `PyInit_<modulename>`.
 
 When the shared library file is found (using `PathFinder` as normal),
 an ExtensionFileLoader is created to handle the loading.
@@ -186,7 +186,7 @@ object and initializing it. So, there's no step two:
 `ExtensionFileLoader.exec_module` does nothing.
 
 PyInit is called without any arguments, so it doesn't have access to the
-`ModuleSpec` and the tjings it includes, like the filesystem path of our
+`ModuleSpec` and the things it includes, like the filesystem path of our
 module. This makes loading data from related files quite tricky.
 Also, calling user-written code from the PyInit function is somewhat
 dangerous, because `sys.modules` is not updated until after the initialization
