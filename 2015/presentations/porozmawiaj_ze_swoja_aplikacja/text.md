@@ -6,12 +6,12 @@ IVR (ang. Interactive Voice Response) to nazwa systemu w telekomunikacji, umożl
 
 [^ivr_wiki]: https://pl.wikipedia.org/wiki/Interactive_Voice_Response
 
-Najpopularniejszą funkcją systemów IVR jest wybór języka, autoryzacja klienta (np. przy pomocy numeru PIN), częściowa lub w pełni automatyczna obsługa przez telefon. Wydawać by się mogło, że używanie telefonów do komunikacji z systemami to przeszłość. Jednak różni ludzie mają różne potrzeby, a dostęp przez różne kanały dostępu pozwala zwiększyć zasięg naszych usług. Osoby często i długo podróżujące samochodem mogą zaoszczędzić sporo czasu telefonicznie robiąc zakupy, płacić rachunki, zamawiać ubezpieczenia, rezerować bilety do kina czy teatru. Starsze osoby mające problemy z obsługą komputerów, mogą preferować korzystanie z telefonów, które już dobrze znają.
+Najpopularniejszą funkcją systemów IVR jest wybór języka, autoryzacja klienta (np. przy pomocy numeru PIN), częściowa lub w pełni automatyczna obsługa przez telefon. Wydawać by się mogło, że używanie telefonów do komunikacji z systemami to przeszłość. Jednak różni ludzie mają różne potrzeby, a szeroki wachlarz kanałów dostępu pozwala zwiększyć zasięg naszych usług. Osoby często i długo podróżujące samochodem mogą zaoszczędzić sporo czasu telefonicznie robiąc zakupy, płacić rachunki, zamawiać ubezpieczenia, rezerować bilety do kina czy teatru. Starsze osoby mające problemy z obsługą komputerów, mogą preferować korzystanie z telefonów, które już dobrze znają.
 
 
-## Produkty dostępne rynku
+## Produkty dostępne na rynku
 
-Rynek dostawców usług telekomunikacyjnych działających w chmurze jest bardzo duży. Jest wiele firm, które różnią się możliwościami, infrastrukturą i przede wszystkim cenami. Najważniejszym dla nich rynkiem są Stany Zjednoczone i to tamtejsi klienci mogą wykorzystać 100% dostępnych możliwości. Nawet Brytyjczycy nie mogą się cieszyć pełnym wsparciem dla ich języka, ponieważ wiele opcji jest ograniczona do amerykańskiej angielszczyzny.
+Rynek dostawców usług telekomunikacyjnych działających w chmurze jest bardzo duży. Jest wiele firm, które różnią się możliwościami, infrastrukturą i przede wszystkim cenami. Najważniejszym dla nich rynkiem są Stany Zjednoczone i to tamtejsi klienci mogą wykorzystać 100% dostępnych możliwości. Nawet Brytyjczycy nie mogą się cieszyć pełnym wsparciem dla ich języka, ponieważ wiele opcji jest ograniczona do amerykańskiej wersji języka angielskiego.
 
 W tabeli poniżej przedstawiliśmy elementy, które mogą wpłynąć na wybór dostawcy, ale przede wszystkim pokazać w jakich segmentach operują dostawcy.
 
@@ -126,3 +126,4 @@ Co dalej? Twilio przygotowało dość obszerną dokumentację. I choć nawigacja
 https://www.twilio.com/
 https://www.plivo.com/
 https://www.tropo.com/
+
