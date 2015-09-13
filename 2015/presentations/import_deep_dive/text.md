@@ -67,13 +67,13 @@ the import machinery looks like this:
         spec.loader.exec_module(module, spec)
 
 Most commonly, you will need to think about this when you're debugging import
-cycles – the case where module A imports module B, which in turn imports A
+cycles - the case where module A imports module B, which in turn imports A
 again. Import cycles are hard to get right, and perhaps even harder to keep
 working as your code changes.
 The best advice for import cycles is to get rid of them, typically by putting
 common code in its own module.
 
-For packages, the rules of thumb to avoid import-related trouble are:
+For packages, the rule of thumb to avoid import-related trouble are:
 
 * `__init__` should:
     * import from submodules
@@ -84,8 +84,7 @@ For packages, the rules of thumb to avoid import-related trouble are:
     * not have internal import cycles
 
 Now, there are still some topics that I haven't covered in the 30 minutes
-of my talk.
-This article dives into a few more tidbits and special cases related to
+of my talk. This article dives into a few more tidbits and special cases related to
 importing: namespace packages, real-world examples of projects that use custom
 importers, Loader-assisted resource loading, the rules for C extension modules,
 and more information on the `__main__` module.
@@ -93,7 +92,7 @@ and more information on the `__main__` module.
 
 ## Namespace packages and plugin systems
 
-Probably the most important omission in my talk is namespace packages.
+Probably the most important omission in my talk are namespace packages.
 
 When `PathFinder.find_spec` loops through the path entries, it looks for
 either a file (which would become a module), or a directory with an
@@ -151,7 +150,7 @@ package, its `__init__`-less siblings are ignored.
 Long before namespace packages were added to CPython, `setuptools` contained
 [an utility](https://pythonhosted.org/setuptools/setuptools.html#namespace-packages)
 to declare namespaces manually and explicitly.
-Of course, this still works – and if you need to support Python 2,
+Of course, this still works - and if you need to support Python 2,
 it's the way to go.
 
 
@@ -218,7 +217,7 @@ A more robust approach is to do:
 While constructing the filename is still somewhat painful, this approach will
 work with zipped packages, and any other loaders that implement `get_data`.
 
-(Sadly, David Beazley's Redis importer does not yet support this.)
+(Sadly, David Beazley's Redis importer does not support this yet.)
 
 
 ## Extension and built-in modules
@@ -229,10 +228,9 @@ existing libraries or write code that runs fast.
 Today, it's generally better to use CFFI or Cython for this, but extensions
 remain important. If nothing else, a big part of the the standard library
 is written in C.
-(And CPython extensions don't need to be written in C –
+(And CPython extensions don't need to be written in C -
 any language that can export C-like functions, such as
-C++ or Rust, will do.)
-Anyway, how are extension modules loaded?
+C++ or Rust, will do.) Anyway, how are extension modules loaded?
 
 An extension is a shared library, such as a DLL on Windows or a `.so` file on
 Linux. It exports one function called `PyInit_<modulename>`.
@@ -269,12 +267,12 @@ PyInit functions to this list.
 The `__main__` module is quite special.
 
 The `loader.create_module` step for it is done very early during
-interpreter startup – so early that the import machinery isn't loaded yet.
+interpreter startup - so early that the import machinery isn't loaded yet.
 The module object is created directly, and remembered deep in C code.
 
-When the time comes to run some code – the file Python was given to
+When the time comes to run some code - the file Python was given to
 interpret, or a module given with the `-m` switch, or even commands from
-interactive console – it is executed inside `__main__`'s namespace.
+interactive console - it is executed inside `__main__`'s namespace.
 
 Python has an `-i` command-line switch, which causes it to drop to interactive
 prompt after running code. If you invoke:
@@ -324,7 +322,7 @@ You should definitely read the importlib documentation:
 
 * https://docs.python.org/3/library/importlib.html
 
-or watch David Beazley's fun-filled tutorial: 
+or watch David Beazley's fun-filled tutorial:
 
 * "Modules and Packages: Live and Let Die!" (PyCon 2015): http://pyvideo.org/video/3387
 
