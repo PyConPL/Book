@@ -1,32 +1,48 @@
 # Import Deep Dive Detours - Petr Viktorin
 
-My talk, Import Deep Dive, gave you a simplified overview of Python's import
-machinery, enough to understand what's going on and where to look for more
-details.
-But, there are still some topics that I haven't covered in the 30 minutes.
-This article dives into a few more tidbits and special cases related to
-importing: namespace packages, real-world examples of project that use custom
-importers, Loader-assisted resource loading, the rules for C extension modules,
-and more information on the `__main__` module.
+Python's `import` statement hides a lot of complexity.
+You could talk about it for hours, and still not cover it all.
 
+My talk should make you understand import machinery well enough that it will
+make sense when you want to study it further.
+It shows the typical case of loading a simple Python module (or package),
+omitting the various customization hooks, and ignoring the
+ever-present hacks for backward compatibility.
 
-I assume you've seen the talk. If not, watch it! It should be put online
-after the conference. (Or you can look for the EuroPython version.)
+To summarize, the import machinery has two major parts: the *finder*
+and the *loader*.
+The finder receives a name, and finds a file with the corresponding code,
+typically by looking for `<modulename>.py` in directories listed in `sys.path`.
+Its output is a `ModuleSpec` object that contains, among other things,
+`origin` (the name of the `.py` file to load) and a loader object.
 
-Here's the code I talked about. Hopefully I've explained it enough:
+The loader then takes the ModuleSpec, creates a module object, and executes
+code in the `.py` file to add the module's function class objects.
+
+There are two major complications:
+First, modules are cached in `sys.modules`, so re-importing a module is little
+more than a dict lookup.
+Second, for submodules, the parent package is always loaded before the submodule.
+
+When reasoning about module imports, it's useful to keep in mind the exact
+order the loading and caching is done in. In simplified pseudocode,
+the import machinery looks like this:
 
     import_module(name):
         sys.modules[name]? return it
 
-        submodules:
+        if importing a submodule:
             load parent module
             sys.modules[name]? return it
+            path = parent.__path__
+        else:
+            path = sys.path
 
         spec = find_spec(name, path)
         load(spec)  # sets sys.modules[name]
 
         module = sys.modules[name]
-        submodules:
+        if importing a submodule:
             set module as attribute of parent
         return module
 
@@ -50,13 +66,14 @@ Here's the code I talked about. Hopefully I've explained it enough:
         sys.modules[spec.name] = module
         spec.loader.exec_module(module, spec)
 
-    get_code(module, spec):
-        if spec.cached exists, and matches origin stats,
-            return it!
-        load source from origin and compile it
-        write bytecode to spec.cached
+Most commonly, you will need to think about this when you're debugging import
+cycles – the case where module A imports module B, which in turn imports A
+again. Import cycles are hard to get right, and perhaps even harder to keep
+working as your code changes.
+The best advice for import cycles is to get rid of them, typically by putting
+common code in its own module.
 
-You also get the package/submodule advice:
+For packages, the rules of thumb to avoid import-related trouble are:
 
 * `__init__` should:
     * import from submodules
@@ -66,7 +83,12 @@ You also get the package/submodule advice:
     * not import directly from `__init__`
     * not have internal import cycles
 
-Now, if you're in for a dive into a few more tidbits, read on!
+Now, there are still some topics that I haven't covered in the 30 minutes
+of my talk.
+This article dives into a few more tidbits and special cases related to
+importing: namespace packages, real-world examples of projects that use custom
+importers, Loader-assisted resource loading, the rules for C extension modules,
+and more information on the `__main__` module.
 
 
 ## Namespace packages and plugin systems
