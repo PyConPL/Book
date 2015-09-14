@@ -47,7 +47,7 @@ After script finish you need to go back to your local machine console and run th
 ```
 $ cat ~/.ssh/id_rsa.pub | ssh root@<machine-address> "sudo sshcommand acl-add dokku <your-app-name>"
 ```
-Where machine-address is ip or hostname of your server and <your-app-name> is the name of application we will deploy. This command may be not required if you already have configured SSH keys and you log in to your server without credentials.
+Where `<machine-address>` is ip or hostname of your server and `<your-app-name>` is the name of application we will deploy. This command may be not required if you already have configured SSH keys and you log in to your server without credentials.
 
 ## Deploying sample Django application to Dokku
 This guideline shows how fast and easy you can set up your own PaaS. In
@@ -98,7 +98,7 @@ Then we create a database for application:
 ```
 server $ dokku postgresql:create <your-app-name>
 ```
-This command automatically creates and wires a database to <your-app-name> application. It also outputs an appropriate DATABASE_URL to console which you need to put to your application's configuration.
+This command automatically creates and wires a database to `<your-app-name>` application. It also outputs an appropriate DATABASE_URL to console which you need to put to your application's configuration.
 
 ## Debugging
 If you are experiencing troubles with building your application, run `dokku trace` on your server and try to deploy your application one more time. You will get a detailed verbose output of container building process.
