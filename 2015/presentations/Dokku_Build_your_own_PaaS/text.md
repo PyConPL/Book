@@ -47,10 +47,10 @@ After script finish you need to go back to your local machine console and run th
 ```
 $ cat ~/.ssh/id_rsa.pub | ssh root@<machine-address> "sudo sshcommand acl-add dokku <your-app-name>"
 ```
-Where <machine-address> is ip or hostname of your server and <your-app-name> is the name of application we will deploy. This command may be not required if you already have configured SSH keys and you log in to your server without credentials.
+Where machine-address is ip or hostname of your server and <your-app-name> is the name of application we will deploy. This command may be not required if you already have configured SSH keys and you log in to your server without credentials.
 
 ## Deploying sample Django application to Dokku
-This guideline shows how fast and easy you can set up your own PaaS. Some points may differ depending on your OS. In
+This guideline shows how fast and easy you can set up your own PaaS. In
 this example we will install Dokku on the server and deploy "Hello, world" Django application.
 
 Clone any sample django application from github, cd to tha application's directory and add dokku as remote server by:
