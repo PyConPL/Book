@@ -103,7 +103,7 @@ This command automatically creates and wires a database to `<your-app-name>` app
 ## Debugging
 If you are experiencing troubles with building your application, run `dokku trace` on your server and try to deploy your application one more time. You will get a detailed verbose output of container building process.
 
-If you have issues with running application, run `dokku logs <your-app-name` to get logs of your app. 
+If you have issues with running application, run `dokku logs <your-app-name>` to get logs of your app. 
 
 You can get more info about Dokku troubleshooting from documentation. It has explanations with guidlines for lots of occasions.
 
