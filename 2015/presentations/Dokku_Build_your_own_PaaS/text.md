@@ -66,7 +66,7 @@ Pay attantion, that dokku will deploy your application **only** if you push to t
 If your application requires additional dependencies like database or cache server, application deployment is not finished yet. Take a look on "Plugins" session.
 
 ## Buildpacks or why previous section is so short
-If you are curious, why application deployment described in the previous is so short and where are dependencies installation, this section is for you.
+If you are curious, why application deployment described in the previous section is so short and where are dependencies installation and lots of other stuff, this section is for you.
 
 So what is exactly **buildpack** and what black magic it does?
 
