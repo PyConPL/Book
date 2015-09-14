@@ -76,7 +76,7 @@ So what Dokku does is exactly determining what buildpack is required for your ap
 
 But what if Dokku doesn't determine a buildpack for your application correctly?
 
-You can create a `.env` file in your application root directory and specify a buildpack by yourself:
+You can create an `.env` file in your application root directory and specify a buildpack by yourself:
   ```
   export BUILDPACK_URL=https://github.com/OShalakhin/heroku-buildpack-geodjango
   ```
