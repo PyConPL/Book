@@ -119,7 +119,7 @@ You can get more info about Dokku troubleshooting from documentation. It has exp
 
 ## Conclusion
 If you have a number of small applications you need to deploy, Dokku is the right choice. It will provide you high
-level of isolation per application and will make you forget pain you experience during applications deployment.
+level of isolation per application and will improve your applications deployment experience.
 
 ## References
 
