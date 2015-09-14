@@ -56,19 +56,19 @@ Download python source code
 
     wget https://www.python.org/ftp/python/2.7.10/Python-2.7.10.tgz
 
-Compile Python under your custom directory (*—prefix* flag). In below example I'm ging to compile Python under */opt/py* to make sure that Python which later on I will use with PostgreSQL is not conflicting with Python that is installed with operating system. Custom Python also has got one significant advantage. If operating system (ex. Linux) comes with Python that is main part of system tools (ex. yum) it is always good idea to isolate Python that you're about to use with your application from system's Python.
+Compile Python under your custom directory (*—prefix* flag). In following example I'm going to compile Python under */opt/py* to make sure that Python which later on I will use with PostgreSQL is not conflicting with Python that is installed with operating system. Custom Python also has got one significant advantage. If operating system (e.g. Linux) comes with Python that is main part of system tools (e.g. yum) it is always good idea to isolate Python that you're about to use with your application from system's Python.
 
 Please make sure to add *–enable-shared* flag during compilation. This option will tell Python to compile with shared libraries. Once Python libraries are compiled with shared option then any software can soft link them and use Python.
 
     ~/stuff/Python-2.7.10% ./configure —prefix=/opt/py –enable-shared
 
-When compilation is finished, some operating systems when you try to run your compiled Python can return below error message.
+When compilation is finished, some operating systems when you try to run your compiled Python can return the following error message.
 
     py ➤ bin/python2.7
 
     bin/python2.7: error while loading shared libraries: libpython2.7.so.1.0: cannot open shared object file: No such file or directory**
 
-You have to add *lib path* of your newly compiled Python to the system lib path. For instance you can add below linbe to your .bashrc file. In my case I compiled Python under */opt/py* so that is why I added path as below.
+You have to add *lib path* of your newly compiled Python to the system lib path. For instance you can add below line to your .bashrc file. In my case I compiled Python under */opt/py* so that is why I added path as below.
 
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/py/lib
     
@@ -113,7 +113,7 @@ Create new empty database *pie* with encoding  **UTF-8** (*-E* option). Option *
 
     /opt/pgsql/bin/createdb -h localhost -p5432  -E utf8 pie
 
-Install Python support for database *pie*. Again we have to specify localhost (-h) and port (-p) that is being used by the server. Option *-d* allow you to create **plpythonu** language under *pie* database. Please notice that language that I created in below example is called **plpythonu*. Letter *u* stands for untrusted. Why untrusted? That is more about history of PostgresQL and Python support.
+Install Python support for database *pie*. Again we have to specify localhost (-h) and port (-p) that is being used by the server. Option *-d* allow you to create **plpythonu** language under *pie* database. Please notice that language that I created in following example is called **plpythonu*. Letter *u* stands for untrusted. Why untrusted? That is more about history of PostgresQL and Python support.
 
     /opt/pgsql/bin/createlang -h localhost -p5432 -d pie plpythonu
     
@@ -123,7 +123,7 @@ And that's it. Simple as that. Your new DB has full Python support and we can st
 
 Before you are going to create your first plpython function you have to know how it works. Your compiled Python and its modules are fully accessible from plpython. This means that the entire Python standard library is fully accessible when writing your business logic. Also you can install any kind of module which you may use later from your functions.
 
-I need to provide additional clarifications here, both terms 'procedural' and 'function' can be a little bit confusing for newcomers. Generally from PostgreSQL perspective you always create plpython function. You call plpython function which is stored in DB. What is "inside" of that function (Python objects or other functions) is up to you to decide. Procedural programming is not the only pattern that you can use inside of plpython. To illustrate two different bodies of function please check example from below.
+I need to provide additional clarifications here, both terms 'procedural' and 'function' can be a little bit confusing for newcomers. Generally from PostgreSQL perspective you always create plpython function. You call plpython function which is stored in DB. What is "inside" of that function (Python objects or other functions) is up to you to decide. Procedural programming is not the only pattern that you can use inside of plpython. To illustrate two different bodies of function please check example below.
 
     create or replace function my_first_function()
     returns int as
@@ -229,7 +229,7 @@ Let's stop here for a minute and analyze that example.
 
 To be able to control **log level** that PostgreSQL is going to catch or ignore please use one of below options in /opt/pgsql/postgresql.conf settings file. 
 
-**client_min_messages** - Controls which message levels are sent to the client (ex. postgreSQL shell)
+**client_min_messages** - Controls which message levels are sent to the client (e.g. PostgreSQL shell)
 
 **log_min_messages** - Controls which message levels are written to the server log
 
@@ -329,7 +329,7 @@ For building business logic in database I will use two main things:
 
 Triggers are going to help me with making my data to be consistent. Doesn't matter if tables are going to be controlled by ORM or they are going to get accessed by using pure SQL. Each time data is being changed trigger will be used with corresponding function. Of course based on which conditions PostgreSQL engine will call triggered function is up to you to define.
 
-Trigger function can be call before or after
+Trigger function can be called before or after
 
 * update
 * insert 
@@ -341,7 +341,7 @@ How to define trigger on a table foo you can see below. Trigger function *my_tri
         AFTER INSERT ON table_foo
             FOR EACH ROW EXECUTE PROCEDURE my_trigger_function();
             
-To show you how trigger can be applied on tables let's try to look closer on below example. Let's create table *foo* and *foo_backup*. Structure of these tables is following:
+To show you how trigger can be applied on tables let's try to look closer on following example. Let's create table *foo* and *foo_backup*. Structure of these tables as follows:
 
     CREATE TABLE foo
     (
@@ -523,7 +523,7 @@ Once data is being saved to Redis we can access such data by using below plpytho
             
 As you may see above example is going to return JSON object. For instance such a data can be returned directly to a browser without post processing (if you're writing web application). 
 
-To demonstarte you how to call above function from Python please use below example.
+To demonstarte you how to call above function from Python please use following example.
 
     import psycopg2
     import psycopg2.extras
