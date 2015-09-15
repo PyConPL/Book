@@ -56,7 +56,7 @@ Download python source code
 
     wget https://www.python.org/ftp/python/2.7.10/Python-2.7.10.tgz
 
-Compile Python under your custom directory (*—prefix* flag). In following example I'm going to compile Python under */opt/py* to make sure that Python which later on I will use with PostgreSQL is not conflicting with Python that is installed with operating system. Custom Python also has got one significant advantage. If operating system (e.g. Linux) comes with Python that is main part of system tools (e.g. yum) it is always good idea to isolate Python that you're about to use with your application from system's Python.
+Compile Python under your custom directory (*—prefix* flag). In the following example I'm going to compile Python under */opt/py* to make sure that Python which later on I will use with PostgreSQL is not conflicting with Python that is installed with operating system. Custom Python also has got one significant advantage. If operating system (e.g. Linux) comes with Python that is main part of system tools (e.g. yum) it is always good idea to isolate Python that you're about to use with your application from system's Python.
 
 Please make sure to add *–enable-shared* flag during compilation. This option will tell Python to compile with shared libraries. Once Python libraries are compiled with shared option then any software can soft link them and use Python.
 
@@ -113,7 +113,7 @@ Create new empty database *pie* with encoding  **UTF-8** (*-E* option). Option *
 
     /opt/pgsql/bin/createdb -h localhost -p5432  -E utf8 pie
 
-Install Python support for database *pie*. Again we have to specify localhost (-h) and port (-p) that is being used by the server. Option *-d* allow you to create **plpythonu** language under *pie* database. Please notice that language that I created in following example is called **plpythonu*. Letter *u* stands for untrusted. Why untrusted? That is more about history of PostgresQL and Python support.
+Install Python support for database *pie*. Again we have to specify localhost (-h) and port (-p) that is being used by the server. Option *-d* allow you to create **plpythonu** language under *pie* database. Please notice that language that I created in the following example is called **plpythonu*. Letter *u* stands for untrusted. Why untrusted? That is more about history of PostgresQL and Python support.
 
     /opt/pgsql/bin/createlang -h localhost -p5432 -d pie plpythonu
     
@@ -341,7 +341,7 @@ How to define trigger on a table foo you can see below. Trigger function *my_tri
         AFTER INSERT ON table_foo
             FOR EACH ROW EXECUTE PROCEDURE my_trigger_function();
             
-To show you how trigger can be applied on tables let's try to look closer on following example. Let's create table *foo* and *foo_backup*. Structure of these tables as follows:
+To show you how trigger can be applied on tables let's try to look closer on the following example. Let's create table *foo* and *foo_backup*. Structure of these tables is as follows:
 
     CREATE TABLE foo
     (
@@ -523,7 +523,7 @@ Once data is being saved to Redis we can access such data by using below plpytho
             
 As you may see above example is going to return JSON object. For instance such a data can be returned directly to a browser without post processing (if you're writing web application). 
 
-To demonstarte you how to call above function from Python please use following example.
+To demonstarte you how to call above function from Python please use the following example.
 
     import psycopg2
     import psycopg2.extras
