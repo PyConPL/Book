@@ -42,7 +42,7 @@ SSH into your host machine and run the following command:
 server $ wget -qO- https://raw.github.com/progrium/dokku/v0.3.26/bootstrap.sh | sudo DOKKU_TAG=v0.3.26 bash
 ```
 Please, **notice** that I use the latest version of Dokku (0.3.26) for this moment.
-Also, I want to emphasize that you have to run installation using **sudo** or as root. This is important as this installer creates a custom dokku user for executing commands and it is important to make sure if this user has enough permissions for building packages, creating configs and required directories. Otherwise your future project builds will fail.
+Also, I want to emphasize that you have to run installation using **sudo** even if you are logged in via root user. This is important as this installer creates a custom dokku user for executing commands and it is important to make sure if this user has enough permissions for building packages, creating configs and required directories. Otherwise your future project builds will fail.
 After script finishes you need to go back to your local machine console and run the following:
 ```
 $ cat ~/.ssh/id_rsa.pub | ssh root@<machine-address> "sudo sshcommand acl-add dokku <your-app-name>"
