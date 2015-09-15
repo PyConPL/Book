@@ -1,11 +1,11 @@
 # Dokku. Build your own PaaS - Sergey Parkhomenko
 
 ## Introduction
-Don’t like configuring and satisfying system requirements? Your dream is to deploy applications in one click? 
-PaaS is the solution! During the year 2014, we all did a great dive into the world of development automatisation and 
-optimisation. Riding this curve, there are a lot of cloud PaaS providers. The most famous are Heroku,
+Don't like configuring and satisfying system requirements? Your dream is to deploy applications in one click?
+PaaS is the solution! During the year 2014, we all did a great dive into the world of development automation and
+optimization. Riding this curve, there are a lot of cloud PaaS providers. The most famous are Heroku,
 Google Apps Engine, etc. Each of them offers great opportunities for deploying, running and scaling your application,
-but the first and the biggest issue is that they don’t offer enough flexibility in environment configuration.
+but the first and the biggest issue is that they don't offer enough flexibility in environment configuration.
 Every developer had a situation when he needed something more from provider, who gives you limited bunch of features.
 Another issue is cost. PaaS providers, mentioned above, cost money. This is not bad, because they do their job well,
 but it is possible to avoid those expenses. And now is time to say one word: “Dokku”.
@@ -23,7 +23,7 @@ installed in private data centers or public infrastructure as a service and mana
 **Dokku** is a Docker-powered PaaS implementation.
 
 ## PaaS use case
-Let'ts imagine that you have a small blog written in Django which you need to deploy fast an easy. Also this blog is
+Let's imagine that you have a small blog written in Django which you need to deploy fast an easy. Also this blog is
 under development and you are going to roll out updates every day during the upcoming month. Simultaneously, lets
 imagine default actions which you do when you need to match such requirements. You purchase a new virtual or
 dedicated server, or buy a new EC2 instance, set up a new environment for the project, or adopt your existing
@@ -42,8 +42,8 @@ SSH into your host machine and run the following command:
 server $ wget -qO- https://raw.github.com/progrium/dokku/v0.3.26/bootstrap.sh | sudo DOKKU_TAG=v0.3.26 bash
 ```
 Please, **notice** that I use the latest version of Dokku (0.3.26) for this moment.
-Also, I want to emphasize that you have to run installation using **sudo** even if you are logged in via root user. This is important as this instalaltor creates a custom dokku user for executing commands and it is important to make sure if this user has enough permissions for building packages, creating configs and required directories. Otherwise your future project builds will fail.
-After script finish you need to go back to your local machine console and run the following:
+Also, I want to emphasize that you have to run installation using **sudo** or as root. This is important as this installer creates a custom dokku user for executing commands and it is important to make sure if this user has enough permissions for building packages, creating configs and required directories. Otherwise your future project builds will fail.
+After script finishes you need to go back to your local machine console and run the following:
 ```
 $ cat ~/.ssh/id_rsa.pub | ssh root@<machine-address> "sudo sshcommand acl-add dokku <your-app-name>"
 ```
@@ -53,7 +53,7 @@ Where `<machine-address>` is ip or hostname of your server and `<your-app-name>`
 This guideline shows how fast and easy you can set up your own PaaS. In
 this example we will install Dokku on the server and deploy "Hello, world" Django application.
 
-Clone any sample django application from github, cd to tha application's directory and add dokku as remote server by:
+Clone any sample django application from github, cd to the application's directory and add dokku as remote server with:
   ```
   local $ git remote add dokku dokku@<machine-address>:<your-app-name>
   ```
@@ -61,18 +61,18 @@ Push application to Dokku:
   ```
   local $ git push dokku <branch-name>:master
   ```
-Pay attantion, that dokku will deploy your application **only** if you push to the master branch!
+Pay attention, that dokku will deploy your application **only** if you push to the master branch!
 
 If your application requires additional dependencies like database or cache server, application deployment is not finished yet. Take a look on "Plugins" session.
 
 ## Buildpacks or why previous section is so short
 If you are curious, why application deployment described in the previous section is so short and where are dependencies installation and lots of other stuff, this section is for you.
 
-So what is exactly **buildpack** and what black magic it does?
+So what exactly is a **buildpack** and what kind of black magic it does?
 
 **Buildpack** is a bunch of scripts for building container image.
 
-So what Dokku does is exactly determining what buildpack is required for your application and building a new contanier for your project. As the result you have a very high level of isolation for your applications and an awesome orchestration solution. Notice, that Dokku is compatible with Heroku buildpacks.
+So what Dokku does is, determine exactly which buildpack is required for your application and build a new container for your project. As the result you have a very high level of isolation for your applications and an awesome orchestration solution. Notice, that Dokku is compatible with Heroku buildpacks.
 
 But what if Dokku doesn't determine a buildpack for your application correctly?
 
@@ -80,11 +80,11 @@ You can create an `.env` file in your application root directory and specify a b
   ```
   export BUILDPACK_URL=https://github.com/OShalakhin/heroku-buildpack-geodjango
   ```
-  
+
   You can also just put a Dockerfile inside the project root and Dokku will pick it up and build an environment from it by default!
 
 ## Plugins
-As was mentioned above, Dokku provides a very high level of isolation for your projects. Here you may ask, what if my application requires a database or a cache server. You can either use a simple database or cache server installed and configured on your server (recommended for stable production purposes), or use Dokku plugins. Dokku provides quite good set of plugins for setting up and running persistent containers for databases, caches, message queues, etc.
+As was mentioned before, Dokku provides a very high level of isolation for your projects. Here you may ask, what if my application requires a database or a cache server. You can either use a simple database or cache server installed and configured on your server (recommended for stable production purposes), or use Dokku plugins. Dokku provides quite good set of plugins for setting up and running persistent containers for databases, caches, message queues, etc.
 
 Let's install postgresql Dokku plugin and wire it to our application as an example.
 
@@ -103,13 +103,13 @@ This command automatically creates and wires a database to `<your-app-name>` app
 ## Debugging
 If you are experiencing troubles with building your application, run `dokku trace` on your server and try to deploy your application one more time. You will get a detailed verbose output of container building process.
 
-If you have issues with running application, run `dokku logs <your-app-name>` to get logs of your app. 
+If you have issues with running application, run `dokku logs <your-app-name>` to get logs of your app.
 
-You can get more info about Dokku troubleshooting from documentation. It has explanations with guidlines for lots of occasions.
+You can get more info about Dokku troubleshooting from documentation. It has explanations with guidelines for lots of occasions.
 
 ## Dokku advantages over competitors
 1. You pay only for the server where Dokku is installed
-2. Fully customisable
+2. Fully customizable
 3. Supports build from Dockerfile
 4. Has a great plugins infrastructure
 5. Easy change number of workers per application
