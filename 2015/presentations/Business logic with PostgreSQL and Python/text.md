@@ -2,13 +2,13 @@
 
 ## Introduction
 
-In my opinion PostgreSQL is the most advanced open source database. It has so many powerful features that it is really difficult to put all of them in one article.
+In my opinion PostgreSQL is the most advanced open source database. It has so many powerful features, that it is really difficult to put them all in one article.
 
-Below I'm going to show you the least known features of PostgreSQL, which is procedural languages and stored functions. By using stored procedures we are going to build business logic step by step.
+In this article I'm going to show you the least known features of PostgreSQL, which is procedural languages and stored functions. By using stored procedures, we are going to build business logic step by step.
 
 ## Business logic
 
-By business logic, we are going to call all of those blocks of code which are responsible for making calculations and taking decisions about data flow. In many cases most of developers decide to build business logic as part of ORM models. It is pretty convenient. Whenever data is being used from database ORM can take control and decide how data is going to be returned to upper objects. Some ORM frameworks like Django allow us to extend base model and start building our own logic in a very complex way.
+By business logic, we are going to call all of those blocks of code, which are responsible for making calculations and taking decisions about data flow. In many cases most of developers decide to build business logic as part of ORM models, which is pretty convenient. Whenever data is being used from a database, ORM can take control and decide how data is going to be returned. Some ORM frameworks, like Django, allow us to extend base model and start building our own logic in a very complex way.
 
 Example piece of pseudo code in Django ORM
 
@@ -33,30 +33,30 @@ Example piece of pseudo code in Django ORM
           # also we can have another level of customization here
           super(History, self).save(*args, **kwargs)
 
-With this simple example, you can see how easy it is to customize save method in Django ORM. By having such a custom code, you can put some business logic in there. For instance you are able to validate data prior to saving it in a database. The options here are unlimited.
+In this simple example, you can see how easy it is to customize save method in Django ORM. With this custom code you can put some business logic in the save method. For example, you can validate data prior to saving in a database. The options here are unlimited.
 
-Some developers prefer to have business logic as a bunch of classes with functionalities in them. That is also a good solution as long as you pay attention and these classes are the single source of truth.
+Other developers prefer to represent business logic as a bunch of classes. That is also a good solution, as long as you pay attention and these classes are the single source of truth.
 
 ## Single source of truth
 
-To explain what I call the *single source of truth* I will use an example. Imagine web application that uses database as data storage and it accepts some page form, being posted but in different views. Let's assume that aforementioned form can have slight differences in those views. What you expect from your system based on given input, (submitted page form) is to always validate and process data in the exact same way. For example your system is going to check if there is any duplication in database, validate required data and data types. Obvious is that system based on given input always has to react in the same way and return designed result.
+To explain what I call the *single source of truth* I will use an example. Imagine a web application that uses database as data storage and it accepts some page form being posted, but in different views. Let's assume that aforementioned form can have slight differences in those views. What you expect from your system based on given input, (submitted page form) is to always validate and process data in the exact same way. For example, your system is going to check if there is any duplication in database, validate required data and data types. It is obvious that system always has to react in the same way and return designed result, based on a given input.
 
 That is what I am going to use in this article as the *single source of truth*, in other words *Business Logic*. Each time input is given, system will react in the same way. Each entry point of the system, which uses the same context of data will react in the same way.
 
 
 ## Why not ORM?
 
-Using ORM as a business logic container definitely has a lot of pros, although there is one serious problem with it. If you have a project which uses DB that is shared with other projects and those use different languages...then... you mostly are going to use API for such interactions with third-party software projects. What if you have to deal with legacy code where having API is not an option? Where to store your single source of truth, iow. your business logic? How about using the database as one?
+Using ORM as a business logic container definitely has a lot of pros, although there is one serious problem with it. If you have a project which uses DB that is shared with other projects and those use different languages...then... you mostly are going to use API for such interactions with third-party software projects. What if you have to deal with legacy code, where having API is not an option? Where to store your single source of truth, iow. your business logic? How about using the database as one.
 
 ## Python
 
-Compiling Python is not a difficult process. Let me show you in a few simples steps how to do it.
+Compiling Python is not a difficult process. Let me show you, in a few simples steps, how to do it.
 
 Download python source code
 
     wget https://www.python.org/ftp/python/2.7.10/Python-2.7.10.tgz
 
-Compile Python under your custom directory (*—prefix* flag). In the following example I'm going to compile Python under */opt/py* to make sure that Python which I will use later on with PostgreSQL is not conflicting with Python that is installed with operating system. Custom Python also has got one significant advantage. If operating system (e.g. Linux) comes with Python that is main part of system tools (e.g. yum) it is always good idea to isolate Python that you're about to use with your application from system's Python.
+Compile Python under your custom directory (*—prefix* flag). In the following example I'm going to compile Python under */opt/py* to make sure that Python which I will use later on, with PostgreSQL is not conflicting with Python, that is installed with operating system. Custom Python also has got one significant advantage. If operating system (e.g. Linux) comes with Python that is main part of system tools (e.g. yum) it is always good idea to isolate Python that you're about to use with your application from system's Python.
 
 Please make sure to add *–enable-shared* flag during compilation. This option will tell Python to compile with shared libraries. Once Python libraries are compiled with shared option then any software can soft link them and use Python.
 
@@ -68,7 +68,7 @@ When compilation is finished, some operating systems, when you try to run your c
 
     bin/python2.7: error while loading shared libraries: libpython2.7.so.1.0: cannot open shared object file: No such file or directory**
 
-You have to add *lib path* of your newly compiled Python to the system lib path. For instance you can add below line to your .bashrc file. In my case I compiled Python under */opt/py* so that is why I added path as below:
+You have to add *lib path* of your newly compiled Python to the system lib path. For instance you can add below line to your .bashrc file. In my case, I compiled Python under */opt/py* so that is why I added path as below:
 
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/py/lib
 
@@ -105,7 +105,7 @@ Now it is time to start PostgreSQL. First you have to initialize name space. I u
     mkdir /opt/pg_data
     /opt/pgsql/bin/initdb /opt/pg_data
 
-and start DB. Below command will start PostgreSQL which is going to listen on all interfaces and port *5432* (default) and data directory (*-D* option) is going to be /opt/pg_data.
+and start DB. Next command will start PostgreSQL, which is going to listen on all interfaces and port *5432* (default). Data directory (*-D* option) is going to be /opt/pg_data.
 
     /opt/pgsql/bin/postmaster -p 5432 -D /opt/pg_data/
 
@@ -113,7 +113,7 @@ Create new empty database *pie* with encoding  **UTF-8** (*-E* option). Option *
 
     /opt/pgsql/bin/createdb -h localhost -p5432  -E utf8 pie
 
-Install Python support for database *pie*. Again we have to specify localhost (-h) and port (-p) that is being used by the server. Option *-d* allow you to create **plpythonu** language under *pie* database. Please notice that language that I created in the following example is called **plpythonu*. Letter *u* stands for untrusted. Why untrusted? That is more about history of PostgresQL and Python support.
+Install Python support for database *pie*. Again we have to specify localhost (-h) and port (-p) that is being used by the server. Option *-d* allow you to create **plpythonu** language under *pie* database. Please notice, that language that I created in the following example is called **plpythonu*. Letter *u* stands for untrusted. Why untrusted? That is more about history of PostgresQL and Python support.
 
     /opt/pgsql/bin/createlang -h localhost -p5432 -d pie plpythonu
 
@@ -121,7 +121,7 @@ And that's it. Simple as that. Your new DB has full Python support and we can st
 
 ## Word of the day
 
-Before you are going to create your first plpython function you have to know how it works. Your compiled Python and its modules are fully accessible from plpython. This means that the entire Python standard library is fully accessible when writing your business logic. Also you can install any kind of module which you may use later from your functions.
+Before creating your first plpython function you need to know how it works. Your compiled Python and its modules are fully accessible from plpython. This means that the entire Python standard library is fully accessible, when writing your business logic. You can also install any kind of module which you may use later from your functions.
 
 I need to provide additional clarifications here, both terms 'procedural' and 'function' can be a little bit confusing for newcomers. Generally from PostgreSQL perspective you always create plpython function. You call plpython function which is stored in DB. What is "inside" of that function (Python objects or other functions) is up to you to decide. Procedural programming is not the only pattern that you can use inside of plpython. To illustrate two different bodies of function please check example below.
 
@@ -193,7 +193,7 @@ What I am trying to point out here is, you should be careful when creating plpyt
 
 # Hello world
 
-Let me show you how to write the classical hello world function
+Let me show you, how to write the classical hello world function
 
     create or replace function logic.hello_world()
     returns void as
@@ -206,7 +206,7 @@ Let me show you how to write the classical hello world function
     LANGUAGE plpythonu VOLATILE;
 
 
-As you can see from above example you are able to print out some log messages. They go to stdout of PostgreSQL directly which means in production stdout is redirected to a log file. Depending on PostgreSQL log level you can hide some unwanted messages from plPy function same as some context like which function calls which. Example of a verbose log level.
+As you can see from above example, you are able to print out some log messages. They go to stdout of PostgreSQL directly, which means in production stdout is redirected to a log file. Depending on PostgreSQL log level you can hide some unwanted messages from plPy function same as some context like which function calls which. Example of a verbose log level.
 
     pie=# select * from logic.view_and_set_discounted_sales(20, 23) ;
     INFO:  [view_and_set_discounted_sales] Updating item id: 36 with new discounted price: 0.529331946972
@@ -327,7 +327,7 @@ For building business logic in database I will use two main things:
 
 ## Triggers
 
-Triggers are going to help me with making my data to be consistent. Doesn't matter if tables are going to be controlled by ORM or they are going to get accessed by using pure SQL. Each time data is being changed trigger will be used with corresponding function. Of course based on which conditions PostgreSQL engine will call triggered function is up to you to define.
+Triggers are going to help me with making my data to be consistent. It doesn't matter if tables are going to be controlled by ORM, or they are going to be accessed using pure SQL. Each time data is being changed, trigger will be used with corresponding function. Of course, based on which conditions PostgreSQL engine will call triggered function is up to you to define.
 
 Trigger function can be called before or after
 
@@ -382,9 +382,9 @@ I will make a copy of data when field *row_change_time* is greater then 15 minut
 
 ## plpython functions
 
-As it was already mentioned, another PostgreSQL feature which is going to be used to build business logic in DB are *plpython functions*. These functions will be used by all the applications that will access database. Each time I will try to modify or read some data in database *pie* I will call a function instead of a table directly.
+As it was already mentioned, another PostgreSQL feature which is going to be used to build business logic in a DB are *plpython functions*. These functions will be used by all the applications that will access database. Each time I will try to modify or read some data in database *pie* I will call a function instead of a table directly.
 
-Example of such approach can be plpython function which takes 2 arguments and returns set of records which are considered by PostgreSQL as a table. Such a table works as view which of course can be used in regular SQL queries. Below I pasted a function which for given bill number will apply given discount. Just to remind you table structures were shown in chaper "schema*.
+Example of such approach can be plpython function which takes 2 arguments and returns set of records which are considered by PostgreSQL as a table. Such a table works as a view, which of course can be used in regular SQL queries. Below I pasted a function which for given bill number will apply given discount. Just to remind you table structures were shown in chaper "schema*.
 
     create or replace function logic.view_and_set_discounted_sales(
     in_bill_number bigint,
@@ -441,7 +441,7 @@ and different value for *in_discount_percentage* parameter
      20 | 20              | My awesome product 15 |  3.37963644177 | 2ad4a8800fd241d5cf6519404a385aa1 | t
     (3 rows)
 
-As you can see in above example it is possible to create function which allows you to return dynamic table where returned data depends on input values. Also as I said previously, PostgreSQL understands result of such a query as a table so you can do as for instance
+As you can see in the above example it is possible to create function which allows you to return dynamic table where returned data depends on input values. Also as I said previously, PostgreSQL understands result of such a query as a table so you can do as for instance
 
     pie=# select * from logic.view_and_set_discounted_sales(20, 23) WHERE out_item_serial_nr='109a95fce2b40f146d15c743c5cd0278';
 
@@ -464,7 +464,7 @@ As I mentioned before you have an access to all Python modules and standard libr
 
     /opt/py/bin/pip install redis
 
-Body of trigger function *logic.tgr_bill_i* you can see below.
+Below is the body of trigger function *logic.tgr_bill_i*.
 
     create or replace function logic.tgr_bill_i()
     returns trigger as
@@ -491,7 +491,7 @@ Body of trigger function *logic.tgr_bill_i* you can see below.
     LANGUAGE plpythonu VOLATILE;
 
 
-Once data is being saved to Redis we can access such data by using below plpython function.
+Once data is being saved to Redis, we can access such data by using below plpython function.
 
     create or replace function logic.get_active_bills()
     returns text as
@@ -521,7 +521,7 @@ Once data is being saved to Redis we can access such data by using below plpytho
     $$
     LANGUAGE plpythonu VOLATILE;
 
-As you may see above example is going to return JSON object. For instance such a data can be returned directly to a browser without post processing (if you're writing web application).
+As you may see in the above example, the function is going to return JSON object. For instance such a data can be returned directly to a browser without post processing (if you're writing web application).
 
 To demonstrate you how to call above function from Python please use the following example.
 
@@ -541,7 +541,7 @@ To demonstrate you how to call above function from Python please use the followi
     if __name__ == '__main__':
         print 'This is my JSON result from cache', read_bills()
 
-Most important part of above example is to notice that I'm **calling function** instead of making SQL query which gets **data from table** directly. BY doing so I am making sure that I actually use my business logic. By getting data directly from a table like
+Most important part of the above example to notice is, that I'm **calling function** instead of making SQL query, which gets **data from table** directly. By doing so I am making sure that I actually use my business logic. By getting data directly from a table like
 
     sql = "SELECT * FROM bill"
 
@@ -549,7 +549,7 @@ I'd bypass business logic and I could get not that kind of data which I should g
 
 ## Summary
 
-Caching here was just an example. It also returns JSON structure instead of set of records. The options how to transform data and what kind of data state to return and in which format are countless. The key part as already mentioned is to start using functions whenever you want to access data. Of course you do not have to be to extreme and *always* use only functions to be able to access tables. You have to find the right balance where it is better to allow changing data by using functions and where data can be changed directly in the table and triggers will do the *magic*.
+Caching here was just an example. It also returns JSON structure instead of set of records. The options how to transform data and what kind of data state to return and in which format are countless. The key part, as already mentioned, is to start using functions whenever you want to access data. Of course, you do not have to be to extreme and *always* use only functions to be able to access tables. You have to find the right balance where it is better to allow changing data by using functions and where data can be changed directly in the table and triggers will do the *magic*.
 
 ## Advantages
 
