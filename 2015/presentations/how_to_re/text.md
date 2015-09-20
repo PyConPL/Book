@@ -27,17 +27,17 @@ Dzięki Januszowi Brzozowskiemu, który wykorzystał je, by zaprojektować diagr
 ## 2. Bibliografia ##
 Powyższy opis jest mocno skrótowy i nie wyczerpuje tematu. Jest bardziej zarysem tego, jak interesujące są początki informatyki, którą znamy w obecnej formie. W celu zgłębienia tematu polecam pozycje [2] oraz [14]. Jak widać na powyższym przykładzie, z wielu, wydawałoby się, niezależnych przemyśleń powstało coś uniwersalnego. Dlatego warto znać historię i dokonania poprzednich pokoleń, by bazując na nich tworzyć lepszą jakość.
 
-[1] https://pl.wikipedia.org/wiki/Wyra%C5%BCenie_regularne
-[2] Speech and Language Processing: An introduction to natural language processing, computational linguistics, and speech recognition. Daniel Jurafsky & James H. Martin
-[3] https://pl.wikipedia.org/wiki/Maszyna_Turinga
-[4] https://pl.wikipedia.org/wiki/Neuron_McCullocha-Pittsa
-[5] http://blog.staffannoteberg.com/2013/01/30/regular-expressions-a-brief-history/
-[6] http://books.google.com/books?id=oL57iECEeEwC
-[7] https://pl.wikipedia.org/wiki/J%C4%99zyk_regularny
-[8] http://kelty.org/or/papers/Kelty_Franchi_LogicalInstruments_2009.pdf
-[9] https://www.cs.ucf.edu/~dcm/Teaching/COP5611Spring2010/vonNeumannSelfReproducingAutomata.pdf
-[10] https://en.wikipedia.org/wiki/Janusz_Brzozowski_(computer_scientist)
-[11] https://en.wikipedia.org/wiki/Rudolf_Carnap#Logical_syntax
-[12] https://pl.wikipedia.org/wiki/Ken_Thompson
-[13] https://pl.wikipedia.org/wiki/Unix
-[14] http://www.fing.edu.uy/inco/cursos/intropln/material/p419-thompson.pdf
+1. https://pl.wikipedia.org/wiki/Wyra%C5%BCenie_regularne
+2. Speech and Language Processing: An introduction to natural language processing, computational linguistics, and speech recognition. Daniel Jurafsky & James H. Martin
+3. https://pl.wikipedia.org/wiki/Maszyna_Turinga
+4. https://pl.wikipedia.org/wiki/Neuron_McCullocha-Pittsa
+5. http://blog.staffannoteberg.com/2013/01/30/regular-expressions-a-brief-history/
+6. http://books.google.com/books?id=oL57iECEeEwC
+7. https://pl.wikipedia.org/wiki/J%C4%99zyk_regularny
+8. http://kelty.org/or/papers/Kelty_Franchi_LogicalInstruments_2009.pdf
+9. https://www.cs.ucf.edu/~dcm/Teaching/COP5611Spring2010/vonNeumannSelfReproducingAutomata.pdf
+10. https://en.wikipedia.org/wiki/Janusz_Brzozowski_(computer_scientist)
+11. https://en.wikipedia.org/wiki/Rudolf_Carnap#Logical_syntax
+12. https://pl.wikipedia.org/wiki/Ken_Thompson
+13. https://pl.wikipedia.org/wiki/Unix
+14. http://www.fing.edu.uy/inco/cursos/intropln/material/p419-thompson.pdf
