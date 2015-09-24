@@ -157,7 +157,8 @@ operations.
 
 A more concise and higher-level programming interface to most frequently
 used Standard SNMP Applications is offered via
-*pysnmp.hlapi...* modules. We will use their API throughout this article.
+*pysnmp.hlapi sub-package*. This slighly revised and improved API first
+appeared in PySNMP 4.3. We will use this API throughout the article.
 
 At this point we end up with a fully-functional SNMP entity that can run in
 standard Manager, Agent and Proxy roles. However one SNMP feature is
