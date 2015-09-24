@@ -284,7 +284,7 @@ the details of the event being reported.
                          UdpTransportTarget(('demo.snmplabs.com', 162)),
                          ContextData(),
                          'trap',
-                         NotificationType(ObjectIdentity('IF-MIB', 'linkDown'))
+                         NotificationType(ObjectIdentity('IF-MIB', 'linkDown')))
     )
 
     if errorIndication:
