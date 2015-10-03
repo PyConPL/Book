@@ -35,7 +35,7 @@ Here we queried publicly available SNMP Manager at *demo.snmplabs.com*
 for a value of MIB variable named *sysDescr.0*. The same operation can
 be performed right from your Python prompt:
 
-    from pysnmp.entity.rfc3413.oneliner.cmdgen import *
+    from pysnmp.hlapi import *
 
     errorIndication, errorStatus, errorIndex, varBinds = next(
         getCmd(SnmpEngine(),
@@ -144,13 +144,13 @@ by the SNMP Engine entity (*pysnmp.entity.engine*).
 
 So called Standard SNMP Applications
 ([RFC3413](http://www.ietf.org/rfc/rfc3413.txt)) are shipped in
-*pysnmp.entity.erf3413...*. They all employ SNMP Engine instance for their
+*pysnmp.entity.rfc3413...*. They all employ SNMP Engine instance for their
 operations.
 
 A more concise and higher-level programming interface to most frequently
 used Standard SNMP Applications is offered via
-*pysnmp.entity.rfc3413.oneliner...* modules. We will use their API
-throughout this article.
+*pysnmp.hlapi sub-package*. This slighly revised and improved API first
+appeared in PySNMP 4.3. We will use this API throughout the article.
 
 At this point we end up with a fully-functional SNMP entity that can run in
 standard Manager, Agent and Proxy roles. However one SNMP feature is
@@ -172,7 +172,7 @@ Besides reading known scalar variables we mentioned earlier, SNMP is able
 to fetch a range of variable including those not known in advance. The
 following code fetches all variables related to host's interface table:
 
-    from pysnmp.entity.rfc3413.oneliner.cmdgen import *
+    from pysnmp.hlapi import *
 
     for errorIndication, errorStatus, errorIndex, varBinds in \
             nextCmd(SnmpEngine(),
@@ -237,7 +237,7 @@ As we can send data back into running generator, our script could be
 modified to cherry-pick smaller sequences of adjacent MIB variables or even
 individual scalars:
 
-    from pysnmp.entity.rfc3413.oneliner.cmdgen import *
+    from pysnmp.hlapi import *
 
     queue = [ [ ObjectType(ObjectIdentity('IF-MIB', 'ifInOctets')) ],
               [ ObjectType(ObjectIdentity('IF-MIB', 'ifOutOctets')) ] ]
@@ -268,7 +268,7 @@ SNMP Manager.  Such SNMP Notification message might include relevant
 variables that help both Manager software and human reader learning
 the details of the event being reported.
 
-    from pysnmp.entity.rfc3413.oneliner.ntforg import *
+    from pysnmp.hlapi import *
 
     errorIndication, errorStatus, errorIndex, varBinds = next(
         sendNotification(SnmpEngine(),
@@ -276,7 +276,7 @@ the details of the event being reported.
                          UdpTransportTarget(('demo.snmplabs.com', 162)),
                          ContextData(),
                          'trap',
-                         NotificationType(ObjectIdentity('IF-MIB', 'linkDown'))
+                         NotificationType(ObjectIdentity('IF-MIB', 'linkDown')))
     )
 
     if errorIndication:
@@ -337,7 +337,7 @@ is available.
 Users can point their PySNMP applications to either local MIB repositories
 or remote ones that are accessible through HTTP or FTP:
 
-    from pysnmp.entity.rfc3413.oneliner.cmdgen import *
+    from pysnmp.hlapi import *
 
     errorIndication, errorStatus, errorIndex, varBinds = next(
         getCmd(SnmpEngine(),
