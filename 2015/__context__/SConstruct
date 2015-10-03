@@ -7,6 +7,7 @@ import glob
 
 import pl_txt
 
+verbose = 1
 only_first_article_for_testing = 0
 
 if 'TEXINPUTS' not in os.environ:
@@ -63,6 +64,11 @@ for alias, location in articles:
     main_src = "../" + location + "/text.tex"
     main_md  = "../" + location + "/text.md"
     diffsrc  = glob.glob("src/" + alias + ".diff")
+    if verbose:
+        print 'Checking in:'
+        print loc_src
+        print main_src
+        print main_md
     if os.path.exists(loc_src):
         env.Command( root + ".tex", loc_src,
                      Copy('$TARGET','$SOURCE') )
@@ -84,6 +90,8 @@ for alias, location in articles:
            )
     else:
         print "Thing ", main_md
+        if verbose:
+            print "Full path:", os.path.abspath(main_md)
         raise RuntimeError("Gulp")
 
 
