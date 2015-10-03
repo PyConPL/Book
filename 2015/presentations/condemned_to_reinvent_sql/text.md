@@ -153,7 +153,7 @@ This doesn't mean that all hope is lost, though. Sane databases allow you to
 create a sort-of dynamic table out of that query. This is called a "view" -
 just a name for a query result. Don't confuse that with Django views.
 
-The view might seem like a trvial feature, but the point here is that it allows
+The view might seem like a trivial feature, but the point here is that it allows
 us to define database-side abstractions, so do not underestimate them.
 
 ```sql
