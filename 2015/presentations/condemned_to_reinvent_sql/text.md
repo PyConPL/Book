@@ -5,16 +5,22 @@
 The days when developers were expected to write SQL by hand are long gone. ORMs
 are getting more and more popular, especially in web development.
 
-While it's hard to beat the convenience of using an ORM, they lure us into
+Django, as one of the most popular (if not the most popular?) Python frameworks
+for web development comes with the ORM built-in. Because of its prevalence, I'm
+going to use it in my examples. If you don't know how it works, their tutorial
+is really nice and short [1].
+
+While it's hard to beat the convenience of using such an ORM, it lures us into
 thinking about a database as a simple "object storage". One of the problems is
 the fact that in most ORMs, querying the database happens pretty much
 exclusively via a model class, which constrains the set of results to a known
 attributes of our objects.
 
-This might be one of the reasons why NoSQL approaches are more alluring: just
-throw your objects into a bin and save them on the disk. Indeed, there is no
-need to worry about tables, constraints and indexes if all you do is load data
-from the storage and process it inside the application!
+Focus on collections of objects might be one of the reasons why NoSQL
+approaches are more alluring: just throw your objects into a bin and save them
+on the disk. Indeed, there is no need to worry about tables, constraints and
+indexes if all you do is load data from the storage and process it inside the
+application!
 
 I think the "object storage" way of thinking severely limits our ability to
 process the data. In a relational model, columns are computed ad-hoc, when
@@ -26,6 +32,12 @@ In this article, I'd like to show a few features of a relational model which,
 while mapping poorly to object-oriented world, give the programmer very
 powerful data manipulation tools.
 
+As an example, I'm going to use PostgreSQL, which I find the most powerful
+open-source database management system. Note that most of the "fancy"
+constructs supported by PostgreSQL are actually standard SQL clauses. Still,
+the big warning is in order: if you use MySQL, you might as well stop
+reading right now.
+
 I'm also going to suggest ways to map these features into application code.
 While I believe the complete, robust translation is not achievable for reasons
 mentioned above, there are techniques that allow us to tie the data and
@@ -35,8 +47,7 @@ like Python.
 ## Views
 
 Consider an university schedule. There are buildings, rooms and lectures
-happening in these rooms. The schema is a fairly straightforward one (all of
-the samples are using Django ORM):
+happening in these rooms. The schema is a fairly straightforward one:
 
 ```python
 class Room(models.Model):
@@ -81,13 +92,24 @@ result is going to be something like this:
 ```
 
 Then, partition the result by building name, within each partition order rows
-by number of lectures, then fetch first and last value of "month" column
-(be sure to use a real relational DBMS, MySQL can't do any of the presented
-sql snippets):
+by number of lectures, then fetch first and last value of "month" column.
+
+The way to do that is called a window function. This feature allows the query
+to aggregate results into subsets (windows) and constructs rows by selecting
+values from a subset. More on that in [2].
+
+Notice that in this case we're going to run a query on top of another query.
+This is called "composition" and is a cornerstone of most programming languages.
+Think about that as an equivalent of nested function calls - call this, pass
+the result as an argument to call that, and so on. Just that in SQL, you don't
+define functions, but rather assign names to such subqueries. The mechanism is
+called "Common Table Expressions" [3] and uses `with foo as (select ...)` syntax.
 
 ```sql
 with "busy_months" as (
-    ...
+    select
+        "lectures_room"."building" as "building",
+        ... -- the rest of the first query
 )
 select distinct on ("building")
     "building",
@@ -129,7 +151,10 @@ Mapping this to the ORM is a bit of a problem, though:
 
 This doesn't mean that all hope is lost, though. Sane databases allow you to
 create a sort-of dynamic table out of that query. This is called a "view" -
-just a name for a query result.  Don't confuse that with Django views.
+just a name for a query result. Don't confuse that with Django views.
+
+The view might seem like a trivial feature, but the point here is that it allows
+us to define database-side abstractions, so do not underestimate them.
 
 ```sql
 create view "lectures_busy_months" as
@@ -153,10 +178,10 @@ class BusyMonths(models.Model):
 ```
 
 There's one shortcoming though: Django requires all models to have a
-single-column primary key. In our case, building names are unique in the result,
-so we can tell Django to just use that. This is not always the case though, and
-you might end up with adding superficial auto-incrementing column just to make
-the ORM happy:
+single-column primary key. In our case, building names are unique in the
+result, so we can tell Django to just use that. This is not always the case
+though, and you might end up with adding superficial auto-incrementing column
+just to make the ORM happy:
 
 ```sql
 create view "needs_id" as
@@ -169,7 +194,7 @@ create view "needs_id" as
 The only remaining thing is creating a schema migration that would install
 our SQL view in the database. This can be done by executing an SQL script
 via `migrations.RunSQL` operation. You can find the details in the sample
-project.
+project [4].
 
 ## Functions
 
@@ -192,13 +217,19 @@ class Grade(models.Model):
 ```
 
 Now, we would like to know who of the students is improving over time and who's
-getting worse. One way of doing that is a "least squares method", which
-interpolates a set of points with a straight line.
+getting worse. One way of doing that is finding a linear interpolation of
+grades over time with a "least squares method" [5]
 
-As said before, to do that in your application, you would need to fetch *all* grades
-from the database, group them by student *yourself* and run `numpy` or
-something on each set. What if you could write an ORM query that looks like
-this?
+    given a set `S` of points `(x, y)` on a plane
+    and a line L: `y = A * x + B`
+    find the values of A and B
+    such that sum of squared distances between line L and each point in S
+    is minimal
+
+As said before, to calculate that in your application, you would need to fetch
+*all* grades from the database, group them by student *yourself* and run
+the fitting algorithm (i.e. `numpy`) on each set. But what if you could write
+an ORM query that looks like this?
 
 ```python
 User.objects.annotate(grade_trend=LinearFit('grade__grade', 'grade__date'))
@@ -208,13 +239,13 @@ Fortunately, in PostgreSQL, we can implement database-side functions
 in Python. Using these, we can create our own aggregates, besides standard ones
 like `count`, `min` and `max`!
 
-The way it works, you need a datatype and two functions: the type stores the
+The way it works, you need a data type and two functions: the type stores the
 "state" of your aggregate. In our case, it's just a list of grades. Then, first
 function is supposed to "add" new value to the "state": in our case, just
 append the grade to the list. The final function takes the "state", and
 calculates the final result.
 
-Sounds scary, but really isn't:
+Sounds scary, but really isn't. The code below is all you need:
 
 ```sql
 create language plpythonu;
@@ -237,6 +268,15 @@ create aggregate linear_fit(float)
 );
 ```
 
+Mind the `create aggregate` clause which is very non-standard and specific to
+PostgreSQL. The parameters are:
+
+ - `stype`: the data type holding the "state"
+ - `initcond`: initial value of the "state"
+ - `sfunc`": function that inserts (aggregates) a "value" into the "state"
+ - `finalfunc`: function that takes the "state" and returns final value of
+    the aggregation
+
 This allows us to write the following query:
 
 ```sql
@@ -256,7 +296,7 @@ own `LinearFit` that wraps `linear_fit`.
 This is little complicated, as we need to dig deeper into the ORM...
 
 Long story short: when we write a query, Django constructs a tree of
-"expressions" to reflect our wishes.  Then, this tree is "compiled" to SQL
+"expressions" to reflect our wishes [6].  Then, this tree is "compiled" to SQL
 code and executed as a raw SQL query. The result is translated back from a
 table to a set of `Model` instances.
 
@@ -339,6 +379,9 @@ think.
 
 ## Further reading
 
-1. [PostgreSQL: Queries](http://www.postgresql.org/docs/9.4/static/queries.html)
+1. [Django: Model intro](https://docs.djangoproject.com/en/1.8/intro/tutorial01/#creating-models)
 2. [Dimitri Fontaine: Understanding Window Functions](http://tapoueh.org/blog/2013/08/20-Window-Functions)
-3. [Django: Query expressions](https://docs.djangoproject.com/en/1.8/ref/models/expressions/)
+3. [PostgreSQL: Common Table Expressions](http://www.postgresql.org/docs/8.4/static/queries-with.html)
+4. [Github: SQL, Condemned](https://github.com/mrzechonek/sql_condemned)
+5. [Wikipedia: Simple linear reqression](https://en.wikipedia.org/wiki/Simple_linear_regression)
+6. [Django: Query expressions](https://docs.djangoproject.com/en/1.8/ref/models/expressions/)
