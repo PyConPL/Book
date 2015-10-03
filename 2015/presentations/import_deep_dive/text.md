@@ -262,7 +262,7 @@ If you embed Python, or build it from source, you can add your own
 PyInit functions to this list.
 
 
-## The special snowflake: '__main__'
+## The special snowflake: `__main__`
 
 The `__main__` module is quite special.
 
