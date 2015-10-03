@@ -34,7 +34,7 @@ done with snmpget tool:
 Here we queried publicly available SNMP Manager at *demo.snmplabs.com*
 for a value of MIB variable named *sysDescr.0*. The same operation can
 be performed right from your Python prompt:
-        
+
     from pysnmp.hlapi import *
 
     errorIndication, errorStatus, errorIndex, varBinds = next(
