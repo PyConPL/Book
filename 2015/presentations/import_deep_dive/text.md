@@ -326,7 +326,7 @@ or watch David Beazley's fun-filled tutorial:
 
 * "Modules and Packages: Live and Let Die!" (PyCon 2015): http://pyvideo.org/video/3387
 
-and talks by Bret Cannon, the author of importlib:
+and talks by Brett Cannon, the author of importlib:
 
 * "How Import Works" (PyCon 2013): http://pyvideo.org/video/1707
 * "Import this, that, and the other thing" (PyCon 2010): http://pyvideo.org/video/341
@@ -352,5 +352,5 @@ And lastly, for the true deep dive, peek in the importlib sources:
 
 If anything is unclear, ask! That's what I did :)
 
-Many thanks to Nick Coghlan, Brett Canon, Eric Snow, Stefan Behnel and everyone
+Many thanks to Nick Coghlan, Brett Cannon, Eric Snow, Stefan Behnel and everyone
 else involved with PEP 489 discussions, which forced me to learn all this.
