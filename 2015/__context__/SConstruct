@@ -35,7 +35,7 @@ if only_first_article_for_testing:
 
 final_pdfs = map((lambda x: "{}/{}/{}.pdf".format(build,x[0],x[0])),articles)
 
-env.Command("pyconbook-2014.pdf",
+env.Command("pyconbook-2015.pdf",
     final_pdfs,
     "texexec --pdfcopy --result=$TARGET $SOURCES")
 
@@ -52,9 +52,7 @@ for alias, location in articles:
             ],
         [
             "pwd",
-            "[ ${TARGET.file} != optimizing.pdf ] || cp ../../../presentations/Optimizing_API_against_latency/cisco.png .",
             pl_txt.link_src(alias),
-            # "env TEXINPUTS=.:..:../..:../../sty:../../src/" + alias + ": " +
             "texexec --pdf " + alias,
             "mv artpages.inc .. 2>/dev/null || true"
             ],

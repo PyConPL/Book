@@ -1,0 +1,11 @@
+--- dive.tex
++++ expected/dive/dive.tex	2015-10-03 21:23:51.502069536 +0200
+@@ -311,7 +311,7 @@
+ your own PyInit functions to this list.
+ 
+ \subsection[the-special-snowflake-__main__]{The special snowflake:
+-\type{__main__}}
++\type{_\_main\_\_}}
+ 
+ The \type{__main__} module is quite special.
+ 

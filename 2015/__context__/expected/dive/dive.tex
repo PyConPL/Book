@@ -1,0 +1,452 @@
+\usemodule[pycon-2014]
+\starttext
+
+
+\section[import-deep-dive-detours---petr-viktorin]{Import Deep Dive
+Detours - Petr Viktorin}
+
+Python's \type{import} statement hides a lot of complexity. You could
+talk about it for hours, and still not cover it all.
+
+My talk should make you understand import machinery well enough that it
+will make sense when you want to study it further. It shows the typical
+case of loading a simple Python module (or package), omitting the
+various customization hooks, and ignoring the ever-present hacks for
+backward compatibility.
+
+To summarize, the import machinery has two major parts: the {\em finder}
+and the {\em loader}. The finder receives a name, and finds a file with
+the corresponding code, typically by looking for \type{<modulename>.py}
+in directories listed in \type{sys.path}. Its output is a
+\type{ModuleSpec} object that contains, among other things,
+\type{origin} (the name of the \type{.py} file to load) and a loader
+object.
+
+The loader then takes the ModuleSpec, creates a module object, and
+executes code in the \type{.py} file to add the module's function class
+objects.
+
+There are two major complications: First, modules are cached in
+\type{sys.modules}, so re-importing a module is little more than a dict
+lookup. Second, for submodules, the parent package is always loaded
+before the submodule.
+
+When reasoning about module imports, it's useful to keep in mind the
+exact order the loading and caching is done in. In simplified
+pseudocode, the import machinery looks like this:
+
+\starttyping
+import_module(name):
+    sys.modules[name]? return it
+
+    if importing a submodule:
+        load parent module
+        sys.modules[name]? return it
+        path = parent.__path__
+    else:
+        path = sys.path
+
+    spec = find_spec(name, path)
+    load(spec)  # sets sys.modules[name]
+
+    module = sys.modules[name]
+    if importing a submodule:
+        set module as attribute of parent
+    return module
+
+find_spec(name, path):
+    for finder in sys.meta_path:
+        call its find_spec(name, path)
+        return spec if successful
+
+PathFinder.find_spec(name, path):
+    for directory in path:
+        get sys.path_hooks entry
+        call its find_spec(name)
+        return spec if successful
+
+load(spec):
+    module = spec.loader.create_module(spec)
+    if module is None:
+        module = types.ModuleType(spec.name)
+
+    set initial module attributes
+    sys.modules[spec.name] = module
+    spec.loader.exec_module(module, spec)
+\stoptyping
+
+Most commonly, you will need to think about this when you're debugging
+import cycles - the case where module A imports module B, which in turn
+imports A again. Import cycles are hard to get right, and perhaps even
+harder to keep working as your code changes. The best advice for import
+cycles is to get rid of them, typically by putting common code in its
+own module.
+
+For packages, the rule of thumb to avoid import-related trouble are:
+
+\startitemize
+\item
+  \type{__init__} should:
+  \startitemize
+  \item
+    import from submodules
+  \item
+    set \type{__all__}
+  \item
+    nothing else
+  \stopitemize
+\item
+  submodules should:
+  \startitemize
+  \item
+    not import directly from \type{__init__}
+  \item
+    not have internal import cycles
+  \stopitemize
+\stopitemize
+
+Now, there are still some topics that I haven't covered in the 30
+minutes of my talk. This article dives into a few more tidbits and
+special cases related to importing: namespace packages, real-world
+examples of projects that use custom importers, Loader-assisted resource
+loading, the rules for C extension modules, and more information on the
+\type{__main__} module.
+
+\subsection[namespace-packages-and-plugin-systems]{Namespace packages
+and plugin systems}
+
+Probably the most important omission in my talk are namespace packages.
+
+When \type{PathFinder.find_spec} loops through the path entries, it
+looks for either a file (which would become a module), or a directory
+with an \type{__init__} file (which would become a package).
+
+What I didn't tell you is that it actually looks for {\em all}
+directories, even if they don't contain \type{__init__}. Any
+\type{__init__}-less directories are remembered for later.
+
+If the finder finishes going through \type{path} without finding a
+suitable module, it makes a {\em namespace package}: an empty module
+whose \type{__path__} contains all the directories remembered.
+
+But why do that?
+
+Namespace packages are usually used to implement plugin systems. Suppose
+there is an extensible sound editor, where individual filters (like
+\quotation{echo}, \quotation{reverb} and \quotation{speedup}) are
+implemented as Python modules, and can be installed individually.
+
+\quotation{Individually} means \quotation{in different locations}. Your
+\type{sys.path} will usually include several kinds of locations. On a
+Linux machine, the path will typically have:
+
+\startitemize
+\item
+  Directories from \type{$PYTHONPATH}, and the current directory
+\item
+  The Python standard library (e.g. \type{/usr/lib/python3.4})
+\item
+  User-specific locations (e.g.
+  \type{~/.local/lib/python3.4/site-packages})
+\item
+  A place for system-wide installed packages (e.g.
+  \type{/usr/lib/python3.4/site-packages})
+\stopitemize
+
+Suppose you install the editor and a built-in \quotation{echo} filter
+system-wide, a private \quotation{reverb} filter to your home directory,
+and you have \quotation{speedup} (which you're currently developing) in
+the current directory (on \type{$PYTHONPATH}). The paths to these
+modules would be:
+
+\startitemize
+\item
+  /usr/lib/python3.4/site-packages/sound\letterunderscore{}editor\letterunderscore{}filters/echo.py
+\item
+  \lettertilde{}/.local/lib/python3.4/site-packages/sound\letterunderscore{}editor\letterunderscore{}filters/reverb.py
+\item
+  ./sound\letterunderscore{}editor\letterunderscore{}filters/speedup.py
+\stopitemize
+
+And that repeated \type{sound_editor_filters} directory becomes a
+namespace package:
+
+\starttyping
+>>> import sound_editor_filters
+>>> sound_editor_filters.__path__
+_NamespacePath([
+    './sound_editor_filters',
+    '~/.local/lib/python3.4/site-packages/sound_editor_filters',
+    '/usr/lib/python3.4/site-packages/sound_editor_filters'])
+\stoptyping
+
+Importing \type{sound_editor_filters.echo} will get you the correct
+module, because submodules are searched for in the \type{__path__} of
+their parent.
+
+Remember that adding an \type{__init__.py} to {\em any} of the
+\type{sound_editor_filters} directories will cancel the magic. Any
+directory with \type{__init__} is a regular package, its
+\type{__init__}-less siblings are ignored.
+
+Long before namespace packages were added to CPython, \type{setuptools}
+contained
+\useURL[url1][https://pythonhosted.org/setuptools/setuptools.html\#namespace-packages][][an
+utility]\from[url1] to declare namespaces manually and explicitly. Of
+course, this still works - and if you need to support Python 2, it's the
+way to go.
+
+\subsection[customization-examples]{Customization examples}
+
+Another topic that didn't make it to my talk is customization: how to
+extend importlib to do new, exciting things?
+
+If you're interested in this, I'll just direct you to
+\useURL[url2][https://docs.python.org/3/library/importlib.html][][importlib
+documentation]\from[url2]. Now that you know the terminology and the
+\quotation{normal} way of how things are done, those docs should make
+much more sense.
+
+Instead, I'll mention some real-world projects that use custom import
+hooks, which you can use as an inspiration about what's possible.
+
+Hy (hy.readthedocs.org) allows you to import modules written in a
+dialect of Lisp. Or as its docs put it, it's \quotation{lisp-stick on a
+Python}. It uses a custom finder that looks for \type{*.hy} files
+instead of \type{*.py} ones, and a corresponding loader that parses the
+Lisp code, runs it, and populates a Python module object with the
+resulting functions and objects.
+
+This is a good approach for any project that wants to embed a custom
+language in the Python runtime.
+
+The Macropy project uses a similar technique to add syntactic macros to
+Python code. Conceptually, it's the same as Hy, except that the language
+is a bit more similar to Python.
+
+Perhaps most widely used of import customizations is Cython's
+\type{pyximport}, which finds a \type{.pyx} file, compiles it into a C
+extension, and then imports it.
+
+If you just want to load Python modules that are stored in a
+non-standard location, like a database, Git repository, or just a
+string, look near the end of David Beazley's PyCon US 2015 tutorial for
+his Redis importer.
+
+\subsection[loading-module-resources]{Loading Module Resources}
+
+Every module uses a \type{Loader} object when it is first initialized,
+but the usefulness of loaders doesn't end there.
+
+Loaders of most types of modules implement the \type{ResourceLoader}
+ABC, a protocol that allows loading data files stored alongside a
+module. For example, to open a data file stored \quotation{next to} the
+current module on the filesystem, a common approach is to do:
+
+\starttyping
+>>> import os
+>>> filename = os.path.join(os.path.dirname(__file__), "file.dat")
+>>> with open(filename, 'rb') as f:
+...     data = f.read()
+\stoptyping
+
+However, this will only work when the module and data are loaded from
+regular files. If they were, for example, distributed in a zip file, the
+\type{open} function would fail.
+
+A more robust approach is to do:
+
+\starttyping
+>>> import os
+>>> filename = os.path.join(os.path.dirname(__file__), "file.dat")
+>>> data = __loader__.get_data(filename)
+\stoptyping
+
+While constructing the filename is still somewhat painful, this approach
+will work with zipped packages, and any other loaders that implement
+\type{get_data}.
+
+(Sadly, David Beazley's Redis importer does not support this yet.)
+
+\subsection[extension-and-built-in-modules]{Extension and built-in
+modules}
+
+A big part of CPython's appeal (especially back when it was just
+starting) is that it is easily extensible with code written in C, so you
+can interface with existing libraries or write code that runs fast.
+Today, it's generally better to use CFFI or Cython for this, but
+extensions remain important. If nothing else, a big part of the the
+standard library is written in C. (And CPython extensions don't need to
+be written in C - any language that can export C-like functions, such as
+C++ or Rust, will do.) Anyway, how are extension modules loaded?
+
+An extension is a shared library, such as a DLL on Windows or a
+\type{.so} file on Linux. It exports one function called
+\type{PyInit_<modulename>}.
+
+When the shared library file is found (using \type{PathFinder} as
+normal), an ExtensionFileLoader is created to handle the loading.
+
+The difference from Python modules is in the loader's methods. Step one:
+\type{create_module} loads the shared library and calls
+\type{PyInit_<modulename>}. PyInit is -- for historical reasons --
+responsible for both creating the module object and initializing it. So,
+there's no step two: \type{ExtensionFileLoader.exec_module} does
+nothing.
+
+PyInit is called without any arguments, so it doesn't have access to the
+\type{ModuleSpec} and the things it includes, like the filesystem path
+of our module. This makes loading data from related files quite tricky.
+Also, calling user-written code from the PyInit function is somewhat
+dangerous, because \type{sys.modules} is not updated until after the
+initialization is done. To overcome these problems, there's a new
+mechanism in Python 3.5, which allows extensions to customize both the
+\type{create_module} and \type{exec_module} steps. It's called
+\quotation{multi-phase initialization}, and it's explained in PEP 489.
+
+Built-in modules, like \type{io} or \type{zipimport}, are very similar
+to extension modules. Pretty much the only difference is the loading
+step: they're looked up in a compiled-in list rather than found in the
+filesystem. If you embed Python, or build it from source, you can add
+your own PyInit functions to this list.
+
+\subsection[the-special-snowflake-__main__]{The special snowflake:
+\type{_\_main\_\_}}
+
+The \type{__main__} module is quite special.
+
+The \type{loader.create_module} step for it is done very early during
+interpreter startup - so early that the import machinery isn't loaded
+yet. The module object is created directly, and remembered deep in C
+code.
+
+When the time comes to run some code - the file Python was given to
+interpret, or a module given with the \type{-m} switch, or even commands
+from interactive console - it is executed inside \type{__main__}'s
+namespace.
+
+Python has an \type{-i} command-line switch, which causes it to drop to
+interactive prompt after running code. If you invoke:
+
+\starttyping
+$ python3 -i somemodule.py
+\stoptyping
+
+the contents of \type{somemodule.py} are run inside the \type{__main__}
+module. When it's done, you're given a chance to give commands, which
+are also executed in the \type{__main__} namespace. So, if the module
+defined some functions, you're able to use them right away.
+
+The mechanism for doing this assumes that the \type{__main__} module
+object is the same as the one created during early initialization. This
+has some implications for the types of modules Python can run directly.
+As explained in the previous section, traditional C extensions implement
+all of \type{loader.create_module} on their own, so they can't use the
+pre-existing \type{__main__}. Sure enough, when you invoke
+\type{python -m math}, you just get an error. (As for PEP 489 extension
+modules: it would be theoretically possible to run some of these
+directly, and hopefully the support will be added in Python 3.6)
+
+However, Python can run {\em packages} directly. It doesn't run the
+\type{__init__.py} when you ask to run a package. That would encourage
+people to violate our rules of what goes in \type{__init__}. (Remember:
+import from subpackages, set \type{__path__}, nothing else. Especially
+not a big \type{if __name__ == "__main__"} block.) Rather, a submodule
+named \type{__main__} is executed.
+
+You can run a number of package-like things:
+
+\startitemize
+\item
+  \type{$ python -m somepackage} (when the package has a \type{__main__}
+  subpackage)
+\item
+  \type{$ python some-directory/} (when the directory has a
+  \type{__main__.py} file)
+\item
+  \type{$ python archive.zip} (when the archive includes a
+  \type{__main__.py} file)
+\stopitemize
+
+In fact, when you see a file with a \type{.pyz} extension, it's nothing
+more than a Python module with a \type{__main__.py}, bundled in a zip
+archive. You can run these directly -- on Unix, they need a correct
+shebang; on Windows they need a correct extension. In Python 3.5, the
+\type{zipapp} tool can produce such executable archives for you, but the
+support for running them has been there since Python 2.6.
+
+\subsection[references]{References}
+
+The documentation of the import machinery's is abundant (if somewhat
+perplexing for the uninitiated). You should definitely read the
+importlib documentation:
+
+\startitemize
+\item
+  https://docs.python.org/3/library/importlib.html
+\stopitemize
+
+or watch David Beazley's fun-filled tutorial:
+
+\startitemize
+\item
+  \quotation{Modules and Packages: Live and Let Die!} (PyCon 2015):
+  http://pyvideo.org/video/3387
+\stopitemize
+
+and talks by Brett Cannon, the author of importlib:
+
+\startitemize
+\item
+  \quotation{How Import Works} (PyCon 2013):
+  http://pyvideo.org/video/1707
+\item
+  \quotation{Import this, that, and the other thing} (PyCon 2010):
+  http://pyvideo.org/video/341
+\stopitemize
+
+For interesting detours and change summaries, look no further than the
+related PEPs:
+
+\startitemize
+\item
+  PEP 328 -- Imports: Multi-Line and Absolute/Relative
+\item
+  PEP 3147 -- PYC Repository Directories
+\item
+  PEP 302 -- New Import Hooks
+\item
+  PEP 451 -- A ModuleSpec Type for the Import System
+\item
+  PEP 420 -- Implicit Namespace Packages
+\item
+  PEP 441 -- Improving Python ZIP Application Support
+\item
+  PEP 338 -- Executing modules as scripts
+\item
+  PEP 3149 -- ABI version tagged .so files
+\item
+  PEP 489 -- Multi-phase extension module initialization
+\item
+  PEP 235 -- Import on Case-Insensitive Platforms
+\item
+  PEP 263 -- Defining Python Source Code Encodings
+\item
+  PEP 3120 -- Using UTF-8 as the default source encoding
+\stopitemize
+
+And lastly, for the true deep dive, peek in the importlib sources:
+
+\startitemize
+\item
+  https://hg.python.org/cpython/file/3.5/Lib/importlib
+\stopitemize
+
+If anything is unclear, ask! That's what I did :)
+
+Many thanks to Nick Coghlan, Brett Cannon, Eric Snow, Stefan Behnel and
+everyone else involved with PEP 489 discussions, which forced me to
+learn all this.
+
+
+\stoptext
