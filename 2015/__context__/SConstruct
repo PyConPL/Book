@@ -8,6 +8,7 @@ import glob
 import pl_txt
 
 verbose = 1
+create_pdfs = 1
 only_first_article_for_testing = 0
 
 if 'TEXINPUTS' not in os.environ:
@@ -41,6 +42,13 @@ env.Command("pyconbook-2015.pdf",
 
 for alias, location in articles:
     root = "{}/{}/{}".format(build, alias, alias)
+    small_pdf_ls = [
+            "pwd",
+            pl_txt.link_src(alias),
+            ]
+    if create_pdfs:
+        small_pdf_ls.append("texexec --pdf " + alias)
+    small_pdf_ls.append("mv artpages.inc .. 2>/dev/null || true")
     env.Command(
         root + ".pdf",
         [
@@ -50,12 +58,7 @@ for alias, location in articles:
             glob.glob("sty/*"),
             glob.glob("src/" + alias + "/*")
             ],
-        [
-            "pwd",
-            pl_txt.link_src(alias),
-            "texexec --pdf " + alias,
-            "mv artpages.inc .. 2>/dev/null || true"
-            ],
+        small_pdf_ls,
         chdir = "%s/%s" % (build, alias),
         )
     loc_src  = "src/" + alias + "/text.tex"
