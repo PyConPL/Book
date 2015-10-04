@@ -1,0 +1,16 @@
+--- queue.tex
++++ expected/queue/queue.tex	2015-10-04 11:49:41.380117695 +0200
+@@ -1,10 +1,9 @@
+ \usemodule[pycon-2015]
+ \starttext
+ 
+-
+-\section[teoria-kolejek---matematyka-i-efektywne-wytwarzanie-oprogramowania---wiktor-żołnowski]{Teoria
+-Kolejek - matematyka i efektywne wytwarzanie oprogramowania - Wiktor
+-Żołnowski}
++\Title{Teoria Kolejek - matematyka i efektywne wytwarzanie oprogramowania}
++\Author{Wiktor Żołnowski}
++\MakeTitlePage
+ 
+ Przez ostatnich kilka lat, pomagając różnym organizacjom jako Agile
+ Coach i niezależny konsultant zauważyłem, że często ta sama metoda

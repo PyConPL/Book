@@ -1,0 +1,15 @@
+--- talk.tex
++++ expected/talk/talk.tex	2015-10-04 11:53:02.452125497 +0200
+@@ -1,9 +1,9 @@
+ \usemodule[pycon-2015]
+ \starttext
+ 
+-
+-\section[porozmawiaj-ze-swoją-aplikację---kamil-kujawiński-i-marcin-najtkowski]{Porozmawiaj
+-ze swoją aplikację - Kamil Kujawiński i Marcin Najtkowski}
++\Title{Porozmawiaj ze swoją aplikację}
++\Author{Kamil Kujawiński, Marcin Najtkowski}
++\MakeTitlePage
+ 
+ \subsection[systemy-ivr]{Systemy IVR}
+ 

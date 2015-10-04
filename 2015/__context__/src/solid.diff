@@ -1,0 +1,15 @@
+--- solid.tex
++++ expected/solid/solid.tex	2015-10-04 11:51:49.028122852 +0200
+@@ -1,9 +1,9 @@
+ \usemodule[pycon-2015]
+ \starttext
+ 
+-
+-\section[solid-python---ignacy-sokołowski]{SOLID Python - Ignacy
+-Sokołowski}
++\Title{SOLID Python}
++\Author{Ignacy Sokołowski}
++\MakeTitlePage
+ 
+ SOLID is an acronym for five basic principles of Object Oriented
+ Programming. The principles intend to make software entities easy to

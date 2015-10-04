@@ -1,0 +1,15 @@
+--- machine.tex
++++ expected/machine/machine.tex	2015-10-04 11:48:18.200111908 +0200
+@@ -1,9 +1,9 @@
+ \usemodule[pycon-2015]
+ \starttext
+ 
+-
+-\section[building-better-machine-learning-models-power-of-ensembles]{Building
+-better machine learning models: Power of ensembles}
++\Title{Building better machine learning models: Power of ensembles}
++\Author{Bargava Subramanian}
++\MakeTitlePage
+ 
+ For a data platform, the quality of the machine learning model's output
+ is one of the most critical pieces for its success.

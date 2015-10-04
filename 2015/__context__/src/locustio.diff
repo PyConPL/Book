@@ -1,0 +1,15 @@
+--- locustio.tex
++++ expected/locustio/locustio.tex	2015-10-04 11:46:45.832111424 +0200
+@@ -1,9 +1,9 @@
+ \usemodule[pycon-2015]
+ \starttext
+ 
+-
+-\section[locust.io---nowoczesne-narzędzie-do-load-testów---jacek-nosal]{Locust.io
+-- nowoczesne narzędzie do load testów - Jacek Nosal}
++\Title{Locust.io - nowoczesne narzędzie do load testów}
++\Author{Jacek Nosal}
++\MakeTitlePage
+ 
+ \subsection[wprowadzenie]{Wprowadzenie}
+ 

@@ -1,0 +1,15 @@
+--- flask.tex
++++ expected/flask/flask.tex	2015-10-04 11:45:44.900108163 +0200
+@@ -1,9 +1,9 @@
+ \usemodule[pycon-2015]
+ \starttext
+ 
+-
+-\section[with-modern_peripherals-python-and-flask---piotr-dyba]{with
+-modern\letterunderscore{}peripherals: Python and Flask - Piotr Dyba}
++\Title{with modern\letterunderscore{}peripherals: Python and Flask}
++\Author{Piotr Dyba}
++\MakeTitlePage
+ 
+ \subsection[introduction]{Introduction}
+ 

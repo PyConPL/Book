@@ -1,0 +1,15 @@
+--- dokku.tex
++++ expected/dokku/dokku.tex	2015-10-04 11:45:05.948103450 +0200
+@@ -1,9 +1,9 @@
+ \usemodule[pycon-2015]
+ \starttext
+ 
+-
+-\section[dokku.-build-your-own-paas---sergey-parkhomenko]{Dokku. Build
+-your own PaaS - Sergey Parkhomenko}
++\Title{Dokku. Build your own PaaS}
++\Author{Sergey Parkhomenko}
++\MakeTitlePage
+ 
+ \subsection[introduction]{Introduction}
+ 

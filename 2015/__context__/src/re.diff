@@ -1,0 +1,16 @@
+--- re.tex
++++ expected/re/re.tex	2015-10-04 11:50:05.928118771 +0200
+@@ -1,10 +1,9 @@
+ \usemodule[pycon-2015]
+ \starttext
+ 
+-
+-\section[how-to-re-czyli-jak-wyrażenia-regularne-stały-się-tym-czym-są-obecnie---dariusz-śmigiel]{How
+-to re, czyli jak wyrażenia regularne stały się tym, czym są obecnie -
+-Dariusz Śmigiel}
++\Title{How to re, czyli jak wyrażenia regularne stały się tym, czym są obecnie}
++\Author{Dariusz Śmigiel}
++\MakeTitlePage
+ 
+ \subsection[historia]{1. Historia}
+ 

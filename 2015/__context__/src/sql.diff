@@ -1,0 +1,15 @@
+--- sql.tex
++++ expected/sql/sql.tex	2015-10-04 11:52:11.760123596 +0200
+@@ -1,9 +1,9 @@
+ \usemodule[pycon-2015]
+ \starttext
+ 
+-
+-\section[condemned-to-re-invent-sql-poorly---michał-lowas-rzechonek]{Condemned
+-to re-invent SQL, poorly - Michał Lowas-Rzechonek}
++\Title{Condemned to re-invent SQL, poorly}
++\Author{Michał Lowas-Rzechonek}
++\MakeTitlePage
+ 
+ \subsection[introduction]{Introduction}
+ 

@@ -1,0 +1,15 @@
+--- snmp.tex
++++ expected/snmp/snmp.tex	2015-10-04 11:51:25.484123140 +0200
+@@ -1,9 +1,9 @@
+ \usemodule[pycon-2015]
+ \starttext
+ 
+-
+-\section[writing-snmp-apps-in-python---ilya-etingof]{Writing SNMP Apps
+-in Python - Ilya Etingof}
++\Title{Writing SNMP Apps in Python}
++\Author{Ilya Etingof}
++\MakeTitlePage
+ 
+ \subsection[introduction]{Introduction}
+ 

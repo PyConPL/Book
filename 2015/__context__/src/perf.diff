@@ -1,0 +1,15 @@
+--- perf.tex
++++ expected/perf/perf.tex	2015-10-04 11:48:40.992115800 +0200
+@@ -1,9 +1,9 @@
+ \usemodule[pycon-2015]
+ \starttext
+ 
+-
+-\section[whats-eating-python-performance---piotr-przymus]{What's Eating
+-Python performance - Piotr Przymus}
++\Title{What's Eating Python performance}
++\Author{Piotr Przymus}
++\MakeTitlePage
+ 
+ Have you ever wondered how to speed up your code in Python? This
+ presentation will show you how to start. I will begin with a guide how

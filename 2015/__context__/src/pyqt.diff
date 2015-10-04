@@ -1,0 +1,15 @@
+--- pyqt.tex
++++ expected/pyqt/pyqt.tex	2015-10-04 11:49:09.000114730 +0200
+@@ -1,9 +1,9 @@
+ \usemodule[pycon-2015]
+ \starttext
+ 
+-
+-\section[aplikacje-desktopowe-z-pyqt---piotr-maliński]{Aplikacje
+-desktopowe z PyQt - Piotr Maliński}
++\Title{Aplikacje desktopowe z PyQt}
++\Author{Piotr Maliński}
++\MakeTitlePage
+ 
+ \subsection[o-co-chodzi-z-qt-i-pyqt]{O co chodzi z Qt i PyQt?}
+ 

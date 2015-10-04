@@ -1,0 +1,15 @@
+--- review.tex
++++ expected/review/review.tex	2015-10-04 11:51:01.800121092 +0200
+@@ -1,9 +1,9 @@
+ \usemodule[pycon-2015]
+ \starttext
+ 
+-
+-\section[why-do-you-need-code-review-tools]{Why Do You Need Code Review
+-Tools?}
++\Title{Why Do You Need Code Review Tools?}
++\Author{Radomir Dopieralski}
++\MakeTitlePage
+ 
+ There is a simple and straightforward way to improve the quality of your
+ code, pay of some of your technical debt, teach the new members of your
