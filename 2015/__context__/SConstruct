@@ -8,8 +8,13 @@ import glob
 import pl_txt
 
 verbose = 1
-create_pdfs = 1
-omit_diffs = 0
+if os.getenv('PLAIN'):
+    create_pdfs = 0
+    omit_diffs = 1
+else:
+    create_pdfs = 1
+    omit_diffs = 0
+
 only_first_article_for_testing = 0
 
 if 'TEXINPUTS' not in os.environ:
