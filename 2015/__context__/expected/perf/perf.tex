@@ -1,0 +1,311 @@
+\usemodule[pycon-2015]
+\starttext
+
+\Title{What's Eating Python performance}
+\Author{Piotr Przymus}
+\MakeTitlePage
+
+Have you ever wondered how to speed up your code in Python? This
+presentation will show you how to start. I will begin with a guide how
+to locate performance bottlenecks and then give you some tips how to
+speed up your code. Also, I would like to discuss how to avoid premature
+optimization as it may be \quote{the root of all evil} (at least
+according to D. Knuth).
+
+\subsection[introduction]{Introduction}
+
+Code optimization is an important aspect of the development process,
+but, when done improperly, it may do more harm than good. This talk is
+intended as a gentle introduction into good practices in Python code
+optimization. Certainly this does not exhaust the topic, and there are
+various great resources where you can find more on the subject, see the
+references for some starting points.
+
+This talk mainly focuses on CPython (both \lettermore{}= 2.7 and
+\lettermore{}= 3.4) Python implementation.
+
+\subsection[improving-the-performance-overview]{Improving the
+performance: overview}
+
+\section[the-root-of-all-evil-premature-optimization]{The root of
+all evil: premature optimization}
+
+*Programmers waste enormous amounts of time thinking about, or worrying
+about the speed of noncritical parts of their programs, and these
+attempts at efficiency actually have a strong negative impact when
+debugging and maintenance are considered. We should forget about small
+efficiencies, say about 97\% of the time: premature optimization is the
+root of all evil. \lettertilde{} * {\bf Donald Knuth},
+\quotation{Structured Programming With Go To Statements}.
+
+In short, premature optimization may be stated as optimizing code before
+knowing whether we need to. This is a dangerous practice that impacts
+your productivity, readability of the code and ease of maintenance and
+debugging (it may also contradict many points of The Zen of Python).
+
+Thus, it is important to learn how to do proper assessment of your code
+in terms of optimization needs. (Remember that a strong felling that
+your code falls into the remaining 3\% does not count!)
+
+Yet do not be discouraged from learning the proper way of optimizing
+your code, and remember about second part of the previous quote:
+
+{\em Yet we should not pass up our opportunities in that critical 3\%.}
+{\bf Donald Knuth}
+
+Certain optimizations are a part of good programming style and good
+practices, and therefore should not be considered as premature. For
+example, moving computations that do not depend on the loop, outside the
+loop -- as this also improves code readability.
+
+\subsection[think-before-doing-think-before-coding]{Think before
+doing (Think before coding)}
+
+Going for higher performance without a deeper reason may be just a waste
+of your time. So start with:
+
+\startitemize
+\item
+  stating your reasons (Why do you need higher performance?),
+\item
+  defining your goals (What would be an acceptable speed of your code?),
+\item
+  estimating time and resources you are willing to spend to achieve
+  these goals.
+\stopitemize
+
+Re-evaluate all the pros and cons.
+
+\subsection[test-measure-track-down-bottlenecks-fix]{Test, Measure,
+Track Down bottlenecks, Fix}
+
+A starting point for optimization is a running code that gives correct
+results. Then you should prepare a regression test suite, which will
+stand on guard of the correctness of your code during the optimization.
+
+Then rest of the optimization process may be summarized as:
+
+\startitemize[n][stopper=.]
+\item
+  Test if the code works correctly.
+\item
+  Measure execution time and if code is not fast enough use a profiler
+  to identify the bottlenecks.
+\item
+  Optimize.
+\item
+  Start from the beginning.
+\stopitemize
+
+\section[regression-test-suite]{Regression test suite}
+
+Before you start, it is crucial to prepare regression test suite that is
+comprehensive but yet quick-to-run. As test will be ran very often, it
+is important that it takes a reasonable amount of time. Consider
+breaking the tests into fast and slow categories if running full test
+suite takes too much time.
+
+\section[measuring-execution-time-and-tracking-down-the-bottlenecks-measuring-and-profiling-tools]{Measuring
+execution time and tracking down the bottlenecks: Measuring and
+profiling tools}
+
+Next, you should measure execution time of your code. This is important
+because:
+
+\startitemize
+\item
+  it shows how current execution time relates to the desired execution
+  time (i.e.~acceptable speed),
+\item
+  it allows you to compare various version of optimizations.
+\stopitemize
+
+There are various tools to do that, among them:
+
+\startitemize
+\item
+  Python's timeit module,
+\item
+  custom made timer using Pythons time module,
+\item
+  unix time (use /usr/bin/time as time is also a common shell built in).
+\stopitemize
+
+Notes on measuring:
+
+\startitemize
+\item
+  Try to measure multiple independent repetitions of your code to
+  establish the lower bound of your execution time.
+\item
+  Prepare a testing environment that will allow you to get comparable
+  results.
+\item
+  Consider writing a micro benchmark to check various alternative
+  solutions of the same algorithm.
+\item
+  Be careful when measuring algorithm speed using artificial data,
+  re-validate using real data.
+\stopitemize
+
+Profiling tools will give you a more in depth view of your code
+performance. This will allow you to take a view of your program
+internals in terms of execution time and used memory.
+
+There are various possible tools, like:
+
+\startitemize
+\item
+  cProfile -- a profiling module available in Python standard library,
+\item
+  line\letterunderscore{}profiler -- an external line-by line profiler,
+\item
+  tools for visualizing profiling results such as runsnakerun.
+\stopitemize
+
+\subsection[io-bound-vs-compute-bound]{IO bound vs compute bound}
+
+It is important that you learn how to classify types of performance
+bounds. {\bf The compute bound} case occurs when large number of
+instructions is making your code slow, the {\bf I/O bound} case takes
+place when your code is slow because of various I/O operations, like
+network delays or disk access. Depending on the type of the bound,
+different optimization strategies will apply.
+
+\section[fixing-the-cause-performance-tips]{Fixing the cause:
+Performance Tips}
+
+\subsection[algorithms-and-data-structures]{Algorithms and data
+structures}
+
+Improving your algorithms time complexity is probably the best thing you
+could do to optimize your code. Using micro optimization tricks will not
+bring you anywhere near to the speed boost you could get from improving
+time complexity of algorithm.
+
+It is very common that innocently looking, searching or lookup code
+placed in a large loop generates a performance issue. Often a trivial
+change, like changing a list to a set, may be the key to solving the
+problem.
+
+That said, be sure to check
+\useURL[url1][https://wiki.python.org/moin/TimeComplexity][][Time
+complexity]\from[url1] from Python's wiki and confront it with the data
+structures used in your algorithms. The big {\bf O} notation matters!
+
+\subsection[improving-the-code-work-flow]{Improving the code work
+flow}
+
+Often you may encounter a loop with code that performs expensive
+time/memory computations that do not change within loop. Fix it by
+moving those operations outside a loop (just before the loop). Beware
+that such operations may be hidden in a class method or in a free
+function.
+
+Try to avoid conditional branching in large loops. Check whatever
+instead of having if/else statements in the loop body:
+
+\startitemize
+\item
+  it is possible to do the conditional check outside the loop,
+\item
+  have separate loops for different branches.
+\stopitemize
+
+Python introduces relatively high overhead for function/method calls. In
+some cases it may be worth to consider code inlining to avoid the
+overhead -- but this comes at a cost of code maintenance and
+readability.
+
+There are also other techniques, like improving
+function/method/variable/attribute lookup times or loop unrolling.
+
+\subsection[memory-and-io-bounds]{Memory and I/O bounds}
+
+Some performance issues may be memory related, so checking memory
+utilization is also a good idea. Typical symptoms that indicate that
+your code may have memory problems:
+
+\startitemize
+\item
+  your program never releases memory,
+\item
+  or your program allocates way too much memory.
+\stopitemize
+
+It is also worth to check if your code uses memory efficiently. You may
+find more information on this topic in my previous talk
+\quotation{Everything You Always Wanted to Know About Memory in Python
+But Were Afraid to Ask} and references included therein.
+
+I/O bounds may require more effort to deal with. Depending on the
+problem there may be various solutions, consider using:
+
+\startitemize
+\item
+  asynchronous I/O with Python (see, for example, \quotation{Journey to
+  the center of the asynchronous world}),
+\item
+  compressed data structures and lightweight compression algorithms
+  (i.e.~algorithms that are primarily intended for real-time
+  applications, which favours compression/decompression speed over
+  compression ratio),
+\item
+  probabilistic data structures (like Bloom filters instead of real
+  data).
+\stopitemize
+
+\subsection[notes-on-the-special-cases]{Notes on the special
+cases}
+
+When your code involves numerics, consider using numpy and scipy. These
+libraries provide highly optimized routines (usually based on external
+scientific libraries).
+
+Some problems may just need more computing power, so it may be a good
+idea to:
+
+\startitemize
+\item
+  write code that utilizes multi core architecture (mutliprocessing),
+\item
+  or scale your code to multiple machines (task queues, spark, grid like
+  environment),
+\item
+  or using hardware accelerators (pyOpenCL, pyCuda, pyMIC, etc.)
+\stopitemize
+
+You may also consider pushing performance-critical code into C.
+
+Remember to check your code with PyPy, you may be pleasantly surprised.
+
+\subsection[summary]{Summary}
+
+Hopefully, this talk will help you start with Python optimization.
+
+For more, check slides and source code examples on my website
+przymus.org, under \quotation{What's Eating Python performance}.
+
+\subsection[references]{References}
+
+\startitemize[n][stopper=.]
+\item
+  PythonSpeed, https://wiki.python.org
+\item
+  PythonSpeed / Performance Tips, https://wiki.python.org
+\item
+  Time complexity, https://wiki.python.org
+\item
+  PythonSpeed / Profiling Python Programs,https://wiki.python.org
+\item
+  Performance, http://pypy.org
+\item
+  Everything You Always Wanted to Know About Memory in Python But Were
+  Afraid to Ask, http://przymus.org
+\item
+  Journey to the center of the asynchronous world,
+  https://github.com/PyConPL/Book
+\stopitemize
+
+
+\stoptext

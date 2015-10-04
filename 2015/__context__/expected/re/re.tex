@@ -1,0 +1,146 @@
+\usemodule[pycon-2015]
+\starttext
+
+\Title{How to re, czyli jak wyrażenia regularne stały się tym, czym są obecnie}
+\Author{Dariusz Śmigiel}
+\MakeTitlePage
+
+\subsection[historia]{1. Historia}
+
+Wyrażenia regularne (powszechnie znane jako regular expressions, bądź w
+skrócie regex/regexp) są to wzorce, które opisują łańcuchy symboli. Jak
+podaje wikipedia: \quotation{Wyrażenia regularne mogą określać zbiór
+pasujących łańcuchów, mogą również wyszczególniać istotne części
+łańcucha.} {[}1{]} Obecnie wyrażenia regularne znajdują zastosowanie w
+programowaniu, jednakże ich początki datowane są~na lata 40. XX wieku, a
+z informatyką miały wtedy niewiele wspólnego.
+
+\section[a-biologia-na-ratunek-informatyce]{a) Biologia na ratunek
+informatyce}
+
+Za podstawę~współczesnej informatyki uznawane są automaty skończone,
+które wywodzą się z prac Alana Turinga. {[}2{]} Maszyna Turinga to
+abstrakcyjny model komputera służącego do wykonywania algorytmów,
+składającego się z nieskończenie długiej taśmy podzielonej na pola, w
+których zapisuje się dane {[}3{]}. Zainspirowani pracą Turinga, dwaj
+neurolodzy Warren McCulloch i Walter Pitts zbudowali sztuczny neuron,
+który jest uproszczonym matematycznym modelem biologicznego neuronu.
+Służy on jako podstawowy blok budulcowy sztucznych sieci neuronowych.
+{[}4{]} W 1943 wyniki swojej pracy opublikowali w artykule naukowym w
+Bulletin of Mathematical Biophysics 2:115-133 zatytułowanym:
+\quotation{A logical calculus of the ideas immanent in nervous
+activity}. Okazało się, że ten artykuł stał się podwaliną pod rozwój
+współczesnej informatyki, chociaż nie taki był jego cel. {[}5{]}
+
+\section[b-co-tam-panie-w-matematyce-słychać]{b) Co tam panie, w
+matematyce słychać}
+
+Kilkanaście lat później, w 1956 roku, matematyk Stephen Kleene poszedł o
+krok dalej i, bazując na neuronie McCullocha-Pittsa {[}4{]},
+zaproponował prostą algebrę, swoje przemyślenia publikując w artykule
+\quotation{Representation of events in nerve nets and finite automata}.
+{[}6{]} Jego celem było opisanie mózgu jako rachunku logicznego.
+Kleene'a nie interesowało to, czy model McCullocha-Pittsa był dokładny;
+skupił się na tym, czym ten model jest. W przeciwieństwie do podejścia
+McCullocha-Pittsa, Kleene udowodnił, że model neuronu nie ogranicza się
+jedynie do ludzkiego mózgu, ale w rzeczywistości opisuje szerszy zakres,
+jakim jest każdy automat skończony, bez ograniczeń na to, czy jest to
+zwierzę, człowiek czy maszyna. Tym samym nawiązał do wykładu o
+automatach, jaki von Neumann dał w trakcie Sympozjum Hixona. {[}9{]} To
+właśnie John von Neumann był jednym z pierwszych, którzy próbowali
+przedstawić ogólną teorię automatów wykorzystując narzędzia logiki.
+Artykuł Kleene'a był pierwszym krokiem na drodze ku temu, by można było
+wyrażenia regularne zaszczepić w programach komputerowych.
+
+\section[c-jak-by-tu-tego-użyć-w-informatyce]{c) Jak by tu tego
+użyć w informatyce}
+
+Prawdopodobnie efekt pracy, którą dokonali wymienieni wcześniej
+naukowcy, nigdy by nie trafił do komputerów, gdyby nie Janusz
+Brzozowski. {[}10{]} Brzozowski, który uzyskał tytuł doktora nauk
+elektrycznych na Princeton University, przez pewien czas wykładał w
+Berkeley. Wtedy też zaprezentował sposób na wykorzystanie wyrażeń
+regularnych, by stworzyć diagram stanów, które były szeroko
+wykorzystywane w latach 50-tych do projektowania i implementowania
+programów w ówczesnych komputerach. Właśnie w Berkeley z Brzozowskim
+zetknął się Ken Thompson {[}12{]}. Bazując na tym, co usłyszał,
+postanowił zaadaptować to podejście i zaimplemenować je w
+oprogramowaniu. Pracując przy tworzeniu UNIX-a, napisał coś, co
+ostatecznie miało stać się narzędziem \quotation{grep}, a
+zaimplementowane było w edytorze \quotation{QED}. \quotation{grep} to w
+rzeczywistości skrót od \quotation{Globally search for regular
+expression re and Print it}, czyli w wolnym tłumaczeniu
+\quotation{globalne wyszukiwanie wyrażeń regularnych oraz wyświetlanie
+ich}. Swój algorytm opisał w artykule \quotation{Regular Expression
+Search Algorithm} {[}14{]}, a całość zaimplementował w asemblerze dla
+IBM 7090.
+
+\section[d-gdzie-tego-szukać]{d) Gdzie tego szukać?}
+
+Od momentu, gdy Thompson zaimplementował pierwszą wersję wyrażeń
+regularnych w QED, minęło sporo czasu. Wraz z rozwojem oprogramowania,
+regexpy można znaleźć w \quotation{vi}, \quotation{lex} \quotation{sed},
+\quotation{AWK}, czy w \quotation{Emacsie}. Oprócz tego, mnóstwo IDE
+korzysta z odkryć, których korzenie sięgają lat 40-tych. Jednym z
+pierwszych zastosowań w językach programowania może się poszczycić Perl.
+Bazując na tym, większość współczesnych języków posiada zbliżoną
+składnię: do tego grona można zaliczyć Javę, JavaScript, Ruby oraz
+oczywiście Pythona.
+
+\section[e-podsumowanie]{e) Podsumowanie}
+
+Zakres transformacji, które wyrażenia regularne przeszły, jest
+zadziwiający. Zaczynając od pracy Rudolfa Carnapa {[}11{]} w zakresie
+logicznej składni języka, poprzez wspomniane neurony McCullocha-Pittsa.
+Następnie podchwycone przez von Neumannowy opis komputera EDVAC, czy
+jego późniejszą teorię automatów. By ostatecznie otrzymać nazwę od
+matematyka Stephena Kleene. Dzięki Januszowi Brzozowskiemu, który
+wykorzystał je, by zaprojektować diagramy stanów oraz dzięki pierwszej
+implementacji wykonanej przez Kena Thompsona, ostatecznie trafiły do
+wszelkiej maści programów, by służyć ku uciesze programistów.
+
+\subsection[bibliografia]{2. Bibliografia}
+
+Powyższy opis jest mocno skrótowy i nie wyczerpuje tematu. Jest bardziej
+zarysem tego, jak interesujące są początki informatyki, którą znamy w
+obecnej formie. W celu zgłębienia tematu polecam pozycje {[}2{]} oraz
+{[}14{]}. Jak widać na powyższym przykładzie, z wielu, wydawałoby się,
+niezależnych przemyśleń powstało coś uniwersalnego. Dlatego warto znać
+historię i dokonania poprzednich pokoleń, by bazując na nich tworzyć
+lepszą jakość.
+
+\startitemize[n][stopper=.,width=2.0em]
+\item
+  https://pl.wikipedia.org/wiki/Wyra\%C5\%BCenie\letterunderscore{}regularne
+\item
+  Speech and Language Processing: An introduction to natural language
+  processing, computational linguistics, and speech recognition. Daniel
+  Jurafsky \& James H. Martin
+\item
+  https://pl.wikipedia.org/wiki/Maszyna\letterunderscore{}Turinga
+\item
+  https://pl.wikipedia.org/wiki/Neuron\letterunderscore{}McCullocha-Pittsa
+\item
+  http://blog.staffannoteberg.com/2013/01/30/regular-expressions-a-brief-history/
+\item
+  http://books.google.com/books?id=oL57iECEeEwC
+\item
+  https://pl.wikipedia.org/wiki/J\%C4\%99zyk\letterunderscore{}regularny
+\item
+  http://kelty.org/or/papers/Kelty\letterunderscore{}Franchi\letterunderscore{}LogicalInstruments\letterunderscore{}2009.pdf
+\item
+  https://www.cs.ucf.edu/\lettertilde{}dcm/Teaching/COP5611Spring2010/vonNeumannSelfReproducingAutomata.pdf
+\item
+  https://en.wikipedia.org/wiki/Janusz\letterunderscore{}Brzozowski\letterunderscore{}(computer\letterunderscore{}scientist)
+\item
+  https://en.wikipedia.org/wiki/Rudolf\letterunderscore{}Carnap\#Logical\letterunderscore{}syntax
+\item
+  https://pl.wikipedia.org/wiki/Ken\letterunderscore{}Thompson
+\item
+  https://pl.wikipedia.org/wiki/Unix
+\item
+  http://www.fing.edu.uy/inco/cursos/intropln/material/p419-thompson.pdf
+\stopitemize
+
+
+\stoptext

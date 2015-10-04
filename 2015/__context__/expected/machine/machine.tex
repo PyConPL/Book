@@ -1,0 +1,268 @@
+\usemodule[pycon-2015]
+\starttext
+
+\Title{Building better machine learning models: Power of ensembles}
+\Author{Bargava Subramanian}
+\MakeTitlePage
+
+For a data platform, the quality of the machine learning model's output
+is one of the most critical pieces for its success.
+
+Data, more often than not, is messy. But once one gets past the
+preliminary data clean-up, building an initial machine learning model
+isn't difficult. But how far is that from the optimal model? One of the
+core tenets in machine learning is that there is no substitute for
+domain expertise; that a simpler model with the right features will
+invariably outperform a complex model without the right features.
+
+When solving a typical machine learning problem, once most of the
+necessary data are collated and preliminary data cleansing work is done,
+figuring out the right features, feature transformations and models are
+as much art as science. This is so because the solution space to search
+and prune grows exponentially as you start considering all feature
+transformations and combinations of features along with multitude of
+model parameters.
+
+But what if there's a clever algorithmic way to search the solution
+space? This article covers one such important toolkit: ensemble
+learning.
+
+\section[success-stories]{Success Stories}
+
+Before going into what ensemble models are, it has to be mentioned that
+they are widely used in practice and are often instrumental in breaking
+into new thresholds. A couple of their successful use cases are:
+
+\startitemize
+\item
+  Ensemble models improved the baseline movie recommendation by 10\% and
+  won the Netflix million-dollar prize
+\item
+  Almost all recent
+  \useURL[url1][https://www.kaggle.com/][][Kaggle]\from[url1]
+  competitions are won by employing ensemble models. For example, see
+  \useURL[url2][https://github.com/ChenglongChen/Kaggle_CrowdFlower][][here]\from[url2]
+\stopitemize
+
+\section[what-are-ensemble-models]{What are Ensemble Models?}
+
+\startblockquote
+This is how you win ML competitions: you take other peoples' work and
+ensemble them together.”
+\useURL[url3][http://cims.nyu.edu/~vitaly/][][Vitaly
+Kuznetsov]\from[url3] NIPS2014
+\stopblockquote
+
+The theoretical underpinning is that consensus information from diverse
+model outputs are more reliable than a single model. At its core, an
+ensemble model structure looks like figure 1.
+
+{\em figure 1: Ensemble model structure}
+{\externalfigure[ensemble_1.png]}
+
+Multiple model outputs are combined to create the final prediction. The
+individual(single) models are called base models. How the various base
+models are combined(ensembled) to create the final prediction determines
+the quality/accuracy of ensemble learning.
+
+The key ingredient to ensemble is to select the base models with
+significant diversity in their predictions. If the individual base
+learners are similar, they add little information. Worse, they tend to
+reinforce the same error present within them.
+
+\section[motivation-example]{Motivation Example}
+
+Before going into the various ways of ensembling, let's take a step back
+and realize that ensembles do work with a simple example.
+
+Let's consider an example of classifying a credit card transaction as
+fraudulent or not. The prediction has to be made on 10 transactions.
+Let's take the case where we already know those 10 cases to be
+fraudulent. Encoding 1 as fraudulent and 0 as non-fraudulent, let there
+be three base model outputs, one each from Logistic Regression, Random
+Forest and Gradient Boosting, each having 70\% accuracy.
+
+While individual models have 70\% accuracy, consider a simple way of
+ensembling them: Majority voting. Using majority voting scheme as the
+ensembling function, the prediction accuracy is boosted from 70\% to
+90\%. Case 6 alone will remain mis-classified, as shown in Table 1.
+
+{\em Table 1:Example output from three models}
+
+\letterbar{}\type{RandomForest} \letterbar{} \type{xgboost} \letterbar{}
+\type{LogisticRegression}\letterbar{}EnsembledOutput\letterbar{}
+\letterbar{}:------:\letterbar{}:-------:\letterbar{}
+:---------:\letterbar{}:------:\letterbar{} \letterbar{} 0 \letterbar{}
+1 \letterbar{} 1 \letterbar{} 1 \letterbar{} \letterbar{} 1 \letterbar{}
+1 \letterbar{} 0 \letterbar{} 1 \letterbar{} \letterbar{} 1 \letterbar{}
+0 \letterbar{} 1 \letterbar{} 1 \letterbar{} \letterbar{} 1 \letterbar{}
+1 \letterbar{} 0 \letterbar{} 1 \letterbar{} \letterbar{} 1 \letterbar{}
+1 \letterbar{} 1 \letterbar{} 1 \letterbar{} \letterbar{} 0 \letterbar{}
+0 \letterbar{} 1 \letterbar{} 0 \letterbar{} \letterbar{} 1 \letterbar{}
+1 \letterbar{} 0 \letterbar{} 1 \letterbar{} \letterbar{} 1 \letterbar{}
+1 \letterbar{} 1 \letterbar{} 1 \letterbar{} \letterbar{} 1 \letterbar{}
+0 \letterbar{} 1 \letterbar{} 1 \letterbar{} \letterbar{} 0 \letterbar{}
+1 \letterbar{} 1 \letterbar{} 1 \letterbar{}
+
+A key point to be stressed again is that model diversity is important.
+If the models were similar, the output would've been similar and there
+would've been no improvement in the output.
+
+\section[advantages]{Advantages}
+
+Some of the advantages of using ensemble models are:
+
+\startitemize
+\item
+  {\bf Improved accuracy}: Dozens of models, even of mediocre quality,
+  may produce top-notch predictions as a team.
+\item
+  {\bf Robustness}: more robust than a single model
+\item
+  {\bf Efficiency}: A divide-and-conquer paradigm. Complex problem is
+  decomposed into many sub-problems and then solved
+\item
+  {\bf Parallelization}: It naturally lends itself to parallelization.
+\item
+  {\bf Wider search of solution space}: When ensembling, different
+  solution spaces searched by individual models are combined, leading to
+  a wider search of solution space. Since the combination step is not
+  computationally intensive, the search is more efficient than a single
+  model searching the entire solution space.
+\item
+  {\bf Reduces overfitting}
+\stopitemize
+
+\section[different-ways-to-create-ensemble-models]{Different ways
+to create ensemble models}
+
+\subsection[base-models]{Base Models}
+
+Let's now discuss some of the ways to create the base models, to ensure
+that they have enough diversity
+
+\startitemize[n][stopper=.]
+\item
+  {\bf Different training sets}: If there's enough data, the same model
+  can be run on different training examples. In practice, transformation
+  of original training set is carried out to create multiple training
+  sets. ({\em Widely used})
+\item
+  {\bf Different algorithms/algorithm diversity}: Choose diverse
+  algorithms. \type{LinearRegression}, \type{LogisticRegression} are
+  diverse from \type{DecisionTree}, \type{RandomForest} etc (Regression
+  Vs Tree-based). \type{SVM} is another class of algorithms. Also,
+  \type{Regression} could be L1 or L2. The basis function for \type{SVM}
+  could be radial or linear. ({\em Widely used})
+\item
+  {\bf Different parameter setups}: Called the hyperparameters, the
+  parameters of the model can be varied to obtain different model
+  outputs. An example would be to build \type{RandomForest} with shallow
+  trees versus building it with denser trees (less trees vs more trees)
+  ({\em Widely used})
+\item
+  {\bf Algorithm randomization}: A lot of the models have randomness
+  playing a key part and the model can be run with different random
+  initialization. ({\em Not so widely used})
+\item
+  {\bf Feature Sampling} Using subset of columns for different model
+  runs, produce different model outputs and can help in estimating and
+  containing variance of model predictions({\em Widely used})
+\stopitemize
+
+\subsection[model-aggregation]{Model Aggregation}
+
+Some of the ways to aggregate the models are
+
+\startitemize[n][stopper=.]
+\item
+  {\bf Voting/Averaging}: A simple way to aggregate output is to either
+  take the candidate with maximum outputs or the average of outputs (if
+  regression or probability is the desired output). For simple
+  averaging, all models are assumed equal.
+\item
+  {\bf Weighted voting/averaging}: The model is given a weight and the
+  output is weighted based on that. An example would be: A model with
+  higher accuracy has a higher weight than a model with lower accuracy.
+\item
+  {\bf Using as attributes}: The model outputs are used as inputs for a
+  second-stage model. See {\em stacking}
+\item
+  {\bf Bagging}: {\bf B}ootstrap {\bf Agg}regat{\bf ing} -Base model is
+  created using bootstrap samples of training set and are combined by
+  plain voting. \type{RandomForest} uses bagging.
+\item
+  {\bf Stacking}: Using different algorithms as base learners, the model
+  outputs are used as meta attributes for another model. Also called
+  {\em Stacked Generalization}. Currently, these are widely used.
+  {\em An example of stacking}: Divide the dataset into two. Using the
+  first half, build \type{LogisticRegression}, \type{SVM},
+  \type{LinearRegression}, \type{xgboost}, \type{RandomForest} models.
+  Predict the output for the second half of the dataset. Using these
+  meta attributes as input features, build a \type{LogisticRegression}
+  model on the second half of the dataset.
+\stopitemize
+
+\section[disadvantages-of-ensemble-models]{Disadvantages of
+ensemble models}
+
+\startitemize[n][stopper=.]
+\item
+  Model human readability is not great. While there are ways to show
+  variable importance, they are not as interpretable as a simple
+  \type{LinearRegression} model or a \type{DecisionTree} model.
+\item
+  For some business cases, the tradeoff in time/effort it takes to build
+  complex ensemble models may not be offset by the improvements in
+  accuracy and hence may not be justified.
+\stopitemize
+
+\section[some-python-libraries-to-aid-efficient-ensembling]{Some
+Python libraries to aid efficient ensembling}
+
+\startitemize[n][stopper=.]
+\item
+  \type{Pipeline}: This creates a pipeline of transforms with a final
+  estimator. An example of pipeline could be: pre-processing(capping,
+  standardizing, scaling) -\lettermore{} feature extraction(principal
+  components, transformation) -\lettermore{} model creation. The process
+  can be made elegant and efficient using this.
+\item
+  \type{hyperopt}: It uses a form of bayesian optimization called
+  {\em tree of Parzen estimators}. For weighted averaging of the base
+  models, this is an efficient package for optimally identifying the
+  models and their weights. In many cases, it may not be possible to
+  specify the required objective function for the base models, but
+  \type{hyperopt} allows custom objective function to be specified and
+  so, ensures that the final ensembled model is optimized on the
+  required objective function.
+\item
+  \type{RandomizedSearchCV}: While we didn't talk about hyper-parameter
+  optimization, this helps in efficient searching of hyper-parameters
+  for the model. When running dozens of models as base models, it may
+  not be possible to do an exhaustive grid search of hyper parameters
+  (and in some cases, not tractable too). Randomized search of the
+  hyper-parameter space helps in producing better model parameters, and
+  hence better base model outputs.
+\item
+  \type{joblib}: For parallel computing. Different models can be run in
+  parallel.
+\stopitemize
+
+\section[references]{References}
+
+\startitemize[n][stopper=.]
+\item
+  http://ews.uiuc.edu/\lettertilde{}jinggao3/sdm10ensemble.htm
+\item
+  http://www.overkillanalytics.net/more-is-always-better-the-power-of-simple-ensembles/
+\item
+  http://www.rms.com/blog/2013/10/08/a-weight-on-your-mind/
+\item
+  http://mlwave.com/kaggle-ensembling-guide/
+\item
+  http://fastml.com/optimizing-hyperparams-with-hyperopt/
+\stopitemize
+
+
+\stoptext
