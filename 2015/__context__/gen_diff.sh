@@ -5,6 +5,12 @@ do
     FILE=`basename $i .tex`
     LABEL=`basename $i`
     DST=src/$FILE.diff
-    diff -ru -L $LABEL build/$i expected/$i > $DST
+    BUILD=build/$i
+    if [ -f $BUILD ]
+    then
+        diff -ru -L $LABEL $BUILD expected/$i > $DST
+    else
+        echo Skipped - no file: $BUILD
+    fi
     echo $DST done.
 done
