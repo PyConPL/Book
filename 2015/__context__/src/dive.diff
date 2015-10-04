@@ -1,11 +1,25 @@
 --- dive.tex
-+++ expected/dive/dive.tex	2015-10-03 21:23:51.502069536 +0200
-@@ -311,7 +311,7 @@
++++ expected/dive/dive.tex	2015-10-04 20:09:38.269300932 +0200
+@@ -1,9 +1,9 @@
+ \usemodule[pycon-2015]
+ \starttext
+ 
+-
+-\section[import-deep-dive-detours---petr-viktorin]{Import Deep Dive
+-Detours - Petr Viktorin}
++\Title{Import Deep Dive Detours}
++\Author{Petr Viktorin}
++\MakeTitlePage
+ 
+ Python's \type{import} statement hides a lot of complexity. You could
+ talk about it for hours, and still not cover it all.
+@@ -310,8 +310,7 @@
+ filesystem. If you embed Python, or build it from source, you can add
  your own PyInit functions to this list.
  
- \subsection[the-special-snowflake-__main__]{The special snowflake:
+-\subsection[the-special-snowflake-__main__]{The special snowflake:
 -\type{__main__}}
-+\type{_\_main\_\_}}
++\subsection[the-special-snowflake-__main__]{The special snowflake: \_\_main\_\_}
  
  The \type{__main__} module is quite special.
  
