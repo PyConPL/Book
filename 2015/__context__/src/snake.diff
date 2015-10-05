@@ -1,5 +1,5 @@
 --- snake.tex
-+++ expected/snake/snake.tex	2015-10-04 19:24:09.417191140 +0200
++++ snake.tex
 @@ -1,10 +1,9 @@
  \usemodule[pycon-2015]
  \starttext

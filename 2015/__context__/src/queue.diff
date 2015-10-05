@@ -1,5 +1,5 @@
 --- queue.tex
-+++ expected/queue/queue.tex	2015-10-04 11:49:41.380117695 +0200
++++ queue.tex
 @@ -1,10 +1,9 @@
  \usemodule[pycon-2015]
  \starttext

@@ -1,5 +1,5 @@
 --- super.tex
-+++ expected/super/super.tex	2015-10-04 11:52:38.852123743 +0200
++++ super.tex
 @@ -1,9 +1,9 @@
  \usemodule[pycon-2015]
  \starttext

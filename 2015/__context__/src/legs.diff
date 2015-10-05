@@ -1,5 +1,5 @@
 --- legs.tex
-+++ expected/legs/legs.tex	2015-10-04 11:46:15.104109567 +0200
++++ legs.tex
 @@ -1,9 +1,9 @@
  \usemodule[pycon-2015]
  \starttext

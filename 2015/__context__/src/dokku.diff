@@ -1,5 +1,5 @@
 --- dokku.tex
-+++ expected/dokku/dokku.tex	2015-10-04 11:45:05.948103450 +0200
++++ dokku.tex
 @@ -1,9 +1,9 @@
  \usemodule[pycon-2015]
  \starttext

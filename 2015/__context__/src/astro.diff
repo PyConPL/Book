@@ -1,5 +1,5 @@
 --- astro.tex
-+++ expected/astro/astro.tex	2015-10-04 11:43:01.660101099 +0200
++++ astro.tex
 @@ -1,8 +1,9 @@
  \usemodule[pycon-2015]
  \starttext

@@ -1,5 +1,5 @@
 --- locustio.tex
-+++ expected/locustio/locustio.tex	2015-10-04 11:46:45.832111424 +0200
++++ locustio.tex
 @@ -1,9 +1,9 @@
  \usemodule[pycon-2015]
  \starttext

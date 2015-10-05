@@ -1,5 +1,5 @@
 --- solid.tex
-+++ expected/solid/solid.tex	2015-10-04 11:51:49.028122852 +0200
++++ solid.tex
 @@ -1,9 +1,9 @@
  \usemodule[pycon-2015]
  \starttext

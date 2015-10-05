@@ -1,5 +1,5 @@
 --- re.tex
-+++ expected/re/re.tex	2015-10-04 11:50:05.928118771 +0200
++++ re.tex
 @@ -1,10 +1,9 @@
  \usemodule[pycon-2015]
  \starttext

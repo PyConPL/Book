@@ -1,5 +1,5 @@
 --- pyqt.tex
-+++ expected/pyqt/pyqt.tex	2015-10-04 11:49:09.000114730 +0200
++++ pyqt.tex
 @@ -1,9 +1,9 @@
  \usemodule[pycon-2015]
  \starttext

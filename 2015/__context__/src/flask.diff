@@ -1,5 +1,5 @@
 --- flask.tex
-+++ expected/flask/flask.tex	2015-10-04 11:45:44.900108163 +0200
++++ flask.tex
 @@ -1,9 +1,9 @@
  \usemodule[pycon-2015]
  \starttext

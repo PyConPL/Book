@@ -1,5 +1,5 @@
 --- talk.tex
-+++ expected/talk/talk.tex	2015-10-04 11:53:02.452125497 +0200
++++ talk.tex
 @@ -1,9 +1,9 @@
  \usemodule[pycon-2015]
  \starttext

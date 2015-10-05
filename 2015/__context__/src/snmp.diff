@@ -1,5 +1,5 @@
 --- snmp.tex
-+++ expected/snmp/snmp.tex	2015-10-04 11:51:25.484123140 +0200
++++ snmp.tex
 @@ -1,9 +1,9 @@
  \usemodule[pycon-2015]
  \starttext

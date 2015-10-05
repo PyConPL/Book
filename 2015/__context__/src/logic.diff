@@ -1,5 +1,5 @@
 --- logic.tex
-+++ expected/logic/logic.tex	2015-10-04 11:47:10.116111264 +0200
++++ logic.tex
 @@ -1,9 +1,9 @@
  \usemodule[pycon-2015]
  \starttext

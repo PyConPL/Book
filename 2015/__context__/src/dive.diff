@@ -1,5 +1,5 @@
 --- dive.tex
-+++ expected/dive/dive.tex	2015-10-04 20:09:38.269300932 +0200
++++ dive.tex
 @@ -1,9 +1,9 @@
  \usemodule[pycon-2015]
  \starttext

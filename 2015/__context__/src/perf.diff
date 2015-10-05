@@ -1,5 +1,5 @@
 --- perf.tex
-+++ expected/perf/perf.tex	2015-10-04 11:48:40.992115800 +0200
++++ perf.tex
 @@ -1,9 +1,9 @@
  \usemodule[pycon-2015]
  \starttext

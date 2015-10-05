@@ -1,5 +1,5 @@
 --- sql.tex
-+++ expected/sql/sql.tex	2015-10-04 11:52:11.760123596 +0200
++++ sql.tex
 @@ -1,9 +1,9 @@
  \usemodule[pycon-2015]
  \starttext

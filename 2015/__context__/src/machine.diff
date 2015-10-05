@@ -1,5 +1,5 @@
 --- machine.tex
-+++ expected/machine/machine.tex	2015-10-04 11:48:18.200111908 +0200
++++ machine.tex
 @@ -1,9 +1,9 @@
  \usemodule[pycon-2015]
  \starttext
