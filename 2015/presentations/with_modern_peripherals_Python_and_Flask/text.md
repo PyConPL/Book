@@ -65,7 +65,8 @@ Frontend code:
 ```javascript
 $(document).ready(function() {
     var namespace = '/test';
-    var socket = io.connect('http://' + document.domain + ':' + location.port + namespace);
+    var socket = io.connect('http://' + document.domain + ':' +
+        location.port + namespace);
     // connecting event
     socket.on('connect', function () {
         socket.emit('connect');
