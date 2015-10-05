@@ -324,7 +324,7 @@ You should definitely read the importlib documentation:
 
 or watch David Beazley's fun-filled tutorial:
 
-* "Modules and Packages: Live and Let Die!" (PyCon 2015): http://pyvideo.org/video/3387
+* "Modules and Packages: Live and Let Die!" (PyCon 2015): \hyphenatedurl{http://pyvideo.org/video/3387}
 
 and talks by Brett Cannon, the author of importlib:
 
