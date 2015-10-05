@@ -40,6 +40,11 @@ for line in open(artlist):
 if only_first_article_for_testing:
     articles = articles[:1]
 
+selected = os.getenv('SELECTED')
+if selected:
+    sel_ls = selected.split()
+    articles = filter(lambda x: x[0] in sel_ls, articles)
+
 final_pdfs = map((lambda x: "{}/{}/{}.pdf".format(build,x[0],x[0])),articles)
 
 env.Command("pyconbook-2015.pdf",
