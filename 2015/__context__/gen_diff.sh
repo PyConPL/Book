@@ -8,7 +8,7 @@ do
     BUILD=build/$i
     if [ -f $BUILD ]
     then
-        diff -ru -L $LABEL $BUILD expected/$i > $DST
+        diff -ru -L $LABEL -L $LABEL $BUILD expected/$i > $DST
     else
         echo Skipped - no file: $BUILD
     fi
