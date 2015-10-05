@@ -81,8 +81,8 @@ select
     date_trunc('month', "lectures_lecture"."date") as "month",
     count(*) as "count"
 from "lectures_lecture"
-left join "lectures_room" on "lectures_room"."id" = "lectures_lecture"."room_id"
-group by "building", "month"
+left join "lectures_room" on "lectures_room"."id" =
+"lectures_lecture"."room_id" group by "building", "month"
 \stoptyping
 
 result is going to be something like this:
@@ -249,7 +249,8 @@ fetch {\em all} grades from the database, group them by student
 set. But what if you could write an ORM query that looks like this?
 
 \starttyping
-User.objects.annotate(grade_trend=LinearFit('grade__grade', 'grade__date'))
+User.objects.annotate(grade_trend=LinearFit(
+    'grade__grade', 'grade__date'))
 \stoptyping
 
 Fortunately, in PostgreSQL, we can implement database-side functions in
@@ -268,7 +269,8 @@ Sounds scary, but really isn't. The code below is all you need:
 \starttyping
 create language plpythonu;
 
-create or replace function linear_fit_finalfunc(p_state float[]) returns float[] as
+create or replace function linear_fit_finalfunc(p_state float[])
+returns float[] as
 $$
     import numpy
     return numpy.polyfit(xrange(len(p_state)), p_state, 1)
@@ -281,8 +283,8 @@ create aggregate linear_fit(float)
     initcond = '{}',      -- starting from an empty list
     sfunc = array_append, -- adding grade to the "state" is just appending to
                           -- the list
-    finalfunc = linear_fit_finalfunc -- final function does the line fitting on
-                                     -- accumulated points
+    -- final function does the line fitting on accumulated points
+    finalfunc = linear_fit_finalfunc
 );
 \stoptyping
 
@@ -364,7 +366,8 @@ class LinearFit(Func):
         ordering_sql, ordering_params = compiler.compile(self.ordering)
         self.extra['ordering'] = ordering_sql
 
-        return super(LinearFit, self).as_sql(compiler, connection, function, template)
+        return super(LinearFit, self).as_sql(compiler, connection,
+            function, template)
 
     def get_group_by_cols(self):
         return []
@@ -374,7 +377,8 @@ This seems to do the job (note that grades were given randomly, so
 trends are mosly flat)!
 
 \starttyping
->>> for i in User.objects.annotate(grade_trend=LinearFit('grade__grade', 'grade__date')):
+>>> for i in User.objects.annotate(grade_trend=LinearFit(
+            'grade__grade', 'grade__date')):
 ...     print i.username, i.grade_trend
 ...
 john [-0.0017908297019, 3.77233748271]
