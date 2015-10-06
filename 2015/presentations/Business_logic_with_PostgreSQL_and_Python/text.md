@@ -24,10 +24,14 @@ Example piece of pseudo code in Django ORM
         super(_MyBaseModel, self).save(*args, **kwargs)
 
     class History(_MyBaseModel):
-      """ model which always calls custom save method before calling Django's save """
-      shops = models.IntegerField('Number of shops', default = 0, null = True)
-      customers = models.IntegerField('Number of customers', default = 0, null=True)
-      customer_type = models.SmallIntegerField('Customer Type', choices = CustomerTypes.CHOICES)
+      """ model which always calls custom save method before
+      calling Django's save """
+      shops = models.IntegerField(
+          'Number of shops', default = 0, null = True)
+      customers = models.IntegerField(
+          'Number of customers', default = 0, null=True)
+      customer_type = models.SmallIntegerField(
+          'Customer Type', choices = CustomerTypes.CHOICES)
 
       def save(self, *args, **kwargs):
           # also we can have another level of customization here
@@ -66,7 +70,8 @@ When compilation is finished, some operating systems, when you try to run your c
 
     py ➤ bin/python2.7
 
-    bin/python2.7: error while loading shared libraries: libpython2.7.so.1.0: cannot open shared object file: No such file or directory**
+    bin/python2.7: error while loading shared libraries: libpython2.7.so.1.0:
+        cannot open shared object file: No such file or directory**
 
 You have to add *lib path* of your newly compiled Python to the system lib path. For instance you can add below line to your .bashrc file. In my case, I compiled Python under */opt/py* so that is why I added path as below:
 
@@ -80,7 +85,8 @@ To simplify installation process of Python modules let's install **pip package m
 
 Download source code.
 
-    wget https://ftp.postgresql.org/pub/source/v9.4.4/postgresql-9.4.4.tar.bz2
+    wget https://ftp.postgresql.org/pub/source/
+        v9.4.4/postgresql-9.4.4.tar.bz2
 
 Compile with Python support from */opt/py* directory. Same as during Python compilation I'm going to compile PostgreSQL under custom directory (*--prefix* flag) */opt/pgsql*.
 
@@ -209,31 +215,36 @@ Let me show you, how to write the classical hello world function
 As you can see from above example, you are able to print out some log messages. They go to stdout of PostgreSQL directly, which means in production stdout is redirected to a log file. Depending on PostgreSQL log level you can hide some unwanted messages from plPy function same as some context like which function calls which. Example of a verbose log level.
 
     pie=# select * from logic.view_and_set_discounted_sales(20, 23) ;
-    INFO:  [view_and_set_discounted_sales] Updating item id: 36 with new discounted price: 0.529331946972
+    INFO:  [view_and_set_discounted_sales] Updating item id: 36 with new
+        discounted price: 0.529331946972
     CONTEXT:  PL/Python function "view_and_set_discounted_sales"
-    INFO:  [view_and_set_discounted_sales] Updating item id: 40 with new discounted price: 5.03912459204
+    INFO:  [view_and_set_discounted_sales] Updating item id: 40 with new
+        discounted price: 5.03912459204
     CONTEXT:  PL/Python function "view_and_set_discounted_sales"
-    INFO:  [view_and_set_discounted_sales] Updating item id: 45 with new discounted price: 3.37963644177
+    INFO:  [view_and_set_discounted_sales] Updating item id: 45 with new
+        discounted price: 3.37963644177
     CONTEXT:  PL/Python function "view_and_set_discounted_sales"
 
 PostgreSQL with log level (notice) will not only show you your *info* messages but also **context** in which it's been logged. That is something that is very helpful with debugging production cases. Once function is being called from context statement you can see what kind of triggers or sub-functions were called. Example message
 
-    INFO:  [view_and_set_discounted_sales] Updating item id: 45 with new discounted price: 3.37963644177
+    INFO:  [view_and_set_discounted_sales] Updating item id: 45 with new
+        discounted price: 3.37963644177
     CONTEXT:  PL/Python function "view_and_set_discounted_sales"
 
 Let's stop here for a minute and analyze that example.
 
-*INFO* - log level of the message
-*[view_and_set_discounted_sales] Updating item id: 45 with new discounted price: 3.37963644177* - Custom message that function prints out
-*CONTEXT:  PL/Python function "view_and_set_discounted_sales"* - context in which above message has been logged.
+    *INFO* - log level of the message
+    -- Custom message that function prints out
+    *[view_and_set_discounted_sales] Updating item id: 45 with new
+        discounted price: 3.37963644177*
+    -- context in which above message has been logged.
+    *CONTEXT:  PL/Python function "view_and_set_discounted_sales"*
 
 To be able to control **log level** that PostgreSQL is going to catch or ignore please use one of below options in /opt/pgsql/postgresql.conf settings file.
 
-**client_min_messages** - Controls which message levels are sent to the client (e.g. PostgreSQL shell)
+**`client_min_messages`** - Controls which message levels are sent to the client (e.g. PostgreSQL shell)
 
-**log_min_messages** - Controls which message levels are written to the server log
-
-
+**`log_min_messages`** - Controls which message levels are written to the server log
 
 Available values of log level in order of decreasing detail:
 
@@ -291,7 +302,8 @@ First comes first. Below you can see structure of tables and relations for datab
     );
 
     ALTER TABLE bill
-      ADD FOREIGN KEY (client_id) REFERENCES client (id) ON DELETE CASCADE ON UPDATE CASCADE;
+      ADD FOREIGN KEY (client_id) REFERENCES client (id) ON DELETE CASCADE
+      ON UPDATE CASCADE;
 
 
 
@@ -309,9 +321,11 @@ First comes first. Below you can see structure of tables and relations for datab
     );
 
     ALTER TABLE bill_item
-      ADD FOREIGN KEY (item_id) REFERENCES item (id) ON DELETE CASCADE ON UPDATE CASCADE;
+      ADD FOREIGN KEY (item_id) REFERENCES item (id) ON DELETE CASCADE
+      ON UPDATE CASCADE;
     ALTER TABLE bill_item
-      ADD FOREIGN KEY (bill_id) REFERENCES bill(id) ON DELETE CASCADE ON UPDATE CASCADE;
+      ADD FOREIGN KEY (bill_id) REFERENCES bill(id) ON DELETE CASCADE
+      ON UPDATE CASCADE;
 
 
     CREATE SCHEMA logic;
@@ -365,14 +379,15 @@ I will make a copy of data when field *row_change_time* is greater then 15 minut
     $$
     from datetime import datetime
 
-    v = datetime.now() - datetime.strptime(TD['old']['row_change_time'][:19], '%Y-%m-%d %H:%M:%S')
+    v = datetime.now() - datetime.strptime(TD['old']['row_change_time'][:19],
+        '%Y-%m-%d %H:%M:%S')
 
     if v.seconds/60.0 > 15:
         # backup data before losing it
         plpy.info('Backing up data...')
         sql = """INSERT INTO foo_backup (row_change_time, e_mail)
-                    VALUES ('{0}', '{1}')".format(TD['old']['row_change_time'],
-                                                TD['old']['e_mail'])
+            VALUES ('{0}', '{1}')".format(
+                TD['old']['row_change_time'], TD['old']['e_mail'])
     	plpy.execute(sql)
 
 
@@ -401,8 +416,9 @@ Example of such approach can be plpython function which takes 2 arguments and re
 
     from decimal import Decimal
 
-    sql = """SELECT bill.id, bill_number, bill_item.item_name, bill_item.item_qty, bill_item.item_price, item_discount_value, bill_id, bill_sent, item_id,
-    item_serial_nr
+    sql = """SELECT bill.id, bill_number, bill_item.item_name,
+        bill_item.item_qty, bill_item.item_price, item_discount_value,
+        bill_id, bill_sent, item_id, item_serial_nr
     FROM
     bill LEFT JOIN bill_item on (bill.id =bill_id)
     LEFT JOIN item on (item_id=item.id)
@@ -411,9 +427,14 @@ Example of such approach can be plpython function which takes 2 arguments and re
     result = []
     plpy.debug(sql);
     for x in plpy.execute(sql):
-        item_price = plpy.execute("SELECT item_price FROM bill_item WHERE item_id=%d AND bill_id=%d" % (x['item_id'], x['bill_id']))[0]['item_price']
-        discounted_price = float(item_price)*((100.0-in_discount_percentage)/100.0)
-        result.append([x['id'], x['bill_number'], x['item_name'], discounted_price, x['item_serial_nr'], x['bill_sent']])
+        item_price = plpy.execute(
+            """SELECT item_price FROM bill_item WHERE item_id=%d AND
+                bill_id=%d""" %
+            (x['item_id'], x['bill_id']))[0]['item_price']
+        discounted_price = float(item_price) * (
+            (100.0-in_discount_percentage)/100.0)
+        result.append([x['id'], x['bill_number'], x['item_name'],
+            discounted_price, x['item_serial_nr'], x['bill_sent']])
 
     return result
     $$

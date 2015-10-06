@@ -40,10 +40,14 @@ class _MyBaseModel(models.Model):
     super(_MyBaseModel, self).save(*args, **kwargs)
 
 class History(_MyBaseModel):
-  """ model which always calls custom save method before calling Django's save """
-  shops = models.IntegerField('Number of shops', default = 0, null = True)
-  customers = models.IntegerField('Number of customers', default = 0, null=True)
-  customer_type = models.SmallIntegerField('Customer Type', choices = CustomerTypes.CHOICES)
+  """ model which always calls custom save method before
+  calling Django's save """
+  shops = models.IntegerField(
+      'Number of shops', default = 0, null = True)
+  customers = models.IntegerField(
+      'Number of customers', default = 0, null=True)
+  customer_type = models.SmallIntegerField(
+      'Customer Type', choices = CustomerTypes.CHOICES)
 
   def save(self, *args, **kwargs):
       # also we can have another level of customization here
@@ -123,7 +127,8 @@ run your compiled Python can return the following error message:
 \starttyping
 py ➤ bin/python2.7
 
-bin/python2.7: error while loading shared libraries: libpython2.7.so.1.0: cannot open shared object file: No such file or directory**
+bin/python2.7: error while loading shared libraries: libpython2.7.so.1.0:
+    cannot open shared object file: No such file or directory**
 \stoptyping
 
 You have to add {\em lib path} of your newly compiled Python to the
@@ -148,7 +153,8 @@ support}
 Download source code.
 
 \starttyping
-wget https://ftp.postgresql.org/pub/source/v9.4.4/postgresql-9.4.4.tar.bz2
+wget https://ftp.postgresql.org/pub/source/
+    v9.4.4/postgresql-9.4.4.tar.bz2
 \stoptyping
 
 Compile with Python support from {\em /opt/py} directory. Same as during
@@ -355,11 +361,14 @@ level.
 
 \starttyping
 pie=# select * from logic.view_and_set_discounted_sales(20, 23) ;
-INFO:  [view_and_set_discounted_sales] Updating item id: 36 with new discounted price: 0.529331946972
+INFO:  [view_and_set_discounted_sales] Updating item id: 36 with new
+    discounted price: 0.529331946972
 CONTEXT:  PL/Python function "view_and_set_discounted_sales"
-INFO:  [view_and_set_discounted_sales] Updating item id: 40 with new discounted price: 5.03912459204
+INFO:  [view_and_set_discounted_sales] Updating item id: 40 with new
+    discounted price: 5.03912459204
 CONTEXT:  PL/Python function "view_and_set_discounted_sales"
-INFO:  [view_and_set_discounted_sales] Updating item id: 45 with new discounted price: 3.37963644177
+INFO:  [view_and_set_discounted_sales] Updating item id: 45 with new
+    discounted price: 3.37963644177
 CONTEXT:  PL/Python function "view_and_set_discounted_sales"
 \stoptyping
 
@@ -370,28 +379,31 @@ Once function is being called from context statement you can see what
 kind of triggers or sub-functions were called. Example message
 
 \starttyping
-INFO:  [view_and_set_discounted_sales] Updating item id: 45 with new discounted price: 3.37963644177
+INFO:  [view_and_set_discounted_sales] Updating item id: 45 with new
+    discounted price: 3.37963644177
 CONTEXT:  PL/Python function "view_and_set_discounted_sales"
 \stoptyping
 
 Let's stop here for a minute and analyze that example.
 
-{\em INFO} - log level of the message
-{\em {[}view\letterunderscore{}and\letterunderscore{}set\letterunderscore{}discounted\letterunderscore{}sales{]}
-Updating item id: 45 with new discounted price: 3.37963644177} - Custom
-message that function prints out {\em CONTEXT: PL/Python function
-\quotation{view\letterunderscore{}and\letterunderscore{}set\letterunderscore{}discounted\letterunderscore{}sales}}
-- context in which above message has been logged.
+\starttyping
+*INFO* - log level of the message
+-- Custom message that function prints out
+*[view_and_set_discounted_sales] Updating item id: 45 with new
+    discounted price: 3.37963644177*
+-- context in which above message has been logged.
+*CONTEXT:  PL/Python function "view_and_set_discounted_sales"*
+\stoptyping
 
 To be able to control {\bf log level} that PostgreSQL is going to catch
 or ignore please use one of below options in /opt/pgsql/postgresql.conf
 settings file.
 
-{\bf client\letterunderscore{}min\letterunderscore{}messages} - Controls
-which message levels are sent to the client (e.g.~PostgreSQL shell)
+{\bf \type{client_min_messages}} - Controls which message levels are
+sent to the client (e.g.~PostgreSQL shell)
 
-{\bf log\letterunderscore{}min\letterunderscore{}messages} - Controls
-which message levels are written to the server log
+{\bf \type{log_min_messages}} - Controls which message levels are
+written to the server log
 
 Available values of log level in order of decreasing detail:
 
@@ -461,7 +473,8 @@ CREATE TABLE bill
 );
 
 ALTER TABLE bill
-  ADD FOREIGN KEY (client_id) REFERENCES client (id) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD FOREIGN KEY (client_id) REFERENCES client (id) ON DELETE CASCADE
+  ON UPDATE CASCADE;
 
 
 
@@ -479,9 +492,11 @@ CREATE TABLE bill_item
 );
 
 ALTER TABLE bill_item
-  ADD FOREIGN KEY (item_id) REFERENCES item (id) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD FOREIGN KEY (item_id) REFERENCES item (id) ON DELETE CASCADE
+  ON UPDATE CASCADE;
 ALTER TABLE bill_item
-  ADD FOREIGN KEY (bill_id) REFERENCES bill(id) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD FOREIGN KEY (bill_id) REFERENCES bill(id) ON DELETE CASCADE
+  ON UPDATE CASCADE;
 
 
 CREATE SCHEMA logic;
@@ -565,14 +580,15 @@ returns trigger as
 $$
 from datetime import datetime
 
-v = datetime.now() - datetime.strptime(TD['old']['row_change_time'][:19], '%Y-%m-%d %H:%M:%S')
+v = datetime.now() - datetime.strptime(TD['old']['row_change_time'][:19],
+    '%Y-%m-%d %H:%M:%S')
 
 if v.seconds/60.0 > 15:
     # backup data before losing it
     plpy.info('Backing up data...')
     sql = """INSERT INTO foo_backup (row_change_time, e_mail)
-                VALUES ('{0}', '{1}')".format(TD['old']['row_change_time'],
-                                            TD['old']['e_mail'])
+        VALUES ('{0}', '{1}')".format(
+            TD['old']['row_change_time'], TD['old']['e_mail'])
     plpy.execute(sql)
 
 
@@ -611,8 +627,9 @@ $$
 
 from decimal import Decimal
 
-sql = """SELECT bill.id, bill_number, bill_item.item_name, bill_item.item_qty, bill_item.item_price, item_discount_value, bill_id, bill_sent, item_id,
-item_serial_nr
+sql = """SELECT bill.id, bill_number, bill_item.item_name,
+    bill_item.item_qty, bill_item.item_price, item_discount_value,
+    bill_id, bill_sent, item_id, item_serial_nr
 FROM
 bill LEFT JOIN bill_item on (bill.id =bill_id)
 LEFT JOIN item on (item_id=item.id)
@@ -621,9 +638,14 @@ bill.id=%d""" % (in_bill_number)
 result = []
 plpy.debug(sql);
 for x in plpy.execute(sql):
-    item_price = plpy.execute("SELECT item_price FROM bill_item WHERE item_id=%d AND bill_id=%d" % (x['item_id'], x['bill_id']))[0]['item_price']
-    discounted_price = float(item_price)*((100.0-in_discount_percentage)/100.0)
-    result.append([x['id'], x['bill_number'], x['item_name'], discounted_price, x['item_serial_nr'], x['bill_sent']])
+    item_price = plpy.execute(
+        """SELECT item_price FROM bill_item WHERE item_id=%d AND
+            bill_id=%d""" %
+        (x['item_id'], x['bill_id']))[0]['item_price']
+    discounted_price = float(item_price) * (
+        (100.0-in_discount_percentage)/100.0)
+    result.append([x['id'], x['bill_number'], x['item_name'],
+        discounted_price, x['item_serial_nr'], x['bill_sent']])
 
 return result
 $$
