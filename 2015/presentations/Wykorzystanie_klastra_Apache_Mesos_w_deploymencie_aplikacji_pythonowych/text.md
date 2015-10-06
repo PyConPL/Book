@@ -192,12 +192,12 @@ przeprowadzania wszystkich operacji poprzez REST API.
 
 ## Referencje
 
-* [1] Mesos Framework Development Guide http://mesos.apache.org/documentation/latest/app-framework-development-guide/
-* [2] Marathon framework https://mesosphere.github.io/marathon/
-* [3] Kod źródłowy pliku `api.py` https://gist.github.com/quamilek/4fd1f246feb6149dd1dd
+* [1] Mesos Framework Development Guide \hyphenatedurl{http://mesos.apache.org/documentation/latest/app-framework-development-guide/}
+* [2] Marathon framework \hyphenatedurl{https://mesosphere.github.io/marathon/}
+* [3]  \hyphenatedurl{https://gist.github.com/quamilek/4fd1f246feb6149dd1dd} - kod źródłowy pliku `api.py`
 * [4] Falcon framework http://falconframework.org
 * [5] PEX library https://github.com/pantsbuild/pex
-* [6] Marathon REST API https://mesosphere.github.io/marathon/docs/rest-api.html
+* [6] Marathon REST API \hyphenatedurl{https://mesosphere.github.io/marathon/docs/rest-api.html}
 
 ## Źródła
 
