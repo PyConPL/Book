@@ -652,12 +652,17 @@ parameter
 \starttyping
 pie=# select * from logic.view_and_set_discounted_sales(20, 23) ;
 
- out_id | out_bill_number |     out_item_name     | out_item_price |        out_item_serial_nr        | out_bill_sent
---------+-----------------+-----------------------+----------------+----------------------------------+---------------
- 20 | 20              | My awesome product 6  | 0.529331946972 | 109a95fce2b40f146d15c743c5cd0278 | t
- 20 | 20              | My awesome product 10 |  5.03912459204 | 3fda3c7814fc94a0dba9fc2bb190adab | t
- 20 | 20              | My awesome product 15 |  3.37963644177 | 2ad4a8800fd241d5cf6519404a385aa1 | t
-(3 rows)
+ out_id | out_bill_number |     out_item_name     | out_item_price |
+--------+-----------------+-----------------------+----------------+
+     20 | 20              | My awesome product 6  | 0.529331946972 |
+     20 | 20              | My awesome product 10 |  5.03912459204 |
+     20 | 20              | My awesome product 15 |  3.37963644177 |
+|        out_item_serial_nr        | out_bill_sent
++----------------------------------+---------------
+| 109a95fce2b40f146d15c743c5cd0278 | t
+| 3fda3c7814fc94a0dba9fc2bb190adab | t
+| 2ad4a8800fd241d5cf6519404a385aa1 | t
+    (3 rows)
 \stoptyping
 
 As you can see in the above example it is possible to create function
