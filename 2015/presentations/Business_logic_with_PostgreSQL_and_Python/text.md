@@ -570,8 +570,6 @@ Caching here was just an example. It also returns JSON structure instead of set 
 
 ## References
 
-http://python.org
-
-http://www.postgresql.org/docs/
-
-https://kmonsoor.wordpress.com/2015/08/10/seven-deadly-sins-in-python-code/
+* \hyphenatedurl{http://python.org}
+* \hyphenatedurl{http://www.postgresql.org/docs/}
+* \hyphenatedurl{https://kmonsoor.wordpress.com/2015/08/10/seven-deadly-sins-in-python-code}
