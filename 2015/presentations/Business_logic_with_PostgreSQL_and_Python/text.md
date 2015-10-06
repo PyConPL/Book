@@ -518,7 +518,8 @@ Once data is being saved to Redis, we can access such data by using below plpyth
         port = in_port if in_port is not None else 6379, db = 1)
     r = redis.Redis(connection_pool = POOL)
 
-    status = {'msg' : '', 'status' : False } # let False means error, True - all OK
+    # let False means error, True - all OK
+    status = {'msg' : '', 'status' : False }
     bills = r.keys('bill_active:*')
     all_bills = []
     for k in bills if bills else []:
