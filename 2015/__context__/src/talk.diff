@@ -13,3 +13,34 @@
  
  \subsection[systemy-ivr]{Systemy IVR}
  
+@@ -153,13 +153,7 @@
+ 
+ Krótki przykład najlepiej zobrazuje tę prostotę, którą tak się
+ zachwycamy.
+-
+-\starttyping
+->>> from twilio.rest import TwilioRestClient
+->>> client = TwilioRestClient(MY_SID, MY_TOKEN)
+->>> client.messages.create(to='+48123456789', from_=MY_NUMBER,
+-        body='Hello world!')
+-\stoptyping
++\type{python >>> from twilio.rest import TwilioRestClient >>> client = TwilioRestClient(MY_SID, MY_TOKEN) >>> client.messages.create(to='+48123456789', from_=MY_NUMBER, body='Hello world!')}
+ 
+ Tym sposobem zostało wykonane zapytanie do RESTowego API, co z kolei
+ poskutkowało wysłaniem SMSa.
+@@ -231,14 +225,7 @@
+ 
+ \subsection[bibliografia]{Bibliografia}
+ 
+-\startitemize
+-\item
+-  https://www.twilio.com/
+-\item
+-  https://www.plivo.com/
+-\item
+-  https://www.tropo.com/
+-\stopitemize
++https://www.twilio.com/ https://www.plivo.com/ https://www.tropo.com/
+ 
+ 
+ \stoptext

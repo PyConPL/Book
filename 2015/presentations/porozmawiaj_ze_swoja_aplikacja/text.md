@@ -56,10 +56,12 @@ Korzystanie z obu wymienionych ułatwia udostępniona przez Twilio biblioteka (`
 Aby rozpocząć, należy w pierwszej kolejności - tu bez niespodzianek - założyć konto. Następnie wybieramy kraj i numer telefonu (w zależności od lokalizacji, niektóre numery umożliwiają tylko obsługę wiadomości tekstowych lub połączeń). Pozostaje jeszcze uzupełnić adres naszego API, zapisać SID oraz token.
 
 Krótki przykład najlepiej zobrazuje tę prostotę, którą tak się zachwycamy.
+
 ```python
 >>> from twilio.rest import TwilioRestClient
 >>> client = TwilioRestClient(MY_SID, MY_TOKEN)
->>> client.messages.create(to='+48123456789', from_=MY_NUMBER, body='Hello world!')
+>>> client.messages.create(to='+48123456789', from_=MY_NUMBER,
+        body='Hello world!')
 ```
 
 Tym sposobem zostało wykonane zapytanie do RESTowego API, co z kolei poskutkowało wysłaniem SMSa.
@@ -123,7 +125,7 @@ Co dalej? Twilio przygotowało dość obszerną dokumentację. I choć nawigacja
 
 ## Bibliografia
 
-https://www.twilio.com/
-https://www.plivo.com/
-https://www.tropo.com/
+* https://www.twilio.com/
+* https://www.plivo.com/
+* https://www.tropo.com/
 
