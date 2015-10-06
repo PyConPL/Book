@@ -105,8 +105,9 @@ from one class to another.
 The Open/Closed Principle states that "software entities (classes, modules,
 functions, etc.) should be open for extension, but closed for modification".
 
-In our example, we have a function for formatting reports. The
-``send_email_report()`` function explicitly calls ``format_report()``. If we
+In our example, we have a function for formatting reports.
+
+The ``send_email_report()`` function explicitly calls ``format_report()``. If we
 wanted to change the way reports are formatted, we would change the
 ``format_report()`` function. That's OK if it's in our own codebase and if
 we always want to format reports in the same way.
