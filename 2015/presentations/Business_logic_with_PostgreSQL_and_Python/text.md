@@ -483,7 +483,8 @@ Below is the body of trigger function *logic.tgr_bill_i*.
     in_server = '127.0.0.1'
     in_port = 6379
 
-    POOL = redis.ConnectionPool(host=in_server, port = in_port if in_port is not None else 6379, db = 1)
+    POOL = redis.ConnectionPool(host=in_server,
+        port = in_port if in_port is not None else 6379, db = 1)
     r = redis.Redis(connection_pool = POOL)
 
     if TD['new']['bill_created']:
