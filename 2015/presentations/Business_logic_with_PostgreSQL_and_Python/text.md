@@ -445,9 +445,12 @@ As you can see in the above example it is possible to create function which allo
 
     pie=# select * from logic.view_and_set_discounted_sales(20, 23) WHERE out_item_serial_nr='109a95fce2b40f146d15c743c5cd0278';
 
-     out_id | out_bill_number |    out_item_name     | out_item_price |        out_item_serial_nr        | out_bill_sent
-    --------+-----------------+----------------------+----------------+----------------------------------+---------------
-         20 | 20              | My awesome product 6 | 0.407585599168 | 109a95fce2b40f146d15c743c5cd0278 | t
+     out_id | out_bill_number |    out_item_name     | out_item_price |
+    --------+-----------------+----------------------+----------------+
+         20 | 20              | My awesome product 6 | 0.407585599168 |
+    |        out_item_serial_nr        | out_bill_sent
+    +----------------------------------+---------------
+    | 109a95fce2b40f146d15c743c5cd0278 | t
     (1 row)
 
 ## Simple cache
