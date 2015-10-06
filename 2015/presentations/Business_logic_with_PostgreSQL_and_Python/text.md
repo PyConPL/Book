@@ -443,7 +443,8 @@ and different value for *in_discount_percentage* parameter
 
 As you can see in the above example it is possible to create function which allows you to return dynamic table where returned data depends on input values. Also as I said previously, PostgreSQL understands result of such a query as a table so you can do as for instance
 
-    pie=# select * from logic.view_and_set_discounted_sales(20, 23) WHERE out_item_serial_nr='109a95fce2b40f146d15c743c5cd0278';
+    pie=# select * from logic.view_and_set_discounted_sales(20, 23)
+              WHERE out_item_serial_nr='109a95fce2b40f146d15c743c5cd0278';
 
      out_id | out_bill_number |    out_item_name     | out_item_price |
     --------+-----------------+----------------------+----------------+
