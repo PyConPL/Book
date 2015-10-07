@@ -270,7 +270,12 @@ the API \type{str} is still referred to as \type{Unicode}, for example
 Python constructs. Here are some examples:
 
 To get an item under a given key in a dictionary
-(\type{category_sequence = mapping[category]}), we use:
+
+\starttyping
+category_sequence = mapping[category]
+\stoptyping
+
+, we use:
 
 \starttyping
 PyObject * category_sequence = PyObject_GetItem(mapping, category);
@@ -281,7 +286,12 @@ if (category_sequence == NULL) {
 \stoptyping
 
 To check if a sequence contains given item
-(\type{contains = item in category_sequence}), we use:
+
+\starttyping
+contains = item in category_sequence
+\stoptyping
+
+, we use:
 
 \starttyping
 int contains = PySequence_Contains(category_sequence, item);
