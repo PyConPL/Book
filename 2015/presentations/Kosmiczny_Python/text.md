@@ -80,12 +80,12 @@ Najczęściej stosowane układy odniesienia to horyzontalny, godzinowy,
 równonocny, ekliptyczny oraz galaktyczny. Podstawowym układem jest układ
 horyzontalny, tutaj kołem wielkim jest płaszczyzna horyzontu. Biegunami w tym
 układzie będzie zenit i nadir. Współrzędnymi układu współrzędnych horyzontalnych
-to Azymut astronomiczny \bf{A}, mierzony w stopniach
-($0^{\circ}$-$360^{\circ}$) oraz  wysokość \b{h} podawana w zakresie
+to Azymut astronomiczny **A**, mierzony w stopniach
+($0^{\circ}$-$360^{\circ}$) oraz wysokość **h** podawana w zakresie
 [$-90^{\circ}$-$90^{\circ}$].
 
 Kolejny układ współrzędnych wykorzystywany w astronomii nazywa się
-godzinowy. Współrzędne to kąt godzinny \b{t} mierzony w godzinach
+godzinowy. Współrzędne to kąt godzinny **t** mierzony w godzinach
 ($0^{h}$-$24^{h}$). Deklinacja $\delta$ to druga współrzędna, która podawana jest w stopniach
 w zakresie [$-90^{\circ}$-$90^{\circ}$]. Są one zdefiniowane dzięki kołu wielkiemu
 przechodzącemu przez równik niebieski. Bieguny tego układu będą się pokrywać z
@@ -152,10 +152,10 @@ większą świadomość, o czym jest prezentacja.
 
 ## Bibiografia
 
-[1] Astronomia - https://pl.wikipedia.org/wiki/Astronomia
-[2] Układy współrzędnych w astronomii - http://www.astro.amu.edu.pl/~jopek/JopekTJ/Dydaktyka/A_Sf/2014-15/Prezentacje/wyklad_03.pdf
-[3] Astropy - http://docs.astropy.org/
-[4] Matplotlib - http://matplotlib.org/
-[5] Bifurikacja - http://zasoby1.open.agh.edu.pl/dydaktyka/matematyka/c_fraktale_i_chaos/chaos.php?rozdzial=2
-[6] AUTO - http://cmvl.cs.concordia.ca/auto/
-[7] Notatki z wykładów astronomicznych.
+* [1] Astronomia - \hyphenatedurl{https://pl.wikipedia.org/wiki/Astronomia}
+* [2] Układy współrzędnych w astronomii - \hyphenatedurl{http://www.astro.amu.edu.pl/~jopek/JopekTJ/Dydaktyka/A_Sf/2014-15/Prezentacje/wyklad_03.pdf}
+* [3] Astropy - \hyphenatedurl{http://docs.astropy.org/}
+* [4] Matplotlib - \hyphenatedurl{http://matplotlib.org/}
+* [5] Bifurikacja - \hyphenatedurl{http://zasoby1.open.agh.edu.pl/dydaktyka/matematyka/c_fraktale_i_chaos/chaos.php?rozdzial=2}
+* [6] AUTO - \hyphenatedurl{http://cmvl.cs.concordia.ca/auto/}
+* [7] Notatki z wykładów astronomicznych.
