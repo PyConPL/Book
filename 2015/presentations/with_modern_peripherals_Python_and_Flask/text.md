@@ -208,9 +208,9 @@ more common.
 
 ## Sources
 
-[Myo Armband](https://www.thalmic.com/myo/)
-[Leap Motion](https://www.leapmotion.com)
-[EyeTribe](https://theeyetribe.com)
-[flask-SocketIO documentation](https://flask-socketio.readthedocs.org/en/latest/)
-[Flask docs](http://flask.pocoo.org/docs/0.10/)
-[Socket.IO](http://socket.io)
+* Myo Armband \hyphenatedurl{https://www.thalmic.com/myo/}
+* Leap Motion \hyphenatedurl{https://www.leapmotion.com}
+* EyeTribe \hyphenatedurl{https://theeyetribe.com}
+* flask-SocketIO documentation \hyphenatedurl{https://flask-socketio.readthedocs.org/en/latest/}
+* Flask docs \hyphenatedurl{http://flask.pocoo.org/docs/0.10/}
+* Socket.IO \hyphenatedurl{http://socket.io}
