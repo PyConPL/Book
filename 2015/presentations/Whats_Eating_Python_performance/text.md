@@ -7,7 +7,7 @@ Code optimization is an important aspect of the development process, but, when d
 This talk is intended as a gentle introduction into good practices in Python code optimization.
 Certainly this does not exhaust the topic, and there are various great resources where you can find more on the subject, see the references for some starting points.
 
-This talk mainly focuses on CPython (both >= 2.7 and >= 3.4) Python implementation.
+This talk mainly focuses on CPython (both $>=$ 2.7 and $>=$ 3.4) Python implementation.
 
 ## Improving the performance: overview
 
@@ -173,4 +173,4 @@ For more, check slides and source code examples on my website przymus.org, under
   1. PythonSpeed / Profiling Python Programs,https://wiki.python.org
   1. Performance, http://pypy.org
   1. Everything You Always Wanted to Know About Memory in Python But Were Afraid to Ask, http://przymus.org
-  1. Journey to the center of the asynchronous world, https://github.com/PyConPL/Book
+  1. Journey to the center of the asynchronous world, \hyphenatedurl{https://github.com/PyConPL/Book}
