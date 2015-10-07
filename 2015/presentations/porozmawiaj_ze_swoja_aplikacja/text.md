@@ -1,8 +1,8 @@
-#Porozmawiaj ze swoją aplikację - Kamil Kujawiński i Marcin Najtkowski
+#Porozmawiaj ze swoją aplikacją - Kamil Kujawiński i Marcin Najtkowski
 
 ## Systemy IVR
 
-IVR (ang. Interactive Voice Response) to nazwa systemu w telekomunikacji, umożliwiającego interaktywną obsługę osoby dzwoniącej. IVR ma więc funkcjonalność automatycznego Call center (lub jego części). [^ivr_wiki]  System IVR może być zainstalowany bezpośrednio u klienta, w sieci PSTN, a także jako aplikacja korzystająca z uług IaaS. Ostatniemu rozwiązaniu poświęcimy ten artykuł oraz naszą prezentację.
+IVR (ang. Interactive Voice Response) to nazwa systemu w telekomunikacji, umożliwiającego interaktywną obsługę osoby dzwoniącej. IVR ma więc funkcjonalność automatycznego Call center (lub jego części). [^ivr_wiki]  System IVR może być zainstalowany bezpośrednio u klienta, w sieci PSTN, a także jako aplikacja korzystająca z usług IaaS. Ostatniemu rozwiązaniu poświęcimy ten artykuł oraz naszą prezentację.
 
 [^ivr_wiki]: https://pl.wikipedia.org/wiki/Interactive_Voice_Response
 
