@@ -198,7 +198,7 @@ locust -f locustfile.py --host=http://host.pl
 
 Locust idealnie nadaje się do sprawdzania serwisów działających nie tylko w oparciu
 o protokół HTTP. Poniżej znajduje się klient nanomsg działający na socketach
-REQ <-> REP. Kod byłby o wiele krótszy, gdybyśmy korzystali z jednej z gotowych
+REQ $\leftrightarrow$ REP. Kod byłby o wiele krótszy, gdybyśmy korzystali z jednej z gotowych
 bibliotek dostarczających klasy klienckie. Podpięcie całości pod locusta sprowadza się
 do zmodyfikowania metody odpowiadającej za wysyłanie requestów do serwisu i wysłaniu
 odpowiednich zdarzeń do locusta, które posłużą za metryki. Następnie tworzymy własną
