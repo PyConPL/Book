@@ -31,6 +31,8 @@ W tabeli poniżej przedstawiliśmy elementy, które mogą wpłynąć na wybór d
 | Najwięksi użytkownicy | Mozilla, Netflix | Deutsche Telekom, IBM [^cisco_confidentiality] | Uber, Paypal, Coca-Cola |
 
 
+Od momentu przejęcia Tropo przez Cisco wiele informacji (serwery, najwięksi użytkownicy) nie jest ujawnianych.
+
 Zdecydowanie najpopularniejszym rozwiązaniem na rynku jest Twilio. Jednak z różnych względów jest to rozwiązanie, które nie odpowiada wszystkim użytkownikom. Twilio nie posiada własnej serwerowni - korzysta z Amazon Web Services. Krytycy uważają, że wirtualne maszyny są zdecydowanie mniej efektywne w przetwarzaniu dźwięku. Dla wielu firm niedopuszczalne także jest udostępnianie swoich danych poza serwery firmowe. Na takie zapotrzebowanie odpowiadają Tropo oferując możliwość instalacji On-Premises w pakiecie Enterprise oraz Plivo, które otworzyło kod źródłowy na licencji Mozilla Public License Version 1.1.
 
 Tak jak w przeglądarkach internetowych uznanym standardem jest HTML, tak w komunikacji głosowej człowiek - komputer standardem jest VoiceXML (VXML)[^voicexml_wiki]. Przy pomocy tego formatu definiujemy syntezę i rozpoznawanie mowy, zarządzenie rozmową oraz odtwarzanie dźwięku. Istnieją specyfikacje rozszerzające, które pozwalają na definicję gramatyki rozpoznawanej mowy (SRGS), opis sposobu syntezy mowy (SSML) oraz kilka innych. Specyfikacja VoiceXML pozwala na stworzenie całej aplikacji i zainstalowanie jej po stronie klienta, jednak większość dostawców nie wspiera w pełni tych standardów stawiając na własne formaty oraz większą rolę API.
