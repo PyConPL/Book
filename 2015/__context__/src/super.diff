@@ -13,3 +13,12 @@
  
  Jest jedna funkcjonalność Pythona, której wszyscy używają bardzo często,
  acz szczątkowo, gdyż panuje opinia iż nadużywanie jej może doprowadzić
+@@ -223,7 +223,7 @@
+ 
+ \startitemize
+ \item
+-  https://en.wikipedia.org/wiki/C3\letterunderscore{}linearization
++  https://en.wikipedia.org/wiki/C3\_linearization
+ \item
+   https://www.youtube.com/watch?v=EiOglTERPEo
+ \item
