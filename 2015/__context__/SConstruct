@@ -15,6 +15,7 @@ else:
     create_pdfs = 1
     omit_diffs = 0
 
+copy_images = 1
 only_first_article_for_testing = 0
 
 if 'TEXINPUTS' not in os.environ:
@@ -57,6 +58,19 @@ for alias, location in articles:
             "pwd",
             pl_txt.link_src(alias),
             ]
+    if copy_images:
+        small_pdf_ls.append(
+            "[ ${TARGET.file} != machine.pdf ] || cp ../../../presentations/Building_better_machine_learning_model_Power_of_ensembles/ensemble_1.png .",
+            )
+        small_pdf_ls.append(
+            "[ ${TARGET.file} != super.pdf ] || cp ../../../presentations/sztuczki_z_metoda_super/graph.new.png .",
+            )
+        small_pdf_ls.append(
+            "[ ${TARGET.file} != super.pdf ] || cp ../../../presentations/sztuczki_z_metoda_super/graph.mocked.png .",
+            )
+        small_pdf_ls.append(
+            "[ ${TARGET.file} != flask.pdf ] || cp ../../../presentations/with_modern_peripherals_Python_and_Flask/001_web_sockets.png .",
+            )
     if create_pdfs:
         small_pdf_ls.append("texexec --pdf " + alias)
     small_pdf_ls.append("mv artpages.inc .. 2>/dev/null || true")
