@@ -5,9 +5,9 @@
  \starttext
  
 -
--\section[porozmawiaj-ze-swoją-aplikację---kamil-kujawiński-i-marcin-najtkowski]{Porozmawiaj
--ze swoją aplikację - Kamil Kujawiński i Marcin Najtkowski}
-+\Title{Porozmawiaj ze swoją aplikację}
+-\section[porozmawiaj-ze-swoją-aplikacją---kamil-kujawiński-i-marcin-najtkowski]{Porozmawiaj
+-ze swoją aplikacją - Kamil Kujawiński i Marcin Najtkowski}
++\Title{Porozmawiaj ze swoją aplikacją}
 +\Author{Kamil Kujawiński, Marcin Najtkowski}
 +\MakeTitlePage
  
