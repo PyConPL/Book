@@ -13,3 +13,12 @@
  
  \subsection[introduction]{Introduction}
  
+@@ -228,7 +228,7 @@
+ \startitemize[n][stopper=.]
+ \item
+   PaaS Wiki
+-  https://en.wikipedia.org/wiki/Platform\letterunderscore{}as\letterunderscore{}a\letterunderscore{}service
++  https://en.wikipedia.org/wiki/Platform\_as\_a\_service
+ \item
+   Dokku Documentation http://progrium.viewdocs.io/dokku/
+ \item

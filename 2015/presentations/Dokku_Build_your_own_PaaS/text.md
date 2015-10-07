@@ -114,7 +114,7 @@ Then we create a database for application:
 server $ dokku postgresql:create <your-app-name>
 ```
 
-This command automatically creates and wires a database to `<your-app-name>` application. It also outputs an appropriate DATABASE_URL to console which you need to put to your application's configuration.
+This command automatically creates and wires a database to `<your-app-name>` application. It also outputs an appropriate `DATABASE_URL` to console which you need to put to your application's configuration.
 
 ## Debugging
 If you are experiencing troubles with building your application, run `dokku trace` on your server and try to deploy your application one more time. You will get a detailed verbose output of container building process.
@@ -139,6 +139,6 @@ level of isolation per application and will improve your applications deployment
 
 ## References
 
-1. PaaS Wiki `https://en.wikipedia.org/wiki/Platform_as_a_service`
-2. Dokku Documentation `http://progrium.viewdocs.io/dokku/`
-3. Deis `http://deis.io/`
+1. PaaS Wiki https://en.wikipedia.org/wiki/Platform_as_a_service
+2. Dokku Documentation http://progrium.viewdocs.io/dokku/
+3. Deis http://deis.io/
