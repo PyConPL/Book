@@ -13,3 +13,13 @@
  
  SOLID is an acronym for five basic principles of Object Oriented
  Programming. The principles intend to make software entities easy to
+@@ -664,8 +664,7 @@
+ \item
+   Robert C. Martin - \quotation{Design Principles and Design
+   Patterns}\crlf
+-
+-  http://www.objectmentor.com/resources/articles/Principles\letterunderscore{}and\letterunderscore{}Patterns.pdf
++http://www.objectmentor.com/resources/articles/Principles\_and\_Patterns.pdf
+ \item
+   Robert C. Martin - \quotation{Agile Software Development: Principles,
+   Patterns, and Practices}

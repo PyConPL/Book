@@ -621,7 +621,8 @@ pay off!
 
 # Further reading
 
-* [Robert C. Martin - "Design Principles and Design Patterns"](http://www.objectmentor.com/resources/articles/Principles_and_Patterns.pdf)
+* Robert C. Martin - "Design Principles and Design Patterns"  
+ http://www.objectmentor.com/resources/articles/Principles_and_Patterns.pdf
 * Robert C. Martin - "Agile Software Development: Principles, Patterns, and
   Practices"
 * Robert C. Martin - "Clean Code. A Handbook of Agile Software Craftsmanship"
