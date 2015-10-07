@@ -454,24 +454,24 @@ Just do *pip install pysnmp-apps* and off you go!
 
 ## References
 
-* [asyncio] \hyphenatedurl{https://docs.python.org/3/library/asyncio.html}
-* [BER] \hyphenatedurl{https://en.wikipedia.org/wiki/X.690\#BER_encoding}
-* [command-line tools] \hyphenatedurl{https://pypi.python.org/pypi/pysnmp-apps}
+* [asyncio] https://docs.python.org/3/library/asyncio.html
+* [BER] https://en.wikipedia.org/wiki/X.690\#BER_encoding
+* [command-line tools] https://pypi.python.org/pypi/pysnmp-apps
 * Dave Zeltserman: Practical Guide to Snmpv3 and Network Management
 * David T. Perkins, Evan McGinnis: Understanding SNMP MIBs
-* [Net-SNMP library] \hyphenatedurl{http://www.net-snmp.org}
-* [PyASN1] \hyphenatedurl{http://pyasn1.sf.net}
-* [PyCrypto] \hyphenatedurl{https://www.dlitz.net/software/pycrypto/}
-* [PySMI] \hyphenatedurl{http://pysmi.sf.net}
-* [PySNMP] \hyphenatedurl{http://pysnmp.sf.net}
-* SNMP RFCs \hyphenatedurl{http://www.snmp.com/protocol/snmp_rfcs.shtml}
-* [RFC2587] \hyphenatedurl{http://www.ietf.org/rfc/rfc2578.txt}
-* [RFC3411] \hyphenatedurl{http://www.ietf.org/rfc/rfc3411.txt}
-* [RFC3412] \hyphenatedurl{http://www.ietf.org/rfc/rfc3412.txt}
-* [RFC3413] \hyphenatedurl{http://www.ietf.org/rfc/rfc3413.txt}
-* [RFC3414] \hyphenatedurl{http://www.ietf.org/rfc/rfc3414.txt}
-* [SimConfig] \hyphenatedurl{http://snmpsim.sourceforge.net/public-snmp-simulator.html}
-* [SNMP Agent emulation software] \hyphenatedurl{https://en.wikipedia.org/wiki/SNMP_simulator}
-* [SNMP Proxy Forwarder] \hyphenatedurl{http://snmpfwd.sf.net}
-* [SNMP Simulator] \hyphenatedurl{http://snmpsim.sf.net}
-* [Twisted] \hyphenatedurl{http://www.twistedmatrix.com}
+* [Net-SNMP library] http://www.net-snmp.org
+* [PyASN1] http://pyasn1.sf.net
+* [PyCrypto] https://www.dlitz.net/software/pycrypto/
+* [PySMI] http://pysmi.sf.net
+* [PySNMP] http://pysnmp.sf.net
+* SNMP RFCs http://www.snmp.com/protocol/snmp_rfcs.shtml
+* [RFC2587] http://www.ietf.org/rfc/rfc2578.txt
+* [RFC3411] http://www.ietf.org/rfc/rfc3411.txt
+* [RFC3412] http://www.ietf.org/rfc/rfc3412.txt
+* [RFC3413] http://www.ietf.org/rfc/rfc3413.txt
+* [RFC3414] http://www.ietf.org/rfc/rfc3414.txt
+* [SimConfig] http://snmpsim.sourceforge.net/public-snmp-simulator.html
+* [SNMP Agent emulation software] https://en.wikipedia.org/wiki/SNMP_simulator
+* [SNMP Proxy Forwarder] http://snmpfwd.sf.net
+* [SNMP Simulator] http://snmpsim.sf.net
+* [Twisted] http://www.twistedmatrix.com

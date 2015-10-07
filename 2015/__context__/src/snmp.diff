@@ -13,3 +13,30 @@
  
  \subsection[introduction]{Introduction}
  
+@@ -507,7 +507,7 @@
+   {[}asyncio{]} https://docs.python.org/3/library/asyncio.html
+ \item
+   {[}BER{]}
+-  https://en.wikipedia.org/wiki/X.690\#BER\letterunderscore{}encoding
++  https://en.wikipedia.org/wiki/X.690\#BER\_encoding
+ \item
+   {[}command-line tools{]} https://pypi.python.org/pypi/pysnmp-apps
+ \item
+@@ -526,7 +526,7 @@
+   {[}PySNMP{]} http://pysnmp.sf.net
+ \item
+   SNMP RFCs
+-  http://www.snmp.com/protocol/snmp\letterunderscore{}rfcs.shtml
++  http://www.snmp.com/protocol/snmp\_rfcs.shtml
+ \item
+   {[}RFC2587{]} http://www.ietf.org/rfc/rfc2578.txt
+ \item
+@@ -542,7 +542,7 @@
+   http://snmpsim.sourceforge.net/public-snmp-simulator.html
+ \item
+   {[}SNMP Agent emulation software{]}
+-  https://en.wikipedia.org/wiki/SNMP\letterunderscore{}simulator
++  https://en.wikipedia.org/wiki/SNMP\_simulator
+ \item
+   {[}SNMP Proxy Forwarder{]} http://snmpfwd.sf.net
+ \item
