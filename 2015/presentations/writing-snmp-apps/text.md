@@ -10,7 +10,7 @@ networked hosts, routers and all sorts of industrial equipment.
 As we all know, many organizations around the world use Python for
 their IT automation needs, including network management. Over the
 course of last decade, many SNMP implementations appeared. Some are
-Python bindings to C-based [Net-SNMP library](http://www.net-snmp.org),
+Python bindings to C-based [Net-SNMP library],
 which is considered by many a reference implementation for SNMP
 technology. Others are pure-Python modules addressing specific SNMP features.
 
@@ -18,9 +18,8 @@ Among many SNMP libraries existing in the Python landscape, right
 from the start, PySNMP project aims at complete and universal SNMP
 implementation, offering its users full power of SNMP technology across
 all computing platforms. Having taken this project seriously,
-[PySNMP](http://pysnmp.sf.net) developers also designed a couple of
-foundation libraries: [PyASN1](http://pyasn1.sf.net) and
-[PySMI](http://pysmi.sf.net) as a byproduct of their PySNMP work.
+[PySNMP] developers also designed a couple of
+foundation libraries: [PyASN1] and [PySMI] as a byproduct of their PySNMP work.
 
 ## Hello, SNMP world!
 
@@ -106,45 +105,39 @@ listening for notifications they may produce whenever something happens.
 ## Library orientation
 
 The PySNMP library is internally structured along the lines of
-[RFC3411](http://www.ietf.org/rfc/rfc3411.txt). Components that are not
+[RFC3411]. Components that are not
 unique to SNMP are put into stand-alone Python packages to promote
 reusability.
 
 SNMP protocol is defined in terms of ASN.1 data structures, SNMP messages
-travelling the wire are encoded in
-[BER](https://en.wikipedia.org/wiki/X.690#BER_encoding). For those purposes
-PySNMP relies on generic implementation of ASN.1 types and codecs distributed
+travelling the wire are encoded in [BER]. For those purposes PySNMP relies on generic implementation
+of ASN.1 types and codecs distributed
 as a dedicated Python package under the name of
-[PyASN1](http://pyasn1.sf.net).
+[PyASN1].
 
 SNMP-level data processing is performed by a collection of SNMP Message
-Processing ([RFC3412](http://www.ietf.org/rfc/rfc3412.txt)) and Security
-([RFC3414](http://www.ietf.org/rfc/rfc3414.txt)) modules living in
-*pysnmp.proto...* sub-package. All crypto operations are offloaded to
-the third-party [PyCrypto](https://www.dlitz.net/software/pycrypto/)
-package.
+Processing [RFC3412] and Security
+[RFC3414] modules living in *pysnmp.proto* sub-package. All crypto operations are offloaded to
+the third-party [PyCrypto] package.
 
 Base classes representing SMI types
-([RFC2587](http://www.ietf.org/rfc/rfc2578.txt)) are defined in
-*pysnmp.smi...*. They administer both of MIB purposes: for SNMP
+[RFC2587] are defined in *pysnmp.smi*. They administer both of MIB purposes: for SNMP
 Manager apps, it's a hierarchical database of MIB variables
 served by remote SNMP Agent. Agents can use PySNMP SMI objects for
 interfacing with backend host or application being managed.
 
 PySNMP is designed to run in asynchronous I/O environment.  Its I/O
-subsystem is built around a set of abstract classes (*pysnmp.carrier...*)
+subsystem is built around a set of abstract classes (*pysnmp.carrier*)
 whose purpose is to facilitate basing SNMP engine on top of a third-party
 I/O framework. The library is shipped with a handful of ready-to-use
 bindings to popular asynchronous cores including *asyncore*,
-*[asyncio](https://docs.python.org/3/library/asyncio.html)* and
-*[Twisted](http://www.twistedmatrix.com)*.
+[asyncio] and [Twisted].
 
 All SNMP services are delivered through and components are orchestrated
 by the SNMP Engine entity (*pysnmp.entity.engine*).
 
-So called Standard SNMP Applications
-([RFC3413](http://www.ietf.org/rfc/rfc3413.txt)) are shipped in
-*pysnmp.entity.rfc3413...*. They all employ SNMP Engine instance for their
+So called Standard SNMP Applications [RFC3413] are shipped in  
+*pysnmp.entity.rfc3413*. They all employ SNMP Engine instance for their
 operations.
 
 A more concise and higher-level programming interface to most frequently
@@ -160,7 +153,7 @@ For example one may want to transform MIB structures into XML/HTML form or
 generate code in some programming language implementing MIB features. That
 was the rationale behind PySNMP developers' decision to isolate MIB parsing
 from SNMP Engine implementation and put it into a dedicated Python package
-called [PySMI](http://pysmi.sf.net).
+called [PySMI].
 
 Being optional, PySMI will be discovered and automatically used by Manager
 applications, running on top of high-level PySNMP API, for MIB variable
@@ -209,7 +202,7 @@ type and are uniformly initialized with:
   SNMP operations. It's used by SNMP applications like Command Generator
   application featured in example.
 * SNMP authentication method: that can be SNMPv1/v2c Community Name or
-  [RFC3414](http://www.ietf.org/rfc/rfc3414.txt) *UsmUser* object
+  [RFC3414] *UsmUser* object
   conveying USM username, encryption and ciphering keys.
 * Type of I/O to use for communication, endpoints addresses and
   other transport-specific options
@@ -250,7 +243,8 @@ individual scalars:
     next(iter)
 
     while queue:
-        errorIndication, errorStatus, errorIndex, varBinds = iter.send(queue.pop())
+        errorIndication, errorStatus, errorIndex, varBinds = iter.send(
+            queue.pop())
         if errorIndication:
             print(errorIndication)
         elif errorStatus:
@@ -276,7 +270,8 @@ the details of the event being reported.
                          UdpTransportTarget(('demo.snmplabs.com', 162)),
                          ContextData(),
                          'trap',
-                         NotificationType(ObjectIdentity('IF-MIB', 'linkDown')))
+                         NotificationType(ObjectIdentity('IF-MIB',
+                             'linkDown')))
     )
 
     if errorIndication:
@@ -326,7 +321,9 @@ containing objects each representing MIB variable:
 
     # pysnmp/smi/mibs/SNMPv2-MIB.py:
     # ...
-    sysDescr = MibScalar((1, 3, 6, 1, 2, 1, 1, 1), DisplayString().subtype(subtypeSpec=ValueSizeConstraint(0, 255))).setMaxAccess("readonly")
+    sysDescr = MibScalar((1, 3, 6, 1, 2, 1, 1, 1),
+        DisplayString().subtype(subtypeSpec=
+        ValueSizeConstraint(0, 255))).setMaxAccess("readonly")
 
 Conversion of original, ASN.1 MIB text files into PySNMP-compliant Python
 modules is done behind the scenes by PySMI. Normally, PySNMP users do not
@@ -344,7 +341,9 @@ or remote ones that are accessible through HTTP or FTP:
                CommunityData('public'),
                UdpTransportTarget(('demo.snmplabs.com', 161)),
                ContextData(),
-               ObjectType(ObjectIdentity('IF-MIB', 'ifInOctets', 1).addAsn1MibSource('file:///usr/share/snmp', 'http://mibs.snmplabs.com/asn1/@mib@'))
+               ObjectType(ObjectIdentity('IF-MIB', 'ifInOctets', 1
+                   ).addAsn1MibSource('file:///usr/share/snmp',
+                   'http://mibs.snmplabs.com/asn1/@mib@'))
        )
     )
 
@@ -352,11 +351,11 @@ To figure out what MIBs are implemented by particular SNMP Agent, Manager
 could query *SNMPv2-MIB::sysORTable* MIB variables:
 
     $ snmpwalk -v2c -c public demo.snmplabs.com sysORTable
-    SNMPv2-MIB::sysORID.1 = OID: SNMPv2-MIB::snmpMIB
-    SNMPv2-MIB::sysORID.2 = OID: SNMP-VIEW-BASED-ACM-MIB::vacmBasicGroup
-    SNMPv2-MIB::sysORID.3 = OID: SNMP-MPD-MIB::snmpMPDCompliance
-    SNMPv2-MIB::sysORID.4 = OID: SNMP-USER-BASED-SM-MIB::usmMIBCompliance
-    SNMPv2-MIB::sysORID.5 = OID: SNMP-FRAMEWORK-MIB::snmpFrameworkMIBCompliance
+    SNMP-MIB::sysORID.1 = OID: SNMPv2-MIB::snmpMIB
+    SNMP-MIB::sysORID.2 = OID: SNMP-VIEW-BASED-ACM-MIB::vacmBasicGroup
+    SNMP-MIB::sysORID.3 = OID: SNMP-MPD-MIB::snmpMPDCompliance
+    SNMP-MIB::sysORID.4 = OID: SNMP-USER-BASED-SM-MIB::usmMIBCompliance
+    SNMP-MIB::sysORID.5 = OID: SNMP-FRAMEWORK-MIB::snmpFrameworkMIBCompliance
     ...
 
 An efficient Manager could then optimize its behavior by fetching required
@@ -399,10 +398,14 @@ provisioning your own instance of MIB Controller object to SNMP Agent:
 
     class EchoMibInstrumController(AbstractMibInstrumController):
         def readVars(self, varBinds, acInfo):
-                return [ (ov[0], OctetString('Would read OID %s' % varBind[0])) for varBind in varBinds]
+                return [ (ov[0], OctetString(
+                    'Would read OID %s' % varBind[0]))
+                    for varBind in varBinds]
 
         def writeVars(self, varBinds, acInfo):
-                return [ (varBind[0], OctetString('Would set OID %s to %s' % varBind)) for varBind in varBinds]
+                return [ (varBind[0], OctetString(
+                    'Would set OID %s to %s' % varBind))
+                    for varBind in varBinds]
 
     snmpContext.registerContextName(
         OctetString('my-context'), EchoMibInstrumController()
@@ -417,8 +420,8 @@ Over the years PySNMP developers created a couple of software products
 based on PySNMP library. That kind of reality check experience influenced
 PySNMP design a great deal.
 
-[SNMP Simulator](http://snmpsim.sf.net) is probably the most sophisticated
-free and open source [SNMP Agent emulation software](https://en.wikipedia.org/wiki/SNMP_simulator) at the time being. This
+[SNMP Simulator] is probably the most sophisticated
+free and open source [SNMP Agent emulation software] at the time being. This
 tool can create an illusion that large SNMP-managed network of various
 devices exists in your virtual laboratory. Emulated devices try to look live
 by reporting changing data. MIB variables can be configured to change
@@ -431,10 +434,9 @@ be replayed by SNMP simulator. Another way to gather a collection of MIB
 variables to simulate is to populate MIB it from ASN.1 MIB file.
 
 You can experience SNMP Simulator yourself by talking to it on the Internet.
-Configuration details could be found
-[here](http://snmpsim.sourceforge.net/public-snmp-simulator.html).
+Configuration details could be found on [SimConfig].
 
-Another large project is [SNMP Proxy Forwarder](http://snmpfwd.sf.net). That
+Another large project is [SNMP Proxy Forwarder]. That
 tool is designed to work as cross-platform, transparent, application-level
 firewall passing SNMP traffic between open and protected network segments.
 The system is split into client and server parts connected with each other
@@ -446,14 +448,30 @@ could be performed, response caching and request rate limiting could be
 set up to reduce SNMP load on end devices.
 
 Finally, we ship a pure-Python version of SNMP
-[command-line tools](https://pypi.python.org/pypi/pysnmp-apps)
+[command-line tools]
 that try to mimic their Net-SNMP prototypes.
 Just do *pip install pysnmp-apps* and off you go!
 
 ## References
 
-1. [PySNMP project site](http://pysnmp.sf.net)
-2. [SNMP RFCs](http://www.snmp.com/protocol/snmp_rfcs.shtml)
-3. [Practical Guide to SNMPv3 and Network Management](http://www.amazon.com/Practical-Guide-Snmpv3-Network-Management/dp/0130214531/ref=pd_sim_14_4?ie=UTF8&refRID=0KNXDXE2XYXV13SX137H)
-4. [Understanding SNMP MIBs](http://www.amazon.com/Understanding-SNMP-MIBs-David-Perkins/dp/0134377087/ref=pd_sim_14_3?ie=UTF8&refRID=1N65YA65G01KJAKR6PD1)
-
+* [asyncio] \hyphenatedurl{https://docs.python.org/3/library/asyncio.html}
+* [BER] \hyphenatedurl{https://en.wikipedia.org/wiki/X.690\#BER_encoding}
+* [command-line tools] \hyphenatedurl{https://pypi.python.org/pypi/pysnmp-apps}
+* Dave Zeltserman: Practical Guide to Snmpv3 and Network Management
+* David T. Perkins, Evan McGinnis: Understanding SNMP MIBs
+* [Net-SNMP library] \hyphenatedurl{http://www.net-snmp.org}
+* [PyASN1] \hyphenatedurl{http://pyasn1.sf.net}
+* [PyCrypto] \hyphenatedurl{https://www.dlitz.net/software/pycrypto/}
+* [PySMI] \hyphenatedurl{http://pysmi.sf.net}
+* [PySNMP] \hyphenatedurl{http://pysnmp.sf.net}
+* SNMP RFCs \hyphenatedurl{http://www.snmp.com/protocol/snmp_rfcs.shtml}
+* [RFC2587] \hyphenatedurl{http://www.ietf.org/rfc/rfc2578.txt}
+* [RFC3411] \hyphenatedurl{http://www.ietf.org/rfc/rfc3411.txt}
+* [RFC3412] \hyphenatedurl{http://www.ietf.org/rfc/rfc3412.txt}
+* [RFC3413] \hyphenatedurl{http://www.ietf.org/rfc/rfc3413.txt}
+* [RFC3414] \hyphenatedurl{http://www.ietf.org/rfc/rfc3414.txt}
+* [SimConfig] \hyphenatedurl{http://snmpsim.sourceforge.net/public-snmp-simulator.html}
+* [SNMP Agent emulation software] \hyphenatedurl{https://en.wikipedia.org/wiki/SNMP_simulator}
+* [SNMP Proxy Forwarder] \hyphenatedurl{http://snmpfwd.sf.net}
+* [SNMP Simulator] \hyphenatedurl{http://snmpsim.sf.net}
+* [Twisted] \hyphenatedurl{http://www.twistedmatrix.com}
