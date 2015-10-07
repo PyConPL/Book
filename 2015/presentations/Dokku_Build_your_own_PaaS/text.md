@@ -139,6 +139,6 @@ level of isolation per application and will improve your applications deployment
 
 ## References
 
-1. [PaaS Wiki](https://en.wikipedia.org/wiki/Platform_as_a_service)
-2. [Dokku Documentation](http://progrium.viewdocs.io/dokku/)
-3. [Deis](http://deis.io/)
+1. PaaS Wiki `https://en.wikipedia.org/wiki/Platform_as_a_service`
+2. Dokku Documentation `http://progrium.viewdocs.io/dokku/`
+3. Deis `http://deis.io/`
