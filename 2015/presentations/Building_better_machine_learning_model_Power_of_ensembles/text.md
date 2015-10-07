@@ -24,8 +24,7 @@ Before going into what ensemble models are, it has to be mentioned that they are
 The theoretical underpinning is that consensus information from diverse model outputs are more reliable than a single model.
  At its core, an ensemble model structure looks like figure 1.
 
-*figure 1: Ensemble model structure*
-![alt text](ensemble_1.png)
+![Figure 1: Ensemble model structure](ensemble_1.png)
 
 Multiple model outputs are combined to create the final prediction. The individual(single) models are called base models. How the various base models are combined(ensembled) to create the final prediction determines the quality/accuracy of ensemble learning.
 

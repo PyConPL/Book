@@ -15,7 +15,7 @@ wrappers and an imaginary application for each of the new devices.
 In short, web sockets is a protocol providing full-duplex communication channels
 over a single TCP connection available in web browsers.
 
-![Alt text](./001_web_sockets.png "01 Web Sockets Diagram")
+![01 Web Sockets Diagram](./001_web_sockets.png)
 
 It starts with a handshake which upgrades the HTTP connection to use the Web Sockets protocol.
 This enables message exchange to and from a server. Such exchange can be triggered

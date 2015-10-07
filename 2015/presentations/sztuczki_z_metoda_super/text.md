@@ -10,10 +10,11 @@ Dodatkowym atutem Pythona jest fakt, iż wywołanie metody rodzica, jest jawne w
 Weźmy pod uwagę tą specyficzną sytuację (wyciągniętą z jednego z moich projektów). Jest to hierarchia dziedziczenia jednej klasy i jej rodziców. Liczby w nawiasach określają numerek w liście wywołania, który dostajemy dzięki MRO.
 
 OrdersListController dziedziczy po Controller. Tutaj jest jeszcze wszystko zrozumiałe. Jednak Controller dziedziczy już po 4 klasach (w kolejności):
- * Requestable
- * FanstaticController
- * FormskitController
- * FlashMessageController
+
+* Requestable
+* FanstaticController
+* FormskitController
+* FlashMessageController
 
 Tutaj wprawdzie jest już zastosowane dziedziczenie po wielu klasach bazowych, jednak MRO w takiej sytuacji jeszcze nie pokazuje swoich możliwości. To co dzieje się głębiej jest już sednem użycia "C3 linearization". FlashMessageController jest 5. w kolejności, co kończy listę bezpośrednich rodziców klasy Controller. To, że BaseController ma numerek 6 wymaga już niestety trochę większego zastanowienia. Nie będę się nawet starał tłumaczyć czemu akurat tak to zostało obliczone (gdyż ten temat bardzo dobrze opisał na swojej prelekcji Raymond Hettinger, twórca implementacji MRO. Prelekcja nazywa się "Super considered super!"*).
 ![graph.mocked.png](graph.mocked.png)
