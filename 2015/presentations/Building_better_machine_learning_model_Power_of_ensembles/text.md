@@ -41,18 +41,19 @@ While individual models have 70% accuracy, consider a simple way of ensembling t
 
 *Table 1:Example output from three models*
 
-|`RandomForest` | `xgboost` | `LogisticRegression`|EnsembledOutput|
-|:------:|:-------:| :---------:|:------:|
-| 0           | 1       |      1            | 1  |
-| 1           | 1       |      0            | 1  |
-| 1           | 0       |      1            | 1  |
-| 1           | 1       |      0            | 1  |
-| 1           | 1       |      1            | 1  |
-| 0           | 0       |      1            | 0  |
-| 1           | 1       |      0            | 1  |
-| 1           | 1       |      1            | 1  |
-| 1           | 0       |      1            | 1  |
-| 0           | 1       |      1            | 1  |
+\bTABLE
+\bTR\bTD RandomForest \eTD\bTD xgboost \eTD\bTD LogisticRegression \eTD\bTD EnsembledOutput\eTD\eTR
+\bTR\bTD 0           \eTD\bTD 1       \eTD\bTD      1            \eTD\bTD 1  \eTD\eTR
+\bTR\bTD 1           \eTD\bTD 1       \eTD\bTD      0            \eTD\bTD 1  \eTD\eTR
+\bTR\bTD 1           \eTD\bTD 0       \eTD\bTD      1            \eTD\bTD 1  \eTD\eTR
+\bTR\bTD 1           \eTD\bTD 1       \eTD\bTD      0            \eTD\bTD 1  \eTD\eTR
+\bTR\bTD 1           \eTD\bTD 1       \eTD\bTD      1            \eTD\bTD 1  \eTD\eTR
+\bTR\bTD 0           \eTD\bTD 0       \eTD\bTD      1            \eTD\bTD 0  \eTD\eTR
+\bTR\bTD 1           \eTD\bTD 1       \eTD\bTD      0            \eTD\bTD 1  \eTD\eTR
+\bTR\bTD 1           \eTD\bTD 1       \eTD\bTD      1            \eTD\bTD 1  \eTD\eTR
+\bTR\bTD 1           \eTD\bTD 0       \eTD\bTD      1            \eTD\bTD 1  \eTD\eTR
+\bTR\bTD 0           \eTD\bTD 1       \eTD\bTD      1            \eTD\bTD 1  \eTD\eTR
+\eTABLE
 
 
 A key point to be stressed again is that model diversity is important. If the models were similar, the output would've been similar and there would've been no improvement in the output.

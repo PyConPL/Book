@@ -89,20 +89,20 @@ ensembling function, the prediction accuracy is boosted from 70\% to
 
 {\em Table 1:Example output from three models}
 
-\letterbar{}\type{RandomForest} \letterbar{} \type{xgboost} \letterbar{}
-\type{LogisticRegression}\letterbar{}EnsembledOutput\letterbar{}
-\letterbar{}:------:\letterbar{}:-------:\letterbar{}
-:---------:\letterbar{}:------:\letterbar{} \letterbar{} 0 \letterbar{}
-1 \letterbar{} 1 \letterbar{} 1 \letterbar{} \letterbar{} 1 \letterbar{}
-1 \letterbar{} 0 \letterbar{} 1 \letterbar{} \letterbar{} 1 \letterbar{}
-0 \letterbar{} 1 \letterbar{} 1 \letterbar{} \letterbar{} 1 \letterbar{}
-1 \letterbar{} 0 \letterbar{} 1 \letterbar{} \letterbar{} 1 \letterbar{}
-1 \letterbar{} 1 \letterbar{} 1 \letterbar{} \letterbar{} 0 \letterbar{}
-0 \letterbar{} 1 \letterbar{} 0 \letterbar{} \letterbar{} 1 \letterbar{}
-1 \letterbar{} 0 \letterbar{} 1 \letterbar{} \letterbar{} 1 \letterbar{}
-1 \letterbar{} 1 \letterbar{} 1 \letterbar{} \letterbar{} 1 \letterbar{}
-0 \letterbar{} 1 \letterbar{} 1 \letterbar{} \letterbar{} 0 \letterbar{}
-1 \letterbar{} 1 \letterbar{} 1 \letterbar{}
+\bTABLE
+\bTR\bTD RandomForest \eTD\bTD xgboost \eTD\bTD LogisticRegression
+\eTD\bTD EnsembledOutput\eTD\eTR
+\bTR\bTD 0 \eTD\bTD 1 \eTD\bTD      1 \eTD\bTD 1 \eTD\eTR
+\bTR\bTD 1 \eTD\bTD 1 \eTD\bTD      0 \eTD\bTD 1 \eTD\eTR
+\bTR\bTD 1 \eTD\bTD 0 \eTD\bTD      1 \eTD\bTD 1 \eTD\eTR
+\bTR\bTD 1 \eTD\bTD 1 \eTD\bTD      0 \eTD\bTD 1 \eTD\eTR
+\bTR\bTD 1 \eTD\bTD 1 \eTD\bTD      1 \eTD\bTD 1 \eTD\eTR
+\bTR\bTD 0 \eTD\bTD 0 \eTD\bTD      1 \eTD\bTD 0 \eTD\eTR
+\bTR\bTD 1 \eTD\bTD 1 \eTD\bTD      0 \eTD\bTD 1 \eTD\eTR
+\bTR\bTD 1 \eTD\bTD 1 \eTD\bTD      1 \eTD\bTD 1 \eTD\eTR
+\bTR\bTD 1 \eTD\bTD 0 \eTD\bTD      1 \eTD\bTD 1 \eTD\eTR
+\bTR\bTD 0 \eTD\bTD 1 \eTD\bTD      1 \eTD\bTD 1 \eTD\eTR
+\eTABLE
 
 A key point to be stressed again is that model diversity is important.
 If the models were similar, the output would've been similar and there
