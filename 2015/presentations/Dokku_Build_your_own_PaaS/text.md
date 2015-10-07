@@ -38,15 +38,21 @@ a target audience for PaaS providers.
 ## Installing Dokku
 Let's assume that you already have configured and running server where we will install Dokku.
 SSH into your host machine and run the following command:
+
 ```
-server $ wget -qO- https://raw.github.com/progrium/dokku/v0.3.26/bootstrap.sh | sudo DOKKU_TAG=v0.3.26 bash
+server $ wget -qO- https://raw.github.com/progrium/dokku/v0.3.26/
+    bootstrap.sh | sudo DOKKU_TAG=v0.3.26 bash
 ```
+
 Please, **notice** that I use the latest version of Dokku (0.3.26) for this moment.
 Also, I want to emphasize that you have to run installation using **sudo** even if you are logged in via root user. This is important as this installer creates a custom dokku user for executing commands and it is important to make sure if this user has enough permissions for building packages, creating configs and required directories. Otherwise your future project builds will fail.
 After script finishes you need to go back to your local machine console and run the following:
+
 ```
-$ cat ~/.ssh/id_rsa.pub | ssh root@<machine-address> "sudo sshcommand acl-add dokku <your-app-name>"
+$ cat ~/.ssh/id_rsa.pub | ssh
+    root@<machine-address> "sudo sshcommand acl-add dokku <your-app-name>"
 ```
+
 Where `<machine-address>` is ip or hostname of your server and `<your-app-name>` is the name of application we will deploy. This command may be not required if you already have configured SSH keys and you log in to your server without credentials.
 
 ## Deploying sample Django application to Dokku
@@ -54,13 +60,17 @@ This guideline shows how fast and easy you can set up your own PaaS. In
 this example we will install Dokku on the server and deploy "Hello, world" Django application.
 
 Clone any sample django application from github, cd to the application's directory and add dokku as remote server with:
-  ```
-  local $ git remote add dokku dokku@<machine-address>:<your-app-name>
-  ```
+
+```
+local $ git remote add dokku dokku@<machine-address>:<your-app-name>
+```
+
 Push application to Dokku:
-  ```
-  local $ git push dokku <branch-name>:master
-  ```
+
+```
+local $ git push dokku <branch-name>:master
+```
+
 Pay attention, that dokku will deploy your application **only** if you push to the master branch!
 
 If your application requires additional dependencies like database or cache server, application deployment is not finished yet. Take a look on "Plugins" session.
@@ -77,11 +87,13 @@ So what Dokku does is, determine exactly which buildpack is required for your ap
 But what if Dokku doesn't determine a buildpack for your application correctly?
 
 You can create an `.env` file in your application root directory and specify a buildpack by yourself:
-  ```
-  export BUILDPACK_URL=https://github.com/OShalakhin/heroku-buildpack-geodjango
-  ```
 
-  You can also just put a Dockerfile inside the project root and Dokku will pick it up and build an environment from it by default!
+```
+export BUILDPACK_URL=https://github.com/OShalakhin/
+    heroku-buildpack-geodjango
+```
+
+You can also just put a Dockerfile inside the project root and Dokku will pick it up and build an environment from it by default!
 
 ## Plugins
 As was mentioned before, Dokku provides a very high level of isolation for your projects. Here you may ask, what if my application requires a database or a cache server. You can either use a simple database or cache server installed and configured on your server (recommended for stable production purposes), or use Dokku plugins. Dokku provides quite good set of plugins for setting up and running persistent containers for databases, caches, message queues, etc.
@@ -89,15 +101,19 @@ As was mentioned before, Dokku provides a very high level of isolation for your 
 Let's install postgresql Dokku plugin and wire it to our application as an example.
 
 First of all, you need to clone plugin to Dokku's plugins directory:
+
 ```
 cd /var/lib/dokku/plugins
 git clone https://github.com/jeffutter/dokku-postgresql-plugin postgresql
 dokku plugins-install
 ```
+
 Then we create a database for application:
+
 ```
 server $ dokku postgresql:create <your-app-name>
 ```
+
 This command automatically creates and wires a database to `<your-app-name>` application. It also outputs an appropriate DATABASE_URL to console which you need to put to your application's configuration.
 
 ## Debugging
