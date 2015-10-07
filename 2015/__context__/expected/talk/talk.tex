@@ -1,7 +1,7 @@
 \usemodule[pycon-2015]
 \starttext
 
-\Title{Porozmawiaj ze swoją aplikację}
+\Title{Porozmawiaj ze swoją aplikacją}
 \Author{Kamil Kujawiński, Marcin Najtkowski}
 \MakeTitlePage
 
@@ -12,7 +12,7 @@ telekomunikacji, umożliwiającego interaktywną obsługę osoby dzwoniącej.
 IVR ma więc funkcjonalność automatycznego Call center (lub jego części).
 \footnote{https://pl.wikipedia.org/wiki/Interactive\letterunderscore{}Voice\letterunderscore{}Response}
 System IVR może być zainstalowany bezpośrednio u klienta, w sieci PSTN,
-a także jako aplikacja korzystająca z uług IaaS. Ostatniemu rozwiązaniu
+a także jako aplikacja korzystająca z usług IaaS. Ostatniemu rozwiązaniu
 poświęcimy ten artykuł oraz naszą prezentację.
 
 Najpopularniejszą funkcją systemów IVR jest wybór języka, autoryzacja
@@ -40,34 +40,80 @@ W tabeli poniżej przedstawiliśmy elementy, które mogą wpłynąć na wybór
 dostawcy, ale przede wszystkim pokazać w jakich segmentach operują
 dostawcy.
 
-\letterbar{} \letterbar{} Plivo \letterbar{} Tropo \letterbar{} Twilio
-\letterbar{}
-\letterbar{}----------------------------------------------------------------------------------------------\letterbar{}:------------------------:\letterbar{}:---------------------------------:\letterbar{}:------------------------:\letterbar{}
-\letterbar{} Ceny (polski numer miesięcznie / minuta rozmowy wychodzącej
-/ minuta rozmowa przychodzącej) \letterbar{} 0,8\$ / 2,35¢-7,3¢ / 0,5¢
-\letterbar{} 10\$ / 5-7¢ / 3¢ \letterbar{} 1\$ / 2¢-7,5¢ / 0,75¢
-\letterbar{} \letterbar{} Serwery \letterbar{} dedykowane \letterbar{}
-Voxeo \footnote{Od momentu przejęcia Tropo przez Cisco wiele informacji
-  nie jest ujawnianych.} \letterbar{} AWS \letterbar{} \letterbar{}
-Paczka w PyPi \letterbar{} plivo \letterbar{} tropo-webapi-python
-\letterbar{} twilio \letterbar{} \letterbar{} Synteza mowy / język
-polski \letterbar{} 16 języków / tak \letterbar{} 25 języków / tak
-\letterbar{} 26 języków / tak \letterbar{} \letterbar{} Transkrypcja
-nagrań \letterbar{} tylko angielski \letterbar{} tylko angielski
-\letterbar{} tylko angielski \letterbar{} \letterbar{} Rozpoznowanie
-mowy / język polski \letterbar{} tak / nie \letterbar{} tak / tak
-\letterbar{} nie / nie \letterbar{} \letterbar{} Standardy \letterbar{}
-PlivoXML \letterbar{} VoiceXML, SSML, SRGS \letterbar{} TwiML
-\letterbar{} \letterbar{} SMS / MMS \letterbar{} tak / nie \letterbar{}
-tak / nie \letterbar{} tak / tylko USA i Kanada \letterbar{}
-\letterbar{} Numery telefonów / polskie numery \letterbar{} 55 krajów /
-tak \letterbar{} 28 krajów / tak \letterbar{} 44 krajów / tak
-\letterbar{} \letterbar{} Instalacja on-premises \letterbar{} tak (open
-source) \letterbar{} tak (licencja) \letterbar{} nie \letterbar{}
-\letterbar{} Najwięksi użytkownicy \letterbar{} Mozilla, Netflix
-\letterbar{} Deutsche Telekom, IBM \footnote{Od momentu przejęcia Tropo
-  przez Cisco wiele informacji nie jest ujawnianych.} \letterbar{} Uber,
-Paypal, Coca-Cola \letterbar{}
+\bTABLE
+\bTR
+  \bTD \eTD
+  \bTD \bf Plivo \eTD
+  \bTD \bf Tropo \eTD
+  \bTD \bf Twilio \eTD
+\eTR
+\bTR
+  \bTD Ceny (polski numer miesięcznie / minuta rozmowy wychodzącej / minuta rozmowa przychodzącej) \eTD
+  \bTD 0,8\$ / 2,35¢-7,3¢ / 0,5¢ \eTD
+  \bTD 10\$ / 5-7¢ / 3¢ \eTD
+  \bTD 1\$ / 2¢-7,5¢ / 0,75¢ \eTD
+\eTR
+\bTR
+  \bTD Serwery \eTD
+  \bTD dedykowane \eTD
+  \bTD Voxeo \eTD
+  \bTD AWS \eTD
+\eTR
+\bTR
+  \bTD Paczka w PyPi \eTD
+  \bTD plivo \eTD
+  \bTD tropo-webapi-python \eTD
+  \bTD twilio \eTD
+\eTR
+\bTR
+  \bTD Synteza mowy / język polski \eTD
+  \bTD 16 języków / tak \eTD
+  \bTD 25 języków / tak \eTD
+  \bTD 26 języków / tak \eTD
+\eTR
+\bTR
+  \bTD Transkrypcja nagrań \eTD
+  \bTD tylko angielski \eTD
+  \bTD tylko angielski \eTD
+  \bTD tylko angielski \eTD
+\eTR
+\bTR
+  \bTD Rozpoznowanie mowy / język polski \eTD
+  \bTD tak / nie \eTD
+  \bTD tak / tak \eTD
+  \bTD nie / nie \eTD
+\eTR
+\bTR
+  \bTD Standardy \eTD
+  \bTD PlivoXML \eTD
+  \bTD VoiceXML, SSML, SRGS \eTD
+  \bTD TwiML \eTD
+\eTR
+\bTR
+  \bTD SMS / MMS \eTD
+  \bTD tak / nie \eTD
+  \bTD tak / nie \eTD
+  \bTD tak / tylko USA i Kanada \eTD
+\eTR
+\bTR
+  \bTD Numery telefonów / polskie numery \eTD
+  \bTD 55 krajów / tak \eTD
+  \bTD 28 krajów / tak \eTD
+  \bTD 44 krajów / tak \eTD
+\eTR
+\bTR
+  \bTD Instalacja on-premises \eTD
+  \bTD tak (open source) \eTD
+  \bTD tak (licencja) \eTD
+  \bTD nie \eTD
+\eTR
+\bTR
+  \bTD Najwięksi użytkownicy \eTD
+  \bTD Mozilla, Netflix \eTD
+  \bTD Deutsche Telekom, IBM \eTD
+  \bTD Uber, Paypal, Coca-Cola \eTD
+\eTR
+\eTABLE
 
 Zdecydowanie najpopularniejszym rozwiązaniem na rynku jest Twilio.
 Jednak z różnych względów jest to rozwiązanie, które nie odpowiada
