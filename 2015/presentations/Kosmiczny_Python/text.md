@@ -152,10 +152,10 @@ większą świadomość, o czym jest prezentacja.
 
 ## Bibiografia
 
-* [1] Astronomia - \hyphenatedurl{https://pl.wikipedia.org/wiki/Astronomia}
-* [2] Układy współrzędnych w astronomii - \hyphenatedurl{http://www.astro.amu.edu.pl/~jopek/JopekTJ/Dydaktyka/A_Sf/2014-15/Prezentacje/wyklad_03.pdf}
-* [3] Astropy - \hyphenatedurl{http://docs.astropy.org/}
-* [4] Matplotlib - \hyphenatedurl{http://matplotlib.org/}
-* [5] Bifurikacja - \hyphenatedurl{http://zasoby1.open.agh.edu.pl/dydaktyka/matematyka/c_fraktale_i_chaos/chaos.php?rozdzial=2}
-* [6] AUTO - \hyphenatedurl{http://cmvl.cs.concordia.ca/auto/}
+* [1] Astronomia - https://pl.wikipedia.org/wiki/Astronomia
+* [2] Układy współrzędnych w astronomii - http://www.astro.amu.edu.pl/~jopek/JopekTJ/Dydaktyka/A_Sf/2014-15/Prezentacje/wyklad_03.pdf
+* [3] Astropy - http://docs.astropy.org/
+* [4] Matplotlib - http://matplotlib.org/
+* [5] Bifurikacja - http://zasoby1.open.agh.edu.pl/dydaktyka/matematyka/c_fraktale_i_chaos/chaos.php?rozdzial=2
+* [6] AUTO - http://cmvl.cs.concordia.ca/auto/
 * [7] Notatki z wykładów astronomicznych.

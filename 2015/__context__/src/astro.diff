@@ -12,3 +12,22 @@
  
  \subsection[krótko-o-astronomii]{Krótko o astronomii}
  
+@@ -171,14 +172,16 @@
+   {[}1{]} Astronomia - https://pl.wikipedia.org/wiki/Astronomia
+ \item
+   {[}2{]} Układy współrzędnych w astronomii -
+-  http://www.astro.amu.edu.pl/\lettertilde{}jopek/JopekTJ/Dydaktyka/A\letterunderscore{}Sf/2014-15/Prezentacje/wyklad\letterunderscore{}03.pdf
++  http://www.astro.amu.edu.pl/\lettertilde{}jopek/\crlf
++JopekTJ/Dydaktyka/A\_Sf/2014-15/Prezentacje/wyklad\_03.pdf
+ \item
+   {[}3{]} Astropy - http://docs.astropy.org/
+ \item
+   {[}4{]} Matplotlib - http://matplotlib.org/
+ \item
+   {[}5{]} Bifurikacja -
+-  http://zasoby1.open.agh.edu.pl/dydaktyka/matematyka/c\letterunderscore{}fraktale\letterunderscore{}i\letterunderscore{}chaos/chaos.php?rozdzial=2
++  http://zasoby1.open.agh.edu.pl/dydaktyka/matematyka/\crlf
++c\_fraktale\_i\_chaos/chaos.php?rozdzial=2
+ \item
+   {[}6{]} AUTO - http://cmvl.cs.concordia.ca/auto/
+ \item
