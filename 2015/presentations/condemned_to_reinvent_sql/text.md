@@ -383,9 +383,9 @@ think.
 
 ## Further reading
 
-1. [Django: Model intro](https://docs.djangoproject.com/en/1.8/intro/tutorial01/#creating-models)
-2. [Dimitri Fontaine: Understanding Window Functions](http://tapoueh.org/blog/2013/08/20-Window-Functions)
-3. [PostgreSQL: Common Table Expressions](http://www.postgresql.org/docs/8.4/static/queries-with.html)
-4. [Github: SQL, Condemned](https://github.com/mrzechonek/sql_condemned)
-5. [Wikipedia: Simple linear reqression](https://en.wikipedia.org/wiki/Simple_linear_regression)
-6. [Django: Query expressions](https://docs.djangoproject.com/en/1.8/ref/models/expressions/)
+1. Django: Model intro https://docs.djangoproject.com/en/1.8/intro/tutorial01/#creating-models
+2. Dimitri Fontaine: Understanding Window Functions http://tapoueh.org/blog/2013/08/20-Window-Functions
+3. PostgreSQL: Common Table Expressions http://www.postgresql.org/docs/8.4/static/queries-with.html
+4. Github: SQL, Condemned https://github.com/mrzechonek/sql_condemned
+5. Wikipedia: Simple linear reqression https://en.wikipedia.org/wiki/Simple_linear_regression
+6. Django: Query expressions https://docs.djangoproject.com/en/1.8/ref/models/expressions/

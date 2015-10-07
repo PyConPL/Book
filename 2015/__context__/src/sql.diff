@@ -13,3 +13,16 @@
  
  \subsection[introduction]{Introduction}
  
+@@ -426,10 +426,10 @@
+   http://www.postgresql.org/docs/8.4/static/queries-with.html
+ \item
+   Github: SQL, Condemned
+-  https://github.com/mrzechonek/sql\letterunderscore{}condemned
++  https://github.com/mrzechonek/sql\_condemned
+ \item
+   Wikipedia: Simple linear reqression
+-  https://en.wikipedia.org/wiki/Simple\letterunderscore{}linear\letterunderscore{}regression
++  https://en.wikipedia.org/wiki/Simple\_linear\_regression
+ \item
+   Django: Query expressions
+   https://docs.djangoproject.com/en/1.8/ref/models/expressions/
