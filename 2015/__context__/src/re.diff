@@ -14,3 +14,45 @@
  
  \subsection[historia]{1. Historia}
  
+@@ -112,33 +111,33 @@
+ 
+ \startitemize[n][stopper=.,width=2.0em]
+ \item
+-  https://pl.wikipedia.org/wiki/Wyrażenie\letterunderscore{}regularne
++  https://pl.wikipedia.org/wiki/Wyrażenie\_regularne
+ \item
+   Speech and Language Processing: An introduction to natural language
+   processing, computational linguistics, and speech recognition. Daniel
+   Jurafsky \& James H. Martin
+ \item
+-  https://pl.wikipedia.org/wiki/Maszyna\letterunderscore{}Turinga
++  https://pl.wikipedia.org/wiki/Maszyna\_Turinga
+ \item
+-  https://pl.wikipedia.org/wiki/Neuron\letterunderscore{}McCullocha-Pittsa
++  https://pl.wikipedia.org/wiki/Neuron\_McCullocha-Pittsa
+ \item
+   http://blog.staffannoteberg.com/2013/01/30/\crlf
+   regular-expressions-a-brief-history/
+ \item
+   http://books.google.com/books?id=oL57iECEeEwC
+ \item
+-  https://pl.wikipedia.org/wiki/Język\letterunderscore{}regularny
++  https://pl.wikipedia.org/wiki/Język\_regularny
+ \item
+-  http://kelty.org/or/papers/Kelty\letterunderscore{}Franchi\letterunderscore{}LogicalInstruments\letterunderscore{}2009.pdf
++  http://kelty.org/or/papers/Kelty\_Franchi\_LogicalInstruments\_2009.pdf
+ \item
+   https://www.cs.ucf.edu/\lettertilde{}dcm/Teaching/COP5611Spring2010/\crlf
+   vonNeumannSelfReproducingAutomata.pdf
+ \item
+-  https://en.wikipedia.org/wiki/Janusz\letterunderscore{}Brzozowski\letterunderscore{}(computer\letterunderscore{}scientist)
++  https://en.wikipedia.org/wiki/Janusz\_Brzozowski\_(computer\_scientist)
+ \item
+-  https://en.wikipedia.org/wiki/Rudolf\letterunderscore{}Carnap\#Logical\letterunderscore{}syntax
++  https://en.wikipedia.org/wiki/Rudolf\_Carnap\#Logical\_syntax
+ \item
+-  https://pl.wikipedia.org/wiki/Ken\letterunderscore{}Thompson
++  https://pl.wikipedia.org/wiki/Ken\_Thompson
+ \item
+   https://pl.wikipedia.org/wiki/Unix
+ \item
