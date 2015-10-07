@@ -94,11 +94,13 @@ na jednym z nich oraz w trybie slave na pozostałych:
 
 
 Master:
+
 ```python
 locust -f locustfile.py --master
 ```
 
 Slave:
+
 ```python
 locust -f locustfile.py --slave --master-host=<adres-ip-mastera>
 ```
@@ -129,14 +131,13 @@ klasami), która będzie nieprzerwanie wykonywana przez instancję klasy Locust.
 *Event hooks* to zdarzenia, które służą do komunikacji z locustem w celu
 zbierania statystyk dotyczących żądań i odpowiedzi. Do dyspozycji mamy:
 
-* request_success
-* request_failure
-* locust_error
-* report_to_master
-* slave_report
-* hatch_complete
-* quitting
-
+* `request_success`
+* `request_failure`
+* `locust_error`
+* `report_to_master`
+* `slave_report`
+* `hatch_complete`
+* `quitting`
 
 ## Scenariusze testowe
 
@@ -332,9 +333,9 @@ być responsywny lub całkowicie przestanie działać.
 ## Bibliografia / użyteczne linki
 
 
-1. [Locust.io: Dokumentacja](http://docs.locust.io/en/latest/)
-2. [Ian Molyneaux: The Art of Application Performance Testing](http://shop.oreilly.com/product/9780596520670.do)
-3. [http://www.uvd.co.uk/blog/load-testing-vote-for-policies-with-locust-io/](http://www.uvd.co.uk/blog/load-testing-vote-for-policies-with-locust-io/)
-4. [http://software.danielwatrous.com/load-testing-alternatives-for-large-scale-web-applications/](http://software.danielwatrous.com/load-testing-alternatives-for-large-scale-web-applications/)
-5. [http://abhishek-tiwari.com/post/performance-testing-as-a-first-class-citizen](http://abhishek-tiwari.com/post/performance-testing-as-a-first-class-citizen)
-6. [http://blog.codinghorror.com/performance-is-a-feature/](http://blog.codinghorror.com/performance-is-a-feature/)
+1. Locust.io: Dokumentacja \hyphenatedurl{http://docs.locust.io/en/latest/}
+2. Ian Molyneaux: The Art of Application Performance Testing \hyphenatedurl{http://shop.oreilly.com/product/9780596520670.do}
+3. Load testing Vote for Policies with Locust.io \hyphenatedurl{http://www.uvd.co.uk/blog/load-testing-vote-for-policies-with-locust-io/}
+4. Load Testing Alternatives for Large Scale Web Applications \hyphenatedurl{http://software.danielwatrous.com/load-testing-alternatives-for-large-scale-web-applications/}
+5. Performance testing as a first-class citizen \hyphenatedurl{http://abhishek-tiwari.com/post/performance-testing-as-a-first-class-citizen}
+6. Performance is a Feature \hyphenatedurl{http://blog.codinghorror.com/performance-is-a-feature/}

@@ -102,10 +102,17 @@ Jeżeli nie wystarcza nam pojedyncza maszyna, w prosty sposób możemy
 zaprząc do współpracy inne środowiska: wystarczy uruchomić locusta w
 trybie master na jednym z nich oraz w trybie slave na pozostałych:
 
-Master: \type{python locust -f locustfile.py --master}
+Master:
+
+\starttyping
+locust -f locustfile.py --master
+\stoptyping
 
 Slave:
-\type{python locust -f locustfile.py --slave --master-host=<adres-ip-mastera>}
+
+\starttyping
+locust -f locustfile.py --slave --master-host=<adres-ip-mastera>
+\stoptyping
 
 Maszyna w trybie master nie przeprowadza symulacji, a jedynie zbiera
 statystyki z maszyn w trybie slave oraz udostępnia interfejs webowy z
@@ -139,19 +146,19 @@ mamy:
 
 \startitemize
 \item
-  request\letterunderscore{}success
+  \type{request_success}
 \item
-  request\letterunderscore{}failure
+  \type{request_failure}
 \item
-  locust\letterunderscore{}error
+  \type{locust_error}
 \item
-  report\letterunderscore{}to\letterunderscore{}master
+  \type{report_to_master}
 \item
-  slave\letterunderscore{}report
+  \type{slave_report}
 \item
-  hatch\letterunderscore{}complete
+  \type{hatch_complete}
 \item
-  quitting
+  \type{quitting}
 \stopitemize
 
 \subsection[scenariusze-testowe]{Scenariusze testowe}
@@ -354,19 +361,23 @@ linki}
 
 \startitemize[n][stopper=.]
 \item
-  \useURL[url1][http://docs.locust.io/en/latest/][][Locust.io:
-  Dokumentacja]\from[url1]
+  Locust.io: Dokumentacja
+  \hyphenatedurl{http://docs.locust.io/en/latest/}
 \item
-  \useURL[url2][http://shop.oreilly.com/product/9780596520670.do][][Ian
-  Molyneaux: The Art of Application Performance Testing]\from[url2]
+  Ian Molyneaux: The Art of Application Performance Testing
+  \hyphenatedurl{http://shop.oreilly.com/product/9780596520670.do}
 \item
-  \useURL[url3][http://www.uvd.co.uk/blog/load-testing-vote-for-policies-with-locust-io/][][http://www.uvd.co.uk/blog/load-testing-vote-for-policies-with-locust-io/]\from[url3]
+  Load testing Vote for Policies with Locust.io
+  \hyphenatedurl{http://www.uvd.co.uk/blog/load-testing-vote-for-policies-with-locust-io/}
 \item
-  \useURL[url4][http://software.danielwatrous.com/load-testing-alternatives-for-large-scale-web-applications/][][http://software.danielwatrous.com/load-testing-alternatives-for-large-scale-web-applications/]\from[url4]
+  Load Testing Alternatives for Large Scale Web Applications
+  \hyphenatedurl{http://software.danielwatrous.com/load-testing-alternatives-for-large-scale-web-applications/}
 \item
-  \useURL[url5][http://abhishek-tiwari.com/post/performance-testing-as-a-first-class-citizen][][http://abhishek-tiwari.com/post/performance-testing-as-a-first-class-citizen]\from[url5]
+  Performance testing as a first-class citizen
+  \hyphenatedurl{http://abhishek-tiwari.com/post/performance-testing-as-a-first-class-citizen}
 \item
-  \useURL[url6][http://blog.codinghorror.com/performance-is-a-feature/][][http://blog.codinghorror.com/performance-is-a-feature/]\from[url6]
+  Performance is a Feature
+  \hyphenatedurl{http://blog.codinghorror.com/performance-is-a-feature/}
 \stopitemize
 
 
