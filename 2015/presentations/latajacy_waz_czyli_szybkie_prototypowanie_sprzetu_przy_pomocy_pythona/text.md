@@ -96,10 +96,10 @@ Na pewno układ ten nie jest rozwiązaniem wszystkich sprzętowych problemów, a
 
 ### Źródła
 
-* Damien George “MicroPython – Python for microconterollers” http://micropython.org/
-* Kick Starter - Micro Python: Python for microcontrollers https://www.kickstarter.com/
-* Jake Edge Micro "Python on the pyboard" http://lwn.net
-* Damien George "The 3 different code emitters" Update #4 on https://www.kickstarter.com
-* Lauren Orsini „Why Copters Are The Next Big Thing In Robotics” http://readwrite.com
-* Oscar Liang „Quadcopter PID Explained and Tuning” http://blog.oscarliang.net
-* Naresh Kumar Thanigaivel „Building a Quadcopter” http://unmannedmulticopter.blogspot.com
+* Damien George “MicroPython – Python for microconterollers” \hyphenatedurl{http://micropython.org/}
+* Kick Starter - Micro Python: Python for microcontrollers \hyphenatedurl{https://www.kickstarter.com/}
+* Jake Edge Micro "Python on the pyboard" \hyphenatedurl{http://lwn.net}
+* Damien George "The 3 different code emitters" Update #4 on \hyphenatedurl{https://www.kickstarter.com}
+* Lauren Orsini „Why Copters Are The Next Big Thing In Robotics” \hyphenatedurl{http://readwrite.com}
+* Oscar Liang „Quadcopter PID Explained and Tuning” \hyphenatedurl{http://blog.oscarliang.net}
+* Naresh Kumar Thanigaivel „Building a Quadcopter” \hyphenatedurl{http://unmannedmulticopter.blogspot.com}
