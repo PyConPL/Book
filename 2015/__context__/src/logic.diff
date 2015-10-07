@@ -13,3 +13,13 @@
  
  \subsection[introduction]{Introduction}
  
+@@ -893,7 +893,8 @@
+ \item
+   http://www.postgresql.org/docs/
+ \item
+-  https://kmonsoor.wordpress.com/2015/08/10/seven-deadly-sins-in-python-code
++  https://kmonsoor.wordpress.com/2015/08/10/\crlf
++seven-deadly-sins-in-python-code
+ \stopitemize
+ 
+ 
