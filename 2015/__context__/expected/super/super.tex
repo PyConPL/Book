@@ -21,7 +21,7 @@ sytuacji (powiedzmy w C++) we wszystkich klasach zaimplementowali taką
 samą metodę, to język nie wiedziałby w jakiej kolejności wykonać dane
 metody. W Pythonie ten problem nie występuje dzięki algorytmowi
 \quotation{C3 linearization}, który został wykorzystany do implementacji
-MRO.*. Wprowadzono go w wersji 2.3 (new style classes) oraz w językach
+MRO. Wprowadzono go w wersji 2.3 (new style classes) oraz w językach
 Perl 5 i Parrot. Niestety nie są znane mi inne języki, które by
 implementowały ten algorytm.
 
@@ -140,50 +140,64 @@ Two().method()
 
 W klasie Two.method, pod super().method nie dostaniemy One.method, tylko
 coś w rodzaju: \quotation{} Mając Two.method albo One.method, możemy
-dostać~się~do klasy w której ta metoda została zdefiniowana. Mając już
+dostać~się~do klasy, w której ta metoda została zdefiniowana. Mając już
 klasę, możemy użyć metody super(), gdyż mamy pełną listę MRO (dzięki
 self), oraz miejsce w hierarchii (dzięki klasie). Mając funkcję wrapper
 nie jesteśmy w stanie (a przynajmniej ja nie znam sposobu) dostać~się do
-klasy, na której ten wrapper został założony. Po przejrzeniu tego
-artykułu przez kolegę~Nihilifer'a{\em , okazało się że jest możliwość
-zrobienia takiego dekoratora. Wystarczy użyć functools.wraps} jako
-dekorator funkcji wrapper. Dzięki temu dekorator zwróci nam metodę,
-którą udekorowaliśmy. Chwila przeszukiwania stackoverflow da nam
-funkcję, która zwróci nam klasę w której dana metoda była zdefiniowana.*
+klasy, na której ten wrapper został założony.
 
-``` import inspect from functools import wraps
+Po przejrzeniu tego artykułu przez kolegę~Nihilifer'a okazało się, że
+jest możliwość zrobienia takiego dekoratora. Wystarczy użyć
+functools.wraps jako dekorator funkcji wrapper. Dzięki temu dekorator
+zwróci nam metodę, którą udekorowaliśmy. Chwila przeszukiwania
+stackoverflow da nam funkcję, która zwróci nam klasę, w której dana
+metoda była zdefiniowana.
 
-def
-get\letterunderscore{}class\letterunderscore{}that\letterunderscore{}defined\letterunderscore{}method(meth):
-if inspect.ismethod(meth): for cls in
-inspect.getmro(meth.{\bf self}.{\bf class}): if
-cls.{\bf dict}.get(meth.{\bf name}) is meth: return cls meth =
-meth.{\bf func} \# fallback to {\bf qualname} parsing if
-inspect.isfunction(meth): module = inspect.getmodule(meth) data =
-meth.{\bf qualname}.split('.', 1){[}0{]}.rsplit('.', 1){[}0{]} cls =
-getattr(module, data) if isinstance(cls, type): return cls return None
+\starttyping
+import inspect
+from functools import wraps
 
-def superme(fun): @wraps(fun) def wrapper(*args, *{\em kwargs): return
-fun(}args, **kwargs) return wrapper
+
+def get_class_that_defined_method(meth):
+    if inspect.ismethod(meth):
+        for cls in inspect.getmro(meth.__self__.__class__):
+            if cls.__dict__.get(meth.__name__) is meth:
+                return cls
+        meth = meth.__func__  # fallback to __qualname__ parsing
+    if inspect.isfunction(meth):
+        module = inspect.getmodule(meth)
+        data = meth.__qualname__.split('.<locals>', 1)[0].rsplit('.', 1)[0]
+        cls = getattr(module, data)
+        if isinstance(cls, type):
+            return cls
+    return None
+
+
+def superme(fun):
+    @wraps(fun)
+    def wrapper(*args, **kwargs):
+        return fun(*args, **kwargs)
+    return wrapper
+
 
 class One(object):
 
-\starttyping
-@superme
-def method(self):
-    pass
-\stoptyping
+    @superme
+    def method(self):
+        pass
+
 
 class Two(One):
 
-\starttyping
-def method(self):
-    method = super(Two, self).method
-    cls = get_class_that_defined_method(method)
-    print(method, cls)
+    def method(self):
+        method = super(Two, self).method
+        cls = get_class_that_defined_method(method)
+        print(method, cls)
+
+Two().method()
 \stoptyping
 
-Two().method() ``` I to nam da taki wynik:
+I to nam da taki wynik:
 
 \starttyping
 <bound method Two.method of <__main__.Two object at 0x7fc8f2c2e160>> <class '__main__.One'>

@@ -2,7 +2,7 @@
 
 Jest jedna funkcjonalność Pythona, której wszyscy używają bardzo często, acz szczątkowo, gdyż panuje opinia iż nadużywanie jej może doprowadzić do nieokreślonego działania aplikacji. Tą funkcjonalnością jest wielodziedziczenie. Postaram się w kilku słowach pokazać jak działa "Method Resolution Order" w Pythonie (wybaczcie, nie znalazłem dobrego tłumaczenia tej nazwy). Postaram się wam pokazać jak można użyć "super()", aby zamockować i przetestować przykładową klasę.
 
-Zacznijmy jednak od teorii. W programowaniu panuje przekonanie, że wielodziedziczenie jest złe, gdyż może występować "the diamond problem", czyli sytuacja, w której klasa dziedziczy po dwóch klasach, a te dwie klasy dziedziczą po jednej i tej samej. Gdybyśmy w takiej sytuacji (powiedzmy w C++) we wszystkich klasach zaimplementowali taką samą metodę, to język nie wiedziałby w jakiej kolejności wykonać dane metody.  W Pythonie ten problem nie występuje dzięki algorytmowi "C3 linearization", który został wykorzystany do implementacji MRO.*. Wprowadzono go w wersji 2.3 (new style classes) oraz w językach Perl 5 i Parrot. Niestety nie są znane mi inne języki, które by implementowały ten algorytm.
+Zacznijmy jednak od teorii. W programowaniu panuje przekonanie, że wielodziedziczenie jest złe, gdyż może występować "the diamond problem", czyli sytuacja, w której klasa dziedziczy po dwóch klasach, a te dwie klasy dziedziczą po jednej i tej samej. Gdybyśmy w takiej sytuacji (powiedzmy w C++) we wszystkich klasach zaimplementowali taką samą metodę, to język nie wiedziałby w jakiej kolejności wykonać dane metody.  W Pythonie ten problem nie występuje dzięki algorytmowi "C3 linearization", który został wykorzystany do implementacji MRO. Wprowadzono go w wersji 2.3 (new style classes) oraz w językach Perl 5 i Parrot. Niestety nie są znane mi inne języki, które by implementowały ten algorytm.
 
 Dodatkowym atutem Pythona jest fakt, iż wywołanie metody rodzica, jest jawne w metodzie potomka. Dzięki temu, można kod rodzica uruchomić nie tylko przed wywołaniem własnej metody, ale na przykład w środku. Daje nam to większą władzę oraz naprawdę duże pole do manewru.
 ![graph.new.png](graph.new.png)
@@ -60,8 +60,19 @@ class Two(One):
 Two().method()
 ```
 
-W klasie Two.method, pod super().method nie dostaniemy One.method, tylko coś w rodzaju: "<bound method Two.wrapper of <__main__.Two object at 0x7f2116f7b048>" Mając Two.method albo One.method, możemy dostać się do klasy w której ta metoda została zdefiniowana. Mając już klasę, możemy użyć metody super(), gdyż mamy pełną listę MRO (dzięki self), oraz miejsce w hierarchii (dzięki klasie). Mając funkcję wrapper nie jesteśmy w stanie (a przynajmniej ja nie znam sposobu) dostać się do klasy, na której ten wrapper został założony.
-Po przejrzeniu tego artykułu przez kolegę Nihilifer'a*, okazało się że jest możliwość zrobienia takiego dekoratora. Wystarczy użyć functools.wraps* jako dekorator funkcji wrapper. Dzięki temu dekorator zwróci nam metodę, którą udekorowaliśmy. Chwila przeszukiwania stackoverflow da nam funkcję, która zwróci nam klasę w której dana metoda była zdefiniowana.*
+W klasie Two.method, pod super().method nie dostaniemy One.method, tylko coś w rodzaju:
+"<bound method Two.wrapper of <__main__.Two object at 0x7f2116f7b048>" Mając Two.method
+albo One.method, możemy dostać się do klasy, w której ta metoda została zdefiniowana.
+Mając już klasę, możemy użyć metody super(), gdyż mamy pełną listę MRO (dzięki self),
+oraz miejsce w hierarchii (dzięki klasie). Mając funkcję wrapper nie jesteśmy
+w stanie (a przynajmniej ja nie znam sposobu) dostać się do klasy,
+na której ten wrapper został założony.
+
+Po przejrzeniu tego artykułu przez kolegę Nihilifer'a okazało się, że jest możliwość
+zrobienia takiego dekoratora. Wystarczy użyć functools.wraps
+jako dekorator funkcji wrapper. Dzięki temu dekorator zwróci nam metodę,
+którą udekorowaliśmy. Chwila przeszukiwania stackoverflow da nam funkcję,
+która zwróci nam klasę, w której dana metoda była zdefiniowana.
 
 ```
 import inspect
@@ -106,6 +117,7 @@ class Two(One):
 
 Two().method()
 ```
+
 I to nam da taki wynik:
 
 ```
