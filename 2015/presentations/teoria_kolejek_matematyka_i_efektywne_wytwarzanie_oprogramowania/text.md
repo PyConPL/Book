@@ -90,21 +90,11 @@ Jeśli, ktoś Wam każe brać więcej do Sprintu to zadajcie mu proste pytanie: 
 Jeszcze na zakończenie trochę przemyśleń. Nieefektywność zespołu, czy organizacji, to moim zdaniem problem kulturowy, wynikający z braku podstawowej wiedzy na temat zarządzania, Teorii Kolejek i Teorii Ograniczeń (ang. Theory Of Constraints) na wysokich poziomach w organizacji (często tych najwyższych). Nie jest to nic nowego - dokładnie te same błędy popełniano od czasów rewolucji przemysłowej. Mam nadzieję, że Teoria Kolejek pomoże Wam, drodzy czytelnicy, szerzyć wiedzę i racjonalne podejście do wytwarzania oprogramowania i zarządzania organizacją. I pamiętajcie - nawet jeśli jesteście “tylko” developerami, to nie od nikogo innego - tylko od Was zależy, jak będziecie pracować, jakich narzędzi używać i na co pozwolicie swojej organizacji. Pamiętajcie, że organizację zawsze można zmienić, albo można zmienić organizację!
 
 ## Źródła
-“The Goal: A Process of Ongoing Improvement”-  Eliyahu M. Goldratt and Jeff Cox
-https://www.youtube.com/watch?v=rSZWig173xM - Wprowadzenie do Teorii Kolejek
-https://www.youtube.com/watch?v=VU8TUSnQ-vw - WIP limit i Prawo Little'a
-https://dzone.com/articles/lean-tools-queuing-theory - Lean i Teoria Kolejek
-http://irh.inf.unideb.hu/user/jsztrik/education/09/english/3f.html - Tablice wzorów w Teorii Kolejek
-http://www.supositorio.com/rcalc/rcalclite.htm - Kalkulator przydatny w eksperymentach nad Teorią Kolejek
-http://www.referenceforbusiness.com/encyclopedia/Pro-Res/Queuing-Theory.html - Wstęp do Teorii Kolejek
-http://less.works/less/principles/queueing_theory.html - Zarządzanie kolejkami
-
-
-
-
-
-
-
-
-
-
+* The Goal: A Process of Ongoing Improvement -  Eliyahu M. Goldratt and Jeff Cox
+* https://www.youtube.com/watch?v=rSZWig173xM - Wprowadzenie do Teorii Kolejek
+* https://www.youtube.com/watch?v=VU8TUSnQ-vw - WIP limit i Prawo Little'a
+* https://dzone.com/articles/lean-tools-queuing-theory - Lean i Teoria Kolejek
+* http://irh.inf.unideb.hu/user/jsztrik/education/09/english/3f.html - Tablice wzorów w Teorii Kolejek
+* http://www.supositorio.com/rcalc/rcalclite.htm - Kalkulator przydatny w eksperymentach nad Teorią Kolejek
+* http://www.referenceforbusiness.com/encyclopedia/Pro-Res/Queuing-Theory.html - Wstęp do Teorii Kolejek
+* http://less.works/less/principles/queueing_theory.html - Zarządzanie kolejkami
