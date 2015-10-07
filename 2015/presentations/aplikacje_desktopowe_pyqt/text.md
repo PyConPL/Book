@@ -111,9 +111,8 @@ Qt i PyQt implementują znacznie więcej niż widżety interfejsu. Dostajemy np.
 
 Jeżeli biblioteka ta zainteresowała Ciebie, to zacznij od przerobienia kilku prostych aplikacji, zapoznaj się z podstawowymi widżetami i sposobem ich działania. Zrób prosty edytor tekstowy, prostą przeglądarkę i temu podobne. W sieci znajdziesz sporo pomocnych materiałów, a w księgarniach kilka książek. Lista dyskusyjna PyQt też oferuje szybką i skuteczną pomoc. Na [mojej stronie][5] znajdziesz wiele poradników do PyQt4 (w miarę możliwości będę aktualizował je do PyQt5).
 
-
-[1]: https://www.riverbankcomputing.com/software/pyqt/intro        "Strona PyQt"
-[2]: http://pyqt.sourceforge.net/Docs/PyQt5/class_reference.html  "Class Reference PyQt5"
-[3]: http://www.qtrac.eu/pyqtbook.html    "Rapid GUI Programming with Python and Qt"
-[4]: https://www.commandprompt.com/community/pyqt/    "GUI Programming with Python: QT Edition"
-[5]: http://www.python.rk.edu.pl/w/p/pyqt/ "Poradniki PyQt4"
+* [1] Strona PyQt \hyphenatedurl{https://www.riverbankcomputing.com/software/pyqt/intro}
+* [2] Class Reference PyQt5 \hyphenatedurl{http://pyqt.sourceforge.net/Docs/PyQt5/class_reference.html}
+* [3] Rapid GUI Programming with Python and Qt \hyphenatedurl{http://www.qtrac.eu/pyqtbook.html}
+* [4] GUI Programming with Python: QT Edition \hyphenatedurl{https://www.commandprompt.com/community/pyqt/}
+* [5] Poradniki PyQt4 \hyphenatedurl{http://www.python.rk.edu.pl/w/p/pyqt/}
