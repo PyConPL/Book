@@ -658,7 +658,7 @@ Extensions are powerful and we can implement some really cool stuff with them [3
 
 ## References
 
-* [1] [GitHub repo with full source code of all examples](https://github.com/kurazu/pyext)
-* [2] [Python/C API Reference Manual](https://docs.python.org/3/c-api/index.html)
-* [3] [GitHub repo of a Python-SpiderMonkey integration library](https://github.com/kurazu/bridge)
-* [4] [Boost.Python documentation](http://www.boost.org/doc/libs/1_59_0/libs/python/doc/)
+* [1] GitHub repo with full source code of all examples https://github.com/kurazu/pyext
+* [2] Python/C API Reference Manual https://docs.python.org/3/c-api/index.html
+* [3] GitHub repo of a Python-SpiderMonkey integration library https://github.com/kurazu/bridge
+* [4] Boost.Python documentation http://www.boost.org/doc/libs/1_59_0/libs/python/doc/
