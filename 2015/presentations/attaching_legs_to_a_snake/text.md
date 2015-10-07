@@ -40,7 +40,8 @@ We need to declare what functions our module exposes:
 
 ```
 static PyMethodDef basic_methods[] = {
-    {"hello", (PyCFunction)basic_hello, METH_NOARGS, "Return hello world."},
+    {"hello", (PyCFunction)basic_hello,
+        METH_NOARGS, "Return hello world."},
     {NULL, NULL, 0, NULL}        /* Sentinel */
 };
 ```
@@ -159,7 +160,8 @@ Notice that we are passing addresses of the variables (using the `&` operator); 
 If we want to give our users more freedom in passing parameters to our extension function, we can use keyword parameters. We need to declare the appropriate flag for our function:
 
 ```
-{"belongs", (PyCFunction)key_belongs, METH_VARARGS | METH_KEYWORDS, "..."},
+{"belongs", (PyCFunction)key_belongs,
+    METH_VARARGS | METH_KEYWORDS, "..."},
 ```
 
 thus making Python pass it one more ```PyObject *```:
@@ -179,7 +181,8 @@ static char * keywords[] = {"mapping", "item", "category", NULL};
 and then we can call `PyArg_ParseTupleAndKeywords` function, passing it both positional and keyword arguments:
 
 ```
-if (!PyArg_ParseTupleAndKeywords(args, kwargs, "OOO", keywords, &mapping, &item, &category)) {
+if (!PyArg_ParseTupleAndKeywords(args, kwargs, "OOO", keywords,
+        &mapping, &item, &category)) {
     return NULL;
 }
 // Carry on ...
@@ -282,7 +285,8 @@ PyObject *mapping = ...;
 PyObject *item = ...;
 PyObject *category = ...;
 
-/* GetItem returns a new reference so the object's ref. count needs to be decremented */
+/* GetItem returns a new reference so the object's ref. count
+   needs to be decremented */
 PyObject *category_sequence = PyObject_GetItem(mapping, category);
 if (category_sequence == NULL) {
     return NULL;
@@ -345,7 +349,8 @@ We can also define which methods will be available on our objects:
 
 ```
 static PyMethodDef Native_methods[] = {
-    {"summary", (PyCFunction)Native_summary, METH_NOARGS, "Return the name and the other attributes formatted"},
+    {"summary", (PyCFunction)Native_summary, METH_NOARGS,
+        "Return the name and the other attributes formatted"},
     {NULL}  /* Sentinel */
 };
 ```
@@ -608,13 +613,15 @@ struct Native
     long number;
     std::string pointer;
 
-    Native(std::string name, long number, bool yes): name(name), number(number) {
+    Native(std::string name, long number, bool yes
+            ): name(name), number(number) {
         this->pointer = std::string(yes ? "YES" : "NO");
     }
 
     std::string summary() {
         std::stringstream ss;
-        ss << "Native " << this->name << " number " << this->number << " pointer " << this->pointer;
+        ss << "Native " << this->name << " number " << this->number <<
+            " pointer " << this->pointer;
         return ss.str();
     }
 };
