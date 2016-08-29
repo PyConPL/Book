@@ -323,9 +323,10 @@ zdarzenia. To, co dokładnie się stało, otrzymamy z systemu w postaci listy pa
 
 Najstarszym mechanizmem tego typu jest funkcja `select()`: pojawiła się w 1983
 roku w odmianie Uniksa nazywanej Berkeley System Distribution (BSD) w wersji
-4.2. `select()` miał sporo ograniczeń, głównym problemem był limit ilości
+4.2 [3]. `select()` miał sporo ograniczeń, głównym problemem był limit ilości
 jednocześnie obserwowanych deskryptorów - 1024. Między innymi z tego powodu
-pojawiła się druga funkcja - `poll()` - i to nią się zajmiemy.
+pojawiła się druga funkcja: `poll()` (oraz udoskonalenia: `epoll`, `kqueue` i inne
+[4]) i to nią się zajmiemy.
 
 W Pythonie, `poll()` używa się następująco:
 
@@ -463,7 +464,7 @@ słowa `yield from`, które w funkcjach tak zadeklarowanych nazywa się `await`.
 Mimo to, poprzednia składnia nadal działa.
 
 Pełny kod przedstawiony w tym artykule, dodatkowo rozbity na mniejsze kroki,
-dostępny jest na GitHubie [5].
+dostępny jest na GitHubie [7].
 
 ## Linki
 
