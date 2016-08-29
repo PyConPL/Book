@@ -315,7 +315,7 @@ Jak natomiast obserwować kilka deskryptorów na raz?
 Szczęśliwie dla nas, większość systemów operacyjnych dostarcza API realizujące
 właśnie taką operację, nazywaną *zwielokrotnianiem zdarzeń* (ang. *event
 multiplexing*). System operacyjny pozwala zgrupować wiele deskryptorów, dla
-każdego z nich definiując rodzaj zdarzenia na jakichcemy czekać (gotowość
+każdego z nich definiując rodzaj zdarzenia na jaki chcemy czekać (gotowość
 do odczytu, gotowość do zapisu lub błąd). Mając taką grupę możemy zawołać jedną
 funkcję, która zaczeka aż na deskryptorach z grupy pojawią się zadane wcześniej
 zdarzenia. To, co dokładnie się stało, otrzymamy z systemu w postaci listy par
