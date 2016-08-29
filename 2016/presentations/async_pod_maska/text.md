@@ -11,7 +11,7 @@ oraz że koncepcja nie jest wcale nowa - nowatorska jest jedynie jej
 implementacja za pomocą generatorów w module `asyncio`.
 
 Zacznę od omówienia mechanizmów wykonywania na jednym komputerze kilku
-programów na raz, potem pokrótce zademonstruję obsługę komunikacji przez sieć,
+programów naraz, potem pokrótce zademonstruję obsługę komunikacji przez sieć,
 a na koniec pokażę, jak napisać "od zera" prosty, asynchroniczny (i
 kompatybilny z `asyncio`!), serwer TCP.
 
@@ -23,7 +23,7 @@ najpierw zająć się modelem wykonania programu na komputerze.
 Dla uproszczenia załóżmy, że nasz komputer ma tylko jeden procesor, a
 dokładniej jedną *jednostkę arytmetyczno-logiczną* (ALU - ang. *arithmetic-logic
 unit*). Jest to centralna część procesora, odpowiedzialna za wykonywanie
-instrukcji a jakich składa się nasz program.
+instrukcji z jakich składa się nasz program.
 
 ALU nie jest w swoim działaniu zbyt wyrafinowana - po prostu wykonuje po kolei
 instrukcje programu umieszczone w kolejnych komórkach pamięci. Ważne jest to,
@@ -32,16 +32,16 @@ instrukcje programu umieszczone w kolejnych komórkach pamięci. Ważne jest to,
 Pojawia się zatem pytanie jak to możliwe, że na jednym komputerze wyposażonym w
 jeden procesor działa jednocześnie kilka programów? W istocie, proste systemy
 operacyjne (np. DOS, systemy operacyjne używane na małych urządzeniach typu
-*embedded*) pozwalają uruchamiać jednocześnie tylko jeden program na raz.
+*embedded*) pozwalają uruchamiać jednocześnie tylko jeden program naraz.
 
 Mechanizmem który pozwala kilku programom działać jednocześnie jest
 *scheduler*. Scheduler jest częścią systemu operacyjnego która nadzoruje
 działanie ALU i decyduje który proces jest w danym momencie wykonywany.
 
-Oznacza to, że "tak naprawdę" ALU w dalszym ciągu wykonuje tylko jeden program
-na raz, ale scheduler przełącza aktywne procesy tak szybko, że użytkownik nie
-jest w stanie tego zauważyć. Formalna nazwa takiego model to *współbieżność*
-(ang.  *concurrency*).
+Oznacza to, że "tak naprawdę" ALU w dalszym ciągu wykonuje jeden program w
+danym momencie, ale scheduler przełącza aktywne procesy tak szybko, że
+użytkownik nie jest w stanie tego zauważyć. Formalna nazwa takiego modelu to
+*współbieżność* (ang.  *concurrency*).
 
 Wykonywana przez scheduler podmiana aktywnego procesu nazywa się
 *przełączaniem kontekstu* (ang. context switching), a dokładniej opisana jest w
@@ -194,7 +194,7 @@ powinno przebiegać jak na poniższym diagramie:
 ![yield from](yield_from.png)
 
 Jest to wykonalne, ale kod który realizuje taką operację jest niezwykle
-skomplikowany, gdyż musi brać pod uwagę, że `os_print` może rzucić wyjątkiem,
+skomplikowany, gdyż musi brać pod uwagę, że `os_print` może zgłosić wyjątek,
 zawierać kilka `yield`ów (np. w pętli) i tak dalej. Ostatecznie jest to ponad
 30 linii kodu [2] które musielibyśmy umieszczać w programie przy *każdej* funkcji
 wejścia-wyjścia. Byłoby to skrajnie niepraktyczne.
@@ -235,8 +235,8 @@ przekazujemy go jako argument do funkcji, które z tego pliku czytają bądź do
 niego piszą.
 
 W ten sposób deskryptor jednoznacznie identyfikuje plik, który chcemy obsłużyć.
-Nie interesuje nas za to jego wartość liczbowa deskryptora, używamy go raczej
-jak bloczka w szatni.
+Nie interesuje nas wartość liczbowa deskryptora, używamy go raczej jak bloczka
+w szatni.
 
     import os
 
@@ -250,11 +250,11 @@ Python ukrywa przed nami takie szczegóły implementacyjne za pomocą obiektu
 `fileno()`:
 
     with open('plik.txt') as file_object:
-        file_descriptor = file_descriptor.fileno()
+        file_descriptor = file_object.fileno()
         print(file_descriptor)
 
 Z naszego punktu widzenia intresujący jest fakt, że pod deskryptorem pliku może
-kryć się dużo więcej niż tylko zwykłe pliki na dysku.  Deskryptor pliku jest
+kryć się dużo więcej niż tylko zwykłe pliki na dysku. Deskryptor pliku jest
 pewną abstrakcją, pozwalającą odnosić się w ten sam sposób to różnych
 urządzeń wejścia-wyjścia: dysku, karty sieciowej, a nawet ekranu.
 
@@ -292,7 +292,7 @@ poleceniem `nc` (od `netcat`):
 
 ## Gniazda sieciowe jako źródła zdarzeń
 
-Nasz serwer ma jednak spory mankament: obsługuje tylko jedno połączenie na raz.
+Nasz serwer ma jednak spory mankament: obsługuje tylko jedno połączenie naraz.
 
 Dzieje się tak dlatego, że funkcje `accept()` i `recv()` blokują program do
 momentu kiedy nie pojawi się nowe połączenie lub nasz klient czegoś nie wyśle.
@@ -308,7 +308,7 @@ Wiemy jak zaimplementować przełączenie kontekstu: funkcja obsługi powinna by
 generatorem, który wykona `yield` (lub `yield from`) jeśli zamierza czekać na
 nowe dane.
 
-Jak natomiast obserwować kilka deskryptorów na raz?
+Jak natomiast obserwować kilka deskryptorów jednocześnie?
 
 ## Funkcje `select()` i `poll()`
 
