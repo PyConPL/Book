@@ -18,7 +18,7 @@ W celu rozpoczęcia pracy niezbędne jest zaopatrzenie się w kilka urządzeń o
 Już tak krótka lista pozwoli na sterowanie oświetleniem czy sprawowanie kontroli nad temperaturą w domu. Na początku, do testowania funkcjonalności nowych modułów elektronicznych, można wykorzystać jedną z platform prototypowych np. Arduino.
 
 ## MicroPython i moduł ESP8266
-MicroPython to implementacja języka Python 3, która zawiera podstawową część biblioteki standardowej Python i jest zoptymalizowana pod kątem działania na mikrokontrolerach [micropython]. Istnieje kilka platform sprzętowych pozwalających na uruchomienie środowiska MicroPython takich jak pyBoard czy pyMCU. Układem, na którym oprzemy naszą instalację inteligentnego domu będzie ESP8266 [esp8266], a konkretnie moduł o nazwie ESP-12F.
+MicroPython to implementacja języka Python 3, która zawiera niewielki podzbiór biblioteki standardowej języka Python i jest zoptymalizowana pod kątem działania na mikrokontrolerach [micropython]. Istnieje kilka platform sprzętowych pozwalających na uruchomienie środowiska MicroPython takich jak pyBoard czy WiPy. Układem, na którym oprzemy naszą instalację inteligentnego domu będzie ESP8266 [esp8266], a konkretnie moduł o nazwie ESP-12F.
 Co oferuje nam urządzenie wielkości znaczka pocztowego (24 x 16 mm) za niecałe 2 dolary? Oto podstawowe cechy modułu ESP-12F:
 - 32 bit RISC CPU - Tensilica Xtensa LX106 @80 MHz,
 - 11 wyprowadzeń GPIO - wejścia/wyjścia cyfrowe,
@@ -27,7 +27,7 @@ Co oferuje nam urządzenie wielkości znaczka pocztowego (24 x 16 mm) za niecał
 - WiFi 802.11 b/g/n (2.4 GHz),
 - 4 MB flash.
 
-Komunikacja z modułem ESP-12F odbywa się za pomocą portu szeregowego. Należy zwrócić uwagę, że komponent zasilany jest napięciem 3.3V i pracuje na logice o tym samym potencjale.
+Komunikacja z modułem ESP-12F odbywa się za pomocą portu szeregowego. Konwerter USB-UART należy podłączyć do wyprowadzeń oznaczonych jako TXD oraz RXD. Trzeba zwrócić uwagę, że komponent zasilany jest napięciem 3.3 V i pracuje na logice o tym samym potencjale. Do zasilania układu należy wykorzystać źródło napięcia o wydajności około 300 mA. W celu uruchomienia modułu wymagane jest również podciągnięcie pinu EN (CH_PD) do VCC oraz pinu GPIO15 do GND przez rezystory 10 kOm.
 
 Oryginalne oprogramowanie modułu obsługuje komunikację za pomocą komend AT. W celu uruchomienia środowiska MicroPython należy wgrać nowy firmware. Najlepszym sposobem uzyskania oprogramowania jest zbudowanie najnowszej wersji ze źródeł. Szczegółowy opis tego procesu znajduje się w repozytorium z kodem źródłowym [micropythonsource], można również wykorzystać znalezione w sieci gotowe pliki binarne firmware. Kolejnym krokiem jest wyczyszczenie pamięci układu i wgranie nowego firmware. Do wykonania tych czynności wykorzystamy narzędzie esptool, które służy do komunikacji z bootloaderem w układzie ESP8266 [esptool]. Przed wpisaniem podanej poniżej komendy należy pamiętać o uruchomieniu modułu ESP w trybie programowania (flash mode), wykonuje się to przez podłączenie pinu GPIO0 do masy.
 
@@ -41,7 +41,7 @@ W przypadku powodzenia naszym oczom powinien ukazać się następujący rezultat
 
     Leaving...
 
-Moduł jest gotowy do uruchomienia środowiska MicroPython. Po podłączeniu pinu GPIO0 do stanu wysokiego (3.3V) i zrestartowaniu modułu bootloader załaduje nowy wsad. Możemy już uzyskać dostęp do REPL (Python prompt) poprzez port szeregowy.
+Moduł jest gotowy do uruchomienia środowiska MicroPython. Po odłączeniu pinu GPIO0 od masy i zrestartowaniu modułu bootloader załaduje nowy wsad. Możemy już uzyskać dostęp do REPL (Python prompt) poprzez port szeregowy.
 
     $ screen /dev/tty.xxx 115200
 
