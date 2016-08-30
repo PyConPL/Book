@@ -19,15 +19,15 @@ Już tak krótka lista pozwoli na sterowanie oświetleniem czy sprawowanie kontr
 
 ## MicroPython i moduł ESP8266
 MicroPython to implementacja języka Python 3, która zawiera niewielki podzbiór biblioteki standardowej języka Python i jest zoptymalizowana pod kątem działania na mikrokontrolerach [micropython]. Istnieje kilka platform sprzętowych pozwalających na uruchomienie środowiska MicroPython takich jak pyBoard czy WiPy. Układem, na którym oprzemy naszą instalację inteligentnego domu będzie ESP8266 [esp8266], a konkretnie moduł o nazwie ESP-12F.
-Co oferuje nam urządzenie wielkości znaczka pocztowego (24×16 mm) za niecałe 2 dolary? Oto podstawowe cechy modułu ESP-12F:
-- 32 bit RISC CPU - Tensilica Xtensa LX106 @80 MHz,
+Co oferuje nam urządzenie wielkości znaczka pocztowego (24×16mm) za niecałe 2 dolary? Oto podstawowe cechy modułu ESP-12F:
+- 32 bit RISC CPU - Tensilica Xtensa LX106 @80MHz,
 - 11 wyprowadzeń GPIO - wejścia/wyjścia cyfrowe,
 - 1 wejście ADC - 10 bitowy przetwornik analogowo-cyfrowy,
 - interfejsy - SPI, I2C, 2×UART,
-- WiFi 802.11 b/g/n (2,4 GHz),
-- 4 MB flash.
+- WiFi 802.11 b/g/n (2,4GHz),
+- 4MB flash.
 
-Komunikacja z modułem ESP-12F odbywa się za pomocą portu szeregowego. Konwerter USB-UART należy podłączyć do wyprowadzeń oznaczonych jako TXD oraz RXD. Trzeba zwrócić uwagę, że komponent zasilany jest napięciem 3,3 V i pracuje na logice o tym samym potencjale. Do zasilania układu należy wykorzystać źródło napięcia o wydajności około 300 mA. W celu uruchomienia modułu wymagane jest również podciągnięcie pinu EN (CH_PD) do VCC oraz pinu GPIO15 do GND przez rezystory 10 kΩ.
+Komunikacja z modułem ESP-12F odbywa się za pomocą portu szeregowego. Konwerter USB-UART należy podłączyć do wyprowadzeń oznaczonych jako TXD oraz RXD. Trzeba zwrócić uwagę, że komponent zasilany jest napięciem 3,3V i pracuje na logice o tym samym potencjale. Do zasilania układu należy wykorzystać źródło napięcia o wydajności około 300mA. W celu uruchomienia modułu wymagane jest również podciągnięcie pinu EN (CH_PD) do VCC oraz pinu GPIO15 do GND przez rezystory 10kΩ.
 
 Oryginalne oprogramowanie modułu obsługuje komunikację za pomocą komend AT. W celu uruchomienia środowiska MicroPython należy wgrać nowy firmware. Najlepszym sposobem uzyskania oprogramowania jest zbudowanie najnowszej wersji ze źródeł. Szczegółowy opis tego procesu znajduje się w repozytorium z kodem źródłowym [micropythonsource], można również wykorzystać znalezione w sieci gotowe pliki binarne firmware. Kolejnym krokiem jest wyczyszczenie pamięci układu i wgranie nowego firmware. Do wykonania tych czynności wykorzystamy narzędzie esptool, które służy do komunikacji z bootloaderem w układzie ESP8266 [esptool]. Przed wpisaniem podanej poniżej komendy należy pamiętać o uruchomieniu modułu ESP w trybie programowania (flash mode), wykonuje się to przez podłączenie pinu GPIO0 do masy.
 
@@ -45,7 +45,7 @@ Moduł jest gotowy do uruchomienia środowiska MicroPython. Po odłączeniu pinu
 
     $ screen /dev/tty.xxx 115200
 
-Czas na pierwszy program. W świecie programowania mikrokontrolerów odpowiednikiem wypisania tekstu "Hello, world" jest program powodujący miganie diody LED (chociaż w naszym przypadku nic nie stoi na przeszkodzie wypisania tekstu). Poniżej znajduje się kod, który sprawia, że niebieska dioda LED zamontowana na module będzie migać z częstotliwością 1 Hz.
+Czas na pierwszy program. W świecie programowania mikrokontrolerów odpowiednikiem wypisania tekstu "Hello, world" jest program powodujący miganie diody LED (chociaż w naszym przypadku nic nie stoi na przeszkodzie wypisania tekstu). Poniżej znajduje się kod, który sprawia, że niebieska dioda LED zamontowana na module będzie migać z częstotliwością 1Hz.
 
     >>> import machine
     >>> import time
@@ -60,11 +60,11 @@ Gotowe! Właśnie zrealizowaliśmy pierwszy projekt sprzętowy. Więcej informac
 
 
 ## Raspberry Pi
-Raspberry Pi to komputer wielkości karty kredytowej (85×56 mm), który znajduje zastosowanie w projektach elektronicznych zastępując komputer stacjonarny [raspberrypi]. Specyfikacja sprzętowa najnowszej wersji Raspberry Pi 3 model B jest następująca:
-* 64 bit CPU - Quad-Core ARM Cortex A53 @1,2 GHz,
-* Pamięć RAM - 1 GB LPDDR2 @900 MHz,
+Raspberry Pi to komputer wielkości karty kredytowej (85×56mm), który znajduje zastosowanie w projektach elektronicznych zastępując komputer stacjonarny [raspberrypi]. Specyfikacja sprzętowa najnowszej wersji Raspberry Pi 3 model B jest następująca:
+* 64 bit CPU - Quad-Core ARM Cortex A53 @1,2GHz,
+* Pamięć RAM - 1GB LPDDR2 @900MHz,
 * Interfejsy - 4×USB 2.0, UART, SPI, I2C, GPIO,
-* Sieć - Ethernet 10/100 Mbps, Wifi 802.11 b/g/n 150 Mbps, Bluetooth Low Energy, BLE 4.1.
+* Sieć - Ethernet 10/100Mbps, Wifi 802.11 b/g/n 150Mbps, Bluetooth Low Energy, BLE 4.1.
 
 Istnieją różne warianty sprzętowe (Model A, Model B, Zero), co pozwala na dobranie urządzenia do potrzeb projektu. Raspberry Pi doskonale sprawdzi się jako centrum zarządzania inteligentnym domem. Oficjalnym system operacyjnym jest Raspbian, jest to dystrybucja linuxa oparta na Debianie co sprawia, że z łatwością uruchomimy dowolną usługę czy skrypt niezbędny do obsługi czujników oraz urządzeń w domu. Możliwość podłączenia wyświetlacza dotykowego o rozdzielczości 800×480 pikseli pozwala na zapewnienie wygodnego interfejsu użytkownika.
 
