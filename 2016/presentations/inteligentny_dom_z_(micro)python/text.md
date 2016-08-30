@@ -13,7 +13,7 @@ W celu rozpoczęcia pracy niezbędne jest zaopatrzenie się w kilka urządzeń o
 * Konwerter USB-UART - komunikacja przez port szeregowy,
 * Moduł przekaźnika RM0 - umożliwia włączanie/wyłączanie urządzeń 230V,
 * Moduł DS18b20 - termometr 1-wire,
-* Zasilacz 5V oraz 3.3V.
+* Zasilacz 5V oraz 3,3V.
 
 Już tak krótka lista pozwoli na sterowanie oświetleniem czy sprawowanie kontroli nad temperaturą w domu. Na początku, do testowania funkcjonalności nowych modułów elektronicznych, można wykorzystać jedną z platform prototypowych np. Arduino.
 
@@ -27,7 +27,7 @@ Co oferuje nam urządzenie wielkości znaczka pocztowego (24×16 mm) za niecałe
 - WiFi 802.11 b/g/n (2,4 GHz),
 - 4 MB flash.
 
-Komunikacja z modułem ESP-12F odbywa się za pomocą portu szeregowego. Konwerter USB-UART należy podłączyć do wyprowadzeń oznaczonych jako TXD oraz RXD. Trzeba zwrócić uwagę, że komponent zasilany jest napięciem 3.3 V i pracuje na logice o tym samym potencjale. Do zasilania układu należy wykorzystać źródło napięcia o wydajności około 300 mA. W celu uruchomienia modułu wymagane jest również podciągnięcie pinu EN (CH_PD) do VCC oraz pinu GPIO15 do GND przez rezystory 10 kΩ.
+Komunikacja z modułem ESP-12F odbywa się za pomocą portu szeregowego. Konwerter USB-UART należy podłączyć do wyprowadzeń oznaczonych jako TXD oraz RXD. Trzeba zwrócić uwagę, że komponent zasilany jest napięciem 3,3 V i pracuje na logice o tym samym potencjale. Do zasilania układu należy wykorzystać źródło napięcia o wydajności około 300 mA. W celu uruchomienia modułu wymagane jest również podciągnięcie pinu EN (CH_PD) do VCC oraz pinu GPIO15 do GND przez rezystory 10 kΩ.
 
 Oryginalne oprogramowanie modułu obsługuje komunikację za pomocą komend AT. W celu uruchomienia środowiska MicroPython należy wgrać nowy firmware. Najlepszym sposobem uzyskania oprogramowania jest zbudowanie najnowszej wersji ze źródeł. Szczegółowy opis tego procesu znajduje się w repozytorium z kodem źródłowym [micropythonsource], można również wykorzystać znalezione w sieci gotowe pliki binarne firmware. Kolejnym krokiem jest wyczyszczenie pamięci układu i wgranie nowego firmware. Do wykonania tych czynności wykorzystamy narzędzie esptool, które służy do komunikacji z bootloaderem w układzie ESP8266 [esptool]. Przed wpisaniem podanej poniżej komendy należy pamiętać o uruchomieniu modułu ESP w trybie programowania (flash mode), wykonuje się to przez podłączenie pinu GPIO0 do masy.
 
