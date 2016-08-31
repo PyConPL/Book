@@ -58,6 +58,7 @@ In addition to configuring specific functionality on the device, 'show commands'
 state data of the router. For example, output like this can be retrieved upon requesting the current ARP table on an
 Arista device:
 ```
+eos.edge1>show arp
 Address         Age (min)  Hardware Addr   Interface
 10.220.88.1             0  001f.9e92.16fb  Vlan1, Ethernet1
 10.220.88.21            0  1c6a.7aaf.576c  Vlan1, not learned
@@ -69,6 +70,7 @@ Address         Age (min)  Hardware Addr   Interface
 
 On a Juniper device, it will look more like this:
 ```
+root@qfx.edge1> show arp
 MAC Address       Address         Name                      Interface           Flags
 00:1f:9e:92:16:fb 10.220.88.1     10.220.88.1               vlan.0              none
 00:19:e8:45:ce:80 10.220.88.22    10.220.88.22              vlan.0              none
@@ -83,14 +85,13 @@ another (like for example the lack of an age timer in the Juniper output above).
 
 ##Generic Access Libraries
 
-To access devices directly via their SSH or Netconf interface, generic python libraries such as
+To access devices directly via their SSH or Netconf interface, generic Python libraries such as
 [pexpect](https://github.com/pexpect/pexpect), [paramiko](https://github.com/paramiko/paramiko) and
 [ncclient](https://github.com/ncclient/ncclient) can be used. They allow for programmatic access from scripts
 (for network engineers who are trying to figure out how to code ;) ) but don't provide any ease of use in terms of
-vendor specificity. You will still have to deal with the little differences the vendors bring, different login
-procedures or additional escape chars). You will take care of different lines of configuration or show commands you
-need to pass into paramiko or pexpect for each device or vendor, or with the varying support of Netconf on each
-device for ncclient.
+vendor specificity. You will still have to deal with the little differences the vendors bring: different login
+procedures or additional escape chars, different configuration syntax, differences in 'show commands' or
+differences with the varying support of Netconf on each device.
 
 ##Specific Network Vendor Libraries
 
@@ -102,28 +103,37 @@ libraries to facilitate device interaction - to mention a few:
 * Juniper's [py-junos-eznc](https://github.com/Juniper/py-junos-eznc )
 
 Each of them supports their specific device with its specific capabilities. Juniper's py-junos-eznc provides access
-via Netconf, whereas pyiosxr 'mimics' Netconf support (which is not directly available) via SSH (pexpect). They ease
-config operations on the devices, such as replacing or merging configurations in one go, or . Each of them is very
-specific to the vendors capabilities though. 
+via Netconf, whereas pyiosxr 'mimics' Netconf support (which is not directly available) via SSH and pexpect.
+They ease config operations on the devices by providing functions to send config, replace or merge it in one go, or
+to retreive the configuration. Each of those libs is very specific to the vendors device and takes all its nits into
+account, but a lot of times networks are designed to use a mix of vendors, in which case one library won't suffice.
 
 ##Multivendor Libraries
 
-Especially in a multivendor environment managing configurations takes on a whole different level. In addition to
-managing differences (and similarities) per device, for example a similar base configuration (syslog servers, NTP
-servers, dns servers) but different BGP neighbors on devices in different locations. Different access methods have to
-be taken into account, one via SSH the other via Netconf. Maintaining scripts with various libraries per vendor is
-painful.
+Managing configurations in a multivendor environment takes on a whole different level. In addition to managing
+differences per device-role, differences in access have to be considered. Each device role needs a similar base
+configuration for example (syslog servers, NTP servers, dns servers) but different BGP neighbors on devices in
+different locations, plus a different methodology to upload the configs to the device. Vendor specific libs can be
+used for each of them individually, however managing the use of different libraries per vendor is quite painful.
 
-Efforts to improve this have been started, for example with [netmiko](https://github.com/ktbyers/netmiko) which is a
+In an effort to improve upon this situation, wrappers around a set of libraries have been built to unify multivendor
+access to networking devices. For example [netmiko](https://github.com/ktbyers/netmiko), which is a
 wrapper around paramiko and provides easy SSH access for plenty of networking equipment. On the Netconf front, or to
 be more specific, access which supports transactions on the device, a project called
-[napalm](https://github.com/napalm-automation/napalm) has been started last year.
+[napalm](https://github.com/napalm-automation/napalm) has been started, which unifies a set of vendor libraries
+into a single set of methdos.
 
-Of course there are also standardization efforts, like open config or Netconf already, but as far as standards go,
-interworkings between different vendors have been proven to take a lot of time and effort and not be on the market as
-quickly as the engineers would like.
+Of course there are also standardization efforts, like open config or Netconf, which aim to improve upon this
+situation. But as far as standards go, interworkings between different vendors have been proven to take a lot of time
+and effort, and typically aren't on the market as quickly as the engineers would like.
 
-##The End
+##Summary
+
+How to start if you are looking at intoducing automation into your network? Start by reviewing your network
+design and determine what vendors are in use. If it is one single vendor and they provide a library, use that. If you
+have a mix of vendors, check if the multivendor wrapper napalm supports all of them. If neither is an option, you can
+decide to use a lower level access wrapper like netmiko, but you will have to give up on using more advanced
+functionality that is provided by the libraries.
 
 And all of this, to get a few lines of config onto your router:
 
