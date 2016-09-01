@@ -4,7 +4,7 @@ was przychodzi do głowy słowo "katastrofa", ale dzisiaj nie o tym. Odpowiedź 
 rozkłady odwrotnie potęgowe. Nie są tak "popularne" jak rozkład normalny, ale też wypełnianiają znaczącą 
 przestrzeń w naszym świecie.
 ## Rozkład odwrotnie potęgowy
-Rozkłady odwrotnie potęgowe, czasem znane jako rozkład Pareto lub Riemann Zeta, można opisać 
+Rozkłady odwrotnie potęgowe, czasem znane jako rozkłady Pareto lub Riemann Zeta, można opisać 
 dość prostym wzorem: f(x) = c/x^a. Oczywiście charakteryzują się one pewnymi założeniami 
 (takimi jak x nie może równać się zero), ale nie warto się w nie zagłębiać. W wielkim skrócie ten 
 rozkład mówi, że małe zdarzenia zdarzają się znacznie częściej niż wielkie. Świetnym przykładem 
@@ -18,7 +18,7 @@ Nasza ulubiona Wikipedia prezentuje wiele przykładów występowania rozkładów
 z wielu dziedzin. Można zacząć od słowa, a dokładnie od częstotliwości jego występowania w długich 
 tekstach. Jeśli policzymy ile razy pojawiają się poszczególne słowa i wyznaczymy histogram, to 
 zobaczymy, że jego kształt będzie przypominał nasze rozkłady odwrotnie potęgowe. Przykładami z 
-astronomii oraz geologii są ziarenka piasku oraz meteoryty. W świecie finansów jest to wielkość 
+astronomii oraz geologii są meteoryty oraz ziarenka piasku. W świecie finansów jest to wielkość 
 odszkodowań ubezpieczyciela za wypadki komunikacyjne. Kto wie, może z użyciem tych rozkładów liczone 
 są nasze składki OC i AC. Jako przykład bliższy tematyce Pycona możemy podać wielkość plików przesyłanych 
 protokołem TCP. W tytułowym pytaniu wyliczone zostały przykłady z dziedziny geofizyki, która obfituje 
@@ -37,11 +37,11 @@ Rozkładem odwrotnie potęgowym możemy opisać stosunek energii wydarzenia sejs
 się z bardzo dobrze znanym prawem Gutenberg-Richter, co widać na wzorze oraz wykresach. W 2002 roku udało się 
 dość dobrze wyznaczyć wykładnik dla trzęsień ziemi, którego wartość wynosi blisko a=1.63. Co ciekawe, dla tego 
 zjawiska jest też drugi przykład rozkładu odwrotnie potęgowego, czyli czasy między trzęsieniami ziemi. Jest to 
-związane z prawem Omori które mówi, że trzęsienia ziemi potrafią wywoływać kolejne trzęsienia ziemi, tak zwane po angielsku "aftershock".
+związane z prawem Omori które mówi, że trzęsienia ziemi potrafią wywoływać kolejne trzęsienia ziemi, tak zwane "aftershock".
 ## A co z tymi repozytoriami?
 Od razu warto odnieść odnieść się do świetnego mówcy Gary'ego Bernhardta, który w swoim wystąpieniu 
 The Unix Chainsaw pokazał rozkład potęgowy w dziedzinie programowania, co jednocześnie przyczyniło się do 
-powstania tego tekstu i prezentacji na PyConie. Jako że wszystko w pythonie jest obiektem, to spójrzmy 
+powstania tego tekstu i prezentacji na PyConie. Jako że wszystko w Pythonie jest obiektem, to spójrzmy 
 na klasy oraz ich najczęściej występujące elementy, takie jak metody i atrybuty. Tym sposobem mamy już 
 dwa rozkłady potęgowe, oczywiście, jeśli weźmiemy dość duże repozytorium np. Django, Sphinx. Pewnie ciężko 
 to sobie wyobrazić na pierwszy rzut oka. Teraz zajrzyjcie w głąb swojej duszy... albo po prostu spójrzcie 
