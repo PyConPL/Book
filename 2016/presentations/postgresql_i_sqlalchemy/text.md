@@ -87,13 +87,13 @@ Po tym przydługim wstępie teoretycznym czas na praktykę. Poniżej, drogi czyt
 Tabele można definiować w sposób deklaratywny, tworząc klasy, gdzie kolumny bazodanowe reprezentowane są przez atrybuty:
 
     >>> from sqlalchemy.ext.declarative import declarative_base
-    >>> from sqlalchemy import Column, Integer, String
+    >>> from sqlalchemy import Column, Integer, Text
 
     >>> Base = declarative_base()
     >>> class User(Base):
     ...     __tablename__ = 'users'
     ...     id = Column(Integer, primary_key=True)
-    ...     name = Column(String)
+    ...     name = Column(Text)
 
 Powyższy zapis przedstawia tabelę, której SQL wyglądałby mniej więcej tak:
 
@@ -109,6 +109,7 @@ Co więcej, SQLAlchemy potrafi stworzyć dla nas tabele na podstawie zadeklarowa
 ## Refleksja
 Z drugiej strony, jeśli istnieje już baza danych, to SQLAlchemy potrafi stworzyć dla nas odpowiednie obiekty na podstawie obiektowego schematu tabel:
 
+    >>> from sqlalchemy import MetaData
     >>> meta = MetaData()
     >>> meta.reflect(bind=engine)
     >>> users_table = meta.tables['users']
@@ -133,7 +134,7 @@ Zapytywać bazę:
 
 Modyfikować dane:
 
-    >>> users[0].name = ‘jasiek’
+    >>> users[0].name = 'jasiek'
 
 Nie należy jednak zapominać o zatwierdzaniu zmian:
 
@@ -154,22 +155,20 @@ Tworzenie relacji sprowadza się do jej zadeklarowania w tabeli podrzędnej:
     >>> class Note(Base):
     ...     __tablename__ = 'notes'
     ...     id = Column(Integer, primary_key=True)
-    ...     note = Column(String, nullable=False)
+    ...     note = Column(Text, nullable=False)
     ...     user_id = Column(Integer, ForeignKey(User.id))
-    ...
     ...     user = relationship(User, back_populates="notes")
 
 Jeśli relacja ma być obustronna, modyfikujemy też rodzica:
 
-    >>> User.names = relationship(
+    >>> User.notes = relationship(
     ...     Note, order_by=Note.id, back_populates="user")
 
 Od tej pory relacje zachowują się jak zwykłe struktury pythonowe:
 
-    >>> mr_x = User(name=”Mr. X”)
-    >>> note1 = Note(note=”Notatka 1”)
-    >>> note2 = Note(note=”Notatka 2”)
-    >>> mr_x.notes.append(note1)
+    >>> mr_x = User(name="Mr. X")
+    >>> note1 = Note(note="Notatka 1", user=mr_x)
+    >>> note2 = Note(note="Notatka 2")
     >>> mr_x.notes.append(note2)
     >>> session.add(mr_x)
     >>> session.commit()
@@ -183,7 +182,7 @@ Zapytania SQL za sprawą alchemii zmieniają się w programowanie obiektowe:
 
 Kwerenda jest wielokrotnego użytku i można ją modyfikować:
 
-    >>> query2 = query.filter(User.name.ilike('mr%')
+    >>> query2 = query.filter(User.name.ilike('mr%'))
     >>> query2.first()
     <User(id=2, name='Mr. X')>
     >>> query2.count()
@@ -243,7 +242,7 @@ SQLAlchemy natywnie wspiera JSONa (w ramach dialektu), mapując go na pythonowe 
     >>> data = {
     ...     'status':200,
     ...     'body': {
-    ...         'items': [1, 2, 3]
+    ...         'items': [1, 2, 3],
     ...         'took': 0.93
     ...     }
     ... }
@@ -251,9 +250,10 @@ SQLAlchemy natywnie wspiera JSONa (w ramach dialektu), mapując go na pythonowe 
     >>> session.add(resp)
     >>> session.commit()
     >>> db_resp = session.query(Response) \
-    ...     .filter(Response['status'] == 200) \
+    ...     .filter(Response.data['status'].astext == '200') \
+    ...     .filter(Response.data.has_key('body')) \
     ...     .one()
-    >>> db_resp['body']['items']
+    >>> db_resp.data['body']['items']
     [1, 2, 3]
 
 # Podsumowanie
