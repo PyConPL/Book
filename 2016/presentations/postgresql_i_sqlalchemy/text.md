@@ -10,7 +10,7 @@ Niniejszy artykuł ma na celu ukazanie dobrodziejstw płynących z użycia ORM j
 # Czym jest Object Relational Mapping?
 Dostęp do relacyjnych baz danych umożliwiają nam różnorakie sterowniki, z których prawie wszystkie są zgodne z DB API 2.0 (PEP249[pep249]), po co więc dodatkowa warstwa pomiędzy sterownikiem a naszym kodem?
 
-Otóż SQL przekazywany do sterownika jest de-facto zwykłym łańcuchem tekstowym i nawet zastosowanie wzorców zastępowania (`?`, `%s`) w kwerendach jest tylko połowicznym rozwiązaniem. Wciąż musimy używać dwóch języków, które się przenikają (SQL osadzony w Pythonie), co z perspektywy kodu aplikacji często sprowadza się to budowania kwerend przez łączenie łańcuchów znakowych. A to  nie jest ani ładne, ani wygodne, ani też łatwe do przetestowania.
+Otóż problem polega na tym, że na SQL osadzony w kodzie Pythona  składa się zazwyczaj zlepek łańcuchów tekstowych i nawet zastosowanie wzorców zastępowania (`?`, `%s`) w kwerendach tylko częściowo poprawia sytuację. Wciąż musimy używać dwóch języków, które się przenikają, co z perspektywy kodu aplikacji sprowadza się do budowania kwerend przez łączenie łańcuchów znakowych. A to nie jest ani ładne, ani wygodne, ani też łatwe do przetestowania.
 
 ORM pozwala na zapisanie zarówno schematu, jak i zapytań do bazy danych przy użyciu naszego języka programowania, co jest o wiele wygodniejsze, mniej podatne na błędy i umożliwia wykorzystanie potęgi Pythona w interakcji z bazą. Ponadto, stosując pewne obostrzenia, można uczynić kod niezależnym od podłączonego silnika bazy danych.
 
@@ -57,11 +57,11 @@ Na rynku znaleźć można ogromną różnorodność dostępnych relacyjnych baz 
 * **Bardzo wierna implementacja standardów SQL** - w przeciwieństwie do znacznej części konkurencji PostgreSQL stara się być zgodny ze standardem SQL (SQL:2011[sql]).
 * **Bardzo użyteczne rozszerzenia standardu SQL** - PostgreSQL wybiega poza standard dostarczając liczne funkcjonalności, których użytkownicy pragną, jak obsługa XML i JSON, różnorodne typy indeksów, czy *full text search*.
 * **Szybkość działania** - PostgreSQL błyszczy w przypadku dużych i skomplikowanych baz.
-* **Powszechność** - dostępny dla wszystkich znaczących systemów operacyjnych, ponadto prawie każdy hosting www udostępnia PostgreSQL.
+* **Powszechność** - dostępny dla wszystkich znaczących systemów operacyjnych, ponadto prawie każdy hosting WWW udostępnia PostgreSQL.
 * **Mnóstwo narzędzi** - począwszy od prostych skryptów pomocniczych, na pełnowymiarowych narzędziach administracyjnych kończąc (pgAdmin[pgadmin]).
 * **Open-source** - otwarty i darmowy po wsze czasy.
 
-Jak wszystko, PostgreSQL ma też swoje wady. Chyba największą jego bolączką jest trudność konfiguracji oraz konieczność stosowania zewnętrznych narzędzi, w celu otrzymania pewnych funkcjonalności, które inne systemy bazodanowe po prostu mają.
+Jak wszystko, PostgreSQL ma też swoje wady. Chyba największą jego bolączką jest trudność konfiguracji oraz konieczność stosowania zewnętrznych narzędzi w celu otrzymania pewnych funkcjonalności, które inne systemy bazodanowe po prostu mają.
 
 Na przykład, gdy obciążenie bazy rośnie i pojawia się konieczność dostawienia dodatkowych serwerów, PostgreSQL posiada wbudowaną jedynie replikację typu *master-slave* (wszystkie zapisy muszą być wykonane na głównym serwerze). Natomiast, aby osiągnąć dwukierunkową replikację *multi-master*, należy już użyć zewnętrznego narzędzia takiego jak Postgres-BDR[bdr].
 
@@ -106,7 +106,7 @@ Co więcej, SQLAlchemy potrafi stworzyć dla nas tabele na podstawie zadeklarowa
 
     >>> Base.metadata.create_all(engine)
 
-## Refleksja
+## Odwzorowanie struktury bazy
 Z drugiej strony, jeśli istnieje już baza danych, to SQLAlchemy potrafi stworzyć dla nas odpowiednie obiekty na podstawie obiektowego schematu tabel:
 
     >>> from sqlalchemy import MetaData
@@ -126,7 +126,7 @@ Mając już obiekt sesji możemy tworzyć rekordy:
     >>> new_user = User(name='jan')
     >>> session.add(new_user)
  
-Zapytywać bazę:
+Odpytywać bazę:
 
     >>> users = session.query(User).filter_by(name='jan')
     >>> list(users)
@@ -214,20 +214,20 @@ Nawet SQLAlchemy, mimo iż potężny, ma swoje ograniczenia i mogą zdarzyć si�
     UPDATE users SET name=:name WHERE users.id = :id_1
 
 # Cuda od PostgreSQL
-Praktycznie wszystko, co powyżej można było wykonać na dowolnym silniku bazy danych i PostgreSQL nie był do tego konieczny. Jednakże SQLAlchemy daje użytkownikowi dostęp do wielu unikalnych funkcji Postgresa, takich jak:
+Praktycznie wszystko co opisano powyżej, można było wykonać na dowolnym silniku bazy danych i PostgreSQL nie był do tego konieczny. Jednakże SQLAlchemy daje użytkownikowi dostęp do wielu unikalnych funkcji Postgresa, takich jak:
 
 * **Sekwencje** - wsparcie dla samodzielnych sekwencji, jak i dla typu liczbowego `SERIAL`.
 * **INSERT/UPDATE/DELETE zwracające wartości** - możliwe jest pobranie wartości kolumn dla operacji na pojedynczych wierszach.
 * **Upsert** - nowinka z PostgreSQL 9.5, obsługa `INSERT ... ON CONFLICT`.
-* **Full text search** - funkcje ułatiające pracę z danymi `TSVECTOR`, `TSQUERY` oraz operatorem `@@`.
+* **Full text search** - funkcje ułatwiające pracę z danymi `TSVECTOR`, `TSQUERY` oraz operatorem `@@`.
 * **... FROM ONLY ...** - interakcja z wbudowanym w PostgreSQL dziedziczeniem tabel.
 * **Rozbudowane indeksy** - indeksy cząstkowe, operatory, typy (B-Tree, Hash, GiST, GIN), `CONCURRENTLY`.
 * **Dodatkowe typy danych** - `ARRAY`, `JSON`/`JSONB`, `HSTORE`, `ENUM`, `...RANGE`, `MACADDR`.
 * **Constraints** - klauzula `EXCLUDE`.
-* **Dodatkowe opcje połączenia** - opcja ustawienia poziomu separacji transakcji (*isolation level*) oraz możliwość użycia serwerowych kursorów (*server side cursors*) w wywołaniu `create_engine()`.
+* **Dodatkowe opcje połączenia** - opcja ustawienia poziomu izolacji transakcji (*isolation level*) oraz możliwość użycia serwerowych kursorów (*server side cursors*) w wywołaniu `create_engine()`.
 
 ## Obsługa JSON/JSONB
-Ograniczona objętość artykułu nie pozwoli na szczegółowe opisanie wszystkich unikalnych funkcjonalności, jednak znajdzie się jeszcze miejsce małą próbkę możliwości na przykładzie natywnego wsparcia dla JSONa.
+Ograniczona objętość artykułu nie pozwoli na szczegółowe opisanie wszystkich unikalnych funkcjonalności, jednak znajdzie się jeszcze miejsce na małą próbkę możliwości na przykładzie natywnego wsparcia dla JSONa.
 
 PostgreSQL od wersji 9.2 udostępnia dwa typy danych do przechowywania JSONa - `JSON` (typ tekstowy, zachowujący dokument w całości) i `JSONB` (binarny, zachowujący logiczną strukturę dokumentu). Typ binarny daje większe możliwości, gdyż można go dowolnie kwerendować i indeksować oraz umożliwia użycie kilku przydatnych funkcji i operatorów.
 
@@ -257,7 +257,7 @@ SQLAlchemy natywnie wspiera JSONa (w ramach dialektu), mapując go na pythonowe 
     [1, 2, 3]
 
 # Podsumowanie
-W dzisiejszych czasach stosowanie narzędzi ORM jest powszechne, a Python w tej kwestii ma nam do zaoferowania perełkę w postaci SQLAlchemy. W połączeniu dobrą relacyjną bazą danych, jaką niewątpliwie jest PostgreSQL, możemy tworzyć nowoczesne, przejrzyste, uniwersalne i łatwe w utrzymaniu aplikacje bazodanowe, zapominając o smutnych czasach, gdy SQL musiał mieszać się z kodem Pythona.
+W dzisiejszych czasach stosowanie narzędzi ORM jest powszechne, a Python w tej kwestii ma nam do zaoferowania perełkę w postaci SQLAlchemy. W połączeniu z dobrą relacyjną bazą danych, jaką niewątpliwie jest PostgreSQL, możemy tworzyć nowoczesne, przejrzyste, uniwersalne i łatwe w utrzymaniu aplikacje bazodanowe, zapominając o smutnych czasach, gdy SQL musiał mieszać się z kodem Pythona.
 
 # Źródła
 * [pep249] <https://www.python.org/dev/peps/pep-0249/> - specyfikacja DB API 2.0
