@@ -121,7 +121,7 @@ access to networking devices. For example [netmiko](https://github.com/ktbyers/n
 wrapper around paramiko and provides easy SSH access for plenty of networking equipment. On the Netconf front, or to
 be more specific, access which supports transactions on the device, a project called
 [napalm](https://github.com/napalm-automation/napalm) has been started, which unifies a set of vendor libraries
-into a single set of methdos.
+into a single set of methods.
 
 Of course there are also standardization efforts, like open config or Netconf, which aim to improve upon this
 situation. But as far as standards go, interworkings between different vendors have been proven to take a lot of time
@@ -129,10 +129,10 @@ and effort, and typically aren't on the market as quickly as the engineers would
 
 ##Summary
 
-How to start if you are looking at intoducing automation into your network? Start by reviewing your network
+How to start if you are looking to introduce automation into your network? Start by reviewing your network
 design and determine what vendors are in use. If it is one single vendor and they provide a library, use that. If you
-have a mix of vendors, check if the multivendor wrapper napalm supports all of them. If neither is an option, you can
-decide to use a lower level access wrapper like netmiko, but you will have to give up on using more advanced
+operate a mix of vendors, check if the multivendor module napalm supports all of them. If neither is an option, you
+can decide to use a lower level access wrapper like netmiko, but you will have to give up on using more advanced
 functionality that is provided by the libraries.
 
 And all of this, to get a few lines of config onto your router:
