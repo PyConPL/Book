@@ -25,7 +25,7 @@ Minimum - przed ćwiczeniem 1
   'name': 'Rejestr piw',
   'summary': 'Obsługa rejestru piw',
   'description': '''
-      Szczegółówy opis
+      Szczegółowy opis
   ''',
   'author': 'Spejson',
   'category': 'Uncategorized',
@@ -198,6 +198,8 @@ Przykładowe rozwiązanie ćwiczenia 2
 -----------------------------------
 `models/beer.py`:
 ```python
+# -*- coding: UTF-8 -*-
+
 from openerp import models, fields, api, _
 
 RATINGS = (
@@ -235,6 +237,8 @@ Testy
 
 `tests.py`:
 ```python
+# -*- coding: UTF-8 -*-
+
 from openerp.tests import common
 from openerp.tools import mute_logger
 
