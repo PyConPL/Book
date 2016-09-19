@@ -5,5 +5,5 @@ This is a book which will be created by PyCon PL Organizers, based on PyCon PL S
 
 Compilation:
 
-    cd 2015/__context__
+    cd 2016/__context__
     make
