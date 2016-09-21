@@ -80,18 +80,23 @@ for alias, location in articles:
     main_md  = "../" + location + "/text.md"
     diffsrc  = glob.glob("src/" + alias + ".diff")
     if verbose:
-        print 'Checking in:'
+        print "Checking '%s' in:" % alias
         print loc_src
         print main_src
         print main_md
     if os.path.exists(loc_src):
+        if verbose:
+            print 'Found:', loc_src
         env.Command( root + ".tex", loc_src,
                      Copy('$TARGET','$SOURCE') )
     elif os.path.exists(main_src):
+        if verbose:
+            print 'Found:', main_src
         env.Command( root + ".tex", main_src,
                      Copy('$TARGET','$SOURCE') )
     elif os.path.exists(main_md):
-        print ">>>" + main_md
+        if verbose:
+            print 'Found:', main_md
         env.Command(
             root + ".tex",
             [main_md] + diffsrc + Glob("src/*.inc.tex"),
