@@ -17,7 +17,7 @@
 pycon2016 pycon2016
 async presentations/async_pod_maska
 %gdb presentations/Debugging_of_CPython_processes_with_gdb
-%dom presentations/inteligentny_dom_z_(micro)python
+%dom presentations/inteligentny_dom_z_micropython
 %object presentations/object_calisthenics
 %sqlalchemy presentations/postgresql_i_sqlalchemy
 %devices presentations/Python_for_Networking_Devices
