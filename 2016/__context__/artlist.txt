@@ -26,3 +26,5 @@ splash presentations/splash
 microservices presentations/tdd_of_python_microservices
 learning presentations/Uczenie_Maszynowe
 geopython presentations/wprowadzenie_do_GeoPythona
+hacking workshops/hacking_micropython
+odoo workshops/odoo_pierwsza_aplikacja
