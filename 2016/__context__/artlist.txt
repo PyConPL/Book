@@ -15,3 +15,14 @@
 %% Zatem pierwsza jest nazwa TeX-owa, druga nazwa z katalogu
 
 pycon2016 pycon2016
+async presentations/async_pod_maska
+%gdb presentations/Debugging_of_CPython_processes_with_gdb
+%dom presentations/inteligentny_dom_z_(micro)python
+%object presentations/object_calisthenics
+%sqlalchemy presentations/postgresql_i_sqlalchemy
+%devices presentations/Python_for_Networking_Devices
+%distribution presentations/Rozklady_odwrotnie_potegowe
+%splash presentations/splash
+%microservices presentations/tdd_of_python_microservices
+%learning presentations/Uczenie_Maszynowe
+%geopython presentations/wprowadzenie_do_GeoPythona
