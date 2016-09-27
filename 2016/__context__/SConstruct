@@ -46,7 +46,9 @@ if selected:
     sel_ls = selected.split()
     articles = filter(lambda x: x[0] in sel_ls, articles)
 
-final_pdfs = map((lambda x: "{}/{}/{}.pdf".format(build,x[0],x[0])),articles)
+final_pdfs = map(
+    (lambda x: "{}/{}/{}.pdf".format(build, x[0], x[0])),
+    articles)
 
 env.Command("pyconbook-2016.pdf",
     final_pdfs,
@@ -114,7 +116,7 @@ for alias, location in articles:
         raise RuntimeError("Not found: %s" % repr(main_md))
 
 
-env.Command("build/artpages.inc",[],[])
+env.Command("build/artpages.inc", [], [])
 
 # Local Variables:
 # mode: python
