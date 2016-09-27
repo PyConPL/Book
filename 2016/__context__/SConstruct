@@ -15,6 +15,10 @@ else:
     create_pdfs = 1
     omit_diffs = 0
 
+tty_columns = os.getenv('COLUMNS')
+if tty_columns:
+    tty_columns = int(tty_columns)
+
 copy_images = 1
 only_first_article_for_testing = 0
 
@@ -55,6 +59,16 @@ env.Command("pyconbook-2016.pdf",
     "texexec --pdfcopy --result=$TARGET $SOURCES")
 
 for alias, location in articles:
+    if tty_columns:
+        dash_count = tty_columns - 3 - len(alias) - len(location)
+        txt_line = ''.join([
+            '-' * dash_count,
+            ' ',
+            alias,
+            ' ',
+            location,
+            ])
+        print txt_line
     root = "{}/{}/{}".format(build, alias, alias)
     small_pdf_ls = [
             "pwd",
