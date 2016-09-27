@@ -14,12 +14,111 @@
  
  Przez ostatnich kilka lat, pomagając różnym organizacjom jako Agile
  Coach i niezależny konsultant zauważyłem, że często ta sama metoda
-@@ -283,7 +282,7 @@
+@@ -86,15 +85,14 @@
+ Zanim przejdziemy do rzeczy, chciałbym, abyście zastanowili się przez
+ chwilę nad odpowiedzią na poniższe pytania dotyczące utylizacji zasobów.
+ 
+-\startitemize[packed]
++\startitemize
+ \item
+-  Jak wygląda autostrada zutylizowana w 100\letterpercent{}?
++  Jak wygląda autostrada zutylizowana w 100\%?
+ \item
+-  Jak działa komputer, w którym procesor jest wykorzystany w
+-  100\letterpercent{}?
++  Jak działa komputer, w którym procesor jest wykorzystany w 100\%?
+ \item
+   Jak efektywny jest zespół, którego zasoby czasowe są wykorzystane w
+-  100\letterpercent{}?
++  100\%?
+ \stopitemize
+ 
+ Pracując ostatnio z jednym zespołów zauważyłem, że mają oni problem z
+@@ -111,11 +109,11 @@
+ nie wnoszą zazwyczaj zbyt dużej wartości do produktu. Liczy się to, co
+ jest zaimplementowane i działa. Na pytania, dlaczego nie robią tego
+ \quotation{Researchu} podczas Backlog Refinementu (i dlaczego w ogóle
+-nie robią Refinementu, na który powinni przeznaczać do
+-10\letterpercent{} czasu w Sprincie), odpowiedzią było oczywiście, że:
+-\quotation{nie mają na to czasu - przecież mają problem z dowożeniem
+-tego co zaplanują, więc dodatkowe spotkania w Sprincie mogą ten problem
+-jedynie pogłębić}. Jak zapewne zauważacie błędne koło się zamyka.
++nie robią Refinementu, na który powinni przeznaczać do 10\% czasu w
++Sprincie), odpowiedzią było oczywiście, że: \quotation{nie mają na to
++czasu - przecież mają problem z dowożeniem tego co zaplanują, więc
++dodatkowe spotkania w Sprincie mogą ten problem jedynie pogłębić}. Jak
++zapewne zauważacie błędne koło się zamyka.
+ 
+ Udowadnianie bezsensowności takich działań zabrało mi sporo czasu, ale w
+ końcu udało się doprowadzić do sytuacji, w której zespół ten dowiózł
+@@ -197,8 +195,8 @@
+ 
+ Wydaje się to być proste - więc dlaczego nie mamy do czynienia na co
+ dzień z super efektywnymi zespołami? Dlaczego jest tak wiele fabryk,
+-które nie są efektywne? Dlaczego system zutylizowany w
+-100\letterpercent{} nie jest efektywny?
++które nie są efektywne? Dlaczego system zutylizowany w 100\% nie jest
++efektywny?
+ 
+ Odpowiedź jest prosta i jest związana z błędnym założeniem, że: *
+ wszystkie zadania mają dokładnie taką samą wielkość, więc nie tworzą się
+@@ -212,7 +210,7 @@
+ Wielu managerów i dyrektorów oczekuje od swoich podwładnych tego, że
+ będą wykazywali inicjatywę, że będą innowacyjni, że będą się rozwijać i
+ usprawniać całą organizację - ja się tylko po cichu czasem pytam, kiedy
+-mają to robić, jeśli ich czas jest zaalokowany w 100\letterpercent{}?
++mają to robić, jeśli ich czas jest zaalokowany w 100\%?
+ 
+ Jak zatem zoptymalizować proces wytwarzania oprogramowania w każdej
+ organizacji? Kilkukrotnie już udało mi się z powodzeniem wykorzystać
+@@ -221,20 +219,19 @@
+ stanie skończyć zadań, albo Story Pointów, albo czegoś innego
+ mierzalnego (czyli Velocity w Scrum - tzw. \quotation{pojemność
+ zespołu}). Istotne jest to, by mierzyć tylko to, co jest skończone, a
+-nie \quotation{rozgrzebane}. * W następnej iteracji planujemy
+-80\letterpercent{} tego, co udało się skończyć w poprzedniej. Jeśli uda
+-się wszystkie zaplanowane zadania skończyć przed końcem iteracji, to
+-dobieramy kolejne, aż skończy się iteracja. * W kolejnej iteracji
+-powtarzamy poprzednie kroki - znowu bierzemy 80\letterpercent{} tego, co
+-udało się skończyć w poprzedniej iteracji.
++nie \quotation{rozgrzebane}. * W następnej iteracji planujemy 80\% tego,
++co udało się skończyć w poprzedniej. Jeśli uda się wszystkie zaplanowane
++zadania skończyć przed końcem iteracji, to dobieramy kolejne, aż skończy
++się iteracja. * W kolejnej iteracji powtarzamy poprzednie kroki - znowu
++bierzemy 80\% tego, co udało się skończyć w poprzedniej iteracji.
+ 
+ Logika podpowiada Wam zapewne, że w ten sposób z iteracji na iterację
+ zespół będzie kończył coraz mniej zadań. Praktyka pokazuje jednak, że
+-zazwyczaj te 80\letterpercent{} rzeczy udaje się skończyć przed końcem
+-iteracji i zespół dobiera kolejne zadania. W efekcie często skutkuje to
+-tym, że w kolejnych iteracjach udaje się skończyć mniej więcej tyle
+-samo, co w poprzednich iteracjach. Czasem zdarza się, że uda się
+-skończyć więcej i średnie Velocity stopniowo rośnie.
++zazwyczaj te 80\% rzeczy udaje się skończyć przed końcem iteracji i
++zespół dobiera kolejne zadania. W efekcie często skutkuje to tym, że w
++kolejnych iteracjach udaje się skończyć mniej więcej tyle samo, co w
++poprzednich iteracjach. Czasem zdarza się, że uda się skończyć więcej i
++średnie Velocity stopniowo rośnie.
+ 
+ \subsection[konkluzja]{Konkluzja}
+ 
+@@ -262,7 +259,7 @@
+ 
+ \subsection[źródła]{Źródła}
+ 
+-\startitemize[packed]
++\startitemize
+ \item
+   The Goal: A Process of Ongoing Improvement - Eliyahu M. Goldratt and
+   Jeff Cox
+@@ -285,8 +282,8 @@
    http://www.referenceforbusiness.com/encyclopedia/Pro-Res/Queuing-Theory.html
    - Wstęp do Teorii Kolejek
  \item
--  http://less.works/less/principles/queueing\letterunderscore{}theory.html
+-  http://less.works/less/principles/queueing_theory.html - Zarządzanie
+-  kolejkami
 +  http://less.works/less/principles/queueing\_theory.html
-   - Zarządzanie kolejkami
++  - Zarządzanie kolejkami
  \stopitemize
+ 
  

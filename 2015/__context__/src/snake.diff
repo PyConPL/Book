@@ -14,3 +14,12 @@
  
  Artykuł ten dotyczy prototypowania sprzętu na platformie MicroPython. W
  pierwszej części omówiona została implementacja języka na mikrokontolery
+@@ -218,7 +217,7 @@
+ 
+ \section[źródła]{Źródła}
+ 
+-\startitemize[packed]
++\startitemize
+ \item
+   Damien George \quotation{MicroPython -- Python for microconterollers}
+   \hyphenatedurl{http://micropython.org/}

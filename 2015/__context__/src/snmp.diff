@@ -13,29 +13,54 @@
  
  \subsection[introduction]{Introduction}
  
-@@ -507,7 +507,7 @@
+@@ -210,7 +210,7 @@
+ message being sent and response processed. Generator functions are
+ specific to SNMP message type and are uniformly initialized with:
+ 
+-\startitemize[packed]
++\startitemize
+ \item
+   SNMP Engine object: this is the umbrella object coordinating all SNMP
+   operations. It's used by SNMP applications like Command Generator
+@@ -236,7 +236,7 @@
+ As for return values, on each iteration generator give us a tuple of
+ result items:
+ 
+-\startitemize[packed]
++\startitemize
+ \item
+   errorIndication: if evaluates to True, it indicates some fatal problem
+   occurred to local or remote SNMP engine. Most likely a timeout or
+@@ -502,11 +502,12 @@
+ 
+ \subsection[references]{References}
+ 
+-\startitemize[packed]
++\startitemize
+ \item
    {[}asyncio{]} https://docs.python.org/3/library/asyncio.html
  \item
-   {[}BER{]}
--  https://en.wikipedia.org/wiki/X.690\#BER\letterunderscore{}encoding
+-  {[}BER{]} https://en.wikipedia.org/wiki/X.690\#BER_encoding
++  {[}BER{]}
 +  https://en.wikipedia.org/wiki/X.690\#BER\_encoding
  \item
    {[}command-line tools{]} https://pypi.python.org/pypi/pysnmp-apps
  \item
-@@ -526,7 +526,7 @@
+@@ -524,7 +525,8 @@
+ \item
    {[}PySNMP{]} http://pysnmp.sf.net
  \item
-   SNMP RFCs
--  http://www.snmp.com/protocol/snmp\letterunderscore{}rfcs.shtml
+-  SNMP RFCs http://www.snmp.com/protocol/snmp_rfcs.shtml
++  SNMP RFCs
 +  http://www.snmp.com/protocol/snmp\_rfcs.shtml
  \item
    {[}RFC2587{]} http://www.ietf.org/rfc/rfc2578.txt
  \item
-@@ -542,7 +542,7 @@
+@@ -540,7 +542,7 @@
    http://snmpsim.sourceforge.net/public-snmp-simulator.html
  \item
    {[}SNMP Agent emulation software{]}
--  https://en.wikipedia.org/wiki/SNMP\letterunderscore{}simulator
+-  https://en.wikipedia.org/wiki/SNMP_simulator
 +  https://en.wikipedia.org/wiki/SNMP\_simulator
  \item
    {[}SNMP Proxy Forwarder{]} http://snmpfwd.sf.net

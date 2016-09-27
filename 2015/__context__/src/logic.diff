@@ -13,7 +13,163 @@
  
  \subsection[introduction]{Introduction}
  
-@@ -893,7 +893,8 @@
+@@ -182,7 +182,8 @@
+ \subsection[create-db]{Create DB}
+ 
+ Now it is time to start PostgreSQL. First you have to initialize name
+-space. I used {\em /opt/pg_data} directory for PostgreSQL storage.
++space. I used {\em /opt/pg\letterunderscore{}data} directory for
++PostgreSQL storage.
+ 
+ \starttyping
+ mkdir /opt/pg_data
+@@ -191,7 +192,7 @@
+ 
+ and start DB. Next command will start PostgreSQL, which is going to
+ listen on all interfaces and port {\em 5432} (default). Data directory
+-({\em -D} option) is going to be /opt/pg_data.
++({\em -D} option) is going to be /opt/pg\letterunderscore{}data.
+ 
+ \starttyping
+ /opt/pgsql/bin/postmaster -p 5432 -D /opt/pg_data/
+@@ -209,8 +210,9 @@
+ localhost (-h) and port (-p) that is being used by the server. Option
+ {\em -d} allow you to create {\bf plpythonu} language under {\em pie}
+ database. Please notice, that language that I created in the following
+-example is called **plpythonu{\em . Letter }u* stands for untrusted. Why
+-untrusted? That is more about history of PostgresQL and Python support.
++example is called *{\em plpythonu}. Letter {\em u} stands for untrusted.
++Why untrusted? That is more about history of PostgresQL and Python
++support.
+ 
+ \starttyping
+ /opt/pgsql/bin/createlang -h localhost -p5432 -d pie plpythonu
+@@ -293,8 +295,9 @@
+ \stoptyping
+ 
+ You may notice that from PostgreSQL engine perspective calling
+-{\em my_first_function} looks identical, even if the actual body of
+-function written in plpython is either flat function or complex object.
++{\em my\letterunderscore{}first\letterunderscore{}function} looks
++identical, even if the actual body of function written in plpython is
++either flat function or complex object.
+ 
+ As for the business logic with Python inside of database that I want
+ show you, I am not trying to convince you to start using procedural
+@@ -404,7 +407,7 @@
+ 
+ Available values of log level in order of decreasing detail:
+ 
+-\startitemize[n,packed][stopper=.]
++\startitemize[n][stopper=.]
+ \item
+   debug5
+ \item
+@@ -505,7 +508,7 @@
+ 
+ For building business logic in database I will use two main things:
+ 
+-\startitemize[packed]
++\startitemize
+ \item
+   triggers with trigger functions on tables
+ \item
+@@ -523,7 +526,7 @@
+ 
+ Trigger function can be called before or after
+ 
+-\startitemize[packed]
++\startitemize
+ \item
+   update
+ \item
+@@ -533,8 +536,8 @@
+ \stopitemize
+ 
+ How to define trigger on a table foo you can see below. Trigger function
+-{\em my_trigger_function} will be called {\em after insert} of each
+-record.
++{\em my\letterunderscore{}trigger\letterunderscore{}function} will be
++called {\em after insert} of each record.
+ 
+ \starttyping
+ CREATE TRIGGER my_trigger
+@@ -544,7 +547,8 @@
+ 
+ To show you how trigger can be applied on tables let's try to look
+ closer on the following example. Let's create table {\em foo} and
+-{\em foo_backup}. Structure of these tables is as follows:
++{\em foo\letterunderscore{}backup}. Structure of these tables is as
++follows:
+ 
+ \starttyping
+ CREATE TABLE foo
+@@ -566,7 +570,8 @@
+         FOR EACH ROW EXECUTE PROCEDURE protect_data();
+ \stoptyping
+ 
+-I will make a copy of data when field {\em row_change_time} is greater
++I will make a copy of data when field
++{\em row\letterunderscore{}change\letterunderscore{}time} is greater
+ then 15 minutes.
+ 
+ \starttyping
+@@ -604,7 +609,7 @@
+ as a table. Such a table works as a view, which of course can be used in
+ regular SQL queries. Below I pasted a function which for given bill
+ number will apply given discount. Just to remind you table structures
+-were shown in chaper “schema*.
++were shown in chaper "schema*.
+ 
+ \starttyping
+ create or replace function logic.view_and_set_discounted_sales(
+@@ -667,7 +672,9 @@
+ (3 rows)
+ \stoptyping
+ 
+-and different value for {\em in_discount_percentage} parameter
++and different value for
++{\em in\letterunderscore{}discount\letterunderscore{}percentage}
++parameter
+ 
+ \starttyping
+ pie=# select * from logic.view_and_set_discounted_sales(20, 23) ;
+@@ -726,7 +733,8 @@
+ /opt/py/bin/pip install redis
+ \stoptyping
+ 
+-Below is the body of trigger function {\em logic.tgr_bill_i}.
++Below is the body of trigger function
++{\em logic.tgr\letterunderscore{}bill\letterunderscore{}i}.
+ 
+ \starttyping
+ create or replace function logic.tgr_bill_i()
+@@ -844,7 +852,7 @@
+ 
+ \subsection[advantages]{Advantages}
+ 
+-\startitemize[n,packed][stopper=.]
++\startitemize[n][stopper=.]
+ \item
+   Logic on DB side makes many things simpler and much cleaner to
+   control.
+@@ -865,7 +873,7 @@
+ 
+ \subsection[disadvantages]{Disadvantages}
+ 
+-\startitemize[n,packed][stopper=.]
++\startitemize[n][stopper=.]
+ \item
+   Very complex unittest.
+ \item
+@@ -879,13 +887,14 @@
+ 
+ \subsection[references]{References}
+ 
+-\startitemize[packed]
++\startitemize
+ \item
+   http://python.org
  \item
    http://www.postgresql.org/docs/
  \item

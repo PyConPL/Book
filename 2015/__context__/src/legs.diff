@@ -13,9 +13,12 @@
  
  \subsection[introduction]{Introduction}
  
-@@ -793,17 +793,17 @@
+@@ -791,19 +791,19 @@
  
- \startitemize
+ \subsection[references]{References}
+ 
+-\startitemize[packed]
++\startitemize
  \item
 -  {[}1{]} GitHub repo with full source code of all examples
 +  {[}1{]} GitHub repo with full source code of all examples\crlf
@@ -29,7 +32,7 @@
    https://github.com/kurazu/bridge
  \item
 -  {[}4{]} Boost.Python documentation
--  http://www.boost.org/doc/libs/1\letterunderscore{}59\letterunderscore{}0/libs/python/doc/
+-  http://www.boost.org/doc/libs/1_59_0/libs/python/doc/
 +  {[}4{]} Boost.Python documentation\crlf
 +  http://www.boost.org/doc/libs/1\_59\_0/libs/python/doc/
  \stopitemize

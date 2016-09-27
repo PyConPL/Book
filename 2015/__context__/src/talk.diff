@@ -1,6 +1,6 @@
 --- talk.tex
 +++ talk.tex
-@@ -1,9 +1,9 @@
+@@ -1,16 +1,16 @@
  \usemodule[pycon-2015]
  \starttext
  
@@ -13,38 +13,98 @@
  
  \subsection[systemy-ivr]{Systemy IVR}
  
-@@ -40,34 +40,80 @@
+ IVR (ang. Interactive Voice Response) to nazwa systemu w
+ telekomunikacji, umożliwiającego interaktywną obsługę osoby dzwoniącej.
+ IVR ma więc funkcjonalność automatycznego Call center (lub jego części).
+-\footnote{https://pl.wikipedia.org/wiki/Interactive_Voice_Response}
++\footnote{https://pl.wikipedia.org/wiki/Interactive\letterunderscore{}Voice\letterunderscore{}Response}
+ System IVR może być zainstalowany bezpośrednio u klienta, w sieci PSTN,
+ a także jako aplikacja korzystająca z usług IaaS. Ostatniemu rozwiązaniu
+ poświęcimy ten artykuł oraz naszą prezentację.
+@@ -32,83 +32,88 @@
+ bardzo duży. Jest wiele firm, które różnią się możliwościami,
+ infrastrukturą i przede wszystkim cenami. Najważniejszym dla nich
+ rynkiem są Stany Zjednoczone i to tamtejsi klienci mogą wykorzystać
+-100\letterpercent{} dostępnych możliwości. Nawet Brytyjczycy nie mogą
+-się cieszyć pełnym wsparciem dla ich języka, ponieważ wiele opcji jest
+-ograniczona do amerykańskiej wersji języka angielskiego.
++100\% dostępnych możliwości. Nawet Brytyjczycy nie mogą się cieszyć
++pełnym wsparciem dla ich języka, ponieważ wiele opcji jest ograniczona
++do amerykańskiej wersji języka angielskiego.
+ 
+ W tabeli poniżej przedstawiliśmy elementy, które mogą wpłynąć na wybór
  dostawcy, ale przede wszystkim pokazać w jakich segmentach operują
  dostawcy.
  
--\letterbar{} \letterbar{} Plivo \letterbar{} Tropo \letterbar{} Twilio
--\letterbar{}
--\letterbar{}----------------------------------------------------------------------------------------------\letterbar{}:------------------------:\letterbar{}:---------------------------------:\letterbar{}:------------------------:\letterbar{}
--\letterbar{} Ceny (polski numer miesięcznie / minuta rozmowy wychodzącej
--/ minuta rozmowa przychodzącej) \letterbar{} 0,8\$ / 2,35¢-7,3¢ / 0,5¢
--\letterbar{} 10\$ / 5-7¢ / 3¢ \letterbar{} 1\$ / 2¢-7,5¢ / 0,75¢
--\letterbar{} \letterbar{} Serwery \letterbar{} dedykowane \letterbar{}
--Voxeo \footnote{Od momentu przejęcia Tropo przez Cisco wiele informacji
--  nie jest ujawnianych.} \letterbar{} AWS \letterbar{} \letterbar{}
--Paczka w PyPi \letterbar{} plivo \letterbar{} tropo-webapi-python
--\letterbar{} twilio \letterbar{} \letterbar{} Synteza mowy / język
--polski \letterbar{} 16 języków / tak \letterbar{} 25 języków / tak
--\letterbar{} 26 języków / tak \letterbar{} \letterbar{} Transkrypcja
--nagrań \letterbar{} tylko angielski \letterbar{} tylko angielski
--\letterbar{} tylko angielski \letterbar{} \letterbar{} Rozpoznowanie
--mowy / język polski \letterbar{} tak / nie \letterbar{} tak / tak
--\letterbar{} nie / nie \letterbar{} \letterbar{} Standardy \letterbar{}
--PlivoXML \letterbar{} VoiceXML, SSML, SRGS \letterbar{} TwiML
--\letterbar{} \letterbar{} SMS / MMS \letterbar{} tak / nie \letterbar{}
--tak / nie \letterbar{} tak / tylko USA i Kanada \letterbar{}
--\letterbar{} Numery telefonów / polskie numery \letterbar{} 55 krajów /
--tak \letterbar{} 28 krajów / tak \letterbar{} 44 krajów / tak
--\letterbar{} \letterbar{} Instalacja on-premises \letterbar{} tak (open
--source) \letterbar{} tak (licencja) \letterbar{} nie \letterbar{}
--\letterbar{} Najwięksi użytkownicy \letterbar{} Mozilla, Netflix
--\letterbar{} Deutsche Telekom, IBM \footnote{Od momentu przejęcia Tropo
--  przez Cisco wiele informacji nie jest ujawnianych.} \letterbar{} Uber,
--Paypal, Coca-Cola \letterbar{}
+-\placetable[none]{}
+-\starttable[|lp(0.51\textwidth)|cp(0.15\textwidth)|cp(0.19\textwidth)|cp(0.15\textwidth)|]
+-\HL
+-\NC 
+-\NC Plivo
+-\NC Tropo
+-\NC Twilio
+-\NC\AR
+-\HL
+-\NC Ceny (polski numer miesięcznie / minuta rozmowy wychodzącej / minuta
+-rozmowa przychodzącej)
+-\NC 0,8\$ / 2,35¢-7,3¢ / 0,5¢
+-\NC 10\$ / 5-7¢ / 3¢
+-\NC 1\$ / 2¢-7,5¢ / 0,75¢
+-\NC\AR
+-\NC Serwery
+-\NC dedykowane
+-\NC Voxeo \footnote{Od momentu przejęcia Tropo przez Cisco wiele
+-  informacji nie jest ujawnianych.}
+-\NC AWS
+-\NC\AR
+-\NC Paczka w PyPi
+-\NC plivo
+-\NC tropo-webapi-python
+-\NC twilio
+-\NC\AR
+-\NC Synteza mowy / język polski
+-\NC 16 języków / tak
+-\NC 25 języków / tak
+-\NC 26 języków / tak
+-\NC\AR
+-\NC Transkrypcja nagrań
+-\NC tylko angielski
+-\NC tylko angielski
+-\NC tylko angielski
+-\NC\AR
+-\NC Rozpoznowanie mowy / język polski
+-\NC tak / nie
+-\NC tak / tak
+-\NC nie / nie
+-\NC\AR
+-\NC Standardy
+-\NC PlivoXML
+-\NC VoiceXML, SSML, SRGS
+-\NC TwiML
+-\NC\AR
+-\NC SMS / MMS
+-\NC tak / nie
+-\NC tak / nie
+-\NC tak / tylko USA i Kanada
+-\NC\AR
+-\NC Numery telefonów / polskie numery
+-\NC 55 krajów / tak
+-\NC 28 krajów / tak
+-\NC 44 krajów / tak
+-\NC\AR
+-\NC Instalacja on-premises
+-\NC tak (open source)
+-\NC tak (licencja)
+-\NC nie
+-\NC\AR
+-\NC Najwięksi użytkownicy
+-\NC Mozilla, Netflix
+-\NC Deutsche Telekom, IBM \footnote{Od momentu przejęcia Tropo przez
+-  Cisco wiele informacji nie jest ujawnianych.}
+-\NC Uber, Paypal, Coca-Cola
+-\NC\AR
+-\HL
+-\stoptable
 +\bTABLE
 +\bTR
 +  \bTD \eTD
@@ -122,3 +182,30 @@
  
  Od momentu przejęcia Tropo przez Cisco wiele informacji (serwery,
  najwięksi użytkownicy) nie jest ujawnianych.
+@@ -142,7 +147,7 @@
+ prostych przypadkach menadżer może sobie wyklikać cały scenariusz
+ rozmowy z klientem. W tym celu Twilio stworzyło otwarty projekt OpenVBX,
+ który oczywiście korzyta z usług Twilio. Użytkownik ma możliwość przy
+-pomocy techniki drag & drop stworzyć system IVR z menu tonowymi,
++pomocy techniki drag \& drop stworzyć system IVR z menu tonowymi,
+ nagrywaniem rozmów i przekierowywaniem połączeń do wybranych numerów.
+ Jak wspomnieliśmy OpenVBX jet ograniczony wyłącznie do korzystania z
+ Twilio, dlatego też powstała zjailbreakowana wersja, która współpracuje
+@@ -221,7 +226,7 @@
+ 
+ class IVR(View):
+     """Główny widok IVR"""
+-    
++
+     # Adresy kolejnych widoków, w zależności od wybranej opcji
+     choices = {
+         '1': reverse('incoming_complaints'),
+@@ -275,7 +280,7 @@
+ 
+ \subsection[bibliografia]{Bibliografia}
+ 
+-\startitemize[packed]
++\startitemize
+ \item
+   https://www.twilio.com/
+ \item

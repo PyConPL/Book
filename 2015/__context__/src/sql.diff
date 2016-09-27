@@ -13,9 +13,21 @@
  
  \subsection[introduction]{Introduction}
  
-@@ -416,22 +416,22 @@
+@@ -291,7 +291,7 @@
+ Mind the \type{create aggregate} clause which is very non-standard and
+ specific to PostgreSQL. The parameters are:
  
- \startitemize[n][stopper=.]
+-\startitemize[packed]
++\startitemize
+ \item
+   \type{stype}: the data type holding the \quotation{state}
+ \item
+@@ -414,23 +414,24 @@
+ 
+ \subsection[further-reading]{Further reading}
+ 
+-\startitemize[n,packed][stopper=.]
++\startitemize[n][stopper=.]
  \item
 -  Django: Model intro
 +  Django: Model intro\crlf
@@ -29,13 +41,12 @@
 +  PostgreSQL: Common Table Expressions\crlf
    http://www.postgresql.org/docs/8.4/static/queries-with.html
  \item
--  Github: SQL, Condemned
--  https://github.com/mrzechonek/sql\letterunderscore{}condemned
+-  Github: SQL, Condemned https://github.com/mrzechonek/sql_condemned
 +  Github: SQL, Condemned\crlf
 +  https://github.com/mrzechonek/sql\_condemned
  \item
 -  Wikipedia: Simple linear reqression
--  https://en.wikipedia.org/wiki/Simple\letterunderscore{}linear\letterunderscore{}regression
+-  https://en.wikipedia.org/wiki/Simple_linear_regression
 +  Wikipedia: Simple linear reqression\crlf
 +  https://en.wikipedia.org/wiki/Simple\_linear\_regression
  \item

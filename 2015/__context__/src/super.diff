@@ -13,11 +13,33 @@
  
  Jest jedna funkcjonalność Pythona, której wszyscy używają bardzo często,
  acz szczątkowo, gdyż panuje opinia iż nadużywanie jej może doprowadzić
-@@ -223,7 +223,7 @@
+@@ -40,7 +40,7 @@
+ wszystko zrozumiałe. Jednak Controller dziedziczy już po 4 klasach (w
+ kolejności):
  
- \startitemize
+-\startitemize[packed]
++\startitemize
  \item
--  https://en.wikipedia.org/wiki/C3\letterunderscore{}linearization
+   Requestable
+ \item
+@@ -149,8 +149,7 @@
+ \stoptyping
+ 
+ W klasie Two.method, pod super().method nie dostaniemy One.method, tylko
+-coś w rodzaju: \quotation{<bound method Two.wrapper of <{\bf main}.Two
+-object at 0x7f2116f7b048>} Mając Two.method albo One.method, możemy
++coś w rodzaju: \quotation{} Mając Two.method albo One.method, możemy
+ dostać~się~do klasy, w której ta metoda została zdefiniowana. Mając już
+ klasę, możemy użyć metody super(), gdyż mamy pełną listę MRO (dzięki
+ self), oraz miejsce w hierarchii (dzięki klasie). Mając funkcję wrapper
+@@ -222,9 +221,9 @@
+ 
+ \subsection[źródła]{Źródła}
+ 
+-\startitemize[packed]
++\startitemize
+ \item
+-  https://en.wikipedia.org/wiki/C3_linearization
 +  https://en.wikipedia.org/wiki/C3\_linearization
  \item
    https://www.youtube.com/watch?v=EiOglTERPEo
