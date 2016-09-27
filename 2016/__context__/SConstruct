@@ -68,6 +68,8 @@ for alias, location in articles:
             ' ',
             location,
             ])
+    else:
+        txt_line = ''
     root = "{}/{}/{}".format(build, alias, alias)
     small_pdf_ls = [
             "pwd",
