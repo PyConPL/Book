@@ -9,7 +9,7 @@ fi
 
 if [ -d $EXP_DIR ]
 then
-    (cd build; tar cf - `find . -name \*.tex`) | (cd expected; tar -xvf -)
+    (cd build; tar cf - `find . -name \*.tex`) | (cd $EXP_DIR; tar -xvf -)
 else
     echo Wrong type of '"'$EXP_DIR'"' - it should be a directory:
     ls -ld $EXP_DIR
