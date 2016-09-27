@@ -4,7 +4,7 @@ all:
 test:
 	./test_pl.py
 compare:
-	(cd build; tar cf - `find . -name \*.tex`) | (cd expected; tar -xvf -)
+	./gen_cmp.sh
 diffs:
 	./gen_diff.sh
 clean:
