@@ -60,7 +60,7 @@ env.Command("pyconbook-2016.pdf",
 
 for alias, location in articles:
     if tty_columns:
-        dash_count = tty_columns - 3 - len(alias) - len(location)
+        dash_count = tty_columns - 8 - len(alias) - len(location)
         txt_line = ''.join([
             '-' * dash_count,
             ' ',
@@ -68,10 +68,10 @@ for alias, location in articles:
             ' ',
             location,
             ])
-        print txt_line
     root = "{}/{}/{}".format(build, alias, alias)
     small_pdf_ls = [
             "pwd",
+            "echo " + txt_line,
             pl_txt.link_src(alias),
             ]
     if copy_images:
