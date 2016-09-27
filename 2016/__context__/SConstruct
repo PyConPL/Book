@@ -33,9 +33,9 @@ def remove_comments(line):
     return line.split('%')[0]
 
 articles = []
-artlist = 'artlist.txt'
+artlist_file = 'artlist.txt'
 build = "build"
-for line in open(artlist):
+for line in open(artlist_file):
     line = remove_comments(line)
     words = line.split()
     if words:
@@ -83,7 +83,7 @@ for alias, location in articles:
         root + ".pdf",
         [
             root + ".tex",
-            artlist,
+            artlist_file,
             build + "/artpages.inc",
             glob.glob("sty/*"),
             glob.glob("src/" + alias + "/*")
