@@ -119,9 +119,13 @@ for alias, location in articles:
             Delete(".tmp"),
             Mkdir(".tmp"),
             pl_txt.run_pandoc(main_md),
-            pl_txt.apply_patch(diffsrc, test_mode=omit_diffs),
-            Copy("$TARGET", ".tmp/${TARGET.file}"),
             ]
+        pandoc_patch_ls.append(
+            pl_txt.apply_patch(diffsrc, test_mode=omit_diffs)
+            )
+        pandoc_patch_ls.append(
+            Copy("$TARGET", ".tmp/${TARGET.file}")
+            )
         env.Command(
             root + ".tex",
             [main_md] + diffsrc + Glob("src/*.inc.tex"),
