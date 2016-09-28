@@ -125,13 +125,7 @@ for alias, location in articles:
         env.Command(
             root + ".tex",
             [main_md] + diffsrc + Glob("src/*.inc.tex"),
-            [
-                Delete(".tmp"),
-                Mkdir(".tmp"),
-                pl_txt.run_pandoc(main_md),
-                pl_txt.apply_patch(diffsrc, test_mode=omit_diffs),
-                Copy("$TARGET", ".tmp/${TARGET.file}"),
-                ],
+            pandoc_patch_ls,
            )
     else:
         if verbose:
