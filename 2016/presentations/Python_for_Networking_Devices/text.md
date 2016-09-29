@@ -1,6 +1,6 @@
-#Python for Networking Devices - Elisa Jasinska
+# Python for Networking Devices - Elisa Jasinska
 
-##Introduction
+## Introduction
 
 The Internet is a series of tubes and at the end of those tubes are: networking devices! To form the Internet as we
 know it, each provider network has to be managed, maintained and interconnected. Traditional Network Engineering is
@@ -8,7 +8,7 @@ moving more and more towards automated device and service management, a task oft
 availability of many useful libraries. We will walk you though common tasks in Network Engineering and introduce a
 number of Python libraries that are helpful in accessing and managing networking equipment.
 
-##Network Device Access
+## Network Device Access
 
 Traditionally networking devices are managed via their command line interface (CLI). The CLI is accessible though
 various forms of transport. Originally Telnet has been used, later on devices started to support SSH. SSH provides
@@ -43,7 +43,7 @@ The drawback of entering configurations line by line is the same as with any oth
 errors might occur somewhere along the way, which will result in only a part of the configuration being committed to
 the device - the change is not transactional.
 
-###Netconf
+### Netconf
 
 Nowadays Netconf is the new hype in the networking world. With underlying SSH transport it supports the same security
 feature set, but in addition it offers support for transactions, structured data and error reporting. Netconf allows
@@ -83,7 +83,7 @@ output, which in case of CLI access has to be parsed individually. Netconf-like 
 of structured data, which is slightly better, but this still doesn’t cover fields not provided in one vendor vs.
 another (like for example the lack of an age timer in the Juniper output above).
 
-##Generic Access Libraries
+## Generic Access Libraries
 
 To access devices directly via their SSH or Netconf interface, generic Python libraries such as
 [pexpect](https://github.com/pexpect/pexpect), [paramiko](https://github.com/paramiko/paramiko) and
@@ -93,7 +93,7 @@ vendor specificity. You will still have to deal with the little differences the 
 procedures or additional escape chars, different configuration syntax, differences in 'show commands' or
 differences with the varying support of Netconf on each device.
 
-##Specific Network Vendor Libraries
+## Specific Network Vendor Libraries
 
 Since Python became more and more popular amongst network engineers, network vendors started to provide their own
 libraries to facilitate device interaction - to mention a few:
@@ -108,7 +108,7 @@ They ease config operations on the devices by providing functions to send config
 to retreive the configuration. Each of those libs is very specific to the vendors device and takes all its nits into
 account, but a lot of times networks are designed to use a mix of vendors, in which case one library won't suffice.
 
-##Multivendor Libraries
+## Multivendor Libraries
 
 Managing configurations in a multivendor environment takes on a whole different level. In addition to managing
 differences per device-role, differences in access have to be considered. Each device role needs a similar base
@@ -127,7 +127,7 @@ Of course there are also standardization efforts, like open config or Netconf, w
 situation. But as far as standards go, interworkings between different vendors have been proven to take a lot of time
 and effort, and typically aren't on the market as quickly as the engineers would like.
 
-##Summary
+## Summary
 
 How to start if you are looking to introduce automation into your network? Start by reviewing your network
 design and determine what vendors are in use. If it is one single vendor and they provide a library, use that. If you

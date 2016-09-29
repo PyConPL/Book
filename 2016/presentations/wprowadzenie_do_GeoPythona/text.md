@@ -1,4 +1,4 @@
-#Krótkie wprowadzenie do GeoPythona – Małgorzata Papież
+# Krótkie wprowadzenie do GeoPythona – Małgorzata Papież
 
 Od kilku lat, w Polsce coraz większą popularność zdobywają aplikacje oparte na wykorzystaniu *danych przestrzennych*.
 To dzięki nim przestaliśmy być zależni od papierowych map i bez wychodzenia z domu możemy zobaczyć każdy zakątek Ziemi.

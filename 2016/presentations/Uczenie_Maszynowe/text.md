@@ -1,10 +1,10 @@
-#Uczenie maszynowe - czyli jak rozwiązywać nietrywialne problemy #
+# Uczenie maszynowe - czyli jak rozwiązywać nietrywialne problemy
 
-##Streszczenie##
+## Streszczenie
 
 Techniki uczenia maszynowego są szeroko wykorzystywane w różnych obszarach codziennego życia. Problemy takie jak klasyfikacja czy predykcja, przy rozwiązywaniu których nie sprawdzają się tradycyjne algorytmy, mogą być z powodzeniem implementowane metodami pozwalającymi nauczyć program podejmować trafne decyzje. Python idealnie nadaje się do wykorzystania tych technik, w czym pomaga bez mała kilkadziesiąt mniej lub bardziej wyspecjalizowanych bibliotek.
 
-##Rozwój znaczenia i metod uczenia maszynowego##
+## Rozwój znaczenia i metod uczenia maszynowego
 
 Gdy w roku 1965 na Uniwersytecie Stanforda powstawał system Dendral, nikt pewnie nie przypuszczał, że ledwie 50 lat później uczenie maszynowe (machine learning, ML) będzie techniką wszechobecną, z której korzystamy codziennie, niemal na każdym kroku.
 
@@ -20,7 +20,7 @@ Zastosowania algorytmów uczenia maszynowego widzimy na co dzień. Kto z nas wpi
 Uczenie maszynowe rozumiemy jako zdolność programu do uczenia się, do generalizacji. Algorytm konstruuje się zwykle w ten sposób, że uruchamia się program na niewielkim wycinku dostępnych danych, na podstawie których dokonuje on parametryzacji, czyli inaczej mówiąc – uczy się. Jeżeli uczenie przebiegło pomyślnie, wówczas program będzie w stanie podjąć właściwą decyzję nawet, jeżeli okażemy mu dane, z którymi nigdy wcześniej nie miał do czynienia.
 Istotą problemów które rozwiązujemy metodami uczenia maszynowego są klasyfikacja oraz predykcja. Nie jest moim celem omówienie tutaj konkretnych technik, do których zaliczyć możemy m.in. sztuczne sieci neuronowe (ANN, *artificial neural networks*) będące (mocno uproszczoną) imitacją procesu uczenia zachodzącego w mózgu, maszyny wektorów nośnych (SVM, *support vector machines*), których idea polega na optymalizacji granicy decyzyjnej, ukryte modele markowa (HMM, *hidden markov models*) mające zastosowanie w analizie procesów stochastycznych czy drzewa decyzyjne (DT, *decision trees*), które dokonują klasyfikacji na podstawie odpowiednio wygenerowaniej struktury drzewiastej. W ostatnich latach furorę robi uczenie głębokie (*deep learning*), które jest swego rodzaju rozszerzeniem i udoskonaleniem trochę już odchodzącej na boczny tor idei sieci neuronowych. Do popularnych technik zaliczymy również algorytm k-średnich. Czytelników zainteresowanych głębszym wyjaśnieniem poszczególnych algorytmów odsyłam do jakże bogatej literatury, np. [3].
 
-##Najpopularniejsze biblioteki ML##
+## Najpopularniejsze biblioteki ML
 
 Inspiracją do napisania tego artykułu było dla mnie znalezione w sieci zestawienie 20 bibliotek ML dla Pythona [6] uporządkowanych według dość oryginalnego kryterium popularności – wyrażało się ono liczbą commitów na githubie oraz osób biorących udział w tworzeniu biblioteki (contributors). Liczba dostępnych bibliotek jest jednak znacznie większa. Joseph Misiti w swoim repozytorium zgromadził zestawienie listujące grubo ponad 150 różnych bibliotek dla Pythona, które w jakimś stopniu są wykorzystywane w uczeniu maszynowym [5].*
 Niewątpliwie najpopularniejszą biblioteką oraz de facto standardem jest **scikit-learn** (https://github.com/scikit-learn/scikit-learn) . Biblioteka ta, oparta na popularnych pakietach numerycznych i naukowych NumPy oraz SciPy, cieszy się też dużym wsparciem społeczności. Jest biblioteką ogólnego zastosowania – zawiera wiele modułów implementujących różne algorytmy oraz techniki ML. Biblioteka jest bardzo łatwa w użyciu i wydajna. Jednak za tą łatwość i mnogość zastosowań płaci się elastycznością. Trudno w scikit-learn zmodyfikować szczegółowe parametry algorytmu, dopasowując go do konkretnego problemu. Dlatego, gdy chcemy wykonywać operacje bardziej niskopoziomowe, warto sięgnąć po dedykowaną, bardziej elastyczną bibliotekę, jak np. **PyBrain** (https://github.com/pybrain/pybrain), pozwalającą skonstruować praktycznie dowolną sieć neuronową, modyfikując np. funkcje aktywacji itp. PyBrain również wykorzystuje SciPy.
@@ -42,28 +42,29 @@ Biblioteką ogólnego przeznaczenia, bez zależności od SciPy i Theano jest **P
 Zwieńczeniem tej niezwykle skrótowej prezentacji niech będzie **fuel** (https://github.com/mila-udem/fuel), biblioteka zapewniająca łatwy dostęp do popularnych zbiorów danych takich jak MNIST (baza danych pisma odręcznego). CIFAR-10 (baza obrazów) czy Google's One Billion Words (beza tekstowa). Z kolei **Python Machine Learning Samples** (https://github.com/awslabs/machine-learning-samples) zawiera zbiór przykładowych aplikacji wykorzystujących ML.
 
 Tabela 1. Wybrane biblioteki ML dla pythona uporządkowane wg liczby współautorów (contributors) [dane liczbowe wg stanu z 31.08.2016].
-|    Biblioteka                  |    commits    |    contributors    |    github                                                 |
-|--------------------------------|---------------|--------------------|-----------------------------------------------------------|
-|    scikit-learn                |    21148      |    661             |    https://github.com/scikit-learn/scikit-learn           |
-|    tensorflow                  |    7339       |    372             |    https://github.com/tensorflow/tensorflow               |
-|    Theano                      |    23286      |    250             |    https://github.com/Theano/Theano                       |
-|    keras                       |    2592       |    250             |    https://github.com/fchollet/keras                      |
-|    caffe                       |    3766       |    208             |    https://github.com/BVLC/caffe                          |
-|    pylearn2                    |    7100       |    116             | https://github.com/lisa-lab/pylearn2                      |
-|    NuPIC                       |    5986       |    73              | https://github.com/numenta/nupic                          |
-|    H2O                         |    19092      |    62              | https://github.com/h2oai/h2o-3                            |
-|    lasagne                     |    1050       |    51              |    https://github.com/Lasagne/Lasagne                     |
-|    blocks                      |    3175       |    48              |    https://github.com/mila-udem/blocks                    |
-|    nilearn                     |    5145       |    45              |    https://github.com/nilearn/nilearn                     |
-|    pybrain                     |    984        |    31              | https://github.com/pybrain/pybrain                        |
-|    fuel                        |    1035       |    28              |    https://github.com/mila-udem/fuel                      |
-|    pattern                     |    943        |    20              | https://github.com/clips/pattern                          |
-|    fann                        |    156        |    19              |    https://github.com/libfann/fann                        |
-|    machine-learning-samples    |    29         |    13              |    https://github.com/awslabs/machine-learning-samples    |
-|    Pyevolve                    |    168        |    12              |    https://github.com/perone/Pyevolve                     |
+
+| Biblioteka               | commits | contributors | https://github.com/              |
+|--------------------------|---------|--------------|----------------------------------|
+| scikit-learn             | 21148   | 661          | scikit-learn/scikit-learn        |
+| tensorflow               | 7339    | 372          | tensorflow/tensorflow            |
+| Theano                   | 23286   | 250          | Theano/Theano                    |
+| keras                    | 2592    | 250          | fchollet/keras                   |
+| caffe                    | 3766    | 208          | BVLC/caffe                       |
+| pylearn2                 | 7100    | 116          | lisa-lab/pylearn2                |
+| NuPIC                    | 5986    | 73           | numenta/nupic                    |
+| H2O                      | 19092   | 62           | h2oai/h2o-3                      |
+| lasagne                  | 1050    | 51           | Lasagne/Lasagne                  |
+| blocks                   | 3175    | 48           | mila-udem/blocks                 |
+| nilearn                  | 5145    | 45           | nilearn/nilearn                  |
+| pybrain                  | 984     | 31           | pybrain/pybrain                  |
+| fuel                     | 1035    | 28           | mila-udem/fuel                   |
+| pattern                  | 943     | 20           | clips/pattern                    |
+| fann                     | 156     | 19           | libfann/fann                     |
+| machine-learning-samples | 29      | 13           | awslabs/machine-learning-samples |
+| Pyevolve                 | 168     | 12           | perone/Pyevolve                  |
 
 
-##Bibliografia##
+## Bibliografia
 
 1.	Britz D., Implementing a Neural Network from Scratch in Python – An Introduction, http://www.wildml.com/2015/09/implementing-a-neural-network-from-scratch/
 2.	Górecki P., Uczenie maszynowe, sztuczna inteligencja i (samo)świadomość, 2014,  http://www.tabletowo.pl/2014/11/23/uczenie-maszynowe-sztuczna-inteligencja-i-samoswiadomosc/
