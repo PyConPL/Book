@@ -468,10 +468,11 @@ dostępny jest na GitHubie [7].
 
 ## Linki
 
-1. Sibsankar Haldar, Alex Alagarsamy Aravind "Operating Systems", rozdział 5, "CPU Management": https://books.google.pl/books?id=orZ0CLxEMXEC&pg=PA118
-2. PEP-380, Syntax for Delegating to a Subgenerator: https://www.python.org/dev/peps/pep-0380/
-3. FreeBSD Developers Handbook, rozdział 7 "Sockets": https://www.freebsd.org/doc/en_US.ISO8859-1/books/developers-handbook/sockets.html
-4. Sangjin Han, "Scalable Event Multiplexing": https://people.eecs.berkeley.edu/~sangjin/2012/12/21/epoll-vs-kqueue.html
-5. Philip Roberts, "What the hack is the event loop anyway?", JSConf EU 2014: https://www.youtube.com/watch?v=8aGhZQkoFbQ
-6. David Beazley, "Python Concurrency From the Ground Up", PyCon 2015: https://www.youtube.com/watch?v=MCs5OvhV9S4
+1. Sibsankar Haldar, Alex Alagarsamy Aravind "Operating Systems", rozdział 5, "CPU Management": \hyphenatedurl{https://books.google.pl/books?id=orZ0CLxEMXEC&pg=PA118}
+2. PEP-380, Syntax for Delegating to a Subgenerator: \hyphenatedurl{https://www.python.org/dev/peps/pep-0380/}
+3. FreeBSD Developers Handbook, rozdział 7 "Sockets": https://www.freebsd.org/
+doc/en`_`US.ISO8859-1/books/developers-handbook/sockets.html
+4. Sangjin Han, "Scalable Event Multiplexing": \hyphenatedurl{https://people.eecs.berkeley.edu/~sangjin/2012/12/21/epoll-vs-kqueue.html}
+5. Philip Roberts, "What the hack is the event loop anyway?", JSConf EU 2014: \hyphenatedurl{https://www.youtube.com/watch?v=8aGhZQkoFbQ}
+6. David Beazley, "Python Concurrency From the Ground Up", PyCon 2015: \hyphenatedurl{https://www.youtube.com/watch?v=MCs5OvhV9S4}
 7. Github, "Ghetto Asyncio": 
