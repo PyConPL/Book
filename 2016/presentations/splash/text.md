@@ -3,7 +3,7 @@ Finding a business model for Open Source Applications - case study of Splash
 =====================
 
 [Splash](http://splash.readthedocs.io/en/stable/) is an open source scriptable headless browser with 
-HTTP API, written in Python 3 with Twisted & PyQt. I’d like to present the project and discuss 
+HTTP API, written in Python 3 with Twisted `&` PyQt. I’d like to present the project and discuss 
 a couple of social and technical phenomena that I noticed while taking part in the development of 
 this application. I’d like to discuss how the application is structured, what libraries we used and
 how they served us, and finally discuss how open source works for us and how I perceive it.

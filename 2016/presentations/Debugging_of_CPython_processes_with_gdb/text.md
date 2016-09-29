@@ -101,7 +101,7 @@ As is, the former is of little help, when you are trying to find a problem
 in your Python code, and all you see is the current state of the interpreter
 itself.
 
-However, [PyEval_EvalFrameEx] looks interesting: it's a function of CPython,
+However, [`PyEval_EvalFrameEx`] looks interesting: it's a function of CPython,
 which executes bytecode of Python application level functions and, thus,
 has access to their state - the very state we are usually interested in.
 

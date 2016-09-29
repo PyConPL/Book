@@ -51,7 +51,7 @@ Bez zbędnego przedłużania, zobaczmy konkretnie jakie reguły składają się 
 
  Chodzi tutaj o wszelkie nazwy klas, metod i zmiennych. Najczęściej skracamy nazwy dlatego, że pełna wersja jest zbyt długa, a musimy jej użyć wiele razy. Zbyt długa nazwa może sugerować, że funkcja ma zbyt wiele odpowiedzialności i stara się zrobić więcej niż jedną rzecz. Wielokrotne używanie tej samej funkcji może z kolei być znakiem, że warto pokusić się o usunięcie zduplikowanego kodu.
 
- Warto zadbać o to, by nazwy klas i metod były krótkie i precyzyjne. Jeśli funkcja ma jeden konkretny cel, to nazwanie jej w zwięzły sposób nie będzie problemem. Należy również zwracać uwagę na kontekst w jakim metoda będzie używana. Załóżmy że mamy klasę Order obsługującą zamówienia. Funkcja służąca do wysyłki nie powinna się nazywać ship_order(), gdyż powtarzamy w ten sposób nazwy. Zamiast tego wystarczy samo ship(), dzięki czemu wywołanie order.ship() jest krótsze i czytelniejsze.
+ Warto zadbać o to, by nazwy klas i metod były krótkie i precyzyjne. Jeśli funkcja ma jeden konkretny cel, to nazwanie jej w zwięzły sposób nie będzie problemem. Należy również zwracać uwagę na kontekst w jakim metoda będzie używana. Załóżmy że mamy klasę Order obsługującą zamówienia. Funkcja służąca do wysyłki nie powinna się nazywać `ship_order()`, gdyż powtarzamy w ten sposób nazwy. Zamiast tego wystarczy samo ship(), dzięki czemu wywołanie order.ship() jest krótsze i czytelniejsze.
 
 ## 6. Encje powinny być małe.
 
@@ -84,10 +84,9 @@ Wszystkie 9 zasad, choć czasem bardzo restrykcyjnych, wymusza na programiście 
 
 Kalistenika obiektowa to nie jest zbiór najlepszych praktyk i nie należy przestrzegać ich rygorystycznie. W każdym przypadku można podać przykład, gdzie stosowanie tych zasad sprawi, że końcowy kod będzie dużo gorszej jakości. Najważniejsza jest bowiem praktyka i zdrowy rozsądek.
 
-[1] https://pl.wikipedia.org/wiki/Kalistenika
+## Bibliografia
 
-[2] https://pragprog.com/book/twa/thoughtworks-anthology
-
-[3] https://www.goodreads.com/book/show/3735293-clean-code
-
-[4] https://pl.wikipedia.org/wiki/Prawo_Demeter
+1. https://pl.wikipedia.org/wiki/Kalistenika
+2. https://pragprog.com/book/twa/thoughtworks-anthology
+3. https://www.goodreads.com/book/show/3735293-clean-code
+4. https://pl.wikipedia.org/wiki/Prawo`_`Demeter
