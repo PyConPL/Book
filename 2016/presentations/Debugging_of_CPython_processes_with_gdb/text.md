@@ -343,11 +343,11 @@ case `gdb` will show you something like:
 #2  time_sleep () at ../Modules/timemodule.c:231
 #3  0x00000000004f5465 in call_function (oparg=<optimized out>, pp_stack=0x7fff62b184c0) at ../Python/ceval.c:4637
 #4  PyEval_EvalFrameEx () at ../Python/ceval.c:3185
-#5  0x00000000004f5194 in fast_function (nk=<optimized out>, na=<optimized out>, n=<optimized out>, pp_stack=0x7fff62b185c0, 
+#5  0x00000000004f5194 in fast_function (nk=<optimized out>, na=<optimized out>, n=<optimized out>, pp_stack=0x7fff62b185c0,
     func=<optimized out>) at ../Python/ceval.c:4750
 #6  call_function (oparg=<optimized out>, pp_stack=0x7fff62b185c0) at ../Python/ceval.c:4677
 #7  PyEval_EvalFrameEx () at ../Python/ceval.c:3185
-#8  0x00000000004f5194 in fast_function (nk=<optimized out>, na=<optimized out>, n=<optimized out>, pp_stack=0x7fff62b186c0, 
+#8  0x00000000004f5194 in fast_function (nk=<optimized out>, na=<optimized out>, n=<optimized out>, pp_stack=0x7fff62b186c0,
     func=<optimized out>) at ../Python/ceval.c:4750
 #9  call_function (oparg=<optimized out>, pp_stack=0x7fff62b186c0) at ../Python/ceval.c:4677
 #10 PyEval_EvalFrameEx () at ../Python/ceval.c:3185
@@ -360,7 +360,7 @@ case `gdb` will show you something like:
 #17 0x000000000062b870 in run_file (p_cf=0x7fff62b18920, filename=0x1733260 L"test2.py", fp=0x1790190) at ../Modules/main.c:318
 #18 Py_Main () at ../Modules/main.c:768
 #19 0x00000000004cb8ef in main () at ../Programs/python.c:69
-#20 0x00007fdf3c970610 in __libc_start_main (main=0x4cb810 <main>, argc=2, argv=0x7fff62b18b38, init=<optimized out>, fini=<optimized out>, 
+#20 0x00007fdf3c970610 in __libc_start_main (main=0x4cb810 <main>, argc=2, argv=0x7fff62b18b38, init=<optimized out>, fini=<optimized out>,
     rtld_fini=<optimized out>, stack_end=0x7fff62b18b28) at libc-start.c:291
 #21 0x00000000005c9df9 in _start ()
 
@@ -420,7 +420,7 @@ Reading symbols from /home/rpodolyaka/workspace/venvs/default/bin/python2...(no 
 #7  0x00000000004e3d92 in PyRun_FileExFlags ()
 #8  0x00000000004e2646 in PyRun_SimpleFileExFlags ()
 #9  0x0000000000491c23 in Py_Main ()
-#10 0x00007ff2df30f610 in __libc_start_main (main=0x491670 <main>, argc=2, argv=0x7ffc36f11cf8, init=<optimized out>, fini=<optimized out>, 
+#10 0x00007ff2df30f610 in __libc_start_main (main=0x491670 <main>, argc=2, argv=0x7ffc36f11cf8, init=<optimized out>, fini=<optimized out>,
     rtld_fini=<optimized out>, stack_end=0x7ffc36f11ce8) at libc-start.c:291
 #11 0x000000000049159b in _start ()
 
@@ -570,11 +570,11 @@ undefined:
 #2  time_sleep.lto_priv () at ../Modules/timemodule.c:206
 #3  0x00000000004c524a in call_function (oparg=<optimized out>, pp_stack=0x7ffefb5045b0) at ../Python/ceval.c:4350
 #4  PyEval_EvalFrameEx () at ../Python/ceval.c:2987
-#5  0x00000000004ca95f in fast_function (nk=<optimized out>, na=<optimized out>, n=<optimized out>, pp_stack=0x7ffefb504700, 
+#5  0x00000000004ca95f in fast_function (nk=<optimized out>, na=<optimized out>, n=<optimized out>, pp_stack=0x7ffefb504700,
     func=0x7f3e95f78c80) at ../Python/ceval.c:4435
 #6  call_function (oparg=<optimized out>, pp_stack=0x7ffefb504700) at ../Python/ceval.c:4370
 #7  PyEval_EvalFrameEx () at ../Python/ceval.c:2987
-#8  0x00000000004ca95f in fast_function (nk=<optimized out>, na=<optimized out>, n=<optimized out>, pp_stack=0x7ffefb504850, 
+#8  0x00000000004ca95f in fast_function (nk=<optimized out>, na=<optimized out>, n=<optimized out>, pp_stack=0x7ffefb504850,
     func=0x7f3e95f78c08) at ../Python/ceval.c:4435
 #9  call_function (oparg=<optimized out>, pp_stack=0x7ffefb504850) at ../Python/ceval.c:4370
 #10 PyEval_EvalFrameEx () at ../Python/ceval.c:2987
@@ -584,7 +584,7 @@ undefined:
 #14 0x00000000004ecf52 in PyRun_FileExFlags () at ../Python/pythonrun.c:1362
 #15 0x00000000004eb6d1 in PyRun_SimpleFileExFlags () at ../Python/pythonrun.c:948
 #16 0x000000000049e2d8 in Py_Main () at ../Modules/main.c:640
-#17 0x00007f3e94fc2610 in __libc_start_main (main=0x49dc00 <main>, argc=2, argv=0x7ffefb504c98, init=<optimized out>, fini=<optimized out>, 
+#17 0x00007f3e94fc2610 in __libc_start_main (main=0x49dc00 <main>, argc=2, argv=0x7ffefb504c98, init=<optimized out>, fini=<optimized out>,
     rtld_fini=<optimized out>, stack_end=0x7ffefb504c88) at libc-start.c:291
 #18 0x000000000049db29 in _start ()
 

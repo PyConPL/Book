@@ -80,7 +80,7 @@ image and run as a container in a uniform way.
 Without messy or convoluted installation processes.
 
 #### Handling other microservices
-The problem here is that if we'd want to simply set up the other services that are required by the 
+The problem here is that if we'd want to simply set up the other services that are required by the
 service under tests, we would also need to set up their dependencies as well.
 This chain reaction could go on until we had a large chunk (if not all) of the platform on our
 development machine.
@@ -98,7 +98,7 @@ Those mock servers are:
 HTTP calls.
 * *Pretenders*, a Python library and a server (like WireMock) that can be used from test code.
 It requires manually starting the server before running the tests.
-* *Mountebank* is similar in principle to the previous two, but has more features, including 
+* *Mountebank* is similar in principle to the previous two, but has more features, including
 faking TCP services (which can be used to simulate broken HTTP messages).
 It's written in NodeJS, but it can be downloaded as a standalone package not requiring a Node
 installation.
@@ -146,7 +146,7 @@ First, `db`:
 ```python
 import docker
 import pytest
-import redis 
+import redis
 
 # "db" is function scoped, so it will be recreated on each test function.
 # It depends on another fixture - "db_session".
@@ -211,7 +211,7 @@ def our_service_session():
         '--port', '{port}',
         '--call', 'data_acquisition.app:get_app']
 
-    # Spawning the service is straightforward. 
+    # Spawning the service is straightforward.
     service = mountepy.HttpService(
         service_command,
         # Configuration is passed through environment variables.
@@ -312,7 +312,7 @@ parallel = true
 ; If even one untested statement is written, the tests will fail.
 ; With parallel coverage, there's no need to write meaningless tests of glue-code that run
 ; almost 100% on mocks to ramp up to absolute coverage,
-; because the code will be hit by the service test. 
+; because the code will be hit by the service test.
 fail_under = 100
 ```
 
@@ -336,7 +336,7 @@ commands =
 
 Remember that Pylint's config can be tweaked to lower its standards,
 which can be too high at times.
-Specific code lines can also be annotated to ignore a Pylint check if you're absolutely 
+Specific code lines can also be annotated to ignore a Pylint check if you're absolutely
 sure that what you're doing is the best way and Pylint is wrong to scold you.
 
 ## Contract tests with Swagger and Bravado
@@ -467,15 +467,16 @@ def test_contract_unit(swagger_spec):
 Solutions presented here will help keep you sane when working on a microservice-based system,
 but are far from being everything you need to know to about microservice development.
 Further things to consider are:
+
 * end-to-end tests,
 * performance tests,
 * operations automation (deployment, data recovery, service scaling, etc.),
 * monitoring of services and infrastructure,
 * and more.
 
-## Sources
-* Gary Bernhardt. [Fast Test, Slow Test](https://youtu.be/RAxiiRPHS9k)
-* Sam Newman. Building Microservices. O'Reilly Media, Inc., February 10, 2015.
-* Harry J.W. Percival. Test-Driven Development with Python. O'Reilly Media, Inc., June 19, 2014.
-* martinfowler.com ["Microservice Testing"](http://martinfowler.com/articles/microservice-testing/)
-* sdtimes.com ["Testing in production comes out of the shadows"](http://sdtimes.com/testing-production-comes-shadows/)
+## References
+1. Gary Bernhardt. Fast Test, Slow Test. https://youtu.be/RAxiiRPHS9k
+2. Sam Newman. Building Microservices. O'Reilly Media, Inc., February 10, 2015
+3. Harry J.W. Percival. Test-Driven Development with Python. O'Reilly Media, Inc., June 19, 2014
+4. Tobias Clemson. Microservice Testing. http://martinfowler.com/articles/\crlf microservice-testing/
+5. Testing in production comes out of the shadows. http://sdtimes.com/testing-production-comes-shadows/

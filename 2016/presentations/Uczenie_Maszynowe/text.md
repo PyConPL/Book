@@ -10,7 +10,7 @@ Gdy w roku 1965 na Uniwersytecie Stanforda powstawał system Dendral, nikt pewni
 
 Dendral był specjalistycznym oprogramowaniem naukowym, służącym do analizy, grupowania oraz rozpoznawania, nieznanych do tej pory człowiekowi, molekuł związków chemicznych. Uzyskane przez program rezultaty zostały opublikowane w literaturze naukowej. Było to pierwsze w historii odkrycie dokonane bezpośrednio przez komputer, a Dendral uważany jest za prekursora systemów wykorzystujących uczenie maszynowe.
 
-Motorem napędowym dynamicznego rozwoju technik sztucznej inteligencji oraz uczenia maszynowego był wzrost ilości gromadzonych danych. Widać to dobrze na przykład w dziedzinie biologii, gdzie pod koniec XX wieku intensywnie badano sposoby pozyskiwania informacji o sekwencjach nukleotydowych genów. W roku 2003 głośno było o zakończeniu wielkiego projektu sekwencjonowania ludzkiego genomu (HGP, human genom project). Uzyskanie pierwszej sekwencji całego genomu człowieka zajęło naukowcom 13 lat i kosztowało aż 3 mld dolarów. Dziś jesteśmy w stanie zsekwencjonować cały genom w ciągu zaledwie kilku godzin, za kwotę rzędu jedynie tysiąca dolarów. Czyste, surowe dane niewiele jednak nam dają. Nie jest dla nas przecież ważna sekwencja sama w sobie, ale wynikające z niej wnioski, takie jak określenie skłonności i ryzyka zachorowania na poszczególne choroby, zidentyfikowanie oporności na niektóre leki (ważne przy planowaniu skutecznego leczenia) itp. 
+Motorem napędowym dynamicznego rozwoju technik sztucznej inteligencji oraz uczenia maszynowego był wzrost ilości gromadzonych danych. Widać to dobrze na przykład w dziedzinie biologii, gdzie pod koniec XX wieku intensywnie badano sposoby pozyskiwania informacji o sekwencjach nukleotydowych genów. W roku 2003 głośno było o zakończeniu wielkiego projektu sekwencjonowania ludzkiego genomu (HGP, human genom project). Uzyskanie pierwszej sekwencji całego genomu człowieka zajęło naukowcom 13 lat i kosztowało aż 3 mld dolarów. Dziś jesteśmy w stanie zsekwencjonować cały genom w ciągu zaledwie kilku godzin, za kwotę rzędu jedynie tysiąca dolarów. Czyste, surowe dane niewiele jednak nam dają. Nie jest dla nas przecież ważna sekwencja sama w sobie, ale wynikające z niej wnioski, takie jak określenie skłonności i ryzyka zachorowania na poszczególne choroby, zidentyfikowanie oporności na niektóre leki (ważne przy planowaniu skutecznego leczenia) itp.
 
 Nawiasem mówiąc, koszt długotrwałego przechowywania danych sekwencyjnych bywa na tyle duży, że często bardziej opłaca się zachować próbkę DNA i w razie potrzeby ponownie przeprowadzić sekwencjonowanie  To kolejny ważny aspekt związany z „erą danych”, który, jako wykraczający poza tematykę artykułu, pominę w dalszych rozważaniach.
 Duża ilość gromadzonych danych nie jest domeną jedynie biologii. Mamy obrazy medyczne, dane meteorologiczne, dane gospodarcze, dane o ruchu w sieci i szereg innych. I podobnie – bazując na tych pozornie bezużytecznych surowych danych, chcemy wyciągnąć konkretne, praktyczne wnioski.
@@ -27,7 +27,7 @@ Niewątpliwie najpopularniejszą biblioteką oraz de facto standardem jest **sci
 
 Istnieją też biblioteki, które rozszerzają funkcjonalność pakietu scikit-learn, np. **Nilearn** (https://github.com/nilearn/nilearn), zawierająca funkcje szczególnie przydatne w analizie obrazów aktywności mózgu.
 
-Ponieważ metody uczenia maszynowego wymagają zwykle obliczeń na macierzach i innych złożonych strukturach matematycznych, wiele bibliotek bazuje na specjalistycznych bibliotekach numerycznych. Wspomniany wyżej scikit-learn wymaga SciPy i NumPy. Inną biblioteką implementującą zaawansowane obliczenia numeryczne jest **Theano** (https://github.com/Theano/Theano). Theano może również być samodzielnie wykorzystywana do ML, szczególnie w implementacji sieci neuronowych oraz uczenia głębokiego. Theano implementuje również rozwiązania pozwalające efektywnie wykonywać obliczenia na procesorach graficznych (GPU). 
+Ponieważ metody uczenia maszynowego wymagają zwykle obliczeń na macierzach i innych złożonych strukturach matematycznych, wiele bibliotek bazuje na specjalistycznych bibliotekach numerycznych. Wspomniany wyżej scikit-learn wymaga SciPy i NumPy. Inną biblioteką implementującą zaawansowane obliczenia numeryczne jest **Theano** (https://github.com/Theano/Theano). Theano może również być samodzielnie wykorzystywana do ML, szczególnie w implementacji sieci neuronowych oraz uczenia głębokiego. Theano implementuje również rozwiązania pozwalające efektywnie wykonywać obliczenia na procesorach graficznych (GPU).
 
 Wśród bibliotek bazujących na Theano warto wskazać **Pylearn2** (https://github.com/lisa-lab/pylearn2) oraz **Block** (https://github.com/mila-udem/blocks), **Keras** (https://github.com/fchollet/keras) i **Lasagne** (https://github.com/Lasagne/Lasagne).
 
@@ -40,7 +40,7 @@ Wśród bibliotek najłatwiej znajdziemy te wspierające sieci neuronowe czy ucz
 Biblioteką ogólnego przeznaczenia, bez zależności od SciPy i Theano jest **Pattern** (https://github.com/clips/pattern), dedykowana w szczególności do eksploracji witryn internetowych. Wspomnieć należy również biblioteki **H2O** (https://github.com/h2oai/h2o-3)  i **caffe** (https://github.com/BVLC/caffe).
 
 Zwieńczeniem tej niezwykle skrótowej prezentacji niech będzie **fuel** (https://github.com/mila-udem/fuel), biblioteka zapewniająca łatwy dostęp do popularnych zbiorów danych takich jak MNIST (baza danych pisma odręcznego). CIFAR-10 (baza obrazów) czy Google's One Billion Words (beza tekstowa). Z kolei **Python Machine Learning Samples** (https://github.com/awslabs/machine-learning-samples) zawiera zbiór przykładowych aplikacji wykorzystujących ML.
- 
+
 Tabela 1. Wybrane biblioteki ML dla pythona uporządkowane wg liczby współautorów (contributors) [dane liczbowe wg stanu z 31.08.2016].
 |    Biblioteka                  |    commits    |    contributors    |    github                                                 |
 |--------------------------------|---------------|--------------------|-----------------------------------------------------------|
@@ -71,7 +71,7 @@ Tabela 1. Wybrane biblioteki ML dla pythona uporządkowane wg liczby współauto
 4.	Mayo M., 7 Steps to Mastering Machine Learning With Python, 2015, http://www.kdnuggets.com/2015/11/seven-steps-machine-learning-python.html
 5.	Misiti J., Awesome Machine Learning, https://github.com/josephmisiti/awesome-machine-learning#python-cv
 6.	Peddibhotla G.B., Top 20 Python Machine Learning Open Source Projects, 2015, http://www.kdnuggets.com/2015/06/top-20-python-machine-learning-open-source-projects.html
-7.	Python Tools for Machine Learning, 2014, https://www.cbinsights.com/blog/python-tools-machine-learning/ 
-8.	Robinson S., The Best Machine Learning Libraries in Python, 2015, http://stackabuse.com/the-best-machine-learning-libraries-in-python/ 
-9.	Rosebrock A., My Top 9 Favorite Python Deep Learning Libraries, 2016, https://www.pyimagesearch.com/2016/06/27/my-top-9-favorite-python-deep-learning-libraries/ 
+7.	Python Tools for Machine Learning, 2014, https://www.cbinsights.com/blog/python-tools-machine-learning/
+8.	Robinson S., The Best Machine Learning Libraries in Python, 2015, http://stackabuse.com/the-best-machine-learning-libraries-in-python/
+9.	Rosebrock A., My Top 9 Favorite Python Deep Learning Libraries, 2016, https://www.pyimagesearch.com/2016/06/27/my-top-9-favorite-python-deep-learning-libraries/
 10.	Scikit-learn. Machine Learning in Python, http://scikit-learn.org/

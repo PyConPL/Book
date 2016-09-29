@@ -1,7 +1,7 @@
 # Wstęp
 Przetwarzanie i składowanie informacji jest nieodłącznym elementem niemal każdego programu komputerowego, zaś w zakresie przechowywania danych, przez lata, bazy relacyjne wypracowały sobie pozycję niekwestionowanego lidera. Dlatego nic dziwnego, że bardzo rozpowszechnioną praktyką przy tworzeniu aplikacji jest jej integracja z relacyjną bazą danych.
 
-W tym miejscu pojawia się problem niekompatybilności, gdyż twórcy aplikacji programują w swoich językach (najczęściej imperatywno-obiektowych, jak Python), natomiast bazy danych używają wyspecjalizowanego (deklaratywno-opisowego) języka SQL. 
+W tym miejscu pojawia się problem niekompatybilności, gdyż twórcy aplikacji programują w swoich językach (najczęściej imperatywno-obiektowych, jak Python), natomiast bazy danych używają wyspecjalizowanego (deklaratywno-opisowego) języka SQL.
 
 Niestety, współpraca języków opartych na tak różnych paradygmatach jest trudna i w punkcie łączenia pojawia się wiele zgrzytów. Dlatego, żeby pogodzić te dwa światy, powstały biblioteki ORM (*Object Relational Mapping*), których zadaniem jest likwidacja tarcia na styku przez (w skrócie) usunięcie SQLa z kodów źródłowych aplikacji i zastąpienie go odwołaniami do biblioteki ORM.
 
@@ -125,7 +125,7 @@ Mając już obiekt sesji możemy tworzyć rekordy:
 
     >>> new_user = User(name='jan')
     >>> session.add(new_user)
- 
+
 Odpytywać bazę:
 
     >>> users = session.query(User).filter_by(name='jan')
@@ -145,7 +145,7 @@ A gdy już czegoś nie potrzebujemy, wystarczy powiedzieć:
     >>> session.delete(new_user)
     >>> session.query(User).filter_by(name='jasiek').count()
     0
-    
+
 ## Relacje
 Tworzenie relacji sprowadza się do jej zadeklarowania w tabeli podrzędnej:
 

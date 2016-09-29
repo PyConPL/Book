@@ -96,7 +96,7 @@ differences with the varying support of Netconf on each device.
 ##Specific Network Vendor Libraries
 
 Since Python became more and more popular amongst network engineers, network vendors started to provide their own
-libraries to facilitate device interaction - to mention a few: 
+libraries to facilitate device interaction - to mention a few:
 
 * Arista's [pyeapi](https://github.com/arista-eosplus/pyeapi)
 * Cisco IOS-XR [pyiosxr](https://github.com/fooelisa/pyiosxr)
