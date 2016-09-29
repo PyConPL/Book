@@ -3,17 +3,17 @@
 ## Wprowadzenie
 
 Ostatnimi czasy wiele mówi się i pisze o programowaniu asynchronicznym i
-pętlach zdarzeń. Pojawiają się takie słowa jak *event loop*, *promise*,
+pętlach zdarzeń. Pojawiają się takie słowa, jak *event loop*, *promise*,
 *future*, *deferred*, *greenlet* itp.
 
-W tym artykule postaram się pokazać o co chodzi w pętli zdarzeń (*event loop*)
+W tym artykule postaram się pokazać, o co chodzi w pętli zdarzeń (*event loop*)
 oraz że koncepcja nie jest wcale nowa - nowatorska jest jedynie jej
 implementacja za pomocą generatorów w module `asyncio`.
 
 Zacznę od omówienia mechanizmów wykonywania na jednym komputerze kilku
 programów naraz, potem pokrótce zademonstruję obsługę komunikacji przez sieć,
 a na koniec pokażę, jak napisać "od zera" prosty, asynchroniczny (i
-kompatybilny z `asyncio`!), serwer TCP.
+kompatybilny z&nbsp;`asyncio`!) serwer TCP.
 
 ## Współbieżność i przełączanie kontekstu
 
@@ -23,23 +23,23 @@ najpierw zająć się modelem wykonania programu na komputerze.
 Dla uproszczenia załóżmy, że nasz komputer ma tylko jeden procesor, a
 dokładniej jedną *jednostkę arytmetyczno-logiczną* (ALU - ang. *arithmetic-logic
 unit*). Jest to centralna część procesora, odpowiedzialna za wykonywanie
-instrukcji z jakich składa się nasz program.
+instrukcji, z jakich składa się nasz program.
 
 ALU nie jest w swoim działaniu zbyt wyrafinowana - po prostu wykonuje po kolei
 instrukcje programu umieszczone w kolejnych komórkach pamięci. Ważne jest to,
 że wykonuje je bez przerwy i tak szybko, jak pozwala na to częstotliwość zegara.
 
-Pojawia się zatem pytanie jak to możliwe, że na jednym komputerze wyposażonym w
+Pojawia się zatem pytanie, jak to możliwe, że na jednym komputerze wyposażonym w
 jeden procesor działa jednocześnie kilka programów? W istocie, proste systemy
 operacyjne (np. DOS, systemy operacyjne używane na małych urządzeniach typu
 *embedded*) pozwalają uruchamiać jednocześnie tylko jeden program naraz.
 
-Mechanizmem który pozwala kilku programom działać jednocześnie jest
-*scheduler*. Scheduler jest częścią systemu operacyjnego która nadzoruje
-działanie ALU i decyduje który proces jest w danym momencie wykonywany.
+Mechanizmem, który pozwala kilku programom działać jednocześnie, jest
+*scheduler*. Scheduler jest częścią systemu operacyjnego, która nadzoruje
+działanie ALU i&nbsp;decyduje, który proces jest w danym momencie wykonywany.
 
-Oznacza to, że "tak naprawdę" ALU w dalszym ciągu wykonuje jeden program w
-danym momencie, ale scheduler przełącza aktywne procesy tak szybko, że
+Oznacza to, że tak naprawdę ALU w dalszym ciągu wykonuje jeden program
+w&nbsp;danym momencie, ale scheduler przełącza aktywne procesy tak szybko, że
 użytkownik nie jest w stanie tego zauważyć. Formalna nazwa takiego modelu to
 *współbieżność* (ang.  *concurrency*).
 
@@ -52,8 +52,8 @@ podręczniku "Operating Systems" [1].
 Kłopot w tym, że nasz scheduler też jest programem. Jak w takim razie go
 uruchomić, skoro ALU zajęte jest wykonywaniem *innego* programu?
 
-Można to zrobić na dwa sposoby: albo wymuszając na procesorze aby zatrzymał
-wykonywany właśnie program, albo czekając aż dany program jawnie zgłosi, że
+Można to zrobić na dwa sposoby: albo wymuszając na procesorze, aby zatrzymał
+wykonywany właśnie program, albo czekając, aż dany program jawnie zgłosi, że
 jest gotowy na przełączenie kontekstu.
 
 Pierwszy z tych sposobów nazywamy *wywłaszczaniem* (ang. *preemption*). Aby
@@ -62,8 +62,8 @@ zegarowego* (ang. *timer interrupt*). Przerwanie to specjalny układ
 elektroniczny, który pozwala zainstalować wewnątrz procesora krótką funkcję,
 która będzie uruchamiana przez ALU z zadaną częstotliwością, niezależnie od
 głównego programu. Przerwanie, jak sama nazwa wskazuje, zatrzymuje "w pół
-kroku" aktualnie wykonywany program, wykonuje zainstalowaną funkcję (nazywaną
-*funkcją obsługi przerwania*, ang. *interrupt service routine*) a następnie wznawia
+kroku" aktualnie wykonywany program, wykonuje zainstalowaną *funkcję obsługi przerwania*
+(ang. *interrupt service routine*), a&nbsp;następnie wznawia
 główny program. Przykładowo, Linux uruchamia scheduler 100 razy na sekundę.
 
 Drugi sposób wymaga, aby wszystkie(!) procesy co jakiś czas jawnie wołały
@@ -76,7 +76,7 @@ dowolnym momencie (np. w połowie zapisywania danych do pliku), co może
 powodować subtelne błędy związane z faktyczną kolejnością wykonywania operacji.
 
 Dodatkowym minusem jest fakt, że przełączanie kontekstu jest operacją
-stosunkowo czasochłonną, a zbyt częste jej wykonywanie zmniejsza wydajność
+stosunkowo czasochłonną, a jej zbyt częste wykonywanie zmniejsza wydajność
 całego systemu, bo mniej czasu pozostaje na wykonanie faktycznych programów.
 
 W Pythonie mechanizm wywłaszczania dostępny jest za pośrednictwem *wątków*
@@ -118,12 +118,12 @@ drugiemu modelowi, czyli przełączaniu na żądanie.
 
 ## Współbieżność kooperacyjna
 
-Patrząc na interpreter Pythona jak na system operacyjny, można zauważyć, że w
-sam język wbudowany jest mechanizm przełączania kontekstu. Tym mechanizmem są
+Patrząc na interpreter Pythona jak na system operacyjny, można zauważyć, że
+w&nbsp;sam język wbudowany jest mechanizm przełączania kontekstu. Tym mechanizmem są
 generatory.
 
 Dokładniej, użycie instrukcji `yield` zmienia funkcję w obiekt generatora (de
-facto *proces*) który możemy uruchomić lub zatrzymać. To czego brakuje aby
+facto *proces*), który możemy uruchomić lub zatrzymać. To, czego brakuje, aby
 uruchomić kilka procesów współbieżnie, to scheduler. Na początek wystarczy nam
 prosta implementacja, przełączająca procesy po kolei:
 
@@ -142,7 +142,7 @@ prosta implementacja, przełączająca procesy po kolei:
             next(process)
 
 Ten program wykonuje nasze dwa "procesy" na zmianę, a przełączanie następuje na
-ich jawne żądanie - jeśli któryś nie zawierałby instrukcji `yield`, cały nasz
+ich jawne żądanie - jeśli któryś nie zawierałby instrukcji `yield`, to cały nasz
 miniaturowy system operacyjny zawiesiłby się, wykonując bez przerwy tylko jego:
 
     def rogue_one(pid):
@@ -160,18 +160,18 @@ miniaturowy system operacyjny zawiesiłby się, wykonując bez przerwy tylko jeg
 
 Taki model wykonania nazywa się *współbieżnością kooperacyjną* (ang.
 *cooperative multitasking*). Przełączanie procesów jest deterministyczne, ale
-wymaga aby programy napisane były w specyficzny sposób: muszą co jakiś czas
-wykonywać instrukcję `yield.`.
+wymaga, aby programy napisane były w specyficzny sposób: muszą co jakiś czas
+wykonywać instrukcję `yield`.
 
 Jawne wołanie `yield` w ciele funkcji byłoby jednak bardzo uciążliwe oraz
 znacznie zmniejszyłoby czytelność programu. Spróbujmy zatem nieco to ułatwić.
 
 ## Kompozycja generatorów
 
-Jednym ze sposobów aby zapewnić, by program zachowywał się "grzecznie" w
+Jednym ze sposobów, aby zapewnić, by program zachowywał się "grzecznie" w
 modelu kooperacyjnym, jest uruchamianie schedulera za każdym razem, gdy program
 prosi system operacyjny o jakiś rodzaj operacji wejścia-wyjścia, np. o
-odczytanie stanu klawiatury albo wyświetlenie tekstu na ekranie. W tym celu
+odczytanie stanu klawiatury, albo o wyświetlenie tekstu na ekranie. W tym celu
 dostarczymy specjalne warianty tych funkcji, w naszym przykładzie funkcji
 `print`:
 
@@ -184,7 +184,7 @@ dostarczymy specjalne warianty tych funkcji, w naszym przykładzie funkcji
             smart_print(pid, i)
 
 Pozostaje zatem pytanie, jak uruchomić scheduler. Jeśli po prostu zawołamy
-go jako funkcję, to po jej zakończeniu wrócimy najpierw do `smart_print` a
+go jako funkcję, to po jej zakończeniu wrócimy najpierw do `smart_print`, a
 potem do tego samego procesu. Z kolei jeśli w `smart_print` użyjemy
 `yield`, to przerwiemy tylko funkcję `smart_print`, znów wracając do `process`.
 Potrzebujemy mechanizmu, który pozwoli poprosić inny generator, aby wykonał
@@ -193,10 +193,10 @@ powinno przebiegać jak na poniższym diagramie:
 
 ![yield from](yield_from.png)
 
-Jest to wykonalne, ale kod który realizuje taką operację jest niezwykle
+Jest to wykonalne, ale kod, który realizuje taką operację, jest niezwykle
 skomplikowany, gdyż musi brać pod uwagę, że `os_print` może zgłosić wyjątek,
-zawierać kilka `yield`ów (np. w pętli) i tak dalej. Ostatecznie jest to ponad
-30 linii kodu [2] które musielibyśmy umieszczać w programie przy *każdej* funkcji
+zawierać kilka poleceń `yield` (np. w pętli) i tak dalej. Ostatecznie jest to ponad
+30 linii kodu [2], które musielibyśmy umieszczać w programie przy *każdej* funkcji
 wejścia-wyjścia. Byłoby to skrajnie niepraktyczne.
 
 Python 3.4 rozwiązuje ten problem dostarczając nowe słowo kluczowe `yield
@@ -220,9 +220,10 @@ kontekstach, na przykład gdy chcemy napisać rekurencyjny generator:
             if os.path.isdir(path):
                 yield from walk(path)
 
-Programy wyświetlające napisy na ekranie nie są jednak zbyt ekscytujące, a o
-programowaniu asynchronicznym rozmawia się zazwyczaj w konktekście obsługi
-sieci. Żeby zobaczyć związek między jednym a drugiem, musimy odłożyć na chwilę
+Programy wyświetlające napisy na ekranie nie są jednak zbyt ekscytujące,
+a&nbsp;o&nbsp;programowaniu asynchronicznym rozmawia się zazwyczaj
+w konktekście obsługi
+sieci. Żeby zobaczyć związek między jednym a drugim, musimy odłożyć na chwilę
 problem przełączania procesów, a zająć się obsługą wejścia-wyjścia na
 poziomie systemu operacyjnego.
 
@@ -230,13 +231,13 @@ poziomie systemu operacyjnego.
 
 Praktycznie wszystkie systemy operacyjne udostępniają operacje wejścia-wyjścia
 za pośrednictwem *deskryptorów plików*. Deskryptor jest zazwyczaj po
-prostu liczbą, którą dostajemy od systemu w momencie otwarcia pliku, a
-przekazujemy go jako argument do funkcji, które z tego pliku czytają bądź do
-niego piszą.
+prostu liczbą, którą dostajemy od systemu w momencie otwarcia pliku,
+a przekazujemy go jako argument do funkcji, które z tego pliku czytają,
+bądź do niego piszą.
 
 W ten sposób deskryptor jednoznacznie identyfikuje plik, który chcemy obsłużyć.
-Nie interesuje nas wartość liczbowa deskryptora, używamy go raczej jak bloczka
-w szatni.
+Nie interesuje nas wartość liczbowa deskryptora, używamy go raczej jak
+bloczka w&nbsp;szatni.
 
     import os
 
@@ -255,17 +256,17 @@ Python ukrywa przed nami takie szczegóły implementacyjne za pomocą obiektu
 
 Z naszego punktu widzenia intresujący jest fakt, że pod deskryptorem pliku może
 kryć się dużo więcej niż tylko zwykłe pliki na dysku. Deskryptor pliku jest
-pewną abstrakcją, pozwalającą odnosić się w ten sam sposób to różnych
+pewną abstrakcją, pozwalającą odnosić się w ten sam sposób do różnych
 urządzeń wejścia-wyjścia: dysku, karty sieciowej, a nawet ekranu.
 
 Dzięki temu komunikację przez sieć można obsługiwać za pomocą tego samego
 mechanizmu, co zwykłe pliki. Co prawda sposób uzyskania takiego sieciowego
-deskryptora (nazywanego *gniazdem*, ang. *socket* [3]) jest bardziej
+deskryptora, nazywanego *gniazdem* (ang. *socket* [3]), jest bardziej
 skomplikowany niż proste `open()`, ale sam odczyt i zapis działają tak samo:
 `accept()` jest odpowiednikiem `open()`, `send()` to `write()`, a `recv()` to
 `read()`.
 
-Prosty serwer akceptujący połączenia na porcie 1234 wygląda następująco:
+Prosty serwer odbierający połączenia na porcie 1234 wygląda następująco:
 
     import os
     import socket
@@ -283,7 +284,7 @@ Prosty serwer akceptujący połączenia na porcie 1234 wygląda następująco:
         connection.send("Hello, %s" % name)
         connection.close()
 
-Po uruchomieniu, jego działanie można sprawdzić z drugiego terminala np.
+Po uruchomieniu, jego działanie można sprawdzić z drugiego terminala, np.
 poleceniem `nc` (od `netcat`):
 
     $ nc localhost 1234
@@ -293,19 +294,18 @@ poleceniem `nc` (od `netcat`):
 ## Gniazda sieciowe jako źródła zdarzeń
 
 Nasz serwer ma jednak spory mankament: obsługuje tylko jedno połączenie naraz.
-
 Dzieje się tak dlatego, że funkcje `accept()` i `recv()` blokują program do
-momentu kiedy nie pojawi się nowe połączenie lub nasz klient czegoś nie wyśle.
-Jeśli nowy klient podłączy się w momencie, kiedy serwer czeka aż `recv()` się
+momentu, kiedy nie pojawi się nowe połączenie lub nasz klient czegoś nie wyśle.
+Jeśli nowy klient podłączy się w momencie, kiedy serwer czeka, aż `recv()` się
 zakończy, nie wyślemy do nowego klienta nic, dopóki poprzednie połączenie nie
 zostanie zamknięte.
 
-Zamiast tego, chcielibyśmy poczekać aż na *którymkolwiek* z naszych
+Zamiast tego chcielibyśmy poczekać, aż na *którymkolwiek* z naszych
 połączeń (reprezentowanych przez deskryptory) pojawią się nowe dane, a
 następnie przełączyć kontekst do funkcji je obsługującej.
 
-Wiemy jak zaimplementować przełączenie kontekstu: funkcja obsługi powinna być
-generatorem, który wykona `yield` (lub `yield from`) jeśli zamierza czekać na
+Wiemy, jak zaimplementować przełączenie kontekstu: funkcja obsługi powinna być
+generatorem, który wykona `yield` (lub `yield from`), jeśli zamierza czekać na
 nowe dane.
 
 Jak natomiast obserwować kilka deskryptorów jednocześnie?
@@ -315,20 +315,20 @@ Jak natomiast obserwować kilka deskryptorów jednocześnie?
 Szczęśliwie dla nas, większość systemów operacyjnych dostarcza API realizujące
 właśnie taką operację, nazywaną *zwielokrotnianiem zdarzeń* (ang. *event
 multiplexing*). System operacyjny pozwala zgrupować wiele deskryptorów, dla
-każdego z nich definiując rodzaj zdarzenia na jaki chcemy czekać (gotowość
+każdego z nich definiując rodzaj zdarzenia, na jaki chcemy czekać (gotowość
 do odczytu, gotowość do zapisu lub błąd). Mając taką grupę możemy zawołać jedną
-funkcję, która zaczeka aż na deskryptorach z grupy pojawią się zadane wcześniej
-zdarzenia. To, co dokładnie się stało, otrzymamy z systemu w postaci listy par
-`(deskryptor, zdarzenie)`.
+funkcję, która zaczeka, aż na deskryptorach z grupy pojawią się zadane wcześniej
+zdarzenia. Informację o&nbsp;tym, co dokładnie się stało,
+otrzymamy z systemu w postaci listy par `(deskryptor, zdarzenie)`.
 
-Najstarszym mechanizmem tego typu jest funkcja `select()`: pojawiła się w 1983
+Najstarszym mechanizmem tego typu jest funkcja `select()`, pojawiła się w 1983
 roku w odmianie Uniksa nazywanej Berkeley System Distribution (BSD) w wersji
-4.2 [3]. `select()` miał sporo ograniczeń, głównym problemem był limit ilości
+4.2 [3]. `select()` miał sporo ograniczeń, głównym problemem był limit liczby
 jednocześnie obserwowanych deskryptorów - 1024. Między innymi z tego powodu
 pojawiła się druga funkcja: `poll()` (oraz udoskonalenia: `epoll`, `kqueue` i inne
 [4]) i to nią się zajmiemy.
 
-W Pythonie, `poll()` używa się następująco:
+W Pythonie `poll()` używa się następująco:
 
     import select
 
@@ -346,7 +346,7 @@ W Pythonie, `poll()` używa się następująco:
             task = tasks[fileno]
             next(task)
 
-Jak łatwo zauważyć, ten program zawiera jedną pętlę `while True` która
+Jak łatwo zauważyć, ten program zawiera jedną pętlę `while True`, która
 obserwuje deskryptory i uruchamia zdefiniowane zadania-procesy. Jest to w
 gruncie rzeczy scheduler, bazujący na operacjach wejścia-wyjścia.
 
@@ -356,8 +356,8 @@ loop*).
 Jeszcze jedna uwaga: aby uniknąć przypadkowego zablokowania głównej pętli,
 wszystkie deskryptory powinny być przełączone w *tryb nieblokujący* (ang.
 *non-blocking mode*) za pomocą metody `setblocking(False)`. Spowoduje to, że
-wywołanie `read()` lub `recv()` w momencie gdy deskryptor nie jest jeszcze
-gotowy do odczytu nie zablokuje systemu, ale natychmiast zakończy się błędem.
+wywołanie `read()` lub `recv()` w momencie, gdy deskryptor nie jest jeszcze
+gotowy do odczytu, nie zablokuje systemu, ale natychmiast zakończy się błędem.
 
 ## Główna pętla
 
@@ -367,7 +367,7 @@ napisania asynchronicznego serwera!
 Zacznijmy od podstawowych operacji wejścia-wyjścia. Musimy podmienić funkcje
 `accept()`, `send()` i `recv()` na wersje realizujące współbieżność
 kooperacyjną, analogicznie jak zrobiliśmy poprzednio dla funkcji `print`.
-Różnica będzie taka, że dodamy do wywołania `yield` informację na jakie
+Różnica będzie taka, że dodamy do wywołania `yield` informację, na jakie
 zdarzenie chcemy czekać:
 
     def sock_accept(sock):
@@ -455,24 +455,24 @@ Uważny czytelnik zapewne zauważy, że funkcje `sock_*` i `create_task` mają
 nieprzypadkowe nazwy. Dokładnie to samo API występuje w klasie `MainLoop`
 modułu `asyncio` - w rzeczy samej, nasz serwer będzie działał tak samo dobrze
 używając implementacji wbudowanej w Pythona. Dodatkowo, główna pętla też jest
-już gotowa i nazywa się `MainLoop.run_forever()`
+już gotowa i&nbsp;nazywa się `MainLoop.run_forever()`
 
 Na koniec zaznaczę, że Python w wersji 3.5 wprowadził nową składnię: aby
-zadeklarować zadanie nie trzeba już umieszczać w ciele funkcji słowa `yield` -
+zadeklarować zadanie, nie trzeba już umieszczać w ciele funkcji słowa `yield` -
 zamiast tego deklaruje się ją za pomocą `async def`. Druga zmiana dotyczy
 słowa `yield from`, które w funkcjach tak zadeklarowanych nazywa się `await`.
 Mimo to, poprzednia składnia nadal działa.
 
 Pełny kod przedstawiony w tym artykule, dodatkowo rozbity na mniejsze kroki,
-dostępny jest na GitHubie [7].
+dostępny jest w serwisie GitHub [7].
 
-## Linki
+## Bibliografia
 
-1. Sibsankar Haldar, Alex Alagarsamy Aravind "Operating Systems", rozdział 5, "CPU Management": \hyphenatedurl{https://books.google.pl/books?id=orZ0CLxEMXEC&pg=PA118}
+1. Sibsankar Haldar, Alex Alagarsamy Aravind. "Operating Systems", rozdział 5, "CPU Management": \hyphenatedurl{https://books.google.pl/books?id=orZ0CLxEMXEC&pg=PA118}
 2. PEP-380, Syntax for Delegating to a Subgenerator: \hyphenatedurl{https://www.python.org/dev/peps/pep-0380/}
-3. FreeBSD Developers Handbook, rozdział 7 "Sockets": https://www.freebsd.org/
+3. FreeBSD Developers Handbook, rozdział 7 "Sockets". https://www.freebsd.org/
 doc/en`_`US.ISO8859-1/books/developers-handbook/sockets.html
-4. Sangjin Han, "Scalable Event Multiplexing": \hyphenatedurl{https://people.eecs.berkeley.edu/~sangjin/2012/12/21/epoll-vs-kqueue.html}
-5. Philip Roberts, "What the hack is the event loop anyway?", JSConf EU 2014: \hyphenatedurl{https://www.youtube.com/watch?v=8aGhZQkoFbQ}
-6. David Beazley, "Python Concurrency From the Ground Up", PyCon 2015: \hyphenatedurl{https://www.youtube.com/watch?v=MCs5OvhV9S4}
-7. Github, "Ghetto Asyncio": 
+4. Sangjin Han. Scalable Event Multiplexing. \hyphenatedurl{https://people.eecs.berkeley.edu/~sangjin/2012/12/21/epoll-vs-kqueue.html}
+5. Philip Roberts. What the hack is the event loop anyway? JSConf EU 2014: \hyphenatedurl{https://www.youtube.com/watch?v=8aGhZQkoFbQ}
+6. David Beazley. Python Concurrency From the Ground Up. PyCon 2015: \hyphenatedurl{https://www.youtube.com/watch?v=MCs5OvhV9S4}
+7. Github. Ghetto Asyncio. \hyphenatedurl{https://github.com/mrzechonek/ghetto-asyncio}
