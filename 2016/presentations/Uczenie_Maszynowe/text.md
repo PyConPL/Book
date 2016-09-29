@@ -4,10 +4,10 @@
 
 Techniki uczenia maszynowego są szeroko wykorzystywane w różnych obszarach
 codziennego życia. Problemy takie jak klasyfikacja czy predykcja, przy
-rozwiązywaniu których nie sprawdzają się tradycyjne algorytmy, mogą być z
-powodzeniem implementowane metodami pozwalającymi nauczyć program podejmować
-trafne decyzje. Python idealnie nadaje się do wykorzystania tych technik, w
-czym pomaga bez mała kilkadziesiąt mniej lub bardziej wyspecjalizowanych bibliotek.
+rozwiązywaniu których nie sprawdzają się tradycyjne algorytmy, mogą być
+z powodzeniem implementowane metodami pozwalającymi nauczyć program podejmować
+trafne decyzje. Python idealnie nadaje się do wykorzystania tych technik,
+w czym pomaga bez mała kilkadziesiąt mniej lub bardziej wyspecjalizowanych bibliotek.
 
 ## Rozwój znaczenia i metod uczenia maszynowego
 
@@ -19,13 +19,13 @@ niemal na każdym kroku.
 Dendral był specjalistycznym oprogramowaniem naukowym, służącym do analizy,
 grupowania oraz rozpoznawania, nieznanych do tej pory człowiekowi, molekuł
 związków chemicznych. Uzyskane przez program rezultaty zostały opublikowane
-w literaturze naukowej. Było to pierwsze w historii odkrycie dokonane
+w&nbsp;literaturze naukowej. Było to pierwsze w historii odkrycie dokonane
 bezpośrednio przez komputer, a Dendral uważany jest za prekursora systemów
 wykorzystujących uczenie maszynowe.
 
 Motorem napędowym dynamicznego rozwoju technik sztucznej inteligencji oraz
-uczenia maszynowego był wzrost ilości gromadzonych danych. Widać to dobrze na
-przykład w dziedzinie biologii, gdzie pod koniec XX wieku intensywnie badano
+uczenia maszynowego był wzrost ilości gromadzonych danych. Widać to dobrze
+na przykład w dziedzinie biologii, gdzie pod koniec XX wieku intensywnie badano
 sposoby pozyskiwania informacji o sekwencjach nukleotydowych genów. W roku
 2003 głośno było o zakończeniu wielkiego projektu sekwencjonowania ludzkiego
 genomu (HGP, human genom project). Uzyskanie pierwszej sekwencji całego genomu
@@ -39,20 +39,20 @@ skutecznego leczenia) itp.
 
 Nawiasem mówiąc, koszt długotrwałego przechowywania danych sekwencyjnych bywa
 na tyle duży, że często bardziej opłaca się zachować próbkę DNA i w razie
-potrzeby ponownie przeprowadzić sekwencjonowanie  To kolejny ważny aspekt
-związany z „erą danych”, który, jako wykraczający poza tematykę artykułu,
-pominę w dalszych rozważaniach.
+potrzeby ponownie przeprowadzić sekwencjonowanie. To kolejny ważny aspekt
+związany z&nbsp;„erą danych”, który, jako wykraczający poza tematykę artykułu,
+pominę w&nbsp;dalszych rozważaniach.
 Duża ilość gromadzonych danych nie jest domeną jedynie biologii. Mamy obrazy
-medyczne, dane meteorologiczne, dane gospodarcze, dane o ruchu w sieci i
-szereg innych. I podobnie – bazując na tych pozornie bezużytecznych surowych
+medyczne, dane meteorologiczne, dane gospodarcze, dane o ruchu w&nbsp;sieci
+i szereg innych. I podobnie – bazując na tych pozornie bezużytecznych surowych
 danych, chcemy wyciągnąć konkretne, praktyczne wnioski.
 
 Zastosowania algorytmów uczenia maszynowego widzimy na co dzień. Kto z nas
 wpisując hasło do popularnej wyszukiwarki nie zwrócił uwagi na pojawiające się
 sugestie? Mamy podpowiedzi w pasku przeglądarki, po witrynach oprowadzają nas
 wirtualni asystenci, w pisaniu tekstów pomaga autokorekta, porządek w poczcie
-zapewniają wykrywacze spamu, dostajemy propozycje artykułów podobnych do
-aktualnie czytanego, sugestie podobnych tematycznie filmów, wyselekcjonowane
+zapewniają wykrywacze spamu, dostajemy propozycje artykułów podobnych
+do aktualnie czytanego, sugestie podobnych tematycznie filmów, wyselekcjonowane
 reklamy. Uczenie maszynowe pozwala na stworzenie szybkich i wiarygodnych
 prognoz pogody, wspomaga ocenę zdolności kredytowej, prognozy ekonomiczne,
 obecne jest w nawigacji samochodowej, grach komputerowych i wielu, wielu
@@ -65,17 +65,17 @@ się program na niewielkim wycinku dostępnych danych, na podstawie których
 dokonuje on parametryzacji, czyli inaczej mówiąc – uczy się. Jeżeli uczenie
 przebiegło pomyślnie, wówczas program będzie w stanie podjąć właściwą decyzję
 nawet, jeżeli okażemy mu dane, z którymi nigdy wcześniej nie miał do czynienia.
-Istotą problemów, które rozwiązujemy metodami uczenia maszynowego
+Istotą problemów, które rozwiązujemy metodami uczenia maszynowego,
 są klasyfikacja oraz predykcja. Nie jest moim celem omówienie tutaj
 konkretnych technik, do których zaliczyć możemy m.in. sztuczne sieci neuronowe
 (ANN, *artificial neural networks*) będące (mocno uproszczoną) imitacją
 procesu uczenia zachodzącego w mózgu, maszyny wektorów nośnych (SVM, *support
 vector machines*), których idea polega na optymalizacji granicy decyzyjnej,
-ukryte modele markowa (HMM, *hidden markov models*) mające zastosowanie w
-analizie procesów stochastycznych czy drzewa decyzyjne (DT, *decision trees*),
+ukryte modele Markowa (HMM, *hidden Markov models*) mające zastosowanie
+w analizie procesów stochastycznych, czy drzewa decyzyjne (DT, *decision trees*),
 które dokonują klasyfikacji na podstawie odpowiednio wygenerowaniej struktury
-drzewiastej. W ostatnich latach furorę robi uczenie głębokie (*deep
-learning*), które jest swego rodzaju rozszerzeniem i udoskonaleniem trochę już
+drzewiastej. W ostatnich latach furorę robi uczenie głębokie
+(*deep learning*), które jest swego rodzaju rozszerzeniem i udoskonaleniem trochę już
 odchodzącej na boczny tor idei sieci neuronowych. Do popularnych technik
 zaliczymy również algorytm k-średnich. Czytelników zainteresowanych głębszym
 wyjaśnieniem poszczególnych algorytmów odsyłam do jakże bogatej literatury,
@@ -85,8 +85,8 @@ np. [3].
 
 Inspiracją do napisania tego artykułu było dla mnie znalezione w sieci
 zestawienie 20 bibliotek ML dla Pythona [6] uporządkowanych według dość
-oryginalnego kryterium popularności – wyrażało się ono liczbą commitów na
-githubie oraz osób biorących udział w tworzeniu biblioteki (contributors).
+oryginalnego kryterium popularności – wyrażało się ono liczbą commitów
+na githubie oraz osób biorących udział w tworzeniu biblioteki (contributors).
 Liczba dostępnych bibliotek jest jednak znacznie większa. Joseph Misiti
 w swoim repozytorium zgromadził zestawienie listujące grubo ponad 150 różnych
 bibliotek dla Pythona, które w jakimś stopniu są wykorzystywane w uczeniu
@@ -137,18 +137,19 @@ działania.
 **Nltk** [22] jest biblioteką dedykowaną dla problemów przetwarzania języka
 naturalnego.
 
-Biblioteką ogólnego przeznaczenia, bez zależności od SciPy i Theano jest
+Biblioteką ogólnego przeznaczenia, bez zależności od SciPy i Theano, jest
 **Pattern** [23], dedykowana w szczególności do eksploracji witryn
 internetowych. Wspomnieć należy również biblioteki **H2O** [24]
 i **caffe** [25].
 
 Zwieńczeniem tej niezwykle skrótowej prezentacji niech będzie **fuel** [26],
 biblioteka zapewniająca łatwy dostęp do popularnych zbiorów danych takich jak
-MNIST (baza danych pisma odręcznego). CIFAR-10 (baza obrazów) czy
-Google's One Billion Words (beza tekstowa). Z kolei **Python Machine Learning
-Samples** [27] zawiera zbiór przykładowych aplikacji wykorzystujących ML.
+MNIST (baza danych pisma odręcznego), CIFAR-10 (baza obrazów) czy
+Google's One Billion Words (baza tekstowa). Z kolei
+**Python Machine Learning Samples** [27]
+zawiera zbiór przykładowych aplikacji wykorzystujących ML.
 
-Tabela 1. Wybrane biblioteki ML dla pythona uporządkowane wg liczby współautorów (contributors) [dane liczbowe wg stanu z 31.08.2016].
+Tabela 1. Wybrane biblioteki ML dla Pythona uporządkowane według liczby współautorów (ang. contributors) [dane liczbowe według stanu z 31.08.2016].
 
 | Biblioteka               | commits | contributors | https://github.com/              |
 |--------------------------|---------|--------------|----------------------------------|
