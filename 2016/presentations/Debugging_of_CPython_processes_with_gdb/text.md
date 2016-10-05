@@ -1,5 +1,4 @@
-Debugging of CPython processes with gdb
-=======================================
+# Debugging of CPython processes with gdb
 
 pdb[1] has been, is and probably always will be the bread and butter of Python
 programmers, when they need to find the root cause of a problem in their
@@ -10,8 +9,7 @@ This is where gdb[2] shines.
 
 
 
-Why gdb?
---------
+## Why gdb?
 
 `gdb` is a general purpose debugger, that is mostly used for debugging of C and
 C++ applications (although it actually supports Ada, Objective-C, Pascal and more).
@@ -36,8 +34,7 @@ native library used).
 
 
 
-Debugging of interpreted languages
-----------------------------------
+## Debugging of interpreted languages
 
 So what makes Python special when using `gdb`?
 
@@ -107,8 +104,7 @@ has access to their state - the very state we are usually interested in.
 
 
 
-gdb and Python
---------------
+## gdb and Python
 
 Search results for `"gdb debug python"` can be confusing. The thing is, that starting
 from `gdb` version 7 it's been possible to extend[11] the debugger with Python code, e.g.
@@ -126,8 +122,7 @@ So it's two different, but related things:
 
 
 
-Debugging Python with gdb 101
------------------------------
+## Debugging Python with gdb 101
 
 First of all, you need to install `gdb`:
 
@@ -271,8 +266,7 @@ Check out the debugging guide[17] for details.
 
 
 
-Gotchas
--------
+## Gotchas
 
 Although the described technique should work out-of-the-box, there are a few known
 gotchas.
@@ -632,8 +626,7 @@ applications, e.g. VisualVM[26].
 
 
 
-Conclusion
-----------
+## Conclusion
 
 `gdb` is a powerful tool that allows one to debug complex problems with
 crashing or hanging CPython processes, as well as Python code that does

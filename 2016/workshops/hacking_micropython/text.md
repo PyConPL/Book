@@ -1,3 +1,5 @@
+# Hacking MicroPython
+
 When using MicroPython, you have even bigger chance to need your own library
 written in C than in other Python implementations. You might want to use one of
 the existing libraries for your platform, get access to some peripherals or

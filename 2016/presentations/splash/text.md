@@ -1,6 +1,4 @@
-
-Finding a business model for Open Source Applications - case study of Splash
-=====================
+# Finding a business model for Open Source Applications - case study of Splash
 
 [Splash](http://splash.readthedocs.io/en/stable/) is an open source scriptable headless browser with
 HTTP API, written in Python 3 with Twisted `&` PyQt. I’d like to present the project and discuss
@@ -12,8 +10,7 @@ My presentation will have two parts, one technical and other "social/psychologic
 one I'll outline the application architecture. In the second one I will try to discuss some general
 issues that I noticed around Open Source.
 
-What is Splash and how it works
-===============================
+## What is Splash and how it works
 
 Splash is a headless browser based on WebKit engine. Its main job is rendering HTML and JavaScript.
 You can interact with Splash by sending HTTP requests with some parameters. For example, you can make
@@ -60,8 +57,7 @@ the application, it is forwarded to the BrowserTab object. Every browser tab
 object gets a web page. Web page inherits from Qt QWebView and does all the rendering, it
 executes page JavaScript, renders the DOM and returns a result.
 
-How open source works in case of Splash
-=======================================
+## How open source works in case of Splash
 
 There is a popular misconception that treats open source projects as some sort of charity work. In
 this perception people doing open source are mostly volunteers, who just try to "help others"
