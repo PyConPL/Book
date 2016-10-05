@@ -22,7 +22,7 @@ SQLAlchemy+PostgreSQL jest tak godny polecenia.
 
 # Czym jest Object Relational Mapping?
 Dostęp do relacyjnych baz danych umożliwiają nam różnorakie sterowniki,
-z których prawie wszystkie są zgodne z DB API 2.0 (PEP249[pep249]), po co więc
+z których prawie wszystkie są zgodne z DB API 2.0 (PEP249[1]), po co więc
 dodatkowa warstwa pomiędzy sterownikiem a naszym kodem?
 
 Otóż problem polega na tym, że na SQL osadzony w kodzie Pythona składa
@@ -57,26 +57,26 @@ Możemy mieć wszystko obiektowo w Pythonie, bez choćby jednego łańcucha znak
 <User(id=1, name="Jasiek")>
 ```
 # Dlaczego SQLAlchemy?
-Bibliotek ORM dla Pythona jest całkiem sporo[orms], niektóre z nich są proste
+Bibliotek ORM dla Pythona jest całkiem sporo[2], niektóre z nich są proste
 (Storm, SQLObject), inne są dobrze zintegrowane ze środowiskiem pracy
 (Django ORM), a jeszcze inne są ciekawe (PonyORM). Ja jednak wybrałem
-SQLAlchemy[sqla] ze względu na kilka cech, które w połączeniu tworzą bardzo
+SQLAlchemy [3] ze względu na kilka cech, które w połączeniu tworzą bardzo
 potężne narzędzie:
 
 * **Kompletność** - bardzo wiele można zrobić przy użyciu SQLAlchemy bez uciekania się do pisania czystego SQLa. Skomplikowane kwerendy nie stanową żadnego problemu.
-* **Dokumentacja** - obszerna, konkretna, z licznymi przykładami i praktycznymi przypadkami użycia[sqladoc].
+* **Dokumentacja** - obszerna, konkretna, z licznymi przykładami i praktycznymi przypadkami użycia [4].
 * **Dojrzały projekt** - SQLAlchemy istnieje od ponad 10 lat.
 * **Ciągły rozwój** - projekt jest aktywny i często aktualizowany, dzięki czemu nadąża za ciągłym rozwojem relacyjnych baz danych.
 * **Mnogość obsługiwanych backendów** - bardzo szeroka gama obsługiwanych sterowników, włączając w to SQLite, dostępny bezpośrednio z biblioteki standardowej Pythona.
 * **Samodzielność** - nie jest zależny od żadnych bibliotek zewnętrznych, nie wymaga też określonego frameworka do działania i dobrze się integruje z każdym typem projektu.
 * **DDL i reflection** - posiada możliwość definiowania struktury danych, a także opcję automatycznego budowania obiektów na podstawie już istniejącej bazy.
-* **Wygodne migracje** - dzięki dodatkowej bibliotece o nazwie `alembic`[alembic].
+* **Wygodne migracje** - dzięki dodatkowej bibliotece o nazwie `alembic`[5].
 * **Elastyczność** - prawie wszystko w SQLAlchemy można skonfigurować, rozszerzyć, czy dostosować do konkretnych potrzeb.
 
 Biblioteka SQLAlchemy zbudowana jest w oparciu o wrzorzec projektowy
-*data mapper*[datamapper], który daje programiście większą kontrolę, ale jest
+*data mapper* [6], który daje programiście większą kontrolę, ale jest
 też nieco trudniejszy w okiełznaniu, niż bardziej rozpowszechniony wśród ORMów
-wzorzec *active record*[activerecord].
+wzorzec *active record* [7].
 
 Z tego powodu, jedyną realną wadą SQLAlchemy *może być* początkowa trudność
 zrozumienia i odnalezienia się w przepastnych czeluściach dokumentacji,
@@ -91,11 +91,11 @@ z tłumu dzięki połączeniu wielu pozytywnych cech:
 
 * **Projekt (pierwotnie) akademicki** - oparty na solidnych podstawach matematyczno-algorytmicznych.
 * **Ciągły rozwój** - zapewniony przez uczelnie na całym świecie, a także przez firmy prywatne, które udostępniają swoich programistów oraz szczodrze dotują projekt.
-* **Bardzo wierna implementacja standardów SQL** - w przeciwieństwie do znacznej części konkurencji PostgreSQL stara się być zgodny ze standardem SQL (SQL:2011[sql]).
+* **Bardzo wierna implementacja standardów SQL** - w przeciwieństwie do znacznej części konkurencji PostgreSQL stara się być zgodny ze standardem SQL (SQL:2011 [8]).
 * **Bardzo użyteczne rozszerzenia standardu SQL** - PostgreSQL wybiega poza standard dostarczając liczne funkcjonalności, których użytkownicy pragną, jak obsługa XML i JSON, różnorodne typy indeksów, czy *full text search*.
 * **Szybkość działania** - PostgreSQL błyszczy w przypadku dużych i skomplikowanych baz.
 * **Powszechność** - dostępny dla wszystkich znaczących systemów operacyjnych, ponadto prawie każdy hosting WWW udostępnia PostgreSQL.
-* **Mnóstwo narzędzi** - począwszy od prostych skryptów pomocniczych, na pełnowymiarowych narzędziach administracyjnych kończąc (pgAdmin[pgadmin]).
+* **Mnóstwo narzędzi** - począwszy od prostych skryptów pomocniczych, na pełnowymiarowych narzędziach administracyjnych kończąc (pgAdmin [9]).
 * **Open-source** - otwarty i darmowy po wsze czasy.
 
 Jak wszystko, PostgreSQL ma też swoje wady. Chyba największą jego bolączką
@@ -106,7 +106,7 @@ Na przykład, gdy obciążenie bazy rośnie i pojawia się konieczność dostawi
 dodatkowych serwerów, PostgreSQL posiada wbudowaną jedynie replikację typu
 *master-slave* (wszystkie zapisy muszą być wykonane na głównym serwerze).
 Natomiast, aby osiągnąć dwukierunkową replikację *multi-master*, należy już
-użyć zewnętrznego narzędzia takiego jak Postgres-BDR[bdr].
+użyć zewnętrznego narzędzia takiego jak Postgres-BDR [10].
 
 # Duet PostgreSQL + SQLAlchemy
 Razem, te dwa potężne narzędzia stają się bazodanowym *wunderwaffe* -
@@ -123,7 +123,7 @@ silnika bazy danych.
 Żeby połączyć SQLAlchemy z bazą danych potrzebny jest jeszcze jeden element,
 a mianowicie sterownik bazy danych dla Pythona. SQLAlchemy współpracuje
 z wieloma sterownikami (różne silniki nazywane są dialektami), w przypadku
-PostgreSQL największe możliwości daje biblioteka `psycopg2`[psycopg2].
+PostgreSQL największe możliwości daje biblioteka `psycopg2` [11].
 
 Połączenie z bazą w SQLAlchemy nawiązujemy podając odpowiedni ciąg znaków je opisujący:
 
@@ -338,15 +338,15 @@ tworzyć nowoczesne, przejrzyste, uniwersalne i łatwe w utrzymaniu aplikacje
 bazodanowe, zapominając o smutnych czasach, gdy SQL musiał mieszać się z kodem
 Pythona.
 
-# Źródła
-* [pep249] <https://www.python.org/dev/peps/pep-0249/> - specyfikacja DB API 2.0
-* [orms] <http://pythoncentral.io/sqlalchemy-vs-orms/> - porównanie ORMów
-* [alembic] <http://alembic.zzzcomputing.com/en/latest/> - zestaw narzędzi do migracji baz danych
-* [datamapper] <https://en.wikipedia.org/wiki/Data_mapper_pattern> - wzorzec projektowy, na którym opiera się SQLAlchemy
-* [activerecord] <https://en.wikipedia.org/wiki/Active_record_pattern> - popularny wzorzec projektowy wśród ORMów.
-* [sql] <http://modern-sql.com/standard> - zbiór linków do strzępków dokumentacji standardu SQL
-* [pgadmin] <https://www.pgadmin.org> - narzędzie administracyjne dla PostrgeSQL
-* [bdr] <https://2ndquadrant.com/en/resources/bdr/> - narzędzie do dwukierunkowej replikacji PosgreSQL
-* [sqla] <http://www.sqlalchemy.org> - strona domowa SQLAlchemy
-* [sqladoc] <http://docs.sqlalchemy.org/en/latest/> - dokumentacja SQLAchemy
-* [psycopg2] <http://initd.org/psycopg/> - najpopularniejszy sterownik PostgreSQL dla Pythona
+# Bibliografia
+1. Specyfikacja DB API 2.0. https://www.python.org/dev/peps/pep-0249/
+2. Porównanie ORMów. http://pythoncentral.io/sqlalchemy-vs-orms/
+3. Strona domowa SQLAlchemy. http://www.sqlalchemy.org
+4. Dokumentacja SQLAchemy. http://docs.sqlalchemy.org/en/latest/
+5. Zestaw narzędzi do migracji baz danych. http://alembic.zzzcomputing.com/en/latest/
+6. Wzorzec projektowy, na którym opiera się SQLAlchemy. https://en.wikipedia.org/wiki/Data`_`mapper`_`pattern
+7. Popularny wzorzec projektowy wśród ORMów. https://en.wikipedia.org/wiki/Active`_`record`_`pattern
+8. Zbiór linków do strzępków dokumentacji standardu SQL. http://modern-sql.com/standard
+9. Narzędzie administracyjne dla PostrgeSQL. https://www.pgadmin.org
+10. Narzędzie do dwukierunkowej replikacji PosgreSQL. https://2ndquadrant.com/en/resources/bdr/
+11. Najpopularniejszy sterownik PostgreSQL dla Pythona. http://initd.org/psycopg/
