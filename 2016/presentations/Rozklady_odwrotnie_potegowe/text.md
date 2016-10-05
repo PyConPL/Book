@@ -82,8 +82,11 @@ plt.hist(count_words.values(), 100)
 plt.show()
 ```
 
-Sporą dawkę wiedzy oraz specjalistów od rozkładów odwrotnie potęgowych można znaleźć w Zakładzie Geofizyki Teoretycznej (Instytut Geofizyki Polskiej Akademii Nauk) [4].
-A po konferencji PyCon PL pojawi się projekt liczący rozkłady dla repozytoriów projektów pisanych w języku Python [5].
+Sporą dawkę wiedzy oraz specjalistów od rozkładów odwrotnie potęgowych można
+znaleźć w Zakładzie Geofizyki Teoretycznej (Instytut Geofizyki Polskiej
+Akademii Nauk) [4].
+A po konferencji PyCon PL pojawi się projekt liczący rozkłady dla repozytoriów
+projektów pisanych w języku Python [5].
 
 ## Bibliografia
 

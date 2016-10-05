@@ -107,8 +107,11 @@ const mp_obj_module_t mp_module_mymodule = {
 };
 ```
 
-What does this code do? It just defines a python module, using `mp_obj_module_t` type, and then initializes some of its fields, such as the base type, the name, and the dictionary of globals for that module. In that dictionary, it defines
-one variable, `__name__`, with the name of our module in it. That's it.
+What does this code do? It just defines a python module, using
+`mp_obj_module_t` type, and then initializes some of its fields, such as the
+base type, the name, and the dictionary of globals for that module. In that
+dictionary, it defines one variable, `__name__`, with the name of our module
+in it. That's it.
 
 Now, for this module to actually be available for import, we need to add it to `mpconfigport.h` file to `MICROPY_PORT_BUILTIN_MODULES`:
 
