@@ -2,7 +2,7 @@
 
 Inteligentne domy stają się coraz bardziej powszechne. Nic dziwnego,
 rozwiązania, które ułatwiają nam codzienne życie, a także pozwalają
-na oszczędność czasu i pieniędzy muszą cieszyć się dużą popularnością.
+na oszczędność czasu i&nbsp;pieniędzy muszą cieszyć się dużą popularnością.
 Na rynku pojawia się wiele firm, które oferują swoje usługi w zakresie
 automatyzacji budynków, ale niejednokrotnie koszty takiej instalacji
 odstraszają potencjalnego użytkownika. Tymczasem stworzenie systemu
@@ -34,6 +34,7 @@ radości, a uruchomione urządzenie potrafi przynieść wymierne korzyści.
 
 W celu rozpoczęcia pracy niezbędne jest zaopatrzenie się w kilka urządzeń oraz
 modułów, które znajdą zastosowanie w każdej instalacji inteligentnego budynku:
+
 * Raspberry Pi - centrum zarządzania budynkiem,
 * Moduły ESP-12F - bezprzewodowa komunikacja z czujnikami i urządzeniami wykonawczymi,
 * Konwerter USB-UART - komunikacja przez port szeregowy,
@@ -49,13 +50,14 @@ prototypowych np. Arduino.
 ## MicroPython i moduł ESP8266
 MicroPython to implementacja języka Python 3, która zawiera niewielki podzbiór
 biblioteki standardowej języka Python i jest zoptymalizowana pod kątem
-działania na mikrokontrolerach [micropython]. Istnieje kilka platform
+działania na mikrokontrolerach [1]. Istnieje kilka platform
 sprzętowych pozwalających na uruchomienie środowiska MicroPython takich
 jak pyBoard czy WiPy. Układem, na którym oprzemy naszą instalację
-inteligentnego domu będzie ESP8266 [esp8266], a konkretnie moduł o nazwie
+inteligentnego domu, będzie ESP8266 [2], a konkretnie moduł o nazwie
 ESP-12F.
 Co oferuje nam urządzenie wielkości znaczka pocztowego (24×16mm) za niecałe
 2 dolary? Oto podstawowe cechy modułu ESP-12F:
+
 - 32 bit RISC CPU - Tensilica Xtensa LX106 @80MHz,
 - 11 wyprowadzeń GPIO - wejścia/wyjścia cyfrowe,
 - 1 wejście ADC - 10 bitowy przetwornik analogowo-cyfrowy,
@@ -75,11 +77,11 @@ Oryginalne oprogramowanie modułu obsługuje komunikację za pomocą komend AT.
 W celu uruchomienia środowiska MicroPython należy wgrać nowy firmware.
 Najlepszym sposobem uzyskania oprogramowania jest zbudowanie najnowszej wersji
 ze źródeł. Szczegółowy opis tego procesu znajduje się w repozytorium z kodem
-źródłowym [micropythonsource], można również wykorzystać znalezione w sieci
+źródłowym [3], można również wykorzystać znalezione w sieci
 gotowe pliki binarne firmware. Kolejnym krokiem jest wyczyszczenie pamięci
 układu i wgranie nowego firmware. Do wykonania tych czynności wykorzystamy
 narzędzie esptool, które służy do komunikacji z bootloaderem w układzie
-ESP8266 [esptool]. Przed wpisaniem podanej poniżej komendy należy pamiętać
+ESP8266 [4]. Przed wpisaniem podanej poniżej komendy należy pamiętać
 o uruchomieniu modułu ESP w trybie programowania (flash mode), wykonuje się to
 przez podłączenie pinu GPIO0 do masy.
 
@@ -116,13 +118,13 @@ zamontowana na module będzie migać z częstotliwością 1Hz.
 
 Gotowe! Właśnie zrealizowaliśmy pierwszy projekt sprzętowy. Więcej informacji
 pomocnych dla początkujących dostępne jest w tutorialu środowiska MicroPython
-dla układu ESP82666 [tutorial].
+dla układu ESP82666 [5].
 
 
 ## Raspberry Pi
 Raspberry Pi to komputer wielkości karty kredytowej (85×56mm), który znajduje
 zastosowanie w projektach elektronicznych zastępując komputer stacjonarny
-[raspberrypi]. Specyfikacja sprzętowa najnowszej wersji Raspberry Pi&nbsp;3 model&nbsp;B jest następująca:
+[6]. Specyfikacja sprzętowa najnowszej wersji Raspberry Pi&nbsp;3 model&nbsp;B jest następująca:
 * 64 bit CPU - Quad-Core ARM Cortex A53 @1,2GHz,
 * Pamięć RAM - 1GB LPDDR2 @900MHz,
 * Interfejsy - 4×USB 2.0, UART, SPI, I2C, GPIO,
@@ -150,14 +152,14 @@ wymagane jest podłączenie do sterownika dodatkowego modułu komunikacyjnego.
 
 Często wykorzystywanym protokołem komunikacji z urządzeniami jest Modbus.
 Modbus jest prostym i niezawodnym protokołem zapewniającym komunikację między
-wieloma urządzeniami w architekturze master slave [modbus]. Komunikacja odbywa
-się przeważnie przez interfejs szeregowy RS232 [rs232] lub RS485 [rs485]
+wieloma urządzeniami w architekturze master slave [7]. Komunikacja odbywa
+się przeważnie przez interfejs szeregowy RS232 [8] lub RS485 [9]
 (istnieje również odmiana protokołu nazwana Modbus TCP zapewniająca
 komunikację przez sieć TCP/IP). W celu podłączenia Raspberry Pi do magistrali
 RS232 lub RS485 niezbędny będzie odpowiedni moduł komunikacyjny (UART-RS232
 lub UART-RS485). Obsługę łączności z urządzeniami zewnętrznymi można
-zrealizować za pomocą biblioteki pymodbus, która oferuje pełną implementację
-protokołu Modbus w języku Python [pymodbus].
+zrealizować za pomocą biblioteki pymodbus [10], która oferuje pełną implementację
+protokołu Modbus w języku Python.
 
 ## Podsumowanie
 Technologia odgrywa coraz większą rolę w naszym życiu, a możliwości, które
@@ -166,14 +168,14 @@ powszechne w najbliższej przyszłości. Okazuje się, że już teraz możemy
 uczestniczyć w rozwoju instalacji inteligentnych budynków wykorzystując dobrze
 znane nam narzędzia.
 
-## W sieci
-* [esp8266] https://nurdspace.nl/ESP8266 - wiki ESP8266
-* [raspberrypi] https://www.raspberrypi.org - oficjalna strona Raspberry Pi
-* [micropython] http://www.micropython.org - oficjalna strona MicroPython i PyBoard
-* [esptool] https://github.com/themadinventor/esptool - narzędzie do komunikacji z bootloaderem układu ESP8266
-* [micropythonsource] https://github.com/micropython/micropython/tree/master/esp8266 - repozytorium zawierające kod źródłowy portu MicroPython dla układu ESP8266
-* [tutorial] http://docs.micropython.org/en/latest/esp8266/esp8266/tutorial/index.html - pierwsze kroki z MicroPython i ESP8266
-* [modbus] http://www.modbus.org/faq.php - podstawowe informacje o protokole Modbus
-* [pymodbus] https://github.com/bashwork/pymodbus - implementacja protokołu Modbus dla Python
-* [rs232] https://pl.wikipedia.org/wiki/RS-232 - opis interfejsu RS232
-* [rs485] https://pl.wikipedia.org/wiki/EIA-485 - opis interfejsu RS485
+## Bibliografia
+1. Oficjalna strona MicroPython i PyBoard. http://www.micropython.org
+2. Wiki ESP8266. https://nurdspace.nl/ESP8266
+3. Repozytorium zawierające kod źródłowy portu MicroPython dla układu ESP8266. https://github.com/micropython/micropython/tree/master/esp8266
+4. Narzędzie do komunikacji z bootloaderem układu ESP8266. \hyphenatedurl{https://github.com/themadinventor/esptool}
+5. Pierwsze kroki z MicroPython i ESP8266. \hyphenatedurl{http://docs.micropython.org/en/latest/esp8266/esp8266/tutorial/index.html}
+6. Oficjalna strona Raspberry Pi. https://www.raspberrypi.org
+7. Podstawowe informacje o protokole Modbus. http://www.modbus.org/faq.php
+8. Opis interfejsu RS232. https://pl.wikipedia.org/wiki/RS-232
+9. Opis interfejsu RS485. https://pl.wikipedia.org/wiki/EIA-485
+10. Implementacja protokołu Modbus dla Python. \hyphenatedurl{https://github.com/bashwork/pymodbus}
