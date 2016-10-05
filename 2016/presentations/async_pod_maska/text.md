@@ -6,7 +6,7 @@ Ostatnimi czasy wiele mówi się i pisze o programowaniu asynchronicznym i
 pętlach zdarzeń. Pojawiają się takie słowa, jak *event loop*, *promise*,
 *future*, *deferred*, *greenlet* itp.
 
-W tym artykule postaram się pokazać, o co chodzi w pętli zdarzeń (*event loop*)
+W tym artykule postaram się pokazać, o co chodzi w pętli zdarzeń (*event loop*),
 oraz że koncepcja nie jest wcale nowa - nowatorska jest jedynie jej
 implementacja za pomocą generatorów w module `asyncio`.
 
@@ -113,7 +113,7 @@ wykona kilka iteracji swojej pętli zanim zostanie wywłaszczony. Co gorsza,
 Python nie ma nad tym żadnej kontroli, bo w modelu wątkowym przełączaniem
 kontekstu zajmuje się system operacyjny.
 
-Ten brak determinizmu i kontroli bywa problematyczny. Przyrzyjmy się zatem
+Ten brak determinizmu i kontroli bywa problematyczny. Przyjrzyjmy się zatem
 drugiemu modelowi, czyli przełączaniu na żądanie.
 
 ## Współbieżność kooperacyjna
