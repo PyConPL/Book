@@ -77,7 +77,18 @@ for alias, location in articles:
             pl_txt.link_src(alias),
             ]
     if copy_images:
-        pass
+        small_pdf_ls.append(
+            "[ ${TARGET.file} != async.pdf ] || cp ../../../presentations/async_pod_maska/yield_from.png .",
+            )
+        small_pdf_ls.append(
+            "[ ${TARGET.file} != microservices.pdf ] || cp ../../../presentations/tdd_of_python_microservices/fixtures.svg .",
+            )
+        small_pdf_ls.append(
+            "[ ${TARGET.file} != microservices.pdf ] || cp ../../../presentations/tdd_of_python_microservices/test_pyramid.png .",
+            )
+        small_pdf_ls.append(
+            "[ ${TARGET.file} != microservices.pdf ] || cp ../../../presentations/tdd_of_python_microservices/tdd_cycle.png .",
+            )
     if create_pdfs:
         small_pdf_ls.append("texexec --pdf " + alias)
     small_pdf_ls.append("mv artpages.inc .. 2>/dev/null || true")

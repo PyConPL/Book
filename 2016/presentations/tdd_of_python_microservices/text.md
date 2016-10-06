@@ -27,7 +27,7 @@ or "outside-in" TDD (shown on the diagram below, taken from "Test-Driven Develop
 The term used to describe them can be "service tests", which I prefer, "functional tests"
 or "component tests".
 
-![](images/tdd_cycle.png "TDD cycle")
+![TDD cycle](tdd_cycle.png)
 
 Service tests are necessary to check if units of code work together as planned,
 if it won't just crash when starting in a real environment.
@@ -42,7 +42,7 @@ Full validation of the application's logic (code coverage) should be achieved wi
 In his presentation about testing microservices, Martin Fowler places service tests
 in the middle of the tests pyramid.
 
-![](images/test_pyramid.png "Microservice test pyramid")
+![Microservice test pyramid](test_pyramid.png)
 
 The general idea is that the higher you get in the pyramid, the tests:
 
@@ -138,7 +138,7 @@ Not only can they parameterize tests, but also other fixtures.
 The two top-level ones presented above are themselves composed of others
 (as shown in the diagram below) in order to fine-tune their behavior to our needs.
 
-![](images/fixtures.svg "Fixture composition")
+![Fixture composition](fixtures.svg)
 
 Let's now trace all the elements that make up our test fixtures.
 First, `db`:
