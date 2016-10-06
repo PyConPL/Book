@@ -1,6 +1,6 @@
 # Finding a business model for Open Source Applications - case study of Splash
 
-[Splash](http://splash.readthedocs.io/en/stable/) is an open source scriptable headless browser with
+Splash [1] is an open source scriptable headless browser with
 HTTP API, written in Python 3 with Twisted `&` PyQt. I’d like to present the project and discuss
 a couple of social and technical phenomena that I noticed while taking part in the development of
 this application. I’d like to discuss how the application is structured, what libraries we used and
@@ -14,11 +14,11 @@ issues that I noticed around Open Source.
 
 Splash is a headless browser based on WebKit engine. Its main job is rendering HTML and JavaScript.
 You can interact with Splash by sending HTTP requests with some parameters. For example, you can make
-request to the `render.png` endpoint with `url` parameter and it will send request to the given url, load
-it into the browser window and return screenshot in .png format for you. You can also send a request to
+request to the `render.png` endpoint with `url` parameter and it will send request to the given URL, load
+it into the browser window and return screenshot in PNG format for you. You can also send a request to
 the `render.HTML` endpoint and it will return HTML.
 
-Splash is scriptable, which means you can write Lua scripts, that tell Splash what to do. For example,
+Splash is scriptable, which means you can write Lua scripts that tell Splash what to do. For example
 you can write a script that will tell the browser to click on some link, wait a minute, hover the cursor over
 some page area and finally return screenshot of a webpage after performing those actions.
 
@@ -76,3 +76,7 @@ to somehow finance the development time and the efforts of the core team.
 Splash a is nice example of how you can implement these ideas in practice, so in my presentation I'd
 like to demonstrate how its business model works, what we gain from open source and
 why, in our specific case, it's not really charity but rational choice.
+
+## References
+
+1. Splash. http://splash.readthedocs.io/en/stable/
