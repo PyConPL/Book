@@ -1,0 +1,15 @@
+--- async.tex
++++ async.tex
+@@ -1,9 +1,9 @@
+ \usemodule[pycon-2016]
+ \starttext
+ 
+-
+-\section[async-pod-maską---michał-lowas-rzechonek]{Async pod maską -
+-Michał Lowas-Rzechonek}
++\Title{Async pod maską}
++\Author{Michał Lowas-Rzechonek}
++\MakeTitlePage
+ 
+ \subsection[wprowadzenie]{Wprowadzenie}
+ 
