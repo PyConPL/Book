@@ -1,11 +1,11 @@
 # Debugging of CPython processes with gdb
 
-pdb[1] has been, is and probably always will be the bread and butter of Python
+pdb [1] has been, is and probably always will be the bread and butter of Python
 programmers, when they need to find the root cause of a problem in their
 applications, as it's a built-in and easy to use debugger. But there are cases,
 when `pdb` can't help you, e.g. if your app has got stuck somewhere, and you
 need to attach to a running process to find out why, without restarting it.
-This is where gdb[2] shines.
+This is where gdb [2] shines.
 
 
 
@@ -21,13 +21,13 @@ for debugging:
 in debug mode or modifying the app code in some way first (e.g. putting
 something like `import rpdb; rpdb.set_trace()` into the code);
 
-* `gdb` allows one to take a core dump[3] of a process and analyze it later.
+* `gdb` allows one to take a core dump [3] of a process and analyze it later.
 This is useful, when you don't want to stop the process for the duration of time,
-while you are introspecting its state, as well as when you do post-mortem[4]
-debugging of a process that has already failed (e.g. crashed[5] with a
+while you are introspecting its state, as well as when you do post-mortem [4]
+debugging of a process that has already failed (e.g. crashed [5] with a
 segmentation fault);
 
-* most debuggers available for Python (notable exceptions are winpdb[6] and pydevd[7])
+* most debuggers available for Python (notable exceptions are winpdb [6] and pydevd [7])
 do not support switching between threads of the application being debugged. `gdb`
 allows that, as well as debugging of threads created by non-Python code (e.g. in some
 native library used).
@@ -40,8 +40,8 @@ So what makes Python special when using `gdb`?
 
 In contradistinction to programming languages like C or C++, Python code is not
 compiled into a native binary for a target platform. Instead there is an
-interpreter (e.g.  CPython[8], the reference implementation of Python), which
-executes compiled byte-code[9].
+interpreter (e.g.  CPython [8], the reference implementation of Python), which
+executes compiled byte-code [9].
 
 This effectively means, that when you attach to a Python process with `gdb`,
 you'll debug the interpreter instance and introspect the process state at the
@@ -98,7 +98,7 @@ As is, the former is of little help, when you are trying to find a problem
 in your Python code, and all you see is the current state of the interpreter
 itself.
 
-However, `PyEval_EvalFrameEx`[10] looks interesting: it's a function of CPython,
+However, `PyEval_EvalFrameEx` [10] looks interesting: it's a function of CPython,
 which executes bytecode of Python application level functions and, thus,
 has access to their state - the very state we are usually interested in.
 
@@ -107,12 +107,12 @@ has access to their state - the very state we are usually interested in.
 ## gdb and Python
 
 Search results for `"gdb debug python"` can be confusing. The thing is, that starting
-from `gdb` version 7 it's been possible to extend[11] the debugger with Python code, e.g.
-in order to provide visualisations for C++ STL[12] types, which is much easier to implement
-in Python rather than in the built-in macro[13] language.
+from `gdb` version 7 it's been possible to extend [11] the debugger with Python code, e.g.
+in order to provide visualisations for C++ STL [12] types, which is much easier to implement
+in Python rather than in the built-in macro [13] language.
 
 In order to be able to debug CPython processes and introspect the application level state,
-the interpreter developers decided to extend `gdb` and wrote a script[14] for that in... Python,
+the interpreter developers decided to extend `gdb` and wrote a script [14] for that in... Python,
 of course!
 
 So it's two different, but related things:
@@ -142,7 +142,7 @@ or
 
 depending on the Linux distro you are using.
 
-The next step is to install debugging symbols[15] for the CPython build you have:
+The next step is to install debugging symbols [15] for the CPython build you have:
 
 ```
 
@@ -158,7 +158,7 @@ or
 
 ```
 
-Some Linux distros like CentOS or RHEL ship debugging symbols separately[16] from
+Some Linux distros like CentOS or RHEL ship debugging symbols separately [16] from
 all other packages and recommend to install those like:
 
 
@@ -168,7 +168,7 @@ all other packages and recommend to install those like:
 
 ```
 
-The installed debugging symbols will be used by the CPython script[14] for `gdb`
+The installed debugging symbols will be used by the CPython script [14] for `gdb`
 in order to analyze the `PyEval_EvalFrameEx` frames (a frame essentially is a
 function call and the associated state in a form of local variables and CPU
 registers, etc) and map those to application level functions in your code.
@@ -261,8 +261,8 @@ now = <float at remote 0x1b8ec58>
 
 ```
 
-There are more `py-` commands provided by the CPython script[14] for `gdb`.
-Check out the debugging guide[17] for details.
+There are more `py-` commands provided by the CPython script [14] for `gdb`.
+Check out the debugging guide [17] for details.
 
 
 
@@ -311,7 +311,7 @@ CPython/gdb story - you can safely ignore its existence.
 
 ## Build flags
 
-Some Linux distros build CPython passing the `-g0` or `-g1` option[18] to `gcc`:
+Some Linux distros build CPython passing the `-g0` or `-g1` option [18] to `gcc`:
 the former produces a binary without debugging information at all, and the latter
 does not allow `gdb` to get information about local variables at runtime.
 
@@ -328,7 +328,7 @@ Debian Jessie, CentOS/RHEL 7) ship the "correctly" built CPython.
 
 For introspection to work properly, it's crucial, that information about\crlf
 `PyEval_EvalFrameEx` arguments is preserved for each call. Depending on the
-optimization level[19] used in `gcc` when building CPython or the concrete
+optimization level [19] used in `gcc` when building CPython or the concrete
 compiler version used, it's possible that this information will be lost at
 runtime (especially with aggressive optimizations enabled by `-O3`). In this
 case `gdb` will show you something like:
@@ -459,7 +459,7 @@ did not specify the executable file, when attaching to the process. In this
 case `gdb` will take the executable file of the process (i.e. `/proc/$PID/exe`
 value on Linux).
 
-One of the ways to separate[20] debugging symbols is to put those into a well-known
+One of the ways to separate [20] debugging symbols is to put those into a well-known
 directory (default is `/usr/lib/debug/`, although it's configurable via
 `debug-file-directory` option in `gdb`). In our case `gdb` tried to load
 debugging symbols from `/usr/lib/debug/home/rpodolyaka/workspace/venvs/default/bin/`\crlf
@@ -479,7 +479,7 @@ Thus, `gdb` will look for debugging symbols in the "right" place -\crlf
 
 It's also worth mentioning, that it's possible that debugging symbols for a
 particular executable are identified by a unique `build-id` value stored
-in ELF[21] executable headers. E.g. CPython on my Debian machine:
+in ELF [21] executable headers. E.g. CPython on my Debian machine:
 
 ```
 
@@ -581,7 +581,7 @@ Undefined command: "py-bt".  Try "help".
 ```
 
 Once again, this is caused by the fact that `python` binary in a virtual
-environment has a different path. By default, `gdb` will try to auto-load[22]
+environment has a different path. By default, `gdb` will try to auto-load [22]
 Python extensions for a particular object file under debug, if they exist.
 Specifically, `gdb` will look for `objfile-gdb.py` and try to `source` it on
 start:
@@ -617,12 +617,12 @@ The described debugging technique is only feasible for the CPython interpreter
 as is, as the `gdb` extension is specifically written to introspect the state
 of CPython internals (e.g. `PyEval_EvalFrameEx` calls).
 
-For PyPy[23] there is an open issue[24] on Bitbucket, where it was proposed to
+For PyPy [23] there is an open issue [24] on Bitbucket, where it was proposed to
 provide integration with `gdb`, but looks like the attached patches have not
 been merged yet and the person who wrote those lost interest in this.
 
-For Jython[25] you could probably use standard tools for debugging of `JVM`
-applications, e.g. VisualVM[26].
+For Jython [25] you could probably use standard tools for debugging of `JVM`
+applications, e.g. VisualVM [26].
 
 
 
