@@ -1,6 +1,6 @@
 --- distribution.tex
 +++ distribution.tex
-@@ -1,10 +1,9 @@
+@@ -1,10 +1,10 @@
  \usemodule[pycon-2016]
  \starttext
  
@@ -9,6 +9,7 @@
 -mają wspólnego trzęsienia ziemi, cyklon tropikalny, lawiny błotne i
 -nasze repozytoria? - Paweł Kopka}
 +\Title{Co mają wspólnego trzęsienia ziemi, cyklon tropikalny, lawiny błotne i nasze repozytoria?}
++\HeaderTitle{Co mają wspólnego trzęsienia ziemi, [...] i nasze repozytoria?}
 +\Author{Paweł Kopka}
 +\MakeTitlePage
  
