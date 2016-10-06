@@ -1,0 +1,293 @@
+\usemodule[pycon-2016]
+\starttext
+
+\Title{Odoo - pierwsza aplikacja (warsztat)}
+\Author{Michał Węgrzynek, Artur Roguszny}
+\MakeTitlePage
+\section[agenda-warsztatu]{Agenda warsztatu}
+
+\startitemize[packed]
+\item
+  Odoo - z czym to się je?
+\item
+  Przygotowanie środowiska (Docker)
+\item
+  Pierwsza baza i instalacja aplikacji (modułu)
+\item
+  Anatomia modułu
+\item
+  Model
+\item
+  Widoki i menu
+\item
+  Ćwiczenie 1
+\item
+  Pola wyliczeniowe
+\item
+  Ćwiczenie 2
+\item
+  Testy
+\stopitemize
+
+\section[kod-z-poszczególnych-etapów]{Kod z poszczególnych etapów}
+
+\subsection[minimum---przed-ćwiczeniem-1]{Minimum - przed ćwiczeniem 1}
+
+\type{__openerp__.py}:
+
+\starttyping
+# -*- coding: UTF-8 -*-
+{
+  'name': 'Rejestr piw',
+  'summary': 'Obsługa rejestru piw',
+  'description': '''
+      Szczegółowy opis
+  ''',
+  'author': 'Spejson',
+  'category': 'Uncategorized',
+  'version': '0.0.1',
+  'data': [
+     'views/beer.xml'
+  ]
+}
+\stoptyping
+
+\type{models/beer.py}:
+
+\starttyping
+# -*- coding: UTF-8 -*-
+
+from openerp import models, fields, api, _
+
+class Beer(models.Model):
+    _name = 'beer'
+    _description = 'Piwo to moje paliwo'
+    _log_access = True
+
+    name = fields.Char(
+        string='Nazwa',
+        required=True
+    )
+\stoptyping
+
+\type{views/beer.xml}
+
+\starttyping
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="beer_tree_view">
+            <field name="name">Beer list</field>
+            <field name="model">beer</field>
+            <field name="priority" eval="10" />
+            <field name="arch" type="xml">
+                <tree string="Piwunia">
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="beer_form_view">
+            <field name="name">Beer form</field>
+            <field name="model">beer</field>
+            <field name="priority" eval="10" />
+            <field name="arch" type="xml">
+                <form string="Piweczko" version="9.0">
+                    <group string="Podstawowe">
+                        <field name="name" />
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="beer_act">
+            <field name="name">Piwska</field>
+            <field name="res_model">beer</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem
+            id="beer_form_menu"
+            name="Piwska"
+            action="beer_act"
+            sequence="200"
+            />
+
+    </data>
+</openerp>
+\stoptyping
+
+\section[uwaga-spoilery-poniżej]{Uwaga! Spoilery poniżej}
+
+\subsection[przykładowe-rozwiązanie-ćwiczenia-1]{Przykładowe rozwiązanie
+ćwiczenia 1}
+
+\type{models/beer.py}:
+
+\starttyping
+# -*- coding: UTF-8 -*-
+
+from openerp import models, fields, api, _
+
+RATINGS = (
+    ('1',_('słabe')),
+    ('2',_('dobre')),
+    ('3',_('bardzo dobre'))
+)
+
+class Beer(models.Model):
+    _name = 'beer'
+    _description = 'Piwo to moje paliwo'
+    _log_access = True
+
+    name = fields.Char(
+        string='Nazwa',
+        required=True
+    )
+
+    alc = fields.Float('% alkoholu', required=True)
+    description = fields.Text('Opis')
+    volume = fields.Float('Objętość [l]', required=True)
+    price = fields.Float('Cena', required=True)
+    rating = fields.Selection(RATINGS, string='Ocena')
+\stoptyping
+
+\type{views/beer.xml}:
+
+\starttyping
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="beer_tree_view">
+            <field name="name">Beer list</field>
+            <field name="model">beer</field>
+            <field name="priority" eval="10" />
+            <field name="arch" type="xml">
+                <tree string="Piwunia">
+                    <field name="name" />
+                    <field name="alc" />
+                    <field name="description" />
+                    <field name="volume" />
+                    <field name="price" />
+                    <field name="rating" />
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="beer_form_view">
+            <field name="name">Beer form</field>
+            <field name="model">beer</field>
+            <field name="priority" eval="10" />
+            <field name="arch" type="xml">
+                <form string="Piweczko" version="9.0">
+                    <sheet>
+                        <group string="Podstawowe" col="4">
+                            <field name="name" colspan="4"/>
+                            <field name="alc" />
+                            <field name="volume" />
+                            <field name="price" />
+                            <field name="rating" />
+                        </group>
+                        <group string="Opis">
+                            <field name="description" nolabel="1" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="beer_act">
+            <field name="name">Piwska</field>
+            <field name="res_model">beer</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem
+            id="beer_form_menu"
+            name="Piwska"
+            action="beer_act"
+            sequence="200"
+            />
+
+    </data>
+</openerp>
+\stoptyping
+
+\subsection[przykładowe-rozwiązanie-ćwiczenia-2]{Przykładowe rozwiązanie
+ćwiczenia 2}
+
+\type{models/beer.py}:
+
+\starttyping
+# -*- coding: UTF-8 -*-
+
+from openerp import models, fields, api, _
+
+RATINGS = (
+    ('1',_('słabe')),
+    ('2',_('dobre')),
+    ('3',_('bardzo dobre'))
+)
+
+class Beer(models.Model):
+    _name = 'beer'
+    _description = 'Piwo to moje paliwo'
+    _log_access = True
+
+    @api.multi
+    @api.depends('alc', 'price', 'volume')
+    def _calc_spejson_rating(self):
+        for piwo in self:
+            piwo.spejson_rating = piwo.alc * piwo.volume / piwo.price if piwo.price > 0 else 999999
+
+    name = fields.Char(
+        string='Nazwa',
+        required=True
+    )
+
+    alc = fields.Float('% alkoholu', required=True)
+    description = fields.Text('Opis')
+    volume = fields.Float('Objętość [l]', required=True)
+    price = fields.Float('Cena', required=True)
+    rating = fields.Selection(RATINGS, string='Ocena')
+    spejson_rating = fields.Float('Ocena Spejsona', compute='_calc_spejson_rating')
+\stoptyping
+
+\subsection[testy]{Testy}
+
+\type{tests.py}:
+
+\starttyping
+# -*- coding: UTF-8 -*-
+
+from openerp.tests import common
+from openerp.tools import mute_logger
+
+class TestPiwo(common.TransactionCase):
+
+    def test_formula(self):
+        dzik_1 = self.env.ref('beer.dzik_1')
+        self.assertAlmostEqual(
+            dzik_1.spejson_rating,
+            999999
+        )
+\stoptyping
+
+\type{demo/beer.xml}:
+
+\starttyping
+<?xml version="1.0"?>
+<openerp><data>
+    <record model="beer" id="dzik_1">
+        <field name="name">Dzik</field>
+        <field name="alc" eval="12.0" />
+        <field name="price" eval="0" />
+        <field name="volume" eval="1" />
+    </record>
+</data></openerp>
+\stoptyping
+
+
+\stoptext
