@@ -5,8 +5,8 @@
  \starttext
  
 -
--\section[hacking-micropython]{Hacking MicroPython}
-+\Title{Hacking MicroPython}
+-\section[hacking-micropython-workshop]{Hacking MicroPython (workshop)}
++\Title{Hacking MicroPython (workshop)}
 +\Author{Radomir Dopieralski}
 +\MakeTitlePage
  
