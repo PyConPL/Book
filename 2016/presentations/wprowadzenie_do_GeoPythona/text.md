@@ -222,7 +222,7 @@ co przyspiesza pracę i zmniejsza prawdopodobieństwo popełnienia błędu.
 ## Bibliografia
 
 1. Strona GDAL z listą wszystkich operacji: http://www.gdal.org/gdal`_`utilities.html
-2. Instalacja GDAL/OGR: http://www.gis.usu.edu/~chrisg/python/2009/install.html
+2. Instalacja GDAL/OGR:\crlf http://www.gis.usu.edu/~chrisg/python/2009/install.html
 3. Centralny Ośrodek Dokumentacji Geodezyjnej i Kartograficznej:\crlf
 http://www.codgik.gov.pl/index.php/darmowe-dane.html
 4. Centralna Baza Danych Geologicznych: http://baza.pgi.gov.pl/
@@ -230,6 +230,6 @@ http://www.codgik.gov.pl/index.php/darmowe-dane.html
 6. OpenStreetMap: http://download.geofabrik.de/
 7. USGS: http://earthexplorer.usgs.gov/
 8. ESA/Sentinel: https://scihub.copernicus.eu/dhus/#/home
-9. Systemy GIS: http://wazniak.mimuw.edu.pl/images/9/9a/Systemy`_`mobilne`_`wyklad`_`8.pdf
+9. Systemy GIS:\crlf http://wazniak.mimuw.edu.pl/images/9/9a/Systemy`_`mobilne`_`wyklad`_`8.pdf
 10. Dane przestrzenne: http://www.igik.edu.pl/pl/a/Dane-przestrzenne-def
 11. Wykorzystanie języka Python w GIS: http://gis-support.pl/wykorzystanie-jezyka-programowania-python-w-quantum-gis/
