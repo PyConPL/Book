@@ -1,0 +1,15 @@
+--- dom.tex
++++ dom.tex
+@@ -1,9 +1,9 @@
+ \usemodule[pycon-2016]
+ \starttext
+ 
+-
+-\section[inteligentny-dom-z-micropython---krzysztof-czarnota]{Inteligentny
+-dom z (Micro)Python - Krzysztof Czarnota}
++\Title{Inteligentny dom z (Micro)Python}
++\Author{Krzysztof Czarnota}
++\MakeTitlePage
+ 
+ Inteligentne domy stają się coraz bardziej powszechne. Nic dziwnego,
+ rozwiązania, które ułatwiają nam codzienne życie, a także pozwalają na
