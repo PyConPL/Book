@@ -240,7 +240,8 @@ class Beer(models.Model):
     @api.depends('alc', 'price', 'volume')
     def _calc_spejson_rating(self):
         for piwo in self:
-            piwo.spejson_rating = piwo.alc * piwo.volume / piwo.price if piwo.price > 0 else 999999
+            piwo.spejson_rating = (piwo.alc * piwo.volume / piwo.price
+                if piwo.price > 0 else 999999)
 
     name = fields.Char(
         string='Nazwa',
@@ -252,7 +253,8 @@ class Beer(models.Model):
     volume = fields.Float('Objętość [l]', required=True)
     price = fields.Float('Cena', required=True)
     rating = fields.Selection(RATINGS, string='Ocena')
-    spejson_rating = fields.Float('Ocena Spejsona', compute='_calc_spejson_rating')
+    spejson_rating = fields.Float('Ocena Spejsona',
+        compute='_calc_spejson_rating')
 \stoptyping
 
 \subsection[testy]{Testy}
