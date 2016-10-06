@@ -339,7 +339,8 @@ W Pythonie `poll()` używa się następująco:
 
     while True:
         for fileno, task in tasks.items():
-            # czekamy na zdarzenia "E(vent) POLL IN", czyli gotowość do odczytu
+            # czekamy na zdarzenia "E(vent) POLL IN", czyli gotowość
+            # do odczytu
             poller.register(fileno, select.EPOLLIN)
 
         for fileno, event in poller.poll():

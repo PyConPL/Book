@@ -71,10 +71,10 @@ Address         Age (min)  Hardware Addr   Interface
 On a Juniper device, it will look more like this:
 ```
 root@qfx.edge1> show arp
-MAC Address       Address         Name                      Interface           Flags
-00:1f:9e:92:16:fb 10.220.88.1     10.220.88.1               vlan.0              none
-00:19:e8:45:ce:80 10.220.88.22    10.220.88.22              vlan.0              none
-f0:ad:4e:01:d9:33 10.220.88.100   10.220.88.100             vlan.0              none
+MAC Address       Address       Name          Interface Flags
+00:1f:9e:92:16:fb 10.220.88.1   10.220.88.1   vlan.0    none
+00:19:e8:45:ce:80 10.220.88.22  10.220.88.22  vlan.0    none
+f0:ad:4e:01:d9:33 10.220.88.100 10.220.88.100 vlan.0    none
 Total entries: 3
 ```
 
@@ -138,6 +138,8 @@ functionality that is provided by the libraries.
 And all of this, to get a few lines of config onto your router:
 
 ```
-set system login message "> telnet xxx.xxx.xxx.xxx\nTrying xxx.xxx.xxx.xxx…\nConnected to telnet.example.com.\nEscape character is '^]'.\n\nlol (tty0)\n\nlogin:\n"
+set system login message "> telnet xxx.xxx.xxx.xxx\nTrying xxx.xxx.xxx.xxx…
+\nConnected to telnet.example.com.\nEscape character is '^]'.\n\nlol (tty0)
+\n\nlogin:\n"
 ```
 EOF
