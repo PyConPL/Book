@@ -1,0 +1,15 @@
+--- learning.tex
++++ learning.tex
+@@ -1,9 +1,9 @@
+ \usemodule[pycon-2016]
+ \starttext
+ 
+-
+-\section[uczenie-maszynowe---czyli-jak-rozwiązywać-nietrywialne-problemy]{Uczenie
+-maszynowe - czyli jak rozwiązywać nietrywialne problemy}
++\Title{Uczenie maszynowe - czyli jak rozwiązywać nietrywialne problemy}
++\Author{Jacek Śmietański}
++\MakeTitlePage
+ 
+ \subsection[streszczenie]{Streszczenie}
+ 

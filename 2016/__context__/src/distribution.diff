@@ -1,0 +1,16 @@
+--- distribution.tex
++++ distribution.tex
+@@ -1,10 +1,9 @@
+ \usemodule[pycon-2016]
+ \starttext
+ 
+-
+-\section[co-mają-wspólnego-trzęsienia-ziemia-cyklon-tropikalny-lawiny-błotne-i-nasze-repozytoria---paweł-kopka]{Co
+-mają wspólnego trzęsienia ziemia, cyklon tropikalny, lawiny błotne i
+-nasze repozytoria? - Paweł Kopka}
++\Title{Co mają wspólnego trzęsienia ziemia, cyklon tropikalny, lawiny błotne i nasze repozytoria?}
++\Author{Paweł Kopka}
++\MakeTitlePage
+ 
+ Co łączy repozytoria, trzęsienia ziemi, lawiny błotne oraz cyklony
+ tropikalne? Pewnie większości z was przychodzi do głowy słowo

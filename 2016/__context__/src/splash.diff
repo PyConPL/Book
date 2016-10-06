@@ -1,0 +1,15 @@
+--- splash.tex
++++ splash.tex
+@@ -1,9 +1,9 @@
+ \usemodule[pycon-2016]
+ \starttext
+ 
+-
+-\section[finding-a-business-model-for-open-source-applications---case-study-of-splash]{Finding
+-a business model for Open Source Applications - case study of Splash}
++\Title{Finding a business model for Open Source Applications - case study of Splash}
++\Author{Paweł Miech}
++\MakeTitlePage
+ 
+ \useURL[url1][http://splash.readthedocs.io/en/stable/][][Splash]\from[url1]
+ is an open source scriptable headless browser with HTTP API, written in

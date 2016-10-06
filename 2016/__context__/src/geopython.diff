@@ -1,0 +1,15 @@
+--- geopython.tex
++++ geopython.tex
+@@ -1,9 +1,9 @@
+ \usemodule[pycon-2016]
+ \starttext
+ 
+-
+-\section[krótkie-wprowadzenie-do-geopythona-małgorzata-papież]{Krótkie
+-wprowadzenie do GeoPythona -- Małgorzata Papież}
++\Title{Krótkie wprowadzenie do GeoPythona}
++\Author{Małgorzata Papież}
++\MakeTitlePage
+ 
+ Od kilku lat, w Polsce coraz większą popularność zdobywają aplikacje
+ oparte na wykorzystaniu {\em danych przestrzennych}. To dzięki nim

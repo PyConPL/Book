@@ -1,0 +1,14 @@
+--- hacking.tex
++++ hacking.tex
+@@ -1,8 +1,9 @@
+ \usemodule[pycon-2016]
+ \starttext
+ 
+-
+-\section[hacking-micropython]{Hacking MicroPython}
++\Title{Hacking MicroPython}
++\Author{Radomir Dopieralski}
++\MakeTitlePage
+ 
+ When using MicroPython, you have even bigger chance to need your own
+ library written in C than in other Python implementations. You might
