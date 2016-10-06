@@ -119,8 +119,8 @@ I've picked Pytest as a test framework.
 An example service test created with it can look like any other plain and simple unit test:
 
 ```python
-# Fixtures are test resource objects that are injected into the test by the framework.
-# This test is parameterized with two of them:
+# Fixtures are test resource objects that are injected into the test
+# by the framework. This test is parameterized with two of them:
 # "our_service", a Mountepy handler of the service under test
 # and "db", a Redis (but it could be any other database) client.
 def test_something(our_service, db):
@@ -152,36 +152,42 @@ import redis
 # It depends on another fixture - "db_session".
 @pytest.yield_fixture(scope='function')
 def db(db_session):
-    # "yield" statement in "yield fixtures" returns the resource object to the test.
+    # "yield" statement in "yield fixtures" returns the resource object
+    # to the test.
     # "db" simply returns the object returned from "db_session".
     yield db_session
-    # Code after "yield" is executed when the tests go outside of the fixture's scope,
+    # Code after "yield" is executed when the tests go outside
+    # of the fixture's scope,
     # in this case - at the end of a test function.
-    # This is the place to write cleanup code for fixtures, no callbacks required.
+    # This is the place to write cleanup code for fixtures,
+    # no callbacks required.
     # Here the cleanup means deleting all the data in Redis.
     db_session.flushdb()
 
-# "session" scope means that the object will be created only once for the entire
-# test suit run.
+# "session" scope means that the object will be created only once
+# for the entire test suit run.
 @pytest.fixture(scope='session')
 def db_session(redis_port):
     return redis.Redis(port=redis_port, db=0)
 
-# This fixture simply returns a port number for Redis, but has the side effect
-# of creating and later destroying a Docker container (with Redis).
-# Thanks to being session-scoped it doesn't need to spawn a new container for each test,
-# thus cutting down the test time.
-# This practice may be looked down upon by people paranoid about test isolation,
-# but if Redis creators did their job well, cleaning the database in "db" should be enough
+# This fixture simply returns a port number for Redis, but has the side
+# effect of creating and later destroying a Docker container (with Redis).
+# Thanks to being session-scoped it doesn't need to spawn a new container
+# for each test, thus cutting down the test time.
+# This practice may be looked down upon by people paranoid
+# about test isolation, but if Redis creators did their job well,
+# cleaning the database in "db" should be enough
 # to start each service test on a clean slate.
 @pytest.yield_fixture(scope='session')
 def redis_port():
     docker_client = docker.Client(version='auto')
     # Developers don't need to download required images themselves,
     # they only need to run the tests.
-    # Pulling an image will, of course, takes some time and freeze the tests, but it's one-time.
+    # Pulling an image will, of course, takes some time and
+    # freeze the tests, but it's one-time.
     download_image_if_missing(docker_client)
-    # Creates the container and waits for Redis to start accepting connections.
+    # Creates the container and waits for Redis
+    # to start accepting connections.
     container_id, redis_port = start_redis_container(docker_client)
     yield redis_port
     docker_client.remove_container(container_id, force=True)
@@ -197,15 +203,18 @@ def our_service(our_service_session, ext_service_impostor):
     return our_service
 
 # Creates (and later destroys) the process of the service under test.
-# The same as with "db" fixture, it's created once for the whole test session to save time.
-# The risk of tests influencing each other is present, but any improper behavior shows
-# that the application is not stateless (which it should be if follows the tenets
-# of 12-factor app), so the tests do their job of finding bugs.
-that we are writing and not something that the whole community depends on, like Redis.
+# The same as with "db" fixture, it's created once
+# for the whole test session to save time.
+# The risk of tests influencing each other is present, but any improper
+# behavior shows that the application is not stateless (which it should
+# be if follows the tenets of 12-factor app), so the tests do their job
+# of finding bugs that we are writing and not something that the whole
+# community depends on, like Redis.
 @pytest.yield_fixture(scope='session')
 def our_service_session():
-    # Starting a service process with Mountepy requires a shell command in Popen format.
-    # The app will run in Waitress (a WSGI container, an alternative to gunicorn, uWSGI, etc.).
+    # Starting a service process with Mountepy requires a shell command
+    # in Popen format. The app will run in Waitress (a WSGI container,
+    # an alternative to gunicorn, uWSGI, etc.).
     service_command = [
         WAITRESS_BIN_PATH,
         '--port', '{port}',
@@ -226,17 +235,18 @@ def our_service_session():
 
 @pytest.yield_fixture(scope='function')
 def ext_service_impostor(mountebank):
-    # Impostor is created in Mountebank, the object able to communicate with it is returned.
-    # The configured behavior is simple in this case,
-    # it will respond to a POST on the given port and path (e.g. "/some/resource")
-    # with an empty response body and status code 204.
+    # Impostor is created in Mountebank, the object able to communicate
+    # with it is returned. The configured behavior is simple in this case,
+    # it will respond to a POST on the given port and path (e.g.
+    # "/some/resource") with an empty response body and status code 204.
     impostor = mountebank.add_imposter_simple(
         port=EXT_SERV_STUB_PORT,
         path=EXT_SERV_PATH,
         method='POST',
         status_code=204)
     yield impostor
-    # After each tests the impostor is destroyed and all the requests it received are forgotten.
+    # After each tests the impostor is destroyed and all the requests
+    # it received are forgotten.
     impostor.destroy()
 
 # The Mountebank instance is also created once for the test suite.
@@ -297,22 +307,22 @@ Let's take a look at my recommended minimal `.coveragerc` file
 [run]
 source = your_project_source_directory
 ; This enables (with a few other tricks documented at
-; http://coverage.readthedocs.io/en/coverage-4.0.3/subprocess.htm and done in PyDAS)
-; test coverage measurement from multiple processes.
-; That is, when Mountepy runs the tested service and requests are fired against it,
-; the coverage information from the code hit when handling the requests will be added to overall
-; coverage data.
-; Now there's no need to duplicate scenarios from service tests into unit tests
-; for coverage measurement.
+; http://coverage.readthedocs.io/en/coverage-4.0.3/subprocess.htm
+; and done in PyDAS) test coverage measurement from multiple processes.
+; That is, when Mountepy runs the tested service and requests are fired
+; against it, the coverage information from the code hit when handling
+; the requests will be added to overall coverage data.
+; Now there's no need to duplicate scenarios from service tests
+; into unit tests for coverage measurement.
 parallel = true
 
 [report]
-; All code needs to be tested. Especially in a dynamic language like Python,
-; which does almost no static validation.
+; All code needs to be tested. Especially in a dynamic language
+; like Python, which does almost no static validation.
 ; If even one untested statement is written, the tests will fail.
-; With parallel coverage, there's no need to write meaningless tests of glue-code that run
-; almost 100% on mocks to ramp up to absolute coverage,
-; because the code will be hit by the service test.
+; With parallel coverage, there's no need to write meaningless tests
+; of glue-code that run almost 100% on mocks to ramp up to absolute
+; coverage, because the code will be hit by the service test.
 fail_under = 100
 ```
 
@@ -327,7 +337,8 @@ Below is an abbreviated version of Tox configuration (`tox.ini`).
 [testenv]
 commands =
     ; Pylint is run before tests.
-    ; If it returns any output, which happens when it finds errors, the whole Tox run fails.
+    ; If it returns any output, which happens when it finds errors,
+    ; the whole Tox run fails.
     /bin/bash -c "pylint data_acquisition --rcfile=.pylintrc"
     ; Running the tests with coverage measurement.
     coverage run -m py.test tests/
@@ -413,9 +424,10 @@ def swagger_spec():
         return yaml.load(spec_file)
 
 def test_contract_service(swagger_spec, our_service):
-    # Bravado client will be used instead of "requests" to call the service.
-    # Service tests using Bravado clients double as contract tests with practically
-    # no added effort except for maintaining the Swagger spec.
+    # Bravado client will be used instead of "requests" to call
+    # the service. Service tests using Bravado clients double as contract
+    # tests with practically no added effort except for maintaining
+    # the Swagger spec.
     client = SwaggerClient.from_spec(
         swagger_spec,
         origin_url=our_service.url))
@@ -424,8 +436,9 @@ def test_contract_service(swagger_spec, our_service):
         'headers': {'authorization': A_VALID_TOKEN},
     }
 
-    # Running and validating the request with a body, a path parameter "worker"
-    # and with an authorization header containing a valid security token.
+    # Running and validating the request with a body, a path parameter
+    # "worker" and with an authorization header containing
+    # a valid security token.
     resp_object = client.v1.submitOperation(
         body={'name': 'make_sandwich', 'repeats': 3},
         worker='Mom',
@@ -451,7 +464,8 @@ import tests # our tests package
 
 # swagger_spec is the same fixture as in the contract/service test.
 def test_contract_unit(swagger_spec):
-    # Client doesn't need an URL now, but it needs the alternative HTTP client.
+    # Client doesn't need an URL now, but it needs
+    # the alternative HTTP client.
     client = SwaggerClient.from_spec(
         swagger_spec,
         http_client=FalconHttpClient(tests.service.api))
