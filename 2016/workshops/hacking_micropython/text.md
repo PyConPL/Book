@@ -100,7 +100,8 @@ STATIC const mp_map_elem_t mymodule_globals_table[] = {
     { MP_OBJ_NEW_QSTR(MP_QSTR___name__), MP_OBJ_NEW_QSTR(MP_QSTR_mymodule) },
 };
 
-STATIC MP_DEFINE_CONST_DICT(mp_module_mymodule_globals, mymodule_globals_table);
+STATIC MP_DEFINE_CONST_DICT(mp_module_mymodule_globals,
+    mymodule_globals_table);
 
 const mp_obj_module_t mp_module_mymodule = {
     .base = { &mp_type_module },
@@ -121,9 +122,9 @@ Now, for this module to actually be available for import, we need to add it to `
 extern const struct _mp_obj_module_t mp_module_mymodule;
 
 #define MICROPY_PORT_BUILTIN_MODULES \
-    { MP_OBJ_NEW_QSTR(MP_QSTR_umachine), (mp_obj_t)&machine_module }, \
-    ...
-    { MP_OBJ_NEW_QSTR(MP_QSTR_mymodule), (mp_obj_t)&mp_module_mymodule }, \
+  { MP_OBJ_NEW_QSTR(MP_QSTR_umachine), (mp_obj_t)&machine_module }, \
+  ...
+  { MP_OBJ_NEW_QSTR(MP_QSTR_mymodule), (mp_obj_t)&mp_module_mymodule }, \
 ```
 
 Now you can try compiling the firmware and flashing it to your board. Then
@@ -229,7 +230,8 @@ mp_obj_t mymodule_hello_make_new(const mp_obj_type_t *type, size_t n_args,
 }
 
 
-STATIC void pyb_spi_print(const mp_print_t *print, mp_obj_t self_in, mp_print_kind_t kind) {
+STATIC void pyb_spi_print(const mp_print_t *print, mp_obj_t self_in,
+        mp_print_kind_t kind) {
     pyb_spi_obj_t *self = MP_OBJ_TO_PTR(self_in);
     mp_printf(print, "Hello(%u)", self->hello_number);
 }
