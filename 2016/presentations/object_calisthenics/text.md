@@ -2,9 +2,9 @@
 
 ## Czym jest kalistenika?
 
-Według definicji podanej przez Wikipedię [1] kalistenika to "aktywność fizyczna
-polegająca na	 treningu siłowym opartym o ćwiczenia z wykorzystaniem własnej
-masy ciała". Kiedy mówimy o kalistenice, najprościej jest zwizualizować
+Według definicji podanej przez Wikipedię, kalistenika to "aktywność fizyczna
+polegająca na treningu siłowym opartym o ćwiczenia z wykorzystaniem własnej
+masy ciała"&nbsp;[1]. Kiedy mówimy o kalistenice, najprościej jest zwizualizować
 to pojęcie przywołując gladiatorów. Aż do XX wieku nie istniały siłownie -
 żadnych bieżni mechanicznych, rowerów stacjonarnych, hantli. Był tylko
 człowiek i masa jego ciała, którą mógł wykorzystać do ćwiczeń. Efektem takich
@@ -38,7 +38,7 @@ więcej niż jedną rzecz. To może nam również pokazać, że nazwa metody nie
 odzwierciedla wprost celu metody. Przez to trudniej jest jej użyć ponownie
 w innym miejscu, jak również przetestować.
 
-Zupełnym przeciwieństwem jest kilku, bądź kilkunastolinijkowa metoda, która
+Zupełnym przeciwieństwem jest kilku-, bądź kilkunastolinijkowa metoda, która
 ma wyłącznie jedną odpowiedzialność - robi jedną rzecz, robi ją dobrze,
 a dodatkowo jest adekwatnie nazwana. Dobra nazwa metody może znacznie ułatwić
 zrozumienie jej celu w trakcie czytania kodu. Jeśli wiemy, co dokładnie jest
@@ -59,7 +59,7 @@ Kilkoma rozwiązaniami pozwalającymi unikać takich konstrukcji są polimorfizm
 wzorzec strategii i wzorzec stanu. Kod, który korzysta z takiego podejścia,
 znacznie łatwiej się czyta i jest łatwiejszy w utrzymaniu.
 
-W najprostszym przypadku wystarczy, że sprawdzamy warunek w `if` i wychodzimy
+W najprostszym przypadku wystarczy, że sprawdzamy warunek w `if` i wychodzimy,
 jeśli nie został on spełniony. Dzięki temu nie mamy w kodzie kilku możliwych
 rozgałęzień. Reguła ta jest prostsza do przestrzegania, jeśli każda metoda
 robi tylko jedną rzecz.
@@ -67,19 +67,19 @@ robi tylko jedną rzecz.
 ## 3. Prymitywne typy powinny być opakowane w klasy.
 
 Powyższa zasada obowiązuje wyłącznie w sytuacji, gdy zmienna przekazuje
-jakieś zachowanie. Do czasu Pythona 3.5 nie było możliwości aby wymusić by
-metoda na poziomie składni przyjmowała konkretny typ zmiennej. Nawet, jeśli
+jakieś zachowanie. Do czasu Pythona 3.5 nie było możliwości, aby wymusić, by
+metoda na poziomie składni przyjmowała konkretny typ zmiennej. Nawet jeśli
 mamy dostępne tego typu udogodnienie, powyższa zasada ma sens.
 
 Obowiązek poinformowania o intencjach metody spoczywa niejako na nazwie
 metody. Jeśli zamiast integer przekażemy do metody obiekt klasy `Hour` lub
-`Year` już sama deklaracja metody jest czytelniejsza. Nie przekażemy przez
-pomyłkę obiektu `Year`, gdy metoda spodziewa się od nas `Hour` lub odwrotnie.
-Co jest możliwe gdy wymusimy wyłącznie typ `int`.
+`Year`, już sama deklaracja metody jest czytelniejsza. Nie przekażemy przez
+pomyłkę obiektu `Year`, gdy metoda spodziewa się od nas `Hour` lub odwrotnie,
+co jest możliwe, gdy wymusimy wyłącznie typ `int`.
 
 Tym samym dajemy programiście proste i czytelne API, które może nie wymagać
 nawet wgłębiania się w kod implementacji. Co więcej, jeśli już mamy tego typu
-klasy opakowujące typy proste, to jest to naturalne miejsce by dodać kolejne
+klasy opakowujące typy proste, to jest to naturalne miejsce, by dodać kolejne
 metody operujące na tych typach.
 
 ## 4. Tylko jedna kropka na linię.
@@ -87,14 +87,15 @@ metody operujące na tych typach.
 (Nie dotyczy getterów i tzw. "Fluent interface".)
 Celem tej zasady jest powstrzymanie programisty przed sięganiem zbyt głęboko
 w implementację klas i tym samym łamaniem enkapsulacji. Jeśli w ramach jednej
-linii odwołujemy się do dwóch różnych obiektów, to znaczy że wiemy zbyt wiele
+linii odwołujemy się do dwóch różnych obiektów, to znaczy, że wiemy zbyt wiele
 o innych obiektach.
 
 Prawo Demeter [4] mówi nam, że metoda może odwołać się wyłącznie do metod należących do:
-* tego samego obiektu,
-* dowolnego parametru przekazanego do niej,
-* dowolnego obiektu przez nią stworzonego,
-* dowolnego składnika klasy do której należy dana metoda.
+
+* tego samego obiektu;
+* dowolnego parametru przekazanego do niej;
+* dowolnego obiektu przez nią stworzonego;
+* dowolnego składnika klasy, do której należy dana metoda.
 
 Pomóc w przestrzeganiu Prawa Demeter może zasada "tell, don’t ask". W skrócie
 polega to na bezpośrednim oddelegowaniu pewnego zadania do innego obiektu (bez
@@ -111,8 +112,8 @@ zduplikowanego kodu.
 
 Warto zadbać o to, by nazwy klas i metod były krótkie i precyzyjne. Jeśli
 funkcja ma jeden konkretny cel, to nazwanie jej w zwięzły sposób nie będzie
-problemem. Należy również zwracać uwagę na kontekst w jakim metoda będzie
-używana. Załóżmy że mamy klasę Order obsługującą zamówienia. Funkcja służąca
+problemem. Należy również zwracać uwagę na kontekst, w jakim metoda będzie
+używana. Załóżmy, że mamy klasę Order obsługującą zamówienia. Funkcja służąca
 do wysyłki nie powinna się nazywać `ship_order()`, gdyż powtarzamy w ten
 sposób nazwy. Zamiast tego wystarczy samo ship(), dzięki czemu wywołanie
 order.ship() jest krótsze i czytelniejsze.
@@ -126,7 +127,7 @@ te limity pozostawić na niezmienionym poziomie.
 Limity te mają na celu wymuszenie trzymania się zasady jednej
 odpowiedzialności. Jeśli w ramach metody/klasy chcemy zrobić zbyt wiele, jest
 to jasny znak, że należy pomyśleć o osobnej metodzie/klasie do tego celu.
-Dzięki temu, klasy tworzą zwartą i zamkniętą całość.
+Dzięki temu klasy tworzą zwartą i zamkniętą całość.
 
 W miarę jak klasy robią się mniejsze i mają mniejszą odpowiedzialność, okaże
 się, że wszystkie klasy w ramach modułu są ze sobą logicznie powiązane i służą
@@ -138,7 +139,7 @@ Jeff Bay wspomina o limicie 2 atrybutów, taką też wartość możemy przyjąć
 Pythona. Większość klas powinna być odpowiedzialna za stan jednej zmiennej,
 ale w pewnych przypadkach potrzeba ich więcej. Dodanie każdej kolejnej
 zmiennej (atrybutu) do klasy sprawia, że staje się ona mniej spójna. Zdaniem
-Bay’a jeśli chcemy mieć więcej atrybutów niż 2, to niemal na pewno jest sposób
+Bay’a, jeśli chcemy mieć więcej atrybutów niż 2, to niemal na pewno jest sposób,
 by część z nich wydzielić do osobnej klasy. Przykład poniżej:
 
  * Customer:
@@ -148,7 +149,7 @@ by część z nich wydzielić do osobnej klasy. Przykład poniżej:
    * CustomerId - int
 
 ## 8. Używaj kolekcji pierwszej klasy.
-Przez kolekcję pierwszej klasy rozumiemy, nie posiadające dodatkowych
+Przez kolekcję pierwszej klasy rozumiemy nie posiadające dodatkowych
 atrybutów, klasy operujące na kolekcjach. Jeśli mamy zbiór elementów i chcemy
 na nich wykonywać operację, to musimy stworzyć do tego dedykowaną klasę. Każdy
 typ kolekcji jest opakowany w swoją klasę. Dzięki temu zachowanie powiązane
@@ -160,7 +161,7 @@ Nie chodzi tutaj bynajmniej o całkowity zakaz używania setterów i getterów.
 Celem tej reguły jest to, by nie pobierać wartości z obiektu i na tej
 podstawie podejmować jakichś decyzji. Prawidłowym podejściem jest pozwolić
 klasie na wykonanie tej operacji. To wewnątrz klasy powinna się znajdować
-logika która opiera się wprost na atrybucie tej klasy. Wraca tutaj po raz
+logika, która opiera się wprost na atrybucie tej klasy. Wraca tutaj po raz
 kolejny zasada "tell, don’t ask". Stosując tę regułę zachowujemy również
 zasadę otwarte zamknięte (Open/closed principle z SOLID).
 
@@ -168,9 +169,9 @@ zasadę otwarte zamknięte (Open/closed principle z SOLID).
 
 Wszystkie 9 zasad, choć czasem bardzo restrykcyjnych, wymusza na programiście
 enkapsulację i myślenie zorientowane na programowanie obiektowe. Aby lepiej
-opanować przedstawione zasady sugeruje się proste ćwiczenie: należy napisać
+opanować przedstawione zasady, sugeruje się proste ćwiczenie: należy napisać
 od postaw prostą aplikację do 1000 linii kodu bez łamania tych zasad.
-Po zrealizowaniu takiego zadania od decyzji dewelopera zależeć będzie których
+Po zrealizowaniu takiego zadania od decyzji dewelopera zależeć będzie, których
 zasad się trzymać, a które można nieco rozluźnić lub całkiem pominąć.
 
 Kalistenika obiektowa to nie jest zbiór najlepszych praktyk i nie należy
