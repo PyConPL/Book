@@ -138,8 +138,9 @@ functionality that is provided by the libraries.
 And all of this, to get a few lines of config onto your router:
 
 ```
-set system login message "> telnet xxx.xxx.xxx.xxx\nTrying xxx.xxx.xxx.xxx…
-\nConnected to telnet.example.com.\nEscape character is '^]'.\n\nlol (tty0)
+set system login message "> telnet xxx.xxx.xxx.xxx
+\nTrying xxx.xxx.xxx.xxx…\nConnected to telnet.example.com.
+\nEscape character is '^]'.\n\nlol (tty0)
 \n\nlogin:\n"
 ```
 EOF
