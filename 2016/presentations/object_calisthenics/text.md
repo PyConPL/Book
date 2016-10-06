@@ -2,7 +2,7 @@
 
 ## Czym jest kalistenika?
 
-Według definicji podanej przez Wikipedię[1] kalistenika to "aktywność fizyczna
+Według definicji podanej przez Wikipedię [1] kalistenika to "aktywność fizyczna
 polegająca na	 treningu siłowym opartym o ćwiczenia z wykorzystaniem własnej
 masy ciała". Kiedy mówimy o kalistenice, najprościej jest zwizualizować
 to pojęcie przywołując gladiatorów. Aż do XX wieku nie istniały siłownie -
@@ -18,14 +18,14 @@ jakości kodu, pisanie kodu prostszego w utrzymaniu, prostszego w zrozumieniu,
 możliwego do ponownego użycia oraz takiego, który można łatwo testować.
 
 Kalistenika obiektowa została pierwotnie przedstawiona w eseju Jeffa Bay’a
-i opublikowana w książce pt. *ThoughtWorks Anthology*[2]. Początkowo została
+i opublikowana w książce pt. *ThoughtWorks Anthology* [2]. Początkowo została
 pomyślana z przeznaczeniem dla zastosowania w Javie, natomiast później
 zaadaptowano ją na potrzeby innych języków programowania.
 
 Dosyć popularnym powiedzeniem jest, że kod jest dużo częściej czytany niż
 pisany. Dlatego tak ważne jest, by kod ten był łatwy do przeczytania,
 zrozumienia, testowania i ponownego zastosowania w innym miejscu. O podobnym
-celu jest mowa w *Czystym kodzie*[3] Roberta C. Martina.
+celu jest mowa w *Czystym kodzie* [3] Roberta C. Martina.
 
 Bez zbędnego przedłużania, zobaczmy konkretnie jakie reguły składają się na kalistenikę obiektową.
 
@@ -90,7 +90,7 @@ w implementację klas i tym samym łamaniem enkapsulacji. Jeśli w ramach jednej
 linii odwołujemy się do dwóch różnych obiektów, to znaczy że wiemy zbyt wiele
 o innych obiektach.
 
-Prawo Demeter[4] mówi nam, że metoda może odwołać się wyłącznie do metod należących do:
+Prawo Demeter [4] mówi nam, że metoda może odwołać się wyłącznie do metod należących do:
 * tego samego obiektu,
 * dowolnego parametru przekazanego do niej,
 * dowolnego obiektu przez nią stworzonego,
