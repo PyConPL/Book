@@ -343,10 +343,10 @@ Pythona.
 2. Porównanie ORMów. http://pythoncentral.io/sqlalchemy-vs-orms/
 3. Strona domowa SQLAlchemy. http://www.sqlalchemy.org
 4. Dokumentacja SQLAchemy. http://docs.sqlalchemy.org/en/latest/
-5. Zestaw narzędzi do migracji baz danych. http://alembic.zzzcomputing.com/en/latest/
-6. Wzorzec projektowy, na którym opiera się SQLAlchemy. https://en.wikipedia.org/wiki/Data`_`mapper`_`pattern
-7. Popularny wzorzec projektowy wśród ORMów. https://en.wikipedia.org/wiki/Active`_`record`_`pattern
+5. Zestaw narzędzi do migracji baz danych.\crlf http://alembic.zzzcomputing.com/en/latest/
+6. Wzorzec projektowy, na którym opiera się SQLAlchemy.\crlf https://en.wikipedia.org/wiki/Data`_`mapper`_`pattern
+7. Popularny wzorzec projektowy wśród ORMów.\crlf https://en.wikipedia.org/wiki/Active`_`record`_`pattern
 8. Zbiór linków do strzępków dokumentacji standardu SQL. http://modern-sql.com/standard
 9. Narzędzie administracyjne dla PostrgeSQL. https://www.pgadmin.org
-10. Narzędzie do dwukierunkowej replikacji PosgreSQL. https://2ndquadrant.com/en/resources/bdr/
+10. Narzędzie do dwukierunkowej replikacji PosgreSQL.\crlf https://2ndquadrant.com/en/resources/bdr/
 11. Najpopularniejszy sterownik PostgreSQL dla Pythona. http://initd.org/psycopg/
