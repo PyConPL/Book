@@ -86,8 +86,8 @@ another (like for example the lack of an age timer in the Juniper output above).
 ## Generic Access Libraries
 
 To access devices directly via their SSH or Netconf interface, generic Python libraries such as
-[pexpect](https://github.com/pexpect/pexpect), [paramiko](https://github.com/paramiko/paramiko) and
-[ncclient](https://github.com/ncclient/ncclient) can be used. They allow for programmatic access from scripts
+pexpect [1], paramiko [2] and
+ncclient [3] can be used. They allow for programmatic access from scripts
 (for network engineers who are trying to figure out how to code ;) ) but don't provide any ease of use in terms of
 vendor specificity. You will still have to deal with the little differences the vendors bring: different login
 procedures or additional escape chars, different configuration syntax, differences in 'show commands' or
@@ -98,9 +98,9 @@ differences with the varying support of Netconf on each device.
 Since Python became more and more popular amongst network engineers, network vendors started to provide their own
 libraries to facilitate device interaction - to mention a few:
 
-* Arista's [pyeapi](https://github.com/arista-eosplus/pyeapi)
-* Cisco IOS-XR [pyiosxr](https://github.com/fooelisa/pyiosxr)
-* Juniper's [py-junos-eznc](https://github.com/Juniper/py-junos-eznc )
+* Arista's pyeapi [4]
+* Cisco IOS-XR pyiosxr [5]
+* Juniper's py-junos-eznc [6]
 
 Each of them supports their specific device with its specific capabilities. Juniper's py-junos-eznc provides access
 via Netconf, whereas pyiosxr 'mimics' Netconf support (which is not directly available) via SSH and pexpect.
@@ -117,10 +117,10 @@ different locations, plus a different methodology to upload the configs to the d
 used for each of them individually, however managing the use of different libraries per vendor is quite painful.
 
 In an effort to improve upon this situation, wrappers around a set of libraries have been built to unify multivendor
-access to networking devices. For example [netmiko](https://github.com/ktbyers/netmiko), which is a
+access to networking devices. For example netmiko [7], which is a
 wrapper around paramiko and provides easy SSH access for plenty of networking equipment. On the Netconf front, or to
 be more specific, access which supports transactions on the device, a project called
-[napalm](https://github.com/napalm-automation/napalm) has been started, which unifies a set of vendor libraries
+napalm [8] has been started, which unifies a set of vendor libraries
 into a single set of methods.
 
 Of course there are also standardization efforts, like open config or Netconf, which aim to improve upon this
@@ -144,3 +144,14 @@ set system login message "> telnet xxx.xxx.xxx.xxx
 \n\nlogin:\n"
 ```
 EOF
+
+## References
+
+1. https://github.com/pexpect/pexpect
+2. https://github.com/paramiko/paramiko
+3. https://github.com/ncclient/ncclient
+4. https://github.com/arista-eosplus/pyeapi
+5. https://github.com/fooelisa/pyiosxr
+6. https://github.com/Juniper/py-junos-eznc
+7. https://github.com/ktbyers/netmiko
+8. https://github.com/napalm-automation/napalm
