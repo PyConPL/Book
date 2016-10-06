@@ -1,4 +1,4 @@
-# Co mają wspólnego trzęsienia ziemia, cyklon tropikalny, lawiny błotne i nasze repozytoria? - Paweł Kopka
+# Co mają wspólnego trzęsienia ziemi, cyklon tropikalny, lawiny błotne i nasze repozytoria? - Paweł Kopka
 
 Co łączy repozytoria, trzęsienia ziemi, lawiny błotne oraz cyklony tropikalne? Pewnie większości z
 was przychodzi do głowy słowo "katastrofa", ale dzisiaj nie o tym. Odpowiedź na otwierające pytanie to:
