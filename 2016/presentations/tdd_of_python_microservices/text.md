@@ -138,7 +138,7 @@ Not only can they parameterize tests, but also other fixtures.
 The two top-level ones presented above are themselves composed of others
 (as shown in the diagram below) in order to fine-tune their behavior to our needs.
 
-![Fixture composition](fixtures.svg)
+![Fixture composition](fixtures.png)
 
 Let's now trace all the elements that make up our test fixtures.
 First, `db`:

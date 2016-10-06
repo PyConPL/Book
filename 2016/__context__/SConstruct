@@ -81,7 +81,7 @@ for alias, location in articles:
             "[ ${TARGET.file} != async.pdf ] || cp ../../../presentations/async_pod_maska/yield_from.png .",
             )
         small_pdf_ls.append(
-            "[ ${TARGET.file} != microservices.pdf ] || cp ../../../presentations/tdd_of_python_microservices/fixtures.svg .",
+            "[ ${TARGET.file} != microservices.pdf ] || cp ../../../presentations/tdd_of_python_microservices/fixtures.png .",
             )
         small_pdf_ls.append(
             "[ ${TARGET.file} != microservices.pdf ] || cp ../../../presentations/tdd_of_python_microservices/test_pyramid.png .",
