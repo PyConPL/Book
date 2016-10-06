@@ -7,7 +7,7 @@ Test-driven development (TDD) allows you to have that.
 
 Except for the stalwart unit tests, proper TDD also requires functional tests.
 This article shows how to implement those tests (using the
-[Mountepy] (https://github.com/butla/mountepy) library I made, Pytest and Docker),
+Mountepy [1] library I made, Pytest and Docker),
 how to enforce TDD (using multi-process code coverage) and good code style (with automated
 Pylint checks) within a team.
 
@@ -259,7 +259,7 @@ def mountebank():
 ```
 
 Real code demonstrating the solutions presented in this article can be found in
-[PyDAS](https://github.com/butla/pydas), which was my guinea pig for microservice TDD experiments.
+PyDAS [2], which was my guinea pig for microservice TDD experiments.
 
 ### Remarks about service tests
 Tests that start a few processes and send real HTTP requests (even through the loopback interface)
@@ -330,7 +330,7 @@ fail_under = 100
 To keep code quality high it's good to use static code analysis tool like Pylint.
 To keep it even higher, any meaningful complaints can cause the test suite to fail.
 
-In PyDAS, I've used [Tox](https://tox.readthedocs.io) to automate test runs.
+In PyDAS, I've used Tox [3] to automate test runs.
 Below is an abbreviated version of Tox configuration (`tox.ini`).
 
 ```Ini
@@ -362,7 +362,7 @@ and can cause bugs in a microservice system, so precautions are necessary.
 They come in the form of contract tests.
 
 ### Swagger
-[Swagger](http://swagger.io/) is an interface definition language.
+Swagger [4] is an interface definition language.
 It will serve us as a contract definition language description.
 
 An example Swagger document written in YAML format (JSON also happens) is below.
@@ -403,7 +403,7 @@ The endpoint can respond with a message with status code 200 containing the repr
 a person's data - and object with their name as a string and the information if they are single (boolean).
 
 ### Contract/service tests
-[Bravado](https://github.com/Yelp/bravado) is a library that can dynamically create client
+Bravado [5] is a library that can dynamically create client
 objects for a service based on its Swagger contract.
 It can do contract tests by automatically validating the types (schemas) of both parameters
 and the values returned from services.
@@ -452,8 +452,8 @@ It's unfeasible to cover the entire contract with service/contract tests,
 because they take too long.
 It would be great to give unit tests that simulate HTTP calls
 (I think all HTTP/REST frameworks have a facility to do that) the Bravado's validation abilities.
-That's what I did for [Falcon](https://falconframework.org/) with
-[bravado-falcon](https://github.com/butla/bravado-falcon), thanks to Bravado's extensibility.
+That's what I did for Falcon [6] with
+bravado-falcon [7], thanks to Bravado's extensibility.
 Such integration can probably be easily developed for other web frameworks.
 
 ```python
@@ -489,8 +489,16 @@ Further things to consider are:
 * and more.
 
 ## References
-1. Gary Bernhardt. Fast Test, Slow Test. https://youtu.be/RAxiiRPHS9k
-2. Sam Newman. Building Microservices. O'Reilly Media, Inc., February 10, 2015
-3. Harry J.W. Percival. Test-Driven Development with Python. O'Reilly Media, Inc., June 19, 2014
-4. Tobias Clemson. Microservice Testing. http://martinfowler.com/articles/\crlf microservice-testing/
-5. Testing in production comes out of the shadows. http://sdtimes.com/testing-production-comes-shadows/
+
+1. Mountepy. https://github.com/butla/mountepy
+2. PyDAS. https://github.com/butla/pydas
+3. Tox. https://tox.readthedocs.io
+4. Swagger. http://swagger.io/
+5. Bravado. https://github.com/Yelp/bravado
+6. Falcon. https://falconframework.org/
+7. bravado-falcon. https://github.com/butla/bravado-falcon
+8. Gary Bernhardt. Fast Test, Slow Test. https://youtu.be/RAxiiRPHS9k
+9. Sam Newman. Building Microservices. O'Reilly Media, Inc., February 10, 2015
+10. Harry J.W. Percival. Test-Driven Development with Python. O'Reilly Media, Inc., June 19, 2014
+11. Tobias Clemson. Microservice Testing. http://martinfowler.com/articles/\crlf microservice-testing/
+12. Testing in production comes out of the shadows. http://sdtimes.com/testing-production-comes-shadows/
