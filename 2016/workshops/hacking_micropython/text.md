@@ -12,8 +12,8 @@ example.
 
 ## A Tour Around the MicroPython Repository
 
-The repository is located on GitHub, at
-https://github.com/micropython/micropython -- you can easily fork it and clone
+The repository is located on GitHub [1]
+ -- you can easily fork it and clone
 it to your computer. Inside you will see a number of directories:
 
 The `docs` directory contains documentation that you can compile into HTML
@@ -281,6 +281,11 @@ both in the `py` directory, to see what is available, and in all the port
 directories, to see how it is used.
 
 There is also a very lively community at the MicroPython forum, where you can
-ask for help: http://forum.micropython.org
+ask for help [2].
 
 Happy hacking!
+
+## References
+
+1. MicroPython project. https://github.com/micropython/micropython
+2. MicroPython Forum. http://forum.micropython.org
