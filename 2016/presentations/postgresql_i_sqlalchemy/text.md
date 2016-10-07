@@ -17,12 +17,12 @@ których zadaniem jest likwidacja tarcia na styku przez (w skrócie) usunięcie
 SQLa z kodów źródłowych aplikacji i zastąpienie go odwołaniami do biblioteki ORM.
 
 Niniejszy artykuł ma na celu ukazanie dobrodziejstw płynących z użycia ORM
-jako takiego, a także uzasadnienie dlaczego akurat tandem
+jako takiego, a także uzasadnienie, dlaczego akurat tandem
 SQLAlchemy+PostgreSQL jest tak godny polecenia.
 
 # Czym jest Object Relational Mapping?
 Dostęp do relacyjnych baz danych umożliwiają nam różnorakie sterowniki,
-z których prawie wszystkie są zgodne z DB API 2.0 (PEP249[1]), po co więc
+z których prawie wszystkie są zgodne z DB API 2.0 (PEP249 [1]), po co więc
 dodatkowa warstwa pomiędzy sterownikiem a naszym kodem?
 
 Otóż problem polega na tym, że na SQL osadzony w kodzie Pythona składa
@@ -57,7 +57,7 @@ Możemy mieć wszystko obiektowo w Pythonie, bez choćby jednego łańcucha znak
 <User(id=1, name="Jasiek")>
 ```
 # Dlaczego SQLAlchemy?
-Bibliotek ORM dla Pythona jest całkiem sporo[2], niektóre z nich są proste
+Bibliotek ORM dla Pythona jest całkiem sporo [2], niektóre z nich są proste
 (Storm, SQLObject), inne są dobrze zintegrowane ze środowiskiem pracy
 (Django ORM), a jeszcze inne są ciekawe (PonyORM). Ja jednak wybrałem
 SQLAlchemy [3] ze względu na kilka cech, które w połączeniu tworzą bardzo
@@ -70,15 +70,15 @@ potężne narzędzie:
 * **Mnogość obsługiwanych backendów** - bardzo szeroka gama obsługiwanych sterowników, włączając w to SQLite, dostępny bezpośrednio z biblioteki standardowej Pythona.
 * **Samodzielność** - nie jest zależny od żadnych bibliotek zewnętrznych, nie wymaga też określonego frameworka do działania i dobrze się integruje z każdym typem projektu.
 * **DDL i reflection** - posiada możliwość definiowania struktury danych, a także opcję automatycznego budowania obiektów na podstawie już istniejącej bazy.
-* **Wygodne migracje** - dzięki dodatkowej bibliotece o nazwie `alembic`[5].
+* **Wygodne migracje** - dzięki dodatkowej bibliotece o nazwie `alembic` [5].
 * **Elastyczność** - prawie wszystko w SQLAlchemy można skonfigurować, rozszerzyć, czy dostosować do konkretnych potrzeb.
 
-Biblioteka SQLAlchemy zbudowana jest w oparciu o wrzorzec projektowy
+Biblioteka SQLAlchemy zbudowana jest w oparciu o wzorzec projektowy
 *data mapper* [6], który daje programiście większą kontrolę, ale jest
 też nieco trudniejszy w okiełznaniu, niż bardziej rozpowszechniony wśród ORMów
 wzorzec *active record* [7].
 
-Z tego powodu, jedyną realną wadą SQLAlchemy *może być* początkowa trudność
+Z tego powodu jedyną realną wadą SQLAlchemy *może być* początkowa trudność
 zrozumienia i odnalezienia się w przepastnych czeluściach dokumentacji,
 jednak liczne dostępne samouczki pozwalają na stopniowe zgłębianie wiedzy,
 począwszy od absolutnych podstaw, bez konieczności zrozumienia wszystkiego
@@ -114,7 +114,7 @@ uzupełniają się idealnie, jak w przykładnym związku, a ich możliwości w s
 daleko wybiegają poza funkcje każdego z osobna.
 
 Warto tutaj wspomnieć o fakcie, że SQLAlchemy wspiera wiele rozszerzeń
-PostgreSQL, dając użytkownikowi coś więcej, niż tylko warstwę abstrakcji
+PostgreSQL, dając użytkownikowi coś więcej niż tylko warstwę abstrakcji
 pomiędzy programem a bazą. Jednakże, jeżeli skorzystamy z tych dodatkowych
 funkcji, tracimy jeden z atutów ORMa, a mianowicie niezależność od konkretnego
 silnika bazy danych.
@@ -342,11 +342,11 @@ Pythona.
 1. Specyfikacja DB API 2.0. https://www.python.org/dev/peps/pep-0249/
 2. Porównanie ORMów. http://pythoncentral.io/sqlalchemy-vs-orms/
 3. Strona domowa SQLAlchemy. http://www.sqlalchemy.org
-4. Dokumentacja SQLAchemy. http://docs.sqlalchemy.org/en/latest/
+4. Dokumentacja SQLAlchemy. http://docs.sqlalchemy.org/en/latest/
 5. Zestaw narzędzi do migracji baz danych.\crlf http://alembic.zzzcomputing.com/en/latest/
 6. Wzorzec projektowy, na którym opiera się SQLAlchemy.\crlf https://en.wikipedia.org/wiki/Data`_`mapper`_`pattern
 7. Popularny wzorzec projektowy wśród ORMów.\crlf https://en.wikipedia.org/wiki/Active`_`record`_`pattern
 8. Zbiór linków do strzępków dokumentacji standardu SQL. http://modern-sql.com/standard
-9. Narzędzie administracyjne dla PostrgeSQL. https://www.pgadmin.org
-10. Narzędzie do dwukierunkowej replikacji PosgreSQL.\crlf https://2ndquadrant.com/en/resources/bdr/
+9. Narzędzie administracyjne dla PostgreSQL. https://www.pgadmin.org
+10. Narzędzie do dwukierunkowej replikacji PostgreSQL.\crlf https://2ndquadrant.com/en/resources/bdr/
 11. Najpopularniejszy sterownik PostgreSQL dla Pythona. http://initd.org/psycopg/
