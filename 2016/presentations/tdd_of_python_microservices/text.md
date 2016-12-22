@@ -500,5 +500,5 @@ Further things to consider are:
 8. Gary Bernhardt. Fast Test, Slow Test. https://youtu.be/RAxiiRPHS9k
 9. Sam Newman. Building Microservices. O'Reilly Media, Inc., February 10, 2015
 10. Harry J.W. Percival. Test-Driven Development with Python. O'Reilly Media, Inc., June 19, 2014
-11. Tobias Clemson. Microservice Testing. http://martinfowler.com/articles/\crlf microservice-testing/
+11. Tobias Clemson. Microservice Testing. http://martinfowler.com/articles/microservice-testing/
 12. Testing in production comes out of the shadows. http://sdtimes.com/testing-production-comes-shadows/
