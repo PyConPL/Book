@@ -33,7 +33,17 @@ This would be how you'd deploy your personal project to your VPS for the first t
 However, you can't keep that architecture forever, as traffic grows, some parts of the system will suffer and you'll have to use some strategies to relief that pain.
 
 ### Database level
-Usually the first part of your system showing some symptoms will be your database, this will usually be your first bottleneck
+Usually the first part of your system showing some symptoms will be your database, this will usually be your first bottleneck and the first thing you'll have to optimize.
+
+#### Increased response times
+This is the main symptom, and it could be the product of either slow reads or slow writes, which leads to slow reads due to resource locking.
+
+- **Slow writes:** usually product of over-indexing a table, all indexes are updated on write time on `INSERT`, `UPDATE` and `DELETE`. Too many indexes on a table will produce slow writes, no indexes at all might end up on slow reads, you need to know your data model and the questions it needs to answer and index based on workload. Premature optimization is bad.
+
+- **Slow reads:** could be the product of a sub-optimal data model for the type of queries it needs to answer, solutions will depend on the traffic on the tables and the relations between them.
+    - **Add Indices:** a good hint about which fields to index is to check the ones that appear the most on the `WHERE` clauses of the executed SQL queries. It's usually a good idea to index foreign keys.
+    - **Denormalize:** usually it's a bad idea to add `ManyToMany` relations between model we know will grow indefinetely and quick, consider denormlizing them into `JSONField` or `ArrayField` if using Postgres or just duplicate the data, this will drastically improve the performance on those queries.
+    - **Database caching:**
 
 ### Caching
 
