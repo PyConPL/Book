@@ -84,7 +84,8 @@ test_example.py:2: AssertionError
 
 ## Let's write some tests for fizzbuzz
 
-Fizzbuzz [5] is a group word game for children to teach them about division. Players take turns to count incrementally, replacing any number divisible by
+Fizzbuzz [5] is a group word game for children to teach them about division.
+Players take turns to count incrementally, replacing any number divisible by
 three with the word "fizz", and any number divisible by five with the word
 "buzz". If the number is dividable by both, one shall say "fizzbuzz".
 
@@ -117,7 +118,8 @@ def test_fizz():
     assert fizzbuz(3) == 'fizz'
 ```
 
-Now run the tests with `python -m pytest`. (Note that if you have an virtual environment set up in the very same directory, pytest will likely try to
+Now run the tests with `python -m pytest`. (Note that if you have an virtual
+environment set up in the very same directory, pytest will likely try to
 collect the tests from within that.  You can either use the `--ignore` switch
 to ignore your virtual environment directory or specify the path to your tests
 directory as a first positional argument.)
@@ -127,9 +129,11 @@ $ python -m pytest --ignore=env
 $ python -m pytest tests/
 ```
 
-Writing tests that check that `fizzbuzz(5)` is `'buzz'` and `fizzbuzz(15)` is `'fizzbuzz'` is left es and exercise for the reader.
+Writing tests that check that `fizzbuzz(5)` is `'buzz'` and `fizzbuzz(15)` is
+`'fizzbuzz'` is left es and exercise for the reader.
 
-At the end of this part, you should have a fizzbuzz implementation and tests for 1, 3, 5 and 15.
+At the end of this part, you should have a fizzbuzz implementation and tests
+for 1, 3, 5 and 15.
 
 
 ## Parametrize our tests and why is it better
@@ -197,7 +201,8 @@ See what happens when you run the tests and try running them with the verbose
 Let's write parametric tests for all our cases. Note that in our example, we've
 used a tuple to represent possible values of our parameter. But it can be any
 (terminal) iterable, such as list, set, range or a custom generator.
-Try to write some parametric test for fizzbuzz using a range or a (list) comprehension [6].
+Try to write some parametric test for fizzbuzz using a range or a (list)
+comprehension [6].
 
 
 ## Let's do something more complicated
@@ -333,7 +338,8 @@ def db(connection):
 ```
 
 Note that using another fixture from a fixture can be done by using it's name
-as an argument. You can use a module scoped fixture from a default scoped fixture, but not the other way around (for obvious reasons).
+as an argument. You can use a module scoped fixture from a default scoped
+fixture, but not the other way around (for obvious reasons).
 
 
 ## Already available fixtures in pytest
@@ -348,7 +354,8 @@ standard output and stderr.
 
 Pytest normally hides every output if the test passes and displays it if the
 test fails. This is useful for debugging failed tests. You can leave you prints
-in and it doesn't harm. But sometimes you actually want to check would would have been printed. The `capsys` fixture helps here:
+in and it doesn't harm. But sometimes you actually want to check would would
+have been printed. The `capsys` fixture helps here:
 
 ```python
 def fizzbuzz_game():
@@ -402,7 +409,8 @@ test being run.
 
 In our fizzbuzz example, we might wan to test multiple facts about fizzbuzz
 calls for 3, 6, 9, 333 etc. Instead of repeating the parameters every time
-or creating a global variable with list of numbers, we can crate a parametric fixture:
+or creating a global variable with list of numbers, we can crate a parametric
+fixture:
 
 ```python
 @pytest.fixture(scope='module', params=[3, 6, 9, 333])
