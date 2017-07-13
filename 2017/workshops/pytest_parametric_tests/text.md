@@ -1,6 +1,6 @@
 # Parametrize all the tests! (workshop)
 
-In this workshop you will learn about **pytest** [1] and why is it better than
+In this workshop you will learn about **pytest** [1] and why it is better than
 unittest or nose. You will see and try out examples on easy and later on more
 complex scenarios. You will learn how to write parametric tests and you will
 paramterize some test for a common problem such as fizzbuzz. Later we'll dive
@@ -8,13 +8,13 @@ in into fixtures and how they are different than setup and teardown. Fixtures
 can be parametric as well, so we'll code some examples for that as well.
 At the end, you'll learn about cross products of parameters and fixtures.
 
-This test can serve as a brief introduction to the topic, but some of the parts
+This text can serve as a brief introduction to the topic, but some of the parts
 are intentionally missing and will be presented on the workshop.
 
 
 ## What is pytest
 
-Pytest is a framework for writing tests for you Python code. When you look at
+Pytest is a framework for writing tests for your Python code. When you look at
 testing in Python, you'll probably learn about **unittest** [2], because it is
 a part of Python's standard library. However, unittest is not very flexible and
 its syntax and usage is very much inspired with JUnit – a Java unit testing
@@ -84,7 +84,8 @@ test_example.py:2: AssertionError
 
 ## Let's write some tests for fizzbuzz
 
-Fizzbuzz [5] is a group word game for children to teach them about division. Players take turns to count incrementally, replacing any number divisible by
+Fizzbuzz [5] is a group word game for children to teach them about division.
+Players take turns to count incrementally, replacing any number divisible by
 three with the word "fizz", and any number divisible by five with the word
 "buzz". If the number is dividable by both, one shall say "fizzbuzz".
 
@@ -117,7 +118,8 @@ def test_fizz():
     assert fizzbuz(3) == 'fizz'
 ```
 
-Now run the tests with `python -m pytest`. (Note that if you have an virtual environment set up in the very same directory, pytest will likely try to
+Now run the tests with `python -m pytest`. (Note that if you have an virtual
+environment set up in the very same directory, pytest will likely try to
 collect the tests from within that.  You can either use the `--ignore` switch
 to ignore your virtual environment directory or specify the path to your tests
 directory as a first positional argument.)
@@ -127,9 +129,11 @@ $ python -m pytest --ignore=env
 $ python -m pytest tests/
 ```
 
-Writing tests that check that `fizzbuzz(5)` is `'buzz'` and `fizzbuzz(15)` is `'fizzbuzz'` is left es and exercise for the reader.
+Writing tests that check that `fizzbuzz(5)` is `'buzz'` and `fizzbuzz(15)` is
+`'fizzbuzz'` is left as and exercise for the reader.
 
-At the end of this part, you should have a fizzbuzz implementation and tests for 1, 3, 5 and 15.
+At the end of this part, you should have a fizzbuzz implementation and tests
+for 1, 3, 5 and 15.
 
 
 ## Parametrize our tests and why is it better
@@ -197,7 +201,8 @@ See what happens when you run the tests and try running them with the verbose
 Let's write parametric tests for all our cases. Note that in our example, we've
 used a tuple to represent possible values of our parameter. But it can be any
 (terminal) iterable, such as list, set, range or a custom generator.
-Try to write some parametric test for fizzbuzz using a range or a (list) comprehension [6].
+Try to write some parametric test for fizzbuzz using a range or a (list)
+comprehension [6].
 
 
 ## Let's do something more complicated
@@ -275,9 +280,9 @@ def db():
     connection.close()
 ```
 
-Bare in mind that if the tests fail, the last line of this fixture would never
+Bare in mind that if a test fails, the last line of this fixture would never
 get executed. To make sure the connection get's closed even on failed test,
-you would use a classical `try-finally` block:
+you would use a classic `try-finally` block:
 
 ```python
 @pytest.fixture
@@ -333,7 +338,8 @@ def db(connection):
 ```
 
 Note that using another fixture from a fixture can be done by using it's name
-as an argument. You can use a module scoped fixture from a default scoped fixture, but not the other way around (for obvious reasons).
+as a name of a parameter. You can use a module scoped fixture from a default
+scoped fixture, but not the other way around (for obvious reasons).
 
 
 ## Already available fixtures in pytest
@@ -348,7 +354,8 @@ standard output and stderr.
 
 Pytest normally hides every output if the test passes and displays it if the
 test fails. This is useful for debugging failed tests. You can leave you prints
-in and it doesn't harm. But sometimes you actually want to check would would have been printed. The `capsys` fixture helps here:
+in and it doesn't harm. But sometimes you actually want to check would would
+have been printed. The `capsys` fixture helps here:
 
 ```python
 def fizzbuzz_game():
@@ -378,7 +385,7 @@ def gitrepo(tmpdir):
 
 ## Parametrizing fixtures
 
-As well as tests, fixtures can be parametric as well [7]. This is very helpful
+As well as tests, fixtures can also be parametric [7]. This is very helpful
 if you need to run your tests with multiple backends or if you use one
 parameter repetitively across multiple tests. Let's get back to our
 hypothetical database example and make it parametric:
@@ -394,15 +401,19 @@ def connection(request):
         yield connection
 ```
 
+Now every test that uses the _connection_ fixture (even transitively) will run
+twice, once with `PostgresDB()` and once with `SQLiteDB()`.
+
 Note that parametric fixtures have a little different syntax and need to accept
-the special `request` function parameter that has the entire context about the
-test being run.
+the special `request` function parameter that holds the entire context about
+the test being run.
 
 ------------
 
-In our fizzbuzz example, we might wan to test multiple facts about fizzbuzz
+In our fizzbuzz example, we might want to test multiple facts about fizzbuzz
 calls for 3, 6, 9, 333 etc. Instead of repeating the parameters every time
-or creating a global variable with list of numbers, we can crate a parametric fixture:
+or creating a global variable with list of numbers, we can crate a parametric
+fixture:
 
 ```python
 @pytest.fixture(scope='module', params=[3, 6, 9, 333])
@@ -459,8 +470,9 @@ def test_fizzbuzz(fizzbuzznum):
     assert fizzbuzz(fizzbuzznum) == 'fizzbuzz'
 ```
 
-Don't overdo that. If you wan to test for all possible values without _actually
-testing all possible values_, you might want to look at **hypothesis** [8].
+Don't overdo that. If you want to test for all possible values without
+_actually testing all possible values_, you might want to look at
+**hypothesis** [8].
 
 ## Where to go next
 
