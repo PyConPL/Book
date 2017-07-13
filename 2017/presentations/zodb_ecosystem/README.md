@@ -23,12 +23,13 @@ You can see the talk slides here:
 https://pythonlinks.info/presentations/zodbtalk.pdf
 
 ZODB is an object-oriented databaase written in Python and 
-optimized in C. This article is a good representation of the talk.
+optimized in C. This article is a good representation of the talk
+I am giving at Pycon Poland 2017.
 
 ## So Easy to use
 
 ZODB is really easy to use.  Just subclass off of class persistent.Persistent,
-and your objects become persistent. 
+and your objects become persistent.  Here is a code sample from the Tutorial.
 
 
 
@@ -51,6 +52,8 @@ def cash(self, amount):
 
 ```
 
+Did you notice how trivial it was to create a persistent object. Magic!
+
 You can also subclass off of class Persitent Containers (Btrees), and 
 class Persistent Set.
 
@@ -62,14 +65,18 @@ ZODB is an ACID-compliant database.
 Atomicity requires that each transaction be "all or nothing".
 
 ### Consistency 
-The consistency property ensures that any transaction will bring the database from one valid state to another. 
+The consistency property ensures that any transaction will bring the database 
+from one valid state to another. 
 
 ### Isolation
-The isolation property ensures that the concurrent execution of transactions results in a system state that would be obtained if transactions were executed sequentially, i.e., one after the other.
+The isolation property ensures that the concurrent execution of transactions 
+results in a system state that would be obtained if 
+transactions were executed sequentially, i.e., one after the other.
 
 ### Durability
-Durability (database systems)
-The durability property ensures that once a transaction has been committed, it will remain so, even in the event of power loss, crashes, or errors. 
+Durability 
+Durability  ensures that once a transaction 
+has been committed, it will remain so, even in the event of power loss, crashes, or errors. 
 
 ## ZODB Data Model
 
@@ -83,7 +90,7 @@ collected.
 ## A Specific Data Model
 
 PythonLinks.info/the-world is a model of the Python software industry 
-represented as a hierarchy.  The world is a category containing regions.  
+represented as a hierarchy.  "The-world" is a category containing regions.  
 Regions contain countries.  Countries contain cities. Cities contain 
 companies.  Companies can contain jobs, products, and other links such as 
 YouTube videos, product reviews, and blogs.  The tree representing the 
@@ -99,9 +106,9 @@ is very natural to map a URL to a particular object by traversing the tree.
 ZODB applications access objects by traversing the tree.  It would be nice 
 if every object had its own unique name, so that even when the tree 
 structure changed, it would still be easy to 
-find the object.  It would ahve a canonical URL. 
+find the object using its canonical URL. 
  
-PythonLinks includes this functionailty.  Every node has a unique name.  
+PythonLinks includes canoninc urls. .  Every node has a unique name.  
 Atempts to create a new node with the same name, result in an integer 
 being appended to the new name. Node, Node-1, Node-2, etc. When objects are 
 renamed, or deleted, the index is updated.  
@@ -109,30 +116,27 @@ renamed, or deleted, the index is updated.
 ## ZODB History and Undo
 ZODB is a versioned database.  Old versions are preserved.  That makes 
 it possible to edit an object, save the edits, and then revert to the 
-previous version of the object.  Each object preserves its historical versions until they are garbage collected.  
+previous version of the object.  Each object preserves its historical versions 
+until they are garbage collected.  
 
 ## ZODB Storage Options
 
 There is a rich variety of ways to store your ZODB objects. 
 
-1. **FileStorage** is the basic way of storing ZODB objects on the 
+1. **FileStorage** is the basic way of storing ZODB (Python) objects on the 
 file system.  There is also Blob storage for storing images, files and other 
 large objects on the file system. 
-2.**ZEO** is a client-server storae system.  ZEO clients share data 
-from the ZEO server.  
+2.**ZEO** is the basic client server version of the ZODB.  
+ZEO clients share data from the ZEO server.  
+Each participating  Python application 
+server includes a ZEO client.  They all talk to the ZEO server. The ZEO server
+will then store the data in FileStorage and BlobStorage 
 3. **RelStorage**  stores ZODB data in a relational database. It performs 
-better than ZEO. It runs on top of:
-  * **MySQL**
-  * **Oracle**
-  * **PostgreSQL**
-3. **NewtDB** is a version of RelStorage optimized for PostgreSQL.  It stores
+better than ZEO. It runs on top of MySQL, Oracle and PostgreSQL.
+4. **NewtDB** is a version of RelStorage optimized for PostgreSQL.  It stores
 data as both Python pickles, as well as JSONB Postgres data structures.  This 
 allows one to benefit from the native PostgreSQL catalogs.
 
-## ZEO
-ZEO is the basic client server version of the ZODB.  Each Python application 
-server includes a ZEO client.  They all talk to the ZEO server. The ZEO server
-will then store the data in a FileStorage. 
 
 ## Caching
 Caching is an important feature of the ZODB. Every ZEO client includes an 
@@ -143,8 +147,9 @@ works fine, but in cases where the object is actively used on all ZEO
 clients, and frequently updated, it does lead to more network traffic. 
 
 ## Scalability
-For mostly-read applications ZODB scales brilliantly. Multiple disk heads can read simultanwously from different parts of the file used in FileStorage. 
-Historically its 
+For mostly-read applications ZODB scales brilliantly. 
+Multiple disk heads can read simultanwously from different parts of the file 
+used in FileStorage. Historically its 
 performance under heavy writing was limited because writes all happened at 
 the end of  a single file.  Only one disk head at a time could write.  That 
 problem has now been fixed.  Writes can now occur simultaneously on 
@@ -154,7 +159,8 @@ hosting the blobs on remote servers, such as S3.
 At Zope Corporation, several hundred newspaper content-management systems and web sites were hosted using a multi-database configuration with most data in a main database and a catalog database. The databases had several hundred gigabytes of ordinary database records plus multiple terabytes of blob data.
 
 Of course if you need multiple computers to store your object data (not blobs),
-then you may want to upgrade to ZEO. ZEO is a GPL'd cousin to the ZODB.
+then you may want to upgrade to ZEO. ZEO is a GPL'd cousin to the ZODB. For large 
+amounts of Blobs, just store them on Amazon S3 servers.
 
 ## ZODB Tutorial
 ZODB is really easy to use from Python.  I invite you to try out the 
@@ -168,7 +174,7 @@ the Zope Component Architecture, there can be different views with the
 same name on different classes of objects, depending on the interfaces
 which they ahve defined. 
 
-## ZODB Platforms
+## ZODB-related Platforms
 
 So which platform should you use with ZODB?  
 I am not an expert in all of these platforms, but I will give you my best 
@@ -177,8 +183,8 @@ advice on when to use each of them.
 ### Plone
 If you need a Content Management System, and Plone and its plugins do what 
 you need.  Brilliant.  Go for it.  Plone is mature, stable, heavily used.  
-They have an annual conference, and many regional conferences.  I recommend
-it highly. There are lots of consultants you can hire. 
+They have an annual international conference, and many regional conferences.  
+I recommend it highly. There are lots of consultants you can hire. 
 
 But Plone is not an application development platform.  If Plone does what 
 you need, you are in great luck.  But I advise against making changes to
@@ -186,20 +192,17 @@ Plone.  Small changes you may be able to make, but anything more major,
 and you 
 are more likely than not to run into trouble.  There is just so much code
 in there.  Zope 2 code, Zope 3 code, and Five (a merger of 
-Zope 2 and Zope 3).  Then there is the Content Management Framework, and 
+Zope 2 and Zope 3).  Then there is the Content Management Framework (CMF), and 
 all of Plone. Way way too complex to even consider doing custom app 
 development on it. 
 
 ### Pyramid
 The next obvious choice is Pyramid.  If you are building a corporate 
 application, Pyramid is a great option.  You can use the ZODB, or a
-relational database.  You can use routing or traversal. You can configure it three different ways.  You 
+relational database.  You can use routing or traversal. You can configure 
+it three different ways.  You 
 can choose from lots of different GUI and other libraries.  
-It is not very opinionated.  
-It is optimized for computer perforance. It is really a stripped down
-web framework.  Whatever your
-client wants you to do you can do. And there will be lots of billable hours 
-for you. 
+
 
 ### Grok
 Me,   I chose to use Grok with Zope 3.  I am not building a corporate
@@ -212,8 +215,8 @@ I care about speed and cost of development.  Related to that is software flexiil
 ### Zopache
 
 Sadly Grok lacks a TTW development environment, so I built one.  
-Zopache.com.  Zopache is a Javascript IDE 
-which I bult on top of the ZODB. ZODB 
+Zopache.com is a Javascript IDE 
+which I bult on top of the ZODB using Grok. ZODB 
 developers might call it a TTW development platform. 
 
 Basic Zopache objects include HTML, CSS, Javascript, Python Scripts, 
@@ -226,7 +229,8 @@ Zopache also supports containers.  Trees can be built out of containers.
 Folders support cut, copy, rename paste and delete operations. HTML folders
 can be edited with the Ace and ck editors.  Javascript Folders allow one to 
 build a well organized  tree of Javascript code, but serve it as a single 
-minified file. 
+minified file or as a human readable and searchable file, wich clickable links to 
+the original javascript object. 
 
 History and Undo are supported.  
 
@@ -239,16 +243,15 @@ option to grow the application with real Python code.
 ### Flask
 Flask is a very lightweight framework which can be used with the ZODB.
 Flask does routing, so one has to manually map 
-from URL's to objects.  Other than that I do not know much about Flask. Maybe
-it is even more stripped down than Pyramid.
+from URL's to objects.  
 
 ### Other Frameworks. 
 There are many Python frameworks, and many other less often 
 used ways of working with the ZODB.  I won't 
-mention them here.  They lead to market confusion.  But 
+mention them all here.  They lead to market confusion.  But 
 it is only natural in the Python world for there to be 
 many different solutions. So one really needs a survey of the 
-ZODB ecosystem to get pointed in the right direction. 
+ZODB ecosystem to get you started in the right direction. 
 
 
 ## Pyramid Vs Grok
@@ -261,6 +264,7 @@ run?  I am focussed on developer
 performance, how fast can I develop my applications.  They want close to the
 metal code.  I want high levels of abstractions.  
 
+In particular the Pyramid folks are mosty strongly against TTW development. 
 I invite you to take a look at the quote on the SubstanceD 
 demo page.  
 http://demo.substanced.net/
@@ -276,12 +280,12 @@ ways to do things.
 
 I am more focussed on the product market.  There is no legacy code here. 
 Just the web, which I have to work with. 
-I want to build it as fast and flexibly as possible. 
+I want to build it as fast and flexibly as is possible. 
 I like the Python idea that there should be one 
 way to do thigns.  
 I want a purist OO approach.  
 Like Ruby on Rails, I want a high level 
-opinionated high level framework. 
+opinionated high level framework.  Grok gives me that. 
 
 Pyramid is focussed on multiple deployments.  So TTW makes no sense.  
 I am focussed on building a single website, so storing 
@@ -293,14 +297,14 @@ Actually I am not even sure what to compare.  For
 a fair comparison, Pyramid does not stand on its own. It needs a bunch of 
 libraries to match what Grok does.  
 
-The next thing I want to do is automatic CRUD.  Define the schema and 
+The first  thing I want to do is automatic CRUD.  Define the schema and 
 get CRUD 
 for free.  zope.formlib does this for me.  z3c.form does this for me for 
-trees. Pyramid does not include this CRUD. 
+trees. Pyramid does not include  CRUD. 
 One has to add it manually. I am still not 
-sure which ones to recommend.  Reportedly the one used in SubstanceD 
+sure which CRUD package to recommend.  Reportedly the one used in SubstanceD 
 does not do CRUD.  So which one does?  The next one I found has just been 
-rearchited for use with relational databases.  
+rearchited for use with relational databases.  Also not what I need. 
 
 I also use components.  Pyramid only supports view components.  
 But the Zope Component Architecture is now available with PyAMS.  
@@ -308,8 +312,7 @@ That was not true when I started.
 
 And of course there is no way that 
 somethng like the high level zope.securitypolicy has been ported to Pyramid. 
-It is just imconpatible with the Pyramid security model. 
-
+It is just imconpatible with the performace-optimized Pyramid security model. 
 
 ## Other Databases
 There are many other NoSQL databases on the market.  My job is 
@@ -319,7 +322,7 @@ questions.
 1. Is it ACID complient?
 2. Do they provide a graph database?
 3. Do they support Persistent Python?
-4.  Can you add arbitrary  instance variables at run-time?
+4. Can you add arbitrary  instance variables at run-time?
 4. Do they support history and undo?
 
 ## About PythonLinks.info
