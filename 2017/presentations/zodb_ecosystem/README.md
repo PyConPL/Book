@@ -1,4 +1,5 @@
- [The ZODB Ecosystem](https://pythonlinks.info/static/MyFiles/pycon-poland/zodbtalkgraphics.svg)
+
+
 
 ## ABSTRACT
 ZODB is an object-oriented database written in Python and 
