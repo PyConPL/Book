@@ -1,0 +1,156 @@
+--- perf.tex
++++ perf.tex
+@@ -1,9 +1,9 @@
+ \usemodule[pycon-2015]
+ \starttext
+ 
+-
+-\section[whats-eating-python-performance---piotr-przymus]{What's Eating
+-Python performance - Piotr Przymus}
++\Title{What's Eating Python performance}
++\Author{Piotr Przymus}
++\MakeTitlePage
+ 
+ Have you ever wondered how to speed up your code in Python? This
+ presentation will show you how to start. I will begin with a guide how
+@@ -30,13 +30,13 @@
+ \section[the-root-of-all-evil-premature-optimization]{The root of
+ all evil: premature optimization}
+ 
+-{\em Programmers waste enormous amounts of time thinking about, or
+-worrying about the speed of noncritical parts of their programs, and
+-these attempts at efficiency actually have a strong negative impact when
++*Programmers waste enormous amounts of time thinking about, or worrying
++about the speed of noncritical parts of their programs, and these
++attempts at efficiency actually have a strong negative impact when
+ debugging and maintenance are considered. We should forget about small
+-efficiencies, say about 97\letterpercent{} of the time: premature
+-optimization is the root of all evil. \lettertilde{} } {\bf Donald
+-Knuth}, \quotation{Structured Programming With Go To Statements}.
++efficiencies, say about 97\% of the time: premature optimization is the
++root of all evil. \lettertilde{} * {\bf Donald Knuth},
++\quotation{Structured Programming With Go To Statements}.
+ 
+ In short, premature optimization may be stated as optimizing code before
+ knowing whether we need to. This is a dangerous practice that impacts
+@@ -45,13 +45,13 @@
+ 
+ Thus, it is important to learn how to do proper assessment of your code
+ in terms of optimization needs. (Remember that a strong felling that
+-your code falls into the remaining 3\letterpercent{} does not count!)
++your code falls into the remaining 3\% does not count!)
+ 
+ Yet do not be discouraged from learning the proper way of optimizing
+ your code, and remember about second part of the previous quote:
+ 
+-{\em Yet we should not pass up our opportunities in that critical
+-3\letterpercent{}.} {\bf Donald Knuth}
++{\em Yet we should not pass up our opportunities in that critical 3\%.}
++{\bf Donald Knuth}
+ 
+ Certain optimizations are a part of good programming style and good
+ practices, and therefore should not be considered as premature. For
+@@ -64,7 +64,7 @@
+ Going for higher performance without a deeper reason may be just a waste
+ of your time. So start with:
+ 
+-\startitemize[packed]
++\startitemize
+ \item
+   stating your reasons (Why do you need higher performance?),
+ \item
+@@ -85,7 +85,7 @@
+ 
+ Then rest of the optimization process may be summarized as:
+ 
+-\startitemize[n,packed][stopper=.]
++\startitemize[n][stopper=.]
+ \item
+   Test if the code works correctly.
+ \item
+@@ -112,7 +112,7 @@
+ Next, you should measure execution time of your code. This is important
+ because:
+ 
+-\startitemize[packed]
++\startitemize
+ \item
+   it shows how current execution time relates to the desired execution
+   time (i.e.~acceptable speed),
+@@ -122,7 +122,7 @@
+ 
+ There are various tools to do that, among them:
+ 
+-\startitemize[packed]
++\startitemize
+ \item
+   Python's timeit module,
+ \item
+@@ -133,7 +133,7 @@
+ 
+ Notes on measuring:
+ 
+-\startitemize[packed]
++\startitemize
+ \item
+   Try to measure multiple independent repetitions of your code to
+   establish the lower bound of your execution time.
+@@ -154,11 +154,11 @@
+ 
+ There are various possible tools, like:
+ 
+-\startitemize[packed]
++\startitemize
+ \item
+   cProfile -- a profiling module available in Python standard library,
+ \item
+-  line_profiler -- an external line-by line profiler,
++  line\letterunderscore{}profiler -- an external line-by line profiler,
+ \item
+   tools for visualizing profiling results such as runsnakerun.
+ \stopitemize
+@@ -205,7 +205,7 @@
+ Try to avoid conditional branching in large loops. Check whatever
+ instead of having if/else statements in the loop body:
+ 
+-\startitemize[packed]
++\startitemize
+ \item
+   it is possible to do the conditional check outside the loop,
+ \item
+@@ -226,7 +226,7 @@
+ utilization is also a good idea. Typical symptoms that indicate that
+ your code may have memory problems:
+ 
+-\startitemize[packed]
++\startitemize
+ \item
+   your program never releases memory,
+ \item
+@@ -241,7 +241,7 @@
+ I/O bounds may require more effort to deal with. Depending on the
+ problem there may be various solutions, consider using:
+ 
+-\startitemize[packed]
++\startitemize
+ \item
+   asynchronous I/O with Python (see, for example, \quotation{Journey to
+   the center of the asynchronous world}),
+@@ -265,7 +265,7 @@
+ Some problems may just need more computing power, so it may be a good
+ idea to:
+ 
+-\startitemize[packed]
++\startitemize
+ \item
+   write code that utilizes multi core architecture (mutliprocessing),
+ \item
+@@ -288,7 +288,7 @@
+ 
+ \subsection[references]{References}
+ 
+-\startitemize[n,packed][stopper=.]
++\startitemize[n][stopper=.]
+ \item
+   PythonSpeed, https://wiki.python.org
+ \item

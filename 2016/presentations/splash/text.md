@@ -1,0 +1,82 @@
+# Finding a business model for Open Source Applications - case study of Splash
+
+Splash [1] is an open source scriptable headless browser with
+HTTP API, written in Python 3 with Twisted `&` PyQt. I’d like to present the project and discuss
+a couple of social and technical phenomena that I noticed while taking part in the development of
+this application. I’d like to discuss how the application is structured, what libraries we used and
+how they served us, and finally discuss how open source works for us and how I perceive it.
+
+My presentation will have two parts, one technical and other "social/psychological". In the first
+one I'll outline the application architecture. In the second one I will try to discuss some general
+issues that I noticed around Open Source.
+
+## What is Splash and how it works
+
+Splash is a headless browser based on WebKit engine. Its main job is rendering HTML and JavaScript.
+You can interact with Splash by sending HTTP requests with some parameters. For example, you can make
+request to the `render.png` endpoint with `url` parameter and it will send request to the given URL, load
+it into the browser window and return screenshot in PNG format for you. You can also send a request to
+the `render.HTML` endpoint and it will return HTML.
+
+Splash is scriptable, which means you can write Lua scripts that tell Splash what to do. For example
+you can write a script that will tell the browser to click on some link, wait a minute, hover the cursor over
+some page area and finally return screenshot of a webpage after performing those actions.
+
+Why did we decide to create Splash? The main reason is that we needed some rendering for Scrapy. Scrapinghub
+was founded by the founders of Scrapy - a framework for creating web crawlers.
+Today the main challenge for all crawlers is JavaScript. If you want
+to know how important JavaScript is for modern web try disabling JavaScript in the browser, and try
+browsing your favorite webpages. I can guarantee you that in many cases you won't see anything. If
+you do manage to browse some content you'll see terribly broken layouts, HTML elements completely
+out of order, divs and headings flying all over the place, missing data. In general you'll see
+chaos and mayhem. Long time ago people believed in a thing called "graceful degradation", meaning that
+if a user didn't have JavaScript, the page should still work, but in a limited way. These days no one really
+does graceful degradation. If you don't have a modern browser with JavaScript enabled, you're not able
+to benefit from all the good content created by web authors.
+
+Now you can of course bypass these limitations, usually web pages are doing plain HTTP requests
+in the background using AJAX, and AJAX is just a normal HTTP request that you can imitate easily from a spider.
+But most people don't know this, or are lazy and don't want to spend hours of their time reverse engineering web
+pages by looking into developer tools, so they decide they prefer to render the page. There are also some
+use cases when you really need to render JavaScript (e.g. you need a screenshot of the page or you need
+to deal with some bot protections that require you to solve a JS challenge).
+
+Why we decide to create Splash and not go with another solution? In other words why not Selenium or
+phantom JS? Main reason is that we really needed to have headless browser with an HTTP API. We didn't
+want to add JavaScript rendering into Scrapy, but we thought that having a separate service doing the rendering
+will be better. So it was crucial to have an HTTP API. None of the existing JS rendering services provided
+this out of the box. Now you can probably add an HTTP API to existing rendering frameworks, but once you
+start doing this you realize it's hard work and it's not that easy to tie it to the existing software. On
+the other hand, getting a library for rendering web pages is not difficult in Python - look no further
+than PyQt. In fact, in our case the rendering is done by Qt Web Kit.
+
+Under the hood Splash architecture is simple. The HTTP API part is written in Python Twisted. It makes
+a heavy use of Twisted Deferred and Twisted.Resources. The main benefit it gives us is that the application
+is asynchronous, which is absolutely crucial for this type of task. After a request is received by
+the application, it is forwarded to the BrowserTab object. Every browser tab
+object gets a web page. Web page inherits from Qt QWebView and does all the rendering, it
+executes page JavaScript, renders the DOM and returns a result.
+
+## How open source works in case of Splash
+
+There is a popular misconception that treats open source projects as some sort of charity work. In
+this perception people doing open source are mostly volunteers, who just try to "help others"
+by making useful software. They don't gain anything from their work, they just contribute to projects
+because of their good will. Doing open source from this point of view is similar to helping older
+people cross the street or helping starving kids in Africa.
+
+This perception of open source is not entirely untrue, for example Bram Moolenaar, author of Vim
+does encourage people to donate to kids in Africa, but it might be sometimes
+misleading. I'd like to try to challenge this myth and try to talk about various forms of business
+you can make around your open source. I'd argue that having some form of business organization around
+your open source projects is good both for you, and for your projects. By having some business model,
+you can stop relying on completely unreliable and erratic contributions of strangers. You are able
+to somehow finance the development time and the efforts of the core team.
+
+Splash a is nice example of how you can implement these ideas in practice, so in my presentation I'd
+like to demonstrate how its business model works, what we gain from open source and
+why, in our specific case, it's not really charity but rational choice.
+
+## References
+
+1. Splash. http://splash.readthedocs.io/en/stable/

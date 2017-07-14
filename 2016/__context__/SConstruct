@@ -1,0 +1,156 @@
+#!/usr/bin/python
+# -*- coding: UTF-8 -*-
+# Get articles and directories list
+
+import os
+import glob
+
+import pl_txt
+
+verbose = 1
+if os.getenv('PLAIN'):
+    create_pdfs = 0
+    omit_diffs = 1
+else:
+    create_pdfs = 1
+    omit_diffs = 0
+
+tty_columns = os.getenv('COLUMNS')
+if tty_columns:
+    tty_columns = int(tty_columns)
+
+copy_images = 1
+only_first_article_for_testing = 0
+
+if 'TEXINPUTS' not in os.environ:
+    os.environ['TEXINPUTS']=''
+os.environ['TEXINPUTS'] = (
+    ".:..:../..:../../sty:" +
+    os.environ['TEXINPUTS'] )
+env = Environment( ENV=os.environ)
+
+def remove_comments(line):
+    return line.split('%')[0]
+
+articles = []
+artlist_file = 'artlist.txt'
+build = "build"
+for line in open(artlist_file):
+    line = remove_comments(line)
+    words = line.split()
+    if words:
+        alias, location = words[:2]
+        articles.append([alias, location])
+
+if only_first_article_for_testing:
+    articles = articles[:1]
+
+selected = os.getenv('SELECTED')
+if selected:
+    sel_ls = selected.split()
+    articles = filter(lambda x: x[0] in sel_ls, articles)
+
+final_pdfs = map(
+    (lambda x: "{}/{}/{}.pdf".format(build, x[0], x[0])),
+    articles)
+
+env.Command("pyconbook-2016.pdf",
+    final_pdfs,
+    "texexec --pdfcopy --result=$TARGET $SOURCES")
+
+for alias, location in articles:
+    if tty_columns:
+        dash_count = tty_columns - 5 - len(alias) - len(location)
+        txt_line = ''.join([
+            '-' * dash_count,
+            ' ',
+            alias,
+            ' ',
+            location,
+            ])
+    else:
+        txt_line = ''
+    root = "{}/{}/{}".format(build, alias, alias)
+    small_pdf_ls = [
+            "pwd",
+            "# " + txt_line,
+            pl_txt.link_src(alias),
+            ]
+    if copy_images:
+        small_pdf_ls.append(
+            "[ ${TARGET.file} != async.pdf ] || cp ../../../presentations/async_pod_maska/yield_from.png .",
+            )
+        small_pdf_ls.append(
+            "[ ${TARGET.file} != microservices.pdf ] || cp ../../../presentations/tdd_of_python_microservices/fixtures.png .",
+            )
+        small_pdf_ls.append(
+            "[ ${TARGET.file} != microservices.pdf ] || cp ../../../presentations/tdd_of_python_microservices/test_pyramid.png .",
+            )
+        small_pdf_ls.append(
+            "[ ${TARGET.file} != microservices.pdf ] || cp ../../../presentations/tdd_of_python_microservices/tdd_cycle.png .",
+            )
+    if create_pdfs:
+        small_pdf_ls.append("texexec --pdf " + alias)
+    small_pdf_ls.append("mv artpages.inc .. 2>/dev/null || true")
+    env.Command(
+        root + ".pdf",
+        [
+            root + ".tex",
+            artlist_file,
+            build + "/artpages.inc",
+            glob.glob("sty/*"),
+            glob.glob("src/" + alias + "/*")
+            ],
+        small_pdf_ls,
+        chdir = "%s/%s" % (build, alias),
+        )
+    loc_src  = "src/" + alias + "/text.tex"
+    main_src = "../" + location + "/text.tex"
+    main_md  = "../" + location + "/text.md"
+    diffsrc  = glob.glob("src/" + alias + ".diff")
+    if verbose:
+        print "Checking '%s' in:" % alias
+        print loc_src
+        print main_src
+        print main_md
+    if os.path.exists(loc_src):
+        if verbose:
+            print 'Found:', loc_src
+        env.Command( root + ".tex", loc_src,
+                     Copy('$TARGET','$SOURCE') )
+    elif os.path.exists(main_src):
+        if verbose:
+            print 'Found:', main_src
+        env.Command( root + ".tex", main_src,
+                     Copy('$TARGET','$SOURCE') )
+    elif os.path.exists(main_md):
+        if verbose:
+            print 'Found:', main_md
+        pandoc_patch_ls = [
+            Delete(".tmp"),
+            Mkdir(".tmp"),
+            pl_txt.run_pandoc(main_md),
+            ]
+        if diffsrc:
+            pandoc_patch_ls.append(
+                pl_txt.apply_patch(diffsrc, test_mode=omit_diffs)
+                )
+        pandoc_patch_ls.append(
+            Copy("$TARGET", ".tmp/${TARGET.file}")
+            )
+        env.Command(
+            root + ".tex",
+            [main_md] + diffsrc + Glob("src/*.inc.tex"),
+            pandoc_patch_ls,
+           )
+    else:
+        if verbose:
+            print "Full path:", os.path.abspath(main_md)
+        raise RuntimeError("Not found: %s" % repr(main_md))
+
+
+env.Command("build/artpages.inc", [], [])
+
+# Local Variables:
+# mode: python
+# End:

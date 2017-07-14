@@ -1,0 +1,42 @@
+--- flask.tex
++++ flask.tex
+@@ -1,9 +1,9 @@
+ \usemodule[pycon-2015]
+ \starttext
+ 
+-
+-\section[with-modern_peripherals-python-and-flask---piotr-dyba]{with
+-modern_peripherals: Python and Flask - Piotr Dyba}
++\Title{with modern\_peripherals: Python and Flask}
++\Author{Piotr Dyba}
++\MakeTitlePage
+ 
+ \subsection[introduction]{Introduction}
+ 
+@@ -22,7 +22,7 @@
+ In short, web sockets is a protocol providing full-duplex communication
+ channels over a single TCP connection available in web browsers.
+ 
+-\placefigure{01 Web Sockets
++\placefigure[here,nonumber]{01 Web Sockets
+ Diagram}{\externalfigure[./001_web_sockets.png]}
+ 
+ It starts with a handshake which upgrades the HTTP connection to use the
+@@ -164,7 +164,7 @@
+ would be when one would need gesture control but without touching the
+ screen for example surgeon or cook would benefit from that. For
+ navigation functions imagine to see the login screen on metal band fun
+-site you would have to make a 'bunny gesture“. Last but not least it
++site you would have to make a 'bunny gesture". Last but not least it
+ could be an addition to an application that would require user to do few
+ exercises when he works too much by making him or her to do gestures to
+ relax muscles. By the way it is possible to use two armbands at once.
+@@ -223,7 +223,7 @@
+ 
+ \subsection[sources]{Sources}
+ 
+-\startitemize[packed]
++\startitemize
+ \item
+   Myo Armband \hyphenatedurl{https://www.thalmic.com/myo/}
+ \item

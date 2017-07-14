@@ -1,0 +1,56 @@
+--- solid.tex
++++ solid.tex
+@@ -1,9 +1,9 @@
+ \usemodule[pycon-2015]
+ \starttext
+ 
+-
+-\section[solid-python---ignacy-sokołowski]{SOLID Python - Ignacy
+-Sokołowski}
++\Title{SOLID Python}
++\Author{Ignacy Sokołowski}
++\MakeTitlePage
+ 
+ SOLID is an acronym for five basic principles of Object Oriented
+ Programming. The principles intend to make software entities easy to
+@@ -18,7 +18,7 @@
+ 
+ {\bf SOLID} is actually an acronym of acronyms:
+ 
+-\startitemize[packed]
++\startitemize
+ \item
+   {\bf SRP} - Single Responsibility Principle
+ \item
+@@ -75,7 +75,7 @@
+ 
+ In order to send a report, we need to perform three tasks.
+ 
+-\startitemize[packed]
++\startitemize
+ \item
+   Get the data
+ \item
+@@ -91,7 +91,7 @@
+ 
+ To get the report data, we need to:
+ 
+-\startitemize[packed]
++\startitemize
+ \item
+   Build an SQL query
+ \item
+@@ -660,11 +660,11 @@
+ 
+ \section[further-reading]{Further reading}
+ 
+-\startitemize[packed]
++\startitemize
+ \item
+   Robert C. Martin - \quotation{Design Principles and Design
+   Patterns}\crlf
+-  http://www.objectmentor.com/resources/articles/Principles_and_Patterns.pdf
++http://www.objectmentor.com/resources/articles/Principles\_and\_Patterns.pdf
+ \item
+   Robert C. Martin - \quotation{Agile Software Development: Principles,
+   Patterns, and Practices}

@@ -1,0 +1,564 @@
+\usemodule[pycon-2016]
+\starttext
+
+\Title{Async pod maską}
+\Author{Michał Lowas-Rzechonek}
+\MakeTitlePage
+
+\subsection[wprowadzenie]{Wprowadzenie}
+
+Ostatnimi czasy wiele mówi się i pisze o programowaniu asynchronicznym i
+pętlach zdarzeń. Pojawiają się takie słowa, jak {\em event loop},
+{\em promise}, {\em future}, {\em deferred}, {\em greenlet} itp.
+
+W tym artykule postaram się pokazać, o co chodzi w pętli zdarzeń
+({\em event loop}), oraz że koncepcja nie jest wcale nowa - nowatorska
+jest jedynie jej implementacja za pomocą generatorów w module
+\type{asyncio}.
+
+Zacznę od omówienia mechanizmów wykonywania na jednym komputerze kilku
+programów naraz, potem pokrótce zademonstruję obsługę komunikacji przez
+sieć, a na koniec pokażę, jak napisać \quotation{od zera} prosty,
+asynchroniczny (i kompatybilny z~\type{asyncio}!) serwer TCP.
+
+\subsection[współbieżność-i-przełączanie-kontekstu]{Współbieżność i
+przełączanie kontekstu}
+
+Żeby zacząć rozmawiać o programowaniu asynchronicznym, wypadałoby
+najpierw zająć się modelem wykonania programu na komputerze.
+
+Dla uproszczenia załóżmy, że nasz komputer ma tylko jeden procesor, a
+dokładniej jedną {\em jednostkę arytmetyczno-logiczną} (ALU - ang.
+{\em arithmetic-logic unit}). Jest to centralna część procesora,
+odpowiedzialna za wykonywanie instrukcji, z jakich składa się nasz
+program.
+
+ALU nie jest w swoim działaniu zbyt wyrafinowana - po prostu wykonuje po
+kolei instrukcje programu umieszczone w kolejnych komórkach pamięci.
+Ważne jest to, że wykonuje je bez przerwy i tak szybko, jak pozwala na
+to częstotliwość zegara.
+
+Pojawia się zatem pytanie, jak to możliwe, że na jednym komputerze
+wyposażonym w jeden procesor działa jednocześnie kilka programów? W
+istocie, proste systemy operacyjne (np. DOS, systemy operacyjne używane
+na małych urządzeniach typu {\em embedded}) pozwalają uruchamiać
+jednocześnie tylko jeden program naraz.
+
+Mechanizmem, który pozwala kilku programom działać jednocześnie, jest
+{\em scheduler}. Scheduler jest częścią systemu operacyjnego, która
+nadzoruje działanie ALU i~decyduje, który proces jest w danym momencie
+wykonywany.
+
+Oznacza to, że tak naprawdę ALU w dalszym ciągu wykonuje jeden program
+w~danym momencie, ale scheduler przełącza aktywne procesy tak szybko, że
+użytkownik nie jest w stanie tego zauważyć. Formalna nazwa takiego
+modelu to {\em współbieżność} (ang. {\em concurrency}).
+
+Wykonywana przez scheduler podmiana aktywnego procesu nazywa się
+{\em przełączaniem kontekstu} (ang. context switching), a dokładniej
+opisana jest w podręczniku \quotation{Operating Systems} {[}1{]}.
+
+\subsection[wywłaszczanie]{Wywłaszczanie}
+
+Kłopot w tym, że nasz scheduler też jest programem. Jak w takim razie go
+uruchomić, skoro ALU zajęte jest wykonywaniem {\em innego} programu?
+
+Można to zrobić na dwa sposoby: albo wymuszając na procesorze, aby
+zatrzymał wykonywany właśnie program, albo czekając, aż dany program
+jawnie zgłosi, że jest gotowy na przełączenie kontekstu.
+
+Pierwszy z tych sposobów nazywamy {\em wywłaszczaniem} (ang.
+{\em preemption}). Aby wymusić przełączenie, scheduler korzysta z
+mechanizmu {\em przerwania zegarowego} (ang. {\em timer interrupt}).
+Przerwanie to specjalny układ elektroniczny, który pozwala zainstalować
+wewnątrz procesora krótką funkcję, która będzie uruchamiana przez ALU z
+zadaną częstotliwością, niezależnie od głównego programu. Przerwanie,
+jak sama nazwa wskazuje, zatrzymuje \quotation{w pół kroku} aktualnie
+wykonywany program, wykonuje zainstalowaną {\em funkcję obsługi
+przerwania} (ang. {\em interrupt service routine}), a~następnie wznawia
+główny program. Przykładowo, Linux uruchamia scheduler 100 razy na
+sekundę.
+
+Drugi sposób wymaga, aby wszystkie(!) procesy co jakiś czas jawnie
+wołały funkcję schedulera. Tym modelem zajmiemy się za chwilę.
+
+Obie metody mają swoje wady i zalety. W ogólnym przypadku lepiej jest
+wywłaszczać, bo wtedy jeden błędny program nie zawiesi całego systemu. Z
+drugiej strony, programy mogą nie być przygotowane na przełączenie
+kontekstu w dowolnym momencie (np. w połowie zapisywania danych do
+pliku), co może powodować subtelne błędy związane z faktyczną
+kolejnością wykonywania operacji.
+
+Dodatkowym minusem jest fakt, że przełączanie kontekstu jest operacją
+stosunkowo czasochłonną, a jej zbyt częste wykonywanie zmniejsza
+wydajność całego systemu, bo mniej czasu pozostaje na wykonanie
+faktycznych programów.
+
+W Pythonie mechanizm wywłaszczania dostępny jest za pośrednictwem
+{\em wątków} (ang. {\em threads}). Jeśli w programie uruchomimy kilka
+wątków, to system operacyjny będzie je dla nas automatycznie przełączał:
+
+\starttyping
+import itertools
+import time
+
+from threading import Thread
+
+def this_is_a_thread(pid):
+    for i in itertools.count():
+        print(pid, i)
+        time.sleep(0.5)
+
+
+threads =  [
+    Thread(target=this_is_a_thread, args=(1,), daemon=True),
+    Thread(target=this_is_a_thread, args=(2,), daemon=True),
+]
+
+# uruchamiamy wątki
+for t in threads:
+    t.start()
+
+# i czekamy na ich zakończenie
+for t in threads:
+    t.join()
+\stoptyping
+
+Jeśli pozostawimy ten program uruchomiony przez jakiś czas, to
+zaobserwujemy, że nasze dwa wątki nie zawsze uruchamiane są na zmianę -
+czasem pierwszy wątek wykona kilka iteracji swojej pętli zanim zostanie
+wywłaszczony. Co gorsza, Python nie ma nad tym żadnej kontroli, bo w
+modelu wątkowym przełączaniem kontekstu zajmuje się system operacyjny.
+
+Ten brak determinizmu i kontroli bywa problematyczny. Przyjrzyjmy się
+zatem drugiemu modelowi, czyli przełączaniu na żądanie.
+
+\subsection[współbieżność-kooperacyjna]{Współbieżność kooperacyjna}
+
+Patrząc na interpreter Pythona jak na system operacyjny, można zauważyć,
+że w~sam język wbudowany jest mechanizm przełączania kontekstu. Tym
+mechanizmem są generatory.
+
+Dokładniej, użycie instrukcji \type{yield} zmienia funkcję w obiekt
+generatora (de facto {\em proces}), który możemy uruchomić lub
+zatrzymać. To, czego brakuje, aby uruchomić kilka procesów współbieżnie,
+to scheduler. Na początek wystarczy nam prosta implementacja,
+przełączająca procesy po kolei:
+
+\starttyping
+import itertools
+import time
+
+def this_is_a_process(pid):
+    for i in itertools.count():
+        print(pid, i)
+        yield
+
+processes = [ this_is_a_process(1), this_is_a_process(2) ]
+
+while True:
+    for process in processes:
+        next(process)
+\stoptyping
+
+Ten program wykonuje nasze dwa \quotation{procesy} na zmianę, a
+przełączanie następuje na ich jawne żądanie - jeśli któryś nie
+zawierałby instrukcji \type{yield}, to cały nasz miniaturowy system
+operacyjny zawiesiłby się, wykonując bez przerwy tylko jego:
+
+\starttyping
+def rogue_one(pid):
+    yield # żeby stać się generatorem
+
+    while True:
+        print(pid, "I rebel!)
+        # nie wołamy "yield" wewnątrz pętli
+
+processes = [ this_is_a_process(1), this_is_a_process(2), rogue_one(3) ]
+
+while True:
+    for process in processes:
+        next(process)
+\stoptyping
+
+Taki model wykonania nazywa się {\em współbieżnością kooperacyjną} (ang.
+{\em cooperative multitasking}). Przełączanie procesów jest
+deterministyczne, ale wymaga, aby programy napisane były w specyficzny
+sposób: muszą co jakiś czas wykonywać instrukcję \type{yield}.
+
+Jawne wołanie \type{yield} w ciele funkcji byłoby jednak bardzo
+uciążliwe oraz znacznie zmniejszyłoby czytelność programu. Spróbujmy
+zatem nieco to ułatwić.
+
+\subsection[kompozycja-generatorów]{Kompozycja generatorów}
+
+Jednym ze sposobów, aby zapewnić, by program zachowywał się
+\quotation{grzecznie} w modelu kooperacyjnym, jest uruchamianie
+schedulera za każdym razem, gdy program prosi system operacyjny o jakiś
+rodzaj operacji wejścia-wyjścia, np. o odczytanie stanu klawiatury, albo
+o wyświetlenie tekstu na ekranie. W tym celu dostarczymy specjalne
+warianty tych funkcji, w naszym przykładzie funkcji \type{print}:
+
+\starttyping
+def smart_print(*args, **kwargs):
+    print(*args, **kwargs)
+    # tutaj chcemy uruchomić scheduler
+
+def process(pid):
+    for i in itertools.count():
+        smart_print(pid, i)
+\stoptyping
+
+Pozostaje zatem pytanie, jak uruchomić scheduler. Jeśli po prostu
+zawołamy go jako funkcję, to po jej zakończeniu wrócimy najpierw do
+\type{smart_print}, a potem do tego samego procesu. Z kolei jeśli w
+\type{smart_print} użyjemy \type{yield}, to przerwiemy tylko funkcję
+\type{smart_print}, znów wracając do \type{process}. Potrzebujemy
+mechanizmu, który pozwoli poprosić inny generator, aby wykonał
+\type{yield} za nas i zatrzymać działanie głównego generatora. Wykonanie
+programu powinno przebiegać jak na poniższym diagramie:
+
+\placefigure{yield from}{\externalfigure[yield_from.png]}
+
+Jest to wykonalne, ale kod, który realizuje taką operację, jest
+niezwykle skomplikowany, gdyż musi brać pod uwagę, że \type{os_print}
+może zgłosić wyjątek, zawierać kilka poleceń \type{yield} (np. w pętli)
+i tak dalej. Ostatecznie jest to ponad 30 linii kodu {[}2{]}, które
+musielibyśmy umieszczać w programie przy {\em każdej} funkcji
+wejścia-wyjścia. Byłoby to skrajnie niepraktyczne.
+
+Python 3.4 rozwiązuje ten problem dostarczając nowe słowo kluczowe
+\type{yield from}, które wykonuje całą sekwencję za nas.
+
+\starttyping
+def os_print(*args, **kwargs):
+    print(*args, **kwargs)
+    yield
+
+def this_is_a_process(pid):
+    for i in itertools.count():
+        yield from os_print(pid, i)
+\stoptyping
+
+Na marginesie, warto zauważyć, że \type{yield from} bywa użyteczne też w
+innych kontekstach, na przykład gdy chcemy napisać rekurencyjny
+generator:
+
+\starttyping
+def walk(dir):
+    for i in os.listdir(dir):
+        path = os.path.join(dir, i)
+        yield path
+        if os.path.isdir(path):
+            yield from walk(path)
+\stoptyping
+
+Programy wyświetlające napisy na ekranie nie są jednak zbyt ekscytujące,
+a~o~programowaniu asynchronicznym rozmawia się zazwyczaj w konktekście
+obsługi sieci. Żeby zobaczyć związek między jednym a drugim, musimy
+odłożyć na chwilę problem przełączania procesów, a zająć się obsługą
+wejścia-wyjścia na poziomie systemu operacyjnego.
+
+\subsection[deskryptory-plików-i-gniazda-sieciowe]{Deskryptory plików i
+gniazda sieciowe}
+
+Praktycznie wszystkie systemy operacyjne udostępniają operacje
+wejścia-wyjścia za pośrednictwem {\em deskryptorów plików}. Deskryptor
+jest zazwyczaj po prostu liczbą, którą dostajemy od systemu w momencie
+otwarcia pliku, a przekazujemy go jako argument do funkcji, które z tego
+pliku czytają, bądź do niego piszą.
+
+W ten sposób deskryptor jednoznacznie identyfikuje plik, który chcemy
+obsłużyć. Nie interesuje nas wartość liczbowa deskryptora, używamy go
+raczej jak bloczka w~szatni.
+
+\starttyping
+import os
+
+file_descriptor = os.open('plik.txt', os.O_RDONLY)
+print(file_descriptor)
+print(os.read(file_descriptor, length=100))
+os.close(file_descriptor)
+\stoptyping
+
+Python ukrywa przed nami takie szczegóły implementacyjne za pomocą
+obiektu \type{file}, ale ciągle pozwala dostać się do deskryptora za
+pomocą metody \type{fileno()}:
+
+\starttyping
+with open('plik.txt') as file_object:
+    file_descriptor = file_object.fileno()
+    print(file_descriptor)
+\stoptyping
+
+Z naszego punktu widzenia intresujący jest fakt, że pod deskryptorem
+pliku może kryć się dużo więcej niż tylko zwykłe pliki na dysku.
+Deskryptor pliku jest pewną abstrakcją, pozwalającą odnosić się w ten
+sam sposób do różnych urządzeń wejścia-wyjścia: dysku, karty sieciowej,
+a nawet ekranu.
+
+Dzięki temu komunikację przez sieć można obsługiwać za pomocą tego
+samego mechanizmu, co zwykłe pliki. Co prawda sposób uzyskania takiego
+sieciowego deskryptora, nazywanego {\em gniazdem} (ang. {\em socket}
+{[}3{]}), jest bardziej skomplikowany niż proste \type{open()}, ale sam
+odczyt i zapis działają tak samo: \type{accept()} jest odpowiednikiem
+\type{open()}, \type{send()} to \type{write()}, a \type{recv()} to
+\type{read()}.
+
+Prosty serwer odbierający połączenia na porcie 1234 wygląda następująco:
+
+\starttyping
+import os
+import socket
+
+server = socket.socket()
+server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+server.bind(('', 1234))
+server.listen(1)
+
+while True:
+    connection, address = server.accept()
+    print(connection.fileno(), "is a connection from", address)
+    connection.send("Enter your name: ")
+    name = connection.recv(100)
+    connection.send("Hello, %s" % name)
+    connection.close()
+\stoptyping
+
+Po uruchomieniu, jego działanie można sprawdzić z drugiego terminala,
+np. poleceniem \type{nc} (od \type{netcat}):
+
+\starttyping
+$ nc localhost 1234
+Enter your name: khorne
+Hello, khorne
+\stoptyping
+
+\subsection[gniazda-sieciowe-jako-źródła-zdarzeń]{Gniazda sieciowe jako
+źródła zdarzeń}
+
+Nasz serwer ma jednak spory mankament: obsługuje tylko jedno połączenie
+naraz. Dzieje się tak dlatego, że funkcje \type{accept()} i
+\type{recv()} blokują program do momentu, kiedy nie pojawi się nowe
+połączenie lub nasz klient czegoś nie wyśle. Jeśli nowy klient podłączy
+się w momencie, kiedy serwer czeka, aż \type{recv()} się zakończy, nie
+wyślemy do nowego klienta nic, dopóki poprzednie połączenie nie zostanie
+zamknięte.
+
+Zamiast tego chcielibyśmy poczekać, aż na {\em którymkolwiek} z naszych
+połączeń (reprezentowanych przez deskryptory) pojawią się nowe dane, a
+następnie przełączyć kontekst do funkcji je obsługującej.
+
+Wiemy, jak zaimplementować przełączenie kontekstu: funkcja obsługi
+powinna być generatorem, który wykona \type{yield} (lub
+\type{yield from}), jeśli zamierza czekać na nowe dane.
+
+Jak natomiast obserwować kilka deskryptorów jednocześnie?
+
+\subsection[funkcje-select-i-poll]{Funkcje \type{select()} i
+\type{poll()}}
+
+Szczęśliwie dla nas, większość systemów operacyjnych dostarcza API
+realizujące właśnie taką operację, nazywaną {\em zwielokrotnianiem
+zdarzeń} (ang. {\em event multiplexing}). System operacyjny pozwala
+zgrupować wiele deskryptorów, dla każdego z nich definiując rodzaj
+zdarzenia, na jaki chcemy czekać (gotowość do odczytu, gotowość~do
+zapisu lub błąd). Mając taką grupę możemy zawołać jedną funkcję, która
+zaczeka, aż na deskryptorach z grupy pojawią się zadane wcześniej
+zdarzenia. Informację o~tym, co dokładnie się stało, otrzymamy z systemu
+w postaci listy par \type{(deskryptor, zdarzenie)}.
+
+Najstarszym mechanizmem tego typu jest funkcja \type{select()}, pojawiła
+się w 1983 roku w odmianie Uniksa nazywanej Berkeley System Distribution
+(BSD) w wersji 4.2 {[}3{]}. \type{select()} miał sporo ograniczeń,
+głównym problemem był limit liczby jednocześnie obserwowanych
+deskryptorów - 1024. Między innymi z tego powodu pojawiła się druga
+funkcja: \type{poll()} (oraz udoskonalenia: \type{epoll}, \type{kqueue}
+i inne {[}4{]}) i to nią się zajmiemy.
+
+W Pythonie \type{poll()} używa się następująco:
+
+\starttyping
+import select
+
+poller = select.poll()
+
+# słownik mapujący deskryptor na odpowiadający mu generator
+tasks = { descriptor1: generator1, ... }
+
+while True:
+    for fileno, task in tasks.items():
+        # czekamy na zdarzenia "E(vent) POLL IN", czyli gotowość
+        # do odczytu
+        poller.register(fileno, select.EPOLLIN)
+
+    for fileno, event in poller.poll():
+        task = tasks[fileno]
+        next(task)
+\stoptyping
+
+Jak łatwo zauważyć, ten program zawiera jedną pętlę \type{while True},
+która obserwuje deskryptory i uruchamia zdefiniowane zadania-procesy.
+Jest to w gruncie rzeczy scheduler, bazujący na operacjach
+wejścia-wyjścia.
+
+Taką konstrukcję nazywamy {\em główną pętlą} lub {\em pętlą zdarzeń}
+(ang. {\em event loop}).
+
+Jeszcze jedna uwaga: aby uniknąć przypadkowego zablokowania głównej
+pętli, wszystkie deskryptory powinny być przełączone w {\em tryb
+nieblokujący} (ang. {\em non-blocking mode}) za pomocą metody
+\type{setblocking(False)}. Spowoduje to, że wywołanie \type{read()} lub
+\type{recv()} w momencie, gdy deskryptor nie jest jeszcze gotowy do
+odczytu, nie zablokuje systemu, ale natychmiast zakończy się błędem.
+
+\subsection[główna-pętla]{Główna pętla}
+
+Wygląda na to, że mamy już w tym momencie wszystkie elementy potrzebne
+do napisania asynchronicznego serwera!
+
+Zacznijmy od podstawowych operacji wejścia-wyjścia. Musimy podmienić
+funkcje \type{accept()}, \type{send()} i \type{recv()} na wersje
+realizujące współbieżność kooperacyjną, analogicznie jak zrobiliśmy
+poprzednio dla funkcji \type{print}. Różnica będzie taka, że dodamy do
+wywołania \type{yield} informację, na jakie zdarzenie chcemy czekać:
+
+\starttyping
+def sock_accept(sock):
+    # czekaj na gotowość do odczytu, czyli nowe połączenie
+    yield sock.fileno(), select.EPOLLIN
+    return sock.accept()
+
+
+def sock_recv(sock, nbytes):
+    # czekaj na gotowość do odczytu, czyli nowe dane
+    yield sock.fileno(), select.EPOLLIN
+    return sock.recv(nbytes)
+
+
+def sock_sendall(sock, buffer):
+    # jeśli mamy dużo danych do wysłania, mogą się nie zmieścić
+    # w jednym send(), stąd pętla
+    while buffer:
+        # czekaj na gotowość do zapisu
+        yield sock.fileno(), select.EPOLLOUT
+        written = sock.send(buffer)
+        buffer = buffer[written:]
+\stoptyping
+
+Następnie tworzymy listę zadań oraz obiekt \type{poll}, który będzie
+monitorował deskryptory zwrócone z naszych funkcji wejścia-wyjścia:
+
+\starttyping
+poll = select.poll()
+tasks = {}
+
+def create_task(task):
+    fileno, eventmask = next(task)
+
+    tasks[fileno] = task
+    poll.register(fileno, eventmask)
+\stoptyping
+
+Oraz implementujemy procesy-zadania. Najpierw odbieranie nowych
+połączeń:
+
+\starttyping
+def server(address):
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    sock.bind(address)
+    sock.listen(16)
+    sock.setblocking(False)
+
+    print("Waiting for connections", address)
+    while True:
+        client, address = yield from sock_accept(sock)
+        create_task(echo(client, address))
+\stoptyping
+
+A następnie obsługę pojedynczego klienta:
+
+\starttyping
+def echo(client, address):
+    print("Client connected", address)
+
+    for i in count():
+        yield from sock_sendall(client, b"%i> " % i)
+
+        buffer = yield from sock_recv(client, 1024)
+        if not buffer:
+            break
+
+        yield from sock_sendall(client, buffer)
+
+    print("Client disconnected", address)
+\stoptyping
+
+I na koniec główna pętla:
+
+\starttyping
+create_task(server(('localhost', 1234)))
+
+while tasks:
+    for fileno, event in poll.poll():
+        poll.unregister(fileno)
+
+    try:
+        task = tasks.pop(fileno)
+        create_task(task)
+    except StopIteration:
+        pass
+\stoptyping
+
+Et voilà!
+
+\subsection[zakończenie]{Zakończenie}
+
+Uważny czytelnik zapewne zauważy, że funkcje \type{sock_*} i
+\type{create_task} mają nieprzypadkowe nazwy. Dokładnie to samo API
+występuje w klasie \type{MainLoop} modułu \type{asyncio} - w rzeczy
+samej, nasz serwer będzie działał tak samo dobrze używając implementacji
+wbudowanej w Pythona. Dodatkowo, główna pętla też jest już gotowa
+i~nazywa się \type{MainLoop.run_forever()}
+
+Na koniec zaznaczę, że Python w wersji 3.5 wprowadził nową składnię: aby
+zadeklarować zadanie, nie trzeba już umieszczać w ciele funkcji słowa
+\type{yield} - zamiast tego deklaruje się ją za pomocą \type{async def}.
+Druga zmiana dotyczy słowa \type{yield from}, które w funkcjach tak
+zadeklarowanych nazywa się \type{await}. Mimo to, poprzednia składnia
+nadal działa.
+
+Pełny kod przedstawiony w tym artykule, dodatkowo rozbity na mniejsze
+kroki, dostępny jest w serwisie GitHub {[}7{]}.
+
+\subsection[bibliografia]{Bibliografia}
+
+\startitemize[n,packed][stopper=.]
+\item
+  Sibsankar Haldar, Alex Alagarsamy Aravind. \quotation{Operating
+  Systems}, rozdział 5, \quotation{CPU Management}.
+  \hyphenatedurl{https://books.google.pl/books?id=orZ0CLxEMXEC&pg=PA118}
+\item
+  PEP-380, Syntax for Delegating to a Subgenerator.
+  \hyphenatedurl{https://www.python.org/dev/peps/pep-0380/}
+\item
+  FreeBSD Developers Handbook, rozdział 7 \quotation{Sockets}.
+  https://www.freebsd.org/
+  doc/en\type{_}US.ISO8859-1/books/developers-handbook/sockets.html
+\item
+  Sangjin Han. Scalable Event Multiplexing.
+  \hyphenatedurl{https://people.eecs.berkeley.edu/~sangjin/2012/12/21/epoll-vs-kqueue.html}
+\item
+  Philip Roberts. What the hack is the event loop anyway? JSConf EU
+  2014. \hyphenatedurl{https://www.youtube.com/watch?v=8aGhZQkoFbQ}
+\item
+  David Beazley. Python Concurrency From the Ground Up. PyCon 2015.
+  \hyphenatedurl{https://www.youtube.com/watch?v=MCs5OvhV9S4}
+\item
+  Ghetto Asyncio.
+  \hyphenatedurl{https://github.com/mrzechonek/ghetto-asyncio}
+\stopitemize
+
+
+\stoptext

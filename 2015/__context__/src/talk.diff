@@ -1,0 +1,211 @@
+--- talk.tex
++++ talk.tex
+@@ -1,16 +1,16 @@
+ \usemodule[pycon-2015]
+ \starttext
+ 
+-
+-\section[porozmawiaj-ze-swoją-aplikacją---kamil-kujawiński-i-marcin-najtkowski]{Porozmawiaj
+-ze swoją aplikacją - Kamil Kujawiński i Marcin Najtkowski}
++\Title{Porozmawiaj ze swoją aplikacją}
++\Author{Kamil Kujawiński, Marcin Najtkowski}
++\MakeTitlePage
+ 
+ \subsection[systemy-ivr]{Systemy IVR}
+ 
+ IVR (ang. Interactive Voice Response) to nazwa systemu w
+ telekomunikacji, umożliwiającego interaktywną obsługę osoby dzwoniącej.
+ IVR ma więc funkcjonalność automatycznego Call center (lub jego części).
+-\footnote{https://pl.wikipedia.org/wiki/Interactive_Voice_Response}
++\footnote{https://pl.wikipedia.org/wiki/Interactive\letterunderscore{}Voice\letterunderscore{}Response}
+ System IVR może być zainstalowany bezpośrednio u klienta, w sieci PSTN,
+ a także jako aplikacja korzystająca z usług IaaS. Ostatniemu rozwiązaniu
+ poświęcimy ten artykuł oraz naszą prezentację.
+@@ -32,83 +32,88 @@
+ bardzo duży. Jest wiele firm, które różnią się możliwościami,
+ infrastrukturą i przede wszystkim cenami. Najważniejszym dla nich
+ rynkiem są Stany Zjednoczone i to tamtejsi klienci mogą wykorzystać
+-100\letterpercent{} dostępnych możliwości. Nawet Brytyjczycy nie mogą
+-się cieszyć pełnym wsparciem dla ich języka, ponieważ wiele opcji jest
+-ograniczona do amerykańskiej wersji języka angielskiego.
++100\% dostępnych możliwości. Nawet Brytyjczycy nie mogą się cieszyć
++pełnym wsparciem dla ich języka, ponieważ wiele opcji jest ograniczona
++do amerykańskiej wersji języka angielskiego.
+ 
+ W tabeli poniżej przedstawiliśmy elementy, które mogą wpłynąć na wybór
+ dostawcy, ale przede wszystkim pokazać w jakich segmentach operują
+ dostawcy.
+ 
+-\placetable[none]{}
+-\starttable[|lp(0.51\textwidth)|cp(0.15\textwidth)|cp(0.19\textwidth)|cp(0.15\textwidth)|]
+-\HL
+-\NC 
+-\NC Plivo
+-\NC Tropo
+-\NC Twilio
+-\NC\AR
+-\HL
+-\NC Ceny (polski numer miesięcznie / minuta rozmowy wychodzącej / minuta
+-rozmowa przychodzącej)
+-\NC 0,8\$ / 2,35¢-7,3¢ / 0,5¢
+-\NC 10\$ / 5-7¢ / 3¢
+-\NC 1\$ / 2¢-7,5¢ / 0,75¢
+-\NC\AR
+-\NC Serwery
+-\NC dedykowane
+-\NC Voxeo \footnote{Od momentu przejęcia Tropo przez Cisco wiele
+-  informacji nie jest ujawnianych.}
+-\NC AWS
+-\NC\AR
+-\NC Paczka w PyPi
+-\NC plivo
+-\NC tropo-webapi-python
+-\NC twilio
+-\NC\AR
+-\NC Synteza mowy / język polski
+-\NC 16 języków / tak
+-\NC 25 języków / tak
+-\NC 26 języków / tak
+-\NC\AR
+-\NC Transkrypcja nagrań
+-\NC tylko angielski
+-\NC tylko angielski
+-\NC tylko angielski
+-\NC\AR
+-\NC Rozpoznowanie mowy / język polski
+-\NC tak / nie
+-\NC tak / tak
+-\NC nie / nie
+-\NC\AR
+-\NC Standardy
+-\NC PlivoXML
+-\NC VoiceXML, SSML, SRGS
+-\NC TwiML
+-\NC\AR
+-\NC SMS / MMS
+-\NC tak / nie
+-\NC tak / nie
+-\NC tak / tylko USA i Kanada
+-\NC\AR
+-\NC Numery telefonów / polskie numery
+-\NC 55 krajów / tak
+-\NC 28 krajów / tak
+-\NC 44 krajów / tak
+-\NC\AR
+-\NC Instalacja on-premises
+-\NC tak (open source)
+-\NC tak (licencja)
+-\NC nie
+-\NC\AR
+-\NC Najwięksi użytkownicy
+-\NC Mozilla, Netflix
+-\NC Deutsche Telekom, IBM \footnote{Od momentu przejęcia Tropo przez
+-  Cisco wiele informacji nie jest ujawnianych.}
+-\NC Uber, Paypal, Coca-Cola
+-\NC\AR
+-\HL
+-\stoptable
++\bTABLE
++\bTR
++  \bTD \eTD
++  \bTD \bf Plivo \eTD
++  \bTD \bf Tropo \eTD
++  \bTD \bf Twilio \eTD
++\eTR
++\bTR
++  \bTD Ceny (polski numer miesięcznie / minuta rozmowy wychodzącej / minuta rozmowa przychodzącej) \eTD
++  \bTD 0,8\$ / 2,35¢-7,3¢ / 0,5¢ \eTD
++  \bTD 10\$ / 5-7¢ / 3¢ \eTD
++  \bTD 1\$ / 2¢-7,5¢ / 0,75¢ \eTD
++\eTR
++\bTR
++  \bTD Serwery \eTD
++  \bTD dedykowane \eTD
++  \bTD Voxeo \eTD
++  \bTD AWS \eTD
++\eTR
++\bTR
++  \bTD Paczka w PyPi \eTD
++  \bTD plivo \eTD
++  \bTD tropo-webapi-python \eTD
++  \bTD twilio \eTD
++\eTR
++\bTR
++  \bTD Synteza mowy / język polski \eTD
++  \bTD 16 języków / tak \eTD
++  \bTD 25 języków / tak \eTD
++  \bTD 26 języków / tak \eTD
++\eTR
++\bTR
++  \bTD Transkrypcja nagrań \eTD
++  \bTD tylko angielski \eTD
++  \bTD tylko angielski \eTD
++  \bTD tylko angielski \eTD
++\eTR
++\bTR
++  \bTD Rozpoznowanie mowy / język polski \eTD
++  \bTD tak / nie \eTD
++  \bTD tak / tak \eTD
++  \bTD nie / nie \eTD
++\eTR
++\bTR
++  \bTD Standardy \eTD
++  \bTD PlivoXML \eTD
++  \bTD VoiceXML, SSML, SRGS \eTD
++  \bTD TwiML \eTD
++\eTR
++\bTR
++  \bTD SMS / MMS \eTD
++  \bTD tak / nie \eTD
++  \bTD tak / nie \eTD
++  \bTD tak / tylko USA i Kanada \eTD
++\eTR
++\bTR
++  \bTD Numery telefonów / polskie numery \eTD
++  \bTD 55 krajów / tak \eTD
++  \bTD 28 krajów / tak \eTD
++  \bTD 44 krajów / tak \eTD
++\eTR
++\bTR
++  \bTD Instalacja on-premises \eTD
++  \bTD tak (open source) \eTD
++  \bTD tak (licencja) \eTD
++  \bTD nie \eTD
++\eTR
++\bTR
++  \bTD Najwięksi użytkownicy \eTD
++  \bTD Mozilla, Netflix \eTD
++  \bTD Deutsche Telekom, IBM \eTD
++  \bTD Uber, Paypal, Coca-Cola \eTD
++\eTR
++\eTABLE
+ 
+ Od momentu przejęcia Tropo przez Cisco wiele informacji (serwery,
+ najwięksi użytkownicy) nie jest ujawnianych.
+@@ -142,7 +147,7 @@
+ prostych przypadkach menadżer może sobie wyklikać cały scenariusz
+ rozmowy z klientem. W tym celu Twilio stworzyło otwarty projekt OpenVBX,
+ który oczywiście korzyta z usług Twilio. Użytkownik ma możliwość przy
+-pomocy techniki drag & drop stworzyć system IVR z menu tonowymi,
++pomocy techniki drag \& drop stworzyć system IVR z menu tonowymi,
+ nagrywaniem rozmów i przekierowywaniem połączeń do wybranych numerów.
+ Jak wspomnieliśmy OpenVBX jet ograniczony wyłącznie do korzystania z
+ Twilio, dlatego też powstała zjailbreakowana wersja, która współpracuje
+@@ -221,7 +226,7 @@
+ 
+ class IVR(View):
+     """Główny widok IVR"""
+-    
++
+     # Adresy kolejnych widoków, w zależności od wybranej opcji
+     choices = {
+         '1': reverse('incoming_complaints'),
+@@ -275,7 +280,7 @@
+ 
+ \subsection[bibliografia]{Bibliografia}
+ 
+-\startitemize[packed]
++\startitemize
+ \item
+   https://www.twilio.com/
+ \item

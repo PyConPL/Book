@@ -1,0 +1,15 @@
+--- devices.tex
++++ devices.tex
+@@ -1,9 +1,9 @@
+ \usemodule[pycon-2016]
+ \starttext
+ 
+-
+-\section[python-for-networking-devices---elisa-jasinska]{Python for
+-Networking Devices - Elisa Jasinska}
++\Title{Python for Networking Devices}
++\Author{Elisa Jasinska}
++\MakeTitlePage
+ 
+ \subsection[introduction]{Introduction}
+ 

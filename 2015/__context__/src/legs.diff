@@ -1,0 +1,40 @@
+--- legs.tex
++++ legs.tex
+@@ -1,9 +1,9 @@
+ \usemodule[pycon-2015]
+ \starttext
+ 
+-
+-\section[attaching-legs-to-a-snake---or---python3-extensions---tomasz-maćkowiak]{Attaching
+-legs to a snake - or - Python3 extensions - Tomasz Maćkowiak}
++\Title{Attaching legs to a snake - or - Python3 extensions}
++\Author{Tomasz Maćkowiak}
++\MakeTitlePage
+ 
+ \subsection[introduction]{Introduction}
+ 
+@@ -791,19 +791,19 @@
+ 
+ \subsection[references]{References}
+ 
+-\startitemize[packed]
++\startitemize
+ \item
+-  {[}1{]} GitHub repo with full source code of all examples
++  {[}1{]} GitHub repo with full source code of all examples\crlf
+   https://github.com/kurazu/pyext
+ \item
+   {[}2{]} Python/C API Reference Manual
+   https://docs.python.org/3/c-api/index.html
+ \item
+-  {[}3{]} GitHub repo of a Python-SpiderMonkey integration library
++  {[}3{]} GitHub repo of a Python-SpiderMonkey integration library\crlf
+   https://github.com/kurazu/bridge
+ \item
+-  {[}4{]} Boost.Python documentation
+-  http://www.boost.org/doc/libs/1_59_0/libs/python/doc/
++  {[}4{]} Boost.Python documentation\crlf
++  http://www.boost.org/doc/libs/1\_59\_0/libs/python/doc/
+ \stopitemize
+ 
+ 

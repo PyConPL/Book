@@ -1,0 +1,55 @@
+--- pyqt.tex
++++ pyqt.tex
+@@ -1,9 +1,9 @@
+ \usemodule[pycon-2015]
+ \starttext
+ 
+-
+-\section[aplikacje-desktopowe-z-pyqt---piotr-maliński]{Aplikacje
+-desktopowe z PyQt - Piotr Maliński}
++\Title{Aplikacje desktopowe z PyQt}
++\Author{Piotr Maliński}
++\MakeTitlePage
+ 
+ \subsection[o-co-chodzi-z-qt-i-pyqt]{O co chodzi z Qt i PyQt?}
+ 
+@@ -150,9 +150,9 @@
+ \stoptyping
+ 
+ Z pliku close.py importujemy nasz widget. Nie zmieniałem jego nazwy,
+-więc domyślna to Ui_Form. Ten kod odpali nasz interfejs, ale nic się nie
+-stanie, gdy klikniemy w przycisk. Musimy połączyć sygnał (kliknięcia) ze
+-slotem:
++więc domyślna to Ui\letterunderscore{}Form. Ten kod odpali nasz
++interfejs, ale nic się nie stanie, gdy klikniemy w przycisk. Musimy
++połączyć sygnał (kliknięcia) ze slotem:
+ 
+ \starttyping
+ class MyForm(QtWidgets.QWidget):
+@@ -229,19 +229,21 @@
+ skuteczną pomoc. Na {[}mojej stronie{]}{[}5{]} znajdziesz wiele
+ poradników do PyQt4 (w miarę możliwości będę aktualizował je do PyQt5).
+ 
+-\startitemize[packed]
++\startitemize
+ \item
+   {[}1{]} Strona PyQt
+   https://www.riverbankcomputing.com/software/pyqt/intro
+ \item
+   {[}2{]} Class Reference PyQt5
+-  http://pyqt.sourceforge.net/Docs/PyQt5/class_reference.html
++  http://pyqt.sourceforge.net/Docs/PyQt5/\crlf
++class\_reference.html
+ \item
+   {[}3{]} Rapid GUI Programming with Python and Qt
+-  http://www.qtrac.eu/pyqtbook.html
++  http://www.qtrac.eu/\crlf
++pyqtbook.html
+ \item
+-  {[}4{]} GUI Programming with Python: QT Edition
+-  https://www.commandprompt.com/community/pyqt/
++  {[}4{]} GUI Programming with Python: QT Edition\crlf
++https://www.commandprompt.com/community/pyqt/
+ \item
+   {[}5{]} Poradniki PyQt4 http://www.python.rk.edu.pl/w/p/pyqt/
+ \stopitemize

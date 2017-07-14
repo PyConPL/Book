@@ -1,0 +1,288 @@
+\usemodule[pycon-2015]
+\starttext
+\Title{{\tt \char`\_\char`\_init\char`\_\char`\_}}
+\HeaderTitle{}
+\gobbleoneargument \MakeTitlePage
+\CheckPingPages
+
+
+% Strona pierwsza, czyli okładka znaczy
+
+\null
+\noheaderandfooterlines
+\vskip 0.2\vsize
+\centerline{%
+  \tfd PyCon PL 2015
+  %\externalfigure[ping-ascii.100][width=0.7\hsize]
+}
+
+
+\vskip 0pt plus 1filll
+
+\centerline{Polska Grupa Użytkowników Linuxa}
+\break
+\noheaderandfooterlines
+
+\def \ListaPlac#1:{\blank[2*big]
+     \begingroup
+     \let \PAR=\par
+     \def \par{\PAR\endgroup}
+     \catcode`\^^M=13
+     \noindent \begingroup \sc #1:%
+     %\lccode `\~=`\^^M%
+     \lowercase{\endgroup\def~{\hfil\break\hbox
+     to2em{}\ignorespaces
+}}
+}%
+
+
+\ListaPlac Komitet Organizacyjny:
+ Filip Kłębczyk (przewodniczący)
+ Agata Bublewicz
+ Łukasz Porębski
+ Piotr Skamruk
+ Patryk Strugacz
+ Maciej Szulik
+ Piotr Tynecki
+ Michał Węgrzynek
+ Piotr Wójcik
+ Anna Wszeborowska
+
+\ListaPlac Komitet Programowy:
+ Maciej Szulik (przewodniczący)
+ Marcin Baran
+ Michał Chałupczak
+ Radomir Dopieralski
+ Mateusz Flieger
+ Konrad Hałas
+ Marcin Jabrzyk
+ Kuba Janoszek
+ Marcin Karkocha
+ Piotr Kasprzyk
+ Przemysław Kukulski
+ Wojciech Łaguna
+ Kaja Milanowska
+ Sebastian Pawluś
+ Michał Rostecki
+ Patrycja Waleśko
+ Jakub Wiśniowski
+ Maciej Wiśniowski
+ Piotr Wójcik
+
+% \ListaPlac Redakcja:
+%  Sebastian Pawluś
+%  Jakub Janoszek
+%  Piotr Kasprzyk
+%  % Ja nie robię, ja tylko makra --K.L.
+%  % Krzysztof Leszczyński
+%  Filip Kłębczyk
+%  Maciej Wiśniowski
+%  Piotr Wójcik
+
+\vfill \break
+
+\ListaPlac Złoci Sponsorzy:~\par%\blank[2*big]
+\centerline{\externalfigure[src/daftcode.png][width=0.45\hsize]\hskip10mm\externalfigure[src/dreamlab.png][width=0.45\hsize]}
+\centerline{\externalfigure[src/Vector_B+W_MirantisLogo.pdf][width=0.45\hsize]\hskip10mm\externalfigure[src/samsung.png][width=0.4\hsize]}
+\centerline{\externalfigure[src/mslogo_b.png][width=0.45\hsize]\hskip10mm\externalfigure[src/itm.png][width=0.45\hsize]}
+\centerline{\externalfigure[src/amazon.png][width=0.55\hsize]\hskip10mm}
+
+\ListaPlac Srebrni Sponsorzy:\par
+\vskip12mm
+\centerline{\externalfigure[src/stx-logo_gray.png][width=0.4\hsize]\hskip10mm\externalfigure[src/compendium.png][width=0.4\hsize]}
+\centerline{\externalfigure[src/codilime.png][width=0.4\hsize]\hskip10mm\externalfigure[src/wheel.png][width=0.4\hsize]}
+\centerline{\externalfigure[src/scrapinghub.png][width=0.4\hsize]\hskip10mm\externalfigure[src/code_cult.png][width=0.25\hsize]}
+\centerline{\externalfigure[src/webinterpret-logo.pdf][width=0.6\hsize]}
+
+\ListaPlac Brązowi Sponsorzy:\par
+\vskip12mm
+\centerline{\externalfigure[src/grand_parade.pdf][width=0.15\hsize]}
+
+\ListaPlac Grafitowi Sponsorzy:\par
+\vskip12mm
+\centerline{\externalfigure[src/itpwn.png][width=0.4\hsize]\hskip10mm\externalfigure[src/sages.png][width=0.3\hsize]}
+\centerline{\externalfigure[src/helion.png][width=0.6\hsize]\hskip10mm\externalfigure[src/FINAL_LOGO_TECHLAND-black-ver8.pdf][width=0.4\hsize]}
+\centerline{\externalfigure[src/graki.png][width=0.4\hsize]}
+\break
+
+\iffalse
+  % wersja prezesa
+
+Witajcie. Znowu.
+
+
+\else
+
+\begingroup
+\setupwhitespace[big]
+\setupindenting[none,never]
+
+Witamy na ósmej edycji konferencji PyCon PL!
+
+To już stała tradycja, że po dwóch latach zmieniamy miejsce naszego wydarzenia. Z~małego miasta Szczyrk na południu Polski przenosimy się do wsi Ossa. Tym samym konferencja pierwszy raz gości w województwie łódzkim, choć do Warszawy tu tak samo blisko jak do Łodzi, czyli prawie rzut beretem (no prawie...). Geograficznie okolica z gór zmienia się na niziny, za to standard hotelu w porównaniu do poprzednich edycji to zdecydowane wyżyny w całej historii polskiego PyCona.
+
+Są jeszcze inne zmiany w tym roku - nowym szefem Komitetu Programowego konferencji został Maciej Szulik. Zadanie miał Maciej niełatwe, bo jego poprzednik - Sebastian Pawluś naprawdę wysoko postawił poprzeczkę. Sztafeta programowa, jak widać, jest jednak udana, bo kolejny rok konferencja trzyma bardzo wysoki poziom. W~tej edycji mamy jeszcze więcej prelegentów zagranicznych (w tym kilku z USA, jednego aż z Australii) i jeszcze bardziej rozbudowaną agendę. Jest również i więcej kobiet w~programie konferencji, co niezmiernie nas cieszy, bo różnorodność nas wszystkich wzbogaca.  Przy okazji warto wspomnieć, że ze wsparciem finansowym na zaproszenie ciekawych prelegentów przyszedł w tym roku PSF (Python Software Foundation), ale również środki od sponsorów odegrały niebagatelną rolę.
+
+Jak widać, konferencja się rozwija, a zasługa w tym polskiej społeczności Pythona, w tym działaczy nowego, bo powstałego pod koniec 2014 roku, stowarzyszenia - Polskiej Grupy Użytkowników Pythona (PLPUG). Trzeba przyznać, że powstanie tej organizacji to był rajd z wieloma nieoczekiwanymi zakrętami i wybojami na drodze, ale po licznych przygodach w końcu się udało, uff! Jak to w życiu bywa, plany ogromne, siły ograniczone, a kasa pusta. Warto więc wesprzeć stowarzyszenie darowizną, albo jeszcze lepiej zostać członkiem i aktywnie włączyć się w jego kształtowanie.
+
+Na koniec pozostaje sobie życzyć dobrze spędzonego czasu, udanej integracji i sporo wyniesionej wiedzy na PyCon PL 2015.  No i co najważniejsze, wielu nowych kontaktów i ciekawych znajomości, bo tę społeczność, o czym czasami zapominamy, tworzy wielu fantastycznych ludzi.
+
+\endgroup
+
+\fi
+
+\vfil\break
+\begingroup
+
+\setupwhitespace[big]
+
+\null\vfill
+\noindent{\sc Kolofon:}
+
+\blank[big]\parindent=0pt \rightskip=0pt
+plus 1fill
+
+Wszystkie prace związane z~przygotowaniem publikacji do~druku
+zostały wykonane wyłącznie w~systemie Linux (m.in. Ubuntu 12.04.1 LTS).
+
+Skład został wykonany w systemie \TeX\ z~wykorzystaniem,
+opracowanego na~potrzeby konferencji, środowiska redakcyjnego
+opartego na~formacie \CONTEXT.
+
+Teksty referatów złożono krojem Bonum z kolekcji \TeX-Gyre.
+Tytuły referatów złożono krojem Antykwa Toruńska, opracowanym
+przez Janusza Nowackiego na~podstawie rysunków Zygfryda
+Gardzielewskiego. 
+
+
+\endgroup
+\break
+
+
+\iffalse
+\def \defEvent{\dodoubleargumentwithset \dodefEvent}
+\def \dodefEvent[#1][#2]{\getparameters[Event::#1::][#2]}
+
+\def \vskipreserve #1#2{\vskip #1\nobreak 
+                        \vskip 0pt plus \dimexpr #2\relax\penalty-1000
+                        \vskip 0pt plus -\dimexpr #2\relax}
+
+\def \startDay#1{\vskipreserve{3\baselineskip}{0.3\vsize}
+     \centerline{\tfa #1}
+     \blank[big]
+}
+
+\def \AgendaEvent[#1]{\par
+     \def \AgendaEventfrom{\errmessage{Undefined AgendaEvent from}}
+     \def \AgendaEventto{\errmessage{Undefined AgendaEvent to}}
+     \def \AgendaEventid{\errmessage{Undefined AgendaEvent id}}
+     \getparameters[AgendaEvent][#1]%
+     \begingroup\edef \a{\endgroup
+       \noexpand\doAgendaEvent
+       \AgendaEventid \space \AgendaEventfrom \space \AgendaEventto\relax}\a
+     }
+
+\def \numifty#1{\ifnum 99=0#1\relax\infty \else #1\fi}
+
+\setvalue{start::ref}{}
+\setvalue{stop::ref}{}
+\setvalue{start::event}{\qquad --- \vrule width 0pt height 5ex depth 0ex\relax}
+\setvalue{stop::event}{ ---\vrule width 0pt height 0ex depth 3ex\relax}
+
+
+\def \doAgendaEvent #1 #2:#3 #4:#5\relax{
+     \hbox to \hsize \bgroup
+     \hbox to 6em{\hfil
+       $\numifty{#2}^{\numifty{#3}}$~--~%
+       $\numifty{#4}^{\numifty{#5}}$\quad}%
+     \vtop \bgroup
+       \advance \hsize -9em
+       \noindent \rightskip=0pt plus 1fil
+       \vrule width 0pt height 3ex
+       \if $\getvalue{Event::#1::author}$\else
+          {\sc \getvalue{Event::#1::author}}\hfil\break
+       \fi
+       \getvalue{start::\getvalue{Event::#1::type}}
+      {\it \getvalue{Event::#1::title}}%
+       \getvalue{stop::\getvalue{Event::#1::type}}
+      \ifnum 0=0\ArtPage{#1::firstpage}\relax
+      \else 
+      \parfillskip=0pt \dotfill\null
+      \rlap{\tt \inhex\ArtPage{#1::firstpage}}
+      \setgvalue{Art::#1::found}{1}
+      \fi\par
+     \egroup\hfil\egroup}
+\def \stopDay{}
+             
+
+\catcode `\_=13
+\def_{{\tt \char `\_}}
+% \input agenda
+
+\iffalse
+\startDay{pozostałe artykuły}
+      \setgvalue{Art::ping2008::found}{1}
+
+\def \Article#1#2{\ifnum1=0\getvalue{Art::#1::found}\relax
+     \else #1\par\doAgendaEvent #1 ~:~ ~:~\relax\fi}
+
+\PingArticles
+
+\fi
+\fi
+%\xxxxxxxxxxxxxxxxx
+
+
+\centerline{\bf Spis treści}
+\blank[2*big]
+\toks0={}
+
+\newread \testarticle
+\def \Article#1#2{\message{**ARTICLE: #1 ***}%
+     \toks0=\expandafter{\the\toks0\relax\Article{#1}}
+     \toks1={}% Authors
+     \toks2={}% Title
+     \openin \testarticle=#1/#1.tex\relax
+     \ifeof \testarticle
+        \closein \testarticle
+     \else
+        \closein \testarticle
+        \expandafter \ScanArt \normalinput #1/#1.tex\relax\ScanArt
+     \fi}
+
+\def \ScanArt {\afterassignment \ScanArtA \let \next}
+\def \ScanArtA{%
+     \ifcase 0%
+            \ifx\next \ScanArt 1\fi
+            \ifx\next \Title   2\fi
+            \ifx\next \Author  2\fi
+            \ifx\next \MakeTitlePage 2\fi
+            \relax
+            % case 0, unknown token
+            \expandafter \ScanArt
+            \or
+            % case 1, found \ScanArt, i.e. endofinput
+            \expandafter \FinishScan
+            \or
+            % case 2
+            \expandafter \next
+            \else
+              \errmessage{internal if/fi error}
+            \fi}
+
+\def \Title#1{\toks2=\expandafter{\the\toks2\relax #1\relax}%
+     \ScanArt}
+\def  \Author#1{\toks1=\expandafter{\the\toks1, #1}\ScanArt}
+\def \MakeTitlePage{\endinput\ScanArt}
+\def \FinishScan{\edef\next{{\the\toks1}{\the\toks2}}%
+     \toks0=\expandafter{\the\toks0\next}}
+\PingArticles
+\def \Article#1#2#3{\bTR
+     \bTD \tt 0x00\inhex \ArtPage{#1::firstpage}\relax\eTD
+     \bTD #3\relax~--~\it \gobbleoneargument#2\relax\eTD
+     \eTR}
+\bTABLE
+        \the\toks0
+\eTABLE
+
+\stoptext

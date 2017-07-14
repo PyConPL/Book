@@ -1,0 +1,13 @@
+--- odoo.tex
++++ odoo.tex
+@@ -1,7 +1,9 @@
+ \usemodule[pycon-2016]
+ \starttext
+ 
+-
++\Title{Odoo - pierwsza aplikacja (warsztat)}
++\Author{Michał Węgrzynek, Artur Roguszny}
++\MakeTitlePage
+ \section[agenda-warsztatu]{Agenda warsztatu}
+ 
+ \startitemize[packed]

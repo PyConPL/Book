@@ -8,28 +8,30 @@
 % zasadzie też się to da zrobić, ale może po prostu będziemy ten
 % plik pilnować.
 
-% Pierwszy powinien być ,,referat'' pycon2014, bo wstęp i spis
+% Pierwszy powinien być ,,referat'' pycon2015, bo wstęp i spis
 % treści
 %% UPDATE:
-%% Pycon 2014 wymyślił potwornie długie nazwy. TeX tego nie łyka
+%% Pycon 2015 wymyślił potwornie długie nazwy. TeX tego nie łyka
 %% Zatem pierwsza jest nazwa TeX-owa, druga nazwa z katalogu
 
-pycon2014 pycon2014
-optimizing presentations/Optimizing_API_against_latency
-bayesian presentations/bayesian_ab_testing_with_python
-vulnerability presentations/python_w_pracy_vulnerability_researchera_reversera
-projekty presentations/Projekty_sprzetowe_Bo_nie_tylko_webem_czlowiek_zyje
-proper presentations/proper_code_reviews
-polityka presentations/Co_tam_panie_w_polityce_Czyli_czym_zaskoczyl_nas_Python_3.4
-robots presentations/how_to_make_killer_robots_with_python_and_raspberry_pi
-chmury presentations/python_w_chmurach
-mistakes presentations/common_programming_mistakes
-journey presentations/Journey_to_the_center_of_the_the_asynchronous_world
-visualizing workshops/Learn_Django_and_Redis_by_Visualizing_Twitter_data
-tornado workshops/Tornado_and_Friends_workshop
-pygame workshops/Pygame_-_gry_w_swiecie_Pythona
-pysnake workshops/PySnake_Dojo
-memory workshops/Python_Memory_Workshop
-maintainable workshops/Writing_Maintainable_Code
-% Zmiana nazwy z 'scrum' na 'r', bo byl problem z \par, ale nie wiem, dlaczego
-r workshops/SCRUM_for_Teams
+pycon2015 pycon2015
+dive presentations/import_deep_dive
+dokku presentations/Dokku_Build_your_own_PaaS
+flask presentations/with_modern_peripherals_Python_and_Flask
+legs presentations/attaching_legs_to_a_snake
+logic presentations/Business_logic_with_PostgreSQL_and_Python
+machine presentations/Building_better_machine_learning_model_Power_of_ensembles
+perf presentations/Whats_Eating_Python_performance
+review presentations/why_do_you_need_a_code_review_tool
+snmp presentations/writing-snmp-apps
+solid presentations/solid-python
+sql presentations/condemned_to_reinvent_sql
+astro presentations/Kosmiczny_Python
+locustio presentations/locustio_load_testing_tool
+mesos presentations/Wykorzystanie_klastra_Apache_Mesos_w_deploymencie_aplikacji_pythonowych
+pyqt presentations/aplikacje_desktopowe_pyqt
+queue presentations/teoria_kolejek_matematyka_i_efektywne_wytwarzanie_oprogramowania
+re presentations/how_to_re
+snake presentations/latajacy_waz_czyli_szybkie_prototypowanie_sprzetu_przy_pomocy_pythona
+super presentations/sztuczki_z_metoda_super
+talk presentations/porozmawiaj_ze_swoja_aplikacja
