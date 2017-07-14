@@ -367,7 +367,7 @@ def fizzbuzz_game():
 def test_fizzbuzz_game_prints_100_lines(capsys):
     fizzbuzz_game()
     out, _ = capsys.readouterr()
-    assert len(out.strip().split()) == 100
+    assert len(out.strip().split('\n')) == 100
 ```
 
 ------------
