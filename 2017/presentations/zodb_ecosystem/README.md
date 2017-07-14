@@ -1,4 +1,4 @@
-![The ZODB Ecosystem by Christopher Lozinsk](https://raw.githubusercontent.com/clozinski/Book/master/2017/presentations/zodb_ecosystem/ZODBTitleGraphics.svg)
+![The ZODB Ecosystem by Christopher Lozinsk](ZODBTitleGraphics.svg)
 
 
 ## ABSTRACT
