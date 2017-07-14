@@ -30,10 +30,7 @@ I am giving at Pycon Poland 2017.
 
 ZODB is really easy to use.  Just subclass off of class persistent.Persistent,
 and your objects become persistent.  Here is a code sample from the Tutorial.
-
-
-
-From http://www.zodb.org/en/latest/tutorial.html
+http://www.zodb.org/en/latest/tutorial.html
 
 ```
 import persistent
@@ -65,11 +62,11 @@ ZODB is an ACID-compliant database.
 Atomicity requires that each transaction be "all or nothing".
 
 ### Consistency 
-The consistency property ensures that any transaction will bring the database 
+Consistency  ensures that any transaction will bring the database 
 from one valid state to another. 
 
 ### Isolation
-The isolation property ensures that the concurrent execution of transactions 
+Isolation ensures that the concurrent execution of transactions 
 results in a system state that would be obtained if 
 transactions were executed sequentially, i.e., one after the other.
 
@@ -90,7 +87,7 @@ collected.
 ## A Specific Data Model
 
 PythonLinks.info/the-world is a model of the Python software industry 
-represented as a hierarchy.  "The-world" is a category containing regions.  
+represented as a hierarchy.  "The-world" is a category containing regions. 
 Regions contain countries.  Countries contain cities. Cities contain 
 companies.  Companies can contain jobs, products, and other links such as 
 YouTube videos, product reviews, and blogs.  The tree representing the 
@@ -108,16 +105,18 @@ if every object had its own unique name, so that even when the tree
 structure changed, it would still be easy to 
 find the object using its canonical URL. 
  
-PythonLinks includes canoninc urls. .  Every node has a unique name.  
+PythonLinks provides canoninc urls. .  Every node has a unique name which can 
+be accessed using a dictionary in the root node.   
 Atempts to create a new node with the same name, result in an integer 
-being appended to the new name. Node, Node-1, Node-2, etc. When objects are 
-renamed, or deleted, the index is updated.  
+being appended to the new node name. Node, Node-1, Node-2, etc. 
+When objects are renamed, or deleted, the root dictiionary is updated.  
 
 ## ZODB History and Undo
-ZODB is a versioned database.  Old versions are preserved.  That makes 
+ZODB is a versioned database.  Each object preserves its historical versions 
+until they are garbage collected.   That makes 
 it possible to edit an object, save the edits, and then revert to the 
-previous version of the object.  Each object preserves its historical versions 
-until they are garbage collected.  
+previous version of the object.  One can even do diffs of previous objects, 
+in order to decide which one is best.
 
 ## ZODB Storage Options
 
@@ -126,9 +125,9 @@ There is a rich variety of ways to store your ZODB objects.
 1. **FileStorage** is the basic way of storing ZODB (Python) objects on the 
 file system.  There is also Blob storage for storing images, files and other 
 large objects on the file system. 
-2.**ZEO** is the basic client server version of the ZODB.  
-ZEO clients share data from the ZEO server.  
-Each participating  Python application 
+2. **ZEO** is the basic client server version of the ZODB.  
+ZEO clients share data from the ZEO server.
+Each participating Python application 
 server includes a ZEO client.  They all talk to the ZEO server. The ZEO server
 will then store the data in FileStorage and BlobStorage 
 3. **RelStorage**  stores ZODB data in a relational database. It performs 
@@ -154,13 +153,13 @@ performance under heavy writing was limited because writes all happened at
 the end of  a single file.  Only one disk head at a time could write.  That 
 problem has now been fixed.  Writes can now occur simultaneously on 
 multiple files on a single computer.  The database can grow even larger by 
-hosting the blobs on remote servers, such as S3. 
+hosting the blobs on remote servers, such as Amazon S3. 
 
 At Zope Corporation, several hundred newspaper content-management systems and web sites were hosted using a multi-database configuration with most data in a main database and a catalog database. The databases had several hundred gigabytes of ordinary database records plus multiple terabytes of blob data.
 
 Of course if you need multiple computers to store your object data (not blobs),
-then you may want to upgrade to ZEO. ZEO is a GPL'd cousin to the ZODB. For large 
-amounts of Blobs, just store them on Amazon S3 servers.
+then you may want to upgrade to NEO (Not NEO4J). NEO is a GPL'd 
+cousin to the ZODB. 
 
 ## ZODB Tutorial
 ZODB is really easy to use from Python.  I invite you to try out the 
@@ -182,7 +181,7 @@ advice on when to use each of them.
 
 ### Plone
 If you need a Content Management System, and Plone and its plugins do what 
-you need.  Brilliant.  Go for it.  Plone is mature, stable, heavily used.  
+you need.  Brilliant.  Go for it.  Plone is mature, stable, heavily used. 
 They have an annual international conference, and many regional conferences.  
 I recommend it highly. There are lots of consultants you can hire. 
 
@@ -214,7 +213,7 @@ I care about speed and cost of development.  Related to that is software flexiil
 
 ### Zopache
 
-Sadly Grok lacks a TTW development environment, so I built one.  
+Sadly Grok lacks a TTW development environment, so I built one. 
 Zopache.com is a Javascript IDE 
 which I bult on top of the ZODB using Grok. ZODB 
 developers might call it a TTW development platform. 
@@ -230,9 +229,7 @@ Folders support cut, copy, rename paste and delete operations. HTML folders
 can be edited with the Ace and ck editors.  Javascript Folders allow one to 
 build a well organized  tree of Javascript code, but serve it as a single 
 minified file or as a human readable and searchable file, wich clickable links to 
-the original javascript object. 
-
-History and Undo are supported.  
+the original javascript object. History and Undo are supported.  
 
 Using Zopache, in your browser, you create a tree of 
 folders, and populate and edit those objects.    
@@ -266,7 +263,7 @@ metal code.  I want high levels of abstractions.
 
 In particular the Pyramid folks are mosty strongly against TTW development. 
 I invite you to take a look at the quote on the SubstanceD 
-demo page.  
+demo page. 
 http://demo.substanced.net/
 Clearly they are very conflicted about minimal TTW development, 
 let alone the idea of building a full Javascript IDE on top of the ZODB.
@@ -284,7 +281,7 @@ I want to build it as fast and flexibly as is possible.
 I like the Python idea that there should be one 
 way to do thigns.  
 I want a purist OO approach.  
-Like Ruby on Rails, I want a high level 
+Like Ruby on Rails, I want an 
 opinionated high level framework.  Grok gives me that. 
 
 Pyramid is focussed on multiple deployments.  So TTW makes no sense.  
@@ -304,7 +301,9 @@ trees. Pyramid does not include  CRUD.
 One has to add it manually. I am still not 
 sure which CRUD package to recommend.  Reportedly the one used in SubstanceD 
 does not do CRUD.  So which one does?  The next one I found has just been 
-rearchited for use with relational databases.  Also not what I need. 
+re-architectedd for use with relational databases.  Also not what I need. 
+
+
 
 I also use components.  Pyramid only supports view components.  
 But the Zope Component Architecture is now available with PyAMS.  
