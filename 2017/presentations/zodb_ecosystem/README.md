@@ -1,5 +1,4 @@
-![The ZODB Ecosystem by Christopher Lozinsk](ZODBTitleGraphics.svg)
-
+![alt text](https://raw.githubusercontent.com/clozinski/Book/master/2017/presentations/zodb_ecosystem/ZODBTitleGraphics.svg “The ZODB Ecosystem by Christopher Lozinski”)
 
 ## ABSTRACT
 ZODB is an object-oriented database written in Python and 
