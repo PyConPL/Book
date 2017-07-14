@@ -1,4 +1,4 @@
-![alt text](./ZODBTitleGraphics.svg "The ZODB Ecosystem by Christopher Lozinski")
+![The ZODB Ecosystem by Christopher Lozinsk](./ZODBTitleGraphics.svg)
 
 
 ## ABSTRACT
