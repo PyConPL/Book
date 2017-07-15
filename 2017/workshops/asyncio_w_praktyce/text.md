@@ -1,6 +1,12 @@
 # Asyncio w praktyce (warsztat)
 
-Podczas tych warsztatów nauczysz się korzystać z **asyncio** [1] na tyle, by móc samodzielnie zaprojektować i zakodować aplikację korzystającą z jego dobrodziejstw. Nauka oprze się o pisanie w pełni funkcjonalnego chatu. W trakcie ćwiczeń poznasz część biblioteki asyncio potrzebną do zrealizowania zadania, nową składnię dla coroutines z async i await, bibliotekę **aiohttp** [1] zapewniającą klienta i serwer HTTP oraz tajniki testowania powyższych. Pisanie testów przed kodem będzie częścią szkolenia, ale w razie potrzeby może zostać pominięte, by nadal móc coś z nich wynieść. Do testowania będziemy używać biblioteki **pytest**[4], ale w minimalnym stopniu - jego nieznajomość w niczym nie będzie przeszkadzać. Najważniejszą rzeczą, którą wyniesiecie ze szkolenia będzie umiejętność projektowania aplikacji opartych na asyncio. Poznacie mocne strony biblioteki i sytuacje w których jest odpowiednim narzędziem. Nauczycie się także unikania najczęstszych pułapek związanych z asyncio.
+Podczas tych warsztatów nauczysz się korzystać z **asyncio** [1] na tyle, by móc samodzielnie zaprojektować i zakodować aplikację korzystającą z jego dobrodziejstw.
+
+Nauka oprze się o pisanie w pełni funkcjonalnego chatu. W trakcie ćwiczeń poznasz część biblioteki asyncio potrzebną do zrealizowania zadania, nową składnię dla coroutines z async i await, bibliotekę **aiohttp** [1] zapewniającą klienta i serwer HTTP oraz tajniki testowania powyższych. Pisanie testów przed kodem będzie częścią szkolenia, ale w razie potrzeby może zostać pominięte, by nadal móc coś z niego wynieść.
+
+Do testowania będziemy używać biblioteki **pytest**[4], ale w minimalnym stopniu - jego nieznajomość w niczym nie będzie przeszkadzać.
+
+Najważniejszą rzeczą, którą wyniesiecie ze szkolenia będzie umiejętność projektowania aplikacji opartych na asyncio. Poznacie mocne strony biblioteki i sytuacje w których jest odpowiednim narzędziem. Nauczycie się także unikania najczęstszych pułapek związanych z asyncio.
 
 
 ```python
@@ -65,7 +71,7 @@ W ten sposób maksymalizujemy wykorzystanie pojedynczego rdzenia CPU. Tak więc 
 
 Co innego w przypadku, gdy zbudowanie odpowiedzi wymaga odpytania kilku lub kilkunastu usług wokół. W takiej sytuacji asyncio da natychmiastowe przyspieszenie dzięki zmultipleksowaniu żądań i wykonaniu ich jednocześnie. Na koniec musimy tylko poskładać ich wyniki. Bez asyncio naszą jedyną opcją było użycie puli wątków, procesów lub oddelegowanie do systemu kolejkowego, jak Celery i synchoniczne oczekiwanie na wynik. Kolejną przesłanką za zastosowaniem asyncio jest konieczność utrzymywania długotrwających połączeń z klientami. Idealnym przykładem jest serwer websocketów, na którym można zbudować powiadomienia w czasie rzeczywistym do naszej aplikacji. Mówimy cały czas o wykorzystaniu asyncio po stronie serwera, ale oczywiście można też stworzyć asynchroczninego klienta, który będzie w stanie odbierać strumień danych płynących po sieci (potencjalnie z kilku źródeł) i odpowiednio na nie reagować.
 
-Nic nie stoi na przeszkodzie by w jednym procesie Pythona, przy użyciu jednej pętli zdarzeń, mieć jednocześnie osadzony tak serwer jak i klienta, a nawet po kilka z nich. Sprawia to, że asyncio świetnie nadaje się do pisania _glue-services_ - tworami, które zapewniają pomost pomiędzy różnymi niekompatybilnymi ze sobą usługami.
+Nic nie stoi na przeszkodzie by w jednym procesie Pythona, przy użyciu jednej pętli zdarzeń, mieć jednocześnie osadzony tak serwer jak i klienta, a nawet po kilka z nich. Sprawia to, że asyncio świetnie nadaje się do pisania _glue-services_ - tworów, które zapewniają pomost pomiędzy różnymi niekompatybilnymi ze sobą usługami.
 
 
 ## Forma szkolenia
@@ -81,35 +87,35 @@ W treści zadań zawarte są też podpowiedzi, ukryte do momentu aż uczestnik n
 
 ## Program szkolenia
 1. Wstęp teoretyczny (10 minut)
-  1. czym jest asyncio
-  2. kiedy warto stosować asyncio?
-  3. przegląd dostępnych narzędzi i bibliotek
-  4. testowanie aplikacji z asyncio - złote zasady
+..1. czym jest asyncio
+..2. kiedy warto stosować asyncio?
+..3. przegląd dostępnych narzędzi i bibliotek
+..4. testowanie aplikacji z asyncio - złote zasady
 2. Wprowadzenie do projektu (5 minut)
-  1. Przedstawienie zawartości repozytorium
-  2. Pożądany zakres funkcjonalności na koniec szkolenia
+..1. Przedstawienie zawartości repozytorium
+..2. Pożądany zakres funkcjonalności na koniec szkolenia
 
 3. Moduł 1 - czat ogólny (1 godzina 15 minut)
-  1. Obsługa przychodzącej wiadomości
-  2. Wysłanie wiadomości do pozostałych użytkowników czatu
-  3. Zabezpieczenie przed sytuacją, gdy jeden z użytkowników rozłączy się w trakcie przekazywania wiadomości
-  4. Oznaczanie obecności na chacie
-  5. Statystyki chatu
-  6. Przechowanie historii chatu dla nowych uczestników
+..1. Obsługa przychodzącej wiadomości
+..2. Wysłanie wiadomości do pozostałych użytkowników czatu
+..3. Zabezpieczenie przed sytuacją, gdy jeden z użytkowników rozłączy się w trakcie przekazywania wiadomości
+..4. Oznaczanie obecności na chacie
+..5. Statystyki chatu
+..6. Przechowanie historii chatu dla nowych uczestników
 
 (przerwa - 15 minut)
 
 4. Moduł 2 - prywatne pokoje (45 minut)
-  1. Zakładanie pokoju
-  2. Zapraszanie do środka uczestników
-  3. Wchodzenie do pokoju przez listę
-  4. Możliwość opuszczania pokoju
-  5. Automatyczne usuwanie pokoju po wyjściu z niego ostatniego uczestnika
+..1. Zakładanie pokoju
+..2. Zapraszanie do środka uczestników
+..3. Wchodzenie do pokoju przez listę
+..4. Możliwość opuszczania pokoju
+..5. Automatyczne usuwanie pokoju po wyjściu z niego ostatniego uczestnika
 
 5. Moduł 3 - prywatne wiadomości (45 minut)
-  1. Możliwość rozpoczęcia konwersacji z innym użytkownikiem
-  2. Dynamiczne tworzenie pokoi z zachowaniem historii konwersacji
-  3. Możliwość dołączenia kolejnego uczestnika do prywatnej rozmowy i utworzenie w ten sposób dynamicznie nowego pokoju
+..1. Możliwość rozpoczęcia konwersacji z innym użytkownikiem
+..2. Dynamiczne tworzenie pokoi z zachowaniem historii konwersacji
+..3. Możliwość dołączenia kolejnego uczestnika do prywatnej rozmowy i utworzenie w ten sposób dynamicznie nowego pokoju
 
 6. Podsumowanie
 
