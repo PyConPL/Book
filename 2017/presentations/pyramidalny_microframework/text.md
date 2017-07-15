@@ -34,7 +34,7 @@ zaintrygowanie czytelnika na tyle, by sam sięgnął do materiałów.
 
 Pierwsze spojrzenie na Pyramida może przerazić nieprzygotowanego pythonowca:
 większa część "hello world" przypomina magiczne zaklęcia, a dokumentacja jest
-tak obszerna, że przeczytanie samego spisu treści zamuje parę minut. Nie mówiąc
+tak obszerna, że przeczytanie samego spisu treści zajmuje parę minut. Nie mówiąc
 już o tutorialu, który składa się z, bagatela, 10 rozdziałów i 52
 podrozdziałów! Do tego dochodzi instalacja, która pobiera chyba połowę PyPI,
 a samo spojrzenie na submoduły wywołuje zawrót głowy.
@@ -79,16 +79,16 @@ wersja pojawia się około dwóch razy w roku, przynosząc nowe funkcjonalności
 i usprawnienia. Autorzy nie boją się dokonywać poważnych zmian, jeśli są
 to zmiany na lepsze, co czasem może skutkować tym, że nasz projekt po
 aktualizacji nagle staje się przestarzały, a w dłuższej perspektywie przestaje
-działać z nowowydaną wersją Pyramida.
+działać z nowo wydaną wersją Pyramida.
 
 Ponadto twórcy Pyramida nie poddają się zjawisku *not-invented-here*, czyli
 uporczywej implementacji wszystkiego od zera tylko po to, aby pozbyć się
 zależności od "obcych" bibliotek. Na przykład jedną z ciekawszych zmian
 między Pyramidem 1.7 a 1.8 była rezygnacja z rozwijanego przez długi czas
 mechanizmu *scaffoldów* (szablonów automatyzujących np. tworzenie nowego
-projektu) na rzecz popularnej bibioteki zewnętrznej `cookiecutter`. Pociągało
+projektu) na rzecz popularnej biblioteki zewnętrznej `cookiecutter`. Pociągało
 to za sobą poważne zmiany zarówno w kodzie, jak i w dokumentacji oraz testach
-(pamiętamy - 100% pokrycia). Jendakże praca została wykonana, a bilans zysków
+(pamiętamy - 100% pokrycia). Jednakże praca została wykonana, a bilans zysków
 i strat był na pewno dodatni.
 
 ## Zależności
@@ -219,7 +219,7 @@ takiej struktury, tworząc nową gałąź w odpowiednim miejscu
 istniejącego drzewa, co nigdy nie wpływa to na pozostałe zasoby.
 
 Początkującym (a także zaawansowanym) amatorom *traversala* może pomóc
-malutka bibliteczka o nazwie `TraversalKit`, która dostarcza klasę bazową
+malutka biblioteczka o nazwie `TraversalKit`, która dostarcza klasę bazową
 dla zasobu oraz ułatwia tworzenie drzewa zasobów.
 
 ## Brak pierwiastka magicznego
@@ -298,7 +298,7 @@ ręcznego "klejenia" adresów.
 
 **Szybkość** - pomimo złożonej funkcjonalności Pyramid okazuje się być
 całkiem szybki, rozstawiając po kątach znaczną część liczącej się konkurencji.
-Nie wykazuje się też nadmierną zasobożęrnością, dzięki czemu utrzymanie
+Nie wykazuje się też nadmierną zasobożernością, dzięki czemu utrzymanie
 aplikacji jest względnie tanie.
 
 # Podsumowanie
@@ -318,6 +318,6 @@ Dlatego też mam nadzieję, że moim tekstem zachęciłem cię do przyjrzenia si
 * https://pylonsproject.org - Pylons Project
 * https://docs.pylonsproject.org/projects/pyramid/en/latest/ - dokumentacja Pyramida
 * https://pylonsproject.org/projects.html - projekty rozwijane przez Pylons Project
-* https://trypyramid.com/resources-extending-pyramid.html - oficjalne dodatki (add-ons)
+* https://trypyramid.com/resources-extending-pyramid.html - oficjalne dodatki (*add-ons*)
 * https://webob.org - strona domowa `WebOb`, wrappera WSGI używanego przez Pyramid
 * https://docs.pylonsproject.org/projects/pyramid/en/latest/quick_tour.html - przewodnik po Pyramidzie
