@@ -40,7 +40,7 @@ loop.close()
 ```
 
 ## Dla kogo?
-Szkolenie jest adresowane dla osób, które programują już chwilę w Pythonie i chcą poznać jego asynchroniczną stronę. Każdy średniozaawansowany lub ogarniający początkujący programista Pythona da sobie radę z ćwiczeniami. Znajomość technologii frontendowych nie jest wymagana - ta część zostanie zapewniona przez organizatora warsztatów.
+Szkolenie jest adresowane do osób, które programują już chwilę w Pythonie i chcą poznać jego asynchroniczną stronę. Każdy średniozaawansowany lub ogarniający początkujący programista Pythona da sobie radę z ćwiczeniami. Znajomość technologii frontendowych nie jest wymagana - ta część zostanie zapewniona przez organizatora warsztatów.
 
 ## Jak się przygotować?
 Potrzebny będzie Python w wersji 3.5 lub 3.6, umiejętność obsługi pip'a, virtualenva i podstawowa znajomość git'a - na tyle, by móc sklonować sobie repozytorium, utworzyć wirtualne środowisko i zainstalować zależności potrzebne do ćwiczeń:
@@ -61,9 +61,9 @@ Edytor kodu nie ma znaczenia, używajcie swojego ulubionego. W razie wątpliwoś
 ## Kiedy warto iść w asyncio? Kiedy nie?
 Pojawienie się asyncio wraz z wersją 3.4 interpretera wywołało trochę zamieszania w świecie Pythona. Nie wszyscy programiści rozumieli, dlaczego zostało ono dodane do biblioteki standardowej oraz czy powinni się nim zainteresować mając działające projekty napisane chociażby w Django.
 
-Inni zareagowali entuzjastycznie i zaadoptowali tę bibliotekę do swoich potrzeb. Trzeba na początek powiedzieć, że asynchroniczność jest w Pythonie już od długiego czasu. Pierwszy release frameworku Twisted miał miejsce w 2002. roku, a więc aż 15 lat temu. Inny popularny framework - Tornado jest z nami już od 8 lat. Te projekty miały swoją niszę na rynku oprogramowania, udostępniając programowanie sterowane zdarzeniami na długo zanim stało się to modne za sprawą NodeJS.
+Inni zareagowali entuzjastycznie i zaadoptowali tę bibliotekę do swoich potrzeb. Trzeba na początek powiedzieć, że asynchroniczność jest w Pythonie już od długiego czasu. Pierwszy release frameworka Twisted miał miejsce w 2002. roku, a więc aż 15 lat temu. Inny popularny framework - Tornado jest z nami już od 8 lat. Te projekty miały swoją niszę na rynku oprogramowania, udostępniając programowanie sterowane zdarzeniami na długo zanim stało się to modne za sprawą NodeJS.
 
-Asynchroniczne programowanie jest szczególnie przydatne, gdy mamy do czynienia z aplikacjami, które przez większość czasu oczekują na zakończenie operacji I/O, a mniej czasu spędzają na obliczeniach przy pomocy CPU. Pomysł na podejście asynchroniczne pochodzi z bardzo prostej obserwacji - gdy program czeka na zakończenie operacji I/O, to pozostaje bezczynny.
+Asynchroniczne programowanie jest szczególnie przydatne, gdy mamy do czynienia z aplikacjami, które przez większość czasu oczekują na zakończenie operacji I/O, a mniej czasu spędzają na obliczeniach przy pomocy CPU. Pomysł na podejście asynchroniczne pochodzi z bardzo prostej obserwacji - gdy program czeka na zakończenie operacji wejścia-wyjścia, to pozostaje bezczynny.
 
 Mechanizmem sterującym, który wykrywa sytuacje rozpoczęcia oczekiwania na operację I/O jest pętla zdarzeń. Zawiesza ona wykonywanie kodu i przenosi się w inne miejsce, którego operacja wejścia-wyjścia zdążyła się zakończyć.
 
@@ -87,35 +87,35 @@ W treści zadań zawarte są też podpowiedzi, ukryte do momentu aż uczestnik n
 
 ## Program szkolenia
 1. Wstęp teoretyczny (10 minut)
-..1. czym jest asyncio
-..2. kiedy warto stosować asyncio?
-..3. przegląd dostępnych narzędzi i bibliotek
-..4. testowanie aplikacji z asyncio - złote zasady
+   1. czym jest asyncio
+   2. kiedy warto stosować asyncio?
+   3. przegląd dostępnych narzędzi i bibliotek
+   4. testowanie aplikacji z asyncio - złote zasady
 2. Wprowadzenie do projektu (5 minut)
-..1. Przedstawienie zawartości repozytorium
-..2. Pożądany zakres funkcjonalności na koniec szkolenia
+   1. Przedstawienie zawartości repozytorium
+   2. Pożądany zakres funkcjonalności na koniec szkolenia
 
 3. Moduł 1 - czat ogólny (1 godzina 15 minut)
-..1. Obsługa przychodzącej wiadomości
-..2. Wysłanie wiadomości do pozostałych użytkowników czatu
-..3. Zabezpieczenie przed sytuacją, gdy jeden z użytkowników rozłączy się w trakcie przekazywania wiadomości
-..4. Oznaczanie obecności na chacie
-..5. Statystyki chatu
-..6. Przechowanie historii chatu dla nowych uczestników
+   1. Obsługa przychodzącej wiadomości
+   2. Wysłanie wiadomości do pozostałych użytkowników czatu
+   3. Zabezpieczenie przed sytuacją, gdy jeden z użytkowników rozłączy się w trakcie przekazywania wiadomości
+   4. Oznaczanie obecności na chacie
+   5. Statystyki chatu
+   6. Przechowanie historii chatu dla nowych uczestników
 
 (przerwa - 15 minut)
 
 4. Moduł 2 - prywatne pokoje (45 minut)
-..1. Zakładanie pokoju
-..2. Zapraszanie do środka uczestników
-..3. Wchodzenie do pokoju przez listę
-..4. Możliwość opuszczania pokoju
-..5. Automatyczne usuwanie pokoju po wyjściu z niego ostatniego uczestnika
+   1. Zakładanie pokoju
+   2. Zapraszanie do środka uczestników
+   3. Wchodzenie do pokoju przez listę
+   4. Możliwość opuszczania pokoju
+   5. Automatyczne usuwanie pokoju po wyjściu z niego ostatniego uczestnika
 
 5. Moduł 3 - prywatne wiadomości (45 minut)
-..1. Możliwość rozpoczęcia konwersacji z innym użytkownikiem
-..2. Dynamiczne tworzenie pokoi z zachowaniem historii konwersacji
-..3. Możliwość dołączenia kolejnego uczestnika do prywatnej rozmowy i utworzenie w ten sposób dynamicznie nowego pokoju
+   1. Możliwość rozpoczęcia konwersacji z innym użytkownikiem
+   2. Dynamiczne tworzenie pokoi z zachowaniem historii konwersacji
+   3. Możliwość dołączenia kolejnego uczestnika do prywatnej rozmowy i utworzenie w ten sposób dynamicznie nowego pokoju
 
 6. Podsumowanie
 
