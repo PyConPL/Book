@@ -1,4 +1,4 @@
-
+![The ZODB Ecosystem by Chrisotpher Lozinski](ZODBTitleGraphics.svg)
 
 
 ## ABSTRACT
