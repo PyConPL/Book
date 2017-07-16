@@ -1,31 +1,31 @@
 # Python w łaziku marsjańskim? — Michał Barciś
 
-Już ponad dwa lata pracujemy wspólnie z zespołem Continuum z Uniwersytetu
+Już od ponad dwóch lat pracujemy wspólnie z zespołem Continuum z Uniwersytetu
 Wrocławskiego nad prototypem łazika marsjańskiego Aleph1. W tym czasie
 rozważaliśmy wiele rozwiązań i różnych technologii, a ostatecznie duża część
-robota została zaprogramowana w Pythonie. Podczas prezentacji opowiem o
-konkretach oraz naszej drodze do ostatecznego rozwiązania, ale w tym artykule
+robota została zaprogramowana w Pythonie. Podczas prezentacji opowiem o samym
+łaziku oraz drodze, którą przebyliśmy w czasie tworzenia go, ale w tym artykule
 chciałbym trochę poszerzyć ten temat i przedstawić przegląd najciekawszych
 zastosowań tego języka programowania. Wspomnę tutaj o wielu bibliotekach oraz
-technologiach, których nie będę dokładnie opisywał — zainteresowany czytelnik
-na pewno bez problemu znajdzie więcej informacji na ich temat w Internecie.
+technologiach, których nie będę dokładnie opisywał — zainteresowany czytelnik na
+pewno bez problemu znajdzie więcej informacji na ich temat w Internecie.
 
 # Mocne strony
 
-Jeszcze kilka lat temu, gdy poruszany był temat tego języka częstą reakcją było
+Jeszcze kilka lat temu, gdy poruszany był temat Pythona częstą reakcją było
 "To ten język, w którym pisze się skrypty, nadaje się to do czegokolwiek
 innego?", "Poza szkołami nie ma miejsca dla Pythona, to dobry język tylko dla
 początkujących", albo nawet, ze zdziwieniem, "To w Pythonie da się napisać
 aplikację okienkową?". 
 
-Podczas pracy w STX Next jednak coraz częściej nawet nasi klienci zdają sobie
-sprawę z tego, że Python to nie tylko aplikacje Internetowe, czy proste skrypty
-słuzące do zarządzania serwerami. Dostarczane rozwiązania muszą być
-wielośrodowiskowe, a aplikacja Internetowa nie może już tylko działać w
+Podczas pracy w STX Next zauważyłem jednak, że coraz częściej nawet nasi klienci
+zdają sobie sprawę z tego, że Python to nie tylko aplikacje Internetowe, czy
+proste skrypty służące do zarządzania serwerami. Dostarczane rozwiązania muszą
+być wielośrodowiskowe, a aplikacja Internetowa nie może już tylko działać w
 przeglądarce — ma rozpoznawać obrazy z kamery, analizować zbierane dane,
 wizualizować je w czasie rzeczywistym, a czasami nawet ostatecznie włączyć
-światło albo otworzyć zamek w drzwiach. Na szczęście praktycznie w każdej z tych
-dziedzin możemy korzystać z lubianej i znanej technologii — z Pythona.
+światło albo otworzyć zamek w drzwiach. Na szczęście praktycznie w każdej z
+tych dziedzin możemy korzystać z lubianej i znanej technologii — z Pythona.
 
 ## Serwisy Internetowe
 
@@ -60,22 +60,22 @@ Pythona, już nigdy więcej nie będziemy musieli pisać skryptów w Bashu.
 ## Gry komputerowe
 
 Co prawda raczej ciężko o duże tytuły napisane w 100% w Pythonie, jednak właśnie
-ten język bardzo częśto wykorzystywany jest do tworzenia scenariuszy i skryptów
+ten język bardzo często wykorzystywany jest do tworzenia scenariuszy i skryptów
 sterujących przebiegiem gry, które nie wymagają wysokiej wydajności i szybkości
 działania. Dzięki temu scenarzyści mogą szybko i skutecznie tworzyć wciągające
 światy i postaci.
 
 ## Nauczanie maszynowe
 
-Osobiście, było dla mnie dużym zdziwieniem jakim cudem właśnie w tej dziedzinie
-Python zdobył taką dużą popularność. Jednak już po pierwszym projekcie
-zrozumiałem, że to dzięki możliwości łatwego i dobrze ustandaryzowanego
-przetwarzania danych z niewielkim narzutem pamięciowym. Dodatkowo biblioteki
-takie jak numpy umożliwiają szybkie wykonywanie operacji arytmetycznych na tych
-danych. Wiele algorytmów nauczania maszynowego można sprowadzić do operacji
-na macierzach, więc wydajność nie jest problemem. Tam, gdzie mimo to wydajność
-jest problemem stosuje się silniki pisane np. w C/C++ i udostępniające API do
-Pythona, dzięki czemu możemy szybko i wydajnie eksperymentować na modelach.
+Dla mnie dużym zdziwieniem było jakim cudem właśnie w tej dziedzinie Python
+zdobył taką dużą popularność. Jednak już po pierwszym projekcie zrozumiałem, że
+to dzięki możliwości łatwego i dobrze ustandaryzowanego przetwarzania danych z
+niewielkim narzutem pamięciowym. Dodatkowo biblioteki takie jak numpy
+umożliwiają szybkie wykonywanie operacji arytmetycznych na tych danych. Wiele
+algorytmów nauczania maszynowego można sprowadzić do operacji na macierzach.
+Tam, gdzie mimo to wydajność jest problemem stosuje się silniki pisane na
+przykład w C/C++ i udostępniające API do Pythona, dzięki czemu możemy szybko i
+wydajnie eksperymentować na modelach.
 
 Dodatkowo, społeczność wytworzyła wiele darmowych narzędzi umożliwiających łatwą
 pracę z dużą ilością danych. Od bibliotek służących do wizualizacji, takich jak
@@ -99,18 +99,17 @@ Pythonie.
 ## Robotyka
 
 To chyba jedno z najciekawszych zastosowań Pythona i z roku na rok coraz
-bardziej popularnych, co widać np. po szybkim rozwoju projektu ROS (Robot
-Operating System, który jest swoistym frameworkiem do tworzenia różnych
-wysoce-zautomatyzowanych urządzeń i systemów. Roboty to nie tylko
-niskopoziomowy kod często wymagający pracy w czasie rzeczywistym oraz
-maksymalnego wykorzystania zasobów. W każdym robocie jest jakaś część
-logiki odpowiedzialna za podejmowanie wyskopoziomowych decyzji, takich
-jak np. wybór miejsca do którego robot ma się przemieści, czy który
-przycisk wcisnąć. Python doskonale się do tego nadaje — zazwyczaj nie
-są to operacje wymagające pracy w czasie rzeczywistym, a świetna
-integracja z systemami do nauczania maszynowego umożliwia pełne
-wykorzystanie zasobów.  Dodatkowo dużo łatwiej w Pythonie stworzyć
-prototyp na podstawie którego wyodrębnione zostaną komponenty, które
+bardziej popularnych, co widać na przykład po szybkim rozwoju projektu ROS
+(Robot Operating System), który jest swoistym frameworkiem do tworzenia różnych
+wysoce-zautomatyzowanych urządzeń i systemów. Roboty to nie tylko niskopoziomowy
+kod często wymagający pracy w czasie rzeczywistym oraz maksymalnego
+wykorzystania zasobów. W każdym robocie jest jakaś część logiki odpowiedzialna
+za podejmowanie wyskopoziomowych decyzji, takich jak na przykład wybór miejsca
+do którego robot ma się przemieścić, czy który przycisk wcisnąć. Python
+doskonale się do tego nadaje — zazwyczaj nie są to operacje wymagające pracy w
+czasie rzeczywistym, a świetna integracja z systemami do nauczania maszynowego
+umożliwia pełne wykorzystanie zasobów.  Dodatkowo dużo łatwiej w Pythonie
+stworzyć prototyp na podstawie którego wyodrębnione zostaną komponenty, które
 należy przepisać np. do C w celu poprawy wydajności.
 
 # A kiedy Python może nie wystarczyć?
