@@ -13,11 +13,33 @@
  
  \subsection[introduction]{Introduction}
  
-@@ -228,7 +228,7 @@
- \startitemize[n][stopper=.]
+@@ -197,7 +197,7 @@
+ \subsection[dokku-advantages-over-competitors]{Dokku advantages over
+ competitors}
+ 
+-\startitemize[n,packed][stopper=.]
++\startitemize[n][stopper=.]
  \item
-   PaaS Wiki
--  https://en.wikipedia.org/wiki/Platform\letterunderscore{}as\letterunderscore{}a\letterunderscore{}service
+   You pay only for the server where Dokku is installed
+ \item
+@@ -212,7 +212,7 @@
+ 
+ \subsection[dokku-disadvantages]{Dokku disadvantages}
+ 
+-\startitemize[n,packed][stopper=.]
++\startitemize[n][stopper=.]
+ \item
+   Doesn't scale on many machines. If you want this, explore Deis
+ \stopitemize
+@@ -225,9 +225,10 @@
+ 
+ \subsection[references]{References}
+ 
+-\startitemize[n,packed][stopper=.]
++\startitemize[n][stopper=.]
+ \item
+-  PaaS Wiki https://en.wikipedia.org/wiki/Platform_as_a_service
++  PaaS Wiki
 +  https://en.wikipedia.org/wiki/Platform\_as\_a\_service
  \item
    Dokku Documentation http://progrium.viewdocs.io/dokku/

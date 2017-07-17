@@ -1,0 +1,33 @@
+--- learning.tex
++++ learning.tex
+@@ -1,9 +1,9 @@
+ \usemodule[pycon-2016]
+ \starttext
+ 
+-
+-\section[uczenie-maszynowe---czyli-jak-rozwiązywać-nietrywialne-problemy]{Uczenie
+-maszynowe - czyli jak rozwiązywać nietrywialne problemy}
++\Title{Uczenie maszynowe - czyli jak rozwiązywać nietrywialne problemy}
++\Author{Jacek Śmietański}
++\MakeTitlePage
+ 
+ \subsection[streszczenie]{Streszczenie}
+ 
+@@ -253,10 +253,15 @@
+ \NC 19
+ \NC libfann/fann
+ \NC\AR
+-\NC machine-learning-samples
++\NC machine-learning-
+ \NC 29
+ \NC 13
+-\NC awslabs/machine-learning-samples
++\NC awslabs/
++\NC\AR
++\NC samples
++\NC
++\NC
++\NC machine-learning-samples
+ \NC\AR
+ \NC Pyevolve
+ \NC 168

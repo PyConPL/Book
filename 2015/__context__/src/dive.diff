@@ -13,6 +13,55 @@
  
  Python's \type{import} statement hides a lot of complexity. You could
  talk about it for hours, and still not cover it all.
+@@ -84,10 +84,10 @@
+ 
+ For packages, the rule of thumb to avoid import-related trouble are:
+ 
+-\startitemize[packed]
++\startitemize
+ \item
+   \type{__init__} should:
+-  \startitemize[packed]
++  \startitemize
+   \item
+     import from submodules
+   \item
+@@ -97,7 +97,7 @@
+   \stopitemize
+ \item
+   submodules should:
+-  \startitemize[packed]
++  \startitemize
+   \item
+     not import directly from \type{__init__}
+   \item
+@@ -140,7 +140,7 @@
+ \type{sys.path} will usually include several kinds of locations. On a
+ Linux machine, the path will typically have:
+ 
+-\startitemize[packed]
++\startitemize
+ \item
+   Directories from \type{$PYTHONPATH}, and the current directory
+ \item
+@@ -159,13 +159,13 @@
+ the current directory (on \type{$PYTHONPATH}). The paths to these
+ modules would be:
+ 
+-\startitemize[packed]
++\startitemize
+ \item
+-  /usr/lib/python3.4/site-packages/sound_editor_filters/echo.py
++  /usr/lib/python3.4/site-packages/sound\letterunderscore{}editor\letterunderscore{}filters/echo.py
+ \item
+-  \lettertilde{}/.local/lib/python3.4/site-packages/sound_editor_filters/reverb.py
++  \lettertilde{}/.local/lib/python3.4/site-packages/sound\letterunderscore{}editor\letterunderscore{}filters/reverb.py
+ \item
+-  ./sound_editor_filters/speedup.py
++  ./sound\letterunderscore{}editor\letterunderscore{}filters/speedup.py
+ \stopitemize
+ 
+ And that repeated \type{sound_editor_filters} directory becomes a
 @@ -310,8 +310,7 @@
  filesystem. If you embed Python, or build it from source, you can add
  your own PyInit functions to this list.
@@ -23,3 +72,56 @@
  
  The \type{__main__} module is quite special.
  
+@@ -356,7 +355,7 @@
+ 
+ You can run a number of package-like things:
+ 
+-\startitemize[packed]
++\startitemize
+ \item
+   \type{$ python -m somepackage} (when the package has a \type{__main__}
+   subpackage)
+@@ -381,14 +380,14 @@
+ perplexing for the uninitiated). You should definitely read the
+ importlib documentation:
+ 
+-\startitemize[packed]
++\startitemize
+ \item
+   https://docs.python.org/3/library/importlib.html
+ \stopitemize
+ 
+ or watch David Beazley's fun-filled tutorial:
+ 
+-\startitemize[packed]
++\startitemize
+ \item
+   \quotation{Modules and Packages: Live and Let Die!} (PyCon 2015):
+   \hyphenatedurl{http://pyvideo.org/video/3387}
+@@ -396,7 +395,7 @@
+ 
+ and talks by Brett Cannon, the author of importlib:
+ 
+-\startitemize[packed]
++\startitemize
+ \item
+   \quotation{How Import Works} (PyCon 2013):
+   http://pyvideo.org/video/1707
+@@ -408,7 +407,7 @@
+ For interesting detours and change summaries, look no further than the
+ related PEPs:
+ 
+-\startitemize[packed]
++\startitemize
+ \item
+   PEP 328 -- Imports: Multi-Line and Absolute/Relative
+ \item
+@@ -437,7 +436,7 @@
+ 
+ And lastly, for the true deep dive, peek in the importlib sources:
+ 
+-\startitemize[packed]
++\startitemize
+ \item
+   https://hg.python.org/cpython/file/3.5/Lib/importlib
+ \stopitemize

@@ -1,0 +1,14 @@
+--- object.tex
++++ object.tex
+@@ -1,8 +1,9 @@
+ \usemodule[pycon-2016]
+ \starttext
+ 
+-
+-\section[object-calisthenics]{Object calisthenics}
++\Title{Object calisthenics}
++\Author{Paweł Lewtak}
++\MakeTitlePage
+ 
+ \subsection[czym-jest-kalistenika]{Czym jest kalistenika?}
+ 

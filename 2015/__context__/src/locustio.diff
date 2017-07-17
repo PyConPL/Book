@@ -13,3 +13,77 @@
  
  \subsection[wprowadzenie]{Wprowadzenie}
  
+@@ -15,15 +15,14 @@
+ więcej użytkowników wejdzie na naszą stronę, ponieważ szybciej będą w
+ stanie ocenić czy znajduje się na niej to, czego szukają.
+ 
+-\startitemize[packed]
++\startitemize
+ \item
+   Google analizując ruch w internecie stwierdziło, że półsekundowe
+-  opóźnienie w ładowaniu strony skutkuje spadkiem ruchu na poziomie
+-  20\letterpercent{}
++  opóźnienie w ładowaniu strony skutkuje spadkiem ruchu na poziomie 20\%
+ \item
+   Amazon podczas A/B testów zauważył, że wzrost czasów odpowiedzi o 100
+-  ms skutkował w ich przypadku spadkiem sprzedaży na poziomie
+-  1\letterpercent{} (co dla tak dużej firmy jest znaczącą wartością)
++  ms skutkował w ich przypadku spadkiem sprzedaży na poziomie 1\% (co
++  dla tak dużej firmy jest znaczącą wartością)
+ \stopitemize
+ 
+ Typowy odwiedzający nie dba również o stronę techniczną, bo po prostu
+@@ -57,7 +56,7 @@
+ 
+ Do zalet locusta należą:
+ 
+-\startitemize[packed]
++\startitemize
+ \item
+   możliwość pisania scenariuszy testowych w Pythonie
+ \item
+@@ -121,7 +120,7 @@
+ 
+ Komponenty:
+ 
+-\startitemize[packed]
++\startitemize
+ \item
+   Locust oraz HttpLocust
+ \item
+@@ -145,7 +144,7 @@
+ celu zbierania statystyk dotyczących żądań i odpowiedzi. Do dyspozycji
+ mamy:
+ 
+-\startitemize[packed]
++\startitemize
+ \item
+   \type{request_success}
+ \item
+@@ -167,7 +166,7 @@
+ Wspomniany {\em TaskSet} służy jako scenariusz testowy - jest to zestaw
+ definicji operacji wykonywanych przez użytkownika, takich jak:
+ 
+-\startitemize[packed]
++\startitemize
+ \item
+   nawigacja do podstrony
+ \item
+@@ -286,7 +285,7 @@
+         # wysyłając informację o czasach requestu do locusta
+         # poprzez użycie komponentu Event
+         start_time = time.time()
+-        
++
+         try:
+             self.socket.send_json(msg)
+             result = self.socket.recv_json()
+@@ -360,7 +359,7 @@
+ \subsection[bibliografia-użyteczne-linki]{Bibliografia / użyteczne
+ linki}
+ 
+-\startitemize[n,packed][stopper=.]
++\startitemize[n][stopper=.]
+ \item
+   Locust.io: Dokumentacja
+   \hyphenatedurl{http://docs.locust.io/en/latest/}

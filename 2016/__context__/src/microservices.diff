@@ -1,0 +1,15 @@
+--- microservices.tex
++++ microservices.tex
+@@ -1,9 +1,9 @@
+ \usemodule[pycon-2016]
+ \starttext
+ 
+-
+-\section[tdd-of-python-microservices---michał-bultrowicz]{TDD of Python
+-microservices - Michał Bultrowicz}
++\Title{TDD of Python microservices}
++\Author{Michał Bultrowicz}
++\MakeTitlePage
+ 
+ \subsection[abstract]{Abstract}
+ 

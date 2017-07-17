@@ -1,0 +1,18 @@
+% Cokolwiek jest po procencie, jest pijane i jest nieuwzględniane
+% bez TeX-a i bez mejka też nie.
+% puste wiersze są ok.
+
+% To jest w zasadzie agenda i najlepiej byłoby, żeby trzymać to
+% w tej samej kolejności co i agendę
+% jeśli ktoś uważa, że powinno się raczej parsować agendę, to w
+% zasadzie też się to da zrobić, ale może po prostu będziemy ten
+% plik pilnować.
+
+% Pierwszy powinien być ,,referat'' pycon2017, bo wstęp i spis
+% treści
+%% UPDATE:
+%% Pycon 2017 wymyślił potwornie długie nazwy. TeX tego nie łyka
+%% Zatem pierwsza jest nazwa TeX-owa, druga nazwa z katalogu
+
+pycon2017 pycon2017
+hardware presentations/python_hardware

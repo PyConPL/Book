@@ -14,3 +14,21 @@
  
  Dzisiejsze aplikacje internetowe poddawane są zróżnicowanemu obciążeniu
  w ciągu tygodni, dni, a nawet godzin. Wykorzystanie zasobów jest ważną
+@@ -217,7 +216,7 @@
+ 
+ \subsection[referencje]{Referencje}
+ 
+-\startitemize[packed]
++\startitemize
+ \item
+   {[}1{]} Mesos Framework Development Guide
+   \hyphenatedurl{http://mesos.apache.org/documentation/latest/app-framework-development-guide/}
+@@ -239,7 +238,7 @@
+ 
+ \subsection[źródła]{Źródła}
+ 
+-\startitemize[packed]
++\startitemize
+ \item
+   Apache Mesos http://mesos.apache.org/
+ \item

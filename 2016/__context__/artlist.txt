@@ -1,0 +1,30 @@
+% Cokolwiek jest po procencie, jest pijane i jest nieuwzględniane
+% bez TeX-a i bez mejka też nie.
+% puste wiersze są ok.
+
+% To jest w zasadzie agenda i najlepiej byłoby, żeby trzymać to
+% w tej samej kolejności co i agendę
+% jeśli ktoś uważa, że powinno się raczej parsować agendę, to w
+% zasadzie też się to da zrobić, ale może po prostu będziemy ten
+% plik pilnować.
+
+% Pierwszy powinien być ,,referat'' pycon2016, bo wstęp i spis
+% treści
+%% UPDATE:
+%% Pycon 2016 wymyślił potwornie długie nazwy. TeX tego nie łyka
+%% Zatem pierwsza jest nazwa TeX-owa, druga nazwa z katalogu
+
+pycon2016 pycon2016
+async presentations/async_pod_maska
+gdb presentations/Debugging_of_CPython_processes_with_gdb
+dom presentations/inteligentny_dom_z_micropython
+object presentations/object_calisthenics
+sqlalchemy presentations/postgresql_i_sqlalchemy
+devices presentations/Python_for_Networking_Devices
+distribution presentations/Rozklady_odwrotnie_potegowe
+splash presentations/splash
+microservices presentations/tdd_of_python_microservices
+learning presentations/Uczenie_Maszynowe
+geopython presentations/wprowadzenie_do_GeoPythona
+hacking workshops/hacking_micropython
+odoo workshops/odoo_pierwsza_aplikacja

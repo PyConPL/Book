@@ -13,7 +13,103 @@
  
  For a data platform, the quality of the machine learning model's output
  is one of the most critical pieces for its success.
-@@ -255,7 +255,8 @@
+@@ -33,10 +33,10 @@
+ they are widely used in practice and are often instrumental in breaking
+ into new thresholds. A couple of their successful use cases are:
+ 
+-\startitemize[packed]
++\startitemize
+ \item
+-  Ensemble models improved the baseline movie recommendation by
+-  10\letterpercent{} and won the Netflix million-dollar prize
++  Ensemble models improved the baseline movie recommendation by 10\% and
++  won the Netflix million-dollar prize
+ \item
+   Almost all recent
+   \useURL[url1][https://www.kaggle.com/][][Kaggle]\from[url1]
+@@ -57,7 +57,7 @@
+ model outputs are more reliable than a single model. At its core, an
+ ensemble model structure looks like figure 1.
+ 
+-\placefigure{Figure 1: Ensemble model
++\placefigure[here,nonumber]{Figure 1: Ensemble model
+ structure}{\externalfigure[ensemble_1.png]}
+ 
+ Multiple model outputs are combined to create the final prediction. The
+@@ -80,13 +80,12 @@
+ Let's take the case where we already know those 10 cases to be
+ fraudulent. Encoding 1 as fraudulent and 0 as non-fraudulent, let there
+ be three base model outputs, one each from Logistic Regression, Random
+-Forest and Gradient Boosting, each having 70\letterpercent{} accuracy.
++Forest and Gradient Boosting, each having 70\% accuracy.
+ 
+-While individual models have 70\letterpercent{} accuracy, consider a
+-simple way of ensembling them: Majority voting. Using majority voting
+-scheme as the ensembling function, the prediction accuracy is boosted
+-from 70\letterpercent{} to 90\letterpercent{}. Case 6 alone will remain
+-mis-classified, as shown in Table 1.
++While individual models have 70\% accuracy, consider a simple way of
++ensembling them: Majority voting. Using majority voting scheme as the
++ensembling function, the prediction accuracy is boosted from 70\% to
++90\%. Case 6 alone will remain mis-classified, as shown in Table 1.
+ 
+ {\em Table 1:Example output from three models}
+ 
+@@ -113,7 +112,7 @@
+ 
+ Some of the advantages of using ensemble models are:
+ 
+-\startitemize[packed]
++\startitemize
+ \item
+   {\bf Improved accuracy}: Dozens of models, even of mediocre quality,
+   may produce top-notch predictions as a team.
+@@ -142,7 +141,7 @@
+ Let's now discuss some of the ways to create the base models, to ensure
+ that they have enough diversity
+ 
+-\startitemize[n,packed][stopper=.]
++\startitemize[n][stopper=.]
+ \item
+   {\bf Different training sets}: If there's enough data, the same model
+   can be run on different training examples. In practice, transformation
+@@ -175,7 +174,7 @@
+ 
+ Some of the ways to aggregate the models are
+ 
+-\startitemize[n,packed][stopper=.]
++\startitemize[n][stopper=.]
+ \item
+   {\bf Voting/Averaging}: A simple way to aggregate output is to either
+   take the candidate with maximum outputs or the average of outputs (if
+@@ -207,7 +206,7 @@
+ \section[disadvantages-of-ensemble-models]{Disadvantages of
+ ensemble models}
+ 
+-\startitemize[n,packed][stopper=.]
++\startitemize[n][stopper=.]
+ \item
+   Model human readability is not great. While there are ways to show
+   variable importance, they are not as interpretable as a simple
+@@ -225,9 +224,9 @@
+ \item
+   \type{Pipeline}: This creates a pipeline of transforms with a final
+   estimator. An example of pipeline could be: pre-processing(capping,
+-  standardizing, scaling) -> feature extraction(principal components,
+-  transformation) -> model creation. The process can be made elegant and
+-  efficient using this.
++  standardizing, scaling) -\lettermore{} feature extraction(principal
++  components, transformation) -\lettermore{} model creation. The process
++  can be made elegant and efficient using this.
+ \item
+   \type{hyperopt}: It uses a form of bayesian optimization called
+   {\em tree of Parzen estimators}. For weighted averaging of the base
+@@ -252,11 +251,12 @@
+ 
+ \section[references]{References}
+ 
+-\startitemize[n,packed][stopper=.]
++\startitemize[n][stopper=.]
  \item
    http://ews.uiuc.edu/\lettertilde{}jinggao3/sdm10ensemble.htm
  \item

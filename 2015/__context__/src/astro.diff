@@ -12,11 +12,36 @@
  
  \subsection[krótko-o-astronomii]{Krótko o astronomii}
  
-@@ -171,14 +172,16 @@
+@@ -101,13 +102,15 @@
+ Układ współrzędnych równikowych równonocnych jest zdefiniowany jak
+ godzinowy z tą różnicą, że punktem początkowym jest punkt Barana, a
+ współrzędne to deklinacja $\delta$ {[}$-90^{\circ}$-$90^{\circ}${]} oraz
+-rektascensja $\alpha$ mierzona jako kąt godzinny w przedziale 0^\{h\},
+-24^\{h\}.
++rektascensja $\alpha$ mierzona jako kąt godzinny w przedziale
++0\letterhat{}\letteropenbrace{}h\letterclosebrace{},
++24\letterhat{}\letteropenbrace{}h\letterclosebrace{}.
+ 
+ Koło wielkie, po którym pozornie porusza się Słońce, to ekliptyka, i
+ jest ono podstawowym kołem w układzie ekliptycznym. Długość ekliptyczna
+ $\lambda$ oraz szerokość ekliptyczna $\Beta$ są liczone w stopniach
+-(0^\{\circ\}, 360^\{\circ\}).
++(0\letterhat{}\letteropenbrace{}\circ\letterclosebrace{},
++360\letterhat{}\letteropenbrace{}\circ\letterclosebrace{}).
+ 
+ Ostatnim układem będzie galaktyczny, jak łatwo się domyślić, podstawową
+ płaszczyzną będzie płaszczyzna galaktyki. I podobnie jak w ekliptycznym
+@@ -164,19 +167,21 @@
+ 
+ \subsection[bibiografia]{Bibiografia}
+ 
+-\startitemize[packed]
++\startitemize
+ \item
    {[}1{]} Astronomia - https://pl.wikipedia.org/wiki/Astronomia
  \item
    {[}2{]} Układy współrzędnych w astronomii -
--  http://www.astro.amu.edu.pl/\lettertilde{}jopek/JopekTJ/Dydaktyka/A\letterunderscore{}Sf/2014-15/Prezentacje/wyklad\letterunderscore{}03.pdf
+-  http://www.astro.amu.edu.pl/\lettertilde{}jopek/JopekTJ/Dydaktyka/A_Sf/2014-15/Prezentacje/wyklad_03.pdf
 +  http://www.astro.amu.edu.pl/\lettertilde{}jopek/\crlf
 +JopekTJ/Dydaktyka/A\_Sf/2014-15/Prezentacje/wyklad\_03.pdf
  \item
@@ -25,7 +50,7 @@
    {[}4{]} Matplotlib - http://matplotlib.org/
  \item
    {[}5{]} Bifurikacja -
--  http://zasoby1.open.agh.edu.pl/dydaktyka/matematyka/c\letterunderscore{}fraktale\letterunderscore{}i\letterunderscore{}chaos/chaos.php?rozdzial=2
+-  http://zasoby1.open.agh.edu.pl/dydaktyka/matematyka/c_fraktale_i_chaos/chaos.php?rozdzial=2
 +  http://zasoby1.open.agh.edu.pl/dydaktyka/matematyka/\crlf
 +c\_fraktale\_i\_chaos/chaos.php?rozdzial=2
  \item

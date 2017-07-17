@@ -1,0 +1,15 @@
+--- gdb.tex
++++ gdb.tex
+@@ -1,9 +1,9 @@
+ \usemodule[pycon-2016]
+ \starttext
+ 
+-
+-\section[debugging-of-cpython-processes-with-gdb]{Debugging of CPython
+-processes with gdb}
++\Title{Debugging of CPython processes with gdb}
++\Author{Roman Podoliaka}
++\MakeTitlePage
+ 
+ pdb{[}1{]} has been, is and probably always will be the bread and butter
+ of Python programmers, when they need to find the root cause of a

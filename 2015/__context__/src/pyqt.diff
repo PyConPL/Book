@@ -13,11 +13,31 @@
  
  \subsection[o-co-chodzi-z-qt-i-pyqt]{O co chodzi z Qt i PyQt?}
  
-@@ -235,13 +235,15 @@
+@@ -150,9 +150,9 @@
+ \stoptyping
+ 
+ Z pliku close.py importujemy nasz widget. Nie zmieniałem jego nazwy,
+-więc domyślna to Ui_Form. Ten kod odpali nasz interfejs, ale nic się nie
+-stanie, gdy klikniemy w przycisk. Musimy połączyć sygnał (kliknięcia) ze
+-slotem:
++więc domyślna to Ui\letterunderscore{}Form. Ten kod odpali nasz
++interfejs, ale nic się nie stanie, gdy klikniemy w przycisk. Musimy
++połączyć sygnał (kliknięcia) ze slotem:
+ 
+ \starttyping
+ class MyForm(QtWidgets.QWidget):
+@@ -229,19 +229,21 @@
+ skuteczną pomoc. Na {[}mojej stronie{]}{[}5{]} znajdziesz wiele
+ poradników do PyQt4 (w miarę możliwości będę aktualizował je do PyQt5).
+ 
+-\startitemize[packed]
++\startitemize
+ \item
+   {[}1{]} Strona PyQt
    https://www.riverbankcomputing.com/software/pyqt/intro
  \item
    {[}2{]} Class Reference PyQt5
--  http://pyqt.sourceforge.net/Docs/PyQt5/class\letterunderscore{}reference.html
+-  http://pyqt.sourceforge.net/Docs/PyQt5/class_reference.html
 +  http://pyqt.sourceforge.net/Docs/PyQt5/\crlf
 +class\_reference.html
  \item

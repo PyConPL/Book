@@ -1,3 +1,5 @@
+# Hacking MicroPython (workshop)
+
 When using MicroPython, you have even bigger chance to need your own library
 written in C than in other Python implementations. You might want to use one of
 the existing libraries for your platform, get access to some peripherals or
@@ -10,8 +12,8 @@ example.
 
 ## A Tour Around the MicroPython Repository
 
-The repository is located on GitHub, at
-https://github.com/micropython/micropython -- you can easily fork it and clone
+The repository is located on GitHub [1]
+ -- you can easily fork it and clone
 it to your computer. Inside you will see a number of directories:
 
 The `docs` directory contains documentation that you can compile into HTML
@@ -98,7 +100,8 @@ STATIC const mp_map_elem_t mymodule_globals_table[] = {
     { MP_OBJ_NEW_QSTR(MP_QSTR___name__), MP_OBJ_NEW_QSTR(MP_QSTR_mymodule) },
 };
 
-STATIC MP_DEFINE_CONST_DICT(mp_module_mymodule_globals, mymodule_globals_table);
+STATIC MP_DEFINE_CONST_DICT(mp_module_mymodule_globals,
+    mymodule_globals_table);
 
 const mp_obj_module_t mp_module_mymodule = {
     .base = { &mp_type_module },
@@ -107,8 +110,11 @@ const mp_obj_module_t mp_module_mymodule = {
 };
 ```
 
-What does this code do? It just defines a python module, using `mp_obj_module_t` type, and then initializes some of its fields, such as the base type, the name, and the dictionary of globals for that module. In that dictionary, it defines
-one variable, `__name__`, with the name of our module in it. That's it.
+What does this code do? It just defines a python module, using
+`mp_obj_module_t` type, and then initializes some of its fields, such as the
+base type, the name, and the dictionary of globals for that module. In that
+dictionary, it defines one variable, `__name__`, with the name of our module
+in it. That's it.
 
 Now, for this module to actually be available for import, we need to add it to `mpconfigport.h` file to `MICROPY_PORT_BUILTIN_MODULES`:
 
@@ -116,9 +122,9 @@ Now, for this module to actually be available for import, we need to add it to `
 extern const struct _mp_obj_module_t mp_module_mymodule;
 
 #define MICROPY_PORT_BUILTIN_MODULES \
-    { MP_OBJ_NEW_QSTR(MP_QSTR_umachine), (mp_obj_t)&machine_module }, \
-    ...
-    { MP_OBJ_NEW_QSTR(MP_QSTR_mymodule), (mp_obj_t)&mp_module_mymodule }, \
+  { MP_OBJ_NEW_QSTR(MP_QSTR_umachine), (mp_obj_t)&machine_module }, \
+  ...
+  { MP_OBJ_NEW_QSTR(MP_QSTR_mymodule), (mp_obj_t)&mp_module_mymodule }, \
 ```
 
 Now you can try compiling the firmware and flashing it to your board. Then
@@ -224,7 +230,8 @@ mp_obj_t mymodule_hello_make_new(const mp_obj_type_t *type, size_t n_args,
 }
 
 
-STATIC void pyb_spi_print(const mp_print_t *print, mp_obj_t self_in, mp_print_kind_t kind) {
+STATIC void pyb_spi_print(const mp_print_t *print, mp_obj_t self_in,
+        mp_print_kind_t kind) {
     pyb_spi_obj_t *self = MP_OBJ_TO_PTR(self_in);
     mp_printf(print, "Hello(%u)", self->hello_number);
 }
@@ -274,6 +281,11 @@ both in the `py` directory, to see what is available, and in all the port
 directories, to see how it is used.
 
 There is also a very lively community at the MicroPython forum, where you can
-ask for help: http://forum.micropython.org
+ask for help [2].
 
 Happy hacking!
+
+## References
+
+1. MicroPython project. https://github.com/micropython/micropython
+2. MicroPython Forum. http://forum.micropython.org

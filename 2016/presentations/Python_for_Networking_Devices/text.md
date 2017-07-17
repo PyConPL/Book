@@ -1,6 +1,6 @@
-#Python for Networking Devices - Elisa Jasinska
+# Python for Networking Devices - Elisa Jasinska
 
-##Introduction
+## Introduction
 
 The Internet is a series of tubes and at the end of those tubes are: networking devices! To form the Internet as we
 know it, each provider network has to be managed, maintained and interconnected. Traditional Network Engineering is
@@ -8,7 +8,7 @@ moving more and more towards automated device and service management, a task oft
 availability of many useful libraries. We will walk you though common tasks in Network Engineering and introduce a
 number of Python libraries that are helpful in accessing and managing networking equipment.
 
-##Network Device Access
+## Network Device Access
 
 Traditionally networking devices are managed via their command line interface (CLI). The CLI is accessible though
 various forms of transport. Originally Telnet has been used, later on devices started to support SSH. SSH provides
@@ -43,7 +43,7 @@ The drawback of entering configurations line by line is the same as with any oth
 errors might occur somewhere along the way, which will result in only a part of the configuration being committed to
 the device - the change is not transactional.
 
-###Netconf
+### Netconf
 
 Nowadays Netconf is the new hype in the networking world. With underlying SSH transport it supports the same security
 feature set, but in addition it offers support for transactions, structured data and error reporting. Netconf allows
@@ -58,6 +58,7 @@ In addition to configuring specific functionality on the device, 'show commands'
 state data of the router. For example, output like this can be retrieved upon requesting the current ARP table on an
 Arista device:
 ```
+eos.edge1>show arp
 Address         Age (min)  Hardware Addr   Interface
 10.220.88.1             0  001f.9e92.16fb  Vlan1, Ethernet1
 10.220.88.21            0  1c6a.7aaf.576c  Vlan1, not learned
@@ -69,10 +70,11 @@ Address         Age (min)  Hardware Addr   Interface
 
 On a Juniper device, it will look more like this:
 ```
-MAC Address       Address         Name                      Interface           Flags
-00:1f:9e:92:16:fb 10.220.88.1     10.220.88.1               vlan.0              none
-00:19:e8:45:ce:80 10.220.88.22    10.220.88.22              vlan.0              none
-f0:ad:4e:01:d9:33 10.220.88.100   10.220.88.100             vlan.0              none
+root@qfx.edge1> show arp
+MAC Address       Address       Name          Interface Flags
+00:1f:9e:92:16:fb 10.220.88.1   10.220.88.1   vlan.0    none
+00:19:e8:45:ce:80 10.220.88.22  10.220.88.22  vlan.0    none
+f0:ad:4e:01:d9:33 10.220.88.100 10.220.88.100 vlan.0    none
 Total entries: 3
 ```
 
@@ -81,53 +83,75 @@ output, which in case of CLI access has to be parsed individually. Netconf-like 
 of structured data, which is slightly better, but this still doesn’t cover fields not provided in one vendor vs.
 another (like for example the lack of an age timer in the Juniper output above).
 
-##Generic Access Libraries
+## Generic Access Libraries
 
-To access devices directly via their SSH or Netconf interface, generic python libraries such as
-[pexpect](https://github.com/pexpect/pexpect), [paramiko](https://github.com/paramiko/paramiko) and
-[ncclient](https://github.com/ncclient/ncclient) can be used. They allow for programmatic access from scripts
+To access devices directly via their SSH or Netconf interface, generic Python libraries such as
+pexpect [1], paramiko [2] and
+ncclient [3] can be used. They allow for programmatic access from scripts
 (for network engineers who are trying to figure out how to code ;) ) but don't provide any ease of use in terms of
-vendor specificity. You will still have to deal with the little differences the vendors bring, different login
-procedures or additional escape chars). You will take care of different lines of configuration or show commands you
-need to pass into paramiko or pexpect for each device or vendor, or with the varying support of Netconf on each
-device for ncclient.
+vendor specificity. You will still have to deal with the little differences the vendors bring: different login
+procedures or additional escape chars, different configuration syntax, differences in 'show commands' or
+differences with the varying support of Netconf on each device.
 
-##Specific Network Vendor Libraries
+## Specific Network Vendor Libraries
 
 Since Python became more and more popular amongst network engineers, network vendors started to provide their own
-libraries to facilitate device interaction - to mention a few: 
+libraries to facilitate device interaction - to mention a few:
 
-* Arista's [pyeapi](https://github.com/arista-eosplus/pyeapi)
-* Cisco IOS-XR [pyiosxr](https://github.com/fooelisa/pyiosxr)
-* Juniper's [py-junos-eznc](https://github.com/Juniper/py-junos-eznc )
+* Arista's pyeapi [4]
+* Cisco IOS-XR pyiosxr [5]
+* Juniper's py-junos-eznc [6]
 
 Each of them supports their specific device with its specific capabilities. Juniper's py-junos-eznc provides access
-via Netconf, whereas pyiosxr 'mimics' Netconf support (which is not directly available) via SSH (pexpect). They ease
-config operations on the devices, such as replacing or merging configurations in one go, or . Each of them is very
-specific to the vendors capabilities though. 
+via Netconf, whereas pyiosxr 'mimics' Netconf support (which is not directly available) via SSH and pexpect.
+They ease config operations on the devices by providing functions to send config, replace or merge it in one go, or
+to retreive the configuration. Each of those libs is very specific to the vendors device and takes all its nits into
+account, but a lot of times networks are designed to use a mix of vendors, in which case one library won't suffice.
 
-##Multivendor Libraries
+## Multivendor Libraries
 
-Especially in a multivendor environment managing configurations takes on a whole different level. In addition to
-managing differences (and similarities) per device, for example a similar base configuration (syslog servers, NTP
-servers, dns servers) but different BGP neighbors on devices in different locations. Different access methods have to
-be taken into account, one via SSH the other via Netconf. Maintaining scripts with various libraries per vendor is
-painful.
+Managing configurations in a multivendor environment takes on a whole different level. In addition to managing
+differences per device-role, differences in access have to be considered. Each device role needs a similar base
+configuration for example (syslog servers, NTP servers, dns servers) but different BGP neighbors on devices in
+different locations, plus a different methodology to upload the configs to the device. Vendor specific libs can be
+used for each of them individually, however managing the use of different libraries per vendor is quite painful.
 
-Efforts to improve this have been started, for example with [netmiko](https://github.com/ktbyers/netmiko) which is a
+In an effort to improve upon this situation, wrappers around a set of libraries have been built to unify multivendor
+access to networking devices. For example netmiko [7], which is a
 wrapper around paramiko and provides easy SSH access for plenty of networking equipment. On the Netconf front, or to
 be more specific, access which supports transactions on the device, a project called
-[napalm](https://github.com/napalm-automation/napalm) has been started last year.
+napalm [8] has been started, which unifies a set of vendor libraries
+into a single set of methods.
 
-Of course there are also standardization efforts, like open config or Netconf already, but as far as standards go,
-interworkings between different vendors have been proven to take a lot of time and effort and not be on the market as
-quickly as the engineers would like.
+Of course there are also standardization efforts, like open config or Netconf, which aim to improve upon this
+situation. But as far as standards go, interworkings between different vendors have been proven to take a lot of time
+and effort, and typically aren't on the market as quickly as the engineers would like.
 
-##The End
+## Summary
+
+How to start if you are looking to introduce automation into your network? Start by reviewing your network
+design and determine what vendors are in use. If it is one single vendor and they provide a library, use that. If you
+operate a mix of vendors, check if the multivendor module napalm supports all of them. If neither is an option, you
+can decide to use a lower level access wrapper like netmiko, but you will have to give up on using more advanced
+functionality that is provided by the libraries.
 
 And all of this, to get a few lines of config onto your router:
 
 ```
-set system login message "> telnet xxx.xxx.xxx.xxx\nTrying xxx.xxx.xxx.xxx…\nConnected to telnet.example.com.\nEscape character is '^]'.\n\nlol (tty0)\n\nlogin:\n"
+set system login message "> telnet xxx.xxx.xxx.xxx
+\nTrying xxx.xxx.xxx.xxx…\nConnected to telnet.example.com.
+\nEscape character is '^]'.\n\nlol (tty0)
+\n\nlogin:\n"
 ```
 EOF
+
+## References
+
+1. https://github.com/pexpect/pexpect
+2. https://github.com/paramiko/paramiko
+3. https://github.com/ncclient/ncclient
+4. https://github.com/arista-eosplus/pyeapi
+5. https://github.com/fooelisa/pyiosxr
+6. https://github.com/Juniper/py-junos-eznc
+7. https://github.com/ktbyers/netmiko
+8. https://github.com/napalm-automation/napalm

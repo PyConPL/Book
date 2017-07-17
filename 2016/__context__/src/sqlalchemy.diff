@@ -1,0 +1,12 @@
+--- sqlalchemy.tex
++++ sqlalchemy.tex
+@@ -1,6 +1,9 @@
+ \usemodule[pycon-2016]
+ \starttext
+ 
++\Title{PostgreSQL i SQLAlchemy - duet (nie)doskonały}
++\Author{Marcin Bardź}
++\MakeTitlePage
+ 
+ \section[wstęp]{Wstęp}
+ 
