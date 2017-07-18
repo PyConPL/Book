@@ -1,10 +1,12 @@
 # with python: security() - Piotr Dyba
 
+## Introduction
+Introduction to cybersecurity for developers.
+Cybersecurity is a critical part of all distributed applications. By understanding and implementing proper security measures, guard your own resources against malicious attackers as well as provide a secure environment for all relevant parties.
 
 #### Disclaimers:
 The views and opinions expressed in this article focus on the developer's perspective an are solely those of the author.
 I have received no payments for mentioning any of the open-source or commercial products mentioned in this article.
-
 
 ## What is cybersecurity and why is it so important nowadays?
 
