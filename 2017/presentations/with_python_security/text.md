@@ -52,99 +52,6 @@ It’s just a trap that pretends to exposes services like ssh, mysql, smtp etc.,
 It was deducted that a lot of the above attacks were conducted by bots trying to log in, using a few default username-password combinations.
 It could be assumed that such attacks are sometimes successful, otherwise the attackers would stop scanning in such a manner.
 
-
-## Threat modeling
-
-Threat modeling is a process for analyzing the security of an application or a system.
-It is a structured approach that enables you to identify, quantify, and address the security risks associated with the target of the modeling.
-
-#### 1. Identification of assets
-
-Let's conduct an example threat modeling from Batman's perspective and identify our assets, which are: the bat cave, our butler Alfred and information in form of emails and texts.
-
-#### 2. Identification and quantification of threats
-
-Next, let's distinguish threats, so: the police, our arch enemy joker and the press.
-Now, let's quantify those threats. Alfred is irreplaceable and has access to all our other assets, so he is our highest risk and thus has the highest priority for defense.
-Our bat cave is also precious, but it can be rebuilt.
-Lastly, information included in emails and text messages could allow our actions and position to be tracked, but we can handle the journalists and the police ourselves.
-
-#### 3. Addressing
-
-For our main asset, Alfred, we can obscure his location and his identity which is not that easy in the modern world.
-The bat cave is a much simpler task, as we can install security systems, traps, misleading bases of operations etc. There is a ton of possibilities here.
-For emails and texts, encryption and caution when writing something delicate should be enough.
-
-
-![02 Batman Threat modeling](./002_batman.png)
-
-
-#### 1. Identification of assets - decompose the application
-
-So, as in the batman example shows, the first step is identifying assets, their purpose and use cases.
-The next step is to specify entry points to each asset and then how it interacts with external parts of the service or 3rd party services.
-The last step is defining the Access Control Lists (ACL), for example which actions are allowed for an anonymous user, a registered user and an admin to do.
-If development of an application is already in progress, there is a high chance that part of the work is already done by reusing data flow diagrams or application UML.
-An even better source of how an application should work are behavioural or integration tests.
-
-
-#### 2. Identification and quantification of threats
-
-There are few frameworks that we can work with, such as STRIDE
-(which stands for Spoofing identity, Tampering with data, Repudiation, Information disclosure, Denial of service, Elevation of privilege)
-and ASF (Application Security Frame), both of which should give us reliable information regarding:
-* auditing and logging
-    * auditing is used to answer the question "Who did what?" and possibly why.
-    * logging is more focused on what's happening.
-* authentication and authorization
-    * authentication is the a process of ascertaining that somebody really is who he or she claims to be
-    * authorization is a process to determine who is allowed to do what
-* configuration management – how and where do we store configs
-* data validation and protection in storage and transit
-    * where do we store the data
-    * where do we validate it before recording
-        * backend side
-        * both backend and frontend side
-        * only frontend (highly not advised)
-    * protection in transit
-        1. basic approach: have all communication over TLS, so encrypted
-        2. advanced approach: have the data additionally encrypted before sending it, which is becoming the corporate level security standard
-        3. expert approach: send it over a dedicated VPN tunnel, government level security
-* exception management – how do we track exception occurrence and what are the procedures to handle them
-
-Now we just need to measure the severity of the threats we have.
-We can try approaching that by ourselves, determining which assets are the most important for us or, for example, use CVSS.
-CVSS, or Common Vulnerability Scoring System, is based on factors such as:
-* Attack vector
-* Attack complexity (hard to measure)
-* Privileges
-* User interaction
-* Scope
-* Confidentiality
-* Integrity
-* availability
-
-All of the above together can give a reference rating, but if one of the parameters is hard to define,
-like in the case of attack complexity, try both and either calculate an average or leave it as a range from two edge CVSS outcomes.
-It is important to remember that this is just a reference point, not an oracle for what should be done.
-As mentioned before, having use case UMLs or, even better, abuse case UMLs may come in handy here.
-
-#### 3. Addressing
-
-We can address issues in 4 ways, by:
-1. Completely removing the threat
-2. Reducing/mitigating the threat
-3. Acknowledging it and doing nothing
-4. Pretending there is no issue
-
-Obviously, the best options is to remove the threat, but sometimes it's either impossible or the costs of removing it are too high. In such cases we can try to mitigate it.
-Taking the risk by leaving it as is or marking it as "address later", where it does not affect our business nor customers,
-maybe fine in some cases, for instance when an attacker is able to traverse over a directory with long and random file names of non important pictures of
-other users' cats. So, there is a chance that someone will type some random gibberish and they will see the picture of a user's cat but they still won't
-know whose cat it is and we don’t really care if that happens.
-But if the attacker can traverse not only over cat pictures, but also over config files etc, and we still do nothing about it, then we are asking to be hacked.
-
-
 ## Common attack vectors on frontend application
 
 How can we hack our app? We can start from analysing it on our own, but probably someone else has already thought about it.
@@ -254,6 +161,97 @@ print(eval('2 + 3'))
 ```
 
 From 12 lines of code for the most basic example of a equation, it can be reduced to just one line using eval, which will work even with more complex equations.
+
+## Threat modeling
+
+Threat modeling is a process for analyzing the security of an application or a system.
+It is a structured approach that enables you to identify, quantify, and address the security risks associated with the target of the modeling.
+
+#### 1. Identification of assets
+
+Let's conduct an example threat modeling from Batman's perspective and identify our assets, which are: the bat cave, our butler Alfred and information in form of emails and texts.
+
+#### 2. Identification and quantification of threats
+
+Next, let's distinguish threats, so: the police, our arch enemy joker and the press.
+Now, let's quantify those threats. Alfred is irreplaceable and has access to all our other assets, so he is our highest risk and thus has the highest priority for defense.
+Our bat cave is also precious, but it can be rebuilt.
+Lastly, information included in emails and text messages could allow our actions and position to be tracked, but we can handle the journalists and the police ourselves.
+
+#### 3. Addressing
+
+For our main asset, Alfred, we can obscure his location and his identity which is not that easy in the modern world.
+The bat cave is a much simpler task, as we can install security systems, traps, misleading bases of operations etc. There is a ton of possibilities here.
+For emails and texts, encryption and caution when writing something delicate should be enough.
+
+
+![02 Batman Threat modeling](./002_batman.png)
+
+
+#### 1. Identification of assets - decompose the application
+
+So, as in the batman example shows, the first step is identifying assets, their purpose and use cases.
+The next step is to specify entry points to each asset and then how it interacts with external parts of the service or 3rd party services.
+The last step is defining the Access Control Lists (ACL), for example which actions are allowed for an anonymous user, a registered user and an admin to do.
+If development of an application is already in progress, there is a high chance that part of the work is already done by reusing data flow diagrams or application UML.
+An even better source of how an application should work are behavioural or integration tests.
+
+
+#### 2. Identification and quantification of threats
+
+There are few frameworks that we can work with, such as STRIDE
+(which stands for Spoofing identity, Tampering with data, Repudiation, Information disclosure, Denial of service, Elevation of privilege)
+and ASF (Application Security Frame), both of which should give us reliable information regarding:
+* auditing and logging
+    * auditing is used to answer the question "Who did what?" and possibly why.
+    * logging is more focused on what's happening.
+* authentication and authorization
+    * authentication is the a process of ascertaining that somebody really is who he or she claims to be
+    * authorization is a process to determine who is allowed to do what
+* configuration management – how and where do we store configs
+* data validation and protection in storage and transit
+    * where do we store the data
+    * where do we validate it before recording
+        * backend side
+        * both backend and frontend side
+        * only frontend (highly not advised)
+    * protection in transit
+        1. basic approach: have all communication over TLS, so encrypted
+        2. advanced approach: have the data additionally encrypted before sending it, which is becoming the corporate level security standard
+        3. expert approach: send it over a dedicated VPN tunnel, government level security
+* exception management – how do we track exception occurrence and what are the procedures to handle them
+
+Now we just need to measure the severity of the threats we have.
+We can try approaching that by ourselves, determining which assets are the most important for us or, for example, use CVSS.
+CVSS, or Common Vulnerability Scoring System, is based on factors such as:
+* Attack vector
+* Attack complexity (hard to measure)
+* Privileges
+* User interaction
+* Scope
+* Confidentiality
+* Integrity
+* availability
+
+All of the above together can give a reference rating, but if one of the parameters is hard to define,
+like in the case of attack complexity, try both and either calculate an average or leave it as a range from two edge CVSS outcomes.
+It is important to remember that this is just a reference point, not an oracle for what should be done.
+As mentioned before, having use case UMLs or, even better, abuse case UMLs may come in handy here.
+
+#### 3. Addressing
+
+We can address issues in 4 ways, by:
+1. Completely removing the threat
+2. Reducing/mitigating the threat
+3. Acknowledging it and doing nothing
+4. Pretending there is no issue
+
+Obviously, the best options is to remove the threat, but sometimes it's either impossible or the costs of removing it are too high. In such cases we can try to mitigate it.
+Taking the risk by leaving it as is or marking it as "address later", where it does not affect our business nor customers,
+maybe fine in some cases, for instance when an attacker is able to traverse over a directory with long and random file names of non important pictures of
+other users' cats. So, there is a chance that someone will type some random gibberish and they will see the picture of a user's cat but they still won't
+know whose cat it is and we don’t really care if that happens.
+But if the attacker can traverse not only over cat pictures, but also over config files etc, and we still do nothing about it, then we are asking to be hacked.
 
 ## Threat Model of a simple blog app
 
