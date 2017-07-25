@@ -320,4 +320,4 @@ Dlatego też mam nadzieję, że moim tekstem zachęciłem cię do przyjrzenia si
 * https://pylonsproject.org/projects.html - projekty rozwijane przez Pylons Project
 * https://trypyramid.com/resources-extending-pyramid.html - oficjalne dodatki (*add-ons*)
 * https://webob.org - strona domowa `WebOb`, wrappera WSGI używanego przez Pyramid
-* https://docs.pylonsproject.org/projects/pyramid/en/latest/quick_tour.html - przewodnik po Pyramidzie
+* https://docs.pylonsproject.org/projects/pyramid/en/latest/quick`_`tour.html - przewodnik po Pyramidzie

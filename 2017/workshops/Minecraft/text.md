@@ -19,7 +19,7 @@ Co jest potrzebne:
   - API Minecraft Python - pobierz  Minecraft Tools dla [Windows], [MAC OS], [Rapsberry Pi lub Ubuntu]
   - [Server Minecraft Spigot] - wersja Spigot zgodna z wersją Minecraft
 
-Jeśli na komputerze mamy już Minecraft, Python i Javę, należy ściągnąć, rozpakować folder "Minecraft Tools" i zainstalować API Minecrafta poprzez uruchomienie "Install_API" spośród wyodrębionych plików. Wtedy należy pobrać taką wersję serwera Spigot, która jest zgodna z posiadaną wersją Minecrafta. Pobrany plik "Spigot.jar" należy podmienić w folderze "server" w "Minecraft Tools". Wtedy można już uruchomić serwer poprzez "Start_server" z folderu "Minecraft Tools". Okna serwera nie należy zamykać.
+Jeśli na komputerze mamy już Minecraft, Python i Javę, należy ściągnąć, rozpakować folder "Minecraft Tools" i zainstalować API Minecrafta poprzez uruchomienie "Install`_`API" spośród wyodrębionych plików. Wtedy należy pobrać taką wersję serwera Spigot, która jest zgodna z posiadaną wersją Minecrafta. Pobrany plik "Spigot.jar" należy podmienić w folderze "server" w "Minecraft Tools". Wtedy można już uruchomić serwer poprzez "Start`_`server" z folderu "Minecraft Tools". Okna serwera nie należy zamykać.
 
 Wtedy wystarczy już tylko:
 1) Uruchomić Minecraft, 
