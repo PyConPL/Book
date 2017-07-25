@@ -140,7 +140,7 @@ i lubimy, dzięki czemu próg wejścia jest znacznie mniejszy.
 * https://www.python.org/about/success/usa/ — Python success stories
 * https://wiki.python.org/moin/Applications — lista aplikacji napisanych w
 Pythonie
-* https://en.wikipedia.org/wiki/List_of_Python_software — inna (dłuższa) lista
+* https://en.wikipedia.org/wiki/List`_`of`_`Python`_`software — inna (dłuższa) lista
 aplikacji napisanych w Pythonie
 * https://worthwhile.com/blog/2016/07/19/django-python-advantages/ — Python i
 web development
