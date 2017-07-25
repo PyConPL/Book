@@ -37,8 +37,8 @@ import persistent
 class Account(persistent.Persistent):
 
 def __init__(self):
-￼   ￼self.balance = 0.0
-￼￼
+    self.balance = 0.0
+
 def deposit(self, amount):
     self.balance += amount
 
@@ -287,7 +287,7 @@ Pyramid is focussed on multiple deployments.  So TTW makes no sense.
 I am focussed on building a single website, so storing 
 stuff in the ZODB is much more modern than storing it on a 40 year old 
 filesystem. 
-￼￼￼
+
 But let us do a closer technical comparison. 
 Actually I am not even sure what to compare.  For
 a fair comparison, Pyramid does not stand on its own. It needs a bunch of 
