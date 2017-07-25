@@ -275,8 +275,8 @@ new DataFrame.
 
 > orderBy() takes one or more columns, either as names (strings) or as Column
 objects. To get a Column object, we use one of two notations on the DataFrame:
->    Pandas-style notation: filtered_df.age
->    Subscript notation: filtered_df['age']
+>    Pandas-style notation: filtered`_`df.age
+>    Subscript notation: filtered`_`df['age']
 
 
 
@@ -440,7 +440,7 @@ and put each method, transformation, or action on a separate line.
 
 ### EXERCISE
 
-Create DataFrame containing basic info (last_name, first_name, ssn, job, age)
+Create DataFrame containing basic info (last`_`name, first`_`name, ssn, job, age)
 about 20000 people.
 
 

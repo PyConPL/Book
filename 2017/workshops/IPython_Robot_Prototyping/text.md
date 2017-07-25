@@ -20,7 +20,7 @@ Or use this knowledge in a crazy startup project to prototype cool robotic appli
 
  - Setting up and running your first ROS Node
 
- - ROS concepts explained: topic & service
+ - ROS concepts explained: topic `&` service
 
  - Using IPython Interactive Widgets to control a robot
 
@@ -28,7 +28,7 @@ Or use this knowledge in a crazy startup project to prototype cool robotic appli
 
  - Tour of ROS tools with examples: Rviz, Rosbag, TF (transforms)
 
- - Wrapup: how to continue learning ROS, Q&A session
+ - Wrapup: how to continue learning ROS, Q`&`A session
 
 
 ## Is this for me?
