@@ -160,7 +160,7 @@ Official NetworkX tutorial - https://github.com/networkx/notebooks/blob/master/t
 NetworkX documentation - https://networkx.readthedocs.io/en/stable/
 EuroSciPy 2016 tutorial - https://github.com/MridulS/euroscipy-networkx
 PyCon/SciPy 2017 tutorial - https://github.com/ericmjl/Network-Analysis-Made-Simple
-Video Tutorial - https://www.youtube.com/watch?v=E4VKzFmByhE&t=3139s
+Video Tutorial - https://www.youtube.com/watch?v=E4VKzFmByhE`&`t=3139s
 DataCamp course - https://www.datacamp.com/courses/network-analysis-in-python-part-1
 
 Datasets (Social Network Analysis project at Stanford) - http://snap.stanford.edu/data/index.html
