@@ -486,7 +486,7 @@ parametric tests and fixtures. Dive in!
 2. unittest in Python documentation. https://docs.python.org/3/library/unittest.html
 3. nose documentation. http://nose.readthedocs.io/
 4. assert on Python Wiki. https://wiki.python.org/moin/UsingAssertionsEffectively
-5. Fizz buzz on Wikipedia. https://en.wikipedia.org/wiki/Fizz_buzz
+5. Fizz buzz on Wikipedia. https://en.wikipedia.org/wiki/Fizz`_`buzz
 6. List comprehensions. https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions
 7. Parametrizing fixtures. https://docs.pytest.org/en/latest/fixture.html#parametrizing-fixtures
 8. Hypothesis documentation. https://hypothesis.readthedocs.io/
