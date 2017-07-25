@@ -50,7 +50,6 @@ W Minecrafcie jest wiele przydatnych akcji, jakie można uruchomić sterując Py
 ### Teleportacja
 
 Położenie w Minecraft można łatwo ustalić za pomocą klawisza F3.
-![Współrzędne](https://www.dropbox.com/s/xqnk18iqa0xz4xa/Wsp%C3%B3%C5%82rz%C4%99dne.png?dl=0)
 
 Jeśli znamy docelowe współrzędne, mozna szybko teleportować się w wybrane miejsce:
 
@@ -94,8 +93,6 @@ mc = Minecraft.create ()
 mc.setBlock (10, 110, 12, 103)
 ```
 W powyższym przypadku postawiliśmy arbuza (kod 103). 
-
-![Arbuz](https://www.dropbox.com/s/vczz6ifydtph7cu/Arbuz.png?dl=0)
 
 ### Szybkie budowanie
 
