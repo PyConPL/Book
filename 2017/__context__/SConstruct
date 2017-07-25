@@ -54,7 +54,7 @@ final_pdfs = map(
     (lambda x: "{}/{}/{}.pdf".format(build, x[0], x[0])),
     articles)
 
-env.Command("pyconbook-2017.pdf",
+env.Command("pyconbook-yyyy.pdf",
     final_pdfs,
     "texexec --pdfcopy --result=$TARGET $SOURCES")
 

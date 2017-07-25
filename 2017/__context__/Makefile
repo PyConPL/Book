@@ -8,4 +8,4 @@ compare:
 diffs:
 	./gen_diff.sh
 clean:
-	rm -rf build .tmp pyconbook-2017.log pyconbook-2017.pdf *.pyc .sconsign.dblite
+	rm -rf build .tmp pyconbook-yyyy.log pyconbook-yyyy.pdf *.pyc .sconsign.dblite
