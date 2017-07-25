@@ -1,4 +1,5 @@
 #!/bin/bash
+
 NAMES=`cd expected;find * -type f -name \*.tex`
 for i in $NAMES
 do
