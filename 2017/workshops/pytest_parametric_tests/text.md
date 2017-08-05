@@ -3,7 +3,7 @@
 In this workshop you will learn about **pytest** [1] and why it is better than
 unittest or nose. You will see and try out examples on easy and later on more
 complex scenarios. You will learn how to write parametric tests and you will
-paramterize some test for a common problem such as fizzbuzz. Later we'll dive
+parametrize some test for a common problem such as fizzbuzz. Later we'll dive
 in into fixtures and how they are different than setup and teardown. Fixtures
 can be parametric as well, so we'll code some examples for that as well.
 At the end, you'll learn about cross products of parameters and fixtures.
@@ -183,7 +183,7 @@ From the tests results, do you see what's wrong? :confused:
 
 ------------
 
-Instead, we'll paramterize the test. That means, we'll have one test written
+Instead, we'll parametrize the test. That means, we'll have one test written
 – as a template – and it will be run for multiple values.
 
 ```python
