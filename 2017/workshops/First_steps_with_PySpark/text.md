@@ -174,7 +174,7 @@ that are required to compute the values returned by the action.
 is usually useful after a filter or other operation that returns a sufficiently
 small subset of the data.
 
-> Be carefull while expecting a big amount of results. The data returned to the
+> Be careful while expecting a big amount of results. The data returned to the
 driver must fit into the driver's available memory. If not, the driver will
 crash.
 
@@ -302,7 +302,7 @@ columns to compare.
 #### drop()
 
 > drop() is like the opposite of select(): Instead of selecting specific columns
-from a DataFrame, it drops a specifed column from a DataFrame.
+from a DataFrame, it drops a specified column from a DataFrame.
 
 Here's a simple use case: Suppose you're reading from a 1,000-column CSV file,
 and you have to get rid of five of the columns. Instead of selecting 995 of the
@@ -461,7 +461,7 @@ What is the job of the oldest person?
 
     # Solution here
 
-Display 10 most frequent first names with numbers of occurences
+Display 10 most frequent first names with numbers of occurrences
 
 
     # Solution here
