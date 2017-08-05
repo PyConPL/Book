@@ -70,7 +70,7 @@ Przedstawione powyżej technologie stanowią tylko część rozwiązań stosowan
 1. Tomasz Francuz - Język C dla mikrokontrolerów AVR. Od podstaw do zaawansowanych aplikacji: http://helion.pl/ksiazki/jezyk-c-dla-mikrokontrolerow-avr-od-podstaw-do-zaawansowanych-aplikacji-tomasz-francuz,jcmikr.htm
 2. Interfejs UART: https://en.wikipedia.org/wiki/Universal`_`asynchronous`_`receiver/transmitter
 3. Magistrale szeregowe: http://www.epanorama.net/links/serialbus.html
-4. Protokoł Modbus: http://www.modbus.org
+4. Protokół Modbus: http://www.modbus.org
 5. System KNX: https://www.knx.org/
 6. System LonWorks: https://en.wikipedia.org/wiki/LonWorks
 7. Magistrala M-Bus: http://www.m-bus.com
