@@ -66,7 +66,7 @@ G['node1']['node2']['some_id']['some_attrb'] # multigraphs
 
 There are multiple graph classes implemented in NetworkX.
 - Graph: A graph object which only allows single edges (undirected) between nodes.
-- DiGraph: A graph object which only allow single edges (directed) betweeen nodes, i.e. an edge from 'A' to 'B' doesn't mean that there exists an edge from 'B' to 'A'.
+- DiGraph: A graph object which only allow single edges (directed) between nodes, i.e. an edge from 'A' to 'B' doesn't mean that there exists an edge from 'B' to 'A'.
 - MultiGraph: A graph object which allows multiple edges(undirected) between two edges.
 - MultiDiGraph: A graph object which allows multiple edges(directed) between two edges.
 
@@ -144,7 +144,7 @@ The output:
 ```
 
 As we can see from the output there are a lot of authors who work in pairs (they haven't collaborated with anyone other than their partner) and triangles.
-But the majority, 4158, work in a big collabration network, even though we have a lone wolf there.
+But the majority, 4158, work in a big collaboration network, even though we have a lone wolf there.
 
 We can find many other interesting properties of a dataset by doing exploratory analysis of the network.
 
