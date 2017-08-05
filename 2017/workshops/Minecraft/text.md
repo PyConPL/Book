@@ -5,7 +5,7 @@ Minecraft zapewnia niczym nieskrępowaną kreatywność i swobodę tworzenia. Py
 
 Dlaczego warto?
 
-  - Poznanie ukrytej magii Minecraftu - urozmaicenie gry i odkrycie jej nieznanych możliwości
+  - Poznanie ukrytej magii Minecrafta - urozmaicenie gry i odkrycie jej nieznanych możliwości
   - Zapoznanie się z Pythonem - dla początkujących programistów
   - Nauczanie programowania, w szczególności wśród dzieci (od ok. 10 lat) i młodzieży
   - Ułatwienie poruszania się i budowania w świecie Minecraft.
@@ -19,7 +19,7 @@ Co jest potrzebne:
   - API Minecraft Python - pobierz  Minecraft Tools dla [Windows], [MAC OS], [Rapsberry Pi lub Ubuntu]
   - [Server Minecraft Spigot] - wersja Spigot zgodna z wersją Minecraft
 
-Jeśli na komputerze mamy już Minecraft, Python i Javę, należy ściągnąć, rozpakować folder "Minecraft Tools" i zainstalować API Minecrafta poprzez uruchomienie "Install`_`API" spośród wyodrębionych plików. Wtedy należy pobrać taką wersję serwera Spigot, która jest zgodna z posiadaną wersją Minecrafta. Pobrany plik "Spigot.jar" należy podmienić w folderze "server" w "Minecraft Tools". Wtedy można już uruchomić serwer poprzez "Start`_`server" z folderu "Minecraft Tools". Okna serwera nie należy zamykać.
+Jeśli na komputerze mamy już Minecraft, Python i Javę, należy ściągnąć, rozpakować folder "Minecraft Tools" i zainstalować API Minecrafta poprzez uruchomienie "Install`_`API" spośród wyodrębnionych plików. Wtedy należy pobrać taką wersję serwera Spigot, która jest zgodna z posiadaną wersją Minecrafta. Pobrany plik "Spigot.jar" należy podmienić w folderze "server" w "Minecraft Tools". Wtedy można już uruchomić serwer poprzez "Start`_`server" z folderu "Minecraft Tools". Okna serwera nie należy zamykać.
 
 Wtedy wystarczy już tylko:
 1) Uruchomić Minecraft, 
@@ -36,7 +36,7 @@ W edytorze Idle wpisujemy:
 >>> from mcpi.minecraft import Minecraft
 >>> mc = Minecraft.create ()
 ```
-Te 2 wierwsze łączą program z Minecraftem. Jeśli po uruchomieniu programu nie pojawił się komunikat o błędzie, możemy kontynuować wpisując np.
+Te 2 pierwsze łączą program z Minecraftem. Jeśli po uruchomieniu programu nie pojawił się komunikat o błędzie, możemy kontynuować wpisując np.
 
 ```sh
 >>> mc.player.setTilePos(0,120,0)
@@ -51,7 +51,7 @@ W Minecrafcie jest wiele przydatnych akcji, jakie można uruchomić sterując Py
 
 Położenie w Minecraft można łatwo ustalić za pomocą klawisza F3.
 
-Jeśli znamy docelowe współrzędne, mozna szybko teleportować się w wybrane miejsce:
+Jeśli znamy docelowe współrzędne, można szybko teleportować się w wybrane miejsce:
 
 ```sh
 from mcpi.minecraft import Minecraft
@@ -64,7 +64,7 @@ mc.player.setPos (x, y, z)
 
 W ten sposób można np. szybko uciec przed zombie w bezpieczne miejsce - jak wnętrze domu, jeśli wcześniej znamy jego współrzędne.
 
-Jeśli chcemy np. "obejść" znane sobie miejsca, tj. przenieść się gdzieś, rozejrzeć się i przenieść znów w inne miejsce, przydatna będzie funkja *sleep*. Żeby ją wykorzystać, musimy dodać do programu moduł *time* poprzez:
+Jeśli chcemy np. "obejść" znane sobie miejsca, tj. przenieść się gdzieś, rozejrzeć się i przenieść znów w inne miejsce, przydatna będzie funkcja *sleep*. Żeby ją wykorzystać, musimy dodać do programu moduł *time* poprzez:
 
 ```sh
 >>> import time
