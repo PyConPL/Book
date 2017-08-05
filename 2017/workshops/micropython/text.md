@@ -99,7 +99,7 @@ zagwarantować wymagany prąd baza-emiter jeśli pin GPIO przejdzie w stan wysok
 
 Mimo że tranzystor i przekaźnik mogą spełniać podobną rolę w obwodzie, istnieje
 między nimi duża różnica.
-Przekaźnik przełącza tyki mechanicznie przy pomocy elektromagnesu.
+Przekaźnik przełącza styki mechanicznie przy pomocy elektromagnesu.
 Tranzystor nie posiada elementów mechanicznych.
 Jego działanie opiera się na technologii półprzewodnikowej.
 Aby wybrać, która z tych opcji jest dla nas właściwa, należy rozważyć wady i
