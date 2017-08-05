@@ -122,7 +122,7 @@ zalety obu rozwiązań.
   cewki.
 * Jego praca jest bezgłośna.
 * Nie posiadając elementów indukcyjnych nie wywołuje problemu samoindukcji w
-  momencie wyłączenia (przekaźnik wymagać może zastosowania diody ochronnej,
+  momencie wyłączenia (przekaźnik może wymagać zastosowania diody ochronnej,
   która pochłonie przepięcie).
 
 Tak więc w sytuacji, gdy mamy do czynienia z prądem zmiennym, lub o dużym
