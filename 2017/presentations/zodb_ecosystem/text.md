@@ -50,7 +50,7 @@ def cash(self, amount):
 
 Did you notice how trivial it was to create a persistent object. Magic!
 
-You can also subclass off of class Persitent Containers (Btrees), and 
+You can also subclass off of class Persistent Containers (Btrees), and 
 class Persistent Set.
 
 ## ACID Properties
@@ -104,11 +104,11 @@ if every object had its own unique name, so that even when the tree
 structure changed, it would still be easy to 
 find the object using its canonical URL. 
  
-PythonLinks provides canoninc urls. .  Every node has a unique name which can 
+PythonLinks provides canonic urls. .  Every node has a unique name which can 
 be accessed using a dictionary in the root node.   
-Atempts to create a new node with the same name, result in an integer 
+Attempts to create a new node with the same name, result in an integer 
 being appended to the new node name. Node, Node-1, Node-2, etc. 
-When objects are renamed, or deleted, the root dictiionary is updated.  
+When objects are renamed, or deleted, the root dictionary is updated.  
 
 ## ZODB History and Undo
 ZODB is a versioned database.  Each object preserves its historical versions 
@@ -146,7 +146,7 @@ clients, and frequently updated, it does lead to more network traffic.
 
 ## Scalability
 For mostly-read applications ZODB scales brilliantly. 
-Multiple disk heads can read simultanwously from different parts of the file 
+Multiple disk heads can read simultaneously from different parts of the file 
 used in FileStorage. Historically its 
 performance under heavy writing was limited because writes all happened at 
 the end of  a single file.  Only one disk head at a time could write.  That 
@@ -170,7 +170,7 @@ objects.  There can be multiple views on any object.  There can be the same
 view on different objects.  That same view can be one class, or else using 
 the Zope Component Architecture, there can be different views with the 
 same name on different classes of objects, depending on the interfaces
-which they ahve defined. 
+which they have defined. 
 
 ## ZODB-related Platforms
 
@@ -207,14 +207,14 @@ Me,   I chose to use Grok with Zope 3.  I am not building a corporate
 application.  I am building startup applications.  I don't care about 
 computer performance, if my applications are overloaded, that is a great 
 problem to have. I can then optimize things. Above all else, 
-I care about speed and cost of development.  Related to that is software flexiility. 
+I care about speed and cost of development.  Related to that is software flexibility. 
 
 
 ### Zopache
 
 Sadly Grok lacks a TTW development environment, so I built one. 
 Zopache.com is a Javascript IDE 
-which I bult on top of the ZODB using Grok. ZODB 
+which I built on top of the ZODB using Grok. ZODB 
 developers might call it a TTW development platform. 
 
 Basic Zopache objects include HTML, CSS, Javascript, Python Scripts, 
@@ -227,7 +227,7 @@ Zopache also supports containers.  Trees can be built out of containers.
 Folders support cut, copy, rename paste and delete operations. HTML folders
 can be edited with the Ace and ck editors.  Javascript Folders allow one to 
 build a well organized  tree of Javascript code, but serve it as a single 
-minified file or as a human readable and searchable file, wich clickable links to 
+minified file or as a human readable and searchable file, which clickable links to 
 the original javascript object. History and Undo are supported.  
 
 Using Zopache, in your browser, you create a tree of 
@@ -255,8 +255,8 @@ So let us compare them. Of course Grok can be used in different ways,
 so I will focus on how I use it. 
 
 Pyramid
-is very focussed on computer performance, how fast will the software 
-run?  I am focussed on developer 
+is very focused on computer performance, how fast will the software 
+run?  I am focused on developer 
 performance, how fast can I develop my applications.  They want close to the
 metal code.  I want high levels of abstractions.  
 
@@ -267,24 +267,24 @@ http://demo.substanced.net/
 Clearly they are very conflicted about minimal TTW development, 
 let alone the idea of building a full Javascript IDE on top of the ZODB.
 
-The next issue is the target market.  Pyramid is firmly focussed on the 
+The next issue is the target market.  Pyramid is firmly focused on the 
 consulting market.  Every client is different and needs a different solution. 
 They want the ability to 
 do it this way or that way. Use a relational database or the ZODB.  Use 
 dispatch or traversal. Configure it three different ways. There are multiple
 ways to do things. 
 
-I am more focussed on the product market.  There is no legacy code here. 
+I am more focused on the product market.  There is no legacy code here. 
 Just the web, which I have to work with. 
 I want to build it as fast and flexibly as is possible. 
 I like the Python idea that there should be one 
-way to do thigns.  
+way to do things.  
 I want a purist OO approach.  
 Like Ruby on Rails, I want an 
 opinionated high level framework.  Grok gives me that. 
 
-Pyramid is focussed on multiple deployments.  So TTW makes no sense.  
-I am focussed on building a single website, so storing 
+Pyramid is focused on multiple deployments.  So TTW makes no sense.  
+I am focused on building a single website, so storing 
 stuff in the ZODB is much more modern than storing it on a 40 year old 
 filesystem. 
 
@@ -300,7 +300,7 @@ trees. Pyramid does not include  CRUD.
 One has to add it manually. I am still not 
 sure which CRUD package to recommend.  Reportedly the one used in SubstanceD 
 does not do CRUD.  So which one does?  The next one I found has just been 
-re-architectedd for use with relational databases.  Also not what I need. 
+re-built for use with relational databases.  Also not what I need. 
 
 
 
@@ -310,14 +310,14 @@ That was not true when I started.
 
 And of course there is no way that 
 somethng like the high level zope.securitypolicy has been ported to Pyramid. 
-It is just imconpatible with the performace-optimized Pyramid security model. 
+It is just incompatible with the performance-optimized Pyramid security model. 
 
 ## Other Databases
 There are many other NoSQL databases on the market.  My job is 
 not to evaluate them all, but just to get you to ask the right
 questions. 
 
-1. Is it ACID complient?
+1. Is it ACID compliant?
 2. Do they provide a graph database?
 3. Do they support Persistent Python?
 4. Can you add arbitrary  instance variables at run-time?
