@@ -17,19 +17,19 @@ Co jest potrzebne:
   - [Python] - minimum Python 3
   - [Java] - najlepiej ostatnia wersja
   - API Minecraft Python - pobierz  Minecraft Tools dla [Windows], [MAC OS], [Rapsberry Pi lub Ubuntu]
-  - [Server Minecraft Spigot] - wersja Spigot zgodna z wersją Minecraft
+  - [Server Minecraft Spigot] - wersja Spigot zgodna z wersją Minecrafta
 
-Jeśli na komputerze mamy już Minecraft, Python i Javę, należy ściągnąć, rozpakować folder "Minecraft Tools" i zainstalować API Minecrafta poprzez uruchomienie "Install`_`API" spośród wyodrębnionych plików. Wtedy należy pobrać taką wersję serwera Spigot, która jest zgodna z posiadaną wersją Minecrafta. Pobrany plik "Spigot.jar" należy podmienić w folderze "server" w "Minecraft Tools". Wtedy można już uruchomić serwer poprzez "Start`_`server" z folderu "Minecraft Tools". Okna serwera nie należy zamykać.
+Jeśli na komputerze mamy już Minecrafta, Pythona i Javę, należy ściągnąć, rozpakować folder "Minecraft Tools" i zainstalować API Minecrafta poprzez uruchomienie "Install`_`API" spośród wyodrębnionych plików. Wtedy należy pobrać taką wersję serwera Spigot, która jest zgodna z posiadaną wersją Minecrafta. Pobrany plik "Spigot.jar" należy podmienić w folderze "server" w "Minecraft Tools". Wtedy można już uruchomić serwer poprzez "Start`_`server" z folderu "Minecraft Tools". Okna serwera nie należy zamykać.
 
 Wtedy wystarczy już tylko:
-1) Uruchomić Minecraft, 
+1) Uruchomić Minecrafta, 
 2) Przejść w tryb Multiplayer,
 3) Dodać serwer: nazwa dowolna, w adresie wpisać "localhost"
 4) Wejść w tryb Multiplayer poprzez utworzony serwer.
 
 ### Testujemy
 
-Żeby przetestować połączenie serwera i API, a także tworzyć programy współpracujące z Minecraftem, należy mieć uruchomiony serwer oraz Minecraft w trybie Multiplayer (z ustawionym serwerem Spigot).
+Żeby przetestować połączenie serwera i API, a także tworzyć programy współpracujące z Minecraftem, należy mieć uruchomiony serwer oraz Minecrafta w trybie Multiplayer (z ustawionym serwerem Spigot).
 
 W edytorze Idle wpisujemy:
 ```sh
@@ -49,7 +49,7 @@ W Minecrafcie jest wiele przydatnych akcji, jakie można uruchomić sterując Py
 
 ### Teleportacja
 
-Położenie w Minecraft można łatwo ustalić za pomocą klawisza F3.
+Położenie w Minecrafcie można łatwo ustalić za pomocą klawisza F3.
 
 Jeśli znamy docelowe współrzędne, można szybko teleportować się w wybrane miejsce:
 
@@ -85,7 +85,7 @@ mc.player.setPos (20, 110, 50)
 
 ### Stawianie bloków
 
-W Minecraft każdy typ bloku ma swój ID. Pełną listę bloków dostępnych w Minecraft znajdziesz tu: [Lista bloków]. Znając ID bloku oraz współrzędne, gdzie chcemy dany blok postawić, możemy w szybki sposób go umieścić w danym miejscu.
+W Minecrafcie każdy typ bloku ma swój ID. Pełną listę bloków dostępnych w Minecrafcie znajdziesz tu: [Lista bloków]. Znając ID bloku oraz współrzędne, gdzie chcemy dany blok postawić, możemy w szybki sposób go umieścić w danym miejscu.
 
 ```sh
 from mcpi.minecraft import Minecraft
