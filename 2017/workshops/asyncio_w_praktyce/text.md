@@ -2,7 +2,7 @@
 
 Podczas tych warsztatów nauczysz się korzystać z **asyncio** [1] na tyle, by móc samodzielnie zaprojektować i zakodować aplikację korzystającą z jego dobrodziejstw.
 
-Nauka oprze się o pisanie w pełni funkcjonalnego chatu. W trakcie ćwiczeń poznasz część biblioteki asyncio potrzebną do zrealizowania zadania, nową składnię dla coroutines z async i await, bibliotekę **aiohttp** [1] zapewniającą klienta i serwer HTTP oraz tajniki testowania powyższych. Pisanie testów przed kodem będzie częścią szkolenia, ale w razie potrzeby może zostać pominięte, by nadal móc coś z niego wynieść.
+Nauka oprze się o pisanie w pełni funkcjonalnego czatu. W trakcie ćwiczeń poznasz część biblioteki asyncio potrzebną do zrealizowania zadania, nową składnię dla coroutines z async i await, bibliotekę **aiohttp** [1] zapewniającą klienta i serwer HTTP oraz tajniki testowania powyższych. Pisanie testów przed kodem będzie częścią szkolenia, ale w razie potrzeby może zostać pominięte, by nadal móc coś z niego wynieść.
 
 Do testowania będziemy używać biblioteki **pytest**[4], ale w minimalnym stopniu - jego nieznajomość w niczym nie będzie przeszkadzać.
 
@@ -99,9 +99,9 @@ W treści zadań zawarte są też podpowiedzi, ukryte do momentu aż uczestnik n
    1. Obsługa przychodzącej wiadomości
    2. Wysłanie wiadomości do pozostałych użytkowników czatu
    3. Zabezpieczenie przed sytuacją, gdy jeden z użytkowników rozłączy się w trakcie przekazywania wiadomości
-   4. Oznaczanie obecności na chacie
-   5. Statystyki chatu
-   6. Przechowanie historii chatu dla nowych uczestników
+   4. Oznaczanie obecności na czacie
+   5. Statystyki czatu
+   6. Przechowanie historii czatu dla nowych uczestników
 
 (przerwa - 15 minut)
 
@@ -121,7 +121,7 @@ W treści zadań zawarte są też podpowiedzi, ukryte do momentu aż uczestnik n
 
 
 ### Komentarz do modułu I
-W tej części uczestnicy zapewnią minimum funkcjonalności, jaką powinna mieć aplikacja chatowa - obsługę wspólnego dla wszystkich pokoju czatowego. Jest to najważniejsza część warsztatu - to tu zostaną podłożone podwaliny pod kolejne części, uczestnicy zrozumieją czym jest pętla zdarzeń i jak unikać jej blokowania.
+W tej części uczestnicy zapewnią minimum funkcjonalności, jaką powinna mieć aplikacja czatowa - obsługę wspólnego dla wszystkich pokoju czatowego. Jest to najważniejsza część warsztatu - to tu zostaną podłożone podwaliny pod kolejne części, uczestnicy zrozumieją czym jest pętla zdarzeń i jak unikać jej blokowania.
 
 ### Komentarz do modułu II
 Druga część wzbogaci rozwijany projekt o możliwość rozpoczynania prywatnych rozmów i dynamicznie zarządzanych pokoi prywatnych. Ujawni to więcej ciekawych problemów typu _race conditions_, a przecież o to chodzi - by nauczyć się wykrywać i zabezpieczać takie sytuacje.
