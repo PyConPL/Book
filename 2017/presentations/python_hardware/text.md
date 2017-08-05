@@ -20,7 +20,7 @@ sprzętowych, jak i daje zajęcie dla programistów nie mających wcześniej do
 czynienia z takimi projektami. Inteligentna lodówka musi przecież wysyłać
 gdzieś w chmurę dane tak, by aplikacja webowa, czy mobilna, mogła zadziałać
 swoją magię. W tym cyfrowym wyścigu udział biorą duże firmy, jak i młode
-innowacyjne startupy, więc zapotrzebowanie na software, czy protypowanie
+innowacyjne startupy, więc zapotrzebowanie na software, czy prototypowanie
 produktów sprzętowych, jest spore i chyba na tyle ciekawe, by się tym
 zainteresować.
 
@@ -37,7 +37,7 @@ mikrokontrolerów ATmega, czy STM, można zaprototypować coś szybciej
 z wykorzystaniem Pythona, JavaScriptu, Lua, czy także C/C++ na platformach
 dla „twórców”. Arduino, czy Raspberry Pi, nie wymagają od nas znajomości
 asemblera, czy niuansów mikrokontrolerów. Oferują łatwe w użyciu, dobrze
-udokumentowane API i biblioteki, które można wykorzystać do protypowania
+udokumentowane API i biblioteki, które można wykorzystać do prototypowania
 elektroniki.
 
 Programista Pythona ma do wyboru kilka platform sprzętowych. MicroPython
@@ -104,7 +104,7 @@ Mając dwie trwałe płytki - jedna z mikrokontrolerem (Arduino, MicroPython),
 a druga z resztą układu znacząco podnosi się trwałość i niezawodność.
 
 
-## Pythonowe platformy do protypowania elektroniki
+## Pythonowe platformy do prototypowania elektroniki
 
 Python dostępny jest na kilku platformach, projektach związanych
 z elektroniką. Tinkerforge, czy Phidgets są bardziej ukierunkowane
@@ -154,7 +154,7 @@ z procesorami ARM będą pobierały znacznie więcej prądu niż mikrokontroler,
 jak i nie będzie można ich aż tak efektywnie usypiać.
 
 Oddzielną grupę stanowią projekty takie jak Tinkerforge, czy Phidgets.
-Projekty te oferują wiele komponetów i płytek kontrolujących. Całość jest
+Projekty te oferują wiele komponentów i płytek kontrolujących. Całość jest
 zintegrowana wysokopoziomowym API dostępnym dla licznych języków. W tego typu
 projektach skryptując np. silnik krokowy nie musimy implementować wysyłania
 serii impulsów, tylko korzystamy z gotowej metody wykonującej określony ruch
