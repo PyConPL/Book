@@ -19,7 +19,7 @@ proper policies for the users, data handling, access.
 
 [Data leaks in time](http://www.informationisbeautiful.net/visualizations/worlds-biggest-data-breaches-hacks/)
 
-Looking at the number and severity of leaks over time, it is easy to observe a huge increase in their occurences over the years and severity rising from 1 000 to above 1 000 000 000 user's data.
+Looking at the number and severity of leaks over time, it is easy to observe a huge increase in their occurrences over the years and severity rising from 1 000 to above 1 000 000 000 user's data.
 
 ![00 NotPetya malware screen](./000_notpetya.png)
 
@@ -97,7 +97,7 @@ subprocess.Popen([
 ])
 ```
 
-SQL injection… Again, we are quite safe here, unless we are using our own SQL engine instead of mature ORMs such as SQLalchemy or djangoORM.
+SQL injection… Again, we are quite safe here, unless we are using our own SQL engine instead of mature ORMs such as SQLAlchemy or djangoORM.
 
 Example of SQL payload:
 ```SQL
@@ -150,7 +150,7 @@ def count(equation):
 	elif sign == '/':
 		return a / b
 	else:
-		return 'Unsuported sign'
+		return 'Unsupported sign'
 
 print(count('2 + 3'))
 ```
