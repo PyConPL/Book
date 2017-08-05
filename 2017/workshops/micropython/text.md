@@ -30,7 +30,7 @@ technicznej odczytujemy następujące parametry:
 
 Ponieważ napięcie i maksymalny prąd jakiego jest w stanie dostarczyć GPIO są
 większe od wymaganych przez diodę, możemy zasilić ją bezpośrednio. Aby dobrać
-wielkość rezystora przypomnijmy sobie II prawo Kirchoffa i prawo Ohma. Pierwsze
+wielkość rezystora przypomnijmy sobie II prawo Kirchhoffa i prawo Ohma. Pierwsze
 z nich mówi nam, że spadek napięcia na rezystorze musi wynieść tyle ile wynosi
 różnica między napięciem na GPIO a spadkiem napięcia na diodzie. Prawo Ohma
 określa zaś, że wartość opornika jest stosunkiem spadku
@@ -127,7 +127,7 @@ zalety obu rozwiązań.
 
 Tak więc w sytuacji, gdy mamy do czynienia z prądem zmiennym, lub o dużym
 natężeniu, wybierzemy przekaźnik. Podobnie, gdy nie znamy parametrów odbiornika
-energii, który będzie kontrolowany. W przypadku sygnału wypełnieniowego (PWM)
+energii, który będzie kontrolowany. W przypadku sygnału wypełniającego (PWM)
 musimy zastosować tranzystor ze względu na małe opóźnienie i zdolność do
 wytrzymania licznych przełączeń. W wielu innych sytuacjach wybór pozostaje
 kwestią priorytetów.
@@ -147,7 +147,7 @@ Na rycinie widzimy przykład pinu podciągniętego do stanu wysokiego przez
 rezystor. Jeśli zewrzemy przełącznik, wysoka wartość rezystora sprawia,
 że linia 3,3 V nie jest już w stanie ustalić stanu pinu na wysoki, gdyż jego
 potencjał ustalany jest przez bazę. Stąd pin osiągnie stan niski.
-Wartości rezystorów zależą od częstotliwości zmianów stanów na linii.
+Wartości rezystorów zależą od częstotliwości zmian stanów na linii.
 Na przykład dla linii I2C należy stosować 4,7kOm, dla przycisków 10kOm
 
 ### Bouncing sygnału
@@ -178,7 +178,7 @@ mechanicznych stykach. Możemy wobec niego zastosować dwa podejścia.
 
 #### Podejście hardware'owe
 
-W tym podejciu stosujemy odpowiednią modyfikację obwodu. Najprostszym
+W tym podejściu stosujemy odpowiednią modyfikację obwodu. Najprostszym
 rozwiązaniem jest zastosowanie tzw. układu RC składającego się z rezystora i
 kondensatora.
 
@@ -192,7 +192,7 @@ jednak by wprowadzone opóźnienie nie było zbyt wysokie.
 
 #### Podejście software'owe
 
-Zjawisko *bouncingu* możemy obsłużyć również softwareowo. W tym celu
+Zjawisko *bouncingu* możemy obsłużyć również software'owo. W tym celu
 wprowadzamy stosowne opóźnienie w kodzie:
 
 ```
