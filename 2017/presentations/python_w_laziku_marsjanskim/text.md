@@ -104,7 +104,7 @@ bardziej popularnych, co widać na przykład po szybkim rozwoju projektu ROS
 wysoce-zautomatyzowanych urządzeń i systemów. Roboty to nie tylko niskopoziomowy
 kod często wymagający pracy w czasie rzeczywistym oraz maksymalnego
 wykorzystania zasobów. W każdym robocie jest jakaś część logiki odpowiedzialna
-za podejmowanie wyskopoziomowych decyzji, takich jak na przykład wybór miejsca
+za podejmowanie wysokopoziomowych decyzji, takich jak na przykład wybór miejsca
 do którego robot ma się przemieścić, czy który przycisk wcisnąć. Python
 doskonale się do tego nadaje — zazwyczaj nie są to operacje wymagające pracy w
 czasie rzeczywistym, a świetna integracja z systemami do nauczania maszynowego
