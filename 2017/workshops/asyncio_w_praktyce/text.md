@@ -24,7 +24,7 @@ def check_workshop_time():
         asyncio_workshop.set_result('Przyjdź na warsztat!')
     else:
         days_left = (PYCON_PL_START_DATE - today).days
-        print(f'Pozostalo {days_left} dni')
+        print(f'Pozostało {days_left} dni')
         loop.call_later(86400, check_workshop_time)
 
 async def attend_pycon_pl():
