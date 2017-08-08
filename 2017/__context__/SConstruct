@@ -27,7 +27,7 @@ if 'TEXINPUTS' not in os.environ:
 os.environ['TEXINPUTS'] = (
     ".:..:../..:../../sty:" +
     os.environ['TEXINPUTS'] )
-env = Environment( ENV=os.environ)
+env = Environment(ENV=os.environ)
 
 def remove_comments(line):
     return line.split('%')[0]
@@ -116,13 +116,13 @@ for alias, location in articles:
     if os.path.exists(loc_src):
         if verbose:
             print 'Found:', loc_src
-        env.Command( root + ".tex", loc_src,
-                     Copy('$TARGET','$SOURCE') )
+        env.Command(root + ".tex", loc_src,
+                    Copy('$TARGET','$SOURCE') )
     elif os.path.exists(main_src):
         if verbose:
             print 'Found:', main_src
-        env.Command( root + ".tex", main_src,
-                     Copy('$TARGET','$SOURCE') )
+        env.Command(root + ".tex", main_src,
+                    Copy('$TARGET','$SOURCE') )
     elif os.path.exists(main_md):
         if verbose:
             print 'Found:', main_md
