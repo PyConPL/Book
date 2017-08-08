@@ -56,9 +56,11 @@ final_pdfs = map(
     (lambda x: "{}/{}/{}.pdf".format(build, x[0], x[0])),
     articles)
 
-env.Command(created_pdf,
+env.Command(
+    created_pdf,
     final_pdfs,
-    "texexec --pdfcopy --result=$TARGET $SOURCES")
+    "texexec --pdfcopy --result=$TARGET $SOURCES",
+    )
 
 for alias, location in articles:
     if tty_columns:
@@ -118,13 +120,19 @@ for alias, location in articles:
     if os.path.exists(loc_src):
         if verbose:
             print 'Found:', loc_src
-        env.Command(root + ".tex", loc_src,
-                    Copy('$TARGET','$SOURCE') )
+        env.Command(
+            root + ".tex",
+            loc_src,
+            Copy('$TARGET','$SOURCE'),
+            )
     elif os.path.exists(main_src):
         if verbose:
             print 'Found:', main_src
-        env.Command(root + ".tex", main_src,
-                    Copy('$TARGET','$SOURCE') )
+        env.Command(
+            root + ".tex",
+            main_src,
+            Copy('$TARGET','$SOURCE'),
+            )
     elif os.path.exists(main_md):
         if verbose:
             print 'Found:', main_md
@@ -151,7 +159,11 @@ for alias, location in articles:
         raise RuntimeError("Not found: %s" % repr(main_md))
 
 
-env.Command("build/artpages.inc", [], [])
+env.Command(
+    "build/artpages.inc",
+    [],
+    [],
+    )
 
 # Local Variables:
 # mode: python
