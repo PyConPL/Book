@@ -70,7 +70,8 @@ def env_command(
         **kwargs
         )
 
-env.Command(
+env_command(
+    env,
     created_pdf,
     final_pdfs,
     "texexec --pdfcopy --result=$TARGET $SOURCES",
@@ -110,7 +111,8 @@ for alias, location in articles:
     if create_pdfs:
         small_pdf_ls.append("texexec --pdf " + alias)
     small_pdf_ls.append("mv artpages.inc .. 2>/dev/null || true")
-    env.Command(
+    env_command(
+        env,
         root + ".pdf",
         [
             root + ".tex",
@@ -134,7 +136,8 @@ for alias, location in articles:
     if os.path.exists(loc_src):
         if verbose:
             print 'Found:', loc_src
-        env.Command(
+        env_command(
+            env,
             root + ".tex",
             loc_src,
             Copy('$TARGET','$SOURCE'),
@@ -142,7 +145,8 @@ for alias, location in articles:
     elif os.path.exists(main_src):
         if verbose:
             print 'Found:', main_src
-        env.Command(
+        env_command(
+            env,
             root + ".tex",
             main_src,
             Copy('$TARGET','$SOURCE'),
@@ -162,7 +166,8 @@ for alias, location in articles:
         pandoc_patch_ls.append(
             Copy("$TARGET", ".tmp/${TARGET.file}")
             )
-        env.Command(
+        env_command(
+            env,
             root + ".tex",
             [main_md] + diffsrc + Glob("src/*.inc.tex"),
             pandoc_patch_ls,
@@ -173,7 +178,8 @@ for alias, location in articles:
         raise RuntimeError("Not found: %s" % repr(main_md))
 
 
-env.Command(
+env_command(
+    env,
     "build/artpages.inc",
     [],
     [],
