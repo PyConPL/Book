@@ -7,6 +7,7 @@ import glob
 
 import pl_txt
 
+created_pdf = "pyconbook-yyyy.pdf"
 verbose = 1
 if os.getenv('PLAIN'):
     create_pdfs = 0
@@ -54,7 +55,7 @@ final_pdfs = map(
     (lambda x: "{}/{}/{}.pdf".format(build, x[0], x[0])),
     articles)
 
-env.Command("pyconbook-yyyy.pdf",
+env.Command(created_pdf,
     final_pdfs,
     "texexec --pdfcopy --result=$TARGET $SOURCES")
 
