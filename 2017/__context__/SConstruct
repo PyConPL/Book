@@ -56,6 +56,20 @@ final_pdfs = map(
     (lambda x: "{}/{}/{}.pdf".format(build, x[0], x[0])),
     articles)
 
+def env_command(
+        env,
+        target,
+        source,
+        action,
+        **kwargs
+        ):
+    env.Command(
+        target,
+        source,
+        action,
+        **kwargs
+        )
+
 env.Command(
     created_pdf,
     final_pdfs,
