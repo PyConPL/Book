@@ -4,10 +4,11 @@
 
 import os
 import glob
+import time
 
 import pl_txt
 
-created_pdf = "pyconbook-yyyy.pdf"
+created_pdf = time.strftime("pyconbook-%Y.pdf")
 verbose = 1
 if os.getenv('PLAIN'):
     create_pdfs = 0
