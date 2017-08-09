@@ -60,6 +60,12 @@ class TestPL(unittest.TestCase):
         self.assertEqual(pl_txt.remove_comments('%a'), '')
         self.assertEqual(pl_txt.remove_comments('b%'), 'b')
 
+    def test_article_home(self):
+        '''
+        TestPL:
+        '''
+        self.assertEqual(pl_txt.art_home('a'), 'build/a')
+
 def make_tests():
     suite = unittest.TestSuite()
     suite.addTest(unittest.makeSuite(TestPL))

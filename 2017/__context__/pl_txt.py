@@ -103,3 +103,6 @@ def prepare_line(tty_columns, alias, location):
     else:
         txt_line = ''
     return txt_line
+
+def art_home(alias):
+    return "%s/%s" % (build_dir, alias)

@@ -103,7 +103,7 @@ for alias, location in al_loc_ls:
         root + ".pdf",
         src_ls,
         small_pdf_ls,
-        chdir = "%s/%s" % (pl_txt.build_dir, alias),
+        chdir=pl_txt.art_home(alias),
         )
     loc_src  = "src/" + alias + "/text.tex"
     main_src = "../" + location + "/text.tex"
