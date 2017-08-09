@@ -79,7 +79,7 @@ OWASP TOP 10 from 2013:
 
 Try all of the OWASP TOP10 and more using one of the projects:
 * [BeeBox project](https://sourceforge.net/projects/bwapp/files/bee-box/)
-* [OWASP Broken Web Applications Project (OWASP BWAP)](https://www.owasp.org/index.php/OWASP_Broken_Web_Applications_Project)
+* [OWASP Broken Web Applications Project (OWASP BWAP)](https://www.owasp.org/index.php/OWASP_Broken_Web_Applications_Project)
 
 
 ## Common attack vectors on a Python application
@@ -261,7 +261,7 @@ A threat model of a simple app using AngularJS for frontend, Sanic for backend a
 * /                 - static home for serving the JavaScript and HTML parts
 * /api/login        - dedicated authentication endpoint
 * /api/blog         - blog list view
-* /api/blog/<id>   - detail post view
+* /api/blog/<id>    - detail post view
 * /api/user         - user list view
 * /api/user/<id>    - detail user view
 
@@ -416,7 +416,7 @@ Both of them can also be used manually, so you can define your own attack patter
 
 * scapy - Free, OpenSource, Python, if want you to test a custom protocol, you will probably need to use scapy, which is a python library for preparing dedicated TCP, ICMP packages and UDP Datagrams.
 
-Commercial solutions and managed services:
+Commercial solutions and managed services:
 The advantage of the service approach is quite nice, as the report from a cybersecurity consultant does not include false-positives from the scans.
 There are three major players in this filed:
 * Qualys
@@ -486,16 +486,16 @@ the drill, after achieving all goals, starts being “noisy” till a point some
 
 ### Bibliography and follow up recommendations
 
-* [owasp.org](http://owasp.org)
+* [owasp.org](http://owasp.org)
 * [vulnhub.com](https://vulnhub.com)
 * [awesome-security](https://github.com/sbilly/awesome-security)
-* [pentest-wiki](https://github.com/nixawk/pentest-wiki)
+* [pentest-wiki](https://github.com/nixawk/pentest-wiki)
 
 * [safeandsavvy.f-secure.com](https://safeandsavvy.f-secure.com/)
 * [reddit.com/r/netsec/](https://reddit.com/r/netsec/)
 * [blogs.cisco.com](https://blogs.cisco.com/)
 * [youtube.com/channel/UClcE-kVhqyiHCcjYwcpfj9w](https://youtube.com/channel/UClcE-kVhqyiHCcjYwcpfj9w)
-* [gynvael.coldwind.pl](http://gynvael.coldwind.pl/)
+* [gynvael.coldwind.pl](http://gynvael.coldwind.pl/)
 * [nakedsecurity.sophos.com](https://nakedsecurity.sophos.com/)
 * [risky.biz](https://risky.biz/netcasts/risky-business/)
 * [badcyber.com](https://badcyber.com/)
@@ -506,7 +506,7 @@ the drill, after achieving all goals, starts being “noisy” till a point some
 * [picoctf.com](https://picoctf.com/)
 * [microcorruption.com](https://microcorruption.com/)
 * [offensive-security.com](https://www.offensive-security.com/when-things-get-tough/)
-* [Batman threat modeling](https://mobilisationlab.org/wp-content/uploads/2015/08/batman-threat-model-1200.png)
+* [Batman threat modeling](https://mobilisationlab.org/wp-content/uploads/2015/08/batman-threat-model-1200.png)
 * [sshttp - hiding SSH servers behind HTTP](https://github.com/stealth/sshttp)
 
 * Justin Mayer's talk from EuroPython 2017: "Replacing passwords with multiple factors: email, otp, and hardware keys"
