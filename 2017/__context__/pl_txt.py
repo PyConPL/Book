@@ -56,3 +56,18 @@ def env_command(
         action,
         **kwargs
         )
+
+def read_file(name):
+    fd = open(name, 'rb')
+    data = fd.read()
+    fd.close()
+    return data
+
+def write_file(name, data):
+    fd = open(name, 'wb')
+    fd.write(data)
+    fd.close()
+    print("Written %d bytes to '%s'" % (
+        len(data),
+        name,
+        ))
