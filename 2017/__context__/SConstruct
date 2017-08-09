@@ -34,9 +34,9 @@ env = Environment(ENV=os.environ)
 def remove_comments(line):
     return line.split('%')[0]
 
-articles = []
 artlist_file = 'artlist.txt'
 build = "build"
+articles = []
 for line in open(artlist_file):
     line = remove_comments(line)
     words = line.split()
