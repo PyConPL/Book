@@ -52,21 +52,7 @@ def prepare_art():
         articles = filter(lambda x: x[0] in sel_ls, articles)
     return articles
 
-articles = []
-for line in open(artlist_file):
-    line = pl_txt.remove_comments(line)
-    words = line.split()
-    if words:
-        alias, location = words[:2]
-        articles.append([alias, location])
-
-if only_first_article_for_testing:
-    articles = articles[:1]
-
-selected = os.getenv('SELECTED')
-if selected:
-    sel_ls = selected.split()
-    articles = filter(lambda x: x[0] in sel_ls, articles)
+articles = prepare_art()
 
 final_pdfs = map(
     (lambda x: "{}/{}/{}.pdf".format(build, x[0], x[0])),
