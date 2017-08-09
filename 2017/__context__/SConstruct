@@ -107,7 +107,7 @@ for alias, location in al_loc_ls:
         root + ".pdf",
         [
             root + ".tex",
-            artlist_file,
+            genart_file,
             build + "/artpages.inc",
             glob.glob("sty/*"),
             glob.glob("src/" + alias + "/*")
