@@ -10,6 +10,7 @@ import pl_txt
 
 created_pdf = time.strftime("pyconbook-%Y.pdf")
 verbose = 1
+debug = 0
 if os.getenv('PLAIN'):
     create_pdfs = 0
     omit_diffs = 1
@@ -60,6 +61,12 @@ def env_command(
         action,
         **kwargs
         ):
+    if debug:
+        print('')
+        tmp_format = 'target'; print('Eval: %s %s' % (tmp_format, eval(tmp_format)))
+        tmp_format = 'source'; print('Eval: %s %s' % (tmp_format, eval(tmp_format)))
+        tmp_format = 'action'; print('Eval: %s %s' % (tmp_format, eval(tmp_format)))
+        tmp_format = 'kwargs'; print('Eval: %s %s' % (tmp_format, eval(tmp_format)))
     env.Command(
         target,
         source,
