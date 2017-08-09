@@ -76,3 +76,10 @@ def write_if_needed(name, new_data):
     prev_data = read_file(name)
     if prev_data != new_data:
         write_file(name, new_data)
+
+def prepare_file(al_loc_ls):
+    line_ls = []
+    for alias, location in al_loc_ls:
+        elem = '%s %s\n' % (alias, location)
+        line_ls.append(elem)
+    return ''.join(line_ls)
