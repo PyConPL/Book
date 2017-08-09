@@ -9,7 +9,7 @@ import time
 import pl_txt
 
 created_pdf = time.strftime("pyconbook-%Y.pdf")
-verbose = 1
+verbose = 0
 if os.getenv('PLAIN'):
     create_pdfs = 0
     omit_diffs = 1
