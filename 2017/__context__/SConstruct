@@ -32,7 +32,7 @@ os.environ['TEXINPUTS'] = (
 env = Environment(ENV=os.environ)
 
 genart_file = 'genart.txt'
-build = "build"
+build_dir = "build"
 
 def prepare_art(artlist_file):
     al_loc_ls = []
@@ -57,7 +57,7 @@ new_data = pl_txt.prepare_file(al_loc_ls)
 pl_txt.write_if_needed(genart_file, new_data)
 
 final_pdfs = map(
-    (lambda x: "{}/{}/{}.pdf".format(build, x[0], x[0])),
+    (lambda x: "{}/{}/{}.pdf".format(build_dir, x[0], x[0])),
     al_loc_ls)
 
 pl_txt.env_command(
@@ -69,12 +69,12 @@ pl_txt.env_command(
 
 for alias, location in al_loc_ls:
     txt_line = pl_txt.prepare_line(tty_columns, alias, location)
-    root = "{}/{}/{}".format(build, alias, alias)
+    root = "{}/{}/{}".format(build_dir, alias, alias)
     src_ls = (
         [
             root + ".tex",
             genart_file,
-            build + "/artpages.inc",
+            build_dir + "/artpages.inc",
             ] +
         glob.glob("sty/*") +
         glob.glob("src/" + alias + "/*"))
@@ -104,7 +104,7 @@ for alias, location in al_loc_ls:
         root + ".pdf",
         src_ls,
         small_pdf_ls,
-        chdir = "%s/%s" % (build, alias),
+        chdir = "%s/%s" % (build_dir, alias),
         )
     loc_src  = "src/" + alias + "/text.tex"
     main_src = "../" + location + "/text.tex"
