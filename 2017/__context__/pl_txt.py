@@ -31,3 +31,6 @@ def pass_line(one_line):
     else:
         result = 0
     return result
+
+def remove_comments(line):
+    return line.split('%')[0]

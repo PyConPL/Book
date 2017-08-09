@@ -51,6 +51,15 @@ class TestPL(unittest.TestCase):
         self.assertEqual(pl_txt.pass_line('%'), 0)
         self.assertEqual(pl_txt.pass_line(' %'), 0)
 
+    def test_comment_removing(self):
+        '''
+        TestPL:
+        '''
+        self.assertEqual(pl_txt.remove_comments(''), '')
+        self.assertEqual(pl_txt.remove_comments('a'), 'a')
+        self.assertEqual(pl_txt.remove_comments('%a'), '')
+        self.assertEqual(pl_txt.remove_comments('b%'), 'b')
+
 def make_tests():
     suite = unittest.TestSuite()
     suite.addTest(unittest.makeSuite(TestPL))

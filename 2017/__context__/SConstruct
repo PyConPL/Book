@@ -31,14 +31,11 @@ os.environ['TEXINPUTS'] = (
     os.environ['TEXINPUTS'] )
 env = Environment(ENV=os.environ)
 
-def remove_comments(line):
-    return line.split('%')[0]
-
 artlist_file = 'artlist.txt'
 build = "build"
 articles = []
 for line in open(artlist_file):
-    line = remove_comments(line)
+    line = pl_txt.remove_comments(line)
     words = line.split()
     if words:
         alias, location = words[:2]
