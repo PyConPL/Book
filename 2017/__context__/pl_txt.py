@@ -4,6 +4,7 @@
 import os
 
 debug = 0
+build_dir = "build"
 
 def apply_patch(diffsrc, test_mode=0):
     src_file = diffsrc + ["/dev/null"]
