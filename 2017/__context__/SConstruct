@@ -74,7 +74,7 @@ def env_command(
         **kwargs
         )
 
-env_command(
+pl_txt.env_command(
     env,
     created_pdf,
     final_pdfs,
@@ -115,7 +115,7 @@ for alias, location in articles:
     if create_pdfs:
         small_pdf_ls.append("texexec --pdf " + alias)
     small_pdf_ls.append("mv artpages.inc .. 2>/dev/null || true")
-    env_command(
+    pl_txt.env_command(
         env,
         root + ".pdf",
         [
@@ -140,7 +140,7 @@ for alias, location in articles:
     if os.path.exists(loc_src):
         if verbose:
             print 'Found:', loc_src
-        env_command(
+        pl_txt.env_command(
             env,
             root + ".tex",
             loc_src,
@@ -149,7 +149,7 @@ for alias, location in articles:
     elif os.path.exists(main_src):
         if verbose:
             print 'Found:', main_src
-        env_command(
+        pl_txt.env_command(
             env,
             root + ".tex",
             main_src,
@@ -170,7 +170,7 @@ for alias, location in articles:
         pandoc_patch_ls.append(
             Copy("$TARGET", ".tmp/${TARGET.file}")
             )
-        env_command(
+        pl_txt.env_command(
             env,
             root + ".tex",
             [main_md] + diffsrc + Glob("src/*.inc.tex"),
@@ -182,7 +182,7 @@ for alias, location in articles:
         raise RuntimeError("Not found: %s" % repr(main_md))
 
 
-env_command(
+pl_txt.env_command(
     env,
     "build/artpages.inc",
     [],
