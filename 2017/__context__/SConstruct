@@ -54,6 +54,8 @@ def prepare_art():
     return al_loc_ls
 
 al_loc_ls = prepare_art()
+new_data = pl_txt.prepare_file(al_loc_ls)
+pl_txt.write_if_needed(genart_file, new_data)
 
 final_pdfs = map(
     (lambda x: "{}/{}/{}.pdf".format(build, x[0], x[0])),
