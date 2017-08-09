@@ -154,14 +154,13 @@ There are multiple sources to find real word network datasets like [SNAP](http:/
 We will use a real world network and analyse the network using the various tools and measures we learn in this tutorial.
 
 
-### References and other tools
+## References
 
-Official NetworkX tutorial - https://github.com/networkx/notebooks/blob/master/tutorial.ipynb
-NetworkX documentation - https://networkx.readthedocs.io/en/stable/
-EuroSciPy 2016 tutorial - https://github.com/MridulS/euroscipy-networkx
-PyCon/SciPy 2017 tutorial - https://github.com/ericmjl/Network-Analysis-Made-Simple
-Video Tutorial - https://www.youtube.com/watch?v=E4VKzFmByhE`&`t=3139s
-DataCamp course - https://www.datacamp.com/courses/network-analysis-in-python-part-1
-
-Datasets (Social Network Analysis project at Stanford) - http://snap.stanford.edu/data/index.html
-KONECT (KONECT project at UNamur) - http://konect.uni-koblenz.de
+1. Official NetworkX tutorial. https://github.com/networkx/notebooks/blob/master/tutorial.ipynb
+2. NetworkX documentation. https://networkx.readthedocs.io/en/stable/
+3. EuroSciPy 2016 tutorial. https://github.com/MridulS/euroscipy-networkx
+4. PyCon/SciPy 2017 tutorial. https://github.com/ericmjl/Network-Analysis-Made-Simple
+5. Video Tutorial. https://www.youtube.com/watch?v=E4VKzFmByhE`&`t=3139s
+6. DataCamp course. https://www.datacamp.com/courses/network-analysis-in-python-part-1
+7. Datasets (Social Network Analysis project at Stanford). http://snap.stanford.edu/data/index.html
+8. KONECT (KONECT project at UNamur). http://konect.uni-koblenz.de
