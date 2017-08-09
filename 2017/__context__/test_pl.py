@@ -42,6 +42,15 @@ class TestPL(unittest.TestCase):
             '[ -L src -o ! -d ../../src/a ] || ln -s ../../src/a src',
             )
 
+    def test_article_selection(self):
+        '''
+        TestPL:
+        '''
+        self.assertEqual(pl_txt.pass_line(''), 0)
+        self.assertEqual(pl_txt.pass_line('a'), 1)
+        self.assertEqual(pl_txt.pass_line('%'), 0)
+        self.assertEqual(pl_txt.pass_line(' %'), 0)
+
 def make_tests():
     suite = unittest.TestSuite()
     suite.addTest(unittest.makeSuite(TestPL))

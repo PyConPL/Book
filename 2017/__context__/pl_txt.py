@@ -24,3 +24,10 @@ def link_src(alias):
     return "[ -L src -o ! -d %(source)s ] || ln -s %(source)s src" % dict(
         source=source,
         )
+
+def pass_line(one_line):
+    if one_line and not one_line.strip().startswith('%'):
+        result = 1
+    else:
+        result = 0
+    return result
