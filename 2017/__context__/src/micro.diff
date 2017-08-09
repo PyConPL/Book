@@ -4,7 +4,7 @@
  \usemodule[pycon-yyyy]
  \starttext
  
-+\Title{Micropython w domowej automatyce}
++\Title{Micropython w domowej automatyce (warsztat)}
 +\Author{Szymon Pyżalski, Nikoloz Glonti}
 +\MakeTitlePage
  
