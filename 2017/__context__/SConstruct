@@ -10,7 +10,6 @@ import pl_txt
 
 created_pdf = time.strftime("pyconbook-%Y.pdf")
 verbose = 1
-debug = 0
 if os.getenv('PLAIN'):
     create_pdfs = 0
     omit_diffs = 1
@@ -53,26 +52,6 @@ if selected:
 final_pdfs = map(
     (lambda x: "{}/{}/{}.pdf".format(build, x[0], x[0])),
     articles)
-
-def env_command(
-        env,
-        target,
-        source,
-        action,
-        **kwargs
-        ):
-    if debug:
-        print('')
-        tmp_format = 'target'; print('Eval: %s %s' % (tmp_format, eval(tmp_format)))
-        tmp_format = 'source'; print('Eval: %s %s' % (tmp_format, eval(tmp_format)))
-        tmp_format = 'action'; print('Eval: %s %s' % (tmp_format, eval(tmp_format)))
-        tmp_format = 'kwargs'; print('Eval: %s %s' % (tmp_format, eval(tmp_format)))
-    env.Command(
-        target,
-        source,
-        action,
-        **kwargs
-        )
 
 pl_txt.env_command(
     env,
