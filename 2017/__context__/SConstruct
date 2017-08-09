@@ -32,6 +32,7 @@ os.environ['TEXINPUTS'] = (
 env = Environment(ENV=os.environ)
 
 artlist_file = 'artlist.txt'
+genart_file = 'genart.txt'
 build = "build"
 
 def prepare_art():
