@@ -80,6 +80,14 @@ for alias, location in al_loc_ls:
     else:
         txt_line = ''
     root = "{}/{}/{}".format(build, alias, alias)
+    src_ls = (
+        [
+            root + ".tex",
+            genart_file,
+            build + "/artpages.inc",
+            ] +
+        glob.glob("sty/*") +
+        glob.glob("src/" + alias + "/*"))
     small_pdf_ls = [
             "pwd",
             "# " + txt_line,
