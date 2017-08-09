@@ -78,6 +78,12 @@ class TestPL(unittest.TestCase):
         '''
         self.assertEqual(pl_txt.art_file_pdf('cd'), 'build/cd/cd.pdf')
 
+    def test_pages_of_articles(self):
+        '''
+        TestPL:
+        '''
+        self.assertEqual(pl_txt.art_pages_file(), 'build/artpages.inc')
+
 def make_tests():
     suite = unittest.TestSuite()
     suite.addTest(unittest.makeSuite(TestPL))

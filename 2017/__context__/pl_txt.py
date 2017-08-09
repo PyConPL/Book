@@ -116,3 +116,6 @@ def art_file_core(alias):
 
 def art_file_pdf(alias):
     return art_file_core(alias) + '.pdf'
+
+def art_pages_file():
+    return art_home('artpages.inc')

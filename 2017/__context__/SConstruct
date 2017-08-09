@@ -73,7 +73,7 @@ for alias, location in al_loc_ls:
         [
             root + ".tex",
             genart_file,
-            pl_txt.build_dir + "/artpages.inc",
+            pl_txt.art_pages_file(),
             ] +
         glob.glob("sty/*") +
         glob.glob("src/" + alias + "/*"))
