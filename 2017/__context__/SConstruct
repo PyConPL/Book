@@ -112,14 +112,7 @@ for alias, location in al_loc_ls:
     pl_txt.env_command(
         env,
         root + ".pdf",
-        [
-            root + ".tex",
-            genart_file,
-            build + "/artpages.inc",
-            ] +
-            glob.glob("sty/*") +
-            glob.glob("src/" + alias + "/*")
-            ,
+        src_ls,
         small_pdf_ls,
         chdir = "%s/%s" % (build, alias),
         )
