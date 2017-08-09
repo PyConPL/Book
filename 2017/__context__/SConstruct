@@ -108,9 +108,10 @@ for alias, location in al_loc_ls:
             root + ".tex",
             genart_file,
             build + "/artpages.inc",
-            glob.glob("sty/*"),
+            ] +
+            glob.glob("sty/*") +
             glob.glob("src/" + alias + "/*")
-            ],
+            ,
         small_pdf_ls,
         chdir = "%s/%s" % (build, alias),
         )
