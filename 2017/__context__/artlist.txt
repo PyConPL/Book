@@ -16,8 +16,6 @@
 
 pycon2017 pycon2017
 hardware presentations/python_hardware
-% Nazwa zaczynająca się od 'r' powodowała problemy, więc
-% zmienione na 'django'.
 real presentations/django_in_the_real_world
 pyramid presentations/pyramidalny_microframework
 mars presentations/python_w_laziku_marsjanskim
