@@ -337,7 +337,6 @@ quite easy to add teh table of companies in your city to your website.  Let
 me know if you are interested in doing so. 
 
 
-## More Information
+## References
 
-For more information about the ZODB, I invite you to visit:
-https://PythonLinks.info/zodb
+1. https://PythonLinks.info/zodb

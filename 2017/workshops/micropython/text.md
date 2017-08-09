@@ -204,13 +204,9 @@ wprowadzamy stosowne opóźnienie w kodzie:
     # ...
 ```
 
-## Materiały internetowe
+## Bibliografia
 
-* http://www.electronics-tutorials.ws/ - wyczerpujące samouczki różnych
-  zagadnień elektronicznych.
-* https://learn.sparkfun.com/tutorials/ - samouczki nastawione na pracę
-  z mikrokontrolerami
-* http://micropython-on-wemos-d1-mini.readthedocs.io/en/latest/ - materiały
-  ze szkolenia micropythonowego Radomira Dopieralskiego
-* https://docs.micropython.org/en/latest/esp8266/esp8266/tutorial/intro.html
-  - oficjalna dokumentacja micropythona na ESP 8266
+1. Wyczerpujące samouczki różnych zagadnień elektronicznych. http://www.electronics-tutorials.ws/
+2. Samouczki nastawione na pracę z mikrokontrolerami. https://learn.sparkfun.com/tutorials/
+3. Materiały ze szkolenia MicroPythonowego Radomira Dopieralskiego. http://micropython-on-wemos-d1-mini.readthedocs.io/en/latest/
+4. Oficjalna dokumentacja MicroPythona na ESP 8266. https://docs.micropython.org/en/latest/esp8266/esp8266/tutorial/intro.html

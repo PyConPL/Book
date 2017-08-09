@@ -119,10 +119,10 @@ W ten sposób utworzony prostopadłościan jest pełny w środku. Teraz trzeba s
 
 Istotne jest to, że w powyższym przykładzie użyliśmy funkcji *getPos ()*, która zwraca współrzędne jako wartości rzeczywiste, w przeciwieństwie do funkcji *getTilePos ()*, która zwraca współrzędne jako liczby całkowite. 
 
-## Źródła:
-  -   [Minecraft - gamepedia]
-  -   "*Nauka programowania z Minecraftem*" - autor: Craig Richardson, Warszawa, 2016.
+## Bibliografia
 
+1. Minecraft - gamepedia. https://minecraft-pl.gamepedia.com/
+2. Craig Richardson. Nauka programowania z Minecraftem. PWN, Warszawa, 2016.
 
    [Minecraft]: <[https://minecraft.net/en-us/download/]>
    [Python]: <https://www.python.org/downloads/>

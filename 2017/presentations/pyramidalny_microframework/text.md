@@ -312,12 +312,12 @@ aplikacji, a jego szybkość i niezawodność powodują, że jest tani w utrzyma
 Dlatego też mam nadzieję, że moim tekstem zachęciłem cię do przyjrzenia się
 (może ponownego) temu niedocenionemu frameworkowi, jakim jest Pyramid.
 
-# Źródła
+## Bibliografia
 
-* https://trypyramid.com - Pyramid strona domowa
-* https://pylonsproject.org - Pylons Project
-* https://docs.pylonsproject.org/projects/pyramid/en/latest/ - dokumentacja Pyramida
-* https://pylonsproject.org/projects.html - projekty rozwijane przez Pylons Project
-* https://trypyramid.com/resources-extending-pyramid.html - oficjalne dodatki (*add-ons*)
-* https://webob.org - strona domowa `WebOb`, wrappera WSGI używanego przez Pyramid
-* https://docs.pylonsproject.org/projects/pyramid/en/latest/quick`_`tour.html - przewodnik po Pyramidzie
+1. https://trypyramid.com - Pyramid strona domowa
+2. https://pylonsproject.org - Pylons Project
+3. https://docs.pylonsproject.org/projects/pyramid/en/latest/ - dokumentacja Pyramida
+4. https://pylonsproject.org/projects.html - projekty rozwijane przez Pylons Project
+5. https://trypyramid.com/resources-extending-pyramid.html - oficjalne dodatki (*add-ons*)
+6. https://webob.org - strona domowa `WebOb`, wrappera WSGI używanego przez Pyramid
+7. https://docs.pylonsproject.org/projects/pyramid/en/latest/quick`_`tour.html - przewodnik po Pyramidzie

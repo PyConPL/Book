@@ -189,4 +189,3 @@ There is a [Patrick Goebel book](http://wiki.ros.org/Books/ROSbyExampleVol2) whi
 
 
 For an introduction to robotics, I recommend watching some on-line videos or participating in free MOOCs. Actually one of the first MOOCs -- [AI for robotics](https://www.udacity.com/course/artificial-intelligence-for-robotics--cs373) on Udacity is a way that Igor started using Python seriously. https://www.udacity.com/course/robotics-nanodegree--nd209
-

@@ -484,33 +484,30 @@ If the red timing finishes undetected, it means the company that undergoes the t
 the drill, after achieving all goals, starts being “noisy” till a point someone should notice…
 
 
-### Bibliography and follow up recommendations
+## References
 
-* [owasp.org](http://owasp.org)
-* [vulnhub.com](https://vulnhub.com)
-* [awesome-security](https://github.com/sbilly/awesome-security)
-* [pentest-wiki](https://github.com/nixawk/pentest-wiki)
-
-* [safeandsavvy.f-secure.com](https://safeandsavvy.f-secure.com/)
-* [reddit.com/r/netsec/](https://reddit.com/r/netsec/)
-* [blogs.cisco.com](https://blogs.cisco.com/)
-* [youtube.com/channel/UClcE-kVhqyiHCcjYwcpfj9w](https://youtube.com/channel/UClcE-kVhqyiHCcjYwcpfj9w)
-* [gynvael.coldwind.pl](http://gynvael.coldwind.pl/)
-* [nakedsecurity.sophos.com](https://nakedsecurity.sophos.com/)
-* [risky.biz](https://risky.biz/netcasts/risky-business/)
-* [badcyber.com](https://badcyber.com/)
-* [packetstormsecurity.com](https://packetstormsecurity.com)
-* [labs.mwrinfosecurity.com/](https://labs.mwrinfosecurity.com/)
-* [ctftime.org](https://ctftime.org/ctf-wtf/)
-* [overthewire.org](http://overthewire.org/wargames/)
-* [picoctf.com](https://picoctf.com/)
-* [microcorruption.com](https://microcorruption.com/)
-* [offensive-security.com](https://www.offensive-security.com/when-things-get-tough/)
-* [Batman threat modeling](https://mobilisationlab.org/wp-content/uploads/2015/08/batman-threat-model-1200.png)
-* [sshttp - hiding SSH servers behind HTTP](https://github.com/stealth/sshttp)
-
-* Justin Mayer's talk from EuroPython 2017: "Replacing passwords with multiple factors: email, otp, and hardware keys"
-
+1. [owasp.org](http://owasp.org)
+2. [vulnhub.com](https://vulnhub.com)
+3. [awesome-security](https://github.com/sbilly/awesome-security)
+4. [pentest-wiki](https://github.com/nixawk/pentest-wiki)
+5. [safeandsavvy.f-secure.com](https://safeandsavvy.f-secure.com/)
+6. [reddit.com/r/netsec/](https://reddit.com/r/netsec/)
+7. [blogs.cisco.com](https://blogs.cisco.com/)
+8. [youtube.com/channel/UClcE-kVhqyiHCcjYwcpfj9w](https://youtube.com/channel/UClcE-kVhqyiHCcjYwcpfj9w)
+9. [gynvael.coldwind.pl](http://gynvael.coldwind.pl/)
+10. [nakedsecurity.sophos.com](https://nakedsecurity.sophos.com/)
+11. [risky.biz](https://risky.biz/netcasts/risky-business/)
+12. [badcyber.com](https://badcyber.com/)
+13. [packetstormsecurity.com](https://packetstormsecurity.com)
+14. [labs.mwrinfosecurity.com/](https://labs.mwrinfosecurity.com/)
+15. [ctftime.org](https://ctftime.org/ctf-wtf/)
+16. [overthewire.org](http://overthewire.org/wargames/)
+17. [picoctf.com](https://picoctf.com/)
+18. [microcorruption.com](https://microcorruption.com/)
+19. [offensive-security.com](https://www.offensive-security.com/when-things-get-tough/)
+20. [Batman threat modeling](https://mobilisationlab.org/wp-content/uploads/2015/08/batman-threat-model-1200.png)
+21. [sshttp - hiding SSH servers behind HTTP](https://github.com/stealth/sshttp)
+22. Justin Mayer's talk from EuroPython 2017: "Replacing passwords with multiple factors: email, otp, and hardware keys"
 
 ### About author
 

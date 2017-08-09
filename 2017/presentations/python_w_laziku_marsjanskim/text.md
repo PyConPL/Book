@@ -135,20 +135,15 @@ warto z niej korzystać — w końcu możemy tworzyć zupełnie nowe rzeczy i ro
 nasze zainteresowania w wielu dziedzinach w technologii, którą już dobrze znamy
 i lubimy, dzięki czemu próg wejścia jest znacznie mniejszy.
 
-### Źródła
+## Bibliografia
 
-* https://www.python.org/about/success/usa/ — Python success stories
-* https://wiki.python.org/moin/Applications — lista aplikacji napisanych w
-Pythonie
-* https://en.wikipedia.org/wiki/List`_`of`_`Python`_`software — inna (dłuższa) lista
-aplikacji napisanych w Pythonie
-* https://worthwhile.com/blog/2016/07/19/django-python-advantages/ — Python i
-web development
-* https://wiki.python.org/moin/WebFrameworks — Frameworki webowe w Pythonie
-* http://plumbum.readthedocs.io/ — oficjalna strona Plumbum
-* http://scikit-learn.org/ — SciKit learn
-* https://micropython.org/ — MicroPython
-* http://www.ros.org/ — ROS
-* https://stackoverflow.com/a/15011981/540717 — Python i aplikacje czasu
-rzeczywistego
-
+1. https://www.python.org/about/success/usa/ — Python success stories
+2. https://wiki.python.org/moin/Applications — lista aplikacji napisanych w Pythonie
+3. https://en.wikipedia.org/wiki/List`_`of`_`Python`_`software — inna (dłuższa) lista aplikacji napisanych w Pythonie
+4. https://worthwhile.com/blog/2016/07/19/django-python-advantages/ — Python i web development
+5. https://wiki.python.org/moin/WebFrameworks — Frameworki webowe w Pythonie
+6. http://plumbum.readthedocs.io/ — oficjalna strona Plumbum
+7. http://scikit-learn.org/ — SciKit learn
+8. https://micropython.org/ — MicroPython
+9. http://www.ros.org/ — ROS
+10. https://stackoverflow.com/a/15011981/540717 — Python i aplikacje czasu rzeczywistego

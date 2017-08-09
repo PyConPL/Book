@@ -67,6 +67,7 @@ Ze względu na spore zapotrzebowanie na energię wsparcie dla komunikacji wifi o
 Przedstawione powyżej technologie stanowią tylko część rozwiązań stosowanych w urządzeniach automatyki domowej. Rynek inteligentnych domów oraz internetu rzeczy rozwija się bardzo dynamicznie, co powoduje powstawanie coraz to nowych standardów. Producenci systemów oraz urządzeń preferują własne rozwiązania, starając się zagarnąć jak największą część rynku dla siebie. Powyższe czynniki oraz różnorodność wymagań nie sprzyjają pojawieniu się spójnego standardu komunikacji urządzeń automatyki domowej. Niemniej opisane rozwiązania posiadają już bardzo silną pozycję na rynku, a ich znajomość na pewno ułatwi odnalezienie się w gąszczu wykorzystywanych interfejsów i protokołów komunikacyjnych.
 
 ## Bibliografia
+
 1. Tomasz Francuz - Język C dla mikrokontrolerów AVR. Od podstaw do zaawansowanych aplikacji: http://helion.pl/ksiazki/jezyk-c-dla-mikrokontrolerow-avr-od-podstaw-do-zaawansowanych-aplikacji-tomasz-francuz,jcmikr.htm
 2. Interfejs UART: https://en.wikipedia.org/wiki/Universal`_`asynchronous`_`receiver/transmitter
 3. Magistrale szeregowe: http://www.epanorama.net/links/serialbus.html
