@@ -1,6 +1,8 @@
 #!/usr/bin/env python2
 # -*- coding: UTF-8 -*-
 
+import os
+
 debug = 0
 
 def apply_patch(diffsrc, test_mode=0):
@@ -73,7 +75,10 @@ def write_file(name, data):
         ))
 
 def write_if_needed(name, new_data):
-    prev_data = read_file(name)
+    if os.path.isfile(name):
+        prev_data = read_file(name)
+    else:
+        prev_data = ''
     if prev_data != new_data:
         write_file(name, new_data)
 
