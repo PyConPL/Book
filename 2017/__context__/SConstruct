@@ -31,11 +31,10 @@ os.environ['TEXINPUTS'] = (
     os.environ['TEXINPUTS'] )
 env = Environment(ENV=os.environ)
 
-artlist_file = 'artlist.txt'
 genart_file = 'genart.txt'
 build = "build"
 
-def prepare_art():
+def prepare_art(artlist_file):
     al_loc_ls = []
     for line in open(artlist_file):
         line = pl_txt.remove_comments(line)
@@ -53,7 +52,7 @@ def prepare_art():
         al_loc_ls = filter(lambda x: x[0] in sel_ls, al_loc_ls)
     return al_loc_ls
 
-al_loc_ls = prepare_art()
+al_loc_ls = prepare_art('artlist.txt')
 new_data = pl_txt.prepare_file(al_loc_ls)
 pl_txt.write_if_needed(genart_file, new_data)
 
