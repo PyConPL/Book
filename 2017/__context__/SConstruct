@@ -56,7 +56,7 @@ new_data = pl_txt.prepare_file(al_loc_ls)
 pl_txt.write_if_needed(genart_file, new_data)
 
 final_pdfs = map(
-    (lambda x: "{}/{}/{}.pdf".format(pl_txt.build_dir, x[0], x[0])),
+    lambda x: pl_txt.art_file_pdf(x[0]),
     al_loc_ls)
 
 pl_txt.env_command(

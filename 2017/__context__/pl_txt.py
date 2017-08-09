@@ -113,3 +113,6 @@ def art_file_core(alias):
         '/',
         alias,
         ])
+
+def art_file_pdf(alias):
+    return art_file_core(alias) + '.pdf'
