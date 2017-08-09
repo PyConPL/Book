@@ -1,0 +1,15 @@
+--- uart.tex
++++ uart.tex
+@@ -1,9 +1,9 @@
+ \usemodule[pycon-yyyy]
+ \starttext
+ 
+-
+-\section[inteligentny-dom---technologie-komunikacji-między-urządzeniami---krzysztof-czarnota]{Inteligentny
+-dom - technologie komunikacji między urządzeniami - Krzysztof Czarnota}
++\Title{Inteligentny dom - technologie komunikacji między urządzeniami}
++\Author{Krzysztof Czarnota}
++\MakeTitlePage
+ 
+ System zarządzania inteligentnym budynkiem wymaga sprawowania kontroli
+ nad urządzeniami zainstalowanymi w obiekcie. Sprawna i odporna na błędy

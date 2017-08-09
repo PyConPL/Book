@@ -1,0 +1,15 @@
+--- mars.tex
++++ mars.tex
+@@ -1,9 +1,9 @@
+ \usemodule[pycon-yyyy]
+ \starttext
+ 
+-
+-\section[python-w-łaziku-marsjańskim-michał-barciś]{Python w łaziku
+-marsjańskim? --- Michał Barciś}
++\Title{Python w łaziku marsjańskim?}
++\Author{Michał Barciś}
++\MakeTitlePage
+ 
+ Już od ponad dwóch lat pracujemy wspólnie z zespołem Continuum z
+ Uniwersytetu Wrocławskiego nad prototypem łazika marsjańskiego Aleph1. W

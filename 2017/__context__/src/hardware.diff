@@ -1,0 +1,15 @@
+--- hardware.tex
++++ hardware.tex
+@@ -1,9 +1,9 @@
+ \usemodule[pycon-yyyy]
+ \starttext
+ 
+-
+-\section[python-w-projektach-sprzętowych---piotr-maliński]{Python w
+-projektach sprzętowych - Piotr Maliński}
++\Title{Python w projektach sprzętowych}
++\Author{Piotr Maliński}
++\MakeTitlePage
+ 
+ \subsection[skąd-ta-popularność-projektów-hardware-plus-software]{Skąd
+ ta popularność projektów \quotation{hardware plus software}?}

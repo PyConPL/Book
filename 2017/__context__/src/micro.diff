@@ -1,0 +1,15 @@
+--- micro.tex
++++ micro.tex
+@@ -1,9 +1,9 @@
+ \usemodule[pycon-yyyy]
+ \starttext
+ 
+-
+-\section[korzystanie-z-gpio-mikrokontrolerów]{Korzystanie z GPIO
+-mikrokontrolerów}
++\Title{Korzystanie z GPIO mikrokontrolerów}
++\Author{Szymon Pyżalski, Nikoloz Glonti}
++\MakeTitlePage
+ 
+ Dla osoby mającej doświadczenie w Pythonie rozpoczęcie pracy ze
+ środowiskiem MicroPython zwykle nie nastręcza problemów od strony

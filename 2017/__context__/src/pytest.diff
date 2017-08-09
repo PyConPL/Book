@@ -1,0 +1,15 @@
+--- pytest.tex
++++ pytest.tex
+@@ -1,9 +1,9 @@
+ \usemodule[pycon-yyyy]
+ \starttext
+ 
+-
+-\section[parametrize-all-the-tests-workshop]{Parametrize all the tests!
+-(workshop)}
++\Title{Parametrize all the tests! (workshop)}
++\Author{Miro Hrončok}
++\MakeTitlePage
+ 
+ In this workshop you will learn about {\bf pytest} {[}1{]} and why it is
+ better than unittest or nose. You will see and try out examples on easy
