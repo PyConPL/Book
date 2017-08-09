@@ -35,28 +35,28 @@ artlist_file = 'artlist.txt'
 build = "build"
 
 def prepare_art():
-    articles = []
+    al_loc_ls = []
     for line in open(artlist_file):
         line = pl_txt.remove_comments(line)
         words = line.split()
         if words:
             alias, location = words[:2]
-            articles.append([alias, location])
+            al_loc_ls.append([alias, location])
 
     if only_first_article_for_testing:
-        articles = articles[:1]
+        al_loc_ls = al_loc_ls[:1]
 
     selected = os.getenv('SELECTED')
     if selected:
         sel_ls = selected.split()
-        articles = filter(lambda x: x[0] in sel_ls, articles)
-    return articles
+        al_loc_ls = filter(lambda x: x[0] in sel_ls, al_loc_ls)
+    return al_loc_ls
 
-articles = prepare_art()
+al_loc_ls = prepare_art()
 
 final_pdfs = map(
     (lambda x: "{}/{}/{}.pdf".format(build, x[0], x[0])),
-    articles)
+    al_loc_ls)
 
 pl_txt.env_command(
     env,
@@ -65,7 +65,7 @@ pl_txt.env_command(
     "texexec --pdfcopy --result=$TARGET $SOURCES",
     )
 
-for alias, location in articles:
+for alias, location in al_loc_ls:
     if tty_columns:
         dash_count = tty_columns - 5 - len(alias) - len(location)
         txt_line = ''.join([
