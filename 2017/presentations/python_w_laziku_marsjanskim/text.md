@@ -50,7 +50,7 @@ Jednak chyba największą zaletą Pythona w aplikacjach desktopowych jest używa
 go jako narzędzia do rozszerzeń i skryptowania rozwiązań. Blender, VIM i wiele
 innych właśnie w ten sposób z powodzeniem wykorzystuje Pythona.
 
-## Devops i skrypty
+## DevOps i skrypty
 
 Python jako język skryptowy z wbudowanym REPL i wieloma jego zamiennikami takimi
 jak iPython, bpython, ptpython naturalnie nadaje się do zarządzania systemem

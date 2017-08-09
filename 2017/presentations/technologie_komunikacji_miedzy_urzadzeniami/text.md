@@ -58,10 +58,10 @@ Wyróżniamy trzy typy urządzeń ZigBee:
 
 Standard ZigBee wykorzystywany jest w urządzeniach, które wysyłają mało danych oraz wymagają długiego czasu pracy na zasilaniu bateryjnym. Typowe zastosowanie znajduje on w różnego rodzaju czujnikach (dymu, zalania, otwarcia okien) i inteligentnych przełącznikach (świtała, rolet).
 
-## Wifi
-Wifi to standard przeznaczony do budowy bezprzewodowych sieci komputerowych. Urządzenia pracują w paśmie częstotliwości 2,4 GHz lub 5 GHz. Powszechność urządzeń wykorzystujących standard wifi spowodowała, że technologia ta została wykorzystana także w urządzeniach automatyki budynkowej.
+## WiFi
+WiFi to standard przeznaczony do budowy bezprzewodowych sieci komputerowych. Urządzenia pracują w paśmie częstotliwości 2,4 GHz lub 5 GHz. Powszechność urządzeń wykorzystujących standard WiFi spowodowała, że technologia ta została wykorzystana także w urządzeniach automatyki budynkowej.
 
-Ze względu na spore zapotrzebowanie na energię wsparcie dla komunikacji wifi oferowane jest przeważnie w urządzeniach na stałe podłączonych do zasilania, takich jak inteligentne żarówki czy sterowniki centralnego ogrzewania. Technologia ta jest także często wykorzystywana w projektach hobbystycznych za sprawą taniego i łatwo dostępnego modułu wifi ESP8266.
+Ze względu na spore zapotrzebowanie na energię wsparcie dla komunikacji WiFi oferowane jest przeważnie w urządzeniach na stałe podłączonych do zasilania, takich jak inteligentne żarówki czy sterowniki centralnego ogrzewania. Technologia ta jest także często wykorzystywana w projektach hobbystycznych za sprawą taniego i łatwo dostępnego modułu WiFi ESP8266.
 
 ## Podsumowanie
 Przedstawione powyżej technologie stanowią tylko część rozwiązań stosowanych w urządzeniach automatyki domowej. Rynek inteligentnych domów oraz internetu rzeczy rozwija się bardzo dynamicznie, co powoduje powstawanie coraz to nowych standardów. Producenci systemów oraz urządzeń preferują własne rozwiązania, starając się zagarnąć jak największą część rynku dla siebie. Powyższe czynniki oraz różnorodność wymagań nie sprzyjają pojawieniu się spójnego standardu komunikacji urządzeń automatyki domowej. Niemniej opisane rozwiązania posiadają już bardzo silną pozycję na rynku, a ich znajomość na pewno ułatwi odnalezienie się w gąszczu wykorzystywanych interfejsów i protokołów komunikacyjnych.
