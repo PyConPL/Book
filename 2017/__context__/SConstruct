@@ -33,6 +33,25 @@ env = Environment(ENV=os.environ)
 
 artlist_file = 'artlist.txt'
 build = "build"
+
+def prepare_art():
+    articles = []
+    for line in open(artlist_file):
+        line = pl_txt.remove_comments(line)
+        words = line.split()
+        if words:
+            alias, location = words[:2]
+            articles.append([alias, location])
+
+    if only_first_article_for_testing:
+        articles = articles[:1]
+
+    selected = os.getenv('SELECTED')
+    if selected:
+        sel_ls = selected.split()
+        articles = filter(lambda x: x[0] in sel_ls, articles)
+    return articles
+
 articles = []
 for line in open(artlist_file):
     line = pl_txt.remove_comments(line)
