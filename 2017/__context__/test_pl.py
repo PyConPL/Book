@@ -2,6 +2,8 @@
 # -*- coding: UTF-8 -*-
 
 import unittest
+import sys
+
 import pl_txt
 
 class TestPL(unittest.TestCase):
@@ -43,7 +45,10 @@ class TestPL(unittest.TestCase):
 def make_tests():
     suite = unittest.TestSuite()
     suite.addTest(unittest.makeSuite(TestPL))
-    unittest.TextTestRunner().run(suite)
+    text_test_result = unittest.TextTestRunner().run(suite)
+    result = not not (text_test_result.failures or text_test_result.errors)
+    return result
 
 if __name__ == '__main__':
-    make_tests()
+    result = make_tests()
+    sys.exit(result)
