@@ -1,6 +1,8 @@
 #!/usr/bin/env python2
 # -*- coding: UTF-8 -*-
 
+debug = 0
+
 def apply_patch(diffsrc, test_mode=0):
     src_file = diffsrc + ["/dev/null"]
     return "cat " + src_file[test_mode] + " | patch -d .tmp"
@@ -34,3 +36,23 @@ def pass_line(one_line):
 
 def remove_comments(line):
     return line.split('%')[0]
+
+def env_command(
+        env,
+        target,
+        source,
+        action,
+        **kwargs
+        ):
+    if debug:
+        print('')
+        tmp_format = 'target'; print('Eval: %s %s' % (tmp_format, eval(tmp_format)))
+        tmp_format = 'source'; print('Eval: %s %s' % (tmp_format, eval(tmp_format)))
+        tmp_format = 'action'; print('Eval: %s %s' % (tmp_format, eval(tmp_format)))
+        tmp_format = 'kwargs'; print('Eval: %s %s' % (tmp_format, eval(tmp_format)))
+    env.Command(
+        target,
+        source,
+        action,
+        **kwargs
+        )
