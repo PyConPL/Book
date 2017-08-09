@@ -68,17 +68,7 @@ pl_txt.env_command(
     )
 
 for alias, location in al_loc_ls:
-    if tty_columns:
-        dash_count = tty_columns - 5 - len(alias) - len(location)
-        txt_line = ''.join([
-            '-' * dash_count,
-            ' ',
-            alias,
-            ' ',
-            location,
-            ])
-    else:
-        txt_line = ''
+    txt_line = pl_txt.prepare_line(tty_columns, alias, location)
     root = "{}/{}/{}".format(build, alias, alias)
     src_ls = (
         [

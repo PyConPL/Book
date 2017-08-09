@@ -88,3 +88,17 @@ def prepare_file(al_loc_ls):
         elem = '%s %s\n' % (alias, location)
         line_ls.append(elem)
     return ''.join(line_ls)
+
+def prepare_line(tty_columns, alias, location):
+    if tty_columns:
+        dash_count = tty_columns - 5 - len(alias) - len(location)
+        txt_line = ''.join([
+            '-' * dash_count,
+            ' ',
+            alias,
+            ' ',
+            location,
+            ])
+    else:
+        txt_line = ''
+    return txt_line
