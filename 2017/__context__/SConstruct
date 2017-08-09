@@ -68,7 +68,7 @@ pl_txt.env_command(
 
 for alias, location in al_loc_ls:
     txt_line = pl_txt.prepare_line(tty_columns, alias, location)
-    root = "{}/{}/{}".format(pl_txt.build_dir, alias, alias)
+    root = pl_txt.art_file_core(alias)
     src_ls = (
         [
             root + ".tex",

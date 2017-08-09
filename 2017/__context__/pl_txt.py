@@ -106,3 +106,10 @@ def prepare_line(tty_columns, alias, location):
 
 def art_home(alias):
     return "%s/%s" % (build_dir, alias)
+
+def art_file_core(alias):
+    return ''.join([
+        art_home(alias),
+        '/',
+        alias,
+        ])
