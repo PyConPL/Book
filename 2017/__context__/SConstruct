@@ -9,6 +9,7 @@ import time
 import pl_txt
 
 created_pdf = time.strftime("pyconbook-%Y.pdf")
+master_al = time.strftime("pycon%Y")
 verbose = 0
 if os.getenv('PLAIN'):
     create_pdfs = 0
@@ -59,6 +60,12 @@ final_pdfs = map(
     lambda x: pl_txt.art_file_pdf(x[0]),
     al_loc_ls)
 
+slave_ls = filter(lambda x: x[0] != master_al, al_loc_ls)
+
+slave_pdfs = map(
+    lambda x: pl_txt.art_file_pdf(x[0]),
+    slave_ls)
+
 pl_txt.env_command(
     env,
     created_pdf,
@@ -77,6 +84,8 @@ for alias, location in al_loc_ls:
             ] +
         glob.glob("sty/*") +
         glob.glob("src/" + alias + "/*"))
+    if alias == master_al:
+       src_ls.extend(slave_pdfs)
     small_pdf_ls = [
             "pwd",
             "# " + txt_line,
