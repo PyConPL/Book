@@ -161,7 +161,7 @@ for alias, location in al_loc_ls:
 
 pl_txt.env_command(
     env,
-    "build/artpages.inc",
+    pl_txt.art_pages_file(),
     [],
     [],
     )
