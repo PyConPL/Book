@@ -193,7 +193,7 @@ opartego na~formacie \CONTEXT.
 Teksty referatów złożono krojem Bonum z kolekcji \TeX-Gyre.
 Tytuły referatów złożono krojem Antykwa Toruńska, opracowanym
 przez Janusza Nowackiego na~podstawie rysunków Zygfryda
-Gardzielewskiego. 
+Gardzielewskiego.
 
 
 \endgroup
@@ -204,7 +204,7 @@ Gardzielewskiego.
 \def \defEvent{\dodoubleargumentwithset \dodefEvent}
 \def \dodefEvent[#1][#2]{\getparameters[Event::#1::][#2]}
 
-\def \vskipreserve #1#2{\vskip #1\nobreak 
+\def \vskipreserve #1#2{\vskip #1\nobreak
                         \vskip 0pt plus \dimexpr #2\relax\penalty-1000
                         \vskip 0pt plus -\dimexpr #2\relax}
 
@@ -230,7 +230,6 @@ Gardzielewskiego.
 \setvalue{start::event}{\qquad --- \vrule width 0pt height 5ex depth 0ex\relax}
 \setvalue{stop::event}{ ---\vrule width 0pt height 0ex depth 3ex\relax}
 
-
 \def \doAgendaEvent #1 #2:#3 #4:#5\relax{
      \hbox to \hsize \bgroup
      \hbox to 6em{\hfil
@@ -247,14 +246,13 @@ Gardzielewskiego.
       {\it \getvalue{Event::#1::title}}%
        \getvalue{stop::\getvalue{Event::#1::type}}
       \ifnum 0=0\ArtPage{#1::firstpage}\relax
-      \else 
+      \else
       \parfillskip=0pt \dotfill\null
       \rlap{\tt \inhex\ArtPage{#1::firstpage}}
       \setgvalue{Art::#1::found}{1}
       \fi\par
      \egroup\hfil\egroup}
 \def \stopDay{}
-             
 
 \catcode `\_=13
 \def_{{\tt \char `\_}}
