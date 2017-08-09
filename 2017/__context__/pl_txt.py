@@ -71,3 +71,8 @@ def write_file(name, data):
         len(data),
         name,
         ))
+
+def write_if_needed(name, new_data):
+    prev_data = read_file(name)
+    if prev_data != new_data:
+        write_file(name, new_data)
