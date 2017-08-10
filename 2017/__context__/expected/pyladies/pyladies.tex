@@ -1,0 +1,2042 @@
+\usemodule[pycon-yyyy]
+\starttext
+
+\Title{PyLadies (warsztat)}
+\Author{Piotr Wasilewski}
+\MakeTitlePage
+
+\section[rozdział-1.-tryb-interaktywny]{Rozdział 1. Tryb interaktywny}
+
+Warsztaty zaczniemy od wyjaśnienia w jaki sposób będziemy programowali w
+Pythonie.
+
+\subsection[zaczynamy]{Zaczynamy!}
+
+Otwórz \useURL[url1][https://repl.it/languages/python3][][ten
+link]\from[url1] w osobnej karcie przeglądarki.
+
+Jeżeli zobaczysz okienko z prośbą o założenie konta, zamknij je klikając
+w \quotation{x}.
+
+Strona którą widzisz jest podzielona na dwie części:
+
+\startitemize[packed]
+\item
+  z lewej strony, na białym tle, jest {\bf edytor} tekstu,
+\item
+  z prawej strony widać {\bf tryb interaktywny}.
+\stopitemize
+
+Edytor pozwala stworzyć cały kod programu, a następnie uruchomić go
+przez wciśnięcie przycisku \quotation{play} (lub kombinacją klawiszy
+Ctrl + Enter). Jeżeli program wypisze jakiś tekst, to zobaczymy go w
+oknie trybu interaktywnego.
+
+Tryb interaktywny działa zupełnie inaczej: czeka na wpisanie polecenia,
+a gdy wciśniesz Enter, wykonuje je i wypisuje jego wynik. W ten sposób
+możesz programować i od razu oglądać rezultaty.
+
+Praca z trybem interaktywnym jest wygodna, kiedy chcesz przetestować
+działanie pojedynczej operacji lub kiedy nie masz pewności jakie
+operacje chcesz wykonać. Jeżeli już wiesz jaki program chcesz napisać,
+wtedy łatwiej jest skorzystać z edytora.
+
+Jest jeszcze jedna ważna różnica między trybem interaktywnym a edytorem:
+tryb interaktywny po wykonaniu operacji zawsze wypisze jej wynik. Edytor
+zrobi to tylko jeżeli mu wydamy takie polecenie (poprzez instrukcję
+\type{print}, o której opowiemy później).
+
+Póki co będziemy korzystali z {\bf trybu interaktywnego}, ponieważ
+będziemy uczyli się pojedynczych instrukcji i oglądali ich rezultaty.
+Nie bój się eksperymentować z różnymi wariantami tych poleceń, w
+najgorszym wypadku Python poinformuje Cię, że wpisanego kodu nie można
+wykonać.
+
+\subsection[znak-zachęty]{Znak zachęty}
+
+W przykładach kodu, które znajdziesz w kolejnych rozdziałach,
+wielokrotnie zobaczysz ciąg znaków \type{>>>}. Jest to {\bf znak
+zachęty}. Używamy go aby odróżnić tekst, który należy wpisać w trybie
+interaktywnym od tekstu, który interpreter Pythona sam wypisuje. Jeżeli
+w jakiejś linijce przykładu zobaczysz znak zachęty, to znaczy, że
+wszystko co następuje po znaku należy wpisać w trybie interaktywnym, a
+następnie wcisnąć~Enter. Samego znaku zachęty nie wpisujemy!
+
+\subsection[pushpin-podsumowanie]{:pushpin: Podsumowanie}
+
+W tym rozdziale:
+
+\startitemize[packed]
+\item
+  otworzyliśmy stronę \type{repl.it}, na której możemy programować w
+  edytorze lub {\bf trybu interaktywnego} Pythona,
+\item
+  dowiedzieliśmy się jak wygląda {\bf znak zachęty} i że pokazuje nam
+  kod, który należy wpisać w trybie interaktywnym.
+\stopitemize
+
+\thinrule
+
+\section[rozdział-2.-tekst]{Rozdział 2. Tekst}
+
+W tym rozdziale:
+
+\startitemize[packed]
+\item
+  dowiesz się czym jest \type{string} i co można z nim zrobić,
+\item
+  nauczysz się pisać programy, które wyświetlają tekst.
+\stopitemize
+
+\subsection[string]{String}
+
+Niemal każdy program generuje jakiś tekst. Aplikacje na smartfonach
+pokazują komunikaty o odebranych wiadomościach. Aplikacje webowe
+zwracają treść stron internetowych. Serwery zapisują na dysku informacje
+o tym jak przebiega ich działanie. Tekst to podstawa komunikacji między
+komputerem a człowiekiem. Właśnie dlatego naukę programowania zaczniemy
+od operacji na tekście, lub, jak mówimy w żargonie programistycznym, na
+{\bf stringach}.
+
+String, czyli łańcuch znaków, to po prostu ciąg liter, cyfr, kropek,
+przecinków etc. Żeby w Pythonie zdefiniować string, po prostu umieść
+jakiś tekst między znakami \type{'} (pojedynczy apostrof):
+
+\starttyping
+>>> 'PyLadies 2017'
+\stoptyping
+
+W powyższym stringu znalazły się duże i małe litery, odstęp (spacja)
+oraz cyfry. Istnieją
+\useURL[url2][https://pl.wikipedia.org/wiki/Unikod][][tysiące
+znaków]\from[url2] jakich możesz użyć.
+
+:snake: Zanim przejdziesz dalej spróbuj samodzielnie utworzyć stringi z
+następującymi informacjami: Twoje imię i nazwisko, nazwa miejscowości z
+której pochodzisz, tytuł Twojego ulubionego filmu lub książki.
+
+\subsection[apostrofy]{Apostrofy}
+
+Przykład, którym posłużyliśmy się przed chwilą, pokazuje string ujęty w
+pojedyncze apostrofy, czyli \type{'}. Jeżeli chcesz, możesz używać znaku
+\type{"}. Dla Pythona nie ma to żadnego znaczenia. Ważne jest natomiast,
+aby z obu stron stringa znalazł się taki sam apostrof: jeżeli zaczynasz
+podwójnym, musisz zakończyć podwójnym. Tak samo z pojedynczym.
+
+\subsection[operacje-na-stringach]{Operacje na stringach}
+
+Teraz, kiedy już umiesz zdefiniować stringa, spróbujmy wykonać na nim
+jakąś~operację. Przez \quotation{operację} rozumiemy przekształcenie
+jednego stringa na inny string, na przykład:
+
+\starttyping
+>>> 'Kubuś Puchatek'.lower()
+'kubuś puchatek'
+\stoptyping
+
+(Zwróć uwagę na brak spacji wokół kropki!)
+
+W tym przykładzie wykonaliśmy dwie operacje: zdefiniowaliśmy stringa
+\type{'Kubuś Puchatek'} oraz {\bf wywołaliśmy metodę} \type{lower}.
+Metoda to po prostu operacja jaką można wykonać na jakimś obiekcie. W
+tym przypadku obiektem jest nasz string, a metoda powoduje stworzenie
+nowego stringa, w którym wszystkie wielkie litery zostały zastąpione
+małymi.
+
+String w Pythonie posiada wiele innych metod, na przykład:
+
+\startitemize[packed]
+\item
+  \type{upper} - przeciwieństwo \type{lower},
+\item
+  \type{title} - zamienia każdą pierwszą literę każdego wyrazu z małej
+  na wielką,
+\item
+  \type{strip} - usuwa spacje z lewej i prawej strony stringa (jeżeli
+  istnieją).
+\stopitemize
+
+:snake: Teraz wypróbuj te metody w taki sposób, żeby zobaczyć efekty ich
+działania. Przetestuj je na stringach, które tworzyliśmy w poprzednim
+zadaniu.
+
+\subsection[do-czego-służą-operacje-na-stringach]{Do czego służą
+operacje na stringach?}
+
+Pisząc programy często musimy sobie radzić ze stringami, które pochodzą
+ze źródeł na które nie mamy wpływu. Na przykład informacje z formularza
+wypełnionego przez użytkownika, albo dane odczytane z pliku. We
+wszystkich tych przypadkach przetwarzamy stringi, o których strukturze
+nic nie wiemy. Operacje pomagają nam przekształcić stringi na
+jednolitego formatu, albo wyszukać w nich jakieś informacje.
+
+Dobrym przykładem jest imię i nazwisko. Wyobraź sobie, że tworzysz
+program, który pobiera od użytkownika jego imię i nazwisko. Chcesz
+zapisać te dane w formacie \type{Imię Nazwisko}, czyli tak, aby każde ze
+słów zaczynało się wielką literą. Problem polega na tym, że użytkownik
+może wpisać \type{jan kowalski}, albo \type{JAN KOWALSKI}. W obu
+przypadkach dostaniesz stringi w innym formacie niż się spodziewasz.
+Możesz sobie z tym poradzić używając metody \type{title}, która obie te
+wartości zamieni na \type{Jan Kowalski}.
+
+\subsection[operacje-z-argumentami]{Operacje z argumentami}
+
+Niektóre operacje wymagają podania dodatkowych opcji. Na przykład:
+
+\starttyping
+>>> 'Kubuś Puchatek'.find('Pu')
+6
+\stoptyping
+
+Metoda \type{find} wyszukuje w stringu podany łańcuch i zwraca numer
+znaku, w którym ten łańcuch się zaczyna. Zwróć uwagę, że znaki
+numerowane są od zera:
+
+\starttyping
+K u b u ś   P u c h ...
+0 1 2 3 4 5 6 7 8 9 ...
+\stoptyping
+
+Wywołaliśmy metodę \type{find} podając jej stringa \type{'Pu'}. Taki
+łańcuch znajduje się wewnątrz stringa \type{'Kubuś Puchatek'} i zaczyna
+się od znaku numer 6, dlatego tą liczbę zobaczyliśmy na ekranie.
+
+Wartości, które musimy podać wywołując metodę (np. \type{'Pu'} z
+przykładu) nazywamy {\bf argumentami}. Niektóre metody nie przyjmują
+żadnych argumentów, ale są też takie, które wymagają podania jednego lub
+więcej. Jeżeli metoda przyjmuje wiele argumentów, to muszą być
+oddzielone od siebie przecinkami.
+
+\subsection[find-replace-count]{\type{find}, \type{replace},
+\type{count}}
+
+Nie będziemy teraz przechodzili przez wszystkie metody jakie posiada
+string, ale trzy z nich warto poznać już na samym początku.
+
+\section[find]{\type{find}}
+
+\type{find} jako argument przyjmuje string i szuka go w stringu na jakim
+wywołaliśmy operację. Jeżeli łańcuch zostanie znaleziony, otrzymujemy
+numer znaku od którego się zaczyna. W przeciwnym wypadku dostaniemy
+\type{-1}.
+
+Ta metoda jest przydatna na przykład kiedy szukamy jakieś frazy i chcemy
+się przekonać czy dany string ją zawiera.
+
+\starttyping
+>>> 'Anna Nowak'.find('Nowak')
+5
+>>> 'Jan Kowalski'.find('Nowak')
+-1
+>>> 'Tomasz Nowak'.find('Nowak')
+7
+\stoptyping
+
+Zwróć uwagę, że wielkość liter ma znaczenie:
+
+\starttyping
+>>> 'Prosiaczek'.find('Pro')
+0
+>>> 'Prosiaczek'.find('pro')
+-1
+>>> 'prosiaczek'.find('Pro')
+-1
+\stoptyping
+
+\section[replace]{\type{replace}}
+
+\type{replace} przyjmuje dwa argumenty: stringi \type{a} i \type{b}.
+Kiedy wywołamy tę metodę na stringu, to wszystkie wystąpienia łacucha
+\type{a} zostaną zastąpione łańcuchem \type{b}.
+
+Przykładowo, możesz zastąpić wszystkie spacje znakiem \type{-}:
+
+\starttyping
+>>> 'Ala ma kota'.replace(' ', '-')
+'Ala-ma-kota'
+\stoptyping
+
+Albo zastąpić całe wyrazy:
+
+\starttyping
+>>> 'Ala ma kota'.replace('kota', 'psa')
+'Ala ma psa'
+\stoptyping
+
+Innym przykładem użycia tej metody jest usunięcie ze stringa jakiegoś
+znaku. Możesz to zrobić podając pusty string jako drugi argument:
+
+\starttyping
+>>> 'Jan Kowalski'.replace('Kowalski', '')
+'Jan '
+\stoptyping
+
+\section[count]{\type{count}}
+
+\type{count} przyjmuje jeden string jako argument i zwraca liczbę
+wystąpień tego łańcucha w stringu na jakim wykonaliśmy operację.
+
+Metoda ta przydaje się, kiedy na przykład chcemy sprawdzić czy jakaś
+fraza powtarza się więcej niż raz w danym stringu:
+
+\starttyping
+>>> 'Ala ma kota'.count('ma')
+1
+>>> 'Ala ma kota, a Ola ma psa'.count('ma')
+2
+\stoptyping
+
+:snake: Zdefiniuj kilka stringów i na każdym z nich wywołaj każdą z
+powyższych metod. Upewnij się, że rozumiesz jak działają, a w razie
+wątpliwości poproś o pomoc mentora.
+
+\subsection[długość-stringa-funkcja-len]{Długość stringa, funkcja
+\type{len}}
+
+Jedną z najbardziej przydatnych operacji jaką możemy wykonać na stringu
+jest sprawdzenie jego długości. Na przykład chcemy sprawdzić czy nie
+jest zbyt długi, albo chcemy sprawdzić który z dwóch stringów jest
+dłuższy. Tutaj z pomocą przychodzi funkcja \type{len}:
+
+\starttyping
+>>> len('Kubuś Puchatek')
+14
+\stoptyping
+
+Zwróć uwagę, że \type{len} nie jest metodą, czyli nie stosujemy notacji
+\type{obiekt.metoda()}. Dzieje się tak, ponieważ sprawdzenie długości
+jakiegoś obiektu (w tym przypadku: stringa) jest na tyle popularną
+operacją, że w Pythonie stworzono osobną funkcję która ją wykonuje.
+
+:snake: Sprawdź długość Twojego imienia i nazwiska. Zobacz jaką długość
+ma pusty string, czyli \type{''}.
+
+\subsection[pushpin-podsumowanie-1]{:pushpin: Podsumowanie}
+
+W tym rozdziale:
+
+\startitemize[packed]
+\item
+  dowiedzieliśmy się czym jest string,
+\item
+  poznaliśmy znaczenie słów {\bf metoda} oraz {\bf argument},
+\item
+  nauczyliśmy się najważniejszych metod jakie można wywołać na stringu,
+\item
+  poznaliśmy funkcję \type{len}, która zwraca długość stringa.
+\stopitemize
+
+\thinrule
+
+\section[rozdział-3.-funkcja-help]{Rozdział 3. Funkcja \type{help}}
+
+W tym rozdziale:
+
+\startitemize[packed]
+\item
+  poznasz funkcję \type{help}.
+\stopitemize
+
+\subsection[pomoc-w-pythonie]{Pomoc w Pythonie}
+
+Nawet najlepszy programista nigdy nie zapamięta wszystkich funkcji i
+metod jakie oferuje Python. W trakcie tego szkolenia poznasz ich wiele,
+ale za kilka dni zapomnisz jak działają. Nie przejmuj się, twórcy
+Pythona pomyśleli o tym\ldots{}
+
+\subsection[dokumentacja-metod-w-pythonie]{Dokumentacja metod w
+Pythonie}
+
+Każda metoda zdefiniowana w Pythonie posiada {\bf dokumentację}, która w
+kilku słowach opisuje jej działanie. Aby przeczytać tę dokumentację,
+należy wywołać funkcję \type{help}, na przykład:
+
+\starttyping
+>>> help('jakiś string'.find)
+Help on built-in function find:
+
+find(...)
+    S.find(sub [,start [,end]]) -> int
+
+    Return the lowest index in S where substring sub is found,
+    such that sub is contained within S[start:end].  Optional
+    arguments start and end are interpreted as in slice notation.
+
+    Return -1 on failure.
+\stoptyping
+
+Dokumentacja pokazuje wszystkie argumenty jakie przyjmuje dana metoda,
+informuje jakiego typu wynik jest zwracany oraz w skrócie wyjaśnia co ta
+metoda robi. Dzięki temu możemy ją sobie bardzo szybko przypomnieć.
+
+Zwróć uwagę, że w tym przykładzie nie otworzyliśmy nawiasu przy nazwie
+metody \type{find}, a co za tym idzie, nie podaliśmy jej żadnych
+argumentów. W ten sposób zamiast wywołać tę metodę, po prostu
+posłużyliśmy się jej nazwą. Kiedy przekażemy taką nazwę do funkcji
+\type{help}, Python pokaże nam dokumentację danej metody.
+
+:snake: Użyj funkcji \type{help} i przeczytaj dokumentację do metod
+\type{replace} i \type{count} oraz do funkcji \type{len}.
+
+\subsection[pushpin-podsumowanie-2]{:pushpin: Podsumowanie}
+
+W tym rozdziale:
+
+\startitemize[packed]
+\item
+  poznaliśmy funkcję \type{help} i dowiedzieliśmy się, że warto jej
+  używać wtedy, kiedy nie rozumiemy jakiejś metody lub nie pamiętamy jak
+  działa.
+\stopitemize
+
+\thinrule
+
+\section[rozdział-4.-liczby]{Rozdział 4. Liczby}
+
+W tym rozdziale:
+
+\startitemize[packed]
+\item
+  dowiesz się czym jest {\em integer} oraz {\em float},
+\item
+  nauczysz się wykonywać operacje arytmetyczne na liczbach.
+\stopitemize
+
+\subsection[liczby-całkowite]{Liczby całkowite}
+
+Aby zdefiniować liczbę całkowitą ({\bf integer}) po prostu wpisz ją nie
+wstawiając spacji między cyfry:
+
+\starttyping
+>>> 2017
+2017
+\stoptyping
+
+Liczby możemy dodawać i odejmować:
+
+\starttyping
+>>> 20 + 17
+37
+>>> 2 + 0 + 1 + 7
+10
+>>> 20 - 17
+3
+>>> 20 - 1 - 7
+12
+\stoptyping
+
+\ldots{}mnożyć i dzielić:
+
+\starttyping
+>>> 20 * 17
+340
+>>> 20 / 17
+1
+\stoptyping
+
+\ldots{}podnosić do potęgi:
+
+\starttyping
+>>> 201 ** 7
+13254776280841401
+\stoptyping
+
+\ldots{}albo sprawdzić resztę z dzielenia:
+
+\starttyping
+>>> 20 % 17
+3
+\stoptyping
+
+Wszystkie te operacje możemy dowolnie łączyć:
+
+\starttyping
+>>> 20 / 2 + 17 * 3
+61
+\stoptyping
+
+Jeżeli chcemy mieć większą kontrolę na kolejnością wykonywania działań,
+możemy posłużyć się nawiasami okrągłymi:
+
+\starttyping
+>>> (20 * (2 + 17)) / 3
+126
+\stoptyping
+
+:snake: Spróbuj samodzielnie wykonać kilka działań arytmetycznych.
+
+\subsection[liczby-rzeczywiste]{Liczby rzeczywiste}
+
+Wszystkie powyższe operacje możemy wykonywać również na liczbach
+rzeczywistych ({\bf float}, zmiennoprzecinkowych):
+
+\starttyping
+>>> 2.5 * 2.0
+5.0
+>>> 7 / 2.0
+3.5
+>>> 6.7 + 0.3 - 2.5
+4.5
+>>> 1.0 / 3
+0.3333333333333333
+\stoptyping
+
+Zwróć uwagę, że wynik operacji będzie zawierał część dziesiętną, tylko
+jeżeli przynajmniej jeden z argumentów jest liczbą rzeczywistą. W
+przeciwnym wypadku część ułamkowa zostanie pominięta, a w rezultacie
+otrzymamy liczbę całkowitą:
+
+\starttyping
+>>> 5 / 2
+2
+>>> 5 / 2.0
+2.5
+>>> 5.0 / 2
+2.5
+>>> 5.0 / 2.0
+2.5
+\stoptyping
+
+:snake: Czy wiesz kiedy Python zwróci {\em float} a kiedy {\em integer}?
+Upewnij się, sprawdź różne kombinacje liczb i działań.
+
+\subsection[operatory-i-ich-kolejność]{Operatory i ich kolejność}
+
+Znaki, których używamy do wykonywania działań (\type{+}, \type{*} itd.)
+nazywamy {\bf operatorami}. Każdy operator ma swój priorytet, co
+oznacza, że jeżeli w jednym działaniu użytych jest kilka różnych
+operatorów (np. \type{2 + 1 * 3}), to Python najpierw obliczy te, które
+mają wyższy priorytet.
+
+Przykładowo, w takim działaniu:
+
+\starttyping
+>>> 4 + 10 * 6
+\stoptyping
+
+najpierw zostanie wykonane mnożenie, a dopiero potem dodawanie, czyli
+rezultatem będzie \type{64}.
+
+Poniższa tabelka prezentuje operatory oraz ich znaczenie. Kolejność
+wierszy odpowiada priorytetowi, czyli na samej górze jest operator z
+najwyższym priorytetem, a na dole z najniższym.
+
+\placetable[none]{}
+\starttable[|l|l|]
+\HL
+\NC Operatory
+\NC Znaczenie
+\NC\AR
+\HL
+\NC \type{+}, \type{-}
+\NC Dodawanie, odejmowanie
+\NC\AR
+\NC \type{*}, \type{/}, \type{//}, \type{%}
+\NC Mnożenie, dzielenie, dzielenie całkowite, modulo
+\NC\AR
+\NC \type{**}
+\NC Potęgowanie
+\NC\AR
+\HL
+\stoptable
+
+\subsection[pushpin-podsumowanie-3]{:pushpin: Podsumowanie}
+
+W tym rozdziale:
+
+\startitemize[packed]
+\item
+  dowiedzieliśmy się jak definiować liczby całkowite ({\em integer}) i
+  zmiennoprzecinkowe ({\em float}),
+\item
+  poznaliśmy najważniejsze operatory matematyczne i ich priorytety.
+\stopitemize
+
+\thinrule
+
+\section[rozdział-5.-błędy]{Rozdział 5. Błędy}
+
+W tym rozdziale:
+
+\startitemize[packed]
+\item
+  dowiesz się czym są {\bf wyjątki},
+\item
+  nauczysz się czytać komunikaty o błędach.
+\stopitemize
+
+\subsection[wyjątki]{Wyjątki}
+
+Tworząc programy nigdy nie jesteśmy w stanie przewidzieć wszystkich
+sytuacji jakie mogą się wydarzyć. Czasami stanie się coś, czego się nie
+spodziewaliśmy, a czasami po prostu użyjemy języka w nieprawidłowy
+sposób. Na każdą taką sytuację Python zareaguje zgłaszając błąd. Dzięki
+temu dowiemy się na czym polegała nasza pomyłka i będziemy mogli
+poprawić kod programu, żeby uniknąć tego samego problemu w przyszłości.
+
+Słowa \quotation{błąd} czy \quotation{problem} są bardzo ogólne,
+ponieważ mogą dotyczyć rzeczy na które jako programiści nie mamy wpływu.
+Dlatego posługujemy są terminem {\bf wyjątek}. Oznacza on sytuację, w
+której Python zatrzymał wykonywanie programu, ponieważ napotkał
+{\em wyjątkową} sytuację, której sam nie potrafił obsłużyć. Mówi się, że
+program {\bf rzucił wyjątek}. Kiedy tak się stanie, rolą programisty
+jest dostosowanie programu w taki sposób, aby w przyszłości podobna
+sytuacja nie skutkowała zatrzymaniem.
+
+Czym są wyjątkowe sytuacje o których wspomnieliśmy? Może to być próba
+wykonania operacji, której Python nie potrafi zrealizować, na przykład
+dodanie liczby do tekstu. Albo błąd \quotation{za mało miejsca na dysku
+twardym} podczas zapisywania jakiegoś pliku. Nie sposób wymienić
+wszystkie takie możliwości - z czasem poznasz zestaw najczęściej
+występujących wyjątków i nauczysz się przewidywać jakie operacje mogą
+skutkować rzuceniem wyjątku.
+
+\subsection[jak-czytać-wyjątki]{Jak czytać wyjątki}
+
+Spróbujmy wywołać wyjątek, dodając tekst do liczby:
+
+\starttyping
+>>> 123 + 'ala ma kota'
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: unsupported operand type(s) for +: 'int' and 'str'
+\stoptyping
+
+Jak widzisz, zamiast zwrócić wynik operacji, Python zgłosił wyjątek.
+Przeczytajmy go linijka po linijce.
+
+\startitemize[packed]
+\item
+  Na samym początku widzimy zawsze wiadomość
+  \type{Traceback (most recent call last):}. Słowem
+  \quotation{Traceback} określa się listę operacji, których wykonanie
+  spowodowało błąd. W tym przypadku wykonana została tylko jedna
+  operacja (dodawanie), ale w przyszłości spotkasz się z sytuacjami, w
+  których wyjątek został rzucony w skutek wykonania całego ciągu
+  poleceń. Python zawsze pokazuje cały traceback, aby programista mógł
+  zrozumieć co poszło nie tak. Zdanie \type{most recent call last}
+  informuje, że ostatnia operacja na liście została wykonana najpóźniej
+  spośród wszystkich.
+\item
+  \type{File "<stdin>", line 1, in <module>} to właśnie traceback. W
+  naszym przypadku jest to tylko jedna linijka. Widzimy tutaj opis
+  miejsca, w którym wystąpił błąd: \type{File <stdin>}, co oznacza po
+  prostu \quotation{standardowe wejście} ({\em standard input}), jak
+  określa się sposób wprowadzania informacji do komputera z użyciem
+  samego tekstu. Oznacza to tyle, że błąd powstał w trybie
+  interaktywnym.
+\item
+  Ostatnia linijka zawiera najważniejszą informację, czyli bezpośrednią
+  przyczynę błędu. Zaczyna się od typu wyjątku. W tym przypadku to
+  \type{TypeError}. Typ można rozumieć jako kategorię: nie mówi on czego
+  dokładnie dotyczył błąd, ale pozwala zaklasyfikować różne wyjątki, aby
+  łatwiej byłe je zrozumieć. \type{TypeError} oznacza niepoprawne użycie
+  jakiegoś typu, w tym przypadku typów {\em integer} i {\em string}.
+  Dalej widzimy szczegóły błędu: operator dodawania został użyty na
+  liczbie całkowitej ({\em integer}) oraz łańcuchu znaków
+  ({\em string}), co nie jest dozwolone.
+\stopitemize
+
+Tworząc bardziej zaawansowane programy spotkasz się z jeszcze dłuższymi
+komunikatami o błędach. Nie zniechęcaj się tym: każdy wyjątek sprowadza
+się do tylko jednej niepoprawnej operacji, a traceback, nieważne jak
+długi, pomoże Ci zlokalizować przyczynę niepowodzenia. Jeżeli mimo
+wszystko nie będziesz w stanie zrozumieć dlaczego Twój program przestał
+działać, wklej ostatnią linijkę komunikatu do wyszukiwarki internetowej.
+Jest bardzo możliwe, że ktoś już kiedyś spotkał się z takim problemem i
+znalazł rozwiązanie.
+
+:snake: Wywołaj błędy i przeczytaj ze zrozumieniem wyjątki spowodowane
+następującymi operacjami: dzielenie przez zero; wywołanie na dowolnym
+stringu metody, która nie istnieje; wykonanie kodu, który nie ma sensu
+(możesz wpisać losowy ciąg znaków).
+
+\subsection[pushpin-podsumowanie-4]{:pushpin: Podsumowanie}
+
+W tym rozdziale:
+
+\startitemize[packed]
+\item
+  dowiedzieliśmy się czym jest wyjątek i jak czytać jego treść.
+\stopitemize
+
+\thinrule
+
+\section[rozdział-6.-zmienne]{Rozdział 6. Zmienne}
+
+W tym rozdziale:
+
+\startitemize[packed]
+\item
+  dowiesz się czym jest {\bf zmienna}, jak ją zdefiniować i jak jej
+  używać.
+\stopitemize
+
+\subsection[zmienna]{Zmienna}
+
+W poprzednich rozdziałach wykonywaliśmy różne operacje: definiowaliśmy
+stringi, mnożyliśmy liczby itd. Każda z tych operacji zwracała jakiś
+wynik, który od razu był wypisywany na ekran. Tekst i liczby, które w
+ten sposób tworzyliśmy, trafiały do pamięci komputera tylko na chwilę i
+zaraz po wyświetleniu były z niej usuwane. W związku z tym w kolejnych
+operacjach nie mogliśmy wykorzystać wyników z operacji poprzednich.
+
+Aby poradzić sobie z problemem przechowania wyniku operacji, używamy
+{\bf zmiennych}. Zamiast tłumaczyć jak działają zmienne, najlepiej
+popatrzeć na przykład:
+
+\starttyping
+>>> x = 7
+>>> x
+7
+>>> 5 + x
+12
+\stoptyping
+
+Przeanalizujmy co wydarzyło się w powyższym przykładzie. Na początku
+{\bf zdefiniowaliśmy zmienną}, czyli przypisaliśmy wynik jakiejś
+operacji do nazwy. W tym przypadku operacją jest po prostu definicja
+liczby \type{7}, natomiast nazwą jest \type{x}. Od tego momentu mogliśmy
+używać {\bf zmiennej} \type{x} w kolejnych operacjach. Jeżeli po prostu
+wpiszemy jej nazwę, wtedy otrzymamy jej {\bf wartość}. Możemy też
+posłużyć się nią w innej operacji, na przykład dodając ją do innej
+liczby.
+
+Definiując zmienne możemy posługiwać się innymi zmiennymi:
+
+\starttyping
+>>> a = 10
+>>> b = 5
+>>> c = a + b
+>>> c
+15
+\stoptyping
+
+Oczywiście w realnym przypadku zmienne nazywamy w taki sposób, aby
+mówiły nam co oznaczają:
+
+\starttyping
+>>> cena_netto = 120
+>>> podatek_vat = cena_netto * 0.23
+>>> cena_brutto = cena_netto + podatek_vat
+>>> cena_brutto
+147.6
+\stoptyping
+
+\subsection[przypisanie]{Przypisanie}
+
+Operację \type{zmienna = wartość} nazywamy {\bf przypisaniem}. W wyniku
+przypisania Python tworzy {\em zmienną}, która otrzymuje {\em wartość}.
+Jeżeli wartość jest operacją~(np. dodawaniem), to najpierw jest
+obliczany jej rezultat, a nawstępnie zostaje on przypisany do zmiennej.
+
+\subsection[nazwy-zmiennych]{Nazwy zmiennych}
+
+Tworząc zmienną musimy najpierw wymyślić dla niej nazwę. Przede
+wszystkim powinna ona wprost mówić jakie jest znaczenie zmiennej. Dzięki
+temu, tak jak w powyższym przykładzie, będziemy mogli z łatwością
+zrozumieć kod programu.
+
+Poza tym Python narzuca ograniczenia na znaki, jakich możemy użyć w
+nazwie zmiennej. Dozwolone znaki to:
+
+\startitemize[packed]
+\item
+  litery od \type{a} do \type{z} (małe) oraz od \type{A} do \type{Z}
+  (duże),
+\item
+  cyfry,
+\item
+  znak \type{_} (podkreślenie).
+\stopitemize
+
+Wszystkie pozostałe znaki są niedozwolone. Co istotne, nazwa nie może
+zaczynać się od cyfry!
+
+:snake: Utwórz zmienne \type{imie} oraz \type{nazwisko}, przypisz do
+nich swoje imię i nazwisko. Następnie na ich podstawie utwórz zmienną
+\type{imie_nazwisko}, która będzie zawierała imię i nazwisko oddzielone
+spacją.
+
+:snake: Zobacz co się stanie, kiedy spróbujesz stworzyć zmienną, której
+nazwa zaczyna się od cyfry.
+
+\subsection[zmiana-wartości-zmiennej]{Zmiana wartości zmiennej}
+
+W każdej chwili możemy zmienić wartość zmiennej:
+
+\starttyping
+>>> x = 'Ala ma kota'
+>>> x
+'ala ma kota'
+>>> x = 'kot ma Alę'
+>>> x
+'kot ma Alę'
+>>> x = x + '.'
+>>> x
+'kot ma Alę.'
+\stoptyping
+
+\subsection[zmienne-i-metody]{Zmienne i metody}
+
+W poprzednich rozdziałach wywoływaliśmy różne metody, np. \type{find}
+lub \type{title}. Zwróć uwagę, że metody, które możesz wykonać
+bezpośrednio na obiekcie, możesz też wykonać na zmiennej:
+
+\starttyping
+>>> imie_nazwisko = 'jan kowalski'
+>>> imie_nazwisko
+'jan kowalski'
+>>> imie_nazwisko.title()
+'Jan Kowalski'
+>>> imie_nazwisko
+'jan kowalski'
+>>> imie_nazwisko = imie_nazwisko.title()
+>>> imie_nazwisko
+'Jan Kowalski'
+\stoptyping
+
+\subsection[pushpin-podsumowanie-5]{:pushpin: Podsumowanie}
+
+W tym rozdziale:
+
+\startitemize[packed]
+\item
+  dowiedzieliśmy się czym jest zmienna, jak ją definiować i jak jej
+  używać.
+\stopitemize
+
+\thinrule
+
+\section[rozdział-7.-funkcje]{Rozdział 7. Funkcje}
+
+W tym rozdziale:
+
+\startitemize[packed]
+\item
+  nauczysz się definiować {\bf funkcje}.
+\stopitemize
+
+\subsection[czym-jest-funkcja]{Czym jest funkcja}
+
+Dotychczas dowiedzieliśmy się czym jest {\em string}, {\em integer} i
+{\em float}, oraz jak używać zmiennych do przechowywania wartości
+pomiędzy operacjami. Dzięki temu możemy napisać program, który wykona
+jakieś operacje na danych, na przykład przetworzy tekst, lub coś
+obliczy, a następnie wypisze wynik na ekran. Im bardziej zaawansowane
+problemy będziemy chcieli rozwiązać naszym programem, tym bardziej
+skomplikowany będzie jego kod.
+
+Jednym ze sposobów na pisanie bardziej zrozumiałego kodu jest
+definiowanie funkcji. {\bf Funkcja} to wydzielony zbiór instrukcji,
+który możemy wielokrotnie wykonać w programie. {\bf Definicja funkcji}
+to sposób w jaki opisujemy, które operacje mają być zawarte w funkcji.
+
+Przykładowo, poniższa funkcja liczbę podniesioną do kwadratu:
+
+\starttyping
+def kwadrat(liczba):
+    wynik = liczba ** 2
+    return wynik
+\stoptyping
+
+Linijka zaczynająca się od słowa \type{def} to {\bf nagłówek funkcji}.
+Składa się z następujących elementów:
+
+\startitemize[packed]
+\item
+  słowo \type{def},
+\item
+  {\bf nazwa} funkcji (w tym przykładzie to \type{kwadrat}),
+\item
+  {\bf lista argumentów} ujęta w nawiasy okrągłe (tutaj mamy jeden
+  argument \type{liczba}, ale możemy ich podać wiele, oddzielając je
+  przecinkami),
+\item
+  dwukropek.
+\stopitemize
+
+Zwróć uwagę na spacje! W całym nagłówku odstęp jest tylko między słowem
+\type{def} a nazwą funkcji. Gdyby funkcja miała wiele argumentów
+oddzielonych przecinkami, to moglibyśmy wstawić spacje obok przecinków,
+aby poprawić czytelność kodu. Poza tymi dwoma przypadkami, w nagłówku
+nie powinno więcej spacji.
+
+W kolejnych linijkach po nagłówku mamy {\bf ciało funkcji}. Są to po
+prostu instrukcje, które zostaną wykonane kiedy użyjemy funkcji. W
+powyższym przykładzie ciało zawiera dwie operacje: podniesienie do
+kwadratu wartości zmiennej \type{liczba} i przypisanie jej do zmiennej
+\type{wynik}, oraz zwrócenie wartości zmiennej \type{wynik}.
+{\bf Zwrócenie} to określenie jaka wartość ma być wynikiem danej
+funkcji. Służy do tego słowo \type{return}. Jeżeli wpiszemy po nim nazwę
+zmiennej, to jej wartość będzie wynikiem. Możemy także zwrócić rezultat
+nie przypisując do wcześniej do zmiennej:
+
+\starttyping
+def kwadrat(liczba):
+    return liczba ** 2
+\stoptyping
+
+\subsection[praca-z-edytorem]{Praca z edytorem}
+
+Zanim zdefiniujesz swoją pierwszą funkcję, zatrzymajmy się na chwilę.
+Jak dotąd wszystkie operacje wykonywaliśmy w trybie interaktywnym, gdzie
+wpisywaliśmy kod, wciskaliśmy Enter i dostawaliśmy wynik. Gdy zaczniemy
+pracować z funkcjami takie podejście może okazać się uciążliwe. Dużo
+wygodniej będzie teraz przejść do {\bf edytora}.
+
+Od tej pory każdy przykład, który nie będzie zaczynał się od \type{>>>}
+należy rozumieć jako kod wpisany w edytorze i uruchomiony przyciskiem
+\quotation{run}.
+
+\subsection[definicja-i-wywołanie-funkcji]{Definicja i wywołanie
+funkcji}
+
+Przepisz teraz do edytora kod funkcji zapisany poniżej. Zwróć szczególną
+uwagę na {\bf wcięcia}. Każda linijka ciała funkcji musi zaczynać się od
+wcięcia. Co istotne, wszystkie te wcięcia {\bf muszę mieć taką samą
+szerokość}. Oznacza to, że jeżeli w pierwszej linijce zrobisz wcięcie na
+dwie spacje, to wszystkie pozostałe linijki aż do końca funkcji też
+muszą mieć wcięcie na dwie spacje. Jak zauważysz, edytor sam zrobi
+wcięcie kiedy po wpisaniu nagłówka wciśniesz Enter. Jeżeli by tego nie
+zrobił, wtedy najłatwiej jest robić wcięcia klawiczem Tab.
+
+\starttyping
+def kwadrat(liczba):
+    wynik = liczba ** 2
+    return wynik
+\stoptyping
+
+Wciśnij teraz przycisk \quotation{run}. Jeżeli w oknie trybu
+interaktywnego nie zauważysz żadnego błędu, będzie to oznaczało, że
+funkcja została prawidłowo zdefiniowana. Teraz możemy ja wywołać w
+trybie interaktywnym:
+
+\starttyping
+>>> kwadrat(5)
+25
+>>> kwadrat(3) + kwadrat(1)
+10
+\stoptyping
+
+Jak widzisz, aby wywołać funkcję, wystarczy wpisać jej nazwę, po czym w
+nawiasach wpisać wartość argumentu. Jeżeli argumentów jest wiele, to
+należy je oddzielić przecinkami.
+
+:snake: Zdefiniuj funkcję o nazwie \type{pole_kola}, która przyjmuje
+argument \type{promien} i zwraca wartość równania
+\type{(promien * 3.14) ** 2}. Wywołaj ją w oknie trybu interaktywnego.
+
+:snake: Wywołaj funkcję \type{pole_kola} bez argumentu:
+\type{pole_kola()}. Czy rozumiesz treść wyjątku jaki został rzucony?
+
+:snake: Wywołaj funkcję \type{pole_kola} z dwoma argumentami:
+\type{pole_kola(2, 3)}. Porównaj treść wyjątku do błędu z poprzedniego
+zadania.
+
+\subsection[argumenty]{Argumenty}
+
+Funkcja nie musi posiadać żadnych argumentów, w takim wypadku nawiasy w
+nagłówku zostawiamy puste:
+
+\starttyping
+def funkcja():
+    return 123
+\stoptyping
+
+Jak już wspomnieliśmy, funkcje mogą przyjmować więcej niż jeden
+argument:
+
+\starttyping
+def suma(a, b):
+    return a + b
+
+
+def osoba(imie, nazwisko, tytul):
+    imie_nazwisko = imie + ' ' + nazwisko
+    return tytul + ' ' + imie_nazwisko.title()
+\stoptyping
+
+Takie funkcje wywołujemy podobnie jak te z jednym argumentem:
+
+\starttyping
+>>> funkcja()
+123
+>>> suma(100, 45)
+145
+>>> suma(100, -20)
+80
+>>> osoba('jan', 'KOWALSKI', 'doktor')
+'doktor Jan Kowalski'
+\stoptyping
+
+:snake: Napisz funkcję \type{cena_brutto}, która przyjmuje argumenty
+\type{cena_netto} oraz \type{vat} i zwraca wartość netto obliczoną
+według wzoru \type{netto * (1 + vat)}.
+
+:snake: Napisz funkcję \type{imie_nazwisko}, która przyjmuje argumenty
+\type{imie} oraz \type{nazwisko} i zwraca stringa z imieniem i
+nazwiskiem oddzielonymi spacją. Upewnij się, że każde słowo w stringu
+zaczyna się od wielkiej litery (użyj metody \type{title}). Następnie
+napisz funkcję \type{lubi}, z argumentami \type{imie}, \type{nazwisko}
+oraz \type{co} i wywołana w ten sposób:
+\type{lubi('jan', 'kowalski', 'KALAFIORY')} zwróci stringa
+\type{'Jan Kowalski lubi kalfiory'}. Pisząc funkcję \type{lubi} użyj
+funkcji \type{imie_nazwisko}.
+
+\subsection[funkcje-wbudowane]{Funkcje wbudowane}
+
+Poza funkcjami, które sami możemy zdefiniować, istnieją funkcje, które
+zawsze są dostępne w interpreterze Pythona. Nazywamy je {\bf funkcjami
+wbudowanymi}. Przykładem jest funkcja \type{len}, o której mówiliśmy w
+jednym z poprzednich rozdziałów:
+
+\starttyping
+>>> len('python')
+6
+\stoptyping
+
+Poza tym mamy jeszcze
+\useURL[url3][https://docs.python.org/3/library/functions.html][][67
+innych funkcji wbudowanych]\from[url3]. Część z nich poznasz w kolejnych
+rozdziałach, a kilka innych opisaliśmy poniżej.
+
+\section[str]{\type{str}}
+
+Przyjmuje jako argument dowolny obiekt i zwraca jego reprezentację jako
+string:
+
+\starttyping
+>>> str(2017)
+'2017'
+\stoptyping
+
+:snake: Zamień na string liczbę ujemną.
+
+:snake: Zobacz co się stanie, jeżeli jako argument przekażesz do
+\type{str} tekst.
+
+\section[int]{\type{int}}
+
+Przyjmuje jako argument dowolny obiekt i zamienia go na integer:
+
+\starttyping
+>>> int(' 123 ')
+123
+\stoptyping
+
+:snake: Zobacz co się stanie, gdy przekażesz do funkcji \type{int}
+liczbę z częścią ułamkową~(float), np. \type{3.14}.
+
+:snake: Zobacz co się stanie, jeśli przekażesz do \type{int} stringa, w
+którym nie ma żadnej liczby.
+
+:snake: Zobacz co sie stanie, kiedy przekażesz do \type{int} stringa, w
+którym są zarówno litery jak i cyfry, np. \type{Ala ma 2 koty}.
+
+\section[float]{\type{float}}
+
+Przyjmuje jako argument dowolny obiekt i zamienia go na float:
+
+\starttyping
+>>> float('3.14')
+3.14
+\stoptyping
+
+:snake: Zobacz jak zachowa się funkcja \type{float}, gdy wywołasz ją z:
+integerem, stringiem z samymi literami, stringiem z samymi cyframi.
+
+\subsection[pushpin-podsumowanie-6]{:pushpin: Podsumowanie}
+
+W tym rozdziale:
+
+\startitemize[packed]
+\item
+  dowiedzieliśmy się czym jest funkcja, jak ją definiować i wywoływać,
+\item
+  poznaliśmy funkcje wbudowane \type{str}, \type{int} oraz \type{float}.
+\stopitemize
+
+\thinrule
+
+\section[rozdział-8.-funkcja-print]{Rozdział 8. Funkcja \type{print}}
+
+W tym rozdziale:
+
+\startitemize[packed]
+\item
+  poznasz funkcję wbudowaną \type{print}.
+\stopitemize
+
+\subsection[wypisywanie-tekstu-na-ekran]{Wypisywanie tekstu na ekran}
+
+Gdy korzystaliśmy z trybu interaktywnego i chcieliśmy wypisać coś na
+ekran, wystarczyło wpisać jakieś wyrażenie i wcisnąć Enter:
+
+\starttyping
+>>> 2 + 2
+4
+>>> x = 'PyLadies'
+>>> x
+'PyLadies'
+\stoptyping
+
+Mogliśmy tak robić, ponieważ w ten sposób działa tryb interaktywny:
+wykonuje operację i wyświetla jej wynik. Jednak zazwyczaj programy w
+Pythonie są bardziej złożone i często zdarza się, że chcemy zobaczyć
+więcej niż tylko ostateczny wynik. Na przykład gdy piszemy program,
+który przetwarza plik tekstowy i chcemy, żeby dla każdej linijki tekstu
+wypisał coś na ekran. W takim wypadku z pomocą przychodzi funkcja
+wbudowana \type{print}.
+
+\subsection[print]{\type{print}}
+
+Funkcja ta przyjmuje dowolną liczbę argumentów i wypisuje wszystkie na
+ekran, oddzielając je spacjami:
+
+\starttyping
+>>> print(2017)
+2017
+>>> print('PyCon PL', 2017)
+PyCon PL 2017
+\stoptyping
+
+Do \type{print} można przekazywać również zmienne:
+
+\starttyping
+>>> temperatura = 24
+>>> print('Temperatura:', temperatura, 'stopnie Celsjusza')
+Temperatura: 24 stopnie Celsjusza
+\stoptyping
+
+:snake: Napisz funkcję, która przyjmuje argument \type{rok_urodzenia},
+wypisuje tekst \type{Masz X lat}, gdzie \type{X} to wiek w roku 2017,
+oraz zwraca ten wiek.
+
+\subsection[pushpin-podsumowanie-7]{:pushpin: Podsumowanie}
+
+W tym rozdziale:
+
+\startitemize[packed]
+\item
+  poznaliśmy funkcję \type{print}.
+\stopitemize
+
+\thinrule
+
+\section[rozdział-8.-listy]{Rozdział 8. Listy}
+
+W tym rozdziale:
+
+\startitemize[packed]
+\item
+  dowiesz się czym są {\bf listy},
+\item
+  poznasz metody \type{append}, \type{pop}, \type{count}, \type{remove}
+  i \type{index},
+\item
+  poznasz funkcje wbudowane \type{sum}, \type{max}, \type{min} oraz
+  \type{sorted}.
+\stopitemize
+
+\subsection[lista]{Lista}
+
+Listy towarzyszą nam na co dzień. Kiedy chcemy posłuchać muzyki,
+odtwarzamy playlistę. W sklepie spoglądamy na listę zakupów. Szukając
+czegoś w internecie, przeglądamy listę wyników.
+
+Jeśli pomyślimy o tym dłużej, zauważymy, że w formie listy można
+zaprezentować wiele innych zjawisk i rzeczy: zbiór książek w bibliotece,
+wydarzenia z jakiegoś okresu, zadania do wykonania, kolejka samochodów
+na stacji benzynowej itd. Lista to w programowaniu bardzo ważne pojęcie,
+bo pozwala w prosty sposób opisać zbiór obiektów, które są ułożone w
+jakimś porządku: alfabetycznym, chronologicznym, losowym etc. Listy w
+Pythonie to potężne, a równocześnie proste narzędzie, którego używa się
+niemal na każdym kroku.
+
+Aby zdefiniować listę, należy wypisać obiekty (stringi, integery)
+oddzielone przecinkami w nawiasach kwadratowych:
+
+\starttyping
+>>> kolory = ['niebieski', 'czerwony', 'zielony', 'czarny']
+>>> print(kolory)
+['niebieski', 'czerwony', 'zielony', 'czarny']
+\stoptyping
+
+W taki sposób definiujemy pustą listę:
+
+\starttyping
+>>> l = []
+>>> print(l)
+[]
+\stoptyping
+
+Możemy odwołać się do poszczególnych elementów listy wpisując jej nazwę
+po czym, w nawiasach kwadratowych, numer elementu ({\bf indeks}).
+Pamiętaj, że numeracja zaczyna się od zera!
+
+\starttyping
+>>> print(kolory[0])
+niebieski
+>>> print(kolory[2])
+zielony
+\stoptyping
+
+Chcąc otrzymać ostatni element na liście, możemy użyć indeksu \type{-1}:
+
+\starttyping
+>>> print(kolory[-1])
+czarny
+\stoptyping
+
+{\bf Indeksy ujemne} to sposób na dostęp do elementów listy
+\quotation{od końca}:
+
+\starttyping
+>>> print(kolory[-2])
+zielony
+>>> print(kolory[-3])
+czerwony
+\stoptyping
+
+Możemy dowolnie mieszać typy elementów na liście:
+
+\starttyping
+>>> liczby = ['jeden', 2, 'trzy', 4, 5]
+\stoptyping
+
+Lista może zawierać w sobie również inne listy:
+
+\starttyping
+>>> odcienie_czerwieni = ['karmazynowy', 'czerwony', 'bordowy']
+>>> kolory = ['zielony', odcienie_czerwieni, 'niebieski']
+>>> print(kolory)
+['zielony', ['karmazynowy', 'czerwony', 'bordowy'], 'niebieski']
+\stoptyping
+
+:snake: Napisz funkcję \type{element}, która przymuje dwa argumenty,
+listę oraz numer indeksu (integer) i zwraca element listy znajdujący się
+pod podanym indeksem.
+
+:snake: Napisz funkcję \type{ostatni_element}, która jako argument
+przyjmuje listę i zwraca jej ostatni element. Użyj w niej funkcji
+\type{element}.
+
+\subsection[metody-listy]{Metody listy}
+
+Listy, podobnie jak stringi mają wiele przydatnych metod. Poniżej
+znajdziesz opis kilku najbardziej przydatnich z nich.
+
+\section[append]{\type{append}}
+
+Ta metoda służy do dodawania elementu do listy:
+
+\starttyping
+>>> liczby = [1, 3]
+>>> print(liczby)
+[1, 3]
+>>> liczby.append(5)
+>>> print(liczby)
+[1, 3, 5]
+>>> liczby.append(7)
+>>> print(liczby)
+[1, 3, 5, 7]
+\stoptyping
+
+:snake: Napisz funkcję, która jako argument przyjmuje listę i dodaje na
+jej końcu taki sam element jaki jest na samym jej początku.
+
+\section[pop]{\type{pop}}
+
+Metoda \type{pop} nie przyjmuje żadnych argumentów, a zwraca ostatni
+element lity, jednocześnie usuwając go z niej:
+
+\starttyping
+>>> litery = ['a', 'b', 'c', 'd']
+>>> print(litery)
+['a', 'b', 'c', 'd']
+>>> litery.pop()
+'d'
+>>> print(litery)
+['a', 'b', 'c']
+>>> litery.pop()
+'c'
+>>> litery.pop()
+'b'
+>>> print(litery)
+['a']
+\stoptyping
+
+:snake: Napisz funkcję, która usuwa z listy dwa ostatnie elementy, po
+czym dodaje do niej ten element, który na samym początku był ostatni.
+
+\section[count-1]{\type{count}}
+
+\type{count} przyjmuje jako argument jeden dowolny obiekt i zwraca
+liczbę wystąpień tego obiektu na liście:
+
+\starttyping
+>>> oceny = [4, 3, 3, 5, 2, 3, 5, 4, 2, 4, 5, 4, 3, 3]
+>>> oceny.count(3)
+5
+>>> oceny.count(4)
+4
+>>> oceny.count(2)
+2
+\stoptyping
+
+\section[remove]{\type{remove}}
+
+Metoda \type{remove} przyjmuje jako argument dowolny obiekt i usuwa go z
+listy. Jeżeli obiekt występuje na liście wielokrotnie, to tylko jego
+pierwsze wystąpienie jest usuwane:
+
+\starttyping
+>>> liczby = [10, 20, 25, 20, 10, 15]
+>>> liczby.remove(20)
+>>> print(liczby)
+[10, 25, 20, 10, 15]
+>>> liczby.remove(20)
+>>> print(liczby)
+[10, 25, 10, 15]
+>>> liczby.remove(10)
+>>> print(liczby)
+[25, 10, 15]
+\stoptyping
+
+:snake: Sprawdź co się stanie jeżeli spróbujemy usunąć element, którego
+nie ma na liście.
+
+:snake: Napisz funkcję, która przyjmuje dwa argumenty: listę oraz
+dowolny inny obiekt. Funkcja powinna usunąć z listy pierwsze wystąpienie
+tego obiektu, a następnie dodać go na końcu listy. Funkcja powinna
+zwrócić liczbę wystąpień tego elementu na liście.
+
+\section[index]{\type{index}}
+
+\type{index} przyjmuje jeden obiekt jako argument i zwraca numer pozycji
+na jakiej ten obiekt znajduje się na liście:
+
+\starttyping
+>>> litery = ['r', 't', 'b', 'w', 'h']
+>>> litery.index('t')
+1
+>>> litery.index('h')
+4
+\stoptyping
+
+:snake: Sprawdź co się stanie jeżeli spróbujemy pobrać indeks elementu,
+którego nie ma na liście.
+
+\subsection[listy-i-funkcja-len]{Listy i funkcja \type{len}}
+
+Podobnie jak w przypadku stringów, długość listy możemy sprawdzić
+funkcją wbudowaną \type{len} :
+
+\starttyping
+>>> litery_nazwiska = ['K', 'o', 'w', 'a', 'l', 's', 'k', 'i']
+>>> print(len(litery_nazwiska))
+8
+\stoptyping
+
+\subsection[funkcje-wbudowane-sum-min-max-i-sorted]{Funkcje wbudowane
+\type{sum}, \type{min}, \type{max} i \type{sorted}}
+
+Istnieje kilka funkcji wbudowanych, które pomagają nam w pracy z
+listami. Tutaj opiszemy część z nich.
+
+Pierwsze trzy są najbardziej pomocne gdy operujemy na listach, których
+wszystkie elementy są liczbami. \type{sum} zwraca sumę wszystkich
+elementów, \type{min} zwraca element o najmniejszej wartości, a
+\type{max} ten o największej wartości:
+
+\starttyping
+>>> pomiary = [2, 4.25, 5.30, 3]
+>>> sum(pomiary)
+14.55
+>>> min(pomiary)
+2
+>>> max(pomiary)
+5.3
+\stoptyping
+
+:snake: Napisz funkcję, która jako argument przyjmuje listę i wypisuje
+na ekran element o największej wartości oraz liczbę wystąpień tego
+elementu na liście.
+
+Kolejna funkcja to \type{sorted}, która przyjmuje listę, a zwraca
+posortowaną kopię tej listy:
+
+\starttyping
+>>> wyniki = [45.5, 47.2, 35.8, 41.0, 33.3]
+>>> posortowane_wyniki = sorted(wyniki)
+>>> print(posortowane_wyniki)
+[33.3, 35.8, 41.0, 45.5, 47.2]
+>>> print(wyniki)
+[45.5, 47.2, 35.8, 41.0, 33.3]
+\stoptyping
+
+:snake: Napisz funkcję, która jako argument przyjmie listę, posortuje
+ją, a następnie zwróci jej ostatni element. (W ten sposób otrzymamy
+własną wersję funkcji \type{max}!)
+
+\subsection[pushpin-podsumowanie-8]{:pushpin: Podsumowanie}
+
+W tym rozdziale:
+
+\startitemize[packed]
+\item
+  dowiedzieliśmy się czym są listy, jak je definiować i jak odnosić się
+  do poszczególnych elementów listy,
+\item
+  poznaliśmy najważniejsze metody list,
+\item
+  dowiedzieliśmy się, w jaki sposób używać na listach funkcji
+  wbudowanych \type{len}, \type{sum}, \type{max}, \type{min} oraz
+  \type{sorted}.
+\stopitemize
+
+\thinrule
+
+\section[rozdział-10.-pętla-for]{Rozdział 10. Pętla \type{for}}
+
+W tym rozdziale:
+
+\startitemize[packed]
+\item
+  dowiesz się czym jest {\bf iteracja} i {\bf pętla},
+\item
+  poznasz pętlę \type{for}.
+\stopitemize
+
+\subsection[iteracja]{Iteracja}
+
+Kiedy operujemy na liście, bardzo często chcemy \quotation{przejść} po
+wszystkich jej elementach po kolei i na każdym z nich wykonać jakąś
+operację. Takie \quotation{przejście} nazywamy {\bf iteracją}. W
+Pythonie aby otrzymać każdy element listy po kolei możemy oczywiście
+użyć indeksów:
+
+\starttyping
+>>> daty = ['15/07/2017', '16/07/2017', '17/07/2017']
+>>> print(daty[0])
+15/07/2017
+>>> print(daty[1])
+16/07/2017
+>>> print(daty[2])
+17/07/2017
+\stoptyping
+
+Jednak takie podejście jest niewygodne kiedy lista jest bardzo długa. A
+co gdy w ogóle nie wiemy na jak długiej liście działamy? Te problemy
+można rozwiązać przy pomocy {\bf pętli}, czyli instrukcji, która
+wykonuje podane operacje dopóki jakiś warunek nie zostanie spełniony. Z
+użyciem pętli możemy na przykład iterować, czyli wykonywać operacje na
+kolejnych elementach listy, dopóki nie dojdziemy do jej końca.
+
+\subsection[pętla-for]{Pętla \type{for}}
+
+Pętle mają wiele zastosowań, ale iteracja jest jednym z najczęściej
+spotykanych. Dlatego Python posiada pętlę \type{for}, która służy
+właśnie do tego. Spójrzmy na taki przykład:
+
+\starttyping
+godziny_odjazdu = ['7:30', '13:45', '16:10']
+for godzina in godziny_odjazdu:
+    print(godzina)
+\stoptyping
+
+Przepisz do edytora powyższy kod i wykonaj go. W oknie trybu
+interaktywnego zobaczysz, że funkcja \type{print} została wykonana dla
+każdego elementu na liście, wypisując go na ekran. Stało się tak,
+ponieważ Python przeszedł po wszystkich elementach listy
+\type{godziny_odjazdu} i dla każdego z nich przypisał jego wartość do
+zmiennej \type{godzina} i wykonał operację \type{print}.
+
+Definicja pętli zaczyna się od słowa \type{for}, następnie należy podać
+nazwę zmiennej, do której będą przypisywane wartości kolejnych
+elementów, dalej wpisujemy słowo \type{in}, nazwę listy oraz dwukropek.
+W kolejnych linijkach znajdują się operacje, które zostaną wykonane dla
+każdego elementu. Pamiętaj, że przed każdą operacją musi się znaleźć
+jednakowe wciącie w kodzie. Ich szerokość nie ma znaczenia, ważne żeby
+były takie same.
+
+Jeżeli pętla znajduje się wewnątrz funkcji, to wcięcie wewnątrz
+\type{for} należy powiększyć o szerokość wcięcia funkcji:
+
+\starttyping
+def wypisz_elementy(lista):
+    for element in lista:
+        print(element)
+\stoptyping
+
+:snake: Napisz funkcję, która jako argument przyjmie listę liczb i
+wpisze na ekran wartość każdej z nich podniesioną do kwadratu.
+
+:snake: Napisz funkcję, który przyjmie listę stringów i zwróci nową
+listę, na której znajdą się wszystkie te stringi pisane wielkimi
+literami (użyj metody \type{upper}).
+
+\subsection[for-i-stringi]{\type{for} i stringi}
+
+Pętla \type{for} jest bardzo elastyczna: możesz jej użyć również na
+stringu. W takim wypadku jej elementami będą poszczególne litery:
+
+\starttyping
+for litera in 'ala ma kota':
+    print(litera)
+\stoptyping
+
+:snake: Napisz funkcję, która jako argument przyjmie string i wypisze
+każdą jego literę wraz z liczbą wystąpień tej litery w stringu (użyj
+metody \type{count}).
+
+\subsection[metoda-split]{Metoda \type{split}}
+
+String posiada metodę \type{split}, która rodziela go w miejscach
+wystąpienia danego znaku i zwraca listę stringów, które powstały w ten
+sposób:
+
+\starttyping
+>>> s = '2015,2016,2017'
+>>> s.split(',')
+['2015', '2016', '2017']
+\stoptyping
+
+Jeżeli nie przekażemy żadnego argumentu, to string zostanie rozdzielony
+w miejscach spacji:
+
+\starttyping
+>>> 'ala ma kota'.split()
+['ala', 'ma', 'kota']
+\stoptyping
+
+:snake: Napisz funkcję, która jako argument przyjmuje string i wypisuje
+wszystkie jego słowa, każde w osobnej linijce.
+
+\subsection[pushpin-podsumowanie-9]{:pushpin: Podsumowanie}
+
+W tym rozdziale:
+
+\startitemize[packed]
+\item
+  poznaliśmy pojęcia {\em iteracja} oraz {\em pętla},
+\item
+  nauczyliśmy się korzystać w pętli \type{for},
+\item
+  dowiedzieliśmy się, że pętla \type{for} działa także na stringach,
+  oraz że stringi posiadają metodę \type{split}.
+\stopitemize
+
+\thinrule
+
+\section[rozdział-11.-prawda-i-fałsz]{Rozdział 11. Prawda i fałsz}
+
+W tym rozdziale:
+
+\startitemize[packed]
+\item
+  poznasz pojęcia \quotation{prawda} i \quotation{fałsz} oraz ich
+  reprezentację w Pythonie: \type{True} i \type{False},
+\item
+  poznasz {\bf instrukcję warunkową} \type{if}, która pozwala zmienić
+  przebieg programu jeżeli określony warunek zostanie spełniony.
+\stopitemize
+
+\subsection[prawda-fałsz-i-warunek]{Prawda, fałsz i warunek}
+
+Programy jakie dotąd pisaliśmy składały się z operacji, które Python
+wykonywał jedna po drugiej. Gdy jedna instrukcja została pomyślnie
+zrealizowana, program przechodził do wykonania kolejnej.
+
+Pisząc kolejne programy szybko przekonasz się, że taki scenariusz nie
+zawsze będzie Ci odpowiadał, ponieważ często chcemy, żeby jakieś
+operacje zostały wykonane tylko gdy zostanie spełniony pewien warunek.
+
+Na przykład: mamy listę liczb i chcemy przejść po jej elementach,
+wypisując tylko te nieparzyste. W takim przypadku warunkiem wypisania
+liczby na ekran jest \quotation{liczba jest niepatrzysta}.
+
+Języki programowania pozwalają definiować takie warunki i sprawdzać je.
+Wynikiem takiego sprawdzenia jest {\bf prawda} lub {\bf fałsz}. Prawda
+oznacza sytuację w której warunek został spełniony. Przeciwieństwem jest
+fałsz. Przykładowo wynikiem warunku \quotation{żyrafa to ptak} jest
+fałsz, a wynikiem dla \quotation{Ziemia nie jest płaska} jest prawda.
+
+\subsection[warunki-w-pythonie-true-i-false]{Warunki w Pythonie,
+\type{True} i \type{False}}
+
+W Pythonie mamy do dyspozycji szereg operatorów, które pozwalają nam
+sprawdzać prawdziwość wyrażeń. Możemy na przykład porównywać wartości.
+Służy do tego operator \type{==}:
+
+\starttyping
+>>> 1 == 2
+False
+>>> (2 + 2) == (2 * 2)
+True
+\stoptyping
+
+Odwrotnością operatora \type{==} jest \type{!=}:
+
+\starttyping
+>>> 'ala' != 'Ala'
+True
+>>> [1, 2] != [1, 2]
+False
+\stoptyping
+
+Możemy również sprawdzać czy jedna wartość jest większa lub mniejsza od
+drugiej:
+
+\starttyping
+>>> 100 > 70
+True
+>>> 70 > 100
+False
+>>> 
+\stoptyping
+
+Operatory \type{>} i \type{<} można mieszać z \type{=}, w ten sposób
+tworząc warunek \quotation{większy lub równy} i \quotation{mniejszy lub
+równy}:
+
+\starttyping
+>>> 3 >= 2
+True
+>>> 2 >= 2
+True
+>>> 1 >= 2
+False
+\stoptyping
+
+Zwróć uwagę, że w jednym wyrażeniu można użyć wielu operatorów:
+
+\starttyping
+>>> 1 <= 2 < 3 <= 3 < 4
+True
+\stoptyping
+
+Ponadto możemy zaprzeczyć całemu wyrażeniu pisząc na początku
+\type{not}:
+
+\starttyping
+>>> not 1 == 1
+False
+>>> not 1 == 2
+True
+\stoptyping
+
+Oczywiście w każdym przypadku wartości wpisane wprost możemy zastąpić
+zmiennymi.
+
+\subsection[porównywanie-stringów]{Porównywanie stringów}
+
+Znając matematykę intuicyjnie rozumiemy w jaki sposób Python porównuje
+ze sobą liczby. Ale w jaki sposób porównywane są stringi? Odpowiedź jest
+prostsza niż mogło by się wydawać: alfabetycznie. Litery znajdujące się
+dalej w alfabecie są \quotation{większe} od tych wcześniejszych. Poza
+tym litery małe są \quotation{większe} od tych dużych.
+
+\starttyping
+>>> 'A' < 'B' < 'a' < 'b'
+True
+\stoptyping
+
+Co ze stringami, które mają więcej niż jeden znak? Są one porównywane
+znak po znaku, dopóki któryś z nich nie będzie się różnił, albo dopóki
+jeden ze stringów będzie dłuższy. W tym drugim przypadku większy będzie
+ten string który ma więcej znaków.
+
+\starttyping
+>>> 'a' < 'ala'
+True
+>>> 'ala' == 'ala'
+True
+>>> 'ala' < 'ala ma kota'
+True
+\stoptyping
+
+\subsection[operator-in]{Operator \type{in}}
+
+Poza dotychczas omówionymi operatorami, jest jeszcze jeden, szczególnie
+przydatny kiedy pracujemy z listami. Operator \type{in} zwraca
+\type{True} jeżeli dany element znajduje się na liście:
+
+\starttyping
+>>> 'Basia' in ['Tomek', 'Magda', 'Karol', 'Basia']
+True
+>>> 12 in [10, 20, 30, 40]
+False
+\stoptyping
+
+\subsection[instrukcja-warunkowa-if]{Instrukcja warunkowa \type{if}}
+
+Sprawdzanie czy jakieś wyrażenie jest prawdziwe nie miałoby żadnego
+sensu gdybyśmy nie mogli w jakiś sposób na tej podstawie podjąć decyzji
+o przebiegu naszego programu. W tym celu używamy {\bf instrukcji
+warunkowej} \type{if}:
+
+\starttyping
+if temperatura > 30.0:
+    print('Uf jak gorąco!')
+\stoptyping
+
+Struktura tej instrukcji jest bardzo prosta: po słowie \type{if}
+wpisujemy warunek, następnie dwukropek i w kolejnych liniach, po
+wciąciu, instrukcje, które zostaną wykonane jeżeli warunek będzie
+prawdziwy (mówimy: jeżeli zostanie spełniony).
+
+:snake: Napisz funkcję, która przyjmuje argumenty \type{element} i
+\type{lista} i jeżeli dany element znajduje się na liście, to zwraca
+jego pozycję (użyj metody \type{index}), w przeciwnym wypadku zwraca
+\type{-1}.
+
+:snake: Napisz funkcję \type{iloraz}, która przyjmuje argumenty
+\type{dzielna} i \type{dzielnik}. Jeżeli dzielnik jest różny od zera,
+funkcja powinna zwrócić wynik dzielenia. W przeciwnym wypadku powinna
+wypisać komunikat o błędzie.
+
+\subsection[if-...-else-oraz-elif]{\type{if ... else} oraz \type{elif}}
+
+Do instrukcji \type{if} możemy dopisać drugą część, która zostanie
+wykonana tylko jeżeli warunek nie będzie spełniony:
+
+\starttyping
+if godzina <= godzina_odjazdu:
+    print('Godzina odjazdu:', godzina_odjazdu)
+else:
+    print('Przepraszamy za opóźnienie')
+\stoptyping
+
+Zwróć uwagę na wcięcia w kodzie: \type{if} oraz \type{else} są na tym
+samym \quotation{poziomie}.
+
+Jeżeli chcemy, możemy w ramach jednej instrukcji \type{if} sprawdzić
+kilka alternatywnych warunków, jeżeli poprzednie okażą się nieprawdziwe:
+
+\starttyping
+if 5 <= godzina < 12:
+    print('rano')
+elif godzina == 12:
+    print('południe')
+elif 12 < godzina < 17:
+    print('popołudnie')
+elif 17 < godzina < 20:
+    print('wieczór')
+else:
+    print('noc')
+\stoptyping
+
+:snake: Napisz funkcję, która porównuje dwie liczby. Jako argumenty
+powinna przyjmować liczby \type{a} i \type{b}. Jeżeli \type{a} jest
+większe od \type{b} powinna zwrócić 1, jeżeli liczby są równe \type{0},
+a jeżeli \type{a} jest mniejsze od \type{b}, \type{-1}. Dodatkowo, w
+zależności od wyniku porównania, funkcja powinna wypisać jeden z
+komunikatów: \type{a < b}, \type{a == b} lub \type{a > b}.
+
+\subsection[łączenie-warunków]{Łączenie warunków}
+
+Czasami będziemy chcieli wykonać jakieś operacje tylko jeżeli
+spełnionych zostanie kilka warunków jednocześnie. W takim wypadku możemy
+użyć operatora \type{and}:
+
+\starttyping
+if substancja == 'woda' and temperatura > 100:
+    stan_skupienia = 'para wodna'
+\stoptyping
+
+Gdybyśmy chcieli, żeby operacja została wykonana jeżeli przynajmniej
+jeden z kilku warunków zostanie spełniony, to należy użyć operatora
+\type{or}:
+
+\starttyping
+if produkt == 'sok' or produkt == 'herbata'
+    cena = 4.50
+\stoptyping
+
+Operatory \type{or} i \type{and} można łączyć w jednym wyrażeniu.
+
+\subsection[pushpin-podsumowanie-10]{:pushpin: Podsumowanie}
+
+W tym rozdziale:
+
+\startitemize[packed]
+\item
+  nauczyliśmy się sprawdzać prawdziwość wyrażeń,
+\item
+  poznaliśmy intrukcję \type{if}, która może zmienić przebieg programu
+  gdy określone wyrażenie jest prawdziwe.
+\stopitemize
+
+\thinrule
+
+\section[rozdział-12.-słowniki]{Rozdział 12. Słowniki}
+
+W tym rozdziale:
+
+\startitemize[packed]
+\item
+  dowiesz się czym jest {\bf słownik}, {\bf klucz} oraz {\bf wartość},
+\item
+  nauczysz się definiować słowniki oraz wykonywać na nich operacje,
+\item
+  poznasz najczęściej spotykane zastosowania słowników.
+\stopitemize
+
+\subsection[czym-jest-słownik]{Czym jest słownik}
+
+Wiele sytuacji z jakimi spotkasz się pisząc programy będzie można opisać
+jako zbiór kluczy i wartości im odpowiadających. Przykładem z
+codziennego życia jest encyklopedia, gdzie kluczami są różne hasła, a
+wartościami są definicje tłumaczące te hasła. Można pójść dalej i
+powiedzieć, że internet to zbiór adresów (np. \type{pl.pycon.org}) oraz
+stron WWW, które się pod nimi kryją.
+
+Takie spojrzenie na otaczającą nas rzeczywistość jest bardzo wygodne, bo
+pozwala opisać złożone zjawiska w systematyczny, łatwy do zrozumienia
+sposób. Dlatego też wiele języków programowania oferuje narzędzia do
+tworzenia tego typu struktur. W przypadku Pythona są to {\bf słowniki}.
+
+Słownik ({\em dictionary}, w skrócie {\em dict}), to zbiór {\bf kluczy}
+oraz odpowiadających im {\bf wartości}. Nazwa \quotation{słownik} nie
+jest przypadkowa, nawiązuje do formuły w której zbiorowi słów
+przypisujemy ich definicje.
+
+\subsection[definicja-słownika]{Definicja słownika}
+
+Słownik definiujemy poprzez wypisanie par klucz-wartość, oddzielonych
+przecinkami, ujmując całość w nawiasy klamrowe. Każda para to dwie
+wartości oddzielone dwukropkiem.
+
+\starttyping
+wiek = {'Marcin': 23, 'Agata': 17, 'Marta': 46}
+\stoptyping
+
+Aby stworzyć pusty słownik wystarczą puste nawiasy klamrowe:
+
+\starttyping
+d = {}
+\stoptyping
+
+Wartości w słowniku nie muszą być tego samego typu, jedna może być
+liczbą, kolejna stringiem itd.:
+
+\starttyping
+d = {'liczba': 123, 'inna liczba': 12.34, 'lista': ['Ala ma kota']}
+\stoptyping
+
+Klucze mogą być również liczbami:
+
+\starttyping
+d = {15: 'Ala ma kota', 'Kot ma alę': 3.14}
+\stoptyping
+
+Słownik też może być elementem listy:
+
+\starttyping
+l = [{'a': 1, 'b': 2}, 3, 4]
+\stoptyping
+
+Kiedy wypiszemy słownik na ekran, zobaczymy całą jego zawartość:
+
+\starttyping
+>>> d = {'a': ['x', 9, 'z'], 'b': 2, 'c': 'Ala ma kota'}
+>>> print(d)
+{'a': ['x', 9, 'z'], 'b': 2, 'c': 'Ala ma kota'}
+\stoptyping
+
+\subsection[operacje-na-słownikach]{Operacje na słownikach}
+
+Kiedy zdefiniujemy słownik, możemy na nim wykonać szereg operacji.
+
+\section[pobieranie-wartości-elementu]{Pobieranie wartości
+elementu}
+
+Aby otrzymać wartość dla danego klucza należy wpisać nazwę słownika, a
+następnie, w nawiasach kwadratowych, nazwę klucza:
+
+\starttyping
+>>> d = {'a': 1, 'b': 2}
+>>> print(d['a'])
+1
+>>> print(d['a'] + d['b'])
+3
+\stoptyping
+
+:snake: Zobacz co się stanie jeżeli pobierzesz wartość dla klucza, który
+nie istnieje w słowniku.
+
+:snake: Napisz funkcję, która przyjmie dwa argumenty, listę słowników
+oraz klucz i zwróci listę wartości znajdujących się pod tym kluczem z
+każdego słownika na liście.
+
+\section[definiowanie-elementu]{Definiowanie elementu}
+
+W każdej chwili możemy zdefiniować wartość klucza w słowniku. Żeby to
+zrobić należy odwołać się do danego klucza i przypisać do niego wartość:
+
+\starttyping
+>>> d = {'a': 1}
+>>> d['b'] = 2
+>>> d[5] = ['lista', 'elementów']
+>>> print(d)
+{'a': 1, 'b': 2, 5: ['lista', 'elementów']}
+>>> print(d[5])
+['lista', 'elementów']
+\stoptyping
+
+Jeżeli dany klucz już istnieje, jego wartość zostanie nadpisana:
+
+\starttyping
+>>> d = {'a': 1}
+>>> print(d['a'])
+1
+>>> d['a'] = 2
+>>> print(d['a'])
+2
+\stoptyping
+
+\section[usuwanie-elementu]{Usuwanie elementu}
+
+Możemy usunąć dowolny klucz słownika posługując się instrukcją
+\type{del}:
+
+\starttyping
+>>> d = {'a': 1, 'b': 2}
+>>> del d['a']
+>>> print(d)
+{'b': 2}
+\stoptyping
+
+:snake: Zobacz co się stanie jeżeli spróbujesz usunąć klucz, który nie
+istnieje w słowniku.
+
+\section[iterowanie-po-kluczach-i-wartościach]{Iterowanie po
+kluczach i wartościach}
+
+W jednym z poprzednich rozdziałów mówiliśmy o iteracji w kontekście
+listy, czyli o \quotation{przechodzeniu} po jej elementach. Używaliśmy w
+tym celu pętli \type{for}. Jeżeli wykonamy tę samą operację na słowniku,
+to przejdziemy po jego kluczach:
+
+\starttyping
+for klucz in slownik:
+    print(klucz)
+\stoptyping
+
+:snake: Napisz funkcję, która przyjmuje jako argument słownik i
+przechodzi po jego kluczach, wypisując każdy z nich.
+
+W podobny sposób możemy iterować po samych wartościach słownika. Służy
+do tego metoda \type{values}:
+
+\starttyping
+lista_startowa = {1: 'Puchatek', 2: 'Prosiaczek', 3: 'Tygrysek'}
+for zawodnik in lista_startowa.values():
+    print(zawodnik)
+\stoptyping
+
+:snake: Napisz funkcję, która przyjmuje jako argument słownik i zwraca
+sumę wszystkich wartości słownika. Zakładamy, że wartości zawsze są
+liczbami.
+
+Słownik posiada również metodę \type{items}, dzięki której możemy
+iterować jednocześnie po kluczach i wartościach słownika:
+
+\starttyping
+lista_startowa = {1: 'Puchatek', 2: 'Prosiaczek', 3: 'Tygrysek'}
+for numer_startowy, zawodnik in lista_startowa.items():
+    print(numer_startowy, ':', zawodnik)
+\stoptyping
+
+Zwróć uwagę, że tym razem w pętli \type{for} zdefiniowaliśmy dwie
+zmienne: \type{numer_startowy} i \type{zawodnik}. Nie jest to nic
+specyficznego dla słownika, ale kolejna właściwość tej pętli. Jeżeli
+pętla przechodzi po liście, której wszystkie elementy są sekwencjami
+(czyli listami lub krotkami), to możemy od razu {\bf rozpakować}
+wszystkie elementy tych sekwencji do zmiennych:
+
+\starttyping
+lista = [['a', 'Arbuz', 'Anglia'], ['b', 'Banan', 'Brazylia']]
+for litera, owoc, panstwo in lista:
+    print(owoc)
+\stoptyping
+
+W naszym przypadku pierwszym elementem każdej sekwencji jest klucz, a
+drugim wartość dla tego klucza.
+
+:snake: Napisz funkcję, która przyjmie dwa argumenty, słownik oraz
+wartość i zwróci nazwę klucza, którego wartość jest równa wartości z
+argumentu.
+
+\subsection[zagnieżdżanie-słowników]{Zagnieżdżanie słowników}
+
+Wartością w słowniku może być dowolny obiekt, również inny słownik.
+Dzięki temu możemy w prosty sposób tworzyć złożone struktury danych:
+
+\starttyping
+>>> auto = {}
+>>> auto['kolor'] = 'czerwony'
+>>> auto['silnik'] = {'pojemność': 1600, 'moc': 130}
+>>> print(auto)
+{'kolor': 'czerwony', 'silnik': {'pojemność': 1600, 'moc': 130}}
+\stoptyping
+
+\subsection[długość-słownika]{\quotation{Długość} słownika}
+
+Kiedy po raz pierwszy wspomnieliśmy o funkcji \type{len},
+powiedzieliśmy, że służy ona do sprawdzania długości obiektów. Każdy typ
+obiektu (string, lista, etc.) może inaczej rozumieć pojęcie długości. W
+przypdku stringów chodzi o liczbę znaków, w przypadku list o liczbę
+elementów itd. Słowniki również mają swoją \quotation{długość}: jest to
+liczba kluczy.
+
+\starttyping
+>>> print(auto)
+{'kolor': 'czerwony', 'silnik': {'pojemność': 1600, 'moc': 130}}
+>>> len(auto)
+2
+\stoptyping
+
+\subsection[do-czego-możemy-wykorzystać-słowniki]{Do czego możemy
+wykorzystać słowniki}
+
+Słownik jest bardzo uniwersalną strukturą danych, przez co ma wiele
+zastosowań:
+
+\startitemize[packed]
+\item
+  reprezentacja obiektów i ich atrybutów (jak w powyższym przykładzie),
+\item
+  mapowanie jednych wartości na inne (jak w prawdziwym słowniku),
+\item
+  przechowywanie wielu powiązanych ze sobą wartości w jednym miejscu
+  (np. klucze to tytuły filmów, a wartości to ich reżyserowie).
+\stopitemize
+
+:snake: Wybierz jedno z powyższych zastosowań słownika. Napisz funkcję
+\type{ustaw}, która przyjmuje trzy argumenty, słownik, klucz oraz
+wartość i ustawia w słowniu daną wartość pod danym kluczem. Napisz
+funkcję \type{pobierz}, która przyjmuje dwa argumenty, słownik oraz
+klucz i zwraca wartość słownika pod danym kluczem. Stosując te funkcje
+wypełnij słownik danymi adekwatnymi dla wybranego zastosowania i pobierz
+te dane.
+
+\subsection[pushpin-podsumowanie-11]{:pushpin: Podsumowanie}
+
+W tym rozdziale:
+
+\startitemize[packed]
+\item
+  nauczyliśmy się tworzyć słowniki i wykonywać na nich operacje, między
+  innymi iterowanie,
+\item
+  dowiedzieliśmy się, że funkcja \type{len} zwraca liczbę kluczy w
+  słowniku,
+\item
+  poznaliśmy najczęściej spotykane zastosowania słowników.
+\stopitemize
+
+
+\stoptext
