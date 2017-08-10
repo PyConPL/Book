@@ -20,8 +20,7 @@ def run_pandoc(main_md, pyladies=0):
         main_md,
         "| sed -e s/subsubsection/section/",
         tag_replace,
-        " > ",
-        ".tmp/${TARGET.file}",
+        " > .tmp/${TARGET.file}",
         ])
 
 def art_src_dir(alias):
