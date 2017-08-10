@@ -10,10 +10,14 @@ def apply_patch(diffsrc, test_mode=0):
     src_file = diffsrc + ["/dev/null"]
     return "cat " + src_file[test_mode] + " | patch -d .tmp"
 
-def run_pandoc(main_md):
+def run_pandoc(main_md, pyladies=0):
+    if pyladies:
+        tag_replace = r" -e 's/:snake:/$\\sim$/g' -e 's/:pushpin:/$\\to$/g'"
+    else:
+        tag_replace = ''
     return (
         "pandoc -t context --template=src/template.pandoc " + main_md +
-        "| sed -e s/subsubsection/section/ > " +
+        "| sed -e s/subsubsection/section/" + tag_replace + " > " +
         ".tmp/${TARGET.file}"
         )
 
