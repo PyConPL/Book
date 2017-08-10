@@ -15,11 +15,14 @@ def run_pandoc(main_md, pyladies=0):
         tag_replace = r" -e 's/:snake:/$\\sim$/g' -e 's/:pushpin:/$\\to$/g'"
     else:
         tag_replace = ''
-    return (
-        "pandoc -t context --template=src/template.pandoc " + main_md +
-        "| sed -e s/subsubsection/section/" + tag_replace + " > " +
-        ".tmp/${TARGET.file}"
-        )
+    return ''.join([
+        "pandoc -t context --template=src/template.pandoc ",
+        main_md,
+        "| sed -e s/subsubsection/section/",
+        tag_replace,
+        " > ",
+        ".tmp/${TARGET.file}",
+        ])
 
 def art_src_dir(alias):
     return "../../src/" + alias
