@@ -142,12 +142,16 @@ for alias, location in al_loc_ls:
             Copy('$TARGET','$SOURCE'),
             )
     elif os.path.exists(main_md):
+        if alias == 'pyladies':
+            pyladies = 1
+        else:
+            pyladies = 0
         if verbose:
             print 'Found:', main_md
         pandoc_patch_ls = [
             Delete(".tmp"),
             Mkdir(".tmp"),
-            pl_txt.run_pandoc(main_md),
+            pl_txt.run_pandoc(main_md, pyladies=pyladies),
             ]
         if diffsrc:
             pandoc_patch_ls.append(
