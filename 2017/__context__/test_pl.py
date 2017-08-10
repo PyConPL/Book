@@ -30,7 +30,7 @@ class TestPL(unittest.TestCase):
             )
         self.assertEqual(
             pl_txt.run_pandoc(main_md='a', pyladies=1),
-            r"pandoc -t context --template=src/template.pandoc a| sed -e s/subsubsection/section/ -e 's/:snake:/$\\sim$/g' -e 's/:pushpin:/$\\to$/g' > .tmp/${TARGET.file}",
+            r"pandoc -t context --template=src/template.pandoc a| sed -e s/subsubsection/section/ -e 's/:snake:/$\\sim$/g' -e 's/:pushpin:/$\\swarrow$/g' > .tmp/${TARGET.file}",
             )
 
     def test_linking_source_directory(self):

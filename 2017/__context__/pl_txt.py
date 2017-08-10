@@ -12,7 +12,7 @@ def apply_patch(diffsrc, test_mode=0):
 
 def run_pandoc(main_md, pyladies=0):
     if pyladies:
-        tag_replace = r" -e 's/:snake:/$\\sim$/g' -e 's/:pushpin:/$\\to$/g'"
+        tag_replace = r" -e 's/:snake:/$\\sim$/g' -e 's/:pushpin:/$\\swarrow$/g'"
     else:
         tag_replace = ''
     return ''.join([
