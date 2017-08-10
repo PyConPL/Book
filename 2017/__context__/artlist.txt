@@ -15,21 +15,22 @@
 %% Zatem pierwsza jest nazwa TeX-owa, druga nazwa z katalogu
 
 pycon2017 pycon2017
+% Prezentacje po angielsku
+cyber presentations/with_python_security
+real presentations/django_in_the_real_world
+zodb presentations/zodb_ecosystem
 % Prezentacje po polsku
 hardware presentations/python_hardware
 uart presentations/technologie_komunikacji_miedzy_urzadzeniami
 mars presentations/python_w_laziku_marsjanskim
 pyramid presentations/pyramidalny_microframework
-% Prezentacje po angielsku
-cyber presentations/with_python_security
-real presentations/django_in_the_real_world
-zodb presentations/zodb_ecosystem
-% Warsztaty po polsku
-micro workshops/micropython
-mine workshops/Minecraft
-asyncio workshops/asyncio_w_praktyce
 % Warsztaty po angielsku
 ros workshops/IPython_Robot_Prototyping
 pytest workshops/pytest_parametric_tests
 spark workshops/First_steps_with_PySpark
 networkx workshops/Network_Analysis_using_Python
+% Warsztaty po polsku
+micro workshops/micropython
+mine workshops/Minecraft
+asyncio workshops/asyncio_w_praktyce
+pyladies workshops/pyladies
