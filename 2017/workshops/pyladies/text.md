@@ -61,8 +61,6 @@ który należy wpisać w trybie interaktywnym.
 
 ---
 
-:checkered_flag: Następny rozdział: [Tekst](./02_tekst.md) :checkered_flag:
-
 # Rozdział 2. Tekst
 
 W tym rozdziale:
@@ -297,8 +295,6 @@ W tym rozdziale:
 
 ---
 
-:checkered_flag: Następny rozdział: [Funkcja `help`](./03_help.md)
-:checkered_flag:
 # Rozdział 3. Funkcja `help`
 
 W tym rozdziale:
@@ -358,7 +354,6 @@ wtedy, kiedy nie rozumiemy jakiejś metody lub nie pamiętamy jak działa.
 
 ---
 
-:checkered_flag: Następny rozdział: [Liczby](./04_liczby.md) :checkered_flag:
 # Rozdział 4. Liczby
 
 W tym rozdziale:
@@ -497,7 +492,6 @@ W tym rozdziale:
 
 ---
 
-:checkered_flag: Następny rozdział: [Błędy](./05_bledy.md) :checkered_flag:
 # Rozdział 5. Błędy
 
 W tym rozdziale:
@@ -589,7 +583,6 @@ W tym rozdziale:
 
 ---
 
-:checkered_flag: Następny rozdział: [Zmienne](./06_zmienne.md) :checkered_flag:
 # Rozdział 6. Zmienne
 
 W tym rozdziale:
@@ -725,7 +718,6 @@ W tym rozdziale:
 
 ---
 
-:checkered_flag: Następny rozdział: [Funkcje](./07_funkcje.md) :checkered_flag:
 # Rozdział 7. Funkcje
 
 W tym rozdziale:
@@ -962,7 +954,6 @@ W tym rozdziale:
 
 ---
 
-:checkered_flag: Następny rozdział: [Funkcja `print`](./08_funkcja_print.md) :checkered_flag:
 # Rozdział 8. Funkcja `print`
 
 W tym rozdziale:
@@ -1024,7 +1015,6 @@ W tym rozdziale:
 
 ---
 
-:checkered_flag: Następny rozdział: [Listy](./09_listy.md) :checkered_flag:
 
 # Rozdział 8. Listy
 
@@ -1293,8 +1283,6 @@ do poszczególnych elementów listy,
 
 ---
 
-:checkered_flag: Następny rozdział: [Pętla `for`](./10_for.md) :checkered_flag:
-
 # Rozdział 10. Pętla `for`
 
 W tym rozdziale:
@@ -1420,7 +1408,6 @@ stringi posiadają metodę `split`.
 
 ---
 
-:checkered_flag: Następny rozdział: [Prawda i fałsz](./11_prawda_i_falsz.md) :checkered_flag:
 # Rozdział 11. Prawda i fałsz
 
 W tym rozdziale:
@@ -1656,7 +1643,6 @@ określone wyrażenie jest prawdziwe.
 
 ---
 
-:checkered_flag: Następny rozdział: [Słowniki](./12_slowniki.md) :checkered_flag:
 
 # Rozdział 12. Słowniki
 
@@ -1911,9 +1897,3 @@ W tym rozdziale:
 innymi iterowanie,
 * dowiedzieliśmy się, że funkcja `len` zwraca liczbę kluczy w słowniku,
 * poznaliśmy najczęściej spotykane zastosowania słowników.
-
-
----
-
-:checkered_flag: Następny rozdział: [](./.md) :checkered_flag:
-
