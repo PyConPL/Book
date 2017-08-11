@@ -137,7 +137,7 @@ kwestią priorytetów.
 ### Rezystory podciągające
 
 Piny niepodłączone mogą negatywnie wpływać na pracę mikrokontrolera.
-Pełnią one role swego rodzaju anteny – zbierają zakłócenia cyfrowe(na przykład
+Pełnią one role swego rodzaju anteny - zbierają zakłócenia cyfrowe(na przykład
 silne szpilki sygnałowe). Taki stan pinu określamy w języku angielskim jako
 *floating*.
 Rezystory podciągające służą do uniknięcia zakłóceń cyfrowych, które mogą

@@ -1,4 +1,4 @@
-# Python w łaziku marsjańskim? — Michał Barciś
+# Python w łaziku marsjańskim? - Michał Barciś
 
 Już od ponad dwóch lat pracujemy wspólnie z zespołem Continuum z Uniwersytetu
 Wrocławskiego nad prototypem łazika marsjańskiego Aleph1. W tym czasie
@@ -7,7 +7,7 @@ robota została zaprogramowana w Pythonie. Podczas prezentacji opowiem o samym
 łaziku oraz drodze, którą przebyliśmy w czasie tworzenia go, ale w tym artykule
 chciałbym trochę poszerzyć ten temat i przedstawić przegląd najciekawszych
 zastosowań tego języka programowania. Wspomnę tutaj o wielu bibliotekach oraz
-technologiach, których nie będę dokładnie opisywał — zainteresowany czytelnik na
+technologiach, których nie będę dokładnie opisywał - zainteresowany czytelnik na
 pewno bez problemu znajdzie więcej informacji na ich temat w Internecie.
 
 # Mocne strony
@@ -22,10 +22,10 @@ Podczas pracy w STX Next zauważyłem jednak, że coraz częściej nawet nasi kl
 zdają sobie sprawę z tego, że Python to nie tylko aplikacje Internetowe, czy
 proste skrypty służące do zarządzania serwerami. Dostarczane rozwiązania muszą
 być wielośrodowiskowe, a aplikacja Internetowa nie może już tylko działać w
-przeglądarce — ma rozpoznawać obrazy z kamery, analizować zbierane dane,
+przeglądarce - ma rozpoznawać obrazy z kamery, analizować zbierane dane,
 wizualizować je w czasie rzeczywistym, a czasami nawet ostatecznie włączyć
 światło albo otworzyć zamek w drzwiach. Na szczęście praktycznie w każdej z
-tych dziedzin możemy korzystać z lubianej i znanej technologii — z Pythona.
+tych dziedzin możemy korzystać z lubianej i znanej technologii - z Pythona.
 
 ## Serwisy Internetowe
 
@@ -41,7 +41,7 @@ bardziej złożonych zastosowań.
 
 Coraz szybciej odchodzą w niepamięć, ponieważ prawie wszystko można już zrobić w
 przeglądarce Internetowej. Wciąż jednak czasami preferujemy "natywne" aplikacje,
-a Python sprawdza się w nich świetnie — szczególnie wtedy, kiedy aplikacja
+a Python sprawdza się w nich świetnie - szczególnie wtedy, kiedy aplikacja
 często wchodzi w interakcję z użytkownikiem. Dzięki pakietom takim jak TkInter,
 wxPython czy PyQt tworzenie aplikacji jest szybkie i przyjemne, a interfejs
 użytkownika dobrze integruje się z systemem operacyjnym.
@@ -86,10 +86,10 @@ scikit-learn.
 ## Mikrokontrolery i automatyka
 
 O dziwo, nawet przy bardzo niskopoziomowym programowaniu coraz częściej słyszy
-się o Pythonie — a to głównie za sprawą projektu MicroPython, który umożliwia
+się o Pythonie - a to głównie za sprawą projektu MicroPython, który umożliwia
 uruchamianie kodu Pythona na systemach wbudowanych. Czy ma to sens, czy od
 takich systemów nie oczekuje się raczej szybkości, niezawodności, wykorzystania
-każdego cyklu procesora? Wg mnie ma — nawet najmniejsze procesory są coraz
+każdego cyklu procesora? Wg mnie ma - nawet najmniejsze procesory są coraz
 bardziej wydajne i często potrzebują wykonać tylko najprostsze operacje, np.
 odebrać pakiet z sieci i włączyć światło. Chcielibyśmy móc tego typu urządzenia
 programować szybko i być pewni, że logika przez nie wykonywana zgadza się z tym,
@@ -106,7 +106,7 @@ kod często wymagający pracy w czasie rzeczywistym oraz maksymalnego
 wykorzystania zasobów. W każdym robocie jest jakaś część logiki odpowiedzialna
 za podejmowanie wysokopoziomowych decyzji, takich jak na przykład wybór miejsca
 do którego robot ma się przemieścić, czy który przycisk wcisnąć. Python
-doskonale się do tego nadaje — zazwyczaj nie są to operacje wymagające pracy w
+doskonale się do tego nadaje - zazwyczaj nie są to operacje wymagające pracy w
 czasie rzeczywistym, a świetna integracja z systemami do nauczania maszynowego
 umożliwia pełne wykorzystanie zasobów. Dodatkowo dużo łatwiej w Pythonie
 stworzyć prototyp na podstawie którego wyodrębnione zostaną komponenty, które
@@ -126,12 +126,12 @@ wymagające optymalizacji, albo po prostu za szablon aplikacji stworzonej w inne
 technologii.
 
 Python może również nie sprawdzić się w programach, które wymagają dużej ilości
-obliczeń — symulacje, silniki gier komputerowych, dekodowanie danych. Na
+obliczeń - symulacje, silniki gier komputerowych, dekodowanie danych. Na
 szczęście w takim wypadku zawsze możemy wyodrębnić krytyczne części kodu i
 zrealizować je w innej technologii. 
 
 Podsumowując, wszechstronność Pythona jest wyjątkowo mocną cechą tego języka i
-warto z niej korzystać — w końcu możemy tworzyć zupełnie nowe rzeczy i rozwijać
+warto z niej korzystać - w końcu możemy tworzyć zupełnie nowe rzeczy i rozwijać
 nasze zainteresowania w wielu dziedzinach w technologii, którą już dobrze znamy
 i lubimy, dzięki czemu próg wejścia jest znacznie mniejszy.
 

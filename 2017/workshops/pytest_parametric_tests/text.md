@@ -17,14 +17,14 @@ are intentionally missing and will be presented on the workshop.
 Pytest is a framework for writing tests for your Python code. When you look at
 testing in Python, you'll probably learn about **unittest** [2], because it is
 a part of Python's standard library. However, unittest is not very flexible and
-its syntax and usage is very much inspired with JUnit – a Java unit testing
+its syntax and usage is very much inspired with JUnit - a Java unit testing
 framework. I guess writing code in Python using a Java inspired API is
 something no Pythonista would desire. :punch:
 
 The lack of flexibility when running tests written in unittest inspired another
 project to be created, a once popular tool called **nose** [3]. While nose can
-make running tests easier and more pleasant, the main part – how do we write
-our tests – remained the same. Not to mention nose has been in maintenance
+make running tests easier and more pleasant, the main part - how do we write
+our tests - remained the same. Not to mention nose has been in maintenance
 mode for the past several years. :vhs:
 
 **Pytest** on the other hand reinvents the way test are being written.
@@ -184,7 +184,7 @@ From the tests results, do you see what's wrong? :confused:
 ------------
 
 Instead, we'll parametrize the test. That means, we'll have one test written
-– as a template – and it will be run for multiple values.
+- as a template - and it will be run for multiple values.
 
 ```python
 import pytest
@@ -236,7 +236,7 @@ Notice how `@pytest.mark.parametrize` can parametrize multiple values.
 Sometimes, you want to tests several facts about one thing. Especially if that
 thing is hard to create, you might want to prepare it beforehand and use it
 repetitively in multiple tests. In that case, you might want to create a
-_fixture_ – something that's needed for multiple tests to operate.
+_fixture_ - something that's needed for multiple tests to operate.
 
 Fixture can be created a s a simple function with a decorator:
 
@@ -318,7 +318,7 @@ tests that require it:
 
 One fixture can use another fixture, so imagine a scenario, where we want to
 reuse a connection for all the tests, but we want to set up database content
-before every test and clean it afterwards. We will create 2 fixtures – one
+before every test and clean it afterwards. We will create 2 fixtures - one
 scoped for the module, one with the default scope:
 
 ```python

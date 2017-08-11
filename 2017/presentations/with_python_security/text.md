@@ -78,7 +78,7 @@ How can we hack our app? We can start from analysing it on our own, but
 probably someone else has already thought about it.
 
 Of course they had, and it was not someone but thousands of people. There
-is a huge project called Open Web Application Security Project – OWASP in short.
+is a huge project called Open Web Application Security Project - OWASP in short.
 OWASP is not only gathering all common threats but also offers examples
 of attacks, ways to measure their severity and much more.
 It can be used both by technical and less technical personnel, such
@@ -268,7 +268,7 @@ information regarding:
     * authentication is the a process of ascertaining that somebody really is
     who he or she claims to be
     * authorization is a process to determine who is allowed to do what
-* configuration management – how and where do we store configs
+* configuration management - how and where do we store configs
 * data validation and protection in storage and transit
     * where do we store the data
     * where do we validate it before recording
@@ -281,7 +281,7 @@ information regarding:
         sending it, which is becoming the corporate level security standard
         3. expert approach: send it over a dedicated VPN tunnel, government
         level security
-* exception management – how do we track exception occurrence and what are the
+* exception management - how do we track exception occurrence and what are the
 procedures to handle them
 
 Now we just need to measure the severity of the threats we have.
@@ -375,7 +375,7 @@ data lose.
 | POST   | No  | Yes        | Yes       | Yes            | Yes       | Yes            |
 | DEL    | No  | No         | No        | Yes            | No        | Yes            |
 
-#### 1.4 Identifying trust levels – Access Control Lists
+#### 1.4 Identifying trust levels - Access Control Lists
 
 | user type | Login | Logout | Read Blog | Write blog | Delete blog | Manage Users |
 |-----------|-------|--------|-----------|------------|-------------|--------------|
@@ -483,7 +483,7 @@ The are four circles of being owned:
 1. Being hacked by a bot or a script kiddie
 2. Being hacked using one of the well known and documented threats
 3. Being hacked using a known vulnerability
-4. Being hacked using an unknown vulnerability – 0 day
+4. Being hacked using an unknown vulnerability - 0 day
 
 The 1st and 2nd circle are really bad as it means we have almost no security
 and we should really change priorities.
@@ -517,20 +517,20 @@ do during that time!
 Source Code Analysis (Reading through the abstract syntax tree and looking
 for possible security bugs) tools:
 
-* Bandit – a tool designed to find common security issues in Python code,
+* Bandit - a tool designed to find common security issues in Python code,
 it is written in Python and can be easily extended with custom security
 policies. It works in a similar manner to pylint or pep8 tool. You can get it
 directly from PyPi.
-* SonarQube – more advanced than bandit, comes with a plugin for Jenkins
+* SonarQube - more advanced than bandit, comes with a plugin for Jenkins
 and support for JS, HTML and 20 other languages. The tool has an integrated
 web ui and many more useful features. You can spawn your own instance or buy
 it as a service. Jenkins read - “Continuous Inspection”.
 
 Automatic Scanning tools:
 
-* ZAP (Zed Attack Proxy) – Free, Open Source, Jenkins ready
-* Burp – Free/Paid, Jenkins ready in ~2017
-* Metasploit – Free, OpenSource, Jenkins ready
+* ZAP (Zed Attack Proxy) - Free, Open Source, Jenkins ready
+* Burp - Free/Paid, Jenkins ready in ~2017
+* Metasploit - Free, OpenSource, Jenkins ready
 * SQLMap - Free, OpenSource
 * scapy - Free, OpenSource, Python
 

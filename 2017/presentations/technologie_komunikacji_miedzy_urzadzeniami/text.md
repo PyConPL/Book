@@ -49,7 +49,7 @@ pamięci EEPROM, przetworniki ADC/DAC, czy też wyświetlacze ciekłokrystaliczn
 I2C (Inter-Integrated Circuit) to dwukierunkowa magistrala służąca
 do synchronicznego przesyłania danych w urządzeniach elektronicznych.
 Komunikacja odbywa się z wykorzystaniem dwóch dwukierunkowych linii
-SDA – (Serial Data Line) oraz SCL (Serial Clock Line). Ze względu
+SDA - (Serial Data Line) oraz SCL (Serial Clock Line). Ze względu
 na swoją budowę interfejs ten nadaje się do komunikacji na małe odległości
 (do kilkunastu cm). Każde urządzenie I2C ma swój unikalny 7-bitowy adres.
 Pierwsze 4 bity określają identyfikator urządzenia. Jest on nadawany
