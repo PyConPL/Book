@@ -1,27 +1,27 @@
 # Minecraft sterowany Pythonem
 
-Minecraft zapewnia niczym nieskrępowaną kreatywność i swobodę tworzenia.
+Minecraft [1] zapewnia niczym nieskrępowaną kreatywność i swobodę tworzenia.
 Python jest prosty do czytania i zapisywania, daje duże możliwości tak
 początkującemu, jak i zaawansowanemu programiście. Dzięki zintegrowaniu
 Minecrafta z Pythonem możemy uzyskać jeszcze większą kontrolę nad Minecraftem
-i tym samym wyzwolić większe pokłady kreatywności.
+i tym samym wyzwolić większe pokłady kreatywności [2].
 
+Zalety integracji Minecrafta z Pythonem są następujące:
 
-Dlaczego warto?
-
-  - Poznanie ukrytej magii Minecrafta - urozmaicenie gry i odkrycie jej nieznanych możliwości
-  - Zapoznanie się z Pythonem - dla początkujących programistów
-  - Nauczanie programowania, w szczególności wśród dzieci (od ok. 10 lat) i młodzieży
-  - Ułatwienie poruszania się i budowania w świecie Minecraft.
+- poznanie ukrytej magii Minecrafta - urozmaicenie gry i odkrycie jej nieznanych możliwości;
+- zapoznanie się z Pythonem - dla początkujących programistów;
+- nauczanie programowania, w szczególności wśród dzieci (od ok. 10 lat) i młodzieży;
+- ułatwienie poruszania się i budowania w świecie Minecraft.
 
 ## Startujemy
 
-Co jest potrzebne:
-  - [Minecraft] - Minecraft w wersji podstawowej
-  - [Python] - minimum Python 3
-  - [Java] - najlepiej ostatnia wersja
-  - API Minecraft Python - pobierz Minecraft Tools dla [Windows], [MAC OS], [Raspberry Pi lub Ubuntu]
-  - [Server Minecraft Spigot] - wersja Spigot zgodna z wersją Minecrafta
+Do rozpoczęcia prac są potrzebne następujące programy:
+
+- Minecraft [3] w wersji podstawowej;
+- Python [4] - minimum Python 3;
+- Java [5] - najlepiej ostatnia wersja;
+- API Minecraft Python - pobierz Minecraft Tools dla Windows [6], MAC OS [7], Raspberry Pi [11] lub Ubuntu [8];
+- Server Minecraft Spigot [9] - wersja Spigot zgodna z wersją Minecrafta.
 
 Jeśli na komputerze mamy już Minecrafta, Pythona i Javę, należy ściągnąć,
 rozpakować folder "Minecraft Tools" i zainstalować API Minecrafta poprzez
@@ -32,10 +32,11 @@ w "Minecraft Tools". Wtedy można już uruchomić serwer poprzez "Start`_`server
 z folderu "Minecraft Tools". Okna serwera nie należy zamykać.
 
 Wtedy wystarczy już tylko:
-1) Uruchomić Minecrafta,
-2) Przejść w tryb Multiplayer,
-3) Dodać serwer: nazwa dowolna, w adresie wpisać "localhost"
-4) Wejść w tryb Multiplayer poprzez utworzony serwer.
+
+1. uruchomić Minecrafta;
+2. przejść w tryb Multiplayer;
+3. dodać serwer: nazwa dowolna, w adresie wpisać "localhost";
+4. wejść w tryb Multiplayer poprzez utworzony serwer.
 
 ### Testujemy
 
@@ -104,8 +105,8 @@ mc.player.setPos (20, 110, 50)
 
 ### Stawianie bloków
 
-W Minecrafcie każdy typ bloku ma swój ID. Pełną listę bloków dostępnych
-w Minecrafcie znajdziesz tu: [Lista bloków]. Znając ID bloku oraz współrzędne,
+W Minecrafcie każdy typ bloku ma swój ID, a pełna lista bloków dostępnych
+w Minecrafcie jest na [10]. Znając ID bloku oraz współrzędne,
 gdzie chcemy dany blok postawić, możemy w szybki sposób go umieścić
 w danym miejscu.
 
@@ -154,14 +155,13 @@ do funkcji *getTilePos ()*, która zwraca współrzędne jako liczby całkowite.
 
 1. Minecraft - gamepedia. https://minecraft-pl.gamepedia.com/
 2. Craig Richardson. Nauka programowania z Minecraftem. PWN, Warszawa, 2016.
-
-   [Minecraft]: <[https://minecraft.net/en-us/download/]>
-   [Python]: <https://www.python.org/downloads/>
-   [Java]: <https://www.java.com/en/download/>
-   [Windows]: <https://sourceforge.net/projects/python-with-minecraft-windows/>
-   [MAC OS]: <https://sourceforge.net/projects/python-with-minecraft-mac/files/?source=navbar>
-   [Raspberry Pi lub Ubuntu]: <https://github.com/py3minepi/py3minepi>
-   [Raspberry Juice]: <https://dev.bukkit.org/projects/raspberryjuice>
-   [Server Minecraft Spigot]: <https://getbukkit.org/spigot>
-   [Lista bloków]: <http://minecraft-pl.gamepedia.com/Warto%C5%9Bci_danych>
-   [Minecraft - gamepedia]: <http://minecraft-pl.gamepedia.com/Warto%C5%9Bci_danych>
+3. https://minecraft.net/en-us/download/
+4. https://www.python.org/downloads/
+5. https://www.java.com/en/download/
+6. https://sourceforge.net/projects/python-with-minecraft-windows/
+7. https://sourceforge.net/projects/python-with-minecraft-mac/\crlf
+files/?source=navbar
+8. https://github.com/py3minepi/py3minepi
+9. https://getbukkit.org/spigot
+10. http://minecraft-pl.gamepedia.com/Wartości`_`danych
+11. https://dev.bukkit.org/projects/raspberryjuice
