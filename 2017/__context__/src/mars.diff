@@ -5,8 +5,8 @@
  \starttext
  
 -
--\section[python-w-łaziku-marsjańskim-michał-barciś]{Python w łaziku
--marsjańskim? --- Michał Barciś}
+-\section[python-w-łaziku-marsjańskim---michał-barciś]{Python w łaziku
+-marsjańskim? - Michał Barciś}
 +\Title{Python w łaziku marsjańskim?}
 +\Author{Michał Barciś}
 +\MakeTitlePage
