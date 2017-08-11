@@ -89,7 +89,7 @@ How can we hack our app? We can start from analysing it on our own, but
 probably someone else has already thought about it.
 
 Of course they had, and it was not someone but thousands of people. There
-is a huge project called Open Web Application Security Project - OWASP in short.
+is a huge project called Open Web Application Security Project - OWASP in short [1].
 OWASP is not only gathering all common threats but also offers examples
 of attacks, ways to measure their severity and much more.
 It can be used both by technical and less technical personnel, such
@@ -163,7 +163,8 @@ python2 -m timeit -s 'code = "a,b =  2,3; c = a * b"' 'exec(code)'
 ```
 
 ```bash
-python2 -m timeit -s 'code = compile("a,b =  2,3; c = a * b", "<string>", "exec")' 'exec(code)'
+python2 -m timeit -s 'code = compile("a,b =  2,3; c = a * b",
+    "<string>", "exec")' 'exec(code)'
 1000000 loops, best of 3: 0.664 usec per loop
 ```
 
@@ -173,7 +174,8 @@ python3.5 -m timeit -s 'code = "a,b =  2,3; c = a * b"' 'exec(code)'
 ```
 
 ```bash
-python3.5 -m timeit -s 'code = compile("a,b =  2,3; c = a * b", "<string>", "exec")' 'exec(code)'
+python3.5 -m timeit -s 'code = compile("a,b =  2,3; c = a * b",
+    "<string>", "exec")' 'exec(code)'
 1000000 loops, best of 3: 0.544 usec per loop
 ```
 
@@ -603,8 +605,8 @@ production systems, especially:
 * The test covers the widest range of attack vectors
 * A pentester has access to our source code and documentation
 
-Grey box narrows the access, but still requires source code and sometimes a
-developer instance before starting the main pentest,
+Grey box narrows the access, but still requires source code and sometimes
+a developer instance before starting the main pentest,
 the pentesting becomes targeted and works within boundaries:
 
 * A pentester does not have access to the system
@@ -656,25 +658,26 @@ should notice…
 
 ## References
 
-1. owasp.org. http://owasp.org
-2. vulnhub.com. https://vulnhub.com
-3. awesome-security. https://github.com/sbilly/awesome-security
-4. pentest-wiki. https://github.com/nixawk/pentest-wiki
-5. safeandsavvy.f-secure.com. https://safeandsavvy.f-secure.com/
-6. reddit.com/r/netsec/. https://reddit.com/r/netsec/
-7. blogs.cisco.com. https://blogs.cisco.com/
-8. youtube.com/channel/UClcE-kVhqyiHCcjYwcpfj9w. https://youtube.com/channel/UClcE-kVhqyiHCcjYwcpfj9w
-9. gynvael.coldwind.pl. http://gynvael.coldwind.pl/
-10. nakedsecurity.sophos.com. https://nakedsecurity.sophos.com/
-11. risky.biz. https://risky.biz/netcasts/risky-business/
-12. badcyber.com. https://badcyber.com/
-13. packetstormsecurity.com. https://packetstormsecurity.com
-14. labs.mwrinfosecurity.com/. https://labs.mwrinfosecurity.com/
-15. ctftime.org. https://ctftime.org/ctf-wtf/
-16. overthewire.org. http://overthewire.org/wargames/
-17. picoctf.com. https://picoctf.com/
-18. microcorruption.com. https://microcorruption.com/
-19. offensive-security.com. https://www.offensive-security.com/when-things-get-tough/
-20. Batman threat modeling. https://mobilisationlab.org/wp-content/uploads/2015/08/batman-threat-model-1200.png
+1. http://owasp.org
+2. https://vulnhub.com
+3. https://github.com/sbilly/awesome-security
+4. https://github.com/nixawk/pentest-wiki
+5. https://safeandsavvy.f-secure.com/
+6. https://reddit.com/r/netsec/
+7. https://blogs.cisco.com/
+8. https://youtube.com/channel/UClcE-kVhqyiHCcjYwcpfj9w
+9. http://gynvael.coldwind.pl/
+10. https://nakedsecurity.sophos.com/
+11. https://risky.biz/netcasts/risky-business/
+12. https://badcyber.com/
+13. https://packetstormsecurity.com
+14. https://labs.mwrinfosecurity.com/
+15. https://ctftime.org/ctf-wtf/
+16. http://overthewire.org/wargames/
+17. https://picoctf.com/
+18. https://microcorruption.com/
+19. https://www.offensive-security.com/when-things-get-tough/
+20. Batman threat modeling. https://mobilisationlab.org/wp-content/uploads/\crlf
+2015/08/batman-threat-model-1200.png
 21. sshttp - hiding SSH servers behind HTTP. https://github.com/stealth/sshttp
-22. Justin Mayer's talk from EuroPython 2017: "Replacing passwords with multiple factors: email, otp, and hardware keys"
+22. Justin Mayer. Replacing passwords with multiple factors: email, otp, and hardware keys. EuroPython 2017
