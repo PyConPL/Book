@@ -32,7 +32,7 @@ w "Minecraft Tools". Wtedy można już uruchomić serwer poprzez "Start`_`server
 z folderu "Minecraft Tools". Okna serwera nie należy zamykać.
 
 Wtedy wystarczy już tylko:
-1) Uruchomić Minecrafta, 
+1) Uruchomić Minecrafta,
 2) Przejść w tryb Multiplayer,
 3) Dodać serwer: nazwa dowolna, w adresie wpisać "localhost"
 4) Wejść w tryb Multiplayer poprzez utworzony serwer.
@@ -114,7 +114,7 @@ from mcpi.minecraft import Minecraft
 mc = Minecraft.create ()
 mc.setBlock (10, 110, 12, 103)
 ```
-W powyższym przypadku postawiliśmy arbuza (kod 103). 
+W powyższym przypadku postawiliśmy arbuza (kod 103).
 
 ### Szybkie budowanie
 
@@ -144,11 +144,11 @@ mc.setBlocks (x,y,z,x+szer, y+wys, z+dlug, typBloku)
 
 W ten sposób utworzony prostopadłościan jest pełny w środku. Teraz trzeba
 stworzyć mniejszy prostopadłościan zbudowany z bloków powietrza
-poprzez zmniejszenie argumentów wcześniej zbudowanego prostopadłościanu o 1. 
+poprzez zmniejszenie argumentów wcześniej zbudowanego prostopadłościanu o 1.
 
 Istotne jest to, że w powyższym przykładzie użyliśmy funkcji *getPos ()*,
 która zwraca współrzędne jako wartości rzeczywiste, w przeciwieństwie
-do funkcji *getTilePos ()*, która zwraca współrzędne jako liczby całkowite. 
+do funkcji *getTilePos ()*, która zwraca współrzędne jako liczby całkowite.
 
 ## Bibliografia
 

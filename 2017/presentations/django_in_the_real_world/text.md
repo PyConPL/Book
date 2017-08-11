@@ -115,7 +115,7 @@ the tables and the relations between them.
     rows into memory is considerably higher than getting your DBMS to give you
     the result of a computation which would be only an `integer` or a `float`
     number.
-    
+
 ### Caching
 Caching and database caching are two different things, when we talk about
 database caching we keep a cache of the results of the most common queries or

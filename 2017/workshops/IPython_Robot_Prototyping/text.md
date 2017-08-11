@@ -26,7 +26,7 @@ This workshop is intended for people familiar with basics of Python (loops,
 conditionals). You don’t have to know anything about robotics we will
 introduce you from fundamentals and give an opportunity to control robots from
 IPython environment. Knowledge of GNU Linux basics (we will be using Ubuntu)
-is welcome, however not necessary. 
+is welcome, however not necessary.
 
 Whether you are warming up with Python and want to try something more, or you
 are a pro and plan to do some robotic project but never did anything with
