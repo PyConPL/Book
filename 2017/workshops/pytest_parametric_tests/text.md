@@ -120,7 +120,7 @@ def test_fizz():
 
 Now run the tests with `python -m pytest`. (Note that if you have an virtual
 environment set up in the very same directory, pytest will likely try to
-collect the tests from within that.  You can either use the `--ignore` switch
+collect the tests from within that. You can either use the `--ignore` switch
 to ignore your virtual environment directory or specify the path to your tests
 directory as a first positional argument.)
 

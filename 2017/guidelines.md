@@ -24,7 +24,7 @@ Form and size:
 Technical matters:
 ---
   * Articles should be prepared in Markdown format through PyCon PL repository. If you don't have a clue what we are writing about in previous sentence and you don't know Github etc. then contact Radomir Dopieralski (mail radomir@dopieralski.pl), he'll be happy to help.
-  * Article can contain graphics (diagrams, screenshots etc.), but you should keep common sense to not overuse that. Vector graphics formats are recommended (SVG, EPS), but of course use raster ones in case of photos and screenshots (remember about appropriate image resolution in that second case).  Graphics, even if embedded in the article, should be also delivered in separate files. Book will be in grayscale (except the cover which is traditionally in color) so please keep that in mind that all your graphics should look acceptable in grayscale.
+  * Article can contain graphics (diagrams, screenshots etc.), but you should keep common sense to not overuse that. Vector graphics formats are recommended (SVG, EPS), but of course use raster ones in case of photos and screenshots (remember about appropriate image resolution in that second case). Graphics, even if embedded in the article, should be also delivered in separate files. Book will be in grayscale (except the cover which is traditionally in color) so please keep that in mind that all your graphics should look acceptable in grayscale.
   * Article can contain code sections. Those will be printed with monospaced font.
   * All articles will be corrected but we highly recommend keeping good language quality and also using spellchecker.
   

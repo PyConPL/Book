@@ -1295,8 +1295,8 @@ W tym rozdziale:
 
 Kiedy operujemy na liście, bardzo często chcemy "przejść" po wszystkich
 jej elementach po kolei i na każdym z nich wykonać jakąś operację.  Takie
-"przejście" nazywamy **iteracją**.  W Pythonie aby otrzymać każdy element
-listy po kolei możemy oczywiście użyć indeksów:
+"przejście" nazywamy **iteracją**.  W Pythonie, aby otrzymać każdy element
+listy po kolei, możemy oczywiście użyć indeksów:
 
 ```python
 >>> daty = ['15/07/2017', '16/07/2017', '17/07/2017']

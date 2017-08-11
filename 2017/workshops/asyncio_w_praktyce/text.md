@@ -91,8 +91,9 @@ modne za sprawą NodeJS.
 
 Asynchroniczne programowanie jest szczególnie przydatne, gdy mamy do czynienia
 z aplikacjami, które przez większość czasu oczekują na zakończenie
-operacji I/O, a mniej czasu spędzają na obliczeniach używających intensywnie CPU. Pomysł
-na podejście asynchroniczne pochodzi z bardzo prostej obserwacji - gdy program
+operacji I/O, a mniej czasu spędzają na obliczeniach używających intensywnie
+CPU. Pomysł na podejście asynchroniczne pochodzi z bardzo prostej
+obserwacji - gdy program
 czeka na zakończenie operacji wejścia-wyjścia, to pozostaje bezczynny.
 
 Mechanizmem sterującym, który wykrywa sytuacje rozpoczęcia oczekiwania
@@ -143,7 +144,9 @@ zorganizowane zgodnie z programem szkolenia i oznaczone trzema różnymi koloram
 
 1. zielony - zakres minimum szkolenia, bez ich zrealizowania nie idź dalej
 2. pomarańczowy - rozszerzenie zakresu podstawowego, łącznie z testami
-3. czerwony - dla chętnych jako zadanie domowe w celu jeszcze lepszego poznania asyncio lub do wykonania w trakcie warsztatów dla zaawansowanych uczestników
+3. czerwony - dla chętnych jako zadanie domowe w celu jeszcze lepszego
+poznania asyncio lub do wykonania w trakcie warsztatów dla zaawansowanych
+uczestników
 
 W treści zadań zawarte są też podpowiedzi, ukryte do momentu aż uczestnik
 nie zdecyduje się z nich skorzystać. Mogą okazać się pomocne, gdyby uczestnik
@@ -151,39 +154,43 @@ miał problem z podejściem do danego etapu lub chciał zobaczyć inny sposób
 rozwiązania.
 
 ## Program szkolenia
-1. Wstęp teoretyczny (10 minut)
-   1. czym jest asyncio
-   2. kiedy warto stosować asyncio?
-   3. przegląd dostępnych narzędzi i bibliotek
-   4. testowanie aplikacji z asyncio - złote zasady
-2. Wprowadzenie do projektu (5 minut)
-   1. Przedstawienie zawartości repozytorium
-   2. Pożądany zakres funkcjonalności na koniec szkolenia
 
-3. Moduł 1 - czat ogólny (1 godzina 15 minut)
-   1. Obsługa przychodzącej wiadomości
-   2. Wysłanie wiadomości do pozostałych użytkowników czatu
-   3. Zabezpieczenie przed sytuacją, gdy jeden z użytkowników rozłączy się w trakcie przekazywania wiadomości
-   4. Oznaczanie obecności na czacie
-   5. Statystyki czatu
-   6. Przechowanie historii czatu dla nowych uczestników
+1. Wstęp teoretyczny (10 minut)
+
+    1. czym jest asyncio
+    2. kiedy warto stosować asyncio?
+    3. przegląd dostępnych narzędzi i bibliotek
+    4. testowanie aplikacji z asyncio - złote zasady
+
+2. Wprowadzenie do projektu (5 minut)
+
+    1. Przedstawienie zawartości repozytorium
+    2. Pożądany zakres funkcjonalności na koniec szkolenia
+3. Moduł I - czat ogólny (1 godzina 15 minut)
+
+    1. Obsługa przychodzącej wiadomości
+    2. Wysłanie wiadomości do pozostałych użytkowników czatu
+    3. Zabezpieczenie przed sytuacją, gdy jeden z użytkowników rozłączy się w trakcie przekazywania wiadomości
+    4. Oznaczanie obecności na czacie
+    5. Statystyki czatu
+    6. Przechowanie historii czatu dla nowych uczestników
 
 (przerwa - 15 minut)
 
-4. Moduł 2 - prywatne pokoje (45 minut)
-   1. Zakładanie pokoju
-   2. Zapraszanie do środka uczestników
-   3. Wchodzenie do pokoju przez listę
-   4. Możliwość opuszczania pokoju
-   5. Automatyczne usuwanie pokoju po wyjściu z niego ostatniego uczestnika
+4. Moduł II - prywatne pokoje (45 minut)
+    1. Zakładanie pokoju
+    2. Zapraszanie do środka uczestników
+    3. Wchodzenie do pokoju przez listę
+    4. Możliwość opuszczania pokoju
+    5. Automatyczne usuwanie pokoju po wyjściu z niego ostatniego uczestnika
 
-5. Moduł 3 - prywatne wiadomości (45 minut)
-   1. Możliwość rozpoczęcia konwersacji z innym użytkownikiem
-   2. Dynamiczne tworzenie pokoi z zachowaniem historii konwersacji
-   3. Możliwość dołączenia kolejnego uczestnika do prywatnej rozmowy i utworzenie w ten sposób dynamicznie nowego pokoju
+5. Moduł III - prywatne wiadomości (45 minut)
+    1. Możliwość rozpoczęcia konwersacji z innym użytkownikiem
+    2. Dynamiczne tworzenie pokoi z zachowaniem historii konwersacji
+    3. Możliwość dołączenia kolejnego uczestnika do prywatnej rozmowy
+    i utworzenie w ten sposób dynamicznie nowego pokoju
 
 6. Podsumowanie
-
 
 ### Komentarz do modułu I
 W tej części uczestnicy zapewnią minimum funkcjonalności, jaką powinna mieć

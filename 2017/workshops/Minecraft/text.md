@@ -1,6 +1,10 @@
 # Minecraft sterowany Pythonem
 
-Minecraft zapewnia niczym nieskrępowaną kreatywność i swobodę tworzenia. Python jest prosty do czytania i zapisywania, daje duże możliwości tak początkującemu, jak i zaawansowanemu programiście. Dzięki zintegrowaniu Minecrafta z Pythonem możemy uzyskać jeszcze większą kontrolę nad Minecraftem i tym samym wyzwolić większe pokłady kreatywności.
+Minecraft zapewnia niczym nieskrępowaną kreatywność i swobodę tworzenia.
+Python jest prosty do czytania i zapisywania, daje duże możliwości tak
+początkującemu, jak i zaawansowanemu programiście. Dzięki zintegrowaniu
+Minecrafta z Pythonem możemy uzyskać jeszcze większą kontrolę nad Minecraftem
+i tym samym wyzwolić większe pokłady kreatywności.
 
 
 Dlaczego warto?
@@ -16,10 +20,16 @@ Co jest potrzebne:
   - [Minecraft] - Minecraft w wersji podstawowej
   - [Python] - minimum Python 3
   - [Java] - najlepiej ostatnia wersja
-  - API Minecraft Python - pobierz  Minecraft Tools dla [Windows], [MAC OS], [Rapsberry Pi lub Ubuntu]
+  - API Minecraft Python - pobierz Minecraft Tools dla [Windows], [MAC OS], [Rapsberry Pi lub Ubuntu]
   - [Server Minecraft Spigot] - wersja Spigot zgodna z wersją Minecrafta
 
-Jeśli na komputerze mamy już Minecrafta, Pythona i Javę, należy ściągnąć, rozpakować folder "Minecraft Tools" i zainstalować API Minecrafta poprzez uruchomienie "Install`_`API" spośród wyodrębnionych plików. Wtedy należy pobrać taką wersję serwera Spigot, która jest zgodna z posiadaną wersją Minecrafta. Pobrany plik "Spigot.jar" należy podmienić w folderze "server" w "Minecraft Tools". Wtedy można już uruchomić serwer poprzez "Start`_`server" z folderu "Minecraft Tools". Okna serwera nie należy zamykać.
+Jeśli na komputerze mamy już Minecrafta, Pythona i Javę, należy ściągnąć,
+rozpakować folder "Minecraft Tools" i zainstalować API Minecrafta poprzez
+uruchomienie "Install`_`API" spośród wyodrębnionych plików. Wtedy należy
+pobrać taką wersję serwera Spigot, która jest zgodna z posiadaną wersją
+Minecrafta. Pobrany plik "Spigot.jar" należy podmienić w folderze "server"
+w "Minecraft Tools". Wtedy można już uruchomić serwer poprzez "Start`_`server"
+z folderu "Minecraft Tools". Okna serwera nie należy zamykać.
 
 Wtedy wystarczy już tylko:
 1) Uruchomić Minecrafta, 
@@ -29,23 +39,29 @@ Wtedy wystarczy już tylko:
 
 ### Testujemy
 
-Żeby przetestować połączenie serwera i API, a także tworzyć programy współpracujące z Minecraftem, należy mieć uruchomiony serwer oraz Minecrafta w trybie Multiplayer (z ustawionym serwerem Spigot).
+Żeby przetestować połączenie serwera i API, a także tworzyć programy
+współpracujące z Minecraftem, należy mieć uruchomiony serwer oraz Minecrafta
+w trybie Multiplayer (z ustawionym serwerem Spigot).
 
 W edytorze Idle wpisujemy:
 ```sh
 >>> from mcpi.minecraft import Minecraft
 >>> mc = Minecraft.create ()
 ```
-Te 2 pierwsze łączą program z Minecraftem. Jeśli po uruchomieniu programu nie pojawił się komunikat o błędzie, możemy kontynuować wpisując np.
+Te 2 pierwsze łączą program z Minecraftem. Jeśli po uruchomieniu programu
+nie pojawił się komunikat o błędzie, możemy kontynuować wpisując np.
 
 ```sh
 >>> mc.player.setTilePos(0,120,0)
 ```
-Dzięki temu poleceniu nasz bohater w Minecrafcie powinien unieść się wysoko nad ziemię. Jeśli tak się stało, wszystko działa sprawnie.
+Dzięki temu poleceniu nasz bohater w Minecrafcie powinien unieść się wysoko
+nad ziemię. Jeśli tak się stało, wszystko działa sprawnie.
 
 ## Misje
 
-W Minecrafcie jest wiele przydatnych akcji, jakie można uruchomić sterując Pythonem. Warto je znać, aby móc się szybciej i efektywniej: wybudować, wyżywić, schronić przed wrogimi bytami czy teleportować.
+W Minecrafcie jest wiele przydatnych akcji, jakie można uruchomić sterując
+Pythonem. Warto je znać, aby móc się szybciej i efektywniej: wybudować,
+wyżywić, schronić przed wrogimi bytami czy teleportować.
 
 ### Teleportacja
 
@@ -62,9 +78,12 @@ y=12
 mc.player.setPos (x, y, z)
 ```
 
-W ten sposób można np. szybko uciec przed zombie w bezpieczne miejsce - jak wnętrze domu, jeśli wcześniej znamy jego współrzędne.
+W ten sposób można np. szybko uciec przed zombie w bezpieczne miejsce - jak
+wnętrze domu, jeśli wcześniej znamy jego współrzędne.
 
-Jeśli chcemy np. "obejść" znane sobie miejsca, tj. przenieść się gdzieś, rozejrzeć się i przenieść znów w inne miejsce, przydatna będzie funkcja *sleep*. Żeby ją wykorzystać, musimy dodać do programu moduł *time* poprzez:
+Jeśli chcemy np. "obejść" znane sobie miejsca, tj. przenieść się gdzieś,
+rozejrzeć się i przenieść znów w inne miejsce, przydatna będzie funkcja
+*sleep*. Żeby ją wykorzystać, musimy dodać do programu moduł *time* poprzez:
 
 ```sh
 >>> import time
@@ -85,7 +104,10 @@ mc.player.setPos (20, 110, 50)
 
 ### Stawianie bloków
 
-W Minecrafcie każdy typ bloku ma swój ID. Pełną listę bloków dostępnych w Minecrafcie znajdziesz tu: [Lista bloków]. Znając ID bloku oraz współrzędne, gdzie chcemy dany blok postawić, możemy w szybki sposób go umieścić w danym miejscu.
+W Minecrafcie każdy typ bloku ma swój ID. Pełną listę bloków dostępnych
+w Minecrafcie znajdziesz tu: [Lista bloków]. Znając ID bloku oraz współrzędne,
+gdzie chcemy dany blok postawić, możemy w szybki sposób go umieścić
+w danym miejscu.
 
 ```sh
 from mcpi.minecraft import Minecraft
@@ -96,9 +118,14 @@ W powyższym przypadku postawiliśmy arbuza (kod 103).
 
 ### Szybkie budowanie
 
-To, co jest nam od początku potrzebne w świecie Minecraft, to odpowiednie schronienie. Dlatego zazwyczaj pierwszy dzień w grze przeznaczamy na budowę domu. Jest to szczególnie istotne w trybie przetrwanie, gdzie dom stanowi schronienie przed wrogimi bytami, jak np. zombie.
+To, co jest nam od początku potrzebne w świecie Minecraft, to odpowiednie
+schronienie. Dlatego zazwyczaj pierwszy dzień w grze przeznaczamy na budowę
+domu. Jest to szczególnie istotne w trybie przetrwanie, gdzie dom stanowi
+schronienie przed wrogimi bytami, jak np. zombie.
 
-Do tworzenia jednego bloku wykorzystaliśmy funkcję *setBlock ()*, a do budowania większych bloków użyjemy funkcji *setBlocks ()*, która pozwoli nam stworzyć prostopadłościan.
+Do tworzenia jednego bloku wykorzystaliśmy funkcję *setBlock ()*,
+a do budowania większych bloków użyjemy funkcji *setBlocks ()*,
+która pozwoli nam stworzyć prostopadłościan.
 
 ```sh
 from mcpi.minecraft import Minecraft
@@ -115,9 +142,13 @@ powietrze = 0
 mc.setBlocks (x,y,z,x+szer, y+wys, z+dlug, typBloku)
 ```
 
-W ten sposób utworzony prostopadłościan jest pełny w środku. Teraz trzeba stworzyć mniejszy prostopadłościan zbudowany z bloków powietrza poprzez zmniejszenie argumentów wcześniej zbudowanego prostopadłościanu o 1. 
+W ten sposób utworzony prostopadłościan jest pełny w środku. Teraz trzeba
+stworzyć mniejszy prostopadłościan zbudowany z bloków powietrza
+poprzez zmniejszenie argumentów wcześniej zbudowanego prostopadłościanu o 1. 
 
-Istotne jest to, że w powyższym przykładzie użyliśmy funkcji *getPos ()*, która zwraca współrzędne jako wartości rzeczywiste, w przeciwieństwie do funkcji *getTilePos ()*, która zwraca współrzędne jako liczby całkowite. 
+Istotne jest to, że w powyższym przykładzie użyliśmy funkcji *getPos ()*,
+która zwraca współrzędne jako wartości rzeczywiste, w przeciwieństwie
+do funkcji *getTilePos ()*, która zwraca współrzędne jako liczby całkowite. 
 
 ## Bibliografia
 

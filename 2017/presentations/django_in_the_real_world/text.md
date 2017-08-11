@@ -46,7 +46,7 @@ The usual Django stack runs Django with either *uwsgi* or *gunicorn* behind
 a web server that could be either Apache or nginx and uses *postgres* for
 database persistence, the architecture would be something like this:
 
-![ ](/home/israel/Projects/pycon/Book/2017/presentations/django_in_the_real_world/diagram.jpg  "Basic Django site architecture")
+![ ](/home/israel/Projects/pycon/Book/2017/presentations/django_in_the_real_world/diagram.jpg "Basic Django site architecture")
 
 This would be how you'd deploy your personal project to your VPS for the first
 time.

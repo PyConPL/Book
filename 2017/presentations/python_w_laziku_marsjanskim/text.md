@@ -43,7 +43,7 @@ Coraz szybciej odchodzą w niepamięć, ponieważ prawie wszystko można już zr
 przeglądarce Internetowej. Wciąż jednak czasami preferujemy "natywne" aplikacje,
 a Python sprawdza się w nich świetnie — szczególnie wtedy, kiedy aplikacja
 często wchodzi w interakcję z użytkownikiem. Dzięki pakietom takim jak TkInter,
-WxPython czy PyQt tworzenie aplikacji jest szybkie i przyjemne, a interfejs
+wxPython czy PyQt tworzenie aplikacji jest szybkie i przyjemne, a interfejs
 użytkownika dobrze integruje się z systemem operacyjnym.
 
 Jednak chyba największą zaletą Pythona w aplikacjach desktopowych jest używanie
@@ -53,7 +53,7 @@ innych właśnie w ten sposób z powodzeniem wykorzystuje Pythona.
 ## DevOps i skrypty
 
 Python jako język skryptowy z wbudowanym REPL i wieloma jego zamiennikami takimi
-jak iPython, bpython, ptpython naturalnie nadaje się do zarządzania systemem
+jak IPython, bpython, ptpython naturalnie nadaje się do zarządzania systemem
 operacyjnym i plikami. Dodatkowo pakiety takie jak Plumbum zapewniają, że znając
 Pythona, już nigdy więcej nie będziemy musieli pisać skryptów w Bashu.
 
@@ -79,8 +79,8 @@ wydajnie eksperymentować na modelach.
 
 Dodatkowo, społeczność wytworzyła wiele darmowych narzędzi umożliwiających łatwą
 pracę z dużą ilością danych. Od bibliotek służących do wizualizacji, takich jak
-matplotlib, poprzez łatwą prezentację danych w Jupyter Notebook (kiedyś iPython
-notebook), aż po frameworki do pracy z danymi takie jak Pandas, czy
+matplotlib, poprzez łatwą prezentację danych w Jupyter Notebook (kiedyś IPython
+Notebook), aż po frameworki do pracy z danymi takie jak Pandas, czy
 scikit-learn.
 
 ## Mikrokontrolery i automatyka
@@ -108,7 +108,7 @@ za podejmowanie wysokopoziomowych decyzji, takich jak na przykład wybór miejsc
 do którego robot ma się przemieścić, czy który przycisk wcisnąć. Python
 doskonale się do tego nadaje — zazwyczaj nie są to operacje wymagające pracy w
 czasie rzeczywistym, a świetna integracja z systemami do nauczania maszynowego
-umożliwia pełne wykorzystanie zasobów.  Dodatkowo dużo łatwiej w Pythonie
+umożliwia pełne wykorzystanie zasobów. Dodatkowo dużo łatwiej w Pythonie
 stworzyć prototyp na podstawie którego wyodrębnione zostaną komponenty, które
 należy przepisać np. do C w celu poprawy wydajności.
 
@@ -141,7 +141,7 @@ i lubimy, dzięki czemu próg wejścia jest znacznie mniejszy.
 2. Lista aplikacji napisanych w Pythonie. https://wiki.python.org/moin/Applications
 3. Inna (dłuższa) lista aplikacji napisanych w Pythonie. https://en.wikipedia.org/wiki/List`_`of`_`Python`_`software
 4. Python i web development. https://worthwhile.com/blog/2016/07/19/django-python-advantages/
-5. https://wiki.python.org/moin/WebFrameworks — Frameworki webowe w Pythonie
+5. Frameworki webowe w Pythonie. https://wiki.python.org/moin/WebFrameworks
 6. Plumbum. http://plumbum.readthedocs.io/
 7. SciKit learn. http://scikit-learn.org/
 8. MicroPython. https://micropython.org/

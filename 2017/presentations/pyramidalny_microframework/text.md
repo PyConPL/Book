@@ -151,7 +151,7 @@ obecność ich wszystkich w jednym frameworku czyni go bardzo potężnym.
 
 ## Widoki
 
-Widok to kawałek kodu powiązany z konkretną ścieżką  aplikacji. W Pyramidzie
+Widok to kawałek kodu powiązany z konkretną ścieżką aplikacji. W Pyramidzie
 może to być zwykła funkcja albo klasa bądź obiekt posiadający metodę
 `__call__()`. Ostatecznym celem widoku jest utworzenie obiektu typu `Response`
 i zwrócenie go jako wynik wywołania funkcji.
