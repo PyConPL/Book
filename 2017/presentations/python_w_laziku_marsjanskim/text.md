@@ -23,15 +23,15 @@ zdają sobie sprawę z tego, że Python to nie tylko aplikacje Internetowe, czy
 proste skrypty służące do zarządzania serwerami. Dostarczane rozwiązania muszą
 być wielośrodowiskowe, a aplikacja Internetowa nie może już tylko działać
 w przeglądarce - ma rozpoznawać obrazy z kamery, analizować zbierane dane,
-wizualizować je w czasie rzeczywistym, a czasami nawet ostatecznie włączyć
+wizualizować je w czasie rzeczywistym [1], a czasami nawet ostatecznie włączyć
 światło albo otworzyć zamek w drzwiach. Na szczęście praktycznie w każdej
 z tych dziedzin możemy korzystać z lubianej
-i znanej technologii - z języka Python.
+i znanej technologii - z języka Python [2][3][4].
 
 ## Serwisy Internetowe
 
-Serwisy internetowe są typowym obszarem zastosowania języka Python.
-Django, Pylons, Flask i wiele innych sprawiają, że gdy już uporamy się z problemem,
+Serwisy internetowe są typowym obszarem zastosowania języka Python [5].
+Django, Pylons, Flask i wiele innych [6] sprawiają, że gdy już uporamy się z problemem,
 który framework wybrać, samo tworzenie oprogramowania to pestka. Jednak według
 mnie, głównym atutem Pythona na stronach internetowych jest łatwość integrowania
 go z innymi usługami, które często udostępniają API w tych samych technologiach.
@@ -56,7 +56,7 @@ innych właśnie w ten sposób z powodzeniem wykorzystuje Pythona.
 Python jako język skryptowy z wbudowanym REPL (ang. read-eval-print loop)
 i wieloma jego zamiennikami takimi
 jak IPython, bpython, ptpython naturalnie nadaje się do zarządzania systemem
-operacyjnym i plikami. Dodatkowo pakiety takie jak Plumbum zapewniają, że znając
+operacyjnym i plikami. Dodatkowo pakiety takie jak Plumbum [7] zapewniają, że znając
 Pythona, już nigdy więcej nie będziemy musieli pisać skryptów w Bashu.
 
 ## Gry komputerowe
@@ -83,12 +83,12 @@ Dodatkowo, społeczność wytworzyła wiele darmowych narzędzi umożliwiającyc
 pracę z dużą ilością danych. Od bibliotek służących do wizualizacji, takich jak
 matplotlib, poprzez łatwą prezentację danych w Jupyter Notebook (kiedyś IPython
 Notebook), aż po frameworki do pracy z danymi takie jak Pandas, czy
-scikit-learn.
+scikit-learn [8].
 
 ## Mikrokontrolery i automatyka
 
 O dziwo, nawet przy bardzo niskopoziomowym programowaniu coraz częściej słyszy
-się o Pythonie - a to głównie za sprawą projektu MicroPython, który umożliwia
+się o Pythonie - a to głównie za sprawą projektu MicroPython [9], który umożliwia
 uruchamianie kodu Pythona na systemach wbudowanych. Czy ma to sens, czy od
 takich systemów nie oczekuje się raczej szybkości, niezawodności, wykorzystania
 każdego cyklu procesora? Według mnie ma - nawet najmniejsze procesory są coraz
@@ -101,7 +101,7 @@ w Pythonie.
 ## Robotyka
 
 To chyba jedno z najciekawszych zastosowań Pythona i z roku na rok coraz
-bardziej popularnych, co widać na przykład po szybkim rozwoju projektu ROS [9]
+bardziej popularnych, co widać na przykład po szybkim rozwoju projektu ROS [10]
 (Robot Operating System), który jest swoistym frameworkiem do tworzenia różnych
 wysoce zautomatyzowanych urządzeń i systemów. Roboty to nie tylko niskopoziomowy
 kod często wymagający pracy w czasie rzeczywistym oraz maksymalnego
@@ -140,12 +140,12 @@ i lubimy, dzięki czemu próg wejścia jest znacznie mniejszy.
 ## Bibliografia
 
 1. Python success stories. https://www.python.org/about/success/usa/
-2. Lista aplikacji napisanych w Pythonie. https://wiki.python.org/moin/Applications
-3. Inna (dłuższa) lista aplikacji napisanych w Pythonie. https://en.wikipedia.org/wiki/List`_`of`_`Python`_`software
-4. Python i web development. https://worthwhile.com/blog/2016/07/19/django-python-advantages/
-5. Frameworki webowe w Pythonie. https://wiki.python.org/moin/WebFrameworks
-6. Plumbum. http://plumbum.readthedocs.io/
-7. SciKit learn. http://scikit-learn.org/
-8. MicroPython. https://micropython.org/
-9. ROS. http://www.ros.org/
-10. Python i aplikacje czasu rzeczywistego. https://stackoverflow.com/a/15011981/540717
+2. Python i aplikacje czasu rzeczywistego.\crlf https://stackoverflow.com/a/15011981/540717
+3. Lista aplikacji. https://wiki.python.org/moin/Applications
+4. Lista aplikacji. https://en.wikipedia.org/wiki/List`_`of`_`Python`_`software
+5. Python i web development. https://worthwhile.com/blog/2016/07/19/django-python-advantages/
+6. Frameworki webowe w Pythonie. https://wiki.python.org/moin/WebFrameworks
+7. Plumbum. http://plumbum.readthedocs.io/
+8. SciKit learn. http://scikit-learn.org/
+9. MicroPython. https://micropython.org/
+10. ROS. http://www.ros.org/
