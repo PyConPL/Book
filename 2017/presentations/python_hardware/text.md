@@ -101,7 +101,7 @@ W przypadku własnych projektów na niską skalę nie trzeba iść aż tak dalek
 ale zawsze warto przejść z surowego prototypu na płytce stykowej na PCB.
 Istnieją serwisy, w których możemy zamówić kilka płytek naszego autorstwa.
 Mając dwie trwałe płytki - jedna z mikrokontrolerem (Arduino, MicroPython),
-a druga z resztą układu znacząco podnosi się trwałość i niezawodność.
+a druga z resztą układu - znacząco podnosi się trwałość i niezawodność.
 
 
 ## Pythonowe platformy do prototypowania elektroniki
@@ -126,7 +126,7 @@ Firma PyCom oferuje swoje płytki deweloperskie z MicroPythonem
 obecne w produktach tej firmy. Firma ST od niedawna oferuje też produkcyjny
 układ SPWF04 (podobny do ESP8266) z MicroPythonem "prosto z pudełka". Płytka
 edukacyjna MicroBit także go wykorzystuje. Wybór jest więc dość spory. Do wad
-można zaliczyć ograniczoną ilość bibliotek do komponentów, co może utrudnić
+można zaliczyć ograniczoną liczbę bibliotek do komponentów, co może utrudnić
 prototypowanie.
 
 Zerynth to komercyjna i częściowo otwarta platforma, której celem jest obsługa
@@ -140,13 +140,13 @@ dostępnością bibliotek do komponentów. Zaletą na pewno jest IDE i dodatkowe
 narzędzia, wadą - vendor lockin.
 
 Jako trzecią platformę możemy potraktować komputery, w szczególności
-Raspberry Pi, które łączą komputer z zestawem GPIO i dość dużą ilością bibliotek
+Raspberry Pi, które łączą komputer z zestawem GPIO i dość dużą liczbą bibliotek
 dla dodatkowych komponentów. Mając do dyspozycji USB, WiFi, Bluetooth,
 Ethernet możemy interfejsować i komunikować się z różnoraką elektroniką
 i usługami sieciowymi. USB można też wykorzystać do komunikacji szeregowej
 z mikrokontrolerami. Jeżeli musimy wykorzystać sprzęt "wyższego poziomu",
 np. kamerę przemysłową, to zapewne będziemy potrzebować MS Windows lub Linuksa
-i API producenta dla Pythona (lub API .NET i IronPython, ew. interfejs COM
+i API producenta dla Pythona (lub API .NET i IronPython, ewentualnie interfejs COM
 dla starszego sprzętu). Zostając w temacie kamer przemysłowych - sporo
 producentów ostatnio dostarcza wsparcie dla Pythona (np. PointGrey/FLIR).
 W przypadku zasilania bateryjnego należy uwzględnić, że nawet oszczędne płytki
