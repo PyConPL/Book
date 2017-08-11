@@ -93,7 +93,7 @@ for alias, location in al_loc_ls:
             ]
     if copy_images:
         small_pdf_ls.extend([
-            "[ ${TARGET.file} != cyber.pdf ] || cp ../../../presentations/with_python_security/000_notpetya.jpg .",
+            "[ ${TARGET.file} != cyber.pdf ] || cp ../../../presentations/with_python_security/000_notpetya.png .",
             "[ ${TARGET.file} != cyber.pdf ] || cp ../../../presentations/with_python_security/001_attacks_per_day.png .",
             "[ ${TARGET.file} != cyber.pdf ] || cp ../../../presentations/with_python_security/002_batman.png .",
             ])

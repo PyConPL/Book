@@ -1,5 +1,16 @@
 # with python: security() - Piotr Dyba
 
+
+### About author
+
+Piotr Dyba is a Team Leader and software engineers at F-Secure’s Rapid
+Detection Service where he and his Python team are developing a distributed
+network of honeypots, network sensors and tooling for RDS.
+In his spare time he is a leading mentor and teacher at PyLadies Poznan.
+Pythonically in love with asyncio and personally with hiking.
+The last interesting fact about Piotr is that he used to be a photojournalist
+and visited Afghanistan as war photographer.
+
 ## Introduction
 Introduction to cybersecurity for developers.
 Cybersecurity is a critical part of all distributed applications.
@@ -32,18 +43,18 @@ Looking at the number and severity of leaks over time, it is easy to observe
 a huge increase in their occurrences over the years and severity rising from
 1 000 to above 1 000 000 000 user's data.
 
-![00 NotPetya malware screen](./000_notpetya.png)
+![NotPetya malware screen](000_notpetya.png)
 
-Remember that screen from just two weeks ago? NotPetya laid waste on many
+Remember the screen (rys. 1) from June 2017? NotPetya laid waste on many
 companies across the globe in just one day, some of which are still recovering.
 The most known cases were companies such as TNT and Raben.
 Raben is a good example of well prepared recovery that took less
 than 24 hours. In that time, Raben moved their whole server infrastructure
 from Windows to Linux, which was quite an achievement.
 
-![01 NotPetya malware screen](./001_attacks_per_day.png)
+![Attackers per day in the first 6 months of 2017](001_attacks_per_day.png)
 
-The graph above shows the number of attackers per day in the last 6 months,
+The graph (rys. 2) shows the number of attackers per day in first 6 months of 2017,
 which varied from 2 to almost 16 millions per day.
 An attack means an action against one of F-secure's research honeypots
 deployed on the public internet.
@@ -209,7 +220,7 @@ and address the security risks associated with the target of the modeling.
 
 #### 1. Identification of assets
 
-Let's conduct an example threat modeling from Batman's perspective
+Let's conduct an example threat modeling from Batman's perspective (rys. 3)
 and identify our assets, which are: the bat cave, our butler Alfred
 and information in form of emails and texts.
 
@@ -235,7 +246,7 @@ For emails and texts, encryption and caution when writing something delicate
 should be enough.
 
 
-![02 Batman Threat modeling](./002_batman.png)
+![Batman Threat modeling](002_batman.png)
 
 
 #### 1. Identification of assets - decompose the application
@@ -645,35 +656,25 @@ should notice…
 
 ## References
 
-1. [owasp.org](http://owasp.org)
-2. [vulnhub.com](https://vulnhub.com)
-3. [awesome-security](https://github.com/sbilly/awesome-security)
-4. [pentest-wiki](https://github.com/nixawk/pentest-wiki)
-5. [safeandsavvy.f-secure.com](https://safeandsavvy.f-secure.com/)
-6. [reddit.com/r/netsec/](https://reddit.com/r/netsec/)
-7. [blogs.cisco.com](https://blogs.cisco.com/)
-8. [youtube.com/channel/UClcE-kVhqyiHCcjYwcpfj9w](https://youtube.com/channel/UClcE-kVhqyiHCcjYwcpfj9w)
-9. [gynvael.coldwind.pl](http://gynvael.coldwind.pl/)
-10. [nakedsecurity.sophos.com](https://nakedsecurity.sophos.com/)
-11. [risky.biz](https://risky.biz/netcasts/risky-business/)
-12. [badcyber.com](https://badcyber.com/)
-13. [packetstormsecurity.com](https://packetstormsecurity.com)
-14. [labs.mwrinfosecurity.com/](https://labs.mwrinfosecurity.com/)
-15. [ctftime.org](https://ctftime.org/ctf-wtf/)
-16. [overthewire.org](http://overthewire.org/wargames/)
-17. [picoctf.com](https://picoctf.com/)
-18. [microcorruption.com](https://microcorruption.com/)
-19. [offensive-security.com](https://www.offensive-security.com/when-things-get-tough/)
-20. [Batman threat modeling](https://mobilisationlab.org/wp-content/uploads/2015/08/batman-threat-model-1200.png)
-21. [sshttp - hiding SSH servers behind HTTP](https://github.com/stealth/sshttp)
+1. owasp.org. http://owasp.org
+2. vulnhub.com. https://vulnhub.com
+3. awesome-security. https://github.com/sbilly/awesome-security
+4. pentest-wiki. https://github.com/nixawk/pentest-wiki
+5. safeandsavvy.f-secure.com. https://safeandsavvy.f-secure.com/
+6. reddit.com/r/netsec/. https://reddit.com/r/netsec/
+7. blogs.cisco.com. https://blogs.cisco.com/
+8. youtube.com/channel/UClcE-kVhqyiHCcjYwcpfj9w. https://youtube.com/channel/UClcE-kVhqyiHCcjYwcpfj9w
+9. gynvael.coldwind.pl. http://gynvael.coldwind.pl/
+10. nakedsecurity.sophos.com. https://nakedsecurity.sophos.com/
+11. risky.biz. https://risky.biz/netcasts/risky-business/
+12. badcyber.com. https://badcyber.com/
+13. packetstormsecurity.com. https://packetstormsecurity.com
+14. labs.mwrinfosecurity.com/. https://labs.mwrinfosecurity.com/
+15. ctftime.org. https://ctftime.org/ctf-wtf/
+16. overthewire.org. http://overthewire.org/wargames/
+17. picoctf.com. https://picoctf.com/
+18. microcorruption.com. https://microcorruption.com/
+19. offensive-security.com. https://www.offensive-security.com/when-things-get-tough/
+20. Batman threat modeling. https://mobilisationlab.org/wp-content/uploads/2015/08/batman-threat-model-1200.png
+21. sshttp - hiding SSH servers behind HTTP. https://github.com/stealth/sshttp
 22. Justin Mayer's talk from EuroPython 2017: "Replacing passwords with multiple factors: email, otp, and hardware keys"
-
-### About author
-
-Piotr Dyba is a Team Leader and software engineers at F-Secure’s Rapid
-Detection Service where he and his Python team are developing a distributed
-network of honeypots, network sensors and tooling for RDS.
-In his spare time he is a leading mentor and teacher at PyLadies Poznan.
-Pythonically in love with asyncio and personally with hiking.
-The last interesting fact about Piotr is that he used to be a photojournalist
-and visited Afghanistan as war photographer.
