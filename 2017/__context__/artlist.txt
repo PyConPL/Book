@@ -19,16 +19,16 @@ pycon2017 pycon2017
 cyber presentations/with_python_security
 real presentations/django_in_the_real_world
 zodb presentations/zodb_ecosystem
-% Prezentacje po polsku
-hardware presentations/python_hardware
-uart presentations/technologie_komunikacji_miedzy_urzadzeniami
-mars presentations/python_w_laziku_marsjanskim
-pyramid presentations/pyramidalny_microframework
 % Warsztaty po angielsku
 ros workshops/IPython_Robot_Prototyping
 pytest workshops/pytest_parametric_tests
 spark workshops/First_steps_with_PySpark
 networkx workshops/Network_Analysis_using_Python
+% Prezentacje po polsku
+hardware presentations/python_hardware
+uart presentations/technologie_komunikacji_miedzy_urzadzeniami
+mars presentations/python_w_laziku_marsjanskim
+pyramid presentations/pyramidalny_microframework
 % Warsztaty po polsku
 micro workshops/micropython
 mine workshops/Minecraft
