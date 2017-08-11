@@ -69,7 +69,7 @@ spadnie, co szybko doprowadzi do przepalenia.
 
 Wachlarz zastosowań tranzystorów w elektronice analogowej i cyfrowej jest
 bardzo szeroki. My jednak skupimy się na jednym - wykorzystaniu tranzystora do
-kontroli obwodu o wysokim natężeniu prądu przy pomocy znacznie niższego. W tym
+kontroli obwodu o wysokim natężeniu prądu za pomocą znacznie niższego. W tym
 celu zastosujemy konfigurację "wspólnego emitera":
 
 ![ryc. 2 Tranzystor NPN jako przełącznik diody](ryc2.svg)
@@ -78,7 +78,7 @@ W układzie tym w momencie, gdy pin znajduje się w stanie niskim, tranzystor
 znajduje się w stanie zatkania - brak przewodnictwa między kolektorem a
 emiterem. Gdy pin przejdzie w stan wysoki - tranzystor osiąga stan nasycenia -
 prąd między kolektorem i emiterem przewodzony jest z minimalnym oporem.
-Spróbujmy przy jego pomocy zasilić "żarówkę" LED na 12V o mocy 1,5 W.
+Spróbujmy za jego pomocą zasilić "żarówkę" LED na 12V o mocy 1,5 W.
 
 Parametry:
 
@@ -99,7 +99,7 @@ zagwarantować wymagany prąd baza-emiter jeśli pin GPIO przejdzie w stan wysok
 
 Mimo że tranzystor i przekaźnik mogą spełniać podobną rolę w obwodzie, istnieje
 między nimi duża różnica.
-Przekaźnik przełącza styki mechanicznie przy pomocy elektromagnesu.
+Przekaźnik przełącza styki mechanicznie za pomocą elektromagnesu.
 Tranzystor nie posiada elementów mechanicznych.
 Jego działanie opiera się na technologii półprzewodnikowej.
 Aby wybrać, która z tych opcji jest dla nas właściwa, należy rozważyć wady i

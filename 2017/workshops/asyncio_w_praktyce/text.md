@@ -91,7 +91,7 @@ modne za sprawą NodeJS.
 
 Asynchroniczne programowanie jest szczególnie przydatne, gdy mamy do czynienia
 z aplikacjami, które przez większość czasu oczekują na zakończenie
-operacji I/O, a mniej czasu spędzają na obliczeniach przy pomocy CPU. Pomysł
+operacji I/O, a mniej czasu spędzają na obliczeniach używających intensywnie CPU. Pomysł
 na podejście asynchroniczne pochodzi z bardzo prostej obserwacji - gdy program
 czeka na zakończenie operacji wejścia-wyjścia, to pozostaje bezczynny.
 

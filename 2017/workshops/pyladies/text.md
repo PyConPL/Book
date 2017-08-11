@@ -1310,7 +1310,7 @@ listy po kolei możemy oczywiście użyć indeksów:
 
 Jednak takie podejście jest niewygodne kiedy lista jest bardzo długa.
 A co gdy w ogóle nie wiemy na jak długiej liście działamy?  Te problemy
-można rozwiązać przy pomocy **pętli**, czyli instrukcji, która wykonuje
+można rozwiązać za pomocą **pętli**, czyli instrukcji, która wykonuje
 podane operacje dopóki jakiś warunek nie zostanie spełniony.  Z użyciem
 pętli możemy na przykład iterować, czyli wykonywać operacje na kolejnych
 elementach listy, dopóki nie dojdziemy do jej końca.
