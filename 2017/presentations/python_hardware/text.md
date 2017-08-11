@@ -46,8 +46,8 @@ ESP8266 z WiFi. Podobnie platforma Zerynth, który pozwala programować
 w Pythonie, którego kompiluje przed wrzuceniem na mikrokontroler.
 Wysokopoziomowe platformy Tinkerforge czy Phidgets także obsługują Pythona,
 podobnie jak bardziej wyspecjalizowana własnościowa platforma firmy Synapse.
-Jeżeli potrzebujemy większej mocy obliczeniowej, to możemy skorzystać z Raspberry
-Pi i bardzo wielu innych "komputerów na płytce", czy nawet klasycznych
+Jeżeli potrzebujemy większej mocy obliczeniowej, to możemy skorzystać
+z Raspberry Pi i bardzo wielu innych "komputerów na płytce", czy nawet klasycznych
 komputerów z procesorami x86 Intela i AMD.
 
 
@@ -139,8 +139,8 @@ raczej mała i przynajmniej w przypadku Pythona ograniczeni jesteśmy
 dostępnością bibliotek do komponentów. Zaletą na pewno jest IDE i dodatkowe
 narzędzia, wadą - vendor lockin.
 
-Jako trzecią platformę możemy potraktować komputery, w szczególności Raspberry
-Pi, które łączą komputer z zestawem GPIO i dość dużą ilością bibliotek
+Jako trzecią platformę możemy potraktować komputery, w szczególności
+Raspberry Pi, które łączą komputer z zestawem GPIO i dość dużą ilością bibliotek
 dla dodatkowych komponentów. Mając do dyspozycji USB, WiFi, Bluetooth,
 Ethernet możemy interfejsować i komunikować się z różnoraką elektroniką
 i usługami sieciowymi. USB można też wykorzystać do komunikacji szeregowej

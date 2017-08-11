@@ -57,7 +57,7 @@ and the following Python packages should be installed.
 You can also use [conda](https://conda.io/docs/) to install these packages.
 
 The workshop will also require datasets to work on which will be uploaded
-on github repository https://github.com/MridulS/pyconpl-2017-networkx.
+on GitHub repository https://github.com/MridulS/pyconpl-2017-networkx.
 
 The repo will contain the Jupyter notebooks that will be required
 during the workshop.

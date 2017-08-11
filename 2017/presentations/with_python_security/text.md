@@ -632,7 +632,7 @@ CEO, CISO or CTO are aware of. A Red Teaming Exercise may consist of:
 
 * Physical security testing like breaking into the office, server rooms,
 conference rooms, planting bugs or lock picking
-* Network and IT security testing done by, for example, planting raspberryPI
+* Network and IT security testing done by, for example, planting Raspberry Pi
 on the net, routing data through a sniffer or leaving behind some rubberducky
 * Phishing and social engineering
 * Software pentesting

@@ -20,7 +20,7 @@ Co jest potrzebne:
   - [Minecraft] - Minecraft w wersji podstawowej
   - [Python] - minimum Python 3
   - [Java] - najlepiej ostatnia wersja
-  - API Minecraft Python - pobierz Minecraft Tools dla [Windows], [MAC OS], [Rapsberry Pi lub Ubuntu]
+  - API Minecraft Python - pobierz Minecraft Tools dla [Windows], [MAC OS], [Raspberry Pi lub Ubuntu]
   - [Server Minecraft Spigot] - wersja Spigot zgodna z wersją Minecrafta
 
 Jeśli na komputerze mamy już Minecrafta, Pythona i Javę, należy ściągnąć,
@@ -160,8 +160,8 @@ do funkcji *getTilePos ()*, która zwraca współrzędne jako liczby całkowite.
    [Java]: <https://www.java.com/en/download/>
    [Windows]: <https://sourceforge.net/projects/python-with-minecraft-windows/>
    [MAC OS]: <https://sourceforge.net/projects/python-with-minecraft-mac/files/?source=navbar>
-   [Rapsberry Pi lub Ubuntu]: <https://github.com/py3minepi/py3minepi>
-   [Rapsberry Juice]: <https://dev.bukkit.org/projects/raspberryjuice>
+   [Raspberry Pi lub Ubuntu]: <https://github.com/py3minepi/py3minepi>
+   [Raspberry Juice]: <https://dev.bukkit.org/projects/raspberryjuice>
    [Server Minecraft Spigot]: <https://getbukkit.org/spigot>
    [Lista bloków]: <http://minecraft-pl.gamepedia.com/Warto%C5%9Bci_danych>
    [Minecraft - gamepedia]: <http://minecraft-pl.gamepedia.com/Warto%C5%9Bci_danych>
