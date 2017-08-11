@@ -137,13 +137,13 @@ i lubimy, dzięki czemu próg wejścia jest znacznie mniejszy.
 
 ## Bibliografia
 
-1. https://www.python.org/about/success/usa/ — Python success stories
-2. https://wiki.python.org/moin/Applications — lista aplikacji napisanych w Pythonie
-3. https://en.wikipedia.org/wiki/List`_`of`_`Python`_`software — inna (dłuższa) lista aplikacji napisanych w Pythonie
-4. https://worthwhile.com/blog/2016/07/19/django-python-advantages/ — Python i web development
+1. Python success stories. https://www.python.org/about/success/usa/
+2. Lista aplikacji napisanych w Pythonie. https://wiki.python.org/moin/Applications
+3. Inna (dłuższa) lista aplikacji napisanych w Pythonie. https://en.wikipedia.org/wiki/List`_`of`_`Python`_`software
+4. Python i web development. https://worthwhile.com/blog/2016/07/19/django-python-advantages/
 5. https://wiki.python.org/moin/WebFrameworks — Frameworki webowe w Pythonie
-6. http://plumbum.readthedocs.io/ — oficjalna strona Plumbum
-7. http://scikit-learn.org/ — SciKit learn
-8. https://micropython.org/ — MicroPython
-9. http://www.ros.org/ — ROS
-10. https://stackoverflow.com/a/15011981/540717 — Python i aplikacje czasu rzeczywistego
+6. Plumbum. http://plumbum.readthedocs.io/
+7. SciKit learn. http://scikit-learn.org/
+8. MicroPython. https://micropython.org/
+9. ROS. http://www.ros.org/
+10. Python i aplikacje czasu rzeczywistego. https://stackoverflow.com/a/15011981/540717
