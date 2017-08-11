@@ -6,17 +6,17 @@ dobrodziejstw.
 
 Nauka oprze się o pisanie w pełni funkcjonalnego czatu. W trakcie ćwiczeń
 poznasz część biblioteki asyncio potrzebną do zrealizowania zadania, nową
-składnię dla coroutines z async i await, bibliotekę **aiohttp** [1]
-zapewniającą klienta i serwer HTTP oraz tajniki testowania powyższych. Pisanie
+składnię dla coroutines z async i await, bibliotekę **aiohttp** [2]
+(klient i serwer HTTP) oraz tajniki testowania powyższych. Pisanie
 testów przed kodem będzie częścią szkolenia, ale w razie potrzeby może zostać
 pominięte, by nadal móc coś z niego wynieść.
 
-Do testowania będziemy używać biblioteki **pytest**[4], ale w minimalnym
+Do testowania będziemy używać biblioteki **pytest** [3], ale w minimalnym
 stopniu - jego nieznajomość w niczym nie będzie przeszkadzać.
 
 Najważniejszą rzeczą, którą wyniesiecie ze szkolenia, będzie umiejętność
 projektowania aplikacji opartych na asyncio. Poznacie mocne strony biblioteki
-i sytuacje w których jest odpowiednim narzędziem. Nauczycie się także unikania
+i sytuacje, w których jest odpowiednim narzędziem. Nauczycie się także unikania
 najczęstszych pułapek związanych z asyncio.
 
 
@@ -51,7 +51,7 @@ loop.close()
 ```
 
 ## Dla kogo?
-Szkolenie jest adresowane do osób, które programują już chwilę w Pythonie
+Szkolenie jest adresowane do osób, które programują już trochę w Pythonie
 i chcą poznać jego asynchroniczną stronę. Każdy średniozaawansowany
 lub ogarniający początkujący programista Pythona da sobie radę z ćwiczeniami.
 Znajomość technologii frontendowych nie jest wymagana - ta część zostanie
@@ -59,7 +59,7 @@ zapewniona przez organizatora warsztatów.
 
 ## Jak się przygotować?
 Potrzebny będzie Python w wersji 3.5 lub 3.6, umiejętność obsługi pip'a,
-virtualenva i podstawowa znajomość git'a - na tyle, by móc sklonować sobie
+virtualenv'a i podstawowa znajomość git'a - na tyle, by móc sklonować sobie
 repozytorium, utworzyć wirtualne środowisko i zainstalować zależności
 potrzebne do ćwiczeń:
 
@@ -70,8 +70,6 @@ python3.6 -m venv ve
 source ve/bin/activate
 pip install -r requirements.pip
 ```
-
-I to wszystko.
 
 Edytor kodu nie ma znaczenia, używajcie swojego ulubionego. W razie
 wątpliwości - PyCharm Community Edition na pewno się nada.
@@ -85,8 +83,8 @@ zainteresować mając działające projekty napisane chociażby w Django.
 
 Inni zareagowali entuzjastycznie i zaadoptowali tę bibliotekę do swoich
 potrzeb. Trzeba na początek powiedzieć, że asynchroniczność jest w Pythonie
-już od długiego czasu. Pierwszy release frameworka Twisted miał miejsce w 2002
-roku, a więc aż 15 lat temu. Inny popularny framework - Tornado jest z nami
+już od długiego czasu. Pierwsze wydanie frameworka Twisted miało miejsce w 2002
+roku, a więc aż 15 lat temu. Inny popularny framework, Tornado, jest z nami
 już od 8 lat. Te projekty miały swoją niszę na rynku oprogramowania,
 udostępniając programowanie sterowane zdarzeniami na długo zanim stało się to
 modne za sprawą NodeJS.
@@ -214,17 +212,17 @@ odczytania później.
 ## Co robić dalej po szkoleniu?
 
 Zdecydowanie polecam zapoznanie się z pierwszymi trzema pozycjami
-z bibliografii, począwszy od książki Luciano Ramalho. Powinno to dać dalszą,
+z bibliografii, począwszy od książki Luciano Ramalho [4]. Powinno to dać dalszą,
 solidną porcję wiedzy potrzebną do projektowania aplikacji opartych
 na asyncio.
 
 Liczba bibliotek i narzędzi kompatybilnych z asyncio rośnie z czasem.
-Większość z nich można znaleźć w dedykowanym repozytorium na **githubie** [5]
+Większość z nich można znaleźć w dedykowanym repozytorium bibliotek i rozszerzeń [5].
 
 ## Bibliografia
 
-1. Dokumentacja asyncio. https://docs.python.org/3/library/asyncio.html
-2. Dokumentacja aiohttp. https://aiohttp.readthedocs.io/en/stable/
-3. Fluent Python autorstwa Luciano Ramalho, rozdział 18.
-4. Dokumentacja pytest. https://docs.pytest.org/
-5. awesome-asyncio (repozytorium bibliotek i rozszerzeń asyncio) https://github.com/timofurrer/awesome-asyncio
+1. asyncio. https://docs.python.org/3/library/asyncio.html
+2. aiohttp. https://aiohttp.readthedocs.io/en/stable/
+3. pytest. https://docs.pytest.org/
+4. Luciano Ramalho. Fluent Python, rozdział 18.
+5. awesome-asyncio. https://github.com/timofurrer/awesome-asyncio
