@@ -92,17 +92,25 @@ for alias, location in al_loc_ls:
             pl_txt.link_src(alias),
             ]
     if copy_images:
+        small_pdf_ls.extend([
+            "[ ${TARGET.file} != cyber.pdf ] || cp ../../../presentations/with_python_security/000_notpetya.jpg .",
+            "[ ${TARGET.file} != cyber.pdf ] || cp ../../../presentations/with_python_security/001_attacks_per_day.png .",
+            "[ ${TARGET.file} != cyber.pdf ] || cp ../../../presentations/with_python_security/002_batman.png .",
+            ])
         small_pdf_ls.append(
-            "[ ${TARGET.file} != async.pdf ] || cp ../../../presentations/async_pod_maska/yield_from.png .",
+            "[ ${TARGET.file} != real.pdf ] || cp ../../../presentations/django_in_the_real_world/diagram.jpg .",
             )
         small_pdf_ls.append(
-            "[ ${TARGET.file} != microservices.pdf ] || cp ../../../presentations/tdd_of_python_microservices/fixtures.png .",
+            "[ ${TARGET.file} != zodb.pdf ] || cp ../../../presentations/zodb_ecosystem/ZODBTitleGraphics.png .",
             )
+        small_pdf_ls.extend([
+            "[ ${TARGET.file} != micro.pdf ] || cp ../../../workshops/micropython/ryc1.svg .",
+            "[ ${TARGET.file} != micro.pdf ] || cp ../../../workshops/micropython/ryc2.svg .",
+            "[ ${TARGET.file} != micro.pdf ] || cp ../../../workshops/micropython/ryc3.svg .",
+            "[ ${TARGET.file} != micro.pdf ] || cp ../../../workshops/micropython/ryc4.svg .",
+            ])
         small_pdf_ls.append(
-            "[ ${TARGET.file} != microservices.pdf ] || cp ../../../presentations/tdd_of_python_microservices/test_pyramid.png .",
-            )
-        small_pdf_ls.append(
-            "[ ${TARGET.file} != microservices.pdf ] || cp ../../../presentations/tdd_of_python_microservices/tdd_cycle.png .",
+            "[ ${TARGET.file} != networkx.pdf ] || cp ../../../workshops/Network_Analysis_using_Python/network.png .",
             )
     if create_pdfs:
         small_pdf_ls.append("texexec --pdf " + alias)
