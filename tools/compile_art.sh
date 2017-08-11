@@ -13,6 +13,7 @@ then
         while [ -f $WORK ]
         do
             time make COLUMNS=$COLUMNS SELECTED="$ALIAS"; red_green_bar.py $? $COLUMNS
+            echo -n 
             inotifywait ../${LOCATION}/text.md
         done
     else
