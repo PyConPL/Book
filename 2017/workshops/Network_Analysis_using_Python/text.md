@@ -53,7 +53,7 @@ The repo will contain the jupyter notebooks that will be required during the wor
 
 A graph G is represented by a set of nodes and a set of edges. An edge between two nodes in a graph signifies a relationship between those two nodes. Edges can be directed and undirected.
 
-![Network](img/network.png)
+![Network](network.png)
 
 NetworkX uses dictionaries underneath to store node and edge data. It's dict-o-dict-o-dict-o-dict to be precise.
 ```
