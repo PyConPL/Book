@@ -61,7 +61,7 @@ wyświetlacze ciekłokrystaliczne.
 I2C (Inter-Integrated Circuit) to dwukierunkowa magistrala służąca do
 synchronicznego przesyłania danych w urządzeniach elektronicznych.
 Komunikacja odbywa się z wykorzystaniem dwóch dwukierunkowych linii SDA
--- (Serial Data Line) oraz SCL (Serial Clock Line). Ze względu na swoją
+- (Serial Data Line) oraz SCL (Serial Clock Line). Ze względu na swoją
 budowę interfejs ten nadaje się do komunikacji na małe odległości (do
 kilkunastu cm). Każde urządzenie I2C ma swój unikalny 7-bitowy adres.
 Pierwsze 4 bity określają identyfikator urządzenia. Jest on nadawany
@@ -86,7 +86,7 @@ linię danych. Urządzenia slave podłączone do tego interfejsu mogą
 posiadać własne zasilanie lub mogą być zasilane bezpośrednio z linii
 danych, wykorzystując zasilanie pasożytnicze. Interfejs zakłada
 istnienie na magistrali tylko jednego urządzenia master i dowolnej
-liczby urządzeń slave. Urządzenia slave identyfikowane są przy pomocy
+liczby urządzeń slave. Urządzenia slave identyfikowane są za pomocą
 unikalnego 8-bajtowego identyfikatora, nadawanego urządzeniu w czasie
 produkcji. Urządzenia slave same nie wykazują żadnej aktywności, a
 wszelkie transfery na magistrali inicjowane są przez urządzenie master.
@@ -189,11 +189,19 @@ ogrzewania.
 ZigBee to protokół bezprzewodowej transmisji danych w sieciach typu mesh
 działających w paśmie 868 MHz, 915 MHz lub 2,4 GHz. Charakteryzuje się
 niewielkim poborem energii oraz niską prędkością transmisji. Wyróżniamy
-trzy typy urządzeń ZigBee: * koordynator (ZC) - jest to węzeł początkowy
-sieci, do którego przyłączają się inne urządzenia, w sieci może
-występować tylko jedno takie urządzenie, * router (ZR) - przekazuje dane
-z innych urządzeń lub routerów, * urządzenie końcowe (ZED) - przesyła
-dane do routera, do którego jest przyłączone {[}9{]}.
+trzy typy urządzeń ZigBee:
+
+\startitemize[packed]
+\item
+  koordynator (ZC) - jest to węzeł początkowy sieci, do którego
+  przyłączają się inne urządzenia, w sieci może występować tylko jedno
+  takie urządzenie,
+\item
+  router (ZR) - przekazuje dane z innych urządzeń lub routerów,
+\item
+  urządzenie końcowe (ZED) - przesyła dane do routera, do którego jest
+  przyłączone {[}9{]}.
+\stopitemize
 
 Standard ZigBee wykorzystywany jest w urządzeniach, które wysyłają mało
 danych oraz wymagają długiego czasu pracy na zasilaniu bateryjnym.
@@ -201,19 +209,19 @@ Typowe zastosowanie znajduje on w różnego rodzaju czujnikach (dymu,
 zalania, otwarcia okien) i inteligentnych przełącznikach (świtała,
 rolet).
 
-\subsection[wifi]{Wifi}
+\subsection[wifi]{WiFi}
 
-Wifi to standard przeznaczony do budowy bezprzewodowych sieci
+WiFi to standard przeznaczony do budowy bezprzewodowych sieci
 komputerowych. Urządzenia pracują w paśmie częstotliwości 2,4 GHz lub 5
-GHz. Powszechność urządzeń wykorzystujących standard wifi spowodowała,
+GHz. Powszechność urządzeń wykorzystujących standard WiFi spowodowała,
 że technologia ta została wykorzystana także w urządzeniach automatyki
 budynkowej.
 
 Ze względu na spore zapotrzebowanie na energię wsparcie dla komunikacji
-wifi oferowane jest przeważnie w urządzeniach na stałe podłączonych do
+WiFi oferowane jest przeważnie w urządzeniach na stałe podłączonych do
 zasilania, takich jak inteligentne żarówki czy sterowniki centralnego
 ogrzewania. Technologia ta jest także często wykorzystywana w projektach
-hobbystycznych za sprawą taniego i łatwo dostępnego modułu wifi ESP8266.
+hobbystycznych za sprawą taniego i łatwo dostępnego modułu WiFi ESP8266.
 
 \subsection[podsumowanie]{Podsumowanie}
 
@@ -233,26 +241,26 @@ komunikacyjnych.
 
 \startitemize[n,packed][stopper=.]
 \item
-  Tomasz Francuz - Język C dla mikrokontrolerów AVR. Od podstaw do
-  zaawansowanych aplikacji:
+  Tomasz Francuz. Język C dla mikrokontrolerów AVR. Od podstaw do
+  zaawansowanych aplikacji.
   http://helion.pl/ksiazki/jezyk-c-dla-mikrokontrolerow-avr-od-podstaw-do-zaawansowanych-aplikacji-tomasz-francuz,jcmikr.htm
 \item
-  Interfejs UART:
+  Interfejs UART.
   https://en.wikipedia.org/wiki/Universal\type{_}asynchronous\type{_}receiver/transmitter
 \item
-  Magistrale szeregowe: http://www.epanorama.net/links/serialbus.html
+  Magistrale szeregowe. http://www.epanorama.net/links/serialbus.html
 \item
-  Protokół Modbus: http://www.modbus.org
+  Protokół Modbus. http://www.modbus.org
 \item
-  System KNX: https://www.knx.org/
+  System KNX. https://www.knx.org/
 \item
-  System LonWorks: https://en.wikipedia.org/wiki/LonWorks
+  System LonWorks. https://en.wikipedia.org/wiki/LonWorks
 \item
-  Magistrala M-Bus: http://www.m-bus.com
+  Magistrala M-Bus. http://www.m-bus.com
 \item
-  Protokół Z-wave: http://www.z-wave.com
+  Protokół Z-wave. http://www.z-wave.com
 \item
-  Protokół ZigBee: http://www.zigbee.org
+  Protokół ZigBee. http://www.zigbee.org
 \stopitemize
 
 

@@ -7,7 +7,7 @@
 
 \subsection[introduction]{Introduction}
 
-There are hundreds of django-based projects running out there, in most
+There are hundreds of Django-based projects running out there, in most
 of the cases, the default setup is enough. Some others need to scale so
 they can serve thousands of requests per minute. Even though there's no
 recipe for optimization, there are some strategies you can implement to
@@ -62,9 +62,9 @@ metrics.
   improvement.
 \stopitemize
 
-\subsection[basic-django-deployment]{Basic django deployment}
+\subsection[basic-django-deployment]{Basic Django deployment}
 
-The usual django stack runs django with either {\em uwsgi} or
+The usual Django stack runs Django with either {\em uwsgi} or
 {\em gunicorn} behind a web server that could be either Apache or nginx
 and uses {\em postgres} for database persistence, the architecture would
 be something like this:
@@ -139,11 +139,11 @@ reads or slow writes, which leads to slow reads due to resource locking.
     the write operations from the read operations, this way both
     operations are handled by different instances. You might have some
     replication delay depending on traffic and write contention. Using
-    django's database routers is highly recommended here to abstract the
+    Django's database routers is highly recommended here to abstract the
     upper layers from handling the databases for write and read.
   \item
     {\bf Know your ORM:} one of the most powerful libraries withing
-    django framework is the \type{ORM}, \type{django.db.models.Model}
+    Django framework is the \type{ORM}, \type{django.db.models.Model}
     class is really powerful and efficient but so underused in most
     cases that is surprising, first of all they have lazy evaluation,
     which means it only hits the database when it needs to and gives you
@@ -177,14 +177,14 @@ retrieve it quickly.
   server and avoid hitting the disk and having to load all those assets
   on every request.
 \item
-  {\bf Templates:} one of django's coolest features is its templates
+  {\bf Templates:} one of Django's coolest features is its templates
   system, which allows you to cache either a whole view or certain
   blocks of a template that are highly demanded, it only takes you to
   add one templatetag and you're good to go, you can cache static blocks
   that won't change or blocks that are associated to a dynamic piece of
   information like a session or user id.
 \item
-  {\bf Session storage:} django offers several session storage backends,
+  {\bf Session storage:} Django offers several session storage backends,
   File based and database backed, but sessions are something you're
   going to be accessing a lot, so, it is recommended to have a fast
   storage backend, redis can be really handy for this and it's easy to

@@ -5,44 +5,46 @@
 \Author{Milena Piasecka}
 \MakeTitlePage
 
-Minecraft zapewnia niczym nieskrępowaną kreatywność i swobodę tworzenia.
-Python jest prosty do czytania i zapisywania, daje duże możliwości tak
-początkującemu, jak i zaawansowanemu programiście. Dzięki zintegrowaniu
-Minecrafta z Pythonem możemy uzyskać jeszcze większą kontrolę nad
-Minecraftem i tym samym wyzwolić większe pokłady kreatywności.
+Minecraft {[}1{]} zapewnia niczym nieskrępowaną kreatywność i swobodę
+tworzenia. Python jest prosty do czytania i zapisywania, daje duże
+możliwości tak początkującemu, jak i zaawansowanemu programiście. Dzięki
+zintegrowaniu Minecrafta z Pythonem możemy uzyskać jeszcze większą
+kontrolę nad Minecraftem i tym samym wyzwolić większe pokłady
+kreatywności {[}2{]}.
 
-Dlaczego warto?
+Zalety integracji Minecrafta z Pythonem są następujące:
 
 \startitemize[packed]
 \item
-  Poznanie ukrytej magii Minecrafta - urozmaicenie gry i odkrycie jej
-  nieznanych możliwości
+  poznanie ukrytej magii Minecrafta - urozmaicenie gry i odkrycie jej
+  nieznanych możliwości;
 \item
-  Zapoznanie się z Pythonem - dla początkujących programistów
+  zapoznanie się z Pythonem - dla początkujących programistów;
 \item
-  Nauczanie programowania, w szczególności wśród dzieci (od ok. 10 lat)
-  i młodzieży
+  nauczanie programowania, w szczególności wśród dzieci (od ok. 10 lat)
+  i młodzieży;
 \item
-  Ułatwienie poruszania się i budowania w świecie Minecraft.
+  ułatwienie poruszania się i budowania w świecie Minecraft.
 \stopitemize
 
 \subsection[startujemy]{Startujemy}
 
-Co jest potrzebne: -
-\useURL[url1][\%5Bhttps://minecraft.net/en-us/download/\%5D][][Minecraft]\from[url1]
-- Minecraft w wersji podstawowej -
-\useURL[url2][https://www.python.org/downloads/][][Python]\from[url2] -
-minimum Python 3 -
-\useURL[url3][https://www.java.com/en/download/][][Java]\from[url3] -
-najlepiej ostatnia wersja - API Minecraft Python - pobierz Minecraft
-Tools dla
-\useURL[url4][https://sourceforge.net/projects/python-with-minecraft-windows/][][Windows]\from[url4],
-\useURL[url5][https://sourceforge.net/projects/python-with-minecraft-mac/files/?source=navbar][][MAC
-OS]\from[url5],
-\useURL[url6][https://github.com/py3minepi/py3minepi][][Rapsberry Pi lub
-Ubuntu]\from[url6] -
-\useURL[url7][https://getbukkit.org/spigot][][Server Minecraft
-Spigot]\from[url7] - wersja Spigot zgodna z wersją Minecrafta
+Do rozpoczęcia prac są potrzebne następujące programy:
+
+\startitemize[packed]
+\item
+  Minecraft {[}3{]} w wersji podstawowej;
+\item
+  Python {[}4{]} - minimum Python 3;
+\item
+  Java {[}5{]} - najlepiej ostatnia wersja;
+\item
+  API Minecraft Python - pobierz Minecraft Tools dla Windows {[}6{]},
+  MAC OS {[}7{]}, Raspberry Pi {[}11{]} lub Ubuntu {[}8{]};
+\item
+  Server Minecraft Spigot {[}9{]} - wersja Spigot zgodna z wersją
+  Minecrafta.
+\stopitemize
 
 Jeśli na komputerze mamy już Minecrafta, Pythona i Javę, należy
 ściągnąć, rozpakować folder \quotation{Minecraft Tools} i zainstalować
@@ -54,10 +56,18 @@ Spigot, która jest zgodna z posiadaną wersją Minecrafta. Pobrany plik
 \quotation{Start\type{_}server} z folderu \quotation{Minecraft Tools}.
 Okna serwera nie należy zamykać.
 
-Wtedy wystarczy już tylko: 1) Uruchomić Minecrafta, 2) Przejść w tryb
-Multiplayer, 3) Dodać serwer: nazwa dowolna, w adresie wpisać
-\quotation{localhost} 4) Wejść w tryb Multiplayer poprzez utworzony
-serwer.
+Wtedy wystarczy już tylko:
+
+\startitemize[n,packed][stopper=.]
+\item
+  uruchomić Minecrafta;
+\item
+  przejść w tryb Multiplayer;
+\item
+  dodać serwer: nazwa dowolna, w adresie wpisać \quotation{localhost};
+\item
+  wejść w tryb Multiplayer poprzez utworzony serwer.
+\stopitemize
 
 \section[testujemy]{Testujemy}
 
@@ -136,11 +146,10 @@ mc.player.setPos (20, 110, 50)
 
 \section[stawianie-bloków]{Stawianie bloków}
 
-W Minecrafcie każdy typ bloku ma swój ID. Pełną listę bloków dostępnych
-w Minecrafcie znajdziesz tu:
-\useURL[url8][http://minecraft-pl.gamepedia.com/Warto\%C5\%9Bci_danych][][Lista
-bloków]\from[url8]. Znając ID bloku oraz współrzędne, gdzie chcemy dany
-blok postawić, możemy w szybki sposób go umieścić w danym miejscu.
+W Minecrafcie każdy typ bloku ma swój ID, a pełna lista bloków
+dostępnych w Minecrafcie jest na {[}10{]}. Znając ID bloku oraz
+współrzędne, gdzie chcemy dany blok postawić, możemy w szybki sposób go
+umieścić w danym miejscu.
 
 \starttyping
 from mcpi.minecraft import Minecraft
@@ -187,15 +196,33 @@ Istotne jest to, że w powyższym przykładzie użyliśmy funkcji {\em getPos
 przeciwieństwie do funkcji {\em getTilePos ()}, która zwraca współrzędne
 jako liczby całkowite.
 
-\subsection[źródła]{Źródła:}
+\subsection[bibliografia]{Bibliografia}
 
-\startitemize[packed]
+\startitemize[n,packed][stopper=.,width=2.0em]
 \item
-  \useURL[url9][http://minecraft-pl.gamepedia.com/Warto\%C5\%9Bci_danych][][Minecraft
-  - gamepedia]\from[url9]
+  Minecraft - gamepedia. https://minecraft-pl.gamepedia.com/
 \item
-  \quotation{{\em Nauka programowania z Minecraftem}} - autor: Craig
-  Richardson, Warszawa, 2016.
+  Craig Richardson. Nauka programowania z Minecraftem. PWN, Warszawa,
+  2016.
+\item
+  https://minecraft.net/en-us/download/
+\item
+  https://www.python.org/downloads/
+\item
+  https://www.java.com/en/download/
+\item
+  https://sourceforge.net/projects/python-with-minecraft-windows/
+\item
+  https://sourceforge.net/projects/python-with-minecraft-mac/\crlf
+  files/?source=navbar
+\item
+  https://github.com/py3minepi/py3minepi
+\item
+  https://getbukkit.org/spigot
+\item
+  http://minecraft-pl.gamepedia.com/Wartości\type{_}danych
+\item
+  https://dev.bukkit.org/projects/raspberryjuice
 \stopitemize
 
 

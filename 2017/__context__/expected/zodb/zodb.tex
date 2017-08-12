@@ -5,37 +5,33 @@
 \Author{Christopher Lozinski}
 \MakeTitlePage
 
-\subsection[abstract]{ABSTRACT}
+\subsection[abstract]{Abstract}
 
 ZODB is an object-oriented database written in Python and optimized in
-C. It is widely used in the US, but not as well known in Poland. This
-talk introduces the database, presents important concepts, and reviews
-the tools available.
+C. It is widely used in the US (United States of America), but not as
+well known in Poland. This talk introduces the database, presents
+important concepts, and reviews the tools available.
 
 \subsection[about-the-author]{About the Author}
 
-Christopher Lozinski has been using the ZODB since 1999.\crlf
-He is an MIT graduate and silicon valley expat who has been using
-dynamically bound languages for 35 years. First it was Lisp, then
-Objective-C, and now Python. On the ZODB, he built PythonLinks.info,
-PolandTrade.info, PrivaCV.com, Zopache.com, and the recently
-decommissioned SpecialtyJobMarkets.com. He is a dual Polish-US citizen,
-and polyglot.
+Christopher Lozinski has been using the ZODB since 1999. He is an MIT
+graduate and Silicon Valley expat who has been using dynamically bound
+languages for 35 years. First it was Lisp, then Objective-C, and now
+Python. On the ZODB, he built PythonLinks.info, PolandTrade.info,
+PrivaCV.com, Zopache.com, and the recently decommissioned
+SpecialtyJobMarkets.com. He is a dual Polish-US citizen, and polyglot.
 
-\subsection[introduction]{INTRODUCTION}
+\subsection[introduction]{Introduction}
 
-You can see the talk slides here:
-https://pythonlinks.info/presentations/zodbtalk.pdf
+You can download the talk slides {[}1{]} and watch the presentation
+{[}2{]}. ZODB {[}3{]} is an object-oriented database written in Python
+and optimized in C.
 
-ZODB is an object-oriented databaase written in Python and optimized in
-C. This article is a good representation of the talk I am giving at
-Pycon Poland 2017.
+\subsection[so-easy-to-use]{So Easy to Use}
 
-\subsection[so-easy-to-use]{So Easy to use}
-
-ZODB is really easy to use. Just subclass off of class
-persistent.Persistent, and your objects become persistent. Here is a
-code sample from the Tutorial.
+ZODB is really easy to use from Python {[}4{]}. Just subclass off of
+class persistent. Persistent, and your objects become persistent. Here
+is a code sample from the Tutorial.
 http://www.zodb.org/en/latest/tutorial.html
 
 \starttyping
@@ -61,28 +57,23 @@ class Persistent Set.
 
 \subsection[acid-properties]{ACID Properties}
 
-ZODB is an ACID-compliant database.
+ZODB is an ACID-compliant database {[}5{]}:
 
-\section[atomicity]{Atomicity}
-
-Atomicity requires that each transaction be \quotation{all or nothing}.
-
-\section[consistency]{Consistency}
-
-Consistency ensures that any transaction will bring the database from
-one valid state to another.
-
-\section[isolation]{Isolation}
-
-Isolation ensures that the concurrent execution of transactions results
-in a system state that would be obtained if transactions were executed
-sequentially, i.e., one after the other.
-
-\section[durability]{Durability}
-
-Durability Durability ensures that once a transaction has been
-committed, it will remain so, even in the event of power loss, crashes,
-or errors.
+\startitemize[packed]
+\item
+  Atomicity requires that each transaction be \quotation{all or
+  nothing}.
+\item
+  Consistency ensures that any transaction will bring the database from
+  one valid state to another.
+\item
+  Isolation ensures that the concurrent execution of transactions
+  results in a system state that would be obtained if transactions were
+  executed sequentially, i.e., one after the other.
+\item
+  Durability ensures that once a transaction has been committed, it will
+  remain so, even in the event of power loss, crashes, or errors.
+\stopitemize
 
 \subsection[zodb-data-model]{ZODB Data Model}
 
@@ -108,18 +99,18 @@ traverse the tree. Since the nodes are essentially dictionaries, with
 text keys, it is very natural to map a URL to a particular object by
 traversing the tree.
 
-\subsection[canonical-urls]{Canonical URL's}
+\subsection[canonical-urls]{Canonical URLs}
 
 ZODB applications access objects by traversing the tree. It would be
 nice if every object had its own unique name, so that even when the tree
 structure changed, it would still be easy to find the object using its
 canonical URL.
 
-PythonLinks provides canonic urls. . Every node has a unique name which
-can be accessed using a dictionary in the root node.\crlf
-Attempts to create a new node with the same name, result in an integer
-being appended to the new node name. Node, Node-1, Node-2, etc. When
-objects are renamed, or deleted, the root dictionary is updated.
+PythonLinks provides canonical URLs. Every node has a unique name which
+can be accessed using a dictionary in the root node. Attempts to create
+a new node with the same name, result in an integer being appended to
+the new node name: Node, Node-1, Node-2, etc. When objects are renamed,
+or deleted, the root dictionary is updated.
 
 \subsection[zodb-history-and-undo]{ZODB History and Undo}
 
@@ -131,7 +122,7 @@ decide which one is best.
 
 \subsection[zodb-storage-options]{ZODB Storage Options}
 
-There is a rich variety of ways to store your ZODB objects.
+There is a rich variety of ways to store your ZODB objects:
 
 \startitemize[n,packed][stopper=.]
 \item
@@ -139,18 +130,18 @@ There is a rich variety of ways to store your ZODB objects.
   the file system. There is also Blob storage for storing images, files
   and other large objects on the file system.
 \item
-  {\bf ZEO} is the basic client server version of the ZODB.\crlf
-  ZEO clients share data from the ZEO server. Each participating Python
-  application server includes a ZEO client. They all talk to the ZEO
-  server. The ZEO server will then store the data in FileStorage and
-  BlobStorage
+  {\bf ZEO} (Zope Enterprise Objects) is the basic client-server version
+  of the ZODB. ZEO clients share data from the ZEO server. Each
+  participating Python application server includes a ZEO client. They
+  all talk to the ZEO server. The ZEO server will then store the data in
+  FileStorage and BlobStorage
 \item
   {\bf RelStorage} stores ZODB data in a relational database. It
   performs better than ZEO. It runs on top of MySQL, Oracle and
   PostgreSQL.
 \item
   {\bf NewtDB} is a version of RelStorage optimized for PostgreSQL. It
-  stores data as both Python pickles, as well as JSONB Postgres data
+  stores data as both Python pickles, as well as JSONB PostgreSQL data
   structures. This allows one to benefit from the native PostgreSQL
   catalogs.
 \stopitemize
@@ -158,7 +149,7 @@ There is a rich variety of ways to store your ZODB objects.
 \subsection[caching]{Caching}
 
 Caching is an important feature of the ZODB. Every ZEO client includes
-an object cache. The object cache is usually in RAM. THere is an
+an object cache. The object cache is usually in RAM. There is an
 optional file based cache. If objects are updated on one ZEO client,
 they are invalidated on the other clients, and reloaded as needed.
 Generally this works fine, but in cases where the object is actively
@@ -186,11 +177,6 @@ Of course if you need multiple computers to store your object data (not
 blobs), then you may want to upgrade to NEO (Not NEO4J). NEO is a GPL'd
 cousin to the ZODB.
 
-\subsection[zodb-tutorial]{ZODB Tutorial}
-
-ZODB is really easy to use from Python. I invite you to try out the
-Tutorial: http://www.zodb.org/en/latest/tutorial.html
-
 \subsection[multiple-views-on-every-object]{Multiple Views on Every
 Object}
 
@@ -203,17 +189,17 @@ interfaces which they have defined.
 
 \subsection[zodb-related-platforms]{ZODB-related Platforms}
 
-So which platform should you use with ZODB?\crlf
-I am not an expert in all of these platforms, but I will give you my
-best advice on when to use each of them.
+So which platform should you use with ZODB? I am not an expert in all of
+these platforms, but I will give you my best advice on when to use each
+of them.
 
 \section[plone]{Plone}
 
 If you need a Content Management System, and Plone and its plugins do
 what you need. Brilliant. Go for it. Plone is mature, stable, heavily
 used. They have an annual international conference, and many regional
-conferences.\crlf
-I recommend it highly. There are lots of consultants you can hire.
+conferences. I recommend it highly. There are lots of consultants you
+can hire.
 
 But Plone is not an application development platform. If Plone does what
 you need, you are in great luck. But I advise against making changes to
@@ -226,19 +212,19 @@ development on it.
 
 \section[pyramid]{Pyramid}
 
-The next obvious choice is Pyramid. If you are building a corporate
-application, Pyramid is a great option. You can use the ZODB, or a
-relational database. You can use routing or traversal. You can configure
-it three different ways. You can choose from lots of different GUI and
-other libraries.
+The next obvious choice is Pyramid {[}6{]}. If you are building a
+corporate application, Pyramid is a great option. You can use the ZODB,
+or a relational database. You can use routing or traversal. You can
+configure it three different ways. You can choose from lots of different
+GUI and other libraries.
 
 \section[grok]{Grok}
 
-Me, I chose to use Grok with Zope 3. I am not building a corporate
-application. I am building startup applications. I don't care about
-computer performance, if my applications are overloaded, that is a great
-problem to have. I can then optimize things. Above all else, I care
-about speed and cost of development. Related to that is software
+Me, I chose to use Grok {[}7{]} with Zope 3. I am not building a
+corporate application. I am building startup applications. I don't care
+about computer performance, if my applications are overloaded, that is a
+great problem to have. I can then optimize things. Above all else, I
+care about speed and cost of development. Related to that is software
 flexibility.
 
 \section[zopache]{Zopache}
@@ -248,31 +234,30 @@ Zopache.com is a Javascript IDE which I built on top of the ZODB using
 Grok. ZODB developers might call it a TTW development platform.
 
 Basic Zopache objects include HTML, CSS, Javascript, Python Scripts,
-Image, File and Jade.\crlf
-HTML objects can be edited with either the WYSIWYG HTML editor, or the
-technical Ace Editor. CSS Javascript and Python Scripts can also be
-edited with the Ace Editor.
+Image, File and Jade. HTML objects can be edited with either the WYSIWYG
+HTML editor, or the technical Ace Editor. CSS Javascript and Python
+Scripts can also be edited with the Ace Editor.
 
 Zopache also supports containers. Trees can be built out of containers.
 Folders support cut, copy, rename paste and delete operations. HTML
-folders can be edited with the Ace and ck editors. Javascript Folders
-allow one to build a well organized tree of Javascript code, but serve
-it as a single minified file or as a human readable and searchable file,
-which clickable links to the original javascript object. History and
-Undo are supported.
+folders can be edited with the Ace {[}8{]} and CKEditor {[}9{]}.
+Javascript Folders allow one to build a well organized tree of
+Javascript code, but serve it as a single minified file or as a human
+readable and searchable file, which clickable links to the original
+javascript object. History and Undo are supported.
 
 Using Zopache, in your browser, you create a tree of folders, and
-populate and edit those objects.\crlf
-Every object has its own URL, and can be displayed or edited. These is
-no need to know Unix. But you do have the option to grow the application
-with real Python code.
+populate and edit those objects. Every object has its own URL, and can
+be displayed or edited. These is no need to know Unix. But you do have
+the option to grow the application with real Python code.
 
 \section[flask]{Flask}
 
-Flask is a very lightweight framework which can be used with the ZODB.
-Flask does routing, so one has to manually map from URL's to objects.
+Flask {[}10{]} is a very lightweight framework which can be used with
+the ZODB. Flask does routing, so one has to manually map from URLs to
+objects.
 
-\section[other-frameworks.]{Other Frameworks.}
+\section[other-frameworks]{Other Frameworks}
 
 There are many Python frameworks, and many other less often used ways of
 working with the ZODB. I won't mention them all here. They lead to
@@ -280,7 +265,7 @@ market confusion. But it is only natural in the Python world for there
 to be many different solutions. So one really needs a survey of the ZODB
 ecosystem to get you started in the right direction.
 
-\subsection[pyramid-vs-grok]{Pyramid Vs Grok}
+\subsection[pyramid-vs-grok]{Pyramid vs Grok}
 
 So let us compare them. Of course Grok can be used in different ways, so
 I will focus on how I use it.
@@ -305,14 +290,12 @@ three different ways. There are multiple ways to do things.
 I am more focused on the product market. There is no legacy code here.
 Just the web, which I have to work with. I want to build it as fast and
 flexibly as is possible. I like the Python idea that there should be one
-way to do things.\crlf
-I want a purist OO approach.\crlf
-Like Ruby on Rails, I want an opinionated high level framework. Grok
-gives me that.
+way to do things. I want a purist OO approach. Like Ruby on Rails, I
+want an opinionated high level framework. Grok gives me that.
 
-Pyramid is focused on multiple deployments. So TTW makes no sense.\crlf
-I am focused on building a single website, so storing stuff in the ZODB
-is much more modern than storing it on a 40 year old filesystem.
+Pyramid is focused on multiple deployments. So TTW makes no sense. I am
+focused on building a single website, so storing stuff in the ZODB is
+much more modern than storing it on a 40 year old filesystem.
 
 But let us do a closer technical comparison. Actually I am not even sure
 what to compare. For a fair comparison, Pyramid does not stand on its
@@ -326,9 +309,9 @@ used in SubstanceD does not do CRUD. So which one does? The next one I
 found has just been re-built for use with relational databases. Also not
 what I need.
 
-I also use components. Pyramid only supports view components.\crlf
-But the Zope Component Architecture is now available with PyAMS.\crlf
-That was not true when I started.
+I also use components. Pyramid only supports view components. But the
+Zope Component Architecture is now available with PyAMS. That was not
+true when I started.
 
 And of course there is no way that somethng like the high level
 zope.securitypolicy has been ported to Pyramid. It is just incompatible
@@ -337,11 +320,11 @@ with the performance-optimized Pyramid security model.
 \subsection[other-databases]{Other Databases}
 
 There are many other NoSQL databases on the market. My job is not to
-evaluate them all, but just to get you to ask the right questions.
+evaluate them all, but just to get you to ask the right questions:
 
 \startitemize[n,packed][stopper=.]
 \item
-  Is it ACID compliant?
+  Are they ACID compliant?
 \item
   Do they provide a graph database?
 \item
@@ -366,10 +349,30 @@ This directory is all in Javascript, and json, so it is quite easy to
 add teh table of companies in your city to your website. Let me know if
 you are interested in doing so.
 
-\subsection[more-information]{More Information}
+\subsection[references]{References}
 
-For more information about the ZODB, I invite you to visit:
-https://PythonLinks.info/zodb
+\startitemize[n,packed][stopper=.,width=2.0em]
+\item
+  https://pythonlinks.info/presentations/zodbtalk.pdf
+\item
+  https://PythonLinks.info/zodb
+\item
+  ZODB. http://www.zodb.org
+\item
+  ZODB Tutorial. http://www.zodb.org/en/latest/tutorial.html
+\item
+  ACID. https://en.wikipedia.org/wiki/ACID
+\item
+  Pyramid. https://trypyramid.com
+\item
+  Grok. http://grok.zope.org
+\item
+  Ace editor. https://ace.c9.io
+\item
+  CKEditor. https://ckeditor.com
+\item
+  Flask. http://flask.pocoo.org
+\stopitemize
 
 
 \stoptext

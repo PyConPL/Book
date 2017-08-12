@@ -5,42 +5,67 @@
 \Author{Mridul Seth}
 \MakeTitlePage
 
-Politics, Mathematics, Law, Biology, Computer Science, Finance all of
-these subjects have one thing in common. They can be modeled using
+Politics, Mathematics, Law, Biology, Computer Science, Finance - all of
+these subjects have one thing in common: they can be modeled using
 networks. NetworkX is a Python language software package for the
-creation, manipulation, and study of the structure, dynamics, and
+creation, manipulation and study of the structure, dynamics, and
 functions of complex networks. This workshop will introduce the basics
-of network theory and working with graphs using python and the NetworkX
+of network theory and working with graphs using Python and the NetworkX
 package. This will be a hands on tutorial and will require writing a lot
 of code snippets. The participants should be comfortable with basic
-python (loops, dictionaries, lists) and some(minimal) experience with
-working inside a jupyter notebook.
-
-\subsection[section]{}
+Python (loops, dictionaries, lists) and some(minimal) experience with
+working inside a Jupyter Notebook.
 
 Broadly the tutorial is divided into four parts:
 
-Part A - Basics of graph theory and various examples of networks in real
-life. - Introduction to the NetworkX API and various data structures
+\startitemize[n][stopper=.]
+\item
+  Introduction
 
-Part B - Work with small synthetic networks (generated using random
-graph generators) to understand the structure of the network. - Analyse
-the network and study various properties of the network like centrality,
-connectivity, shortest paths, cliques.
+  \startitemize[packed]
+  \item
+    Basics of graph theory and various examples of networks in real
+    life.
+  \item
+    Introduction to the NetworkX API and various data structures
+  \stopitemize
+\item
+  Tools usage
+  \startitemize[packed]
+  \item
+    Work with small synthetic networks (generated using random graph
+    generators) to understand the structure of the network.
+  \item
+    Analyse the network and study various properties of the network like
+    centrality, connectivity, shortest paths, cliques.
+  \stopitemize
+\item
+  Analyze data
 
-Part C - We'll use the various techniques we have learnt so far and
-model a network out of real world data like co-authorship network(
-http://www-personal.umich.edu/\lettertilde{}mejn/netdata/cond-mat-2005.zip)
-or a similar network and study the structure and properties of this
-network.
+  \startitemize[packed]
+  \item
+    We'll use the various techniques we have learnt so far and model a
+    network out of real world data like co-authorship network(
+    http://www-personal.umich.edu/\lettertilde{}mejn/netdata/cond-mat-2005.zip)
+    or a similar network and study the structure and properties of this
+    network.
+  \stopitemize
+\item
+  Real world data
 
-Part D - We'll work on some interesting problems like temporal networks
-and visualisation of networks. - We'll model the US Airport Network with
-respect to time and will try to make sense out of it.
+  \startitemize[packed]
+  \item
+    We'll work on some interesting problems like temporal networks and
+    visualisation of networks.
+  \item
+    We'll model the US Airport Network with respect to time and will try
+    to make sense out of it.
+  \stopitemize
+\stopitemize
 
 By the end of the tutorial everyone should be comfortable with hacking
 on the NetworkX API, modelling data as networks and basic analysis on
-networks using python.
+networks using Python.
 
 This text gives a brief overview of the content of the workshop.
 
@@ -49,18 +74,30 @@ requirements}
 
 You should have python3 and pip installed, and using
 \useURL[url1][https://virtualenv.pypa.io/en/stable/][][virtualenv]\from[url1]
-is recommended and the following python packages should be installed. -
-jupyter - matplotlib - networkx - pandas - numpy
+is recommended and the following Python packages should be installed.
+
+\startitemize[packed]
+\item
+  Jupyter
+\item
+  matplotlib
+\item
+  networkx
+\item
+  pandas
+\item
+  numpy
+\stopitemize
 
 You can also use
 \useURL[url2][https://conda.io/docs/][][conda]\from[url2] to install
 these packages.
 
 The workshop will also require datasets to work on which will be
-uploaded on github repository
+uploaded on GitHub repository
 https://github.com/MridulS/pyconpl-2017-networkx.
 
-The repo will contain the jupyter notebooks that will be required during
+The repo will contain the Jupyter notebooks that will be required during
 the workshop.
 
 \subsection[introduction]{Introduction}
@@ -71,9 +108,9 @@ represent them?}
 
 A graph G is represented by a set of nodes and a set of edges. An edge
 between two nodes in a graph signifies a relationship between those two
-nodes. Edges can be directed and undirected.
+nodes. Edges can be directed or undirected.
 
-\placefigure{Network}{\externalfigure[img/network.png]}
+\placefigure{Network}{\externalfigure[network.png]}
 
 NetworkX uses dictionaries underneath to store node and edge data. It's
 dict-o-dict-o-dict-o-dict to be precise.
@@ -86,14 +123,23 @@ G['node1']['node2']['some_id']['some_attrb'] # multigraphs
 
 \subsubsection[basics-of-networkx]{Basics of NetworkX}
 
-There are multiple graph classes implemented in NetworkX. - Graph: A
-graph object which only allows single edges (undirected) between nodes.
-- DiGraph: A graph object which only allow single edges (directed)
-between nodes, i.e.~an edge from \quote{A} to \quote{B} doesn't mean
-that there exists an edge from \quote{B} to \quote{A}. - MultiGraph: A
-graph object which allows multiple edges(undirected) between two edges.
-- MultiDiGraph: A graph object which allows multiple edges(directed)
-between two edges.
+There are multiple graph classes implemented in NetworkX:
+
+\startitemize[packed]
+\item
+  Graph - a graph object which only allows single edges (undirected)
+  between nodes.
+\item
+  DiGraph - a graph object which only allow single edges (directed)
+  between nodes, i.e.~an edge from \quote{A} to \quote{B} doesn't mean
+  that there exists an edge from \quote{B} to \quote{A}.
+\item
+  MultiGraph - a graph object which allows multiple edges(undirected)
+  between two edges.
+\item
+  MultiDiGraph - a graph object which allows multiple edges(directed)
+  between two edges.
+\stopitemize
 
 Hybrid graphs? Not yet available in NetworkX.
 
@@ -201,21 +247,31 @@ and \useURL[url4][http://konect.uni-koblenz.de][][KONECT]\from[url4]. We
 will use a real world network and analyse the network using the various
 tools and measures we learn in this tutorial.
 
-\section[references-and-other-tools]{References and other tools}
+\subsection[references]{References}
 
-Official NetworkX tutorial -
-https://github.com/networkx/notebooks/blob/master/tutorial.ipynb
-NetworkX documentation - https://networkx.readthedocs.io/en/stable/
-EuroSciPy 2016 tutorial - https://github.com/MridulS/euroscipy-networkx
-PyCon/SciPy 2017 tutorial -
-https://github.com/ericmjl/Network-Analysis-Made-Simple Video Tutorial -
-https://www.youtube.com/watch?v=E4VKzFmByhE\type{&}t=3139s DataCamp
-course -
-https://www.datacamp.com/courses/network-analysis-in-python-part-1
-
-Datasets (Social Network Analysis project at Stanford) -
-http://snap.stanford.edu/data/index.html KONECT (KONECT project at
-UNamur) - http://konect.uni-koblenz.de
+\startitemize[n,packed][stopper=.]
+\item
+  Official NetworkX tutorial.
+  https://github.com/networkx/notebooks/blob/master/tutorial.ipynb
+\item
+  NetworkX documentation. https://networkx.readthedocs.io/en/stable/
+\item
+  EuroSciPy 2016 tutorial. https://github.com/MridulS/euroscipy-networkx
+\item
+  PyCon/SciPy 2017 tutorial.
+  https://github.com/ericmjl/Network-Analysis-Made-Simple
+\item
+  Video Tutorial.
+  https://www.youtube.com/watch?v=E4VKzFmByhE\type{&}t=3139s
+\item
+  DataCamp course.
+  https://www.datacamp.com/courses/network-analysis-in-python-part-1
+\item
+  Datasets (Social Network Analysis project at Stanford).
+  http://snap.stanford.edu/data/index.html
+\item
+  KONECT (KONECT project at UNamur). http://konect.uni-koblenz.de
+\stopitemize
 
 
 \stoptext

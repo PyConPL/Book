@@ -86,7 +86,7 @@ do przepalenia.
 
 Wachlarz zastosowań tranzystorów w elektronice analogowej i cyfrowej
 jest bardzo szeroki. My jednak skupimy się na jednym - wykorzystaniu
-tranzystora do kontroli obwodu o wysokim natężeniu prądu przy pomocy
+tranzystora do kontroli obwodu o wysokim natężeniu prądu za pomocą
 znacznie niższego. W tym celu zastosujemy konfigurację
 \quotation{wspólnego emitera}:
 
@@ -97,7 +97,7 @@ W układzie tym w momencie, gdy pin znajduje się w stanie niskim,
 tranzystor znajduje się w stanie zatkania - brak przewodnictwa między
 kolektorem a emiterem. Gdy pin przejdzie w stan wysoki - tranzystor
 osiąga stan nasycenia - prąd między kolektorem i emiterem przewodzony
-jest z minimalnym oporem. Spróbujmy przy jego pomocy zasilić
+jest z minimalnym oporem. Spróbujmy za jego pomocą zasilić
 \quotation{żarówkę} LED na 12V o mocy 1,5 W.
 
 Parametry:
@@ -122,8 +122,8 @@ wymagany prąd baza-emiter jeśli pin GPIO przejdzie w stan wysoki 3,3V.
 
 Mimo że tranzystor i przekaźnik mogą spełniać podobną rolę w obwodzie,
 istnieje między nimi duża różnica. Przekaźnik przełącza styki
-mechanicznie przy pomocy elektromagnesu. Tranzystor nie posiada
-elementów mechanicznych. Jego działanie opiera się na technologii
+mechanicznie za pomocą elektromagnesu. Tranzystor nie posiada elementów
+mechanicznych. Jego działanie opiera się na technologii
 półprzewodnikowej. Aby wybrać, która z tych opcji jest dla nas właściwa,
 należy rozważyć wady i zalety obu rozwiązań.
 
@@ -172,7 +172,7 @@ innych sytuacjach wybór pozostaje kwestią priorytetów.
 \section[rezystory-podciągające]{Rezystory podciągające}
 
 Piny niepodłączone mogą negatywnie wpływać na pracę mikrokontrolera.
-Pełnią one role swego rodzaju anteny -- zbierają zakłócenia cyfrowe(na
+Pełnią one role swego rodzaju anteny - zbierają zakłócenia cyfrowe(na
 przykład silne szpilki sygnałowe). Taki stan pinu określamy w języku
 angielskim jako {\em floating}. Rezystory podciągające służą do
 uniknięcia zakłóceń cyfrowych, które mogą prowadzić do nieprawidłowej
@@ -240,22 +240,21 @@ celu wprowadzamy stosowne opóźnienie w kodzie:
     # ...
 \stoptyping
 
-\subsection[materiały-internetowe]{Materiały internetowe}
+\subsection[bibliografia]{Bibliografia}
 
-\startitemize[packed]
+\startitemize[n,packed][stopper=.]
 \item
-  http://www.electronics-tutorials.ws/ - wyczerpujące samouczki różnych
-  zagadnień elektronicznych.
+  Wyczerpujące samouczki różnych zagadnień elektronicznych.
+  http://www.electronics-tutorials.ws/
 \item
-  https://learn.sparkfun.com/tutorials/ - samouczki nastawione na pracę
-  z mikrokontrolerami
+  Samouczki nastawione na pracę z mikrokontrolerami.
+  https://learn.sparkfun.com/tutorials/
 \item
-  http://micropython-on-wemos-d1-mini.readthedocs.io/en/latest/ -
-  materiały ze szkolenia micropythonowego Radomira Dopieralskiego
+  Materiały ze szkolenia MicroPythonowego Radomira Dopieralskiego.
+  http://micropython-on-wemos-d1-mini.readthedocs.io/en/latest/
 \item
+  Oficjalna dokumentacja MicroPythona na ESP 8266.
   https://docs.micropython.org/en/latest/esp8266/esp8266/tutorial/intro.html
-\item
-  oficjalna dokumentacja micropythona na ESP 8266
 \stopitemize
 
 
