@@ -390,7 +390,7 @@ data lose.
 
 #### 1.4 Identifying trust levels - Access Control Lists
 
-| user type | Login | Logout | Read Blog | Write blog | Delete blog | Manage Users |
+| user type | Login | Logout | Read blog | Write blog | Delete blog | Manage Users |
 |-----------|-------|--------|-----------|------------|-------------|--------------|
 | Anonymous | Yes   | No     | Yes       | No         | No          | No           |
 | User      | No    | Yes    | Yes       | Yes        | No          | No           |
