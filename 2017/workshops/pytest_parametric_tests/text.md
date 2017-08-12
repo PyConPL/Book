@@ -19,16 +19,16 @@ testing in Python, you'll probably learn about **unittest** [2], because it is
 a part of Python's standard library. However, unittest is not very flexible and
 its syntax and usage is very much inspired with JUnit - a Java unit testing
 framework. I guess writing code in Python using a Java inspired API is
-something no Pythonista would desire. :punch:
+something no Pythonista would desire.
 
 The lack of flexibility when running tests written in unittest inspired another
 project to be created, a once popular tool called **nose** [3]. While nose can
 make running tests easier and more pleasant, the main part - how do we write
 our tests - remained the same. Not to mention nose has been in maintenance
-mode for the past several years. :vhs:
+mode for the past several years.
 
 **Pytest** on the other hand reinvents the way test are being written.
-Instead of Java-like nonsense, you write very readable, Pythonic code. :snake:
+Instead of Java-like nonsense, you write very readable, Pythonic code.
 
 Compare this:
 
@@ -69,8 +69,8 @@ def test_upper():
 ```
 
 ```
-================================== FAILURES ===================================
-_________________________________ test_upper __________________________________
+============================== FAILURES ===============================
+_____________________________ test_upper ______________________________
 
     def test_upper():
 >       assert 'foo'.upper() == 'FOo'
@@ -79,7 +79,7 @@ E         - FOO
 E         + FOo
 
 test_example.py:2: AssertionError
-========================== 1 failed in 0.02 seconds ===========================
+====================== 1 failed in 0.02 seconds =======================
 ```
 
 ## Let's write some tests for fizzbuzz
@@ -130,7 +130,7 @@ $ python -m pytest tests/
 ```
 
 Writing tests that check that `fizzbuzz(5)` is `'buzz'` and `fizzbuzz(15)` is
-`'fizzbuzz'` is left as and exercise for the reader.
+`'fizzbuzz'` is left as an exercise for the reader.
 
 At the end of this part, you should have a fizzbuzz implementation and tests
 for 1, 3, 5 and 15.
@@ -156,9 +156,7 @@ def test_fizz9():
     assert fizzbuz(9) == 'fizz'
 ```
 
-Uh... copy pasting code around like that is wrong. :thumbsdown: :poop:
-
-------------
+Uh... copy pasting code around like that is wrong.
 
 Or running one test over a range of numbers:
 
@@ -179,9 +177,7 @@ def fizzbuzz(number):
     ...
 ```
 
-From the tests results, do you see what's wrong? :confused:
-
-------------
+From the tests results, do you see what's wrong?
 
 Instead, we'll parametrize the test. That means, we'll have one test written
 - as a template - and it will be run for multiple values.
@@ -238,7 +234,7 @@ thing is hard to create, you might want to prepare it beforehand and use it
 repetitively in multiple tests. In that case, you might want to create a
 _fixture_ - something that's needed for multiple tests to operate.
 
-Fixture can be created a s a simple function with a decorator:
+Fixture can be created as a simple function with a decorator:
 
 ```python
 @pytest.fixture
@@ -370,8 +366,6 @@ def test_fizzbuzz_game_prints_100_lines(capsys):
     assert len(out.strip().split('\n')) == 100
 ```
 
-------------
-
 You can also use the builtin fixtures to create your own. Here we create a
 git repository and let the test execute within:
 
@@ -408,8 +402,6 @@ Note that parametric fixtures have a little different syntax and need to accept
 the special `request` function parameter that holds the entire context about
 the test being run.
 
-------------
-
 In our fizzbuzz example, we might want to test multiple facts about fizzbuzz
 calls for 3, 6, 9, 333 etc. Instead of repeating the parameters every time
 or creating a global variable with list of numbers, we can crate a parametric
@@ -421,7 +413,7 @@ def fizznum(request):
     return request.param
 
 
-def test_fizznum_is_not_devidable_by_5(fizznum):
+def test_fizznum_is_not_divisible_by_5(fizznum):
     '''A "metatest" that tests the fizznum fixture itself''''
     assert fizznum % 5 != 0
 
@@ -440,8 +432,8 @@ All the parameters can be combined together to create a cross product of test
 templates. Either you can combine two or more `@pytest.mark.parametrize`
 decorators, more fixtures, or both together.
 
-Note that the bellow example is not very well written and I don't encourage to
-write code like that, but it serves a purpose. :trollface:
+Note that the example below is not very well written and I don't encourage to
+write code like that, but it serves a purpose.
 
 ```python
 @pytest.fixture(scope='module', params=[3, 6, 9, 333])
@@ -483,10 +475,14 @@ parametric tests and fixtures. Dive in!
 ## References
 
 1. pytest documentation. https://docs.pytest.org/
-2. unittest in Python documentation. https://docs.python.org/3/library/unittest.html
+2. unittest in Python documentation. https://docs.python.org/3/library/\crlf
+    unittest.html
 3. nose documentation. http://nose.readthedocs.io/
-4. assert on Python Wiki. https://wiki.python.org/moin/UsingAssertionsEffectively
+4. assert on Python Wiki. https://wiki.python.org/moin/\crlf
+    UsingAssertionsEffectively
 5. Fizz buzz on Wikipedia. https://en.wikipedia.org/wiki/Fizz`_`buzz
-6. List comprehensions. https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions
-7. Parametrizing fixtures. https://docs.pytest.org/en/latest/fixture.html#parametrizing-fixtures
+6. List comprehensions. https://docs.python.org/3/tutorial/\crlf
+    datastructures.html#list-comprehensions
+7. Parametrizing fixtures. https://docs.pytest.org/en/latest/\crlf
+    fixture.html#parametrizing-fixtures
 8. Hypothesis documentation. https://hypothesis.readthedocs.io/

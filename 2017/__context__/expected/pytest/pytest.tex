@@ -26,18 +26,16 @@ look at testing in Python, you'll probably learn about {\bf unittest}
 unittest is not very flexible and its syntax and usage is very much
 inspired with JUnit - a Java unit testing framework. I guess writing
 code in Python using a Java inspired API is something no Pythonista
-would desire. :punch:
+would desire.
 
 The lack of flexibility when running tests written in unittest inspired
 another project to be created, a once popular tool called {\bf nose}
 {[}3{]}. While nose can make running tests easier and more pleasant, the
 main part - how do we write our tests - remained the same. Not to
 mention nose has been in maintenance mode for the past several years.
-:vhs:
 
 {\bf Pytest} on the other hand reinvents the way test are being written.
 Instead of Java-like nonsense, you write very readable, Pythonic code.
-:snake:
 
 Compare this:
 
@@ -79,8 +77,8 @@ def test_upper():
 \stoptyping
 
 \starttyping
-================================== FAILURES ===================================
-_________________________________ test_upper __________________________________
+============================== FAILURES ===============================
+_____________________________ test_upper ______________________________
 
     def test_upper():
 >       assert 'foo'.upper() == 'FOo'
@@ -89,7 +87,7 @@ E         - FOO
 E         + FOo
 
 test_example.py:2: AssertionError
-========================== 1 failed in 0.02 seconds ===========================
+====================== 1 failed in 0.02 seconds =======================
 \stoptyping
 
 \subsection[lets-write-some-tests-for-fizzbuzz]{Let's write some tests
@@ -145,7 +143,7 @@ $ python -m pytest tests/
 \stoptyping
 
 Writing tests that check that \type{fizzbuzz(5)} is \type{'buzz'} and
-\type{fizzbuzz(15)} is \type{'fizzbuzz'} is left as and exercise for the
+\type{fizzbuzz(15)} is \type{'fizzbuzz'} is left as an exercise for the
 reader.
 
 At the end of this part, you should have a fizzbuzz implementation and
@@ -172,10 +170,7 @@ def test_fizz9():
     assert fizzbuz(9) == 'fizz'
 \stoptyping
 
-Uh\ldots{} copy pasting code around like that is wrong. :thumbsdown:
-:poop:
-
-\thinrule
+Uh\ldots{} copy pasting code around like that is wrong.
 
 Or running one test over a range of numbers:
 
@@ -196,9 +191,7 @@ def fizzbuzz(number):
     ...
 \stoptyping
 
-From the tests results, do you see what's wrong? :confused:
-
-\thinrule
+From the tests results, do you see what's wrong?
 
 Instead, we'll parametrize the test. That means, we'll have one test
 written - as a template - and it will be run for multiple values.
@@ -256,7 +249,7 @@ and use it repetitively in multiple tests. In that case, you might want
 to create a {\em fixture} - something that's needed for multiple tests
 to operate.
 
-Fixture can be created a s a simple function with a decorator:
+Fixture can be created as a simple function with a decorator:
 
 \starttyping
 @pytest.fixture
@@ -391,8 +384,6 @@ def test_fizzbuzz_game_prints_100_lines(capsys):
     assert len(out.strip().split('\n')) == 100
 \stoptyping
 
-\thinrule
-
 You can also use the builtin fixtures to create your own. Here we create
 a git repository and let the test execute within:
 
@@ -430,8 +421,6 @@ Note that parametric fixtures have a little different syntax and need to
 accept the special \type{request} function parameter that holds the
 entire context about the test being run.
 
-\thinrule
-
 In our fizzbuzz example, we might want to test multiple facts about
 fizzbuzz calls for 3, 6, 9, 333 etc. Instead of repeating the parameters
 every time or creating a global variable with list of numbers, we can
@@ -443,7 +432,7 @@ def fizznum(request):
     return request.param
 
 
-def test_fizznum_is_not_devidable_by_5(fizznum):
+def test_fizznum_is_not_divisible_by_5(fizznum):
     '''A "metatest" that tests the fizznum fixture itself''''
     assert fizznum % 5 != 0
 
@@ -463,8 +452,8 @@ test templates. Either you can combine two or more
 \type{@pytest.mark.parametrize} decorators, more fixtures, or both
 together.
 
-Note that the bellow example is not very well written and I don't
-encourage to write code like that, but it serves a purpose. :trollface:
+Note that the example below is not very well written and I don't
+encourage to write code like that, but it serves a purpose.
 
 \starttyping
 @pytest.fixture(scope='module', params=[3, 6, 9, 333])
@@ -510,20 +499,21 @@ sections covering parametric tests and fixtures. Dive in!
   pytest documentation. https://docs.pytest.org/
 \item
   unittest in Python documentation.
-  https://docs.python.org/3/library/unittest.html
+  https://docs.python.org/3/library/\crlf
+  unittest.html
 \item
   nose documentation. http://nose.readthedocs.io/
 \item
-  assert on Python Wiki.
-  https://wiki.python.org/moin/UsingAssertionsEffectively
+  assert on Python Wiki. https://wiki.python.org/moin/\crlf
+  UsingAssertionsEffectively
 \item
   Fizz buzz on Wikipedia. https://en.wikipedia.org/wiki/Fizz\type{_}buzz
 \item
-  List comprehensions.
-  https://docs.python.org/3/tutorial/datastructures.html\#list-comprehensions
+  List comprehensions. https://docs.python.org/3/tutorial/\crlf
+  datastructures.html\#list-comprehensions
 \item
-  Parametrizing fixtures.
-  https://docs.pytest.org/en/latest/fixture.html\#parametrizing-fixtures
+  Parametrizing fixtures. https://docs.pytest.org/en/latest/\crlf
+  fixture.html\#parametrizing-fixtures
 \item
   Hypothesis documentation. https://hypothesis.readthedocs.io/
 \stopitemize
