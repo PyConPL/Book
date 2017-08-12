@@ -8,7 +8,7 @@ no recipe for optimization, there are some strategies you can implement
 to take your project to that level, some of them are very simple, some others
 are very complex.
 
-Optimizing a system, isn't always related to the technology or the tools
+Optimizing a system isn't always related to the technology or the tools
 you're using. Of course, there are efficient and inefficient ways of using
 certain language or framework, but it's usually more about having some
 Software Engineering concepts clear and knowing how to apply them to your
@@ -25,7 +25,7 @@ case, the most common metrics are:
     * **High availability:** it's a characteristic of systems which aims to
     ensure a certain level of operational performance, usually *uptime*, for
     a higher period of time;
-    * Low utilization of available resources.
+    * Low utilization of available resources;
 
 * **Scalability:** the capability of a system to process or handle
 a **growing** workload or its potential to be **enlarged** to accommodate that
@@ -43,7 +43,8 @@ roughly 80% of the effects come from 20% of the causes, so, by fixing that
 
 ## Basic Django deployment
 The usual Django stack runs Django with either *uwsgi* or *gunicorn* behind
-a web server that could be either Apache or nginx and uses *postgres* for
+a web server that could be either Apache or nginx and uses *postgres*
+(PostgreSQL) for
 database persistence, the architecture is presented on rys. 1.
 
 ![Basic Django site architecture](diagram.png)
@@ -53,7 +54,7 @@ time.
 
 ## Profile first
 Before optimizing anything, you'll have to measure what's going on and where
-the true bottlenecks are, you can use tools like `django-debug-toolbar`to have
+the true bottlenecks are, you can use tools like `django-debug-toolbar` to have
 an overall idea about the performance and even the raw `SQL` queries being ran.
 
 To measure code performance in terms of CPU and memory usage, you can use
@@ -84,12 +85,12 @@ and index based on workload. Premature optimization is bad.
 - **Slow reads:** could be the product of a sub-optimal data model for the
 type of queries it needs to answer, solutions will depend on the traffic on
 the tables and the relations between them.
-    - **Add Indices:** a good hint about which fields to index is to check
+    - **Add indices:** a good hint about which fields to index is to check
     the ones that appear the most on the `WHERE` clauses of the executed SQL
     queries. It's usually a good idea to index foreign keys.
     - **Denormalize:** usually it's a bad idea to add `ManyToMany` relations
     between model we know will grow indefinitely and quick, consider
-    denormlizing them into `JSONField` or `ArrayField` if using Postgres or
+    denormlizing them into `JSONField` or `ArrayField` if using PostgreSQL or
     just duplicate the data, this will drastically improve the performance on
     those queries.
     - **Database caching:** recommended for tables with a low modification
@@ -103,7 +104,7 @@ the tables and the relations between them.
     depending on traffic and write contention. Using Django's database routers
     is highly recommended here to abstract the upper layers from handling the
     databases for write and read.
-    - **Know your ORM:** one of the most powerful libraries withing Django
+    - **Know your ORM:** one of the most powerful libraries within Django
     framework is the `ORM`, `django.db.models.Model` class is really powerful
     and efficient but so underused in most cases that is surprising, first of
     all they have lazy evaluation, which means it only hits the database when
@@ -123,8 +124,9 @@ the ones where the data doesn't change a lot, whereas when we talk about
 caching, what we want to achieve is to speed up the system's response time
 by keeping a copy of something in a place where we can retrieve it quickly.
 
-- **Static files:** stylesheets, javascript files, images, icons, everything
-your site needs to look nice and have a great UX can be cached using
+- **Static files:** stylesheets, JavaScript files, images, icons, everything
+your site needs to look nice and have a great UX (User Experience)
+can be cached using
 memcached, for example, or using a Content Delivery Network (CDN) if you know
 it will be accessed from different and distant places. This way you can
 offload some work from your web server and avoid hitting the disk and having
@@ -134,9 +136,9 @@ which allows you to cache either a whole view or certain blocks of a template
 that are highly demanded, it only takes you to add one templatetag and you're
 good to go, you can cache static blocks that won't change or blocks that are
 associated to a dynamic piece of information like a session or user id.
-- **Session storage:** Django offers several session storage backends, File
+- **Session storage:** Django offers several session storage backends, file
 based and database backed, but sessions are something you're going to be
-accessing a lot, so, it is recommended to have a fast storage backend, redis
+accessing a lot, so, it is recommended to have a fast storage backend, Redis
 can be really handy for this and it's easy to setup, you only need to make
 sure that your whole dataset fits into memory which won't be a problem at all
 if you use it only for sessions.
