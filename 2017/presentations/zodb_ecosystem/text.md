@@ -1,34 +1,35 @@
 ![The ZODB Ecosystem by Christopher Lozinski](ZODBTitleGraphics.svg)
 
+## Abstract
 
-## ABSTRACT
 ZODB is an object-oriented database written in Python and
-optimized in C. It is widely used in the US, but not as well
-known in Poland. This talk introduces the database,
-presents important concepts, and reviews the tools available.
+optimized in C. It is widely used in the US (United States of America),
+but not as well known in Poland.
+This talk introduces the database, presents important concepts, and reviews
+the tools available.
 
 ## About the Author
+
 Christopher Lozinski has been using the ZODB since 1999.
-He is an MIT graduate and silicon valley expat who has
+He is an MIT graduate and Silicon Valley expat who has
 been using dynamically bound
 languages for 35 years. First it was Lisp, then Objective-C,
 and now Python. On the ZODB, he built PythonLinks.info, PolandTrade.info,
 PrivaCV.com, Zopache.com, and the recently decommissioned
 SpecialtyJobMarkets.com. He is a dual Polish-US citizen, and polyglot.
 
-## INTRODUCTION
+## Introduction
 
-You can see the talk slides here:
-https://pythonlinks.info/presentations/zodbtalk.pdf
+You can download the talk slides [1] and watch the presentation [2].
+ZODB [3] is an object-oriented database written in Python
+and optimized in C.
 
-ZODB is an object-oriented databaase written in Python and
-optimized in C. This article is a good representation of the talk
-I am giving at Pycon Poland 2017.
+## So Easy to Use
 
-## So Easy to use
-
-ZODB is really easy to use. Just subclass off of class persistent.Persistent,
-and your objects become persistent. Here is a code sample from the Tutorial.
+ZODB is really easy to use from Python [4].
+Just subclass off of class persistent.
+Persistent, and your objects become persistent.
+Here is a code sample from the Tutorial.
 http://www.zodb.org/en/latest/tutorial.html
 
 ```
@@ -55,24 +56,15 @@ class Persistent Set.
 
 ## ACID Properties
 
-ZODB is an ACID-compliant database.
+ZODB is an ACID-compliant database [5]:
 
-### Atomicity
-Atomicity requires that each transaction be "all or nothing".
-
-### Consistency
-Consistency ensures that any transaction will bring the database
-from one valid state to another.
-
-### Isolation
-Isolation ensures that the concurrent execution of transactions
-results in a system state that would be obtained if
-transactions were executed sequentially, i.e., one after the other.
-
-### Durability
-Durability
-Durability ensures that once a transaction
-has been committed, it will remain so, even in the event of power loss, crashes, or errors.
+- Atomicity requires that each transaction be "all or nothing".
+- Consistency ensures that any transaction will bring the database from one valid state to another.
+- Isolation ensures that the concurrent execution of transactions results
+in a system state that would be obtained if transactions were executed
+sequentially, i.e., one after the other.
+- Durability ensures that once a transaction has been committed, it will
+remain so, even in the event of power loss, crashes, or errors.
 
 ## ZODB Data Model
 
@@ -98,16 +90,16 @@ the tree. Since the nodes are essentially dictionaries, with text keys, it
 is very natural to map a URL to a particular object by traversing the tree.
 
 
-## Canonical URL's
+## Canonical URLs
 ZODB applications access objects by traversing the tree. It would be nice
 if every object had its own unique name, so that even when the tree
-structure changed, it would still be easy to
-find the object using its canonical URL.
+structure changed, it would still be easy
+to find the object using its canonical URL.
 
-PythonLinks provides canonic urls. Every node has a unique name which can
+PythonLinks provides canonical URLs. Every node has a unique name which can
 be accessed using a dictionary in the root node.
 Attempts to create a new node with the same name, result in an integer
-being appended to the new node name. Node, Node-1, Node-2, etc.
+being appended to the new node name: Node, Node-1, Node-2, etc.
 When objects are renamed, or deleted, the root dictionary is updated.
 
 ## ZODB History and Undo
@@ -119,12 +111,12 @@ in order to decide which one is best.
 
 ## ZODB Storage Options
 
-There is a rich variety of ways to store your ZODB objects.
+There is a rich variety of ways to store your ZODB objects:
 
 1. **FileStorage** is the basic way of storing ZODB (Python) objects on the
 file system. There is also Blob storage for storing images, files and other
 large objects on the file system.
-2. **ZEO** is the basic client server version of the ZODB.
+2. **ZEO** (Zope Enterprise Objects) is the basic client-server version of the ZODB.
 ZEO clients share data from the ZEO server.
 Each participating Python application
 server includes a ZEO client. They all talk to the ZEO server. The ZEO server
@@ -132,7 +124,7 @@ will then store the data in FileStorage and BlobStorage
 3. **RelStorage** stores ZODB data in a relational database. It performs
 better than ZEO. It runs on top of MySQL, Oracle and PostgreSQL.
 4. **NewtDB** is a version of RelStorage optimized for PostgreSQL. It stores
-data as both Python pickles, as well as JSONB Postgres data structures. This
+data as both Python pickles, as well as JSONB PostgreSQL data structures. This
 allows one to benefit from the native PostgreSQL catalogs.
 
 
@@ -162,10 +154,6 @@ gigabytes of ordinary database records plus multiple terabytes of blob data.
 Of course if you need multiple computers to store your object data (not blobs),
 then you may want to upgrade to NEO (Not NEO4J). NEO is a GPL'd
 cousin to the ZODB.
-
-## ZODB Tutorial
-ZODB is really easy to use from Python. I invite you to try out the
-Tutorial: http://www.zodb.org/en/latest/tutorial.html
 
 ## Multiple Views on Every Object
 The modern way to use a ZODB data model on the web is to support views on
@@ -198,7 +186,7 @@ all of Plone. Way way too complex to even consider doing custom app
 development on it.
 
 ### Pyramid
-The next obvious choice is Pyramid. If you are building a corporate
+The next obvious choice is Pyramid [6]. If you are building a corporate
 application, Pyramid is a great option. You can use the ZODB, or a
 relational database. You can use routing or traversal. You can configure
 it three different ways. You
@@ -206,7 +194,7 @@ can choose from lots of different GUI and other libraries.
 
 
 ### Grok
-Me, I chose to use Grok with Zope 3. I am not building a corporate
+Me, I chose to use Grok [7] with Zope 3. I am not building a corporate
 application. I am building startup applications. I don't care about
 computer performance, if my applications are overloaded, that is a great
 problem to have. I can then optimize things. Above all else,
@@ -228,21 +216,20 @@ also be edited with the Ace Editor.
 
 Zopache also supports containers. Trees can be built out of containers.
 Folders support cut, copy, rename paste and delete operations. HTML folders
-can be edited with the Ace and ck editors. Javascript Folders allow one to
+can be edited with the Ace [8] and CKEditor [9]. Javascript Folders allow one to
 build a well organized tree of Javascript code, but serve it as a single
 minified file or as a human readable and searchable file, which clickable links
 to the original javascript object. History and Undo are supported.
 
-Using Zopache, in your browser, you create a tree of
-folders, and populate and edit those objects.
+Using Zopache, in your browser, you create a tree
+of folders, and populate and edit those objects.
 Every object has its own URL, and can be
 displayed or edited. These is no need to know Unix. But you do have the
 option to grow the application with real Python code.
 
 ### Flask
-Flask is a very lightweight framework which can be used with the ZODB.
-Flask does routing, so one has to manually map
-from URL's to objects.
+Flask [10] is a very lightweight framework which can be used with the ZODB.
+Flask does routing, so one has to manually map from URLs to objects.
 
 ### Other Frameworks
 There are many Python frameworks, and many other less often
@@ -315,13 +302,13 @@ It is just incompatible with the performance-optimized Pyramid security model.
 ## Other Databases
 There are many other NoSQL databases on the market. My job is
 not to evaluate them all, but just to get you to ask the right
-questions.
+questions:
 
-1. Is it ACID compliant?
+1. Are they ACID compliant?
 2. Do they provide a graph database?
 3. Do they support Persistent Python?
 4. Can you add arbitrary instance variables at run-time?
-4. Do they support history and undo?
+5. Do they support history and undo?
 
 ## About PythonLinks.info
 PythonLinks.info is the world's largest Python Directory. One branch
@@ -338,4 +325,13 @@ Let me know if you are interested in doing so.
 
 ## References
 
-1. https://PythonLinks.info/zodb
+1. https://pythonlinks.info/presentations/zodbtalk.pdf
+2. https://PythonLinks.info/zodb
+3. ZODB. http://www.zodb.org
+4. ZODB Tutorial. http://www.zodb.org/en/latest/tutorial.html
+5. ACID. https://en.wikipedia.org/wiki/ACID
+6. Pyramid. https://trypyramid.com
+7. Grok. http://grok.zope.org
+8. Ace editor. https://ace.c9.io
+9. CKEditor. https://ckeditor.com
+10. Flask. http://flask.pocoo.org
