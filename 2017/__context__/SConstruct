@@ -104,10 +104,10 @@ for alias, location in al_loc_ls:
             "[ ${TARGET.file} != zodb.pdf ] || cp ../../../presentations/zodb_ecosystem/ZODBTitleGraphics.png .",
             )
         small_pdf_ls.extend([
-            "[ ${TARGET.file} != micro.pdf ] || cp ../../../workshops/micropython/ryc1.svg .",
-            "[ ${TARGET.file} != micro.pdf ] || cp ../../../workshops/micropython/ryc2.svg .",
-            "[ ${TARGET.file} != micro.pdf ] || cp ../../../workshops/micropython/ryc3.svg .",
-            "[ ${TARGET.file} != micro.pdf ] || cp ../../../workshops/micropython/ryc4.svg .",
+            "[ ${TARGET.file} != micro.pdf ] || cp ../../../workshops/micropython/ryc1.png .",
+            "[ ${TARGET.file} != micro.pdf ] || cp ../../../workshops/micropython/ryc2.png .",
+            "[ ${TARGET.file} != micro.pdf ] || cp ../../../workshops/micropython/ryc3.png .",
+            "[ ${TARGET.file} != micro.pdf ] || cp ../../../workshops/micropython/ryc4.png .",
             ])
         small_pdf_ls.append(
             "[ ${TARGET.file} != networkx.pdf ] || cp ../../../workshops/Network_Analysis_using_Python/network.png .",
