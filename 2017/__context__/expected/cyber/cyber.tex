@@ -7,7 +7,7 @@
 
 \section[about-author]{About author}
 
-Piotr Dyba is a Team Leader and software engineers at F-Secure's Rapid
+Piotr Dyba is a Team Leader and software engineer at F-Secure's Rapid
 Detection Service where he and his Python team are developing a
 distributed network of honeypots, network sensors and tooling for RDS.
 In his spare time he is a leading mentor and teacher at PyLadies Poznan.
@@ -44,12 +44,9 @@ assume that our hardware is safe, we need to harden our software on both
 workstations and servers and impose proper policies for the users, data
 handling, access.
 
-\useURL[url1][http://www.informationisbeautiful.net/visualizations/worlds-biggest-data-breaches-hacks/][][Data
-leaks in time]\from[url1]
-
-Looking at the number and severity of leaks over time, it is easy to
-observe a huge increase in their occurrences over the years and severity
-rising from 1 000 to above 1 000 000 000 user's data.
+Looking at the number and severity of leaks over time {[}23{]}, it is
+easy to observe a huge increase in their occurrences over the years and
+severity rising from 1 000 to above 1 000 000 000 user's data.
 
 \placefigure{NotPetya malware screen}{\externalfigure[000_notpetya.png]}
 
@@ -70,7 +67,7 @@ deployed on the public internet. A honeypot is a server that pretends to
 be an easy target for an attacker, where all his or her actions can be
 monitored and registered, but which cannot crucially affect the critical
 parts of the broader infrastructure. It's just a trap that pretends to
-exposes services like ssh, mysql, smtp etc., in our case written in pure
+expose services like ssh, mysql, smtp etc., in our case written in pure
 Python.
 
 \placetable[none]{}
@@ -162,25 +159,36 @@ Every few years, OWASP publishes a list of most common attacks. The last
 one is from 2013 and a fresh one is coming up this year, but if you
 compare between the recent lists, the changes are minimal over time,
 which leads to a sad conclusion that many people still have not yet
-learned from other's mistakes.
+learned from others' mistakes.
 
-OWASP TOP 10 from 2013: 1. A1 Injection 2. A2 Broken Authentication and
-Session Management 3. A3 Cross-Site Scripting (XSS) 4. A4 Insecure
-Direct Object References 5. A5 Security Misconfiguration 6. A6 Sensitive
-Data Exposure 6. A7 Missing Function Level Access Control 8. A8
-Cross-Site Request Forgery (CSRF) 9. A9 Using Components with Known
-Vulnerabilities 10. A10 Unvalidated Redirects and Forwards
+OWASP TOP 10 from 2013:
 
-Try all of the OWASP TOP10 and more using one of the projects:
-
-\startitemize[packed]
+\startitemize[n,packed][stopper=.,width=2.0em]
 \item
-  \useURL[url2][https://sourceforge.net/projects/bwapp/files/bee-box/][][BeeBox
-  project]\from[url2]
+  A1 Injection
 \item
-  \useURL[url3][https://www.owasp.org/index.php/OWASP_Broken_Web_Applications_Project][][OWASP
-  Broken Web Applications Project (OWASP BWAP)]\from[url3]
+  A2 Broken Authentication and Session Management
+\item
+  A3 Cross-Site Scripting (XSS)
+\item
+  A4 Insecure Direct Object References
+\item
+  A5 Security Misconfiguration
+\item
+  A6 Sensitive Data Exposure
+\item
+  A7 Missing Function Level Access Control
+\item
+  A8 Cross-Site Request Forgery (CSRF)
+\item
+  A9 Using Components with Known Vulnerabilities
+\item
+  A10 Unvalidated Redirects and Forwards
 \stopitemize
+
+Try all of the OWASP TOP10 and more using one of the projects: BeeBox
+project {[}24{]}, OWASP Broken Web Applications Project (OWASP BWAP)
+{[}25{]}.
 
 \subsection[common-attack-vectors-on-a-python-application]{Common attack
 vectors on a Python application}
@@ -201,8 +209,8 @@ subprocess.Popen([
 \stoptyping
 
 SQL injection\ldots{} Again, we are quite safe here, unless we are using
-our own SQL engine instead of mature ORMs such as SQLAlchemy or
-djangoORM.
+our own SQL engine instead of mature ORMs such as SQLAlchemy or Django
+ORM.
 
 Example of SQL payload:
 
@@ -215,11 +223,9 @@ keyboard\ldots{} the developer. Fortunately, we can also mitigate this
 to a point, using security static code analysis which is described later
 on. If you are interested in how to exploit pickle there is a link that
 can explain this really well on an example of an already fixed bug in
-the Twisted framework.
-\useURL[url4][https://blog.nelhage.com/2011/03/exploiting-pickle/][][Exploiting
-pickle]\from[url4]
+the Twisted framework {[}26{]}.
 
-But why people would even use eval or exec if it is so dangerous ?
+But why people would even use eval or exec if it is so dangerous?
 
 \starttyping
 python2 -m timeit -s 'code = "a,b =  2,3; c = a * b"' 'exec(code)'
@@ -414,7 +420,7 @@ Vulnerability Scoring System, is based on factors such as:
 \item
   Integrity
 \item
-  availability
+  Availability
 \stopitemize
 
 All of the above together can give a reference rating, but if one of the
@@ -450,8 +456,8 @@ names of non important pictures of other users' cats. So, there is a
 chance that someone will type some random gibberish and they will see
 the picture of a user's cat but they still won't know whose cat it is
 and we don't really care if that happens. But if the attacker can
-traverse not only over cat pictures, but also over config files etc, and
-we still do nothing about it, then we are asking to be hacked.
+traverse not only over cat pictures, but also over config files etc.,
+and we still do nothing about it, then we are asking to be hacked.
 
 \subsection[threat-model-of-a-simple-blog-app]{Threat Model of a simple
 blog app}
@@ -479,7 +485,7 @@ backend and SQL database with a few simple endpoints such as:
 \subsection[use-cases-to-understand-how-the-application-is-used]{1.1
 Use cases to understand how the application is used}
 
-So let's get back to our Blog app. We have 3 basic uses cases for our
+So let's get back to our Blog app. We have 3 basic use cases for our
 app:
 
 \startitemize[packed]
@@ -697,7 +703,7 @@ Post, Delete methods shown in those two tables.
 \HL
 \stoptable
 
-G - Get \letterbar{} P - Post \letterbar{} D - Delete
+(G - Get, P - Post, D - Delete)
 
 We know we can disable del and post methods for home, and for login we
 can only accept the post method. Note that the other endpoint's
@@ -706,7 +712,7 @@ endpoints, so it may differ from the example above.
 
 \subsection[identifying-assets]{1.5 Identifying assets}
 
-what is the most precious thing we have in our app ?
+what is the most precious thing we have in our app?
 
 In case of a blog, it is the information, that is, our users and blog
 posts, but depending on our business model, it can also be
@@ -730,7 +736,7 @@ threat modeling.
 \subsection[identification-and-quantification-of-threats-frontend]{2.1
 Identification and quantification of threats: Frontend}
 
-So, for our Front end we can expect six of OWASP top 10,
+So, for our Front end we can expect six of OWASP top 10:
 
 \startitemize[n,packed][stopper=.]
 \item
@@ -747,7 +753,7 @@ So, for our Front end we can expect six of OWASP top 10,
   A10 Unvalidated Redirects and Forwards
 \stopitemize
 
-We are using a well know framework, which is really good, unless we or
+We are using a well-known framework, which is really good, unless we or
 our developers do something stupid, because AngularJS mitigates or even
 handles all of those issues.
 
@@ -780,14 +786,14 @@ during development:
 
 \startitemize[n,packed][stopper=.]
 \item
-  Use common sense
+  Use common sense;
 \item
   Do not use uncommon external libraries without proper check up, for
-  example if they are not sending the data to NSA/KGB/ETC, but most
+  example if they are not sending the data to NSA/KGB/etc., but most
   importantly they are not sending the data to a unknown attacker and
-  being sold later on.
+  being sold later on;
 \item
-  Do not use outdated libraries as it may open code to vulnerabilities
+  Do not use outdated libraries as it may open code to vulnerabilities.
 \stopitemize
 
 \subsection[addressing-issues]{3.0 Addressing issues}
@@ -807,7 +813,7 @@ Someone gets user access and creates spam - we can mitigate that by:
 
 \startitemize[packed]
 \item
-  Limiting post per day
+  Limiting posts per day
 \item
   Edits per hour
 \item
@@ -820,7 +826,7 @@ Part of mitigation is also having proper testing at unit level - having
 not only happy paths but including edge cases helps.
 
 \subsection[ok-so-we-got-hacked-but-how-bad-can-it-be]{OK so we
-got hacked, but how bad can it be ?}
+got hacked, but how bad can it be?}
 
 The are four circles of being owned:
 
@@ -828,7 +834,7 @@ The are four circles of being owned:
 \item
   Being hacked by a bot or a script kiddie
 \item
-  Being hacked using one of the well known and documented threats
+  Being hacked using one of the well-known and documented threats
 \item
   Being hacked using a known vulnerability
 \item
@@ -848,7 +854,7 @@ the fourth circle, the attacker will try to keep their actions unnoticed
 as long as possible, thus there should not be a fallback in the press
 about it.
 
-\quotation{The smart thing is to learn from other's mistakes.}
+\quotation{The smart thing is to learn from others' mistakes.}
 
 Not seeing the destructive outcome of an attack does not necessarily
 mean that you were not hacked. There is a chance that you have been
@@ -858,7 +864,7 @@ attacker may also install some nasty ransomware and demand a high
 ransom.
 
 Gartner report from 2016 says that it takes on average 200 days since a
-hack for a company to find about it. (citation needed) Imagine what an
+hack for a company to find about it (citation needed). Imagine what an
 attacker can do during that time!
 
 \section[tooling]{Tooling}
@@ -875,7 +881,7 @@ looking for possible security bugs) tools:
 \item
   SonarQube - more advanced than bandit, comes with a plugin for Jenkins
   and support for JS, HTML and 20 other languages. The tool has an
-  integrated web ui and many more useful features. You can spawn your
+  integrated web UI and many more useful features. You can spawn your
   own instance or buy it as a service. Jenkins read -
   \quotation{Continuous Inspection}.
 \stopitemize
@@ -896,7 +902,7 @@ Automatic Scanning tools:
 \stopitemize
 
 Zap is an open source alternative to burp, developed under the OWASP
-project and it already has a dedicated Jenkins plugin. Burp can Scan for
+project and it already has a dedicated Jenkins plugin. Burp can scan for
 vulnerabilities, intercept browser traffic and automate custom attacks,
 it does not have a Jenkins plugin yet, but it was announced that this
 year something should be ready for continuous development. Both ZAP and
@@ -905,7 +911,7 @@ patterns and payloads. Metasploit is a framework that focuses on system
 level scans but can be extended with custom ones. SQLMap scans
 application only for SQL injections. If want you to test a custom
 protocol, you will probably need to use scapy, which is a Python library
-for preparing dedicated TCP, ICMP packages and UDP Datagrams.
+for preparing dedicated TCP, ICMP packages and UDP datagrams.
 
 Commercial solutions and managed services: The advantage of the service
 approach is quite nice, as the report from a cybersecurity consultant
@@ -926,15 +932,15 @@ players in this filed:
 \subsection[penetration-testing]{Penetration Testing}
 
 A penetration test is an authorized attack on a system, application
-and/or infrastructure. The reasoning behind undergoing pentesting is
-quite obviously to find security weaknesses or to fulfil a compliance
-needed by a 3rd party. There are usually two main objectives for a
-pentester to achieve: get privileged access and/or obtain restricted
-information. Even when having an on site pentesting team, it is still
-recommended to use a 3rd party company as well. Penetration tests should
-be considered before major releases or periodically after a longer
-development cycle. In the best case scenario automated security tests
-using for example Zap are also in place.
+and/or infrastructure. The reasoning behind undergoing pentesting
+(Penetration Testing) is quite obviously to find security weaknesses or
+to fulfil a compliance needed by a 3rd party. There are usually two main
+objectives for a pentester to achieve: get privileged access and/or
+obtain restricted information. Even when having an on site pentesting
+team, it is still recommended to use a 3rd party company as well.
+Penetration tests should be considered before major releases or
+periodically after a longer development cycle. In the best case scenario
+automated security tests using for example Zap are also in place.
 
 A penetration tester is a person who performs a penetration test. They
 can also be called by: Pentester, Hacker, White Hat or Security
@@ -942,7 +948,7 @@ consultant, just remember not to call them Black Hat or Cracker which
 basically means a criminal and will make them really sad and you do not
 want that to happen.
 
-There are three major approaches when pentesting: white, grey and black
+There are three major approaches while pentesting: white, grey and black
 box.
 
 White box means full transparency and full access for a pentester to our
@@ -989,7 +995,7 @@ perspective is similar to a real attacker:
 
 \subsection[ciso]{CISO}
 
-Chief Information Security Officer is a person responsible for
+Chief Information Security Officer is a person responsible for:
 
 \startitemize[packed]
 \item
@@ -1091,6 +1097,17 @@ point someone should notice\ldots{}
 \item
   Justin Mayer. Replacing passwords with multiple factors: email, otp,
   and hardware keys. EuroPython 2017
+\item
+  Data leaks in time.
+  http://www.informationisbeautiful.net/visualizations/worlds-biggest-data-breaches-hacks/
+\item
+  BeeBox
+  project{]}(https://sourceforge.net/projects/bwapp/files/bee-box/)
+\item
+  OWASP Broken Web Applications Project (OWASP
+  BWAP){]}(https://www.owasp.org/index.php/OWASP\type{_}Broken\type{_}Web\type{_}Applications\type{_}Project)
+\item
+  Exploiting pickle. https://blog.nelhage.com/2011/03/exploiting-pickle/
 \stopitemize
 
 

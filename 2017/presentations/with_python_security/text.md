@@ -3,7 +3,7 @@
 
 ### About author
 
-Piotr Dyba is a Team Leader and software engineers at F-Secure’s Rapid
+Piotr Dyba is a Team Leader and software engineer at F-Secure’s Rapid
 Detection Service where he and his Python team are developing a distributed
 network of honeypots, network sensors and tooling for RDS.
 In his spare time he is a leading mentor and teacher at PyLadies Poznan.
@@ -37,9 +37,7 @@ To be able to assume that our hardware is safe, we need to harden our software
 on both workstations and servers and impose proper policies for the users,
 data handling, access.
 
-[Data leaks in time](http://www.informationisbeautiful.net/visualizations/worlds-biggest-data-breaches-hacks/)
-
-Looking at the number and severity of leaks over time, it is easy to observe
+Looking at the number and severity of leaks over time [23], it is easy to observe
 a huge increase in their occurrences over the years and severity rising from
 1 000 to above 1 000 000 000 user's data.
 
@@ -61,7 +59,7 @@ deployed on the public internet.
 A honeypot is a server that pretends to be an easy target for an attacker,
 where all his or her actions can be monitored and registered, but which cannot
 crucially affect the critical parts of the broader infrastructure.
-It’s just a trap that pretends to exposes services like ssh, mysql, smtp etc.,
+It’s just a trap that pretends to expose services like ssh, mysql, smtp etc.,
 in our case written in pure Python.
 
 
@@ -104,9 +102,10 @@ Every few years, OWASP publishes a list of most common attacks.
 The last one is from 2013 and a fresh one is coming up this year,
 but if you compare between the recent lists, the changes are minimal over
 time, which leads to a sad conclusion that many people still have not yet
-learned from other's mistakes.
+learned from others' mistakes.
 
 OWASP TOP 10 from 2013:
+
 1. A1 Injection
 2. A2 Broken Authentication and Session Management
 3. A3 Cross-Site Scripting (XSS)
@@ -119,10 +118,8 @@ OWASP TOP 10 from 2013:
 10. A10 Unvalidated Redirects and Forwards
 
 Try all of the OWASP TOP10 and more using one of the projects:
-
-* [BeeBox project](https://sourceforge.net/projects/bwapp/files/bee-box/)
-* [OWASP Broken Web Applications Project (OWASP BWAP)](https://www.owasp.org/index.php/OWASP_Broken_Web_Applications_Project)
-
+BeeBox project [24],
+OWASP Broken Web Applications Project (OWASP BWAP) [25].
 
 ## Common attack vectors on a Python application
 
@@ -141,7 +138,7 @@ subprocess.Popen([
 ```
 
 SQL injection… Again, we are quite safe here, unless we are using our own SQL
-engine instead of mature ORMs such as SQLAlchemy or djangoORM.
+engine instead of mature ORMs such as SQLAlchemy or Django ORM.
 
 Example of SQL payload:
 ```SQL
@@ -152,10 +149,9 @@ The main threat to a Python application is located between chair and keyboard…
 the developer. Fortunately, we can also mitigate this to a point, using
 security static code analysis which is described later on. If you are
 interested in how to exploit pickle there is a link that can explain this
-really well on an example of an already fixed bug in the Twisted framework.
-[Exploiting pickle](https://blog.nelhage.com/2011/03/exploiting-pickle/)
+really well on an example of an already fixed bug in the Twisted framework [26].
 
-But why people would even use eval or exec if it is so dangerous ?
+But why people would even use eval or exec if it is so dangerous?
 
 ```bash
 python2 -m timeit -s 'code = "a,b =  2,3; c = a * b"' 'exec(code)'
@@ -309,7 +305,7 @@ CVSS, or Common Vulnerability Scoring System, is based on factors such as:
 * Scope
 * Confidentiality
 * Integrity
-* availability
+* Availability
 
 All of the above together can give a reference rating, but if one of
 the parameters is hard to define, like in the case of attack complexity, try both
@@ -340,7 +336,7 @@ So, there is a chance that someone will type some random gibberish and they
 will see the picture of a user's cat but they still won't know whose cat it is
 and we don’t really care if that happens.
 But if the attacker can traverse not only over cat pictures, but also over
-config files etc, and we still do nothing about it, then we are asking to be
+config files etc., and we still do nothing about it, then we are asking to be
 hacked.
 
 ## Threat Model of a simple blog app
@@ -359,7 +355,7 @@ and SQL database with a few simple endpoints such as:
 
 #### 1.1 Use cases to understand how the application is used
 
-So let's get back to our Blog app. We have 3 basic uses cases for our app:
+So let's get back to our Blog app. We have 3 basic use cases for our app:
 
 * Everyone can enter the site and view the blog and blog posts
 * Registered users can add new posts
@@ -405,7 +401,7 @@ Delete methods shown in those two tables.
 | User      | G | -          | GP        | GP             | -         | G              |
 | Admin     | G | -          | GP        | GPD            | GP        | GPD            |
 
-G - Get | P - Post | D - Delete
+(G - Get, P - Post, D - Delete)
 
 We know we can disable del and post methods for home, and for login we can
 only accept the post method.
@@ -414,7 +410,7 @@ approach to creating proper endpoints, so it may differ from the example above.
 
 #### 1.5 Identifying assets
 
-what is the most precious thing we have in our app ?
+what is the most precious thing we have in our app?
 
 In case of a blog, it is the information, that is, our users and blog posts,
 but depending on our business model, it can also be confidentiality.
@@ -433,7 +429,7 @@ of threat modeling.
 
 #### 2.1 Identification and quantification of threats: Frontend
 
-So, for our Front end we can expect six of OWASP top 10,
+So, for our Front end we can expect six of OWASP top 10:
 
 1. A2 Broken Authentication and Session Management
 2. A3 Cross-Site Scripting (XSS)
@@ -442,7 +438,7 @@ So, for our Front end we can expect six of OWASP top 10,
 5. A8 Cross-Site Request Forgery (CSRF)
 6. A10 Unvalidated Redirects and Forwards
 
-We are using a well know framework, which is really good,
+We are using a well-known framework, which is really good,
 unless we or our developers do something stupid, because AngularJS mitigates
 or even handles all of those issues.
 
@@ -463,11 +459,11 @@ From Threat Modeling of a Python app, we can see that we can have even more
 vulnerabilities than on the frontend side, but most of them are mitigated out
 of the box, as long as we follow three important rules during development:
 
-1. Use common sense
+1. Use common sense;
 2. Do not use uncommon external libraries without proper check up, for example
-if they are not sending the data to NSA/KGB/ETC, but most importantly they are
-not sending the data to a unknown attacker and being sold later on.
-3. Do not use outdated libraries as it may open code to vulnerabilities
+if they are not sending the data to NSA/KGB/etc., but most importantly they are
+not sending the data to a unknown attacker and being sold later on;
+3. Do not use outdated libraries as it may open code to vulnerabilities.
 
 #### 3.0 Addressing issues
 
@@ -480,7 +476,7 @@ access only from specific IPs/IP ranges
 
 Someone gets user access and creates spam - we can mitigate that by:
 
-* Limiting post per day
+* Limiting posts per day
 * Edits per hour
 * Shorter sessions
 * Captcha
@@ -489,12 +485,12 @@ Part of mitigation is also having proper testing at unit level - having not
 only happy paths but including edge cases helps.
 
 
-#### OK so we got hacked, but how bad can it be ?
+#### OK so we got hacked, but how bad can it be?
 
 The are four circles of being owned:
 
 1. Being hacked by a bot or a script kiddie
-2. Being hacked using one of the well known and documented threats
+2. Being hacked using one of the well-known and documented threats
 3. Being hacked using a known vulnerability
 4. Being hacked using an unknown vulnerability - 0 day
 
@@ -511,7 +507,7 @@ were the defences, as it drew the attacker to the last resort he/she had.
 For the fourth circle, the attacker will try to keep their actions unnoticed
 as long as possible, thus there should not be a fallback in the press about it.
 
-"The smart thing is to learn from other's mistakes."
+"The smart thing is to learn from others' mistakes."
 
 Not seeing the destructive outcome of an attack does not necessarily mean that
 you were not hacked.
@@ -522,7 +518,7 @@ trolling, an attacker may also install some nasty ransomware and demand a high
 ransom.
 
 Gartner report from 2016 says that it takes on average 200 days since a hack
-for a company to find about it. (citation needed) Imagine what an attacker can
+for a company to find about it (citation needed). Imagine what an attacker can
 do during that time!
 
 ### Tooling
@@ -536,7 +532,7 @@ policies. It works in a similar manner to pylint or pep8 tool. You can get it
 directly from PyPi.
 * SonarQube - more advanced than bandit, comes with a plugin for Jenkins
 and support for JS, HTML and 20 other languages. The tool has an integrated
-web ui and many more useful features. You can spawn your own instance or buy
+web UI and many more useful features. You can spawn your own instance or buy
 it as a service. Jenkins read - “Continuous Inspection”.
 
 Automatic Scanning tools:
@@ -549,7 +545,7 @@ Automatic Scanning tools:
 
 Zap is an open source alternative to burp, developed under the OWASP project
 and it already has a dedicated Jenkins plugin.
-Burp can Scan for vulnerabilities, intercept browser traffic and automate
+Burp can scan for vulnerabilities, intercept browser traffic and automate
 custom attacks, it does not have a Jenkins plugin yet, but it was announced
 that this year something should be ready for continuous development.
 Both ZAP and Burp can also be used manually, so you can define your own attack
@@ -559,7 +555,7 @@ extended with custom ones.
 SQLMap scans application only for SQL injections.
 If want you to test a custom protocol, you will probably need to use scapy,
 which is a Python library for preparing dedicated TCP, ICMP packages
-and UDP Datagrams.
+and UDP datagrams.
 
 
 Commercial solutions and managed services:
@@ -579,7 +575,8 @@ There are three major players in this filed:
 
 A penetration test is an authorized attack on a system, application and/or
 infrastructure.
-The reasoning behind undergoing pentesting is quite obviously to find security
+The reasoning behind undergoing pentesting (Penetration Testing)
+is quite obviously to find security
 weaknesses or to fulfil a compliance needed by a 3rd party.
 There are usually two main objectives for a pentester to achieve: get
 privileged access and/or obtain restricted information.
@@ -596,7 +593,7 @@ consultant, just remember not to call them Black Hat or Cracker which
 basically means a criminal and will make them really sad and you do not want
 that to happen.
 
-There are three major approaches when pentesting: white, grey and black box.
+There are three major approaches while pentesting: white, grey and black box.
 
 White box means full transparency and full access for a pentester to our
 production systems, especially:
@@ -625,7 +622,7 @@ be one of the steps when executing an attack or be one if its goals
 
 #### CISO
 
-Chief Information Security Officer is a person responsible for
+Chief Information Security Officer is a person responsible for:
 
 * Computer security/incident response team
 * Disaster recovery and business continuity management
@@ -681,3 +678,7 @@ should notice…
 2015/08/batman-threat-model-1200.png
 21. sshttp - hiding SSH servers behind HTTP. https://github.com/stealth/sshttp
 22. Justin Mayer. Replacing passwords with multiple factors: email, otp, and hardware keys. EuroPython 2017
+23. Data leaks in time. http://www.informationisbeautiful.net/visualizations/worlds-biggest-data-breaches-hacks/
+24. BeeBox project](https://sourceforge.net/projects/bwapp/files/bee-box/)
+25. OWASP Broken Web Applications Project (OWASP BWAP)](https://www.owasp.org/index.php/OWASP`_`Broken`_`Web`_`Applications`_`Project)
+26. Exploiting pickle. https://blog.nelhage.com/2011/03/exploiting-pickle/
