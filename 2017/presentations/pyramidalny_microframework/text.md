@@ -5,7 +5,7 @@
 Pyramid jest frameworkiem webowym rozwijanym przez inicjatywę społecznościową
 Pylons Project, która za cel postawiła sobie tworzenie pythonowych technologii
 webowych spełniających najwyższe standardy, takie jak 100% pokrycia w
-dokumentacji i w testach, czy wsparcie dla Pythona 2.x i 3.x. Autorzy
+dokumentacji i w testach, czy też wsparcie dla Pythona 2.x i 3.x. Autorzy
 przyznają, że podczas tworzenia Pyramida mocno inspirowali się Zope, Pylons i
 Django, a ja bym do tej listy dodał jeszcze Ruby on Rails, którym inspirowały
 się wszystkie powyższe frameworki.
@@ -68,7 +68,7 @@ Poza podstawowym frameworkiem mamy jeszcze całą rodzinkę dodatków,
 zarówno tworzonych i utrzymywanych w ramach Pylons Project (około 100 sztuk),
 jak i niezależnych. Daje to sumę około 350 pakietów w PyPI.
 
-Dodatki są bardzo zróżnicowane od prostych typu `paginate`, przez rozszerzenia
+Dodatki są bardzo zróżnicowane, od prostych typu `paginate`, przez rozszerzenia
 funkcjonalności jak `pyramid_jinja2` czy `pyramid_ldap`, a na wielkich
 aplikacjach (CMS, platforma dla mikroserwisów itp.) kończąc.
 
@@ -110,7 +110,7 @@ opakowująca żądania HTTP w środowisku WSGI, używana w wielu innych projekta
 Pyramid bardzo mało narzuca programiście, dając mu swobodę wyboru, z którą
 wielu nie wie co zrobić. Z jednej strony mamy nieskrępowaną wolność kodowania,
 która pozwala rozwinąć skrzydła programiście, a także umożliwia pracę
-z ulubionymi bibliotekami. Z drugiej jednak strony, programista może poczuć
+z ulubionymi bibliotekami. Z drugiej jednak strony programista może poczuć
 się zawieszony w próżni, nie wiedząc w jaki sposób zaimplementować daną
 funkcjonalność.
 
@@ -158,9 +158,9 @@ i zwrócenie go jako wynik wywołania funkcji.
 
 ## Konfiguracja
 
-Pyramid, poza imperatywnym mechanizmem konfiguracji (funkcje typu `add_view()`)
+Pyramid, poza imperatywnym mechanizmem konfiguracji (funkcje typu `add_view()`),
 udostępnia także bardzo wygodny deklaratywny mechanizm, oparty na dekoratorach.
-Dzięki temu zamiast wspomnianego `add_view()` wystarczy dodać przed naszą
+Dzięki temu, zamiast wspomnianego `add_view()`, wystarczy dodać przed naszą
 funkcją widoku dekorator `@view_config()`, który zostanie odnaleziony podczas
 startu aplikacji.
 
@@ -191,7 +191,7 @@ Jeśli operacja się powiedzie (czyli zasób zachowuje się jak słownik i zwrac
 dla podanego klucza), to otrzymaną wartość traktujemy tak samo jak `root` i
 idziemy rekurencyjnie w głąb.
 
-W momencie gdy skończą nam się części ścieżki albo gdy nie uda się pobrać
+W momencie, gdy skończą nam się części ścieżki albo gdy nie uda się pobrać
 zasobu podrzędnego, algorytm przejścia dobiega końca, a jego wynikiem jest
 ostatni (najbardziej zagnieżdżony) z uzyskanych zasobów.
 
@@ -213,7 +213,7 @@ Brzmi skomplikowanie i takie jest w istocie, ale korzyści z zastosowania
 *traversala* mogą być bardzo znaczące. Przede wszystkim struktura zasobów
 ma charakter drzewiasty i znacznie lepiej niż płaski *routing* odzwierciedla
 strukturę adresu URL. Ponadto, *traversal* nie jest podatny na trudne
-w wykryciu błędy wewnątrz wyrażeń regularnych ani też nie jest wrażliwy
+w wykryciu błędy wewnątrz wyrażeń regularnych, ani też nie jest wrażliwy
 na kolejność wpisów. Po trzecie, bardzo łatwo dodać nową funkcjonalność do
 takiej struktury, tworząc nową gałąź w odpowiednim miejscu
 istniejącego drzewa, co nigdy nie wpływa to na pozostałe zasoby.
@@ -228,7 +228,7 @@ Pyramid stawia przejrzystość na pierwszym miejscu, dlatego próżno w nim szuk
 magii składniowej w stylu `py.test` czy `SQLAlchemy`. Z jednej strony może to
 zniechęcać początkującego użytkownika (nic się samo nie wyczaruje), ale tę
 cechę docenią bardziej doświadczeni programiści, gdyż framework nie blokuje
-twórcy swoimi z definicji ograniczonym DSLami. Odsuwa to także groźbę "walki
+twórcy swoimi, z definicji ograniczonymi, DSLami. Odsuwa to także groźbę "walki
 z frameworkiem", która często pojawia się w większych projektach.
 
 Jedynym odstępstwem od zasady "niemagiczności" jest wspomniana wcześniej
@@ -259,18 +259,18 @@ zarówno w środowisku developerskim, jak i produkcyjnym.
 **Interfejsy** - budowa wewnętrzna Pyramida w znacznym stopniu opiera się na
 interfejsach z biblioteki `zope.interface`. Może to początkowo powodować
 pewną awersję, bo kod troszkę "śmierdzi" Javą, ale twórcy wiedzieli co robią
-i nie przegięli struny - hierarchia klas jest bardzo prosta i niezbyt głęboka,
+i nie przeciągnęli struny - hierarchia klas jest bardzo prosta i niezbyt głęboka,
 dlatego trudno się w niej pogubić.
 
 **Sesje** - jak na Pyramida przystało, do dyspozycji mamy kilka silników sesji.
 Dostępne od ręki są to tylko nieszyfrowane sesje ciasteczkowe
 (podpisywane lub nie), ale w oficjalnych rozszerzeniach znajdziemy szyfrowane
-sesje oparte o PyNaCl albo serwerowe używające Redisa. Jeśli powyższe
+sesje oparte o PyNaCl albo serwerowe, używające Redisa. Jeśli powyższe
 rozwiązania nam nie pasują, zawsze możemy stworzyć własną klasę sesji
 implementując interfejs `ISession`.
 
 **Uwierzytelnianie** - Pyramid obsługuje liczne metody uwierzytelniania
-(od *basic auth* przez rozwiązania z ciasteczkami aż po cięższy oręż typu
+(od *basic auth*, przez rozwiązania z ciasteczkami, aż po cięższy oręż typu
 LDAP). Oczywiście nie ma przeszkód, żeby stworzyć własny autentykator,
 wystarczy zaimplementować interfejs `IAuthenticationPolicy`.
 
@@ -309,15 +309,19 @@ pierwszych trudnych kroków staje się wygodny w użyciu i nad wyraz intuicyjny.
 Bardzo dobrze nadaje się zarówno do małych projektów, jak i do wielkich
 aplikacji, a jego szybkość i niezawodność powodują, że jest tani w utrzymaniu.
 
-Dlatego też mam nadzieję, że moim tekstem zachęciłem cię do przyjrzenia się
+Dlatego też mam nadzieję, że moim tekstem zachęciłem Cię do przyjrzenia się
 (może ponownego) temu niedocenionemu frameworkowi, jakim jest Pyramid.
 
 ## Bibliografia
 
-1. https://trypyramid.com - Pyramid strona domowa
-2. https://pylonsproject.org - Pylons Project
-3. https://docs.pylonsproject.org/projects/pyramid/en/latest/ - dokumentacja Pyramida
-4. https://pylonsproject.org/projects.html - projekty rozwijane przez Pylons Project
-5. https://trypyramid.com/resources-extending-pyramid.html - oficjalne dodatki (*add-ons*)
-6. https://webob.org - strona domowa `WebOb`, wrappera WSGI używanego przez Pyramid
-7. https://docs.pylonsproject.org/projects/pyramid/en/latest/quick`_`tour.html - przewodnik po Pyramidzie
+1. Pyramid strona domowa. https://trypyramid.com
+2. Pylons Project. https://pylonsproject.org
+3. Dokumentacja Pyramida. https://docs.pylonsproject.org/projects/pyramid/\crlf
+    en/latest/
+4. Projekty rozwijane przez Pylons Project. https://pylonsproject.org/projects.html
+5. Oficjalne dodatki (*add-ons*). https://trypyramid.com/\crlf
+    resources-extending-pyramid.html
+6. Strona domowa `WebOb`, wrappera WSGI używanego przez Pyramid.\crlf
+    https://webob.org
+7. Przewodnik po Pyramidzie. https://docs.pylonsproject.org/projects/pyramid/\crlf
+    en/latest/quick`_`tour.html

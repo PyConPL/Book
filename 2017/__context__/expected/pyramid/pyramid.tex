@@ -11,10 +11,10 @@ Pyramid jest frameworkiem webowym rozwijanym przez inicjatywę
 społecznościową Pylons Project, która za cel postawiła sobie tworzenie
 pythonowych technologii webowych spełniających najwyższe standardy,
 takie jak 100\letterpercent{} pokrycia w dokumentacji i w testach, czy
-wsparcie dla Pythona 2.x i 3.x. Autorzy przyznają, że podczas tworzenia
-Pyramida mocno inspirowali się Zope, Pylons i Django, a ja bym do tej
-listy dodał jeszcze Ruby on Rails, którym inspirowały się wszystkie
-powyższe frameworki.
+też wsparcie dla Pythona 2.x i 3.x. Autorzy przyznają, że podczas
+tworzenia Pyramida mocno inspirowali się Zope, Pylons i Django, a ja bym
+do tej listy dodał jeszcze Ruby on Rails, którym inspirowały się
+wszystkie powyższe frameworki.
 
 Teraz może wytłumaczę się z tego niedorzecznego tytułu - otóż jest to
 najbardziej zwarta charakterystyka frameworka Pyramid, jaką udało mi się
@@ -78,7 +78,7 @@ Poza podstawowym frameworkiem mamy jeszcze całą rodzinkę dodatków,
 zarówno tworzonych i utrzymywanych w ramach Pylons Project (około 100
 sztuk), jak i niezależnych. Daje to sumę około 350 pakietów w PyPI.
 
-Dodatki są bardzo zróżnicowane od prostych typu \type{paginate}, przez
+Dodatki są bardzo zróżnicowane, od prostych typu \type{paginate}, przez
 rozszerzenia funkcjonalności jak \type{pyramid_jinja2} czy
 \type{pyramid_ldap}, a na wielkich aplikacjach (CMS, platforma dla
 mikroserwisów itp.) kończąc.
@@ -124,7 +124,7 @@ będąca częścią Pylons Project.
 Pyramid bardzo mało narzuca programiście, dając mu swobodę wyboru, z
 którą wielu nie wie co zrobić. Z jednej strony mamy nieskrępowaną
 wolność kodowania, która pozwala rozwinąć skrzydła programiście, a także
-umożliwia pracę z ulubionymi bibliotekami. Z drugiej jednak strony,
+umożliwia pracę z ulubionymi bibliotekami. Z drugiej jednak strony
 programista może poczuć się zawieszony w próżni, nie wiedząc w jaki
 sposób zaimplementować daną funkcjonalność.
 
@@ -177,9 +177,9 @@ funkcji.
 \subsection[konfiguracja]{Konfiguracja}
 
 Pyramid, poza imperatywnym mechanizmem konfiguracji (funkcje typu
-\type{add_view()}) udostępnia także bardzo wygodny deklaratywny
-mechanizm, oparty na dekoratorach. Dzięki temu zamiast wspomnianego
-\type{add_view()} wystarczy dodać przed naszą funkcją widoku dekorator
+\type{add_view()}), udostępnia także bardzo wygodny deklaratywny
+mechanizm, oparty na dekoratorach. Dzięki temu, zamiast wspomnianego
+\type{add_view()}, wystarczy dodać przed naszą funkcją widoku dekorator
 \type{@view_config()}, który zostanie odnaleziony podczas startu
 aplikacji.
 
@@ -212,7 +212,7 @@ zasób zachowuje się jak słownik i zwraca wartość dla podanego klucza),
 to otrzymaną wartość traktujemy tak samo jak \type{root} i idziemy
 rekurencyjnie w głąb.
 
-W momencie gdy skończą nam się części ścieżki albo gdy nie uda się
+W momencie, gdy skończą nam się części ścieżki albo gdy nie uda się
 pobrać zasobu podrzędnego, algorytm przejścia dobiega końca, a jego
 wynikiem jest ostatni (najbardziej zagnieżdżony) z uzyskanych zasobów.
 
@@ -237,7 +237,7 @@ Brzmi skomplikowanie i takie jest w istocie, ale korzyści z zastosowania
 zasobów ma charakter drzewiasty i znacznie lepiej niż płaski
 {\em routing} odzwierciedla strukturę adresu URL. Ponadto,
 {\em traversal} nie jest podatny na trudne w wykryciu błędy wewnątrz
-wyrażeń regularnych ani też nie jest wrażliwy na kolejność wpisów. Po
+wyrażeń regularnych, ani też nie jest wrażliwy na kolejność wpisów. Po
 trzecie, bardzo łatwo dodać nową funkcjonalność do takiej struktury,
 tworząc nową gałąź w odpowiednim miejscu istniejącego drzewa, co nigdy
 nie wpływa to na pozostałe zasoby.
@@ -252,8 +252,8 @@ Pyramid stawia przejrzystość na pierwszym miejscu, dlatego próżno w nim
 szukać magii składniowej w stylu \type{py.test} czy \type{SQLAlchemy}. Z
 jednej strony może to zniechęcać początkującego użytkownika (nic się
 samo nie wyczaruje), ale tę cechę docenią bardziej doświadczeni
-programiści, gdyż framework nie blokuje twórcy swoimi z definicji
-ograniczonym DSLami. Odsuwa to także groźbę \quotation{walki z
+programiści, gdyż framework nie blokuje twórcy swoimi, z definicji
+ograniczonymi, DSLami. Odsuwa to także groźbę \quotation{walki z
 frameworkiem}, która często pojawia się w większych projektach.
 
 Jedynym odstępstwem od zasady \quotation{niemagiczności} jest wspomniana
@@ -285,19 +285,19 @@ zastosowania zarówno w środowisku developerskim, jak i produkcyjnym.
 {\bf Interfejsy} - budowa wewnętrzna Pyramida w znacznym stopniu opiera
 się na interfejsach z biblioteki \type{zope.interface}. Może to
 początkowo powodować pewną awersję, bo kod troszkę \quotation{śmierdzi}
-Javą, ale twórcy wiedzieli co robią i nie przegięli struny - hierarchia
-klas jest bardzo prosta i niezbyt głęboka, dlatego trudno się w niej
-pogubić.
+Javą, ale twórcy wiedzieli co robią i nie przeciągnęli struny -
+hierarchia klas jest bardzo prosta i niezbyt głęboka, dlatego trudno się
+w niej pogubić.
 
 {\bf Sesje} - jak na Pyramida przystało, do dyspozycji mamy kilka
 silników sesji. Dostępne od ręki są to tylko nieszyfrowane sesje
 ciasteczkowe (podpisywane lub nie), ale w oficjalnych rozszerzeniach
-znajdziemy szyfrowane sesje oparte o PyNaCl albo serwerowe używające
+znajdziemy szyfrowane sesje oparte o PyNaCl albo serwerowe, używające
 Redisa. Jeśli powyższe rozwiązania nam nie pasują, zawsze możemy
 stworzyć własną klasę sesji implementując interfejs \type{ISession}.
 
 {\bf Uwierzytelnianie} - Pyramid obsługuje liczne metody
-uwierzytelniania (od {\em basic auth} przez rozwiązania z ciasteczkami
+uwierzytelniania (od {\em basic auth}, przez rozwiązania z ciasteczkami,
 aż po cięższy oręż typu LDAP). Oczywiście nie ma przeszkód, żeby
 stworzyć~własny autentykator, wystarczy zaimplementować interfejs
 \type{IAuthenticationPolicy}.
@@ -338,7 +338,7 @@ intuicyjny. Bardzo dobrze nadaje się zarówno do małych projektów, jak i
 do wielkich aplikacji, a jego szybkość i niezawodność powodują, że jest
 tani w utrzymaniu.
 
-Dlatego też mam nadzieję, że moim tekstem zachęciłem cię do przyjrzenia
+Dlatego też mam nadzieję, że moim tekstem zachęciłem Cię do przyjrzenia
 się (może ponownego) temu niedocenionemu frameworkowi, jakim jest
 Pyramid.
 
@@ -346,24 +346,27 @@ Pyramid.
 
 \startitemize[n,packed][stopper=.]
 \item
-  https://trypyramid.com - Pyramid strona domowa
+  Pyramid strona domowa. https://trypyramid.com
 \item
-  https://pylonsproject.org - Pylons Project
+  Pylons Project. https://pylonsproject.org
 \item
-  https://docs.pylonsproject.org/projects/pyramid/en/latest/ -
-  dokumentacja Pyramida
+  Dokumentacja Pyramida.
+  https://docs.pylonsproject.org/projects/pyramid/\crlf
+  en/latest/
 \item
-  https://pylonsproject.org/projects.html - projekty rozwijane przez
-  Pylons Project
+  Projekty rozwijane przez Pylons Project.
+  https://pylonsproject.org/projects.html
 \item
-  https://trypyramid.com/resources-extending-pyramid.html - oficjalne
-  dodatki ({\em add-ons})
+  Oficjalne dodatki ({\em add-ons}). https://trypyramid.com/\crlf
+  resources-extending-pyramid.html
 \item
-  https://webob.org - strona domowa \type{WebOb}, wrappera WSGI
-  używanego przez Pyramid
+  Strona domowa \type{WebOb}, wrappera WSGI używanego przez
+  Pyramid.\crlf
+  https://webob.org
 \item
-  https://docs.pylonsproject.org/projects/pyramid/en/latest/quick\type{_}tour.html
-  - przewodnik po Pyramidzie
+  Przewodnik po Pyramidzie.
+  https://docs.pylonsproject.org/projects/pyramid/\crlf
+  en/latest/quick\type{_}tour.html
 \stopitemize
 
 
