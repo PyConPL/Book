@@ -43,7 +43,7 @@ bardziej złożonych zastosowań.
 Coraz szybciej odchodzą w niepamięć, ponieważ prawie wszystko można już zrobić
 w przeglądarce Internetowej. Wciąż jednak czasami preferujemy "natywne" aplikacje,
 a Python sprawdza się w nich świetnie - szczególnie wtedy, kiedy aplikacja
-często wchodzi w interakcję z użytkownikiem. Dzięki pakietom takim jak TkInter,
+często wchodzi w interakcję z użytkownikiem. Dzięki pakietom takim jak Tkinter,
 wxPython czy PyQt tworzenie aplikacji jest szybkie i przyjemne, a interfejs
 użytkownika dobrze integruje się z systemem operacyjnym.
 
