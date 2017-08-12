@@ -15,10 +15,11 @@ UART (Universal Asynchronous Receiver and Transmitter) to interfejs
 przeznaczony do nawiązania komunikacji z urządzeniem poprzez port szeregowy.
 Komunikacja odbywa się przez dwie jednokierunkowe linie TX oraz RX. Dane
 wysyłane są asynchronicznie w postaci ramek. Ramka danych definiuje długość
-danych, obecność bitu parzystości oraz ilość bitów stopu. Format ten zapewnia
+danych, obecność bitu parzystości oraz liczbę bitów stopu. Format ten zapewnia
 podstawową kontrolę błędów. Nawiązanie komunikacji wymaga używania tego samego
 formatu ramki i prędkości transmisji przez oba urządzenia. Interfejs typowo
-obsługuje prędkości transmisji od 110 do 115200 bodów. Maksymalna długość
+obsługuje prędkości transmisji danych od 110 do 115200 bitów na sekundę.
+Maksymalna długość
 przewodu łączącego urządzenia wynosi nawet 100 m i spada wraz ze wzrostem
 prędkości transmisji [1, 2].
 
@@ -130,8 +131,8 @@ M-Bus (Meter-Bus) jest europejskim standardem opracowanym do przesyłania
 wskazań z przyrządów pomiarowych. Standard zapewnia obsługę kilkuset urządzeń
 podłączonych do magistrali o długości wynoszącej nawet kilka kilometrów.
 Transmisja danych jest odporna na błędy, ale stosunkowo wolna. Prędkość
-przesyłania danych waha się w granicach od 300 do 9600 bodów. Protokół zakłada
-niezbyt częste odczytywanie mierzonych wartości [7].
+przesyłania danych waha się w granicach od 300 do 9600 bitów na sekundę.
+Protokół zakłada niezbyt częste odczytywanie mierzonych wartości [7].
 
 Zgodnie ze swoim przeznaczeniem protokół M-Bus stosowany jest w różnych
 miernikach znajdujących się w instalacjach domowych, takich jak: liczniki
