@@ -99,7 +99,8 @@ our dataset - a collection of randomly generated fake person records.
     from pyspark.sql import Row
     def fake_entry():
         name = fake.name().split()
-        return Row(name[1], name[0], fake.ssn(), fake.job(), abs(2016 - fake.date_time().year) + 1)
+        return Row(name[1], name[0], fake.ssn(), fake.job(),
+            abs(2016 - fake.date_time().year) + 1)
 
 
     # Create a helper function to call a function repeatedly
@@ -128,7 +129,8 @@ To create DataFrame we will use `createDataFrame` method:
     help(sqlContext.createDataFrame)
 
 
-    data_df = sqlContext.createDataFrame(data, ('last_name', 'first_name', 'ssn', 'occupation', 'age'))
+    data_df = sqlContext.createDataFrame(data, ('last_name', 'first_name',
+        'ssn', 'occupation', 'age'))
 
 
     print('type of data_df: {0}'.format(type(data_df)))
@@ -154,10 +156,12 @@ To create DataFrame we will use `createDataFrame` method:
 #### Working on DataFrame
 
 
-    # Transform data_df through a select transformation and rename the newly created '(age -1)' column to 'age'
-    # Because select is a transformation and Spark uses lazy evaluation, no jobs, stages,
-    # or tasks will be launched when we run this code.
-    sub_df = data_df.select('last_name', 'first_name', 'ssn', 'occupation', (data_df.age - 1).alias('age'))
+    # Transform data_df through a select transformation and rename
+    # the newly created '(age -1)' column to 'age'
+    # Because select is a transformation and Spark uses lazy evaluation,
+    # no jobs, stages, or tasks will be launched when we run this code.
+    sub_df = data_df.select('last_name', 'first_name', 'ssn',
+        'occupation', (data_df.age - 1).alias('age'))
 
 
     # Query plan
@@ -196,10 +200,8 @@ If you'd prefer that show() not truncate the data, you can tell it not to:
 
     sub_df.show(n=30, truncate=False)
 
-In Databricks, there's an even nicer way to look at the values in a DataFrame:
-The display() helper function.
-
-
+In Databricks, there's an even nicer way to look at the values
+in a DataFrame - the display() helper function.
 
     display(sub_df)
 
@@ -280,7 +282,8 @@ objects. To get a Column object, we use one of two notations on the DataFrame:
 
 
 
-    # Get the five oldest people in the list. To do that, sort by age in descending order.
+    # Get the five oldest people in the list.
+    # To do that, sort by age in descending order.
     display(dataDF.orderBy(dataDF.age.desc()).take(5))
 
 
@@ -335,8 +338,10 @@ DataFrame.
 
 
     # We can also use groupBy() to do another useful aggregations:
-    print("Maximum age: {0}".format(data_df.groupBy().max('age').first()[0]))
-    print("Minimum age: {0}".format(data_df.groupBy().min('age').first()[0]))
+    print("Maximum age: {0}".format(data_df.groupBy()
+        .max('age').first()[0]))
+    print("Minimum age: {0}".format(data_df.groupBy()
+        .min('age').first()[0]))
 
 #### sample()
 
@@ -407,12 +412,13 @@ not always executed immediately.
     def broken_ten(value):
         """
         Incorrect implementation of the ten function
-        (the `if` statement checks an undefined variable `val` instead of `value`).
+        (the `if` statement checks an undefined variable `val`
+        instead of `value`).
         :param value: a number.
         :return bool: whether `value` is less than 10.
     
-        The function references `val`, which is not available in the local or global
-        namespace, so a `NameError` is raised.
+        The function references `val`, which is not available
+        in the local or global namespace, so a `NameError` is raised.
         """
         return True if (val < 10) else False
     
@@ -420,8 +426,8 @@ not always executed immediately.
     broken_df = sub_df.filter(bt_udf(sub_df.age) == True)
 
 
-    # Now we'll see the error
-    # Click on the `+` button to expand the error and scroll through the message.
+    # Now we'll see the error. Click on the `+` button to expand the error
+    # and scroll through the message.
     broken_df.count()
 
 #### Coding style
@@ -434,7 +440,8 @@ and put each method, transformation, or action on a separate line.
     from pyspark.sql.functions import *
     (data_df
      .filter(data_df.age > 20)
-     .select(concat(data_df.first_name, lit(' '), dataDF.last_name), dataDF.occupation)
+     .select(concat(data_df.first_name, lit(' '), dataDF.last_name),
+         dataDF.occupation)
      .show(truncate=False)
      )
 
@@ -478,25 +485,24 @@ Display all rare jobs (jobs that occurs only once in our dataset)
 
 ### I/O
 
-We can create DataFrame reading data from file.
-> text file: `sqlContext.read.text(file)`
+We can create DataFrame reading data from file:
 
-> csv file: `sqlContext.read.csv(file)`
+- text file: `sqlContext.read.text(file)`
+- csv file: `sqlContext.read.csv(file)`
+- json file: `sqlContext.read.json(file)`
 
-> json file: `sqlContext.read.json(file)`
 
-
+```python
     filename = "pantadeusz.txt"
     text_df = sqlContext.read.text(filename, encoding="utf-8")
     text_df.show(15, truncate=False)
+```
 
 ### EXERCISE
 
 Print 10 most common words in `Pan Tadeusz`.
 
-Note:
-- we need first properly transform input data (remove punctuations, trailing and
-leading spaces, change to lowercase)
-
+Note: we need first properly transform input data (remove punctuations, trailing
+and leading spaces, change to lowercase).
 
     # Solution here
