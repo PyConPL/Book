@@ -9,7 +9,7 @@ This workshop will introduce the basics of network theory and working with
 graphs using Python and the NetworkX package.
 This will be a hands on tutorial and will require writing a lot of code snippets.
 The participants should be comfortable with basic Python (loops, dictionaries,
-lists) and some(minimal) experience with working inside a Jupyter Notebook.
+lists) and some (minimal) experience with working inside a Jupyter Notebook.
 
 Broadly the tutorial is divided into four parts:
 
@@ -66,7 +66,7 @@ during the workshop.
 
 ##### What are Networks (Graphs) and how can we use NetworkX and Python to represent them?
 
-A graph G is represented by a set of nodes and a set of edges.
+A graph G is represented by a set of nodes and a set of edges (rys. 1).
 An edge between two nodes in a graph signifies a relationship between those
 two nodes. Edges can be directed or undirected.
 
@@ -103,8 +103,8 @@ G = nx.Graph() # DiGraph, MultiGraph, MultiDiGraph
 
 ``` python
 # Add nodes to our graph object
-# In NetworkX, nodes can be any hashable object e.g. a text string, an image,
-# an XML object, another Graph, a customized node object, etc.
+# In NetworkX, nodes can be any hashable object e.g. a text string,
+# an image, an XML object, another Graph, a customized node object, etc.
 
 G.add_node('1')
 G.add_node(1)
@@ -150,7 +150,8 @@ is connected to no additional vertices in the supergraph.
 NetworkX has algorithms implemented to help us with finding components
 of a network.
 ``` python
-print [len(c) for c in sorted(nx.connected_components(authors_graph), key=len, reverse=True)]
+print [len(c) for c in sorted(nx.connected_components(authors_graph),
+    key=len, reverse=True)]
 ```
 This piece of code gives us the components of a network `authors_graph` where
 `authors_graph` is the Arxiv GR-QC (General Relativity and Quantum Cosmology)
@@ -197,11 +198,13 @@ tools and measures we learn in this tutorial.
 
 ## References
 
-1. Official NetworkX tutorial. https://github.com/networkx/notebooks/blob/master/tutorial.ipynb
+1. Official NetworkX tutorial. https://github.com/networkx/notebooks/blob/\crlf
+    master/tutorial.ipynb
 2. NetworkX documentation. https://networkx.readthedocs.io/en/stable/
 3. EuroSciPy 2016 tutorial. https://github.com/MridulS/euroscipy-networkx
 4. PyCon/SciPy 2017 tutorial. https://github.com/ericmjl/Network-Analysis-Made-Simple
 5. Video Tutorial. https://www.youtube.com/watch?v=E4VKzFmByhE`&`t=3139s
 6. DataCamp course. https://www.datacamp.com/courses/network-analysis-in-python-part-1
-7. Datasets (Social Network Analysis project at Stanford). http://snap.stanford.edu/data/index.html
+7. Datasets (Social Network Analysis project at Stanford). http://snap.stanford.edu/\crlf
+    data/index.html
 8. KONECT (KONECT project at UNamur). http://konect.uni-koblenz.de

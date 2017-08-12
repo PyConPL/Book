@@ -13,7 +13,7 @@ functions of complex networks. This workshop will introduce the basics
 of network theory and working with graphs using Python and the NetworkX
 package. This will be a hands on tutorial and will require writing a lot
 of code snippets. The participants should be comfortable with basic
-Python (loops, dictionaries, lists) and some(minimal) experience with
+Python (loops, dictionaries, lists) and some (minimal) experience with
 working inside a Jupyter Notebook.
 
 Broadly the tutorial is divided into four parts:
@@ -106,9 +106,9 @@ the workshop.
 are Networks (Graphs) and how can we use NetworkX and Python to
 represent them?}
 
-A graph G is represented by a set of nodes and a set of edges. An edge
-between two nodes in a graph signifies a relationship between those two
-nodes. Edges can be directed or undirected.
+A graph G is represented by a set of nodes and a set of edges (rys. 1).
+An edge between two nodes in a graph signifies a relationship between
+those two nodes. Edges can be directed or undirected.
 
 \placefigure{Network}{\externalfigure[network.png]}
 
@@ -150,8 +150,8 @@ G = nx.Graph() # DiGraph, MultiGraph, MultiDiGraph
 
 \starttyping
 # Add nodes to our graph object
-# In NetworkX, nodes can be any hashable object e.g. a text string, an image,
-# an XML object, another Graph, a customized node object, etc.
+# In NetworkX, nodes can be any hashable object e.g. a text string,
+# an image, an XML object, another Graph, a customized node object, etc.
 
 G.add_node('1')
 G.add_node(1)
@@ -200,7 +200,8 @@ NetworkX has algorithms implemented to help us with finding components
 of a network.
 
 \starttyping
-print [len(c) for c in sorted(nx.connected_components(authors_graph), key=len, reverse=True)]
+print [len(c) for c in sorted(nx.connected_components(authors_graph),
+    key=len, reverse=True)]
 \stoptyping
 
 This piece of code gives us the components of a network
@@ -252,7 +253,8 @@ tools and measures we learn in this tutorial.
 \startitemize[n,packed][stopper=.]
 \item
   Official NetworkX tutorial.
-  https://github.com/networkx/notebooks/blob/master/tutorial.ipynb
+  https://github.com/networkx/notebooks/blob/\crlf
+  master/tutorial.ipynb
 \item
   NetworkX documentation. https://networkx.readthedocs.io/en/stable/
 \item
@@ -268,7 +270,8 @@ tools and measures we learn in this tutorial.
   https://www.datacamp.com/courses/network-analysis-in-python-part-1
 \item
   Datasets (Social Network Analysis project at Stanford).
-  http://snap.stanford.edu/data/index.html
+  http://snap.stanford.edu/\crlf
+  data/index.html
 \item
   KONECT (KONECT project at UNamur). http://konect.uni-koblenz.de
 \stopitemize
