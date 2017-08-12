@@ -98,7 +98,7 @@ for alias, location in al_loc_ls:
             "[ ${TARGET.file} != cyber.pdf ] || cp ../../../presentations/with_python_security/002_batman.png .",
             ])
         small_pdf_ls.append(
-            "[ ${TARGET.file} != real.pdf ] || cp ../../../presentations/django_in_the_real_world/diagram.jpg .",
+            "[ ${TARGET.file} != real.pdf ] || cp ../../../presentations/django_in_the_real_world/diagram.png .",
             )
         small_pdf_ls.append(
             "[ ${TARGET.file} != zodb.pdf ] || cp ../../../presentations/zodb_ecosystem/ZODBTitleGraphics.png .",
