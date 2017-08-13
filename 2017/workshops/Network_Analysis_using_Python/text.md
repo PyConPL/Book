@@ -25,8 +25,7 @@ Broadly the tutorial is divided into four parts:
 3. Analyze data
 
     - We'll use the various techniques we have learnt so far and model a network
-    out of real world data like co-authorship
-    network( http://www-personal.umich.edu/~mejn/netdata/cond-mat-2005.zip)
+    out of real world data like co-authorship network [8]
     or a similar network and study the structure and properties of this network.
 4. Real world data
 
@@ -45,7 +44,7 @@ This text gives a brief overview of the content of the workshop.
 ### Packages and other requirements
 
 You should have python3 and pip installed, and using
-virtualenv [8] is recommended
+virtualenv [9] is recommended
 and the following Python packages should be installed.
 
 - Jupyter
@@ -54,10 +53,10 @@ and the following Python packages should be installed.
 - pandas
 - numpy
 
-You can also use conda [9] to install these packages.
+You can also use conda [10] to install these packages.
 
 The workshop will also require datasets to work on which will be uploaded
-on GitHub repository https://github.com/MridulS/pyconpl-2017-networkx.
+on GitHub repository [11].
 
 The repo will contain the Jupyter notebooks that will be required
 during the workshop.
@@ -155,9 +154,7 @@ print [len(c) for c in sorted(nx.connected_components(authors_graph),
 ```
 This piece of code gives us the components of a network `authors_graph` where
 `authors_graph` is the Arxiv GR-QC (General Relativity and Quantum Cosmology)
-collaboration network.
-
-source:  http://snap.stanford.edu/data/index.html#canets
+collaboration network [12].
 
 The output:
 ```
@@ -191,7 +188,7 @@ exploratory analysis of the network.
 ##### Real world data
 
 There are multiple sources to find real word network datasets like
-SNAP [10] and KONECT [11].
+SNAP [13] and KONECT [14].
 We will use a real world network and analyse the network using the various
 tools and measures we learn in this tutorial.
 
@@ -206,7 +203,10 @@ tools and measures we learn in this tutorial.
 6. DataCamp course. https://www.datacamp.com/courses/network-analysis-in-python-part-1
 7. Datasets (Social Network Analysis project at Stanford). http://snap.stanford.edu/\crlf
     data/index.html
-8. virtualenv. https://virtualenv.pypa.io/en/stable/
-9. conda. https://conda.io/docs/
-10. SNAP. http://snap.stanford.edu/data/index.html
-11. KONECT (KONECT project at UNamur). http://konect.uni-koblenz.de
+8. http://www-personal.umich.edu/~mejn/netdata/cond-mat-2005.zip
+9. virtualenv. https://virtualenv.pypa.io/en/stable/
+10. conda. https://conda.io/docs/
+11. https://github.com/MridulS/pyconpl-2017-networkx
+12. http://snap.stanford.edu/data/index.html#canets
+13. SNAP. http://snap.stanford.edu/data/index.html
+14. KONECT (KONECT project at UNamur). http://konect.uni-koblenz.de

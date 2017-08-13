@@ -45,9 +45,8 @@ Broadly the tutorial is divided into four parts:
   \startitemize[packed]
   \item
     We'll use the various techniques we have learnt so far and model a
-    network out of real world data like co-authorship network(
-    http://www-personal.umich.edu/\lettertilde{}mejn/netdata/cond-mat-2005.zip)
-    or a similar network and study the structure and properties of this
+    network out of real world data like co-authorship network {[}8{]} or
+    a similar network and study the structure and properties of this
     network.
   \stopitemize
 \item
@@ -72,7 +71,7 @@ This text gives a brief overview of the content of the workshop.
 \section[packages-and-other-requirements]{Packages and other
 requirements}
 
-You should have python3 and pip installed, and using virtualenv {[}8{]}
+You should have python3 and pip installed, and using virtualenv {[}9{]}
 is recommended and the following Python packages should be installed.
 
 \startitemize[packed]
@@ -88,11 +87,10 @@ is recommended and the following Python packages should be installed.
   numpy
 \stopitemize
 
-You can also use conda {[}9{]} to install these packages.
+You can also use conda {[}10{]} to install these packages.
 
 The workshop will also require datasets to work on which will be
-uploaded on GitHub repository
-https://github.com/MridulS/pyconpl-2017-networkx.
+uploaded on GitHub repository {[}11{]}.
 
 The repo will contain the Jupyter notebooks that will be required during
 the workshop.
@@ -203,9 +201,8 @@ print [len(c) for c in sorted(nx.connected_components(authors_graph),
 
 This piece of code gives us the components of a network
 \type{authors_graph} where \type{authors_graph} is the Arxiv GR-QC
-(General Relativity and Quantum Cosmology) collaboration network.
-
-source: http://snap.stanford.edu/data/index.html\#canets
+(General Relativity and Quantum Cosmology) collaboration network
+{[}12{]}.
 
 The output:
 
@@ -240,7 +237,7 @@ exploratory analysis of the network.
 \subsubsection[real-world-data]{Real world data}
 
 There are multiple sources to find real word network datasets like SNAP
-{[}10{]} and KONECT {[}11{]}. We will use a real world network and
+{[}13{]} and KONECT {[}14{]}. We will use a real world network and
 analyse the network using the various tools and measures we learn in
 this tutorial.
 
@@ -269,9 +266,15 @@ this tutorial.
   http://snap.stanford.edu/\crlf
   data/index.html
 \item
+  http://www-personal.umich.edu/\lettertilde{}mejn/netdata/cond-mat-2005.zip
+\item
   virtualenv. https://virtualenv.pypa.io/en/stable/
 \item
   conda. https://conda.io/docs/
+\item
+  https://github.com/MridulS/pyconpl-2017-networkx
+\item
+  http://snap.stanford.edu/data/index.html\#canets
 \item
   SNAP. http://snap.stanford.edu/data/index.html
 \item
