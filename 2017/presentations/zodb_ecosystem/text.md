@@ -26,27 +26,25 @@ and optimized in C.
 
 ## So Easy to Use
 
-ZODB is really easy to use from Python [4].
+ZODB is really easy to use from Python.
 Just subclass off of class persistent.
 Persistent, and your objects become persistent.
-Here is a code sample from the Tutorial.
-http://www.zodb.org/en/latest/tutorial.html
+Here is a code sample from the Tutorial [4].
 
 ```
 import persistent
 
 class Account(persistent.Persistent):
 
-def __init__(self):
-    self.balance = 0.0
+    def __init__(self):
+        self.balance = 0.0
 
-def deposit(self, amount):
-    self.balance += amount
+    def deposit(self, amount):
+        self.balance += amount
 
-def cash(self, amount):
-    assert amount < self.balance
-    self.balance -= amount
-
+    def cash(self, amount):
+        assert amount < self.balance
+        self.balance -= amount
 ```
 
 Did you notice how trivial it was to create a persistent object. Magic!
@@ -58,18 +56,18 @@ class Persistent Set.
 
 ZODB is an ACID-compliant database [5]:
 
-- Atomicity requires that each transaction be "all or nothing".
-- Consistency ensures that any transaction will bring the database from one valid state to another.
+- Atomicity requires that each transaction be "all or nothing";
+- Consistency ensures that any transaction will bring the database from one valid state to another;
 - Isolation ensures that the concurrent execution of transactions results
 in a system state that would be obtained if transactions were executed
-sequentially, i.e., one after the other.
+sequentially, i.e., one after the other;
 - Durability ensures that once a transaction has been committed, it will
 remain so, even in the event of power loss, crashes, or errors.
 
 ## ZODB Data Model
 
-Simple ZODB applications store data as a tree of objects. essentially a
-tree of dictionaries. More sophisticated
+Simple ZODB applications store data as a tree of objects,
+essentially a tree of dictionaries. More sophisticated
 applications store Data as a graph of objects. Really sophisticated
 applications can store data as any Python data structure. If the data is
 reachable from the root object it is persistent. If not, it is garbage
@@ -203,28 +201,28 @@ I care about speed and cost of development. Related to that is software flexibil
 
 ### Zopache
 
-Sadly Grok lacks a TTW development environment, so I built one.
-Zopache.com is a Javascript IDE
+Sadly Grok lacks a TTW (Through the Web) development environment, so I built one.
+Zopache.com is a JavaScript IDE
 which I built on top of the ZODB using Grok. ZODB
 developers might call it a TTW development platform.
 
-Basic Zopache objects include HTML, CSS, Javascript, Python Scripts,
+Basic Zopache objects include HTML, CSS, JavaScript, Python Scripts,
 Image, File and Jade.
 HTML objects can be edited with either the WYSIWYG HTML editor, or the
-technical Ace Editor. CSS Javascript and Python Scripts can
+technical Ace Editor. CSS JavaScript and Python Scripts can
 also be edited with the Ace Editor.
 
 Zopache also supports containers. Trees can be built out of containers.
-Folders support cut, copy, rename paste and delete operations. HTML folders
-can be edited with the Ace [8] and CKEditor [9]. Javascript Folders allow one to
-build a well organized tree of Javascript code, but serve it as a single
+Folders support cut, copy, rename, paste and delete operations. HTML folders
+can be edited with the Ace [8] and CKEditor [9]. JavaScript Folders allow one to
+build a well organized tree of JavaScript code, but serve it as a single
 minified file or as a human readable and searchable file, which clickable links
-to the original javascript object. History and Undo are supported.
+to the original JavaScript object. History and Undo are supported.
 
 Using Zopache, in your browser, you create a tree
 of folders, and populate and edit those objects.
 Every object has its own URL, and can be
-displayed or edited. These is no need to know Unix. But you do have the
+displayed or edited. There is no need to know Unix. But you do have the
 option to grow the application with real Python code.
 
 ### Flask
@@ -252,10 +250,9 @@ metal code. I want high levels of abstractions.
 
 In particular the Pyramid folks are mosty strongly against TTW development.
 I invite you to take a look at the quote on the SubstanceD
-demo page.
-http://demo.substanced.net/
+demo page [11].
 Clearly they are very conflicted about minimal TTW development,
-let alone the idea of building a full Javascript IDE on top of the ZODB.
+let alone the idea of building a full JavaScript IDE on top of the ZODB.
 
 The next issue is the target market. Pyramid is firmly focused on the
 consulting market. Every client is different and needs a different solution.
@@ -316,10 +313,10 @@ includes a geographic directory of companies using Python. For each
 region, for each country for each city, Python Links lists the companies
 in that city, and provides important links for that company. Their name is
 hyperlinked to their web site. Their products and jos are listed. It is also
-possible to add You Tube videos, blogs, product reviews, and reviews of what
+possible to add YouTube videos, blogs, product reviews, and reviews of what
 it is like to work at the company.
 
-This directory is all in Javascript, and json, so it is
+This directory is all in JavaScript, and JSON, so it is
 quite easy to add teh table of companies in your city to your website.
 Let me know if you are interested in doing so.
 
@@ -335,3 +332,4 @@ Let me know if you are interested in doing so.
 8. Ace editor. https://ace.c9.io
 9. CKEditor. https://ckeditor.com
 10. Flask. http://flask.pocoo.org
+11. SubstanceD. http://demo.substanced.net/
