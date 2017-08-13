@@ -168,8 +168,7 @@ For an introduction to robotics, I recommend watching some on-line videos
 or participating in free MOOCs.
 Actually one of the first MOOCs --
 AI for robotics [12]
-on Udacity is a way that Igor started using Python seriously.
-https://www.udacity.com/course/robotics-nanodegree--nd209
+on Udacity is a way that Igor started using Python seriously [13].
 
 ## References
 
@@ -185,3 +184,4 @@ https://www.udacity.com/course/robotics-nanodegree--nd209
 10. http://wiki.ros.org/ROS/Tutorials
 11. http://wiki.ros.org/Books/ROSbyExampleVol2
 12. https://www.udacity.com/course/artificial-intelligence-for-robotics--cs373
+13. https://www.udacity.com/course/robotics-nanodegree--nd209
