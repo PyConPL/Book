@@ -5,7 +5,7 @@ w Pythonie.
 
 ## Zaczynamy!
 
-Otwórz [ten link](https://repl.it/languages/python3) w osobnej karcie
+Otwórz ten link: https://repl.it/languages/python3 w osobnej karcie
 przeglądarki.
 
 Jeżeli zobaczysz okienko z prośbą o założenie konta, zamknij je klikając
@@ -86,8 +86,7 @@ tekst między znakami `'` (pojedynczy apostrof):
 ```
 
 W powyższym stringu znalazły się duże i małe litery, odstęp (spacja) oraz
-cyfry.  Istnieją [tysiące znaków](https://pl.wikipedia.org/wiki/Unikod)
-jakich możesz użyć.
+cyfry. Istnieją tysiące znaków, jakich możesz użyć [1].
 
 :snake: Zanim przejdziesz dalej spróbuj samodzielnie utworzyć stringi
 z następującymi informacjami: Twoje imię i nazwisko, nazwa miejscowości
@@ -893,7 +892,7 @@ z poprzednich rozdziałów:
 6
 ```
 
-Poza tym mamy jeszcze [67 innych funkcji wbudowanych](https://docs.python.org/3/library/functions.html).
+Poza tym mamy jeszcze 67 innych funkcji wbudowanych [2].
 Część z nich poznasz w kolejnych rozdziałach, a kilka innych opisaliśmy
 poniżej.
 
@@ -1897,3 +1896,8 @@ W tym rozdziale:
 innymi iterowanie,
 * dowiedzieliśmy się, że funkcja `len` zwraca liczbę kluczy w słowniku,
 * poznaliśmy najczęściej spotykane zastosowania słowników.
+
+## Bibliografia
+
+1. https://pl.wikipedia.org/wiki/Unikod
+2. https://docs.python.org/3/library/functions.html
