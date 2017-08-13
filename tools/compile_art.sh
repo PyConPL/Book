@@ -7,16 +7,25 @@ if [ $# -eq 2 ]
 then
     ALIAS=$1
     LOCATION=$2
-    if [ -f $SFILE ]
+    if [ ! -f $LOCATION ]
     then
-        touch $WORK
-        while [ -f $WORK ]
-        do
-            time make COLUMNS=$COLUMNS SELECTED="$ALIAS"; red_green_bar.py $? $COLUMNS
-            inotifywait ../${LOCATION}/text.md
-        done
+        LOCATION=../${LOCATION}/text.md
+    fi
+    if [ -f $LOCATION ]
+    then
+        if [ -f $SFILE ]
+        then
+            touch $WORK
+            while [ -f $WORK ]
+            do
+                time make COLUMNS=$COLUMNS SELECTED="$ALIAS"; red_green_bar.py $? $COLUMNS
+                inotifywait $LOCATION
+            done
+        else
+            echo Nie jestem we wlasciwym katalogu, bo tu brak pliku: $SFILE
+        fi
     else
-        echo Nie jestem we wlasciwym katalogu, bo tu brak pliku: $SFILE
+        echo No source file: $LOCATION
     fi
 else
     echo Podaj linie z pliku z artykulami jako parametry:
