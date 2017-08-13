@@ -45,7 +45,7 @@ This text gives a brief overview of the content of the workshop.
 ### Packages and other requirements
 
 You should have python3 and pip installed, and using
-[virtualenv](https://virtualenv.pypa.io/en/stable/) is recommended
+virtualenv [8] is recommended
 and the following Python packages should be installed.
 
 - Jupyter
@@ -54,7 +54,7 @@ and the following Python packages should be installed.
 - pandas
 - numpy
 
-You can also use [conda](https://conda.io/docs/) to install these packages.
+You can also use conda [9] to install these packages.
 
 The workshop will also require datasets to work on which will be uploaded
 on GitHub repository https://github.com/MridulS/pyconpl-2017-networkx.
@@ -191,8 +191,7 @@ exploratory analysis of the network.
 ##### Real world data
 
 There are multiple sources to find real word network datasets like
-[SNAP](http://snap.stanford.edu/data/index.html) and
-[KONECT](http://konect.uni-koblenz.de).
+SNAP [10] and KONECT [11].
 We will use a real world network and analyse the network using the various
 tools and measures we learn in this tutorial.
 
@@ -207,4 +206,7 @@ tools and measures we learn in this tutorial.
 6. DataCamp course. https://www.datacamp.com/courses/network-analysis-in-python-part-1
 7. Datasets (Social Network Analysis project at Stanford). http://snap.stanford.edu/\crlf
     data/index.html
-8. KONECT (KONECT project at UNamur). http://konect.uni-koblenz.de
+8. virtualenv. https://virtualenv.pypa.io/en/stable/
+9. conda. https://conda.io/docs/
+10. SNAP. http://snap.stanford.edu/data/index.html
+11. KONECT (KONECT project at UNamur). http://konect.uni-koblenz.de
