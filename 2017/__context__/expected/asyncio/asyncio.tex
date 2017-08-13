@@ -105,13 +105,13 @@ z bardzo prostej obserwacji - gdy program czeka na zakończenie operacji
 wejścia-wyjścia, to pozostaje bezczynny.
 
 Mechanizmem sterującym, który wykrywa sytuacje rozpoczęcia oczekiwania
-na operację I/O jest pętla zdarzeń. Zawiesza ona wykonywanie kodu i
-przenosi się w inne miejsce, którego operacja wejścia-wyjścia zdążyła
-się zakończyć.
+na operację I/O, jest pętla zdarzeń. Zawiesza ona wykonywanie pewnego
+kodu i przenosi sterowanie w inne miejsce kodu, gdzie operacja
+wejścia-wyjścia zdążyła się zakończyć.
 
 W ten sposób maksymalizujemy wykorzystanie pojedynczego rdzenia CPU. Tak
 więc od razu można odpowiedzieć na pytanie, kiedy NIE UŻYWAĆ asyncio -
-gdy nie mamy wiele operacji I/O lub nie zajmują one wiele czasu
+gdy nie mamy wiele operacji I/O lub gdy nie zajmują one wiele czasu
 wykonania programu. Zbadanie tego faktu może zostać dokonane przy użyciu
 profilerów. Zwykle {\em tradycyjna} aplikacja w Django, szczególnie
 jeżeli już działa na produkcji, nie odniesie najmniejszej korzyści z
@@ -125,18 +125,18 @@ lub kilkunastu usług wokół. W takiej sytuacji asyncio da natychmiastowe
 przyspieszenie dzięki zmultipleksowaniu żądań i wykonaniu ich
 jednocześnie. Na koniec musimy tylko poskładać ich wyniki. Bez asyncio
 naszą jedyną opcją było użycie puli wątków, procesów lub oddelegowanie
-do systemu kolejkowego, jak Celery i synchroniczne oczekiwanie na wynik.
-Kolejną przesłanką za zastosowaniem asyncio jest konieczność
+do systemu kolejkowego (np. Celery) i synchroniczne oczekiwanie na
+wynik. Kolejną przesłanką za zastosowaniem asyncio jest konieczność
 utrzymywania długo trwających połączeń z klientami. Idealnym przykładem
-jest serwer websocketów, na którym można zbudować powiadomienia w czasie
-rzeczywistym do naszej aplikacji. Mówimy cały czas o wykorzystaniu
-asyncio po stronie serwera, ale oczywiście można też stworzyć
-asynchronicznego klienta, który będzie w stanie odbierać strumień danych
-płynących po sieci (potencjalnie z kilku źródeł) i odpowiednio na nie
-reagować.
+jest serwer websocket'ów, na którym można zbudować powiadomienia w
+czasie rzeczywistym do naszej aplikacji. Mówimy cały czas o
+wykorzystaniu asyncio po stronie serwera, ale oczywiście można też
+stworzyć asynchronicznego klienta, który będzie w stanie odbierać
+strumień danych płynących po sieci (potencjalnie z kilku źródeł) i
+odpowiednio na nie reagować.
 
 Nic nie stoi na przeszkodzie, by w jednym procesie Pythona, przy użyciu
-jednej pętli zdarzeń, mieć jednocześnie osadzony tak serwer jak i
+jednej pętli zdarzeń, mieć jednocześnie osadzony tak serwer, jak i
 klienta, a nawet po kilka z nich. Sprawia to, że asyncio świetnie nadaje
 się do pisania {\em glue-services} - tworów, które zapewniają pomost
 pomiędzy różnymi niekompatybilnymi ze sobą usługami.
@@ -157,16 +157,16 @@ różnymi kolorami:
 \startitemize[n,packed][stopper=.]
 \item
   zielony - zakres minimum szkolenia, bez ich zrealizowania nie idź
-  dalej
+  dalej;
 \item
-  pomarańczowy - rozszerzenie zakresu podstawowego, łącznie z testami
+  pomarańczowy - rozszerzenie zakresu podstawowego, łącznie z testami;
 \item
   czerwony - dla chętnych jako zadanie domowe w celu jeszcze lepszego
   poznania asyncio lub do wykonania w trakcie warsztatów dla
-  zaawansowanych uczestników
+  zaawansowanych uczestników.
 \stopitemize
 
-W treści zadań zawarte są też podpowiedzi, ukryte do momentu aż
+W treści zadań zawarte są też podpowiedzi, ukryte do momentu, aż
 uczestnik nie zdecyduje się z nich skorzystać. Mogą okazać się pomocne,
 gdyby uczestnik miał problem z podejściem do danego etapu lub chciał
 zobaczyć inny sposób rozwiązania.
@@ -254,7 +254,7 @@ zobaczyć inny sposób rozwiązania.
 W tej części uczestnicy zapewnią minimum funkcjonalności, jaką powinna
 mieć aplikacja czatowa - obsługę wspólnego dla wszystkich pokoju
 czatowego. Jest to najważniejsza część warsztatu - to tu zostaną
-podłożone podwaliny pod kolejne części, uczestnicy zrozumieją czym jest
+podłożone podwaliny pod kolejne części, uczestnicy zrozumieją, czym jest
 pętla zdarzeń i jak unikać jej blokowania.
 
 \section[komentarz-do-modułu-ii]{Komentarz do modułu II}
@@ -269,18 +269,18 @@ chodzi - by nauczyć się wykrywać i zabezpieczać takie sytuacje.
 Ostatnia część skupia się na dodaniu kolejnej, częstej funkcjonalności -
 prywatnych wiadomości. Chociaż mierzyć się będziemy z tymi samymi
 problemami, co wcześniej, to jest {\em znikający} użytkownicy, to jednak
-rozwiązanie jakie chcemy osiągnąć będzie zgoła inne - nie tylko chcemy
+rozwiązanie, jakie chcemy osiągnąć, będzie zgoła inne - nie tylko chcemy
 pozbyć się wyjątków związanych z błędami przy próbie wysyłania
 wiadomości na martwy websocket, ale także zapewnić integralność danych.
 Jeżeli użytkownika nie było w momencie wysyłania do niego wiadomości, to
-chcielibyśmy aby miał możliwość jej odczytania później.
+chcielibyśmy, aby miał możliwość jej odczytania później.
 
 \subsection[co-robić-dalej-po-szkoleniu]{Co robić dalej po szkoleniu?}
 
-Zdecydowanie polecam zapoznanie się z pierwszymi trzema pozycjami z
-bibliografii, począwszy od książki Luciano Ramalho {[}4{]}. Powinno to
-dać dalszą, solidną porcję wiedzy potrzebną do projektowania aplikacji
-opartych na asyncio.
+Zdecydowanie polecam rozpocząć od lektury książki Luciano Ramalho
+{[}4{]}, a następnie zapoznać się z pierwszymi dwoma pozycjami z
+bibliografii {[}1{]}{[}2{]}. Powinno to dać dalszą, solidną porcję
+wiedzy potrzebną do projektowania aplikacji opartych na asyncio.
 
 Liczba bibliotek i narzędzi kompatybilnych z asyncio rośnie z czasem.
 Większość z nich można znaleźć w dedykowanym repozytorium bibliotek i
