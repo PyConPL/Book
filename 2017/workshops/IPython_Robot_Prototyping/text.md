@@ -12,13 +12,13 @@ robotic application.
 
 ## Workshop agenda (3h):
 
-    - Introduction to robotics and ROS ecosystem
-    - Setting up and running your first ROS Node
-    - ROS concepts explained: topic `&` service
-    - Using IPython Interactive Widgets to control a robot
-    - Visualizing robot senses using ROS and Bokeh library
-    - Tour of ROS tools with examples: Rviz, Rosbag, TF (transforms)
-    - Wrapup: how to continue learning ROS, Q`&`A session
+- Introduction to robotics and ROS ecosystem
+- Setting up and running your first ROS Node
+- ROS concepts explained: topic `&` service
+- Using IPython Interactive Widgets to control a robot
+- Visualizing robot senses using ROS and Bokeh library
+- Tour of ROS tools with examples: Rviz, Rosbag, TF (transforms)
+- Wrapup: how to continue learning ROS, Q`&`A session
 
 ## Is this for me?
 
@@ -39,14 +39,14 @@ Robotics is growing and interesting field for both work and fun.
 Robots (moving, intelligent devices) have hundreds of interacting
 components that enable them to do what they are supposed to do:
 
-- [play and teach children](https://www.youtube.com/watch?v=sF0tRCqvyT0)
-- explore [underwater](https://www.youtube.com/watch?v=EgtZAUDqxHE) or [space](https://vimeo.com/146183080)
-- be a [companion](https://www.youtube.com/watch?v=dx0zxr3D_zU) or a [teleoperation](https://www.youtube.com/watch?v=p92415PxgCw) tool
+- play and teach children [1]
+- explore underwater [2] or space [3]
+- be a companion [4] or a teleoperation [5] tool
 - and so much more.
 
-Did you see a robot that can [jump and paraglide](https://www.youtube.com/watch?v=_luhn7TLfWU)?
-Or the [creepy one](https://www.youtube.com/watch?v=rVlhMGQgDkY) that can walk on its own and open doors?
-[Or the one that hitchhiked through Canada](http://mir1.hitchbot.me/)?
+Did you see a robot that can jump and paraglide [6]?
+Or the creepy one [7] that can walk on its own and open doors?
+Or the one that hitchhiked through Canada [8]?
 
 One can say that this is possible because the hardware is getting better
 or that we have access to cheap components. While this is the case, software
@@ -62,7 +62,7 @@ have similar needs: there is need to connect hardware (motor drivers, cameras,
 other sensors), multiple computers and programs, need to control it from one
 place, visualize how it is going and finally do some robot stuff
 (plan to go somewhere or do something, talk and be social or just
-[be cute](https://www.youtube.com/watch?v=3g-yrjh58ms).
+be cute [9].
 
 ROS is a tool for such bootstrapping and in this workshop, you will learn how
 you can start interacting with such a system or maybe build your own.
@@ -157,9 +157,9 @@ how you can record what is happening using Rosbag.
 ## Some references and helpful links
 
 For a nice introduction to most of the tools used here, official
-[ROS tutorials](http://wiki.ros.org/ROS/Tutorials) are a very good start.
+ROS tutorials [10] are a very good start.
 
-There is a [Patrick Goebel book](http://wiki.ros.org/Books/ROSbyExampleVol2)
+There is a Patrick Goebel book [11]
 which shows how you can use and combine these tools (and couple more)
 to create a mobile robot with arms that can make map of its own environment to
 plan his movement and not bump into things
@@ -167,6 +167,21 @@ plan his movement and not bump into things
 For an introduction to robotics, I recommend watching some on-line videos
 or participating in free MOOCs.
 Actually one of the first MOOCs --
-[AI for robotics](https://www.udacity.com/course/artificial-intelligence-for-robotics--cs373)
+AI for robotics [12]
 on Udacity is a way that Igor started using Python seriously.
 https://www.udacity.com/course/robotics-nanodegree--nd209
+
+## References
+
+1. https://www.youtube.com/watch?v=sF0tRCqvyT0
+2. https://www.youtube.com/watch?v=EgtZAUDqxHE
+3. https://vimeo.com/146183080
+4. https://www.youtube.com/watch?v=dx0zxr3D`_`zU
+5. https://www.youtube.com/watch?v=p92415PxgCw
+6. https://www.youtube.com/watch?v=`_`luhn7TLfWU
+7. https://www.youtube.com/watch?v=rVlhMGQgDkY
+8. http://mir1.hitchbot.me/
+9. https://www.youtube.com/watch?v=3g-yrjh58ms
+10. http://wiki.ros.org/ROS/Tutorials
+11. http://wiki.ros.org/Books/ROSbyExampleVol2
+12. https://www.udacity.com/course/artificial-intelligence-for-robotics--cs373
