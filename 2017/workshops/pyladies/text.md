@@ -1006,11 +1006,44 @@ Temperatura: 24 stopnie Celsjusza
 tekst `Masz X lat`, gdzie `X` to wiek w roku 2017, oraz zwraca ten wiek.
 
 
+## Formatowanie stringów
+
+W tym miejscu warto wrócić do stringów i opowiedzieć o jeszcze jednej,
+bardzo przydatnej metodzie: `format`.  Służy ona do **formatowania
+stringów**, czyli "wstawiania" do nich wartości zmiennych.  Spójrz na
+poniższy przykład:
+
+```python
+>>> 'ala {} kota'.format('ma')
+'ala ma kota'
+```
+
+Jak widzisz, wywołanie metody `format` spowodowało, że para znaków `{}`
+została zastąpiona argumentami funkcji.  W podobny sposób możemy wstawić
+dowolną liczbę i typ obiektów:
+
+```python
+>>> szerokosc = 110
+>>> wysokosc = 50.5
+>>> jednostka = 'mm'
+>>> '{}x{} {}'.format(szerokosc, wysokosc, jednostka)
+'110x50.5 mm'
+```
+
+Możliwości metody `format` nie kończą się na zwykłym wstawianiu wartości
+do stringa.  [Dokumentacja Pythona](https://docs.python.org/3.6/library/string.html#formatspec)
+w szczegółach opisuje tę funkcję.  Warto przyjrzeć się choćby przykładom,
+które tam zamieszczono.
+
+:snake: Zobacz co się stanie, jeżeli liczba argumentów metody `format`
+będzie __mniejsza__ niż liczba wystąpień `{}` w stringu.
+
+
 ## :pushpin: Podsumowanie
 
 W tym rozdziale:
 
-* poznaliśmy funkcję `print`.
+* poznaliśmy funkcję `print` oraz metodę `format`.
 
 ---
 
@@ -1269,6 +1302,65 @@ a następnie zwróci jej ostatni element.  (W ten sposób otrzymamy własną
 wersję funkcji `max`!)
 
 
+## Wycinki list
+
+Czasami operując na liście chcielibyśmy używać tylko jej fragmentu, np.
+10 pierwszych elementów, albo elementy od drugiego do piątego.  Python
+jest przygotowany na taką sytuację: umożliwia utworzenie *wycinka*
+listy (ang. *slice*).  Aby stworzyć wycinek należy wpisać nazwę listy,
+a następnie w nawiasach kwadratowych indeksy pierwszego i ostatniego
+wycinka elementu odzielone dwukropkiem.
+
+Przykładowo, zwrócenie fragmentu listy od drugiego do czwartego elementu
+będzie wyglądało tak:
+
+```python
+>>> l = [1, 2, 3, 4, 5, 6, 7]
+>>> l[1:4]
+[2, 3, 4]
+```
+
+Pamiętaj, że indeksy listy zaczynając się od zera, a element o indeksie
+końcowym (w tym wypadku: `5`) nie zostanie dołączony do wycinka.
+
+Możemy też pominąć indeks początkowy.  W takim wypadku Python zwróci
+wszystkie elementy od początku:
+
+```python
+>>> l[:5]
+[1, 2, 3, 4, 5]
+```
+
+Jeżeli pominiemy indeks końcowy, dostaniemy wszystkie elementy do końca
+listy:
+
+```python
+>>> l[2:]
+[3, 4, 5, 6, 7]
+```
+
+Jeżeli indeks końcowy będzie liczbą ujemną, to pozycja ostatniego elementu
+wycinka będzie liczona od końca listy:
+
+```python
+>>> l[:-1]
+[1, 2, 3, 4, 5, 6]
+>>> l[:-2]
+[1, 2, 3, 4, 5]
+```
+
+Co ciekawe, wycinki możemy tworzyć również ze stringów:
+
+```python
+>>> s = 'ala ma kota'
+>>> s[2:8]
+'a ma k'
+```
+
+:snake: Zobacz co się stanie, jeżeli indeks początkowy będzie liczbą
+ujemną, lub jeżeli indeks końcowy będzie większy niż długość listy.
+
+
 ## :pushpin: Podsumowanie
 
 W tym rozdziale:
@@ -1372,10 +1464,18 @@ jego literę wraz z liczbą wystąpień tej litery w stringu (użyj metody
 `count`).
 
 
-## Metoda `split`
+### Metoda `split`
 
-String posiada metodę `split`, która rodziela go w miejscach wystąpienia
-danego znaku i zwraca listę stringów, które powstały w ten sposób:
+Możemy również iterować po słowach.  Służy do tego metoda `split`:
+
+```python
+for slowo in 'ala ma kota':
+    print(slowo)
+```
+
+Tak na prawdę metoda `split` ma dużo szersze zastosowanie.  Jeżeli
+podamy jej jako argument jakiś znak, wtedy string zostanie podzielony
+w miejscach występowania tego znaku:
 
 ```python
 >>> s = '2015,2016,2017'
@@ -1395,6 +1495,34 @@ w miejscach spacji:
 wszystkie jego słowa, każde w osobnej linijce.
 
 
+## `range`
+
+W tym miejscu warto wspomnieć o funkcji wbudowanej `range`.  Przyjmuje
+ona jako argumenty dwa integery: początek i koniec przedziału liczbowego,
+który zwraca.  Możemy następnie iterować po takim przedziale i wówczas
+elementami będą kolejne liczby całkowite:
+
+```python
+for liczba in range(10, 20):
+    print(liczba)
+```
+
+W powyższym przykładzie wypisujemy liczby całkowite od 10 do 19.  Liczba,
+którą podaliśmy jako koniec przedziału nie jest w nim uwzględniona.
+
+Co ciekawe, możemy podać tylko jeden argument, który wtedy jest traktowany
+jako koniec przedziału, zaś za początek przyjmuje się liczbę 0.  Kolejny
+przykład pokazuje jak wypisać liczby od 0 do 99:
+
+```python
+for liczba in range(100):
+    print(liczba)
+```
+
+:snake: Napisz funkcję, która przyjmie jeden argument o nazwie `limit`
+i zwróci listę wartości od 0 do `limit` podniesionych do kwadratu.
+
+
 ## :pushpin: Podsumowanie
 
 W tym rozdziale:
@@ -1402,7 +1530,71 @@ W tym rozdziale:
 * poznaliśmy pojęcia *iteracja* oraz *pętla*,
 * nauczyliśmy się korzystać w pętli `for`,
 * dowiedzieliśmy się, że pętla `for` działa także na stringach, oraz że
-stringi posiadają metodę `split`.
+stringi posiadają metodę `split`,
+* poznaliśmy funkcję wbudowaną `range`.
+
+
+---
+
+# Rozdział 11. Krotki
+
+W tym rozdziale:
+
+* dowiesz się czym jest **krotka**.
+
+
+## Krotka
+
+Czytając kod programów napisanych w Pythonie bardzo szybko natkniesz się
+na coś z pozoru bardzo podobnego do listy:
+
+```python
+waluty = ('EUR', 'PLN', 'USD')
+```
+
+Powyższy przykład to definicja **krotki**.  Na pierwszy rzut oka różni się
+ona od listy tylko na tym, że zamiast nawiasów kwadratowych ma okrągłe.
+Jednak krotka posiada jedną istotną cechę, która odróżnia ją od listy:
+nie można jej modyfikować.  Oznacza to, że do raz utworzonej krotki nie
+można dodawać elementów, usuwać ich, ani nawet zmieniać.  Dlatego też nie
+znajdziemy w krotce metod `append` ani `remove`.  Za to z powodzeniem
+możemy odnosić się do poszczególnych elementów używając ich indeksów:
+
+```python
+>>> waluty[1]
+'PLN'
+```
+
+Oznacza to, że możemy również iterować po krotce pętlą `for`.  Jeśli zaś
+przekażemy krotkę do funkcji `len`, to dostaniemy liczbę jej elementów.
+
+:snake: Napisz funkcję, która jako argument przyjmie krotkę i zwraca
+listę, która zawiera dokładnie takie same elementy.
+
+
+## Zastosowanie krotek
+
+Z pozoru krotka może się wydawać czymś zupełnie zbędnym.  Po co nam taka
+lista, której nie można modyfikować?  Otóż w wielu przypadkach potrzebujemy
+dokładnie czegoś takiego.  Dobrym przykładem jest właśnie zbiór nazw walut.
+Wyobraźmy sobie, że piszemy program do przeliczania wartości pieniężnych
+między różnymi walutami.  W naszym programie będą zmieniały się kursy,
+ale same waluty będą cały czas takie same.  Dlatego możemy je zdefiniować
+w krotce, tym samym chroniąc się przed modyfikacją zbioru walut, co byłoby
+niepożądane.  Nawet jeżeli w przyszłości będziemy chcieli dodać kolejną
+walutę, łatwiej będzie wydać nową wersję programu niż ryzykować modyfikację
+zbioru, który powinien pozostać niezmieniony.
+
+Podobnych przykładów jest więcej i czytając kod różnych programów szybko
+przekonasz się, że krotki przydają się częściej niż mogło by się wydawać.
+
+
+## :pushpin: Podsumowanie
+
+W tym rozdziale:
+
+* dowiedzieliśmy się czym jest krotka i jakie operacje możemy na niej
+wykonywać.
 
 
 ---
@@ -1629,6 +1821,276 @@ if produkt == 'sok' or produkt == 'herbata'
 ```
 
 Operatory `or` i `and` można łączyć w jednym wyrażeniu.
+
+
+## :pushpin: Podsumowanie
+
+W tym rozdziale:
+
+* nauczyliśmy się sprawdzać prawdziwość wyrażeń,
+* poznaliśmy intrukcję `if`, która może zmienić przebieg programu gdy
+określone wyrażenie jest prawdziwe.
+
+
+---
+
+
+# Rozdział 12. Prawda i fałsz
+
+W tym rozdziale:
+
+* poznasz pojęcia "prawda" i "fałsz" oraz ich reprezentację w Pythonie:
+`True` i `False`,
+* poznasz **instrukcję warunkową** `if`, która pozwala zmienić przebieg
+programu jeżeli określony warunek zostanie spełniony.
+
+
+## Prawda, fałsz i warunek
+
+Programy jakie dotąd pisaliśmy składały się z operacji, które Python
+wykonywał jedna po drugiej.  Gdy jedna instrukcja została pomyślnie
+zrealizowana, program przechodził do wykonania kolejnej.
+
+Pisząc kolejne programy szybko przekonasz się, że taki scenariusz nie
+zawsze będzie Ci odpowiadał, ponieważ często chcemy, żeby jakieś operacje
+zostały wykonane tylko gdy zostanie spełniony pewien warunek.
+
+Na przykład: mamy listę liczb i chcemy przejść po jej elementach, wypisując
+tylko te nieparzyste.  W takim przypadku warunkiem wypisania liczby na
+ekran jest "liczba jest niepatrzysta".
+
+Języki programowania pozwalają definiować takie warunki i sprawdzać je.
+Wynikiem takiego sprawdzenia jest **prawda** lub **fałsz**.  Prawda oznacza
+sytuację w której warunek został spełniony.  Przeciwieństwem jest fałsz.
+Przykładowo wynikiem warunku "żyrafa to ptak" jest fałsz, a wynikiem dla
+"Ziemia nie jest płaska" jest prawda.
+
+
+## Warunki w Pythonie, `True` i `False`
+
+W Pythonie mamy do dyspozycji szereg operatorów, które pozwalają nam
+sprawdzać prawdziwość wyrażeń.  Możemy na przykład porównywać wartości.
+Służy do tego operator `==`:
+
+```python
+>>> 1 == 2
+False
+>>> (2 + 2) == (2 * 2)
+True
+```
+
+Odwrotnością operatora `==` jest `!=`:
+
+```python
+>>> 'ala' != 'Ala'
+True
+>>> [1, 2] != [1, 2]
+False
+```
+
+Możemy również sprawdzać czy jedna wartość jest większa lub mniejsza od
+drugiej:
+
+```python
+>>> 100 > 70
+True
+>>> 70 > 100
+False
+```
+
+Operatory `>` i `<` można mieszać z `=`, w ten sposób tworząc warunek
+"większy lub równy" i "mniejszy lub równy":
+
+```python
+>>> 3 >= 2
+True
+>>> 2 >= 2
+True
+>>> 1 >= 2
+False
+```
+
+Zwróć uwagę, że w jednym wyrażeniu można użyć wielu operatorów:
+
+```python
+>>> 1 <= 2 < 3 <= 3 < 4
+True
+```
+
+Ponadto możemy zaprzeczyć całemu wyrażeniu pisząc na początku `not`:
+
+```python
+>>> not 1 == 1
+False
+>>> not 1 == 2
+True
+```
+
+Oczywiście w każdym przypadku wartości wpisane wprost możemy zastąpić
+zmiennymi.
+
+
+## Porównywanie stringów
+
+Znając matematykę intuicyjnie rozumiemy w jaki sposób Python porównuje
+ze sobą liczby.  Ale w jaki sposób porównywane są stringi?  Odpowiedź jest
+prostsza niż mogło by się wydawać: alfabetycznie.  Litery znajdujące się
+dalej w alfabecie są "większe" od tych wcześniejszych.  Poza tym litery
+małe są "większe" od tych dużych.
+
+```python
+>>> 'A' < 'B' < 'a' < 'b'
+True
+```
+
+Co ze stringami, które mają więcej niż jeden znak?  Są one porównywane
+znak po znaku, dopóki któryś z nich nie będzie się różnił, albo dopóki
+jeden ze stringów będzie dłuższy.  W tym drugim przypadku większy będzie
+ten string który ma więcej znaków.
+
+```python
+>>> 'a' < 'ala'
+True
+>>> 'ala' == 'ala'
+True
+>>> 'ala' < 'ala ma kota'
+True
+```
+
+
+## Operator `in`
+
+Poza dotychczas omówionymi operatorami, jest jeszcze jeden, szczególnie
+przydatny kiedy pracujemy z listami.  Operator `in` zwraca `True` jeżeli
+dany element znajduje się na liście:
+
+```python
+>>> 'Basia' in ['Tomek', 'Magda', 'Karol', 'Basia']
+True
+>>> 12 in [10, 20, 30, 40]
+False
+```
+
+
+## Instrukcja warunkowa `if`
+
+Sprawdzanie czy jakieś wyrażenie jest prawdziwe nie miałoby żadnego sensu
+gdybyśmy nie mogli w jakiś sposób na tej podstawie podjąć decyzji
+o dalszym przebiegu naszego programu.  W tym celu używamy **instrukcji
+warunkowej** `if`:
+
+```python
+if temperatura > 30.0:
+    print('Uf jak gorąco!')
+```
+
+Struktura tej instrukcji jest bardzo prosta: po słowie `if` wpisujemy
+warunek, następnie dwukropek i w kolejnych liniach, po wcięciu, instrukcje,
+które zostaną wykonane jeżeli warunek będzie prawdziwy (mówimy: jeżeli
+warunek zostanie spełniony).
+
+:snake: Napisz funkcję, która przyjmuje argumenty `element` i `lista`
+i jeżeli dany element znajduje się na liście, to zwraca jego pozycję
+(użyj metody `index`), w przeciwnym wypadku zwraca `-1`.
+
+:snake: Napisz funkcję `iloraz`, która przyjmuje argumenty `dzielna`
+i `dzielnik`. Jeżeli dzielnik jest różny od zera, funkcja powinna zwrócić
+wynik dzielenia.  W przeciwnym wypadku powinna wypisać komunikat o błędzie.
+
+
+## `if ... else` oraz `elif`
+
+Do instrukcji `if` możemy dopisać drugą część, która zostanie wykonana
+tylko jeżeli warunek nie będzie spełniony:
+
+```python
+if godzina <= godzina_odjazdu:
+    print('Godzina odjazdu:', godzina_odjazdu)
+else:
+    print('Przepraszamy za opóźnienie')
+```
+
+Zwróć uwagę na wcięcia w kodzie: `if` oraz `else` są na tym samym
+"poziomie".
+
+Jeżeli chcemy, możemy w ramach jednej instrukcji `if` sprawdzić kilka
+alternatywnych warunków, jeżeli poprzednie okażą się nieprawdziwe:
+
+```python
+if 5 <= godzina < 12:
+    print('rano')
+elif godzina == 12:
+    print('południe')
+elif 12 < godzina < 17:
+    print('popołudnie')
+elif 17 < godzina < 20:
+    print('wieczór')
+else:
+    print('noc')
+```
+
+:snake: Napisz funkcję, która porównuje dwie liczby.  Jako argumenty
+powinna przyjmować liczby `a` i `b`.  Jeżeli `a` jest większe od `b`
+powinna zwrócić 1, jeżeli liczby są równe `0`, a jeżeli `a` jest mniejsze
+od `b`, `-1`.  Dodatkowo, w zależności od wyniku porównania, funkcja
+powinna wypisać jeden z komunikatów: `a < b`, `a == b` lub `a > b`.
+
+
+## Łączenie warunków
+
+Czasami będziemy chcieli wykonać jakieś operacje tylko jeżeli spełnionych
+zostanie kilka warunków jednocześnie.  W takim wypadku możemy użyć
+operatora `and`:
+
+```python
+if substancja == 'woda' and temperatura > 100:
+    stan_skupienia = 'para wodna'
+```
+
+Gdybyśmy chcieli, żeby operacja została wykonana jeżeli przynajmniej jeden
+z kilku warunków zostanie spełniony, to należy użyć operatora `or`:
+
+```python
+if produkt == 'sok' or produkt == 'herbata'
+    cena = 4.50
+```
+
+Operatory `or` i `and` można łączyć w jednym wyrażeniu.
+
+
+## Prawdziwość obiektów, funkcja `bool`
+
+Warunek nie musi być porównaniem.  Każdy typ obiektu w jakiś sposób
+definiuje prawdziwość.  Na przykład pusta lista to fałsz, a lista z co
+najmniej jednym jednym elementem to prawda.
+
+Aby przekonać się jaką wartość w rozumieniu logiki reprezentuje dany
+obiekt, możemy posłużyć się funkcją zbudowaną `bool`.  Przyjmuje ona jeden
+argument - dowolny obiekt - i zwraca jego wartość logiczną: `True` lub
+`False`.
+
+```python
+>>> bool([])
+False
+>>> bool([1, 2, 3])
+True
+```
+
+:snake: Dla każdego z następujących typów odszukaj wartość, dla której
+funkcja `bool` zwróci `True` i taką dla której zwróci `False`: string,
+krotka, integer, float.
+
+Ponieważ każdy obiekt można rozważać w kategorii "prawdziwości", każdym
+obiektem możemy posłużyć się w instrukcji `if`:
+
+```python
+if imie and nazwisko and len(haslo) > 5:
+    print('Podano prawidłowe dane')
+```
+
+:snake: Napisz funkcję, która jako argument przyjmie listę i zwróci `True`
+jeżeli wszystkie elementy na tej liście są prawdziwe, albo `False` jeżeli
+przynajmniej jeden element nie jest prawdziwy.
 
 
 ## :pushpin: Podsumowanie
@@ -1896,6 +2358,922 @@ W tym rozdziale:
 innymi iterowanie,
 * dowiedzieliśmy się, że funkcja `len` zwraca liczbę kluczy w słowniku,
 * poznaliśmy najczęściej spotykane zastosowania słowników.
+
+
+---
+
+
+# Rozdział 13. Słowniki
+
+W tym rozdziale:
+
+* dowiesz się czym jest **słownik**, **klucz** oraz **wartość**,
+* nauczysz się definiować słowniki oraz wykonywać na nich operacje,
+* poznasz najczęściej spotykane zastosowania słowników.
+
+
+## Czym jest słownik
+
+Wiele sytuacji z jakimi spotkasz się pisząc programy będzie można opisać
+jako zbiór kluczy i wartości im odpowiadających.  Przykładem z codziennego
+życia jest encyklopedia, gdzie kluczami są różne hasła, a wartościami
+są definicje tłumaczące te hasła.  Można pójść dalej i powiedzieć, że
+internet to zbiór adresów (np. `pl.pycon.org`) oraz stron WWW, które się
+pod nimi kryją.
+
+Takie spojrzenie na otaczającą nas rzeczywistość jest bardzo wygodne,
+bo pozwala opisać złożone zjawiska w systematyczny, łatwy do zrozumienia
+sposób.  Dlatego też wiele języków programowania oferuje narzędzia do
+tworzenia tego typu struktur.  W przypadku Pythona są to **słowniki**.
+
+Słownik (*dictionary*, w skrócie *dict*), to zbiór **kluczy** oraz
+odpowiadających im **wartości**.  Nazwa "słownik" nie jest przypadkowa,
+nawiązuje do formuły w której zbiorowi słów przypisujemy ich definicje.
+
+
+## Definicja słownika
+
+Słownik definiujemy poprzez wypisanie par klucz-wartość, oddzielonych
+przecinkami, ujmując całość w nawiasy klamrowe.  Każda para to dwie
+wartości oddzielone dwukropkiem.
+
+```python
+wiek = {'Marcin': 23, 'Agata': 17, 'Marta': 46}
+```
+
+Aby stworzyć pusty słownik wystarczą puste nawiasy klamrowe:
+
+```python
+d = {}
+```
+
+Wartości w słowniku nie muszą być tego samego typu, jedna może być liczbą,
+kolejna stringiem itd.:
+
+```python
+d = {'liczba': 123, 'inna liczba': 12.34, 'lista': ['Ala ma kota']}
+```
+
+Klucze mogą być również liczbami:
+
+```python
+d = {15: 'Ala ma kota', 'Kot ma alę': 3.14}
+```
+
+Słownik też może być elementem listy:
+
+```python
+l = [{'a': 1, 'b': 2}, 3, 4]
+```
+
+Kiedy wypiszemy słownik na ekran, zobaczymy całą jego zawartość:
+
+```python
+>>> d = {'a': ['x', 9, 'z'], 'b': 2, 'c': 'Ala ma kota'}
+>>> print(d)
+{'a': ['x', 9, 'z'], 'b': 2, 'c': 'Ala ma kota'}
+```
+
+
+## Operacje na słownikach
+
+Kiedy zdefiniujemy słownik, możemy na nim wykonać szereg operacji.
+
+
+### Pobieranie wartości elementu
+
+Aby otrzymać wartość dla danego klucza należy wpisać nazwę słownika,
+a następnie, w nawiasach kwadratowych, nazwę klucza:
+
+```python
+>>> d = {'a': 1, 'b': 2}
+>>> print(d['a'])
+1
+>>> print(d['a'] + d['b'])
+3
+```
+
+:snake: Zobacz co się stanie jeżeli pobierzesz wartość dla klucza, który
+nie istnieje w słowniku.
+
+:snake: Napisz funkcję, która przyjmie dwa argumenty, listę słowników
+oraz klucz i zwróci listę wartości znajdujących się pod tym kluczem
+z każdego słownika na liście.
+
+
+### Definiowanie elementu
+
+W każdej chwili możemy zdefiniować wartość klucza w słowniku.  Żeby to
+zrobić należy odwołać się do danego klucza i przypisać do niego wartość:
+
+```python
+>>> d = {'a': 1}
+>>> d['b'] = 2
+>>> d[5] = ['lista', 'elementów']
+>>> print(d)
+{'a': 1, 'b': 2, 5: ['lista', 'elementów']}
+>>> print(d[5])
+['lista', 'elementów']
+```
+
+Jeżeli dany klucz już istnieje, jego wartość zostanie nadpisana:
+
+```python
+>>> d = {'a': 1}
+>>> print(d['a'])
+1
+>>> d['a'] = 2
+>>> print(d['a'])
+2
+```
+
+
+### Usuwanie elementu
+
+Możemy usunąć dowolny klucz słownika posługując się instrukcją `del`:
+
+```python
+>>> d = {'a': 1, 'b': 2}
+>>> del d['a']
+>>> print(d)
+{'b': 2}
+```
+
+:snake: Zobacz co się stanie jeżeli spróbujesz usunąć klucz, który nie
+istnieje w słowniku.
+
+
+### Iterowanie po kluczach i wartościach
+
+W jednym z poprzednich rozdziałów mówiliśmy o iteracji w kontekście listy,
+czyli o "przechodzeniu" po jej elementach.  Używaliśmy w tym celu pętli
+`for`.  Jeżeli wykonamy tę samą operację na słowniku, to przejdziemy po
+jego kluczach:
+
+```python
+for klucz in slownik:
+    print(klucz)
+```
+
+:snake: Napisz funkcję, która przyjmuje jako argument słownik i przechodzi
+po jego kluczach, wypisując każdy z nich.
+
+W podobny sposób możemy iterować po samych wartościach słownika.  Służy
+do tego metoda `values`:
+
+```python
+lista_startowa = {1: 'Puchatek', 2: 'Prosiaczek', 3: 'Tygrysek'}
+for zawodnik in lista_startowa.values():
+    print(zawodnik)
+```
+
+:snake: Napisz funkcję, która przyjmuje jako argument słownik i zwraca
+sumę wszystkich wartości słownika.  Zakładamy, że wartości zawsze są
+liczbami.
+
+Słownik posiada również metodę `items`, dzięki której możemy iterować
+jednocześnie po kluczach i wartościach słownika:
+
+```python
+lista_startowa = {1: 'Puchatek', 2: 'Prosiaczek', 3: 'Tygrysek'}
+for numer_startowy, zawodnik in lista_startowa.items():
+    print(numer_startowy, ':', zawodnik)
+```
+
+Zwróć uwagę, że tym razem w pętli `for` zdefiniowaliśmy dwie zmienne:
+`numer_startowy` i `zawodnik`.  Nie jest to nic specyficznego dla słownika,
+ale kolejna właściwość tej pętli.  Jeżeli pętla przechodzi po liście,
+której wszystkie elementy są sekwencjami (czyli listami lub krotkami),
+to możemy od razu **rozpakować** wszystkie elementy tych sekwencji do
+zmiennych:
+
+```python
+lista = [['a', 'Arbuz', 'Anglia'], ['b', 'Banan', 'Brazylia']]
+for litera, owoc, panstwo in lista:
+    print(owoc)
+```
+
+W naszym przypadku pierwszym elementem każdej sekwencji jest klucz,
+a drugim wartość dla tego klucza.
+
+:snake: Napisz funkcję, która przyjmie dwa argumenty, słownik oraz wartość
+i zwróci nazwę klucza, którego wartość jest równa wartości z argumentu.
+
+
+## Zagnieżdżanie słowników
+
+Wartością w słowniku może być dowolny obiekt, również inny słownik.
+Dzięki temu możemy w prosty sposób tworzyć złożone struktury danych:
+
+```python
+>>> auto = {}
+>>> auto['kolor'] = 'czerwony'
+>>> auto['silnik'] = {'pojemność': 1600, 'moc': 130}
+>>> print(auto)
+{'kolor': 'czerwony', 'silnik': {'pojemność': 1600, 'moc': 130}}
+```
+
+
+## "Długość" słownika
+
+Kiedy po raz pierwszy wspomnieliśmy o funkcji `len`, powiedzieliśmy, że
+służy ona do sprawdzania długości obiektów.  Każdy typ obiektu (string,
+lista, etc.) może inaczej rozumieć pojęcie długości.  W przypdku stringów
+chodzi o liczbę znaków, w przypadku list o liczbę elementów itd.
+Słowniki również mają swoją "długość": jest to liczba kluczy.
+
+```python
+>>> print(auto)
+{'kolor': 'czerwony', 'silnik': {'pojemność': 1600, 'moc': 130}}
+>>> len(auto)
+2
+```
+
+
+## Do czego możemy wykorzystać słowniki
+
+Słownik jest bardzo uniwersalną strukturą danych, przez co ma wiele
+zastosowań:
+
+* reprezentacja obiektów i ich atrybutów (jak w powyższym przykładzie),
+* mapowanie jednych wartości na inne (jak w prawdziwym słowniku),
+* przechowywanie wielu powiązanych ze sobą wartości w jednym miejscu
+(np. klucze to tytuły filmów, a wartości to ich reżyserowie).
+
+:snake: Wybierz jedno z powyższych zastosowań słownika.  Napisz funkcję
+`ustaw`, która przyjmuje trzy argumenty, słownik, klucz oraz wartość i
+ustawia w słowniu daną wartość pod danym kluczem.  Napisz funkcję
+`pobierz`, która przyjmuje dwa argumenty, słownik oraz klucz i zwraca
+wartość słownika pod danym kluczem.  Stosując te funkcje wypełnij słownik
+danymi adekwatnymi dla wybranego zastosowania i pobierz te dane.
+
+
+## :pushpin: Podsumowanie
+
+W tym rozdziale:
+
+* nauczyliśmy się tworzyć słowniki i wykonywać na nich operacje, między
+innymi iterowanie,
+* dowiedzieliśmy się, że funkcja `len` zwraca liczbę kluczy w słowniku,
+* poznaliśmy najczęściej spotykane zastosowania słowników.
+
+
+---
+
+
+# Rozdział 14. `None`
+
+W tym rozdziale:
+
+* dowiesz się czym jest **`None`**.
+
+
+## `None`
+
+W Pythonie istnieje jedna szczególna wartość, która nie reprezentuje
+żadnego dotąd poznanego typu: **`None`**.  Nie jest to liczba, string, ani
+nic innego co poznasz ucząc się tego języka.  `None` to unikalna wartość,
+która reprezentuje osobny typ.  Powstała po to, żeby programista mógł
+zdefiniować "nic".  Po co?  Okazuje się, że są sytuacje, w których chcesz
+wprost zaznaczyć, że dana operacja nie zwróciła żadnej istotnej informacji.
+W takich sytuacjach możesz użyć wartości `None`. Zwróć uwagę, że sam fakt
+posłużenia się tą wartością jest na tyle wyjątkowy, że sugeruje, że
+zaistniały jakieś szczególne okoliczności.
+
+Przykładem użycia `None` może być dzielenie przez 0.  Jak wiemy, taka
+operacja matematyczna jest niedozwolona.  Teraz wyobraźmy sobie, że piszemy
+funkję, która przyjmuje jako argumenty dwie liczby i zwraca wynik
+dzielenia jednej przez drugą.
+
+```python
+def podziel(dzielna, dzielnik):
+    return dzielna / dzielnik
+```
+
+Co się stanie gdy argument `dzielnik` będzie równy `0`?  Otrzymamy błąd:
+
+```python
+>>> podziel(3, 0)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "<stdin>", line 2, in podziel
+ZeroDivisionError: division by zero
+```
+
+Aby temu zapobiec, możemy przed wykonaniem dzielenia sprawdzić wartość
+argumentu i w razie potrzeby zwrócić `None`, sygnalizując, że nie możemy
+obliczyć wyniku:
+
+```python
+def podziel(dzielna, dzielnik):
+    if dzielnik == 0:
+        return None
+    return dzielna / dzielnik
+```
+
+Teraz z łatwością możemy rozpoznać kiedy funkcja napotkała niestandardowe
+wywołanie:
+
+```python
+>>> wynik = podziel(4, 2)
+>>> print(wynik)
+2.0
+>>> wynik = podziel(5, 0)
+>>> print(wynik)
+None
+```
+
+
+## Domyślna wartość funkcji
+
+Napiszmy prostą funkcję, która przyjmuje argument i wypisuje go na ekran:
+
+```python
+def wypisz(obiekt):
+    print(obiekt)
+```
+
+Wywołanie funkcji spowoduje oczekiwane skutki:
+
+```python
+>>> wypisz(123)
+123
+>>> wypisz('ala ma kota')
+ala ma kota
+```
+
+Widzimy, że ciało funkcji zostało wykonane, jednak jaka wartość została
+zwrócona?  Innymi słowy: co się dzieje, jeżeli nie użyjemy instrukcji
+`return`?  Odpowiedź brzmi: funkcja zwróci `None`.
+
+```python
+>>> rezultat = wypisz('abc')
+abc
+>>> print(rezultat)
+None
+```
+
+Tak samo dzieje się, jeżeli użyjemy instrukcji `return` nie podając jej
+żadnej wartości:
+
+```python
+def wypisz(obiekt):
+    print(obiekt)
+    return
+```
+
+Efekt będzie taki sam jak wtedy gdy nie użyjemy `return`:
+
+```python
+>>> rezultat = wypisz(3.14)
+3.14
+>>> print(rezultat)
+None
+```
+
+Za takim zachowaniem nie kryje się żadna magia: po prostu twórcy Pythona
+przyjęli, że domyślnie funkcja zwraca "nic", a wartość taka będzie
+reprezentowana przez `None`.
+
+
+## Operator `is`
+
+Skoro wiemy, że funkcje mogą zwracać `None`, to w jaki sposób z tego
+skorzystać?  Możemy na przykład sprawdzić zwróconą wartość w instrukcji
+`if`:
+
+```python
+def imie_nazwisko(imie, nazwisko):
+    if imie != '' and nazwisko != '':
+        return imie + ' ' + nazwisko
+
+def nazwa_uzytkownika(imie, nazwisko, email):
+    pelne_nazwisko = imie_nazwisko(imie, nazwisko)
+    if pelne_nazwisko == None:
+        return email
+    else:
+        return pelne_nazwisko
+```
+
+W powyższym przykładzie funkcja `nazwa_uzytkownika` zwraca pełną nazwę
+użytkownika na podstawie jego imienia, nazwiska i adresu email.  Jeżeli
+imię i nazwisko są dane, to zwracane jest pełne nazwisko, w przyciwnym
+wypadku zwrócony zostanie tylko adres email.  Sprawdzenie czy pełne
+nazwisko jest podane zostało zapisane w instrukcji
+`if pelne_nazwisko == None`.
+
+Instrukcja `if zmienna == None` jest poprawna, jednak w ogólnym przypadku
+może nie zawsze działać.  Dzieje się tak, ponieważ tworząc bardziej
+zaawansowane struktury danych w Pythonie (co nie będzie omówione podczas
+tych warsztatów), możemy zmienić zachowanie porównania, w efekcie wpływając
+na wynik zwracany przez operator `==`.  Możemy wybrnąć z tej sytuacji
+stosując zamiast tego **operator `is`**:
+
+```python
+if pelne_nazwisko is None:
+    return email
+```
+
+W ten sposób nasz kod będzie niewrażliwy na modyfikacje zachowania
+operatora `==`.
+
+Kiedy zatem używać `is`?  Używaj tego operatora zawsze kiedy porównujesz
+wartość do `None`.  Póki co nie będzie to robiło różnicy, ale dzięki temu
+nabędziesz dobrego nawyku, który w przyszłości okaże się przydatny.
+
+:snake: Napisz funkcję, która jako argument przyjmuje listę i zwróci
+również listę, na której znajdą się wszystkie elementy z argumentu,
+z wyjątkiem wartości równych `None`.
+
+
+## :pushpin: Podsumowanie
+
+W tym rozdziale:
+
+* poznaliśmy `None`,
+* dowiedzieliśmy się, że porównując wartości do `None` należy stosować
+operator `is`.
+
+
+---
+
+
+# Rozdział 15. Pętla `while`
+
+W tym rozdziale:
+
+* nauczysz posługiwać się pętlą `while`.
+
+
+## Pętla `while`
+
+Wiesz już czym jest pętla oraz znasz jedną z nich: `for`.  Teraz poznasz
+drugą, jednocześnie ostatnią jaka istnieje w Pythonie: `while`.  Jej
+struktura jest jeszcze prostsza od poprzedniej:
+
+```python
+licznik = 1
+while licznik < 10:
+    print(licznik)
+    licznik = licznik + 1
+```
+
+Definicję pętli zaczynamy słowem `while`, następnie definiujemy warunek,
+a po drukropku, w kolejnych linijkach i po wcięciu, wypisujemy instrukcje,
+które będą wykonywane tak długo jak warunek będzie prawdziwy.
+
+Zwróć uwagę, że jeżeli zdefiniujemy warunek, który zawsze będzie prawdziwy,
+wtedy pętla będzie wykonywana w nieskończoność:
+
+```python
+while 1 == 1:
+    print('.')
+```
+
+:snake: Napisz funkcję, która przyjmie listę jako argument i wypisze
+wszystkie jej elementy przy użyciu pętli `while`.
+
+## :pushpin: Podsumowanie
+
+W tym rozdziale:
+
+* poznaliśmy pętlę `while`.
+
+
+---
+
+# Rozdział 16. Biblioteka standardowa
+
+W tym rozdziale:
+
+* dowiesz się czym jest **biblioteka standardowa**,
+* poznasz najważniejsze **moduły** biblioteki standardowej.
+
+
+## Biblioteka
+
+W programowaniu posługujemy się pojęciem **biblioteka**, które oznacza
+zbiór programów i narzędzi do ich budowania, które możemy wykrzystać
+pisząc własne programy.  Przykładem biblioteki może być zbiór funkcji
+metematycznych (np. trygonometrycznych), do których możemy odwołać się
+w naszym kodzie zamiast definiować je samodzielnie.
+
+
+## Moduły
+
+W Pythonie biblioteki programistyczne są dostępne poprzez **moduły**.
+Moduł to po prostu kod umieszczony na dysku, w miejscu w którym
+Python może go odnaleźć.  Może to być kod napisany w Pythonie, ale
+są sposoby na pisanie modułów w innych językach programowania.  Python
+znajdzie taki kod jeżeli zostanie on umieszczony w jednym z określonych
+z góry katalogów.
+
+Każdy może napisać własny moduł do Pythona.  W internecie znajdziemy
+tysiące modułów, które różne osoby i firmy udostępniają.  Możemy je pobrać
+i używać ich do pisania programów.  Możemy też tworzyć własne moduły
+i dzielić się nimi z innymi użytkownikami.
+
+Aby skorzystać z modułu musimy **zaimportować** jego nazwę.  Robimy to
+instrukcją `import`.  Gdy moduł jest już zaimportowany, możemy używać
+funkcji i zmiennych, które zostały w nim zdefiniowane.  Robimy to wpisując
+nazwę modułu, a następnie, po kropce, nazwę obiektu.
+
+W poniższym przykładzie importujemy moduł o nazwie `math` i wywołujemy
+funkcję `sqrt`, która zwraca pierwiastek kwadratowy z podanej liczby:
+
+```python
+import math
+print(math.sqrt(9))
+```
+
+## Biblioteka standardowa Pythona
+
+Poza modułami, które użytkownicy sami mogą pisać, istnieje zbiór modułów,
+który zawsze jest dostępny w Pythonie. Ten zbiór nazywamy **biblioteką
+standardową**.  Znajdziemy w nim dziesiątki modułów, a w nich narzędzia
+do komunikacji sieciowej, obsługi różnych formatów plików, obliczeń
+matematycznych etc.
+
+Biblioteka standardowa jest obszernie udokumentowana na [oficjalnej
+stronie Pythona](https://docs.python.org/3/library/index.html).
+
+
+## Najważniejsze moduły
+
+Omówienie całej biblioteki standardowej to zadanie na co najmniej kilka
+tygodni, dlatego podczas tych warsztatów wspomnimy tylko o kilku
+najbardziej popularnych modułach.
+
+
+### [`math`](https://docs.python.org/3/library/math.html)
+
+Moduł `math` zawiera kilkadziesiąt funkcji matematycznych, które mogą
+okazać się pomocne przy prostych obliczeniach.  Poniżej opisaliśmy kilka
+z nich.
+
+Funkcje `ceil` i `floor` zwracają wartości zaokrąglone odpowiednio
+w dół i w górę:
+
+```python
+>>> math.ceil(3.5)
+4
+>>> math.floor(3.5)
+3
+```
+
+Funkcja `sqrt` zwraca pierwiastek kwadratowy z danej liczby:
+
+```python
+>>> math.sqrt(25)
+5.0
+```
+
+`pi` oraz `e` reprezentują wartości stałych matematycznych:
+
+```python
+>>> math.pi
+3.141592653589793
+>>> math.e
+2.718281828459045
+```
+
+:snake: Napisz funkcję, która zwróci wartość pola powierzchni koła
+o zadanym promieniu (według wzoru `PI * r^2`, gdzie `r` to promień).
+
+
+### [`datetime`](https://docs.python.org/3/library/datetime.html)
+
+Moduł `datetime` to podstawowe narzędzie do pracy z datami i czasem.
+Zawiera obiekty `date`, `datetime` oraz `timedelta`, które reprezentują
+odpowiednio datę, datę i czas oraz różnicę w czasie.
+
+Aby otrzymać dzisiejszą datę należy wywołać metodę `today` na obiekcie
+`date`:
+
+```python
+>>> datetime.date.today()
+datetime.date(2017, 8, 13)
+```
+
+Otrzymany w ten sposób obiekt zawiera trzy **atrybuty**: `year`, `month`
+oraz `day`, czyli odpowiednio rok, miesiąc i dzień.
+
+```python
+>>> dzisiaj = datetime.date.today()
+>>> dzisiaj.year
+2017
+>>> dzisiaj.month
+8
+>>> dzisiaj.day
+13
+```
+
+Metoda `now` na obiekcie `datetime` zwróci nam datę i godzinę, którą mamy
+w tej chwili.  Poza atrybutami `year`, `month` oraz `day` posiada także
+`hour`, `minute`, `second` i `microsecond`, czyli godzinę, minutę, sekundę
+i mikrosekundę.
+
+```python
+>>> teraz = datetime.datetime.now()
+>>> teraz
+datetime.datetime(2017, 8, 13, 18, 53, 13, 366193)
+>>> teraz.hour
+18
+>>> teraz.minute
+53
+>>> teraz.second
+13
+>>> teraz.microsecond
+366193
+```
+
+Oba typy obiektów możemy wypisać na ekran w czytelnym formacie:
+
+```python
+>>> print(dzisiaj)
+2017-08-13
+>>> print(teraz)
+2017-08-13 18:53:13.366193
+```
+
+Chcąc utworzyć reprezentację dowolnego momentu w czasie, wystarczy
+wywołać `date` lub `datetime` i podać kolejno `year`, `month`, `day`,
+`hour`, `minute`, `second`, `microsecond`:
+
+```python
+>>> print(datetime.date(2010, 5, 10))
+2010-05-10
+>>> print(datetime.datetime(2020, 11, 23, 15, 7, 30))
+2020-11-23 15:07:30
+```
+
+:snake: Zobacz co się stanie jeżeli spróbujesz utworzyć obiekt `date`
+z miesiącem spoza zakresu od 1 do 12 lub datę, która nie istnieje, np.
+31 kwietnia.
+
+:snake: Zobacz co się stanie jeżeli spróbujesz utworzyć obiekt `datetime`
+z godziną, minutą lub sekundą o wartosci spoza dopuszczalnego zakresu
+(np. godzina 26).
+
+Jeżeli chcemy zobaczyć różnicę w czasie między dwoma obiektami typu
+`datetime`, możemy je po prostu odjąć od siebie:
+
+```python
+>>> a = datetime.datetime(2017, 8, 16, 17, 00)
+>>> b = datetime.datetime(2017, 8, 16, 19, 00)
+>>> roznica = b - a
+>>> roznica
+datetime.timedelta(0, 7200)
+>>> roznica.seconds
+7200
+```
+
+W powyższym przykładzie otrzymaliśmy obiekt `timedelta`, który posiada
+atrybut `seconds` o wartości równej liczbie sekund pomiędzy `a` i `b`.
+
+Jeżeli różnica jest większa niż jedna doba, to zostanie ona podzielona
+na dwie wartości: `seconds` i `days`, czyli sekundy i dni.
+
+```python
+>>> c = datetime.datetime(2017, 8, 16, 17, 00)
+>>> d = datetime.datetime(2017, 8, 18, 15, 00)
+>>> roznica = d - c
+>>> roznica.seconds
+79200
+>>> roznica.days
+1
+```
+
+Jeżeli do daty `c` dodamy jeden dzień i 79200 sekund, to otrzymamy `d`.
+
+:snake: Napisz funkcję, która przyjmuje dwie daty jako argumenty.
+Jeżeli druga data jest mniejsza od pierwszej, funkcja powinna zwrócić
+`None`.  W przeciwnym wypadku funkcja powinna zwrócić liczbę sekund
+dzielącą obie daty.  Zwróć uwagę, że różnica może być większa niż jedna
+doba.  W takim wypadku liczbę dni należy zamienić na sekundy.
+
+
+### [`random`](https://docs.python.org/3/library/random.html)
+
+Moduł `random` służy do wykonywania operacji, których wynik jest losowy:
+generowania liczb losowych, losowego wybierania obiektów z danego zakresu,
+itd.
+
+Funkcja `randint` przyjmuje dwa integery jako argumenty i zwraca losowo
+wybraną liczbę całkowitą, której wartość znajduje się pomiędzy argumentami.
+
+```python
+>>> random.randint(1, 100)
+9
+>>> random.randint(1, 100)
+44
+```
+
+Funkcja `choice` przyjmuje jako argument dowolną sekwencję (listę, krotkę,
+string) i zwraca losowo wybrany element:
+
+```python
+>>> random.choice('ala ma kota')
+'m'
+>>> random.choice([9, 7, 5, 3])
+7
+>>> random.choice(('pycon', 'pl', '2017'))
+'pl'
+```
+
+:snake: Napisz funkcję, która przyjmie jako argument dowolną sekwencję
+i zwróci *krotkę* z trzema losowo wybramymi z niej elementami.
+
+
+### [`json`](https://docs.python.org/3/library/json.html)
+
+Moduł `json` pozwala zapisywać obiekty Pythona (słowniki i listy) jako
+string w formacie JSON (*JavaScript Object Notation*), który jest
+powszechnie używany np. w serwisach internetowych do wymiany danych między
+przeglądarką a serwerem.
+
+Żeby zapisać obiekt do stringa należy wywołać funkcję `dumps`:
+
+```python
+>>> json.dumps({'miejsce': 'Ossa', 'data': '2017-08-16'})
+'{"miejsce": "Ossa", "data": "2017-08-16"}'
+>>> json.dumps([2017, 8, 16])
+'[2017, 8, 16]'
+```
+
+Do zamiany stringa na słownik lub listę służy funkcja `loads`:
+
+```python
+>>> json.loads('{"miejsce": "Ossa", "data": "2017-08-16"}')
+{'miejsce': 'Ossa', 'data': '2017-08-16'}
+>>> json.loads('[2017, 8, 16]')
+[2017, 8, 16]
+```
+
+## Co dalej?
+
+Wyżej wymieniliśmy tylko kilka najbardziej popularnych modułów, więc
+zachęcamy do zapoznania się z resztą biblioteki standardowej.  Warto
+zacząć od oficjalnej dokumentacji, ale w internecie znajdziemy mnóstwo
+artykułów poświęconych stosowaniu biblioteki standardowej na co dzień.
+Oczywiście nie trzeba znać jej w całości żeby swobodnie programować
+w Pythonie.  Wiele z tych modułów ma bardzo specyficzne zastosowania
+i większość programistów nigdy z nich nie korzysta.  Warto natomiast
+pamiętać, że jeżeli trafisz na jakiś nowy problem, to dobrze jest najpierw
+przejrzeć bibliotekę standardową w poszukiwaniu modułu, który może okazać
+się pomocny.
+
+
+## :pushpin: Podsumowanie
+
+W tym rozdziale:
+
+* dowiedzieliśmy się czym jest **biblioteka standardowa** i jak z niej
+korzystać,
+* poznaliśmy moduły `math`, `datetime`, `random` i `json`.
+
+
+---
+
+
+# Podsumowanie
+
+Dobiegamy do końca kursu, ale to jeszcze nie koniec warsztatów!  Mentorzy
+mają dla Ciebie jeszcze garść zadań.  Możesz też skorzystać z okazji
+i zadać mentorom tyle pytań na ile tylko starczy czasu - między innymi
+dlatego zorganizowaliśmy te warsztaty!
+
+
+## O czym nie powiedzieliśmy
+
+Niestety czas na warsztaty jest organiczony, więc i zakres tematów jakie
+poruszyliśmy nie jest wyczerpujący.  Znasz już podstawy Pythona.  Możesz
+już samodzielnie pisać programy, a czytanie cudzych nie będzie już takie
+trudne.  Jednak na tym etapie często trafisz na kod, którego nie
+zrozumiesz.  A może już teraz wiesz o tematach, które wydają się
+interesujące, ale nie wiesz jak zacząć.  Dlatego przygotowaliśmy dla Ciebie
+listę zagadnień, którą możesz potraktować jako kontynuację tych warsztatów.
+Nie jest to wyczerpująca lista tematów, ale na pewno pomoże Ci jeszcze
+lepiej poznać Pythona.  W każdym punkcie umieściliśmy odnośnik do strony,
+która wyjaśnia dany temat.
+
+* [Jeszcze więcej o wyjątkach i obsługiwaniu ich](https://docs.python.org/3.6/tutorial/errors.html)
+* [Klasy, czyli programowanie zorientowane obiektowo](https://docs.python.org/3.6/tutorial/classes.html)
+* [Dekoratory](https://docs.python.org/3/glossary.html#term-decorator)
+* [Generatory](https://docs.python.org/3/glossary.html#index-17)
+* [Listy składane](https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions)
+* [Zbiory](https://docs.python.org/3/tutorial/datastructures.html#sets)
+
+
+## Na koniec... `dir`
+
+Kończąc pokażemy Ci jeszcze jedną, bardzo przydatną funkcję wbudowaną.
+Nazywa się `dir`, przyjmuje jako argument dowolny obiekt i zwraca listę
+nazw wszystkich metod i atrybutów tego obiektu:
+
+```python
+>>> d = {'a': 1}
+>>> dir(d)
+['__class__', '__contains__', '__delattr__', '__delitem__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__iter__', '__le__', '__len__', '__lt__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__setitem__', '__sizeof__', '__str__', '__subclasshook__', 'clear', 'copy', 'fromkeys', 'get', 'items', 'keys', 'pop', 'popitem', 'setdefault', 'update', 'values']
+```
+
+W powyższym przykładzie rozpoznasz na pewno kilka znajomych nazw, np.
+`items` czy `values`, ale jak widzisz słowniki oferują znacznie więcej.
+Zwróć uwagę na nazwy zaczynające i kończące się podwójnym znakiem
+podkreślenia.  W taki sposób są nazywane atrybuty i metody, które nie są
+przeznaczone dla użytkowników obiektu.  Zazwyczaj są to rzeczy używane
+tylko wewnątrz danego obiektu.  Oczywiście tak czy inaczej można z nich
+korzystać - po prostu zazwyczaj nie będą dla nas przydatne, więc warto
+zainteresować się pozostałymi nazwami.
+
+Co teraz zrobić z taką listą?  Jeżeli jakaś nazwa wydaje się oczywista,
+możemy po prostu spróbować jej użyć - w najgorszym wypadku otrzymamy
+komunikat o błędzie wyjaśniający co zrobiliśmy źle.  Możemy też - i to
+polecamy - użyć funkcji `help`, która wyświetli dokumentację danego
+obiektu:
+
+```python
+help(d.update)
+```
+
+
+
+Dziękujemy za udział w warsztatach!  Jeszcze raz zachęcamy do rozmowy
+z mentorami - chętnie odpowiedzą na wszystkie pytania i wyjaśnią
+niezrozumiałe tematy.
+
+Jeżeli masz uwagi do tego kursu, podziel się nimi pisząc do autorów,
+albo przekaż je mentorom.  Twoje zdanie jest dla nas bardzo ważne!
+
+![programming is fun again](https://imgs.xkcd.com/comics/python.png)
+# Warsztaty PyLadies / PyCon PL 2017
+
+Witaj na warsztatach PyLadies! Podczas tego kursu nauczysz się programować
+w języku **Python** od podstaw. Aby zacząć nie potrzebujesz nic instalować,
+nie jest wymagana żadna znajomość programowania czy informatyki. Wystarczy
+przeglądarka internetowa i chęć zdobywania wiedzy!
+
+
+## Czego uczą te warsztaty
+
+Ten kurs nauczy Cię tworzyć własne programy w Pythonie. Poznasz podstawy
+tego języka, oraz dowiesz się jak w przyszłości poszerzyć wiedzę, aby
+samodzielnie tworzyć coraz ciekawsze rzeczy. Dzięki tym warsztatom
+zrozumiesz Pythona na poziomie, który pozwoli Ci pisać przydatne narzędzia
+oraz zgłębiać bardziej zaawansowane aspekty tego języka.
+
+Podsumowując: Twoja przygoda z programowaniem zaczyna się właśnie tutaj!
+
+
+## Legenda
+
+Zanim zaczniemy, zapoznaj się z oznaczeniami, które zostały użyte na
+kolejnych stronach kursu.
+
+:snake: oznacza miejsce, w którym dajemy Ci do wykonania jakieś zadanie.
+Jeżeli instrukcje nie są jasne, lub zadanie sprawia Ci kłopoty - poproś
+o pomoc mentora.
+
+:pushpin: to podsumowanie rozdziału. Zanim przejdziesz dalej, upewnij się,
+że rozumiesz wszystkie wymienione tam tematy. Jeśli masz jakiekolwiek
+wątpliwości - zapytaj mentora. Nie sugeruj się innymi - właśnie po to
+robimy podsumowanie, żeby upewnić się, że każdy zrozumiał dany rozdział.
+
+**Pogrubionym tekstem** wyróżniliśmy istotne słowa i zwroty. Warto je
+zapamiętać, aby łatwiej przyswoić kolejne rozdziały.
+
+`W taki sposób` oznaczyliśmy przykładowy kod programów.
+
+
+## Mentorzy
+
+Nasz zespół mentorów jest tutaj dla Ciebie! Jeżeli masz pytania, cokolwiek
+jest niejasne albo nie wiesz jak wykonać jakieś zadanie - poproś kogoś
+z nas o pomoc. Chętnie odpowiemy, opowiemy i pomożemy Ci zrozumieć każdy
+temat. Nie krępuj się: my równeż kiedyś zadawaliśmy pytania i właśnie
+dzięki temu sami możemy teraz na nie odpowiadać.
+
+
+## Spis treści
+
+1. [Tryb interaktywny](./01_tryb_interaktywny.md)
+2. [Tekst](./02_tekst.md)
+3. [Funkcja `help`](./03_help.md)
+4. [Liczby](./04_liczby.md)
+5. [Błędy](./05_bledy.md)
+6. [Zmienne](./06_zmienne.md)
+7. [Funkcje](./07_funkcje.md)
+8. [Funkcja `print`](./08_funkcja_print.md)
+9. [Listy](./09_listy.md)
+10. [Pętla `for`](./10_for.md)
+11. [Krotki](./11_krotki.md)
+12. [Prawda i fałsz](./12_prawda_i_falsz.md)
+13. [Słowniki](./13_slowniki.md)
+14. [`None`](./14_none.md)
+15. [Pętla `while`](./15_petla_while.md)
+16. [Biblioteka standardowa](./16_biblioteka_standardowa.md)
+17. [Podsumowanie](./17_podsumowanie.md)
+
 
 ## Bibliografia
 
