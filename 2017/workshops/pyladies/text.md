@@ -59,8 +59,6 @@ lub **trybu interaktywnego** Pythona,
 * dowiedzieliśmy się jak wygląda **znak zachęty** i że pokazuje nam kod,
 który należy wpisać w trybie interaktywnym.
 
----
-
 # Rozdział 2. Tekst
 
 W tym rozdziale:
@@ -292,8 +290,6 @@ W tym rozdziale:
 * nauczyliśmy się najważniejszych metod jakie można wywołać na stringu,
 * poznaliśmy funkcję `len`, która zwraca długość stringa.
 
----
-
 # Rozdział 3. Funkcja `help`
 
 W tym rozdziale:
@@ -349,9 +345,6 @@ W tym rozdziale:
 
 * poznaliśmy funkcję `help` i dowiedzieliśmy się, że warto jej używać
 wtedy, kiedy nie rozumiemy jakiejś metody lub nie pamiętamy jak działa.
-
-
----
 
 # Rozdział 4. Liczby
 
@@ -489,8 +482,6 @@ W tym rozdziale:
 * dowiedzieliśmy się jak definiować liczby całkowite (*integer*) i zmiennoprzecinkowe (*float*),
 * poznaliśmy najważniejsze operatory matematyczne i ich priorytety.
 
----
-
 # Rozdział 5. Błędy
 
 W tym rozdziale:
@@ -579,8 +570,6 @@ stringu metody, która nie istnieje; wykonanie kodu, który nie ma sensu
 W tym rozdziale:
 
 * dowiedzieliśmy się czym jest wyjątek i jak czytać jego treść.
-
----
 
 # Rozdział 6. Zmienne
 
@@ -714,8 +703,6 @@ na obiekcie, możesz też wykonać na zmiennej:
 W tym rozdziale:
 
 * dowiedzieliśmy się czym jest zmienna, jak ją definiować i jak jej używać.
-
----
 
 # Rozdział 7. Funkcje
 
@@ -951,8 +938,6 @@ W tym rozdziale:
 * dowiedzieliśmy się czym jest funkcja, jak ją definiować i wywoływać,
 * poznaliśmy funkcje wbudowane `str`, `int` oraz `float`.
 
----
-
 # Rozdział 8. Funkcja `print`
 
 W tym rozdziale:
@@ -1044,9 +1029,6 @@ będzie __mniejsza__ niż liczba wystąpień `{}` w stringu.
 W tym rozdziale:
 
 * poznaliśmy funkcję `print` oraz metodę `format`.
-
----
-
 
 # Rozdział 8. Listy
 
@@ -1371,9 +1353,6 @@ do poszczególnych elementów listy,
 * dowiedzieliśmy się, w jaki sposób używać na listach funkcji wbudowanych
 `len`, `sum`, `max`, `min` oraz `sorted`.
 
-
----
-
 # Rozdział 10. Pętla `for`
 
 W tym rozdziale:
@@ -1533,9 +1512,6 @@ W tym rozdziale:
 stringi posiadają metodę `split`,
 * poznaliśmy funkcję wbudowaną `range`.
 
-
----
-
 # Rozdział 11. Krotki
 
 W tym rozdziale:
@@ -1595,9 +1571,6 @@ W tym rozdziale:
 
 * dowiedzieliśmy się czym jest krotka i jakie operacje możemy na niej
 wykonywać.
-
-
----
 
 # Rozdział 11. Prawda i fałsz
 
@@ -1830,10 +1803,6 @@ W tym rozdziale:
 * nauczyliśmy się sprawdzać prawdziwość wyrażeń,
 * poznaliśmy intrukcję `if`, która może zmienić przebieg programu gdy
 określone wyrażenie jest prawdziwe.
-
-
----
-
 
 # Rozdział 12. Prawda i fałsz
 
@@ -2101,10 +2070,6 @@ W tym rozdziale:
 * poznaliśmy intrukcję `if`, która może zmienić przebieg programu gdy
 określone wyrażenie jest prawdziwe.
 
-
----
-
-
 # Rozdział 12. Słowniki
 
 W tym rozdziale:
@@ -2358,10 +2323,6 @@ W tym rozdziale:
 innymi iterowanie,
 * dowiedzieliśmy się, że funkcja `len` zwraca liczbę kluczy w słowniku,
 * poznaliśmy najczęściej spotykane zastosowania słowników.
-
-
----
-
 
 # Rozdział 13. Słowniki
 
@@ -2617,10 +2578,6 @@ innymi iterowanie,
 * dowiedzieliśmy się, że funkcja `len` zwraca liczbę kluczy w słowniku,
 * poznaliśmy najczęściej spotykane zastosowania słowników.
 
-
----
-
-
 # Rozdział 14. `None`
 
 W tym rozdziale:
@@ -2794,10 +2751,6 @@ W tym rozdziale:
 * dowiedzieliśmy się, że porównując wartości do `None` należy stosować
 operator `is`.
 
-
----
-
-
 # Rozdział 15. Pętla `while`
 
 W tym rozdziale:
@@ -2838,9 +2791,6 @@ wszystkie jej elementy przy użyciu pętli `while`.
 W tym rozdziale:
 
 * poznaliśmy pętlę `while`.
-
-
----
 
 # Rozdział 16. Biblioteka standardowa
 
