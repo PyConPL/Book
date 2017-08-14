@@ -1289,9 +1289,9 @@ wersję funkcji `max`!)
 Czasami operując na liście chcielibyśmy używać tylko jej fragmentu, np.
 10 pierwszych elementów, albo elementy od drugiego do piątego.  Python
 jest przygotowany na taką sytuację: umożliwia utworzenie *wycinka*
-listy (ang. *slice*).  Aby stworzyć wycinek należy wpisać nazwę listy,
+listy (ang. *slice*).  Aby stworzyć wycinek, należy wpisać nazwę listy,
 a następnie w nawiasach kwadratowych indeksy pierwszego i ostatniego
-wycinka elementu odzielone dwukropkiem.
+elementu wycinka, odzielone dwukropkiem.
 
 Przykładowo, zwrócenie fragmentu listy od drugiego do czwartego elementu
 będzie wyglądało tak:
@@ -1302,8 +1302,8 @@ będzie wyglądało tak:
 [2, 3, 4]
 ```
 
-Pamiętaj, że indeksy listy zaczynając się od zera, a element o indeksie
-końcowym (w tym wypadku: `5`) nie zostanie dołączony do wycinka.
+Pamiętaj, że indeksy listy zaczynają się od zera, a element o indeksie
+końcowym (w tym przypadku: `5`) nie zostanie dołączony do wycinka.
 
 Możemy też pominąć indeks początkowy.  W takim wypadku Python zwróci
 wszystkie elementy od początku:
