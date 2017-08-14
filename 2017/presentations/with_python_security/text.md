@@ -679,6 +679,7 @@ should notice…
 21. sshttp - hiding SSH servers behind HTTP. https://github.com/stealth/sshttp
 22. Justin Mayer. Replacing passwords with multiple factors: email, otp, and hardware keys. EuroPython 2017
 23. Data leaks in time. http://www.informationisbeautiful.net/visualizations/worlds-biggest-data-breaches-hacks/
-24. BeeBox project](https://sourceforge.net/projects/bwapp/files/bee-box/)
-25. OWASP Broken Web Applications Project (OWASP BWAP)](https://www.owasp.org/index.php/OWASP`_`Broken`_`Web`_`Applications`_`Project)
+24. BeeBox project. https://sourceforge.net/projects/bwapp/files/bee-box/
+25. OWASP Broken Web Applications Project (OWASP BWAP).\crlf
+    https://www.owasp.org/index.php/OWASP`_`Broken`_`Web`_`Applications`_`Project
 26. Exploiting pickle. https://blog.nelhage.com/2011/03/exploiting-pickle/
