@@ -5,6 +5,92 @@
 \Author{Piotr Wasilewski}
 \MakeTitlePage
 
+\section[warsztaty-pyladies-pycon-pl-2017]{Warsztaty PyLadies / PyCon PL
+2017}
+
+Witaj na warsztatach PyLadies! Podczas tego kursu nauczysz się
+programować w języku {\bf Python} od podstaw. Aby zacząć nie
+potrzebujesz nic instalować, nie jest wymagana żadna znajomość
+programowania czy informatyki. Wystarczy przeglądarka internetowa i chęć
+zdobywania wiedzy!
+
+\subsection[czego-uczą-te-warsztaty]{Czego uczą te warsztaty}
+
+Ten kurs nauczy Cię tworzyć własne programy w Pythonie. Poznasz podstawy
+tego języka, oraz dowiesz się jak w przyszłości poszerzyć wiedzę, aby
+samodzielnie tworzyć coraz ciekawsze rzeczy. Dzięki tym warsztatom
+zrozumiesz Pythona na poziomie, który pozwoli Ci pisać przydatne
+narzędzia oraz zgłębiać bardziej zaawansowane aspekty tego języka.
+
+Podsumowując: Twoja przygoda z programowaniem zaczyna się właśnie tutaj!
+
+\subsection[legenda]{Legenda}
+
+Zanim zaczniemy, zapoznaj się z oznaczeniami, które zostały użyte na
+kolejnych stronach kursu.
+
+$\sim$ oznacza miejsce, w którym dajemy Ci do wykonania jakieś zadanie.
+Jeżeli instrukcje nie są jasne, lub zadanie sprawia Ci kłopoty - poproś
+o pomoc mentora.
+
+$\swarrow$ to podsumowanie rozdziału. Zanim przejdziesz dalej, upewnij
+się, że rozumiesz wszystkie wymienione tam tematy. Jeśli masz
+jakiekolwiek wątpliwości - zapytaj mentora. Nie sugeruj się innymi -
+właśnie po to robimy podsumowanie, żeby upewnić się, że każdy zrozumiał
+dany rozdział.
+
+{\bf Pogrubionym tekstem} wyróżniliśmy istotne słowa i zwroty. Warto je
+zapamiętać, aby łatwiej przyswoić kolejne rozdziały.
+
+\type{W taki sposób} oznaczyliśmy przykładowy kod programów.
+
+\subsection[mentorzy]{Mentorzy}
+
+Nasz zespół mentorów jest tutaj dla Ciebie! Jeżeli masz pytania,
+cokolwiek jest niejasne albo nie wiesz jak wykonać jakieś zadanie -
+poproś kogoś z nas o pomoc. Chętnie odpowiemy, opowiemy i pomożemy Ci
+zrozumieć każdy temat. Nie krępuj się: my równeż kiedyś~zadawaliśmy
+pytania i właśnie dzięki temu sami możemy teraz na nie odpowiadać.
+
+\subsection[spis-treści]{Spis treści}
+
+\startitemize[n,packed][stopper=.,width=2.0em]
+\item
+  Tryb interaktywny
+\item
+  Tekst
+\item
+  Funkcja \type{help}
+\item
+  Liczby
+\item
+  Błędy
+\item
+  Zmienne
+\item
+  Funkcje
+\item
+  Funkcja \type{print}
+\item
+  Listy
+\item
+  Pętla \type{for}
+\item
+  Krotki
+\item
+  Prawda i fałsz
+\item
+  Słowniki
+\item
+  \type{None}
+\item
+  Pętla \type{while}
+\item
+  Biblioteka standardowa
+\item
+  Podsumowanie
+\stopitemize
+
 \section[rozdział-1.-tryb-interaktywny]{Rozdział 1. Tryb interaktywny}
 
 Warsztaty zaczniemy od wyjaśnienia w jaki sposób będziemy programowali w
@@ -74,8 +160,6 @@ W tym rozdziale:
   dowiedzieliśmy się jak wygląda {\bf znak zachęty} i że pokazuje nam
   kod, który należy wpisać w trybie interaktywnym.
 \stopitemize
-
-\thinrule
 
 \section[rozdział-2.-tekst]{Rozdział 2. Tekst}
 
@@ -324,8 +408,6 @@ W tym rozdziale:
   poznaliśmy funkcję \type{len}, która zwraca długość stringa.
 \stopitemize
 
-\thinrule
-
 \section[rozdział-3.-funkcja-help]{Rozdział 3. Funkcja \type{help}}
 
 W tym rozdziale:
@@ -386,8 +468,6 @@ W tym rozdziale:
   używać wtedy, kiedy nie rozumiemy jakiejś metody lub nie pamiętamy jak
   działa.
 \stopitemize
-
-\thinrule
 
 \section[rozdział-4.-liczby]{Rozdział 4. Liczby}
 
@@ -550,8 +630,6 @@ W tym rozdziale:
   poznaliśmy najważniejsze operatory matematyczne i ich priorytety.
 \stopitemize
 
-\thinrule
-
 \section[rozdział-5.-błędy]{Rozdział 5. Błędy}
 
 W tym rozdziale:
@@ -657,8 +735,6 @@ W tym rozdziale:
 \item
   dowiedzieliśmy się czym jest wyjątek i jak czytać jego treść.
 \stopitemize
-
-\thinrule
 
 \section[rozdział-6.-zmienne]{Rozdział 6. Zmienne}
 
@@ -803,8 +879,6 @@ W tym rozdziale:
   dowiedzieliśmy się czym jest zmienna, jak ją definiować i jak jej
   używać.
 \stopitemize
-
-\thinrule
 
 \section[rozdział-7.-funkcje]{Rozdział 7. Funkcje}
 
@@ -1053,8 +1127,6 @@ W tym rozdziale:
   poznaliśmy funkcje wbudowane \type{str}, \type{int} oraz \type{float}.
 \stopitemize
 
-\thinrule
-
 \section[rozdział-8.-funkcja-print]{Rozdział 8. Funkcja \type{print}}
 
 W tym rozdziale:
@@ -1109,16 +1181,48 @@ $\sim$ Napisz funkcję, która przyjmuje argument \type{rok_urodzenia},
 wypisuje tekst \type{Masz X lat}, gdzie \type{X} to wiek w roku 2017,
 oraz zwraca ten wiek.
 
+\subsection[formatowanie-stringów]{Formatowanie stringów}
+
+W tym miejscu warto wrócić do stringów i opowiedzieć o jeszcze jednej,
+bardzo przydatnej metodzie: \type{format}. Służy ona do
+{\bf formatowania stringów}, czyli \quotation{wstawiania} do nich
+wartości zmiennych. Spójrz na poniższy przykład:
+
+\starttyping
+>>> 'ala {} kota'.format('ma')
+'ala ma kota'
+\stoptyping
+
+Jak widzisz, wywołanie metody \type{format} spowodowało, że para znaków
+\mono{\{\}} została zastąpiona argumentami funkcji. W podobny sposób
+możemy wstawić dowolną liczbę i typ obiektów:
+
+\starttyping
+>>> szerokosc = 110
+>>> wysokosc = 50.5
+>>> jednostka = 'mm'
+>>> '{}x{} {}'.format(szerokosc, wysokosc, jednostka)
+'110x50.5 mm'
+\stoptyping
+
+Możliwości metody \type{format} nie kończą się na zwykłym wstawianiu
+wartości do stringa.
+\useURL[url1][https://docs.python.org/3.6/library/string.html\#formatspec][][Dokumentacja
+Pythona]\from[url1] w szczegółach opisuje tę funkcję. Warto przyjrzeć
+się choćby przykładom, które tam zamieszczono.
+
+$\sim$ Zobacz co się stanie, jeżeli liczba argumentów metody
+\type{format} będzie {\bf mniejsza} niż liczba wystąpień \mono{\{\}} w
+stringu.
+
 \subsection[pushpin-podsumowanie-7]{$\swarrow$ Podsumowanie}
 
 W tym rozdziale:
 
 \startitemize[packed]
 \item
-  poznaliśmy funkcję \type{print}.
+  poznaliśmy funkcję \type{print} oraz metodę \type{format}.
 \stopitemize
-
-\thinrule
 
 \section[rozdział-8.-listy]{Rozdział 8. Listy}
 
@@ -1376,6 +1480,64 @@ $\sim$ Napisz funkcję, która jako argument przyjmie listę, posortuje
 ją, a następnie zwróci jej ostatni element. (W ten sposób otrzymamy
 własną wersję funkcji \type{max}!)
 
+\subsection[wycinki-list]{Wycinki list}
+
+Czasami operując na liście chcielibyśmy używać tylko jej fragmentu, np.
+10 pierwszych elementów, albo elementy od drugiego do piątego. Python
+jest przygotowany na taką sytuację: umożliwia utworzenie {\em wycinka}
+listy (ang. {\em slice}). Aby stworzyć wycinek, należy wpisać nazwę
+listy, a następnie w nawiasach kwadratowych indeksy pierwszego i
+ostatniego elementu wycinka, odzielone dwukropkiem.
+
+Przykładowo, zwrócenie fragmentu listy od drugiego do czwartego elementu
+będzie wyglądało tak:
+
+\starttyping
+>>> l = [1, 2, 3, 4, 5, 6, 7]
+>>> l[1:4]
+[2, 3, 4]
+\stoptyping
+
+Pamiętaj, że indeksy listy zaczynają się od zera, a element o indeksie
+końcowym (w tym przypadku: \type{5}) nie zostanie dołączony do wycinka.
+
+Możemy też pominąć indeks początkowy. W takim wypadku Python zwróci
+wszystkie elementy od początku:
+
+\starttyping
+>>> l[:5]
+[1, 2, 3, 4, 5]
+\stoptyping
+
+Jeżeli pominiemy indeks końcowy, dostaniemy wszystkie elementy do końca
+listy:
+
+\starttyping
+>>> l[2:]
+[3, 4, 5, 6, 7]
+\stoptyping
+
+Jeżeli indeks końcowy będzie liczbą ujemną, to pozycja ostatniego
+elementu wycinka będzie liczona od końca listy:
+
+\starttyping
+>>> l[:-1]
+[1, 2, 3, 4, 5, 6]
+>>> l[:-2]
+[1, 2, 3, 4, 5]
+\stoptyping
+
+Co ciekawe, wycinki możemy tworzyć również ze stringów:
+
+\starttyping
+>>> s = 'ala ma kota'
+>>> s[2:8]
+'a ma k'
+\stoptyping
+
+$\sim$ Zobacz co się stanie, jeżeli indeks początkowy będzie liczbą
+ujemną, lub jeżeli indeks końcowy będzie większy niż długość listy.
+
 \subsection[pushpin-podsumowanie-8]{$\swarrow$ Podsumowanie}
 
 W tym rozdziale:
@@ -1391,8 +1553,6 @@ W tym rozdziale:
   wbudowanych \type{len}, \type{sum}, \type{max}, \type{min} oraz
   \type{sorted}.
 \stopitemize
-
-\thinrule
 
 \section[rozdział-10.-pętla-for]{Rozdział 10. Pętla \type{for}}
 
@@ -1487,11 +1647,18 @@ $\sim$ Napisz funkcję, która jako argument przyjmie string i wypisze
 każdą jego literę wraz z liczbą wystąpień tej litery w stringu (użyj
 metody \type{count}).
 
-\subsection[metoda-split]{Metoda \type{split}}
+\section[metoda-split]{Metoda \type{split}}
 
-String posiada metodę \type{split}, która rodziela go w miejscach
-wystąpienia danego znaku i zwraca listę stringów, które powstały w ten
-sposób:
+Możemy również iterować po słowach. Służy do tego metoda \type{split}:
+
+\starttyping
+for slowo in 'ala ma kota'.split():
+    print(slowo)
+\stoptyping
+
+Tak naprawdę metoda \type{split} ma dużo szersze zastosowanie. Jeżeli
+podamy jej jako argument jakiś znak, wtedy string zostanie podzielony w
+miejscach występowania tego znaku:
 
 \starttyping
 >>> s = '2015,2016,2017'
@@ -1510,6 +1677,34 @@ w miejscach spacji:
 $\sim$ Napisz funkcję, która jako argument przyjmuje string i wypisuje
 wszystkie jego słowa, każde w osobnej linijce.
 
+\subsection[range]{\type{range}}
+
+W tym miejscu warto wspomnieć o funkcji wbudowanej \type{range}.
+Przyjmuje ona jako argumenty dwa integery: początek i koniec przedziału
+liczbowego, który zwraca. Możemy następnie iterować po takim przedziale
+i wówczas elementami będą kolejne liczby całkowite:
+
+\starttyping
+for liczba in range(10, 20):
+    print(liczba)
+\stoptyping
+
+W powyższym przykładzie wypisujemy liczby całkowite od 10 do 19. Liczba,
+którą podaliśmy jako koniec przedziału, nie jest w nim uwzględniona.
+
+Co ciekawe, możemy podać tylko jeden argument, który wtedy jest
+traktowany jako koniec przedziału, zaś za początek przyjmuje się liczbę
+0. Kolejny przykład pokazuje jak wypisać liczby od 0 do 99:
+
+\starttyping
+for liczba in range(100):
+    print(liczba)
+\stoptyping
+
+$\sim$ Napisz funkcję, która przyjmie jeden argument o nazwie
+\type{limit} i zwróci listę wartości od 0 do \type{limit} podniesionych
+do kwadratu.
+
 \subsection[pushpin-podsumowanie-9]{$\swarrow$ Podsumowanie}
 
 W tym rozdziale:
@@ -1521,12 +1716,78 @@ W tym rozdziale:
   nauczyliśmy się korzystać w pętli \type{for},
 \item
   dowiedzieliśmy się, że pętla \type{for} działa także na stringach,
-  oraz że stringi posiadają metodę \type{split}.
+  oraz że stringi posiadają metodę \type{split},
+\item
+  poznaliśmy funkcję wbudowaną \type{range}.
 \stopitemize
 
-\thinrule
+\section[rozdział-11.-krotki]{Rozdział 11. Krotki}
 
-\section[rozdział-11.-prawda-i-fałsz]{Rozdział 11. Prawda i fałsz}
+W tym rozdziale:
+
+\startitemize[packed]
+\item
+  dowiesz się czym jest {\bf krotka}.
+\stopitemize
+
+\subsection[krotka]{Krotka}
+
+Czytając kod programów napisanych w Pythonie bardzo szybko natkniesz się
+na coś z pozoru bardzo podobnego do listy:
+
+\starttyping
+waluty = ('EUR', 'PLN', 'USD')
+\stoptyping
+
+Powyższy przykład to definicja {\bf krotki}. Na pierwszy rzut oka różni
+się ona od listy tylko na tym, że zamiast nawiasów kwadratowych ma
+okrągłe. Jednak krotka posiada jedną istotną cechę, która odróżnia ją od
+listy: nie można jej modyfikować. Oznacza to, że do raz utworzonej
+krotki nie można dodawać elementów, usuwać ich, ani nawet zmieniać.
+Dlatego też nie znajdziemy w krotce metod \type{append} ani
+\type{remove}. Za to z powodzeniem możemy odnosić się do poszczególnych
+elementów używając ich indeksów:
+
+\starttyping
+>>> waluty[1]
+'PLN'
+\stoptyping
+
+Oznacza to, że możemy również iterować po krotce pętlą \type{for}. Jeśli
+zaś przekażemy krotkę do funkcji \type{len}, to dostaniemy liczbę jej
+elementów.
+
+$\sim$ Napisz funkcję, która jako argument przyjmie krotkę i zwraca
+listę, która zawiera dokładnie takie same elementy.
+
+\subsection[zastosowanie-krotek]{Zastosowanie krotek}
+
+Z pozoru krotka może się wydawać czymś zupełnie zbędnym. Po co nam taka
+lista, której nie można modyfikować? Otóż w wielu przypadkach
+potrzebujemy dokładnie czegoś takiego. Dobrym przykładem jest właśnie
+zbiór nazw walut. Wyobraźmy sobie, że piszemy program do przeliczania
+wartości pieniężnych między różnymi walutami. W naszym programie będą
+zmieniały się kursy, ale same waluty będą cały czas takie same. Dlatego
+możemy je zdefiniować w krotce, tym samym chroniąc się przed modyfikacją
+zbioru walut, co byłoby niepożądane. Nawet jeżeli w przyszłości będziemy
+chcieli dodać kolejną walutę, łatwiej będzie wydać nową wersję programu
+niż ryzykować modyfikację zbioru, który powinien pozostać niezmieniony.
+
+Podobnych przykładów jest więcej i czytając kod różnych programów szybko
+przekonasz się, że krotki przydają się częściej niż mogło by się
+wydawać.
+
+\subsection[pushpin-podsumowanie-10]{$\swarrow$ Podsumowanie}
+
+W tym rozdziale:
+
+\startitemize[packed]
+\item
+  dowiedzieliśmy się czym jest krotka i jakie operacje możemy na niej
+  wykonywać.
+\stopitemize
+
+\section[rozdział-12.-prawda-i-fałsz]{Rozdział 12. Prawda i fałsz}
 
 W tym rozdziale:
 
@@ -1536,7 +1797,7 @@ W tym rozdziale:
   reprezentację w Pythonie: \type{True} i \type{False},
 \item
   poznasz {\bf instrukcję warunkową} \type{if}, która pozwala zmienić
-  przebieg programu jeżeli określony warunek zostanie spełniony.
+  przebieg programu, jeżeli określony warunek zostanie spełniony.
 \stopitemize
 
 \subsection[prawda-fałsz-i-warunek]{Prawda, fałsz i warunek}
@@ -1590,7 +1851,6 @@ drugiej:
 True
 >>> 70 > 100
 False
->>> 
 \stoptyping
 
 Operatory \type{>} i \type{<} można mieszać z \type{=}, w ten sposób
@@ -1670,7 +1930,7 @@ False
 
 Sprawdzanie czy jakieś wyrażenie jest prawdziwe nie miałoby żadnego
 sensu gdybyśmy nie mogli w jakiś sposób na tej podstawie podjąć decyzji
-o przebiegu naszego programu. W tym celu używamy {\bf instrukcji
+o dalszym przebiegu naszego programu. W tym celu używamy {\bf instrukcji
 warunkowej} \type{if}:
 
 \starttyping
@@ -1680,8 +1940,8 @@ if temperatura > 30.0:
 
 Struktura tej instrukcji jest bardzo prosta: po słowie \type{if}
 wpisujemy warunek, następnie dwukropek i w kolejnych liniach, po
-wciąciu, instrukcje, które zostaną wykonane jeżeli warunek będzie
-prawdziwy (mówimy: jeżeli zostanie spełniony).
+wcięciu, instrukcje, które zostaną wykonane jeżeli warunek będzie
+prawdziwy (mówimy: jeżeli warunek zostanie spełniony).
 
 $\sim$ Napisz funkcję, która przyjmuje argumenty \type{element} i
 \type{lista} i jeżeli dany element znajduje się na liście, to zwraca
@@ -1753,7 +2013,43 @@ if produkt == 'sok' or produkt == 'herbata'
 
 Operatory \type{or} i \type{and} można łączyć w jednym wyrażeniu.
 
-\subsection[pushpin-podsumowanie-10]{$\swarrow$ Podsumowanie}
+\subsection[prawdziwość-obiektów-funkcja-bool]{Prawdziwość obiektów,
+funkcja \type{bool}}
+
+Warunek nie musi być porównaniem. Każdy typ obiektu w jakiś sposób
+definiuje prawdziwość. Na przykład pusta lista to fałsz, a lista z co
+najmniej jednym jednym elementem to prawda.
+
+Aby przekonać się jaką wartość w rozumieniu logiki reprezentuje dany
+obiekt, możemy posłużyć się funkcją zbudowaną \type{bool}. Przyjmuje ona
+jeden argument - dowolny obiekt - i zwraca jego wartość logiczną:
+\type{True} lub \type{False}.
+
+\starttyping
+>>> bool([])
+False
+>>> bool([1, 2, 3])
+True
+\stoptyping
+
+$\sim$ Dla każdego z następujących typów odszukaj wartość, dla której
+funkcja \type{bool} zwróci \type{True} i taką dla której zwróci
+\type{False}: string, krotka, integer, float.
+
+Ponieważ każdy obiekt można rozważać w kategorii
+\quotation{prawdziwości}, każdym obiektem możemy posłużyć się w
+instrukcji \type{if}:
+
+\starttyping
+if imie and nazwisko and len(haslo) > 5:
+    print('Podano prawidłowe dane')
+\stoptyping
+
+$\sim$ Napisz funkcję, która jako argument przyjmie listę i zwróci
+\type{True} jeżeli wszystkie elementy na tej liście są prawdziwe, albo
+\type{False} jeżeli przynajmniej jeden element nie jest prawdziwy.
+
+\subsection[pushpin-podsumowanie-11]{$\swarrow$ Podsumowanie}
 
 W tym rozdziale:
 
@@ -1765,9 +2061,7 @@ W tym rozdziale:
   gdy określone wyrażenie jest prawdziwe.
 \stopitemize
 
-\thinrule
-
-\section[rozdział-12.-słowniki]{Rozdział 12. Słowniki}
+\section[rozdział-13.-słowniki]{Rozdział 13. Słowniki}
 
 W tym rozdziale:
 
@@ -2019,7 +2313,7 @@ klucz i zwraca wartość słownika pod danym kluczem. Stosując te funkcje
 wypełnij słownik danymi adekwatnymi dla wybranego zastosowania i pobierz
 te dane.
 
-\subsection[pushpin-podsumowanie-11]{$\swarrow$ Podsumowanie}
+\subsection[pushpin-podsumowanie-12]{$\swarrow$ Podsumowanie}
 
 W tym rozdziale:
 
@@ -2033,6 +2327,617 @@ W tym rozdziale:
 \item
   poznaliśmy najczęściej spotykane zastosowania słowników.
 \stopitemize
+
+\section[rozdział-14.-none]{Rozdział 14. \type{None}}
+
+W tym rozdziale:
+
+\startitemize[packed]
+\item
+  dowiesz się czym jest {\bf \type{None}}.
+\stopitemize
+
+\subsection[none]{\type{None}}
+
+W Pythonie istnieje jedna szczególna wartość, która nie reprezentuje
+żadnego dotąd poznanego typu: {\bf \type{None}}. Nie jest to liczba,
+string, ani nic innego co poznasz ucząc się tego języka. \type{None} to
+unikalna wartość, która reprezentuje osobny typ. Powstała po to, żeby
+programista mógł zdefiniować \quotation{nic}. Po co? Okazuje się, że są
+sytuacje, w których chcesz wprost zaznaczyć, że dana operacja nie
+zwróciła żadnej istotnej informacji. W takich sytuacjach możesz użyć
+wartości \type{None}. Zwróć uwagę, że sam fakt posłużenia się tą
+wartością jest na tyle wyjątkowy, że sugeruje, że zaistniały jakieś
+szczególne okoliczności.
+
+Przykładem użycia \type{None} może być dzielenie przez 0. Jak wiemy,
+taka operacja matematyczna jest niedozwolona. Teraz wyobraźmy sobie, że
+piszemy funkję, która przyjmuje jako argumenty dwie liczby i zwraca
+wynik dzielenia jednej przez drugą.
+
+\starttyping
+def podziel(dzielna, dzielnik):
+    return dzielna / dzielnik
+\stoptyping
+
+Co się stanie gdy argument \type{dzielnik} będzie równy \type{0}?
+Otrzymamy błąd:
+
+\starttyping
+>>> podziel(3, 0)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "<stdin>", line 2, in podziel
+ZeroDivisionError: division by zero
+\stoptyping
+
+Aby temu zapobiec, możemy przed wykonaniem dzielenia sprawdzić wartość
+argumentu i w razie potrzeby zwrócić \type{None}, sygnalizując, że nie
+możemy obliczyć wyniku:
+
+\starttyping
+def podziel(dzielna, dzielnik):
+    if dzielnik == 0:
+        return None
+    return dzielna / dzielnik
+\stoptyping
+
+Teraz z łatwością możemy rozpoznać kiedy funkcja napotkała
+niestandardowe wywołanie:
+
+\starttyping
+>>> wynik = podziel(4, 2)
+>>> print(wynik)
+2.0
+>>> wynik = podziel(5, 0)
+>>> print(wynik)
+None
+\stoptyping
+
+\subsection[domyślna-wartość-funkcji]{Domyślna wartość funkcji}
+
+Napiszmy prostą funkcję, która przyjmuje argument i wypisuje go na
+ekran:
+
+\starttyping
+def wypisz(obiekt):
+    print(obiekt)
+\stoptyping
+
+Wywołanie funkcji spowoduje oczekiwane skutki:
+
+\starttyping
+>>> wypisz(123)
+123
+>>> wypisz('ala ma kota')
+ala ma kota
+\stoptyping
+
+Widzimy, że ciało funkcji zostało wykonane, jednak jaka wartość została
+zwrócona? Innymi słowy: co się dzieje, jeżeli nie użyjemy instrukcji
+\type{return}? Odpowiedź brzmi: funkcja zwróci \type{None}.
+
+\starttyping
+>>> rezultat = wypisz('abc')
+abc
+>>> print(rezultat)
+None
+\stoptyping
+
+Tak samo dzieje się, jeżeli użyjemy instrukcji \type{return} nie podając
+jej żadnej wartości:
+
+\starttyping
+def wypisz(obiekt):
+    print(obiekt)
+    return
+\stoptyping
+
+Efekt będzie taki sam jak wtedy gdy nie użyjemy \type{return}:
+
+\starttyping
+>>> rezultat = wypisz(3.14)
+3.14
+>>> print(rezultat)
+None
+\stoptyping
+
+Za takim zachowaniem nie kryje się żadna magia: po prostu twórcy Pythona
+przyjęli, że domyślnie funkcja zwraca \quotation{nic}, a wartość taka
+będzie reprezentowana przez \type{None}.
+
+\subsection[operator-is]{Operator \type{is}}
+
+Skoro wiemy, że funkcje mogą zwracać \type{None}, to w jaki sposób z
+tego skorzystać? Możemy na przykład sprawdzić zwróconą wartość w
+instrukcji \type{if}:
+
+\starttyping
+def imie_nazwisko(imie, nazwisko):
+    if imie != '' and nazwisko != '':
+        return imie + ' ' + nazwisko
+
+def nazwa_uzytkownika(imie, nazwisko, email):
+    pelne_nazwisko = imie_nazwisko(imie, nazwisko)
+    if pelne_nazwisko == None:
+        return email
+    else:
+        return pelne_nazwisko
+\stoptyping
+
+W powyższym przykładzie funkcja \type{nazwa_uzytkownika} zwraca pełną
+nazwę użytkownika na podstawie jego imienia, nazwiska i adresu email.
+Jeżeli imię i nazwisko są dane, to zwracane jest pełne nazwisko, w
+przyciwnym wypadku zwrócony zostanie tylko adres email. Sprawdzenie czy
+pełne nazwisko jest podane zostało zapisane w instrukcji
+\type{if pelne_nazwisko == None}.
+
+Instrukcja \type{if zmienna == None} jest poprawna, jednak w ogólnym
+przypadku może nie zawsze działać. Dzieje się tak, ponieważ tworząc
+bardziej zaawansowane struktury danych w Pythonie (co nie będzie
+omówione podczas tych warsztatów), możemy zmienić zachowanie porównania,
+w efekcie wpływając na wynik zwracany przez operator \type{==}. Możemy
+wybrnąć z tej sytuacji stosując zamiast tego {\bf operator \type{is}}:
+
+\starttyping
+if pelne_nazwisko is None:
+    return email
+\stoptyping
+
+W ten sposób nasz kod będzie niewrażliwy na modyfikacje zachowania
+operatora \type{==}.
+
+Kiedy zatem używać \type{is}? Używaj tego operatora zawsze kiedy
+porównujesz wartość do \type{None}. Póki co nie będzie to robiło
+różnicy, ale dzięki temu nabędziesz dobrego nawyku, który w przyszłości
+okaże się przydatny.
+
+$\sim$ Napisz funkcję, która jako argument przyjmuje listę i zwróci
+również listę, na której znajdą się wszystkie elementy z argumentu, z
+wyjątkiem wartości równych \type{None}.
+
+\subsection[pushpin-podsumowanie-13]{$\swarrow$ Podsumowanie}
+
+W tym rozdziale:
+
+\startitemize[packed]
+\item
+  poznaliśmy \type{None},
+\item
+  dowiedzieliśmy się, że porównując wartości do \type{None} należy
+  stosować operator \type{is}.
+\stopitemize
+
+\section[rozdział-15.-pętla-while]{Rozdział 15. Pętla \type{while}}
+
+W tym rozdziale:
+
+\startitemize[packed]
+\item
+  nauczysz posługiwać się pętlą \type{while}.
+\stopitemize
+
+\subsection[pętla-while]{Pętla \type{while}}
+
+Wiesz już czym jest pętla oraz znasz jedną z nich: \type{for}. Teraz
+poznasz drugą, jednocześnie ostatnią jaka istnieje w Pythonie:
+\type{while}. Jej struktura jest jeszcze prostsza od poprzedniej:
+
+\starttyping
+licznik = 1
+while licznik < 10:
+    print(licznik)
+    licznik = licznik + 1
+\stoptyping
+
+Definicję pętli zaczynamy słowem \type{while}, następnie definiujemy
+warunek, a po drukropku, w kolejnych linijkach i po wcięciu, wypisujemy
+instrukcje, które będą wykonywane tak długo jak warunek będzie
+prawdziwy.
+
+Zwróć uwagę, że jeżeli zdefiniujemy warunek, który zawsze będzie
+prawdziwy, wtedy pętla będzie wykonywana w nieskończoność:
+
+\starttyping
+while 1 == 1:
+    print('.')
+\stoptyping
+
+$\sim$ Napisz funkcję, która przyjmie listę jako argument i wypisze
+wszystkie jej elementy przy użyciu pętli \type{while}.
+
+\subsection[pushpin-podsumowanie-14]{$\swarrow$ Podsumowanie}
+
+W tym rozdziale:
+
+\startitemize[packed]
+\item
+  poznaliśmy pętlę \type{while}.
+\stopitemize
+
+\section[rozdział-16.-biblioteka-standardowa]{Rozdział 16. Biblioteka
+standardowa}
+
+W tym rozdziale:
+
+\startitemize[packed]
+\item
+  dowiesz się czym jest {\bf biblioteka standardowa},
+\item
+  poznasz najważniejsze {\bf moduły} biblioteki standardowej.
+\stopitemize
+
+\subsection[biblioteka]{Biblioteka}
+
+W programowaniu posługujemy się pojęciem {\bf biblioteka}, które oznacza
+zbiór programów i narzędzi do ich budowania, które możemy wykrzystać
+pisząc własne programy. Przykładem biblioteki może być zbiór funkcji
+metematycznych (np. trygonometrycznych), do których możemy odwołać się w
+naszym kodzie zamiast definiować je samodzielnie.
+
+\subsection[moduły]{Moduły}
+
+W Pythonie biblioteki programistyczne są dostępne poprzez {\bf moduły}.
+Moduł to po prostu kod umieszczony na dysku, w miejscu w którym Python
+może go odnaleźć. Może to być kod napisany w Pythonie, ale są sposoby na
+pisanie modułów w innych językach programowania. Python znajdzie taki
+kod jeżeli zostanie on umieszczony w jednym z określonych z góry
+katalogów.
+
+Każdy może napisać własny moduł do Pythona. W internecie znajdziemy
+tysiące modułów, które różne osoby i firmy udostępniają. Możemy je
+pobrać i używać ich do pisania programów. Możemy też tworzyć własne
+moduły i dzielić się nimi z innymi użytkownikami.
+
+Aby skorzystać z modułu musimy {\bf zaimportować} jego nazwę. Robimy to
+instrukcją \type{import}. Gdy moduł jest już zaimportowany, możemy
+używać funkcji i zmiennych, które zostały w nim zdefiniowane. Robimy to
+wpisując nazwę modułu, a następnie, po kropce, nazwę obiektu.
+
+W poniższym przykładzie importujemy moduł o nazwie \type{math} i
+wywołujemy funkcję \type{sqrt}, która zwraca pierwiastek kwadratowy z
+podanej liczby:
+
+\starttyping
+import math
+print(math.sqrt(9))
+\stoptyping
+
+\subsection[biblioteka-standardowa-pythona]{Biblioteka standardowa
+Pythona}
+
+Poza modułami, które użytkownicy sami mogą pisać, istnieje zbiór
+modułów, który zawsze jest dostępny w Pythonie. Ten zbiór nazywamy
+{\bf biblioteką standardową}. Znajdziemy w nim dziesiątki modułów, a w
+nich narzędzia do komunikacji sieciowej, obsługi różnych formatów
+plików, obliczeń matematycznych etc.
+
+Biblioteka standardowa jest obszernie udokumentowana na
+\useURL[url2][https://docs.python.org/3/library/index.html][][oficjalnej
+stronie Pythona]\from[url2].
+
+\subsection[najważniejsze-moduły]{Najważniejsze moduły}
+
+Omówienie całej biblioteki standardowej to zadanie na co najmniej kilka
+tygodni, dlatego podczas tych warsztatów wspomnimy tylko o kilku
+najbardziej popularnych modułach.
+
+\section[math]{\useURL[url3][https://docs.python.org/3/library/math.html][][\type{math}]\from[url3]}
+
+Moduł \type{math} zawiera kilkadziesiąt funkcji matematycznych, które
+mogą okazać się pomocne przy prostych obliczeniach. Poniżej opisaliśmy
+kilka z nich.
+
+Funkcje \type{ceil} i \type{floor} zwracają wartości zaokrąglone
+odpowiednio w dół i w górę:
+
+\starttyping
+>>> math.ceil(3.5)
+4
+>>> math.floor(3.5)
+3
+\stoptyping
+
+Funkcja \type{sqrt} zwraca pierwiastek kwadratowy z danej liczby:
+
+\starttyping
+>>> math.sqrt(25)
+5.0
+\stoptyping
+
+\type{pi} oraz \type{e} reprezentują wartości stałych matematycznych:
+
+\starttyping
+>>> math.pi
+3.141592653589793
+>>> math.e
+2.718281828459045
+\stoptyping
+
+$\sim$ Napisz funkcję, która zwróci wartość pola powierzchni koła o
+zadanym promieniu (według wzoru \type{PI * r^2}, gdzie \type{r} to
+promień).
+
+\section[datetime]{\useURL[url4][https://docs.python.org/3/library/datetime.html][][\type{datetime}]\from[url4]}
+
+Moduł \type{datetime} to podstawowe narzędzie do pracy z datami i
+czasem. Zawiera obiekty \type{date}, \type{datetime} oraz
+\type{timedelta}, które reprezentują odpowiednio datę, datę i czas oraz
+różnicę w czasie.
+
+Aby otrzymać dzisiejszą datę należy wywołać metodę \type{today} na
+obiekcie \type{date}:
+
+\starttyping
+>>> datetime.date.today()
+datetime.date(2017, 8, 13)
+\stoptyping
+
+Otrzymany w ten sposób obiekt zawiera trzy {\bf atrybuty}: \type{year},
+\type{month} oraz \type{day}, czyli odpowiednio rok, miesiąc i dzień.
+
+\starttyping
+>>> dzisiaj = datetime.date.today()
+>>> dzisiaj.year
+2017
+>>> dzisiaj.month
+8
+>>> dzisiaj.day
+13
+\stoptyping
+
+Metoda \type{now} na obiekcie \type{datetime} zwróci nam datę i godzinę,
+którą mamy w tej chwili. Poza atrybutami \type{year}, \type{month} oraz
+\type{day} posiada także \type{hour}, \type{minute}, \type{second} i
+\type{microsecond}, czyli godzinę, minutę, sekundę i mikrosekundę.
+
+\starttyping
+>>> teraz = datetime.datetime.now()
+>>> teraz
+datetime.datetime(2017, 8, 13, 18, 53, 13, 366193)
+>>> teraz.hour
+18
+>>> teraz.minute
+53
+>>> teraz.second
+13
+>>> teraz.microsecond
+366193
+\stoptyping
+
+Oba typy obiektów możemy wypisać na ekran w czytelnym formacie:
+
+\starttyping
+>>> print(dzisiaj)
+2017-08-13
+>>> print(teraz)
+2017-08-13 18:53:13.366193
+\stoptyping
+
+Chcąc utworzyć reprezentację dowolnego momentu w czasie, wystarczy
+wywołać \type{date} lub \type{datetime} i podać kolejno \type{year},
+\type{month}, \type{day}, \type{hour}, \type{minute}, \type{second},
+\type{microsecond}:
+
+\starttyping
+>>> print(datetime.date(2010, 5, 10))
+2010-05-10
+>>> print(datetime.datetime(2020, 11, 23, 15, 7, 30))
+2020-11-23 15:07:30
+\stoptyping
+
+$\sim$ Zobacz co się stanie jeżeli spróbujesz utworzyć obiekt
+\type{date} z miesiącem spoza zakresu od 1 do 12 lub datę, która nie
+istnieje, np. 31 kwietnia.
+
+$\sim$ Zobacz co się stanie jeżeli spróbujesz utworzyć obiekt
+\type{datetime} z godziną, minutą lub sekundą o wartosci spoza
+dopuszczalnego zakresu (np. godzina 26).
+
+Jeżeli chcemy zobaczyć różnicę w czasie między dwoma obiektami typu
+\type{datetime}, możemy je po prostu odjąć od siebie:
+
+\starttyping
+>>> a = datetime.datetime(2017, 8, 16, 17, 00)
+>>> b = datetime.datetime(2017, 8, 16, 19, 00)
+>>> roznica = b - a
+>>> roznica
+datetime.timedelta(0, 7200)
+>>> roznica.seconds
+7200
+\stoptyping
+
+W powyższym przykładzie otrzymaliśmy obiekt \type{timedelta}, który
+posiada atrybut \type{seconds} o wartości równej liczbie sekund pomiędzy
+\type{a} i \type{b}.
+
+Jeżeli różnica jest większa niż jedna doba, to zostanie ona podzielona
+na dwie wartości: \type{seconds} i \type{days}, czyli sekundy i dni.
+
+\starttyping
+>>> c = datetime.datetime(2017, 8, 16, 17, 00)
+>>> d = datetime.datetime(2017, 8, 18, 15, 00)
+>>> roznica = d - c
+>>> roznica.seconds
+79200
+>>> roznica.days
+1
+\stoptyping
+
+Jeżeli do daty \type{c} dodamy jeden dzień i 79200 sekund, to otrzymamy
+\type{d}.
+
+$\sim$ Napisz funkcję, która przyjmuje dwie daty jako argumenty. Jeżeli
+druga data jest mniejsza od pierwszej, funkcja powinna zwrócić
+\type{None}. W przeciwnym wypadku funkcja powinna zwrócić liczbę sekund
+dzielącą obie daty. Zwróć uwagę, że różnica może być większa niż jedna
+doba. W takim wypadku liczbę dni należy zamienić na sekundy.
+
+\section[random]{\useURL[url5][https://docs.python.org/3/library/random.html][][\type{random}]\from[url5]}
+
+Moduł \type{random} służy do wykonywania operacji, których wynik jest
+losowy: generowania liczb losowych, losowego wybierania obiektów z
+danego zakresu, itd.
+
+Funkcja \type{randint} przyjmuje dwa integery jako argumenty i zwraca
+losowo wybraną liczbę całkowitą, której wartość znajduje się pomiędzy
+argumentami.
+
+\starttyping
+>>> random.randint(1, 100)
+9
+>>> random.randint(1, 100)
+44
+\stoptyping
+
+Funkcja \type{choice} przyjmuje jako argument dowolną sekwencję (listę,
+krotkę, string) i zwraca losowo wybrany element:
+
+\starttyping
+>>> random.choice('ala ma kota')
+'m'
+>>> random.choice([9, 7, 5, 3])
+7
+>>> random.choice(('pycon', 'pl', '2017'))
+'pl'
+\stoptyping
+
+$\sim$ Napisz funkcję, która przyjmie jako argument dowolną sekwencję i
+zwróci {\em krotkę} z trzema losowo wybramymi z niej elementami.
+
+\section[json]{\useURL[url6][https://docs.python.org/3/library/json.html][][\type{json}]\from[url6]}
+
+Moduł \type{json} pozwala zapisywać obiekty Pythona (słowniki i listy)
+jako string w formacie JSON ({\em JavaScript Object Notation}), który
+jest powszechnie używany np. w serwisach internetowych do wymiany danych
+między przeglądarką a serwerem.
+
+Żeby zapisać obiekt do stringa należy wywołać funkcję~\type{dumps}:
+
+\starttyping
+>>> json.dumps({'miejsce': 'Ossa', 'data': '2017-08-16'})
+'{"miejsce": "Ossa", "data": "2017-08-16"}'
+>>> json.dumps([2017, 8, 16])
+'[2017, 8, 16]'
+\stoptyping
+
+Do zamiany stringa na słownik lub listę służy funkcja \type{loads}:
+
+\starttyping
+>>> json.loads('{"miejsce": "Ossa", "data": "2017-08-16"}')
+{'miejsce': 'Ossa', 'data': '2017-08-16'}
+>>> json.loads('[2017, 8, 16]')
+[2017, 8, 16]
+\stoptyping
+
+\subsection[co-dalej]{Co dalej?}
+
+Wyżej wymieniliśmy tylko kilka najbardziej popularnych modułów, więc
+zachęcamy do zapoznania się z resztą biblioteki standardowej. Warto
+zacząć od oficjalnej dokumentacji, ale w internecie znajdziemy mnóstwo
+artykułów poświęconych stosowaniu biblioteki standardowej na co dzień.
+Oczywiście nie trzeba znać jej w całości żeby swobodnie programować w
+Pythonie. Wiele z tych modułów ma bardzo specyficzne zastosowania i
+większość programistów nigdy z nich nie korzysta. Warto natomiast
+pamiętać, że jeżeli trafisz na jakiś nowy problem, to dobrze jest
+najpierw przejrzeć bibliotekę standardową w poszukiwaniu modułu, który
+może okazać się pomocny.
+
+\subsection[pushpin-podsumowanie-15]{$\swarrow$ Podsumowanie}
+
+W tym rozdziale:
+
+\startitemize[packed]
+\item
+  dowiedzieliśmy się czym jest {\bf biblioteka standardowa} i jak z niej
+  korzystać,
+\item
+  poznaliśmy moduły \type{math}, \type{datetime}, \type{random} i
+  \type{json}.
+\stopitemize
+
+\section[podsumowanie]{Podsumowanie}
+
+Dobiegamy do końca kursu, ale to jeszcze nie koniec warsztatów! Mentorzy
+mają dla Ciebie jeszcze garść zadań. Możesz też skorzystać z okazji i
+zadać mentorom tyle pytań na ile tylko starczy czasu - między innymi
+dlatego zorganizowaliśmy te warsztaty!
+
+\subsection[o-czym-nie-powiedzieliśmy]{O czym nie powiedzieliśmy}
+
+Niestety czas na warsztaty jest organiczony, więc i zakres tematów jakie
+poruszyliśmy nie jest wyczerpujący. Znasz już podstawy Pythona. Możesz
+już samodzielnie pisać programy, a czytanie cudzych nie będzie już takie
+trudne. Jednak na tym etapie często trafisz na kod, którego nie
+zrozumiesz. A może już teraz wiesz o tematach, które wydają się
+interesujące, ale nie wiesz jak zacząć. Dlatego przygotowaliśmy dla
+Ciebie listę zagadnień, którą możesz potraktować jako kontynuację tych
+warsztatów. Nie jest to wyczerpująca lista tematów, ale na pewno pomoże
+Ci jeszcze lepiej poznać Pythona. W każdym punkcie umieściliśmy odnośnik
+do strony, która wyjaśnia dany temat.
+
+\startitemize[packed]
+\item
+  \useURL[url7][https://docs.python.org/3.6/tutorial/errors.html][][Jeszcze
+  więcej o wyjątkach i obsługiwaniu ich]\from[url7]
+\item
+  \useURL[url8][https://docs.python.org/3.6/tutorial/classes.html][][Klasy,
+  czyli programowanie zorientowane obiektowo]\from[url8]
+\item
+  \useURL[url9][https://docs.python.org/3/glossary.html\#term-decorator][][Dekoratory]\from[url9]
+\item
+  \useURL[url10][https://docs.python.org/3/glossary.html\#index-17][][Generatory]\from[url10]
+\item
+  \useURL[url11][https://docs.python.org/3/tutorial/datastructures.html\#list-comprehensions][][Listy
+  składane]\from[url11]
+\item
+  \useURL[url12][https://docs.python.org/3/tutorial/datastructures.html\#sets][][Zbiory]\from[url12]
+\stopitemize
+
+\subsection[na-koniec-dir]{Na koniec\ldots{} \type{dir}}
+
+Kończąc pokażemy Ci jeszcze jedną, bardzo przydatną funkcję wbudowaną.
+Nazywa się \type{dir}, przyjmuje jako argument dowolny obiekt i zwraca
+listę nazw wszystkich metod i atrybutów tego obiektu:
+
+\starttyping
+>>> d = {'a': 1}
+>>> dir(d)
+['__class__', '__contains__', '__delattr__', '__delitem__', '__dir__',
+'__doc__', '__eq__', '__format__', '__ge__', '__getattribute__',
+'__getitem__', '__gt__', '__hash__', '__init__', '__init_subclass__',
+'__iter__', '__le__', '__len__', '__lt__', '__ne__', '__new__',
+'__reduce__', '__reduce_ex__', '__repr__', '__setattr__',
+'__setitem__', '__sizeof__', '__str__', '__subclasshook__', 'clear',
+'copy', 'fromkeys', 'get', 'items', 'keys', 'pop', 'popitem',
+'setdefault', 'update', 'values']
+\stoptyping
+
+W powyższym przykładzie rozpoznasz na pewno kilka znajomych nazw, np.
+\type{items} czy \type{values}, ale jak widzisz słowniki oferują
+znacznie więcej. Zwróć uwagę na nazwy zaczynające i kończące się
+podwójnym znakiem podkreślenia. W taki sposób są nazywane atrybuty i
+metody, które nie są przeznaczone dla użytkowników obiektu. Zazwyczaj są
+to rzeczy używane tylko wewnątrz danego obiektu. Oczywiście tak czy
+inaczej można z nich korzystać - po prostu zazwyczaj nie będą dla nas
+przydatne, więc warto zainteresować się pozostałymi nazwami.
+
+Co teraz zrobić z taką listą? Jeżeli jakaś nazwa wydaje się oczywista,
+możemy po prostu spróbować jej użyć - w najgorszym wypadku otrzymamy
+komunikat o błędzie wyjaśniający co zrobiliśmy źle. Możemy też - i to
+polecamy - użyć funkcji \type{help}, która wyświetli dokumentację danego
+obiektu:
+
+\starttyping
+help(d.update)
+\stoptyping
+
+Dziękujemy za udział w warsztatach! Jeszcze raz zachęcamy do rozmowy z
+mentorami - chętnie odpowiedzą na wszystkie pytania i wyjaśnią
+niezrozumiałe tematy.
+
+Jeżeli masz uwagi do tego kursu, podziel się nimi pisząc do autorów,
+albo przekaż je mentorom. Twoje zdanie jest dla nas bardzo ważne!
 
 \subsection[bibliografia]{Bibliografia}
 
