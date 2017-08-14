@@ -1448,11 +1448,11 @@ jego literę wraz z liczbą wystąpień tej litery w stringu (użyj metody
 Możemy również iterować po słowach.  Służy do tego metoda `split`:
 
 ```python
-for slowo in 'ala ma kota':
+for slowo in 'ala ma kota'.split():
     print(slowo)
 ```
 
-Tak na prawdę metoda `split` ma dużo szersze zastosowanie.  Jeżeli
+Tak naprawdę metoda `split` ma dużo szersze zastosowanie.  Jeżeli
 podamy jej jako argument jakiś znak, wtedy string zostanie podzielony
 w miejscach występowania tego znaku:
 
@@ -1486,8 +1486,8 @@ for liczba in range(10, 20):
     print(liczba)
 ```
 
-W powyższym przykładzie wypisujemy liczby całkowite od 10 do 19.  Liczba,
-którą podaliśmy jako koniec przedziału nie jest w nim uwzględniona.
+W powyższym przykładzie wypisujemy liczby całkowite od 10 do 19. Liczba,
+którą podaliśmy jako koniec przedziału, nie jest w nim uwzględniona.
 
 Co ciekawe, możemy podać tylko jeden argument, który wtedy jest traktowany
 jako koniec przedziału, zaś za początek przyjmuje się liczbę 0.  Kolejny
@@ -1579,7 +1579,7 @@ W tym rozdziale:
 * poznasz pojęcia "prawda" i "fałsz" oraz ich reprezentację w Pythonie:
 `True` i `False`,
 * poznasz **instrukcję warunkową** `if`, która pozwala zmienić przebieg
-programu jeżeli określony warunek zostanie spełniony.
+programu, jeżeli określony warunek zostanie spełniony.
 
 
 ## Prawda, fałsz i warunek
