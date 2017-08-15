@@ -32,6 +32,10 @@ Whether you are warming up with Python and want to try something more, or you
 are a pro and plan to do some robotic project but never did anything with
 ROS - we invite you to our workshop!
 
+# Workshop materials
+
+Workshop materials (ROS package, IPython exercises and link to ROS Kinetic/ Ubuntu virtual machine) are available at: [0]
+
 ## Introduction and invitation
 
 Robotics is growing and interesting field for both work and fun.
@@ -168,10 +172,12 @@ For an introduction to robotics, I recommend watching some on-line videos
 or participating in free MOOCs.
 Actually one of the first MOOCs --
 AI for robotics [12]
-on Udacity is a way that Igor started using Python seriously [13].
+on Udacity is a way that Igor started using Python seriously. Currentely, Udacity
+has a whole nanodegree for people interested in robotics  [13].
 
 ## References
 
+0. https://github.com/AdoHaha/ipython`_`robot`_`prototyping
 1. https://www.youtube.com/watch?v=sF0tRCqvyT0
 2. https://www.youtube.com/watch?v=EgtZAUDqxHE
 3. https://vimeo.com/146183080
