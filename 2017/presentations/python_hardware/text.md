@@ -20,7 +20,7 @@ sprzętowych, jak i daje zajęcie dla programistów nie mających wcześniej do
 czynienia z takimi projektami. Inteligentna lodówka musi przecież wysyłać
 gdzieś w chmurę dane tak, by aplikacja webowa, czy mobilna, mogła zadziałać
 swoją magię. W tym cyfrowym wyścigu udział biorą duże firmy, jak i młode
-innowacyjne startupy, więc zapotrzebowanie na software, czy protypowanie
+innowacyjne startupy, więc zapotrzebowanie na software, czy prototypowanie
 produktów sprzętowych, jest spore i chyba na tyle ciekawe, by się tym
 zainteresować.
 
@@ -37,7 +37,7 @@ mikrokontrolerów ATmega, czy STM, można zaprototypować coś szybciej
 z wykorzystaniem Pythona, JavaScriptu, Lua, czy także C/C++ na platformach
 dla „twórców”. Arduino, czy Raspberry Pi, nie wymagają od nas znajomości
 asemblera, czy niuansów mikrokontrolerów. Oferują łatwe w użyciu, dobrze
-udokumentowane API i biblioteki, które można wykorzystać do protypowania
+udokumentowane API i biblioteki, które można wykorzystać do prototypowania
 elektroniki.
 
 Programista Pythona ma do wyboru kilka platform sprzętowych. MicroPython
@@ -46,8 +46,8 @@ ESP8266 z WiFi. Podobnie platforma Zerynth, który pozwala programować
 w Pythonie, którego kompiluje przed wrzuceniem na mikrokontroler.
 Wysokopoziomowe platformy Tinkerforge czy Phidgets także obsługują Pythona,
 podobnie jak bardziej wyspecjalizowana własnościowa platforma firmy Synapse.
-Jeżeli potrzebujemy większej mocy obliczeniowej, to możemy skorzystać z Raspberry
-Pi i bardzo wielu innych "komputerów na płytce", czy nawet klasycznych
+Jeżeli potrzebujemy większej mocy obliczeniowej, to możemy skorzystać
+z Raspberry Pi i bardzo wielu innych "komputerów na płytce", czy nawet klasycznych
 komputerów z procesorami x86 Intela i AMD.
 
 
@@ -101,10 +101,10 @@ W przypadku własnych projektów na niską skalę nie trzeba iść aż tak dalek
 ale zawsze warto przejść z surowego prototypu na płytce stykowej na PCB.
 Istnieją serwisy, w których możemy zamówić kilka płytek naszego autorstwa.
 Mając dwie trwałe płytki - jedna z mikrokontrolerem (Arduino, MicroPython),
-a druga z resztą układu znacząco podnosi się trwałość i niezawodność.
+a druga z resztą układu - znacząco podnosi się trwałość i niezawodność.
 
 
-## Pythonowe platformy do protypowania elektroniki
+## Pythonowe platformy do prototypowania elektroniki
 
 Python dostępny jest na kilku platformach, projektach związanych
 z elektroniką. Tinkerforge, czy Phidgets są bardziej ukierunkowane
@@ -126,7 +126,7 @@ Firma PyCom oferuje swoje płytki deweloperskie z MicroPythonem
 obecne w produktach tej firmy. Firma ST od niedawna oferuje też produkcyjny
 układ SPWF04 (podobny do ESP8266) z MicroPythonem "prosto z pudełka". Płytka
 edukacyjna MicroBit także go wykorzystuje. Wybór jest więc dość spory. Do wad
-można zaliczyć ograniczoną ilość bibliotek do komponentów, co może utrudnić
+można zaliczyć ograniczoną liczbę bibliotek do komponentów, co może utrudnić
 prototypowanie.
 
 Zerynth to komercyjna i częściowo otwarta platforma, której celem jest obsługa
@@ -139,14 +139,14 @@ raczej mała i przynajmniej w przypadku Pythona ograniczeni jesteśmy
 dostępnością bibliotek do komponentów. Zaletą na pewno jest IDE i dodatkowe
 narzędzia, wadą - vendor lockin.
 
-Jako trzecią platformę możemy potraktować komputery, w szczególności Raspberry
-Pi, które łączą komputer z zestawem GPIO i dość dużą ilością bibliotek
+Jako trzecią platformę możemy potraktować komputery, w szczególności
+Raspberry Pi, które łączą komputer z zestawem GPIO i dość dużą liczbą bibliotek
 dla dodatkowych komponentów. Mając do dyspozycji USB, WiFi, Bluetooth,
 Ethernet możemy interfejsować i komunikować się z różnoraką elektroniką
 i usługami sieciowymi. USB można też wykorzystać do komunikacji szeregowej
 z mikrokontrolerami. Jeżeli musimy wykorzystać sprzęt "wyższego poziomu",
 np. kamerę przemysłową, to zapewne będziemy potrzebować MS Windows lub Linuksa
-i API producenta dla Pythona (lub API .NET i IronPython, ew. interfejs COM
+i API producenta dla Pythona (lub API .NET i IronPython, ewentualnie interfejs COM
 dla starszego sprzętu). Zostając w temacie kamer przemysłowych - sporo
 producentów ostatnio dostarcza wsparcie dla Pythona (np. PointGrey/FLIR).
 W przypadku zasilania bateryjnego należy uwzględnić, że nawet oszczędne płytki
@@ -154,7 +154,7 @@ z procesorami ARM będą pobierały znacznie więcej prądu niż mikrokontroler,
 jak i nie będzie można ich aż tak efektywnie usypiać.
 
 Oddzielną grupę stanowią projekty takie jak Tinkerforge, czy Phidgets.
-Projekty te oferują wiele komponetów i płytek kontrolujących. Całość jest
+Projekty te oferują wiele komponentów i płytek kontrolujących. Całość jest
 zintegrowana wysokopoziomowym API dostępnym dla licznych języków. W tego typu
 projektach skryptując np. silnik krokowy nie musimy implementować wysyłania
 serii impulsów, tylko korzystamy z gotowej metody wykonującej określony ruch

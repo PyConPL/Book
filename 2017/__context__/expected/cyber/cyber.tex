@@ -1,0 +1,1113 @@
+\usemodule[pycon-yyyy]
+\starttext
+
+\Title{with python: security()}
+\Author{Piotr Dyba}
+\MakeTitlePage
+
+\section[about-author]{About author}
+
+Piotr Dyba is a Team Leader and software engineer at F-Secure's Rapid
+Detection Service where he and his Python team are developing a
+distributed network of honeypots, network sensors and tooling for RDS.
+In his spare time he is a leading mentor and teacher at PyLadies Poznan.
+Pythonically in love with asyncio and personally with hiking. The last
+interesting fact about Piotr is that he used to be a photojournalist and
+visited Afghanistan as war photographer.
+
+\subsection[introduction]{Introduction}
+
+Introduction to cybersecurity for developers. Cybersecurity is a
+critical part of all distributed applications. By understanding and
+implementing proper security measures, guard your own resources against
+malicious attackers as well as provide a secure environment for all
+relevant parties.
+
+\subsection[disclaimers]{Disclaimers:}
+
+The views and opinions expressed in this article focus on the
+developer's perspective an are solely those of the author. I have
+received no payments for mentioning any of the open-source or commercial
+products mentioned in this article.
+
+\subsection[what-is-cybersecurity-and-why-is-it-so-important-nowadays]{What
+is cybersecurity and why is it so important nowadays?}
+
+Cybersecurity encompasses means and protocols to defend resources and
+devices (computer systems, IoT devices, smartphones) from disruption,
+damage or theft. It is not only about firewalls and antivirus software,
+but rather it starts with the hardware, including policies for handling
+computers and servers at a company, access rights to server rooms and
+even which devices are allowed to be brought into the company building.
+For instance, it is common to ban external pen-drives. To be able to
+assume that our hardware is safe, we need to harden our software on both
+workstations and servers and impose proper policies for the users, data
+handling, access.
+
+Looking at the number and severity of leaks over time {[}23{]}, it is
+easy to observe a huge increase in their occurrences over the years and
+severity rising from 1 000 to above 1 000 000 000 user's data.
+
+\placefigure{NotPetya malware screen}{\externalfigure[000_notpetya.png]}
+
+Remember the screen (rys. 1) from June 2017? NotPetya laid waste on many
+companies across the globe in just one day, some of which are still
+recovering. The most known cases were companies such as TNT and Raben.
+Raben is a good example of well prepared recovery that took less than 24
+hours. In that time, Raben moved their whole server infrastructure from
+Windows to Linux, which was quite an achievement.
+
+\placefigure{Attackers per day in the first 6 months of
+2017}{\externalfigure[001_attacks_per_day.png]}
+
+The graph (rys. 2) shows the number of attackers per day in first 6
+months of 2017, which varied from 2 to almost 16 millions per day. An
+attack means an action against one of F-secure's research honeypots
+deployed on the public internet. A honeypot is a server that pretends to
+be an easy target for an attacker, where all his or her actions can be
+monitored and registered, but which cannot crucially affect the critical
+parts of the broader infrastructure. It's just a trap that pretends to
+expose services like ssh, mysql, smtp etc., in our case written in pure
+Python.
+
+\placetable[none]{}
+\starttable[|l|l|l|l|]
+\HL
+\NC O.No.
+\NC username
+\NC password
+\NC count
+\NC\AR
+\HL
+\NC 1
+\NC root
+\NC root
+\NC 1165236
+\NC\AR
+\NC 2
+\NC admin
+\NC admin
+\NC 66522
+\NC\AR
+\NC 3
+\NC user
+\NC user
+\NC 23994
+\NC\AR
+\NC 4
+\NC test
+\NC test
+\NC 13302
+\NC\AR
+\NC 5
+\NC pi
+\NC raspberry
+\NC 35938
+\NC\AR
+\NC 6
+\NC support
+\NC support
+\NC 35331
+\NC\AR
+\NC 7
+\NC ubnt
+\NC ubnt
+\NC 33170
+\NC\AR
+\NC 8
+\NC oracle
+\NC oracle
+\NC 9294
+\NC\AR
+\NC 9
+\NC guest
+\NC guest
+\NC 23524
+\NC\AR
+\NC 10
+\NC git
+\NC git
+\NC 10829
+\NC\AR
+\HL
+\stoptable
+
+It was deducted that a lot of the above attacks were conducted by bots
+trying to log in, using a few default username-password combinations. It
+could be assumed that such attacks are sometimes successful, otherwise
+the attackers would stop scanning in such a manner.
+
+\subsection[common-attack-vectors-on-frontend-application]{Common attack
+vectors on frontend application}
+
+How can we hack our app? We can start from analysing it on our own, but
+probably someone else has already thought about it.
+
+Of course they had, and it was not someone but thousands of people.
+There is a huge project called Open Web Application Security Project -
+OWASP in short {[}1{]}. OWASP is not only gathering all common threats
+but also offers examples of attacks, ways to measure their severity and
+much more. It can be used both by technical and less technical
+personnel, such as a Project Manager, as most of the vulnerabilities
+also have a business level explanation.
+
+OWASP offers a vast repository of cybersecurity knowledge, encompassing
+not only on threats, but also on tools, books, events and other
+interesting sites.
+
+Every few years, OWASP publishes a list of most common attacks. The last
+one is from 2013 and a fresh one is coming up this year, but if you
+compare between the recent lists, the changes are minimal over time,
+which leads to a sad conclusion that many people still have not yet
+learned from others' mistakes.
+
+OWASP TOP 10 from 2013:
+
+\startitemize[n,packed][stopper=.,width=2.0em]
+\item
+  A1 Injection
+\item
+  A2 Broken Authentication and Session Management
+\item
+  A3 Cross-Site Scripting (XSS)
+\item
+  A4 Insecure Direct Object References
+\item
+  A5 Security Misconfiguration
+\item
+  A6 Sensitive Data Exposure
+\item
+  A7 Missing Function Level Access Control
+\item
+  A8 Cross-Site Request Forgery (CSRF)
+\item
+  A9 Using Components with Known Vulnerabilities
+\item
+  A10 Unvalidated Redirects and Forwards
+\stopitemize
+
+Try all of the OWASP TOP10 and more using one of the projects: BeeBox
+project {[}24{]}, OWASP Broken Web Applications Project (OWASP BWAP)
+{[}25{]}.
+
+\subsection[common-attack-vectors-on-a-python-application]{Common attack
+vectors on a Python application}
+
+Attackers can try injecting code into our Python application, but this
+can only happen if they have found a new loophole in Python itself, or
+if we are using eval/exec or pickle, especially for user input.
+
+Example of Python payload (not in one line for readability)
+
+\starttyping
+import subprocess
+subprocess.Popen([
+    '/bin/bash',
+    '-c',
+    'rm -rf --no-preserve-root /'
+])
+\stoptyping
+
+SQL injection\ldots{} Again, we are quite safe here, unless we are using
+our own SQL engine instead of mature ORMs such as SQLAlchemy or Django
+ORM.
+
+Example of SQL payload:
+
+\starttyping
+admin; DROP DATABASE users;
+\stoptyping
+
+The main threat to a Python application is located between chair and
+keyboard\ldots{} the developer. Fortunately, we can also mitigate this
+to a point, using security static code analysis which is described later
+on. If you are interested in how to exploit pickle there is a link that
+can explain this really well on an example of an already fixed bug in
+the Twisted framework {[}26{]}.
+
+But why people would even use eval or exec if it is so dangerous?
+
+\starttyping
+python2 -m timeit -s 'code = "a,b =  2,3; c = a * b"' 'exec(code)'
+10000 loops, best of 3: 18.7 usec per loop
+\stoptyping
+
+\starttyping
+python2 -m timeit -s 'code = compile("a,b =  2,3; c = a * b",
+    "<string>", "exec")' 'exec(code)'
+1000000 loops, best of 3: 0.664 usec per loop
+\stoptyping
+
+\starttyping
+python3.5 -m timeit -s 'code = "a,b =  2,3; c = a * b"' 'exec(code)'
+10000 loops, best of 3: 22.3 usec per loop
+\stoptyping
+
+\starttyping
+python3.5 -m timeit -s 'code = compile("a,b =  2,3; c = a * b",
+    "<string>", "exec")' 'exec(code)'
+1000000 loops, best of 3: 0.544 usec per loop
+\stoptyping
+
+It can make a simple script much faster on Python 2.7 \lettertilde{}30
+(18.7usec vs.~0.664usec) times and, what is interesting, over 40 times
+faster on Python 3.5 (22.3usec vs.~0.544usec).
+
+Eval may simplify code. A known example of string calculator shows that
+really well.
+
+String calculator:
+
+\starttyping
+def count(equation):
+    a, sign, b = equation.split(' ')
+    a, b = int(a), int(b)
+    if sign == '+':
+        return a + b
+    elif sign == '-':
+        return a - b
+    elif sign == '*':
+        return a * b
+    elif sign == '/':
+        return a / b
+    else:
+        return 'Unsupported sign'
+
+print(count('2 + 3'))
+\stoptyping
+
+String calculator using only eval:
+
+\starttyping
+print(eval('2 + 3'))
+\stoptyping
+
+From 12 lines of code for the most basic example of a equation, it can
+be reduced to just one line using eval, which will work even with more
+complex equations.
+
+\subsection[threat-modeling]{Threat modeling}
+
+Threat modeling is a process for analyzing the security of an
+application or a system. It is a structured approach that enables you to
+identify, quantify, and address the security risks associated with the
+target of the modeling.
+
+\subsection[identification-of-assets]{1. Identification of assets}
+
+Let's conduct an example threat modeling from Batman's perspective (rys.
+3) and identify our assets, which are: the bat cave, our butler Alfred
+and information in form of emails and texts.
+
+\subsection[identification-and-quantification-of-threats]{2.
+Identification and quantification of threats}
+
+Next, let's distinguish threats, so: the police, our arch enemy joker
+and the press. Now, let's quantify those threats. Alfred is
+irreplaceable and has access to all our other assets, so he is our
+highest risk and thus has the highest priority for defense. Our bat cave
+is also precious, but it can be rebuilt. Lastly, information included in
+emails and text messages could allow our actions and position to be
+tracked, but we can handle the journalists and the police ourselves.
+
+\subsection[addressing]{3. Addressing}
+
+For our main asset, Alfred, we can obscure his location and his identity
+which is not that easy in the modern world. The bat cave is a much
+simpler task, as we can install security systems, traps, misleading
+bases of operations etc. There is a ton of possibilities here. For
+emails and texts, encryption and caution when writing something delicate
+should be enough.
+
+\placefigure{Batman Threat modeling}{\externalfigure[002_batman.png]}
+
+\subsection[identification-of-assets---decompose-the-application]{1.
+Identification of assets - decompose the application}
+
+So, as in the batman example shows, the first step is identifying
+assets, their purpose and use cases. The next step is to specify entry
+points to each asset and then how it interacts with external parts of
+the service or 3rd party services. The last step is defining the Access
+Control Lists (ACL), for example which actions are allowed for an
+anonymous user, a registered user and an admin to do. If development of
+an application is already in progress, there is a high chance that part
+of the work is already done by reusing data flow diagrams or application
+UML. An even better source of how an application should work are
+behavioural or integration tests.
+
+\subsection[identification-and-quantification-of-threats-1]{2.
+Identification and quantification of threats}
+
+There are few frameworks that we can work with, such as STRIDE (which
+stands for Spoofing identity, Tampering with data, Repudiation,
+Information disclosure, Denial of service, Elevation of privilege) and
+ASF (Application Security Frame), both of which should give us reliable
+information regarding:
+
+\startitemize[packed]
+\item
+  auditing and logging
+  \startitemize[packed]
+  \item
+    auditing is used to answer the question \quotation{Who did what?}
+    and possibly why.
+  \item
+    logging is more focused on what's happening.
+  \stopitemize
+\item
+  authentication and authorization
+  \startitemize[packed]
+  \item
+    authentication is the a process of ascertaining that somebody really
+    is who he or she claims to be
+  \item
+    authorization is a process to determine who is allowed to do what
+  \stopitemize
+\item
+  configuration management - how and where do we store configs
+\item
+  data validation and protection in storage and transit
+  \startitemize[packed]
+  \item
+    where do we store the data
+  \item
+    where do we validate it before recording
+    \startitemize[packed]
+    \item
+      backend side
+    \item
+      both backend and frontend side
+    \item
+      only frontend (highly not advised)
+    \stopitemize
+  \item
+    protection in transit
+    \startitemize[n,packed][stopper=.]
+    \item
+      basic approach: have all communication over TLS, so encrypted
+    \item
+      advanced approach: have the data additionally encrypted before
+      sending it, which is becoming the corporate level security
+      standard
+    \item
+      expert approach: send it over a dedicated VPN tunnel, government
+      level security
+    \stopitemize
+  \stopitemize
+\item
+  exception management - how do we track exception occurrence and what
+  are the procedures to handle them
+\stopitemize
+
+Now we just need to measure the severity of the threats we have. We can
+try approaching that by ourselves, determining which assets are the most
+important for us or, for example, use CVSS. CVSS, or Common
+Vulnerability Scoring System, is based on factors such as:
+
+\startitemize[packed]
+\item
+  Attack vector
+\item
+  Attack complexity (hard to measure)
+\item
+  Privileges
+\item
+  User interaction
+\item
+  Scope
+\item
+  Confidentiality
+\item
+  Integrity
+\item
+  Availability
+\stopitemize
+
+All of the above together can give a reference rating, but if one of the
+parameters is hard to define, like in the case of attack complexity, try
+both and either calculate an average or leave it as a range from two
+edge CVSS outcomes. It is important to remember that this is just a
+reference point, not an oracle for what should be done. As mentioned
+before, having use case UMLs or, even better, abuse case UMLs may come
+in handy here.
+
+\subsection[addressing-1]{3. Addressing}
+
+We can address issues in 4 ways, by:
+
+\startitemize[n,packed][stopper=.]
+\item
+  Completely removing the threat
+\item
+  Reducing/mitigating the threat
+\item
+  Acknowledging it and doing nothing
+\item
+  Pretending there is no issue
+\stopitemize
+
+Obviously, the best options is to remove the threat, but sometimes it's
+either impossible or the costs of removing it are too high. In such
+cases we can try to mitigate it. Taking the risk by leaving it as is or
+marking it as \quotation{address later}, where it does not affect our
+business nor customers, maybe fine in some cases, for instance when an
+attacker is able to traverse over a directory with long and random file
+names of non important pictures of other users' cats. So, there is a
+chance that someone will type some random gibberish and they will see
+the picture of a user's cat but they still won't know whose cat it is
+and we don't really care if that happens. But if the attacker can
+traverse not only over cat pictures, but also over config files etc.,
+and we still do nothing about it, then we are asking to be hacked.
+
+\subsection[threat-model-of-a-simple-blog-app]{Threat Model of a simple
+blog app}
+
+\subsection[specification]{Specification}
+
+A threat model of a simple app using AngularJS for frontend, Sanic for
+backend and SQL database with a few simple endpoints such as:
+
+\startitemize[packed]
+\item
+  / - static home for serving the JavaScript and HTML parts
+\item
+  /api/login - dedicated authentication endpoint
+\item
+  /api/blog - blog list view
+\item
+  /api/blog/ - detail post view
+\item
+  /api/user - user list view
+\item
+  /api/user/ - detail user view
+\stopitemize
+
+\subsection[use-cases-to-understand-how-the-application-is-used]{1.1
+Use cases to understand how the application is used}
+
+So let's get back to our Blog app. We have 3 basic use cases for our
+app:
+
+\startitemize[packed]
+\item
+  Everyone can enter the site and view the blog and blog posts
+\item
+  Registered users can add new posts
+\item
+  Admins can manage users and delete posts
+\stopitemize
+
+\subsection[interactions-with-external-entities]{1.2 Interactions
+with external entities}
+
+Let's now project these use cases on interactions with the database.
+
+\placetable[none]{}
+\starttable[|l|l|l|l|l|l|l|]
+\HL
+\NC DB Action
+\NC Login
+\NC Logout
+\NC Read
+\NC Write
+\NC Delete
+\NC Manage
+\AR
+\NC
+\NC
+\NC
+\NC blog
+\NC blog
+\NC blog
+\NC Users
+\NC\AR
+\HL
+\NC DB Read
+\NC Yes
+\NC No
+\NC Yes
+\NC Yes
+\NC No
+\NC Yes
+\NC\AR
+\NC DB Write
+\NC Yes
+\NC Yes
+\NC No
+\NC Yes
+\NC No
+\NC Yes
+\NC\AR
+\NC DB Delete
+\NC No
+\NC No
+\NC No
+\NC No
+\NC Yes
+\NC Yes
+\NC\AR
+\HL
+\stoptable
+
+The important fact is that only the admin can manage users and delete
+blog posts, which means it is quite easy to defend the application
+against data lose.
+
+\subsection[identifying-entry-points]{1.3 Identifying entry
+points}
+
+\placetable[none]{}
+\starttable[|l|l|l|l|l|l|l|]
+\HL
+\NC Method
+\NC /
+\NC /api/
+\NC /api/
+\NC /api/
+\NC /api/
+\NC /api/
+\NC\AR
+\NC
+\NC
+\NC login
+\NC blog
+\NC blog/
+\NC user
+\NC user/
+\NC\AR
+\HL
+\NC GET
+\NC Yes
+\NC No
+\NC Yes
+\NC Yes
+\NC Yes
+\NC Yes
+\NC\AR
+\NC POST
+\NC No
+\NC Yes
+\NC Yes
+\NC Yes
+\NC Yes
+\NC Yes
+\NC\AR
+\NC DEL
+\NC No
+\NC No
+\NC No
+\NC Yes
+\NC No
+\NC Yes
+\NC\AR
+\HL
+\stoptable
+
+\subsection[identifying-trust-levels---access-control-lists]{1.4
+Identifying trust levels - Access Control Lists}
+
+\placetable[none]{}
+\starttable[|l|l|l|l|l|l|l|]
+\HL
+\NC user type
+\NC Login
+\NC Logout
+\NC Read
+\NC Write
+\NC Delete
+\NC Manage
+\NC\AR
+\NC
+\NC
+\NC
+\NC blog
+\NC blog
+\NC blog
+\NC Users
+\NC\AR
+\HL
+\NC Anonymous
+\NC Yes
+\NC No
+\NC Yes
+\NC No
+\NC No
+\NC No
+\NC\AR
+\NC User
+\NC No
+\NC Yes
+\NC Yes
+\NC Yes
+\NC No
+\NC No
+\NC\AR
+\NC Admin
+\NC No
+\NC Yes
+\NC Yes
+\NC Yes
+\NC Yes
+\NC Yes
+\NC\AR
+\HL
+\stoptable
+
+Let's think about our database actions on API layer and focus on Get,
+Post, Delete methods shown in those two tables.
+
+\placetable[none]{}
+\starttable[|l|l|l|l|l|l|l|]
+\HL
+\NC User type
+\NC /
+\NC /api/
+\NC /api/
+\NC /api/
+\NC /api/
+\NC /api/
+\NC\AR
+\NC
+\NC
+\NC login
+\NC blog
+\NC blog/
+\NC user
+\NC user/
+\NC\AR
+\HL
+\NC Anonymous
+\NC G
+\NC P
+\NC G
+\NC G
+\NC -
+\NC G
+\NC\AR
+\NC User
+\NC G
+\NC -
+\NC GP
+\NC GP
+\NC -
+\NC G
+\NC\AR
+\NC Admin
+\NC G
+\NC -
+\NC GP
+\NC GPD
+\NC GP
+\NC GPD
+\NC\AR
+\HL
+\stoptable
+
+(G - Get, P - Post, D - Delete)
+
+We know we can disable del and post methods for home, and for login we
+can only accept the post method. Note that the other endpoint's
+specification will depend on the project's approach to creating proper
+endpoints, so it may differ from the example above.
+
+\subsection[identifying-assets]{1.5 Identifying assets}
+
+what is the most precious thing we have in our app?
+
+In case of a blog, it is the information, that is, our users and blog
+posts, but depending on our business model, it can also be
+confidentiality. These can be affected by:
+
+\startitemize[packed]
+\item
+  Someone getting admin access and deletes everything.
+\item
+  Someone getting user access and creates spam or spreads malware.
+\stopitemize
+
+Our second most valued asset may be our code base, which can be targeted
+in different ways than the information itself by getting open sourced or
+sold, following which even read only access will allow an attacker to
+more easily find vulnerabilities and exploit them.
+
+At this point we have completed all points of the Decomposition phase of
+threat modeling.
+
+\subsection[identification-and-quantification-of-threats-frontend]{2.1
+Identification and quantification of threats: Frontend}
+
+So, for our Front end we can expect six of OWASP top 10:
+
+\startitemize[n,packed][stopper=.]
+\item
+  A2 Broken Authentication and Session Management
+\item
+  A3 Cross-Site Scripting (XSS)
+\item
+  A5 Security Misconfiguration
+\item
+  A7 Missing Function Level Access Control
+\item
+  A8 Cross-Site Request Forgery (CSRF)
+\item
+  A10 Unvalidated Redirects and Forwards
+\stopitemize
+
+We are using a well-known framework, which is really good, unless we or
+our developers do something stupid, because AngularJS mitigates or even
+handles all of those issues.
+
+\subsection[identification-and-quantification-of-threats-python-backend]{2.2
+Identification and quantification of threats: Python Backend}
+
+OWASP TOP 10:
+
+\startitemize[n,packed][stopper=.]
+\item
+  A1 Injection
+\item
+  A2 Broken Authentication and Session Management
+\item
+  A4 Insecure Direct Object References
+\item
+  A5 Security Misconfiguration
+\item
+  A6 Sensitive Data Exposure
+\item
+  A7 Missing Function Level Access Control
+\item
+  A8 Cross-Site Request Forgery (CSRF)
+\stopitemize
+
+From Threat Modeling of a Python app, we can see that we can have even
+more vulnerabilities than on the frontend side, but most of them are
+mitigated out of the box, as long as we follow three important rules
+during development:
+
+\startitemize[n,packed][stopper=.]
+\item
+  Use common sense;
+\item
+  Do not use uncommon external libraries without proper check up, for
+  example if they are not sending the data to NSA/KGB/etc., but most
+  importantly they are not sending the data to a unknown attacker and
+  being sold later on;
+\item
+  Do not use outdated libraries as it may open code to vulnerabilities.
+\stopitemize
+
+\subsection[addressing-issues]{3.0 Addressing issues}
+
+Someone gets admin access and deletes all data - we can mitigate or even
+remove this threat by:
+
+\startitemize[packed]
+\item
+  Adding multifactor authentication at least for Admins
+\item
+  Moving the admin part of an application to a separate microservice
+  with access only from specific IPs/IP ranges
+\stopitemize
+
+Someone gets user access and creates spam - we can mitigate that by:
+
+\startitemize[packed]
+\item
+  Limiting posts per day
+\item
+  Edits per hour
+\item
+  Shorter sessions
+\item
+  Captcha
+\stopitemize
+
+Part of mitigation is also having proper testing at unit level - having
+not only happy paths but including edge cases helps.
+
+\subsection[ok-so-we-got-hacked-but-how-bad-can-it-be]{OK so we
+got hacked, but how bad can it be?}
+
+The are four circles of being owned:
+
+\startitemize[n,packed][stopper=.]
+\item
+  Being hacked by a bot or a script kiddie
+\item
+  Being hacked using one of the well-known and documented threats
+\item
+  Being hacked using a known vulnerability
+\item
+  Being hacked using an unknown vulnerability - 0 day
+\stopitemize
+
+The 1st and 2nd circle are really bad as it means we have almost no
+security and we should really change priorities. It will most probably
+be picked up by the internet media and we will be lampooned for how easy
+and fun it was hacking our app. Really shame on you! The 3rd level means
+that protocols regarding emerging threats should be better and faster.
+Last but not least, getting owned by a new, shiny vulnerability is
+obviously bad for business but at least not that shameful. At the same
+time, it shows how serious the attackers needs to be and how good were
+the defences, as it drew the attacker to the last resort he/she had. For
+the fourth circle, the attacker will try to keep their actions unnoticed
+as long as possible, thus there should not be a fallback in the press
+about it.
+
+\quotation{The smart thing is to learn from others' mistakes.}
+
+Not seeing the destructive outcome of an attack does not necessarily
+mean that you were not hacked. There is a chance that you have been
+owned long time ago and you still do not know about it! Apart from
+invisible actions such as gathering data or some increased trolling, an
+attacker may also install some nasty ransomware and demand a high
+ransom.
+
+Gartner report from 2016 says that it takes on average 200 days since a
+hack for a company to find about it (citation needed). Imagine what an
+attacker can do during that time!
+
+\section[tooling]{Tooling}
+
+Source Code Analysis (Reading through the abstract syntax tree and
+looking for possible security bugs) tools:
+
+\startitemize[packed]
+\item
+  Bandit - a tool designed to find common security issues in Python
+  code, it is written in Python and can be easily extended with custom
+  security policies. It works in a similar manner to pylint or pep8
+  tool. You can get it directly from PyPi.
+\item
+  SonarQube - more advanced than bandit, comes with a plugin for Jenkins
+  and support for JS, HTML and 20 other languages. The tool has an
+  integrated web UI and many more useful features. You can spawn your
+  own instance or buy it as a service. Jenkins read -
+  \quotation{Continuous Inspection}.
+\stopitemize
+
+Automatic Scanning tools:
+
+\startitemize[packed]
+\item
+  ZAP (Zed Attack Proxy) - Free, Open Source, Jenkins ready
+\item
+  Burp - Free/Paid, Jenkins ready in \lettertilde{}2017
+\item
+  Metasploit - Free, OpenSource, Jenkins ready
+\item
+  SQLMap - Free, OpenSource
+\item
+  scapy - Free, OpenSource, Python
+\stopitemize
+
+Zap is an open source alternative to burp, developed under the OWASP
+project and it already has a dedicated Jenkins plugin. Burp can scan for
+vulnerabilities, intercept browser traffic and automate custom attacks,
+it does not have a Jenkins plugin yet, but it was announced that this
+year something should be ready for continuous development. Both ZAP and
+Burp can also be used manually, so you can define your own attack
+patterns and payloads. Metasploit is a framework that focuses on system
+level scans but can be extended with custom ones. SQLMap scans
+application only for SQL injections. If want you to test a custom
+protocol, you will probably need to use scapy, which is a Python library
+for preparing dedicated TCP, ICMP packages and UDP datagrams.
+
+Commercial solutions and managed services: The advantage of the service
+approach is quite nice, as the report from a cybersecurity consultant
+does not include false-positives from the scans. There are three major
+players in this filed:
+
+\startitemize[packed]
+\item
+  Qualys
+\item
+  Nessus
+\item
+  F-Secure Radar
+\stopitemize
+
+\subsection[useful-terminology]{Useful terminology}
+
+\subsection[penetration-testing]{Penetration Testing}
+
+A penetration test is an authorized attack on a system, application
+and/or infrastructure. The reasoning behind undergoing pentesting
+(Penetration Testing) is quite obviously to find security weaknesses or
+to fulfil a compliance needed by a 3rd party. There are usually two main
+objectives for a pentester to achieve: get privileged access and/or
+obtain restricted information. Even when having an on site pentesting
+team, it is still recommended to use a 3rd party company as well.
+Penetration tests should be considered before major releases or
+periodically after a longer development cycle. In the best case scenario
+automated security tests using for example Zap are also in place.
+
+A penetration tester is a person who performs a penetration test. They
+can also be called by: Pentester, Hacker, White Hat or Security
+consultant, just remember not to call them Black Hat or Cracker which
+basically means a criminal and will make them really sad and you do not
+want that to happen.
+
+There are three major approaches while pentesting: white, grey and black
+box.
+
+White box means full transparency and full access for a pentester to our
+production systems, especially:
+
+\startitemize[packed]
+\item
+  A pentester has full access to the application and systems they are
+  testing
+\item
+  The test covers the widest range of attack vectors
+\item
+  A pentester has access to our source code and documentation
+\stopitemize
+
+Grey box narrows the access, but still requires source code and
+sometimes a developer instance before starting the main pentest, the
+pentesting becomes targeted and works within boundaries:
+
+\startitemize[packed]
+\item
+  A pentester does not have access to the system
+\item
+  A pentester has different types of accounts such as user and/or
+  moderator, but not admin-level application access
+\item
+  A pentester has access to our source code and documentation
+\stopitemize
+
+Black box, as the name suggests, limits access, so the pentester's
+perspective is similar to a real attacker:
+
+\startitemize[packed]
+\item
+  A pentester does not have knowledge about the system or only knows its
+  basics
+\item
+  A pentester has no access to source code, but obtaining the source
+  code may be one of the steps when executing an attack or be one if its
+  goals
+\item
+  A pentester has no initial access to the app above end-user level
+\stopitemize
+
+\subsection[ciso]{CISO}
+
+Chief Information Security Officer is a person responsible for:
+
+\startitemize[packed]
+\item
+  Computer security/incident response team
+\item
+  Disaster recovery and business continuity management
+\item
+  Identity and access management
+\item
+  Information privacy
+\item
+  Information regulatory compliance PCI, Data Protection Act, GIODO in
+  Poland
+\item
+  Information risk management
+\item
+  Security architecture and development, so process and tools
+\item
+  IT Security
+\item
+  Security awareness in the company
+\item
+  Managing pentests and red teamings
+\stopitemize
+
+\subsection[red-teaming]{Red Teaming}
+
+A red teaming drill is usually a multi-level attack on a company that
+only CEO, CISO or CTO are aware of. A Red Teaming Exercise may consist
+of:
+
+\startitemize[packed]
+\item
+  Physical security testing like breaking into the office, server rooms,
+  conference rooms, planting bugs or lock picking
+\item
+  Network and IT security testing done by, for example, planting
+  Raspberry Pi on the net, routing data through a sniffer or leaving
+  behind some rubberducky
+\item
+  Phishing and social engineering
+\item
+  Software pentesting
+\stopitemize
+
+If the red timing finishes undetected, it means the company that
+undergoes the test has huge security problems as the attacker during the
+drill, after achieving all goals, starts being \quotation{noisy} till a
+point someone should notice\ldots{}
+
+\subsection[references]{References}
+
+\startitemize[n,packed][stopper=.,width=2.0em]
+\item
+  http://owasp.org
+\item
+  https://vulnhub.com
+\item
+  https://github.com/sbilly/awesome-security
+\item
+  https://github.com/nixawk/pentest-wiki
+\item
+  https://safeandsavvy.f-secure.com/
+\item
+  https://reddit.com/r/netsec/
+\item
+  https://blogs.cisco.com/
+\item
+  https://youtube.com/channel/UClcE-kVhqyiHCcjYwcpfj9w
+\item
+  http://gynvael.coldwind.pl/
+\item
+  https://nakedsecurity.sophos.com/
+\item
+  https://risky.biz/netcasts/risky-business/
+\item
+  https://badcyber.com/
+\item
+  https://packetstormsecurity.com
+\item
+  https://labs.mwrinfosecurity.com/
+\item
+  https://ctftime.org/ctf-wtf/
+\item
+  http://overthewire.org/wargames/
+\item
+  https://picoctf.com/
+\item
+  https://microcorruption.com/
+\item
+  https://www.offensive-security.com/when-things-get-tough/
+\item
+  Batman threat modeling.
+  https://mobilisationlab.org/wp-content/uploads/\crlf
+  2015/08/batman-threat-model-1200.png
+\item
+  sshttp - hiding SSH servers behind HTTP.
+  https://github.com/stealth/sshttp
+\item
+  Justin Mayer. Replacing passwords with multiple factors: email, otp,
+  and hardware keys. EuroPython 2017
+\item
+  Data leaks in time.
+  http://www.informationisbeautiful.net/visualizations/worlds-biggest-data-breaches-hacks/
+\item
+  BeeBox project. https://sourceforge.net/projects/bwapp/files/bee-box/
+\item
+  OWASP Broken Web Applications Project (OWASP BWAP).\crlf
+  https://www.owasp.org/index.php/OWASP\type{_}Broken\type{_}Web\type{_}Applications\type{_}Project
+\item
+  Exploiting pickle. https://blog.nelhage.com/2011/03/exploiting-pickle/
+\stopitemize
+
+
+\stoptext

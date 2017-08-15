@@ -1,0 +1,15 @@
+--- zodb.tex
++++ zodb.tex
+@@ -1,9 +1,9 @@
+ \usemodule[pycon-yyyy]
+ \starttext
+ 
+-
+-\placefigure{The ZODB Ecosystem by Christopher
+-Lozinski}{\externalfigure[ZODBTitleGraphics.svg]}
++\Title{The ZODB Ecosystem}
++\Author{Christopher Lozinski}
++\MakeTitlePage
+ 
+ \subsection[abstract]{Abstract}
+ 

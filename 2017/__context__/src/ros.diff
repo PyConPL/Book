@@ -1,0 +1,15 @@
+--- ros.tex
++++ ros.tex
+@@ -1,9 +1,9 @@
+ \usemodule[pycon-yyyy]
+ \starttext
+ 
+-
+-\section[rapidly-prototyping-robotics-with-ros-and-ipython]{Rapidly
+-Prototyping Robotics with ROS and IPython}
++\Title{Rapidly Prototyping Robotics with ROS and IPython (workshop)}
++\Author{Lidia Lipińska, Marcin Kolesiński, Igor Zubrycki}
++\MakeTitlePage
+ 
+ TLDR:
+ 

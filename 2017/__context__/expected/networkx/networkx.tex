@@ -1,0 +1,285 @@
+\usemodule[pycon-yyyy]
+\starttext
+
+\Title{Network Analysis using Python (workshop)}
+\Author{Mridul Seth}
+\MakeTitlePage
+
+Politics, Mathematics, Law, Biology, Computer Science, Finance - all of
+these subjects have one thing in common: they can be modeled using
+networks. NetworkX is a Python language software package for the
+creation, manipulation and study of the structure, dynamics, and
+functions of complex networks. This workshop will introduce the basics
+of network theory and working with graphs using Python and the NetworkX
+package. This will be a hands on tutorial and will require writing a lot
+of code snippets. The participants should be comfortable with basic
+Python (loops, dictionaries, lists) and some (minimal) experience with
+working inside a Jupyter Notebook.
+
+Broadly the tutorial is divided into four parts:
+
+\startitemize[n][stopper=.]
+\item
+  Introduction
+
+  \startitemize[packed]
+  \item
+    Basics of graph theory and various examples of networks in real
+    life.
+  \item
+    Introduction to the NetworkX API and various data structures
+  \stopitemize
+\item
+  Tools usage
+  \startitemize[packed]
+  \item
+    Work with small synthetic networks (generated using random graph
+    generators) to understand the structure of the network.
+  \item
+    Analyse the network and study various properties of the network like
+    centrality, connectivity, shortest paths, cliques.
+  \stopitemize
+\item
+  Analyze data
+
+  \startitemize[packed]
+  \item
+    We'll use the various techniques we have learnt so far and model a
+    network out of real world data like co-authorship network {[}8{]} or
+    a similar network and study the structure and properties of this
+    network.
+  \stopitemize
+\item
+  Real world data
+
+  \startitemize[packed]
+  \item
+    We'll work on some interesting problems like temporal networks and
+    visualisation of networks.
+  \item
+    We'll model the US Airport Network with respect to time and will try
+    to make sense out of it.
+  \stopitemize
+\stopitemize
+
+By the end of the tutorial everyone should be comfortable with hacking
+on the NetworkX API, modelling data as networks and basic analysis on
+networks using Python.
+
+This text gives a brief overview of the content of the workshop.
+
+\section[packages-and-other-requirements]{Packages and other
+requirements}
+
+You should have python3 and pip installed, and using virtualenv {[}9{]}
+is recommended and the following Python packages should be installed.
+
+\startitemize[packed]
+\item
+  Jupyter
+\item
+  matplotlib
+\item
+  networkx
+\item
+  pandas
+\item
+  numpy
+\stopitemize
+
+You can also use conda {[}10{]} to install these packages.
+
+The workshop will also require datasets to work on which will be
+uploaded on GitHub repository {[}11{]}.
+
+The repo will contain the Jupyter notebooks that will be required during
+the workshop.
+
+\subsection[introduction]{Introduction}
+
+\subsubsection[what-are-networks-graphs-and-how-can-we-use-networkx-and-python-to-represent-them]{What
+are Networks (Graphs) and how can we use NetworkX and Python to
+represent them?}
+
+A graph G is represented by a set of nodes and a set of edges (rys. 1).
+An edge between two nodes in a graph signifies a relationship between
+those two nodes. Edges can be directed or undirected.
+
+\placefigure{Network}{\externalfigure[network.png]}
+
+NetworkX uses dictionaries underneath to store node and edge data. It's
+dict-o-dict-o-dict-o-dict to be precise.
+
+\starttyping
+G['node1']
+G['node1']['node2']
+G['node1']['node2']['some_id']['some_attrb'] # multigraphs
+\stoptyping
+
+\subsubsection[basics-of-networkx]{Basics of NetworkX}
+
+There are multiple graph classes implemented in NetworkX:
+
+\startitemize[packed]
+\item
+  Graph - a graph object which only allows single edges (undirected)
+  between nodes.
+\item
+  DiGraph - a graph object which only allow single edges (directed)
+  between nodes, i.e.~an edge from \quote{A} to \quote{B} doesn't mean
+  that there exists an edge from \quote{B} to \quote{A}.
+\item
+  MultiGraph - a graph object which allows multiple edges(undirected)
+  between two edges.
+\item
+  MultiDiGraph - a graph object which allows multiple edges(directed)
+  between two edges.
+\stopitemize
+
+Hybrid graphs? Not yet available in NetworkX.
+
+\starttyping
+# Create an empty graph object with no nodes and edges.
+G = nx.Graph() # DiGraph, MultiGraph, MultiDiGraph
+\stoptyping
+
+\starttyping
+# Add nodes to our graph object
+# In NetworkX, nodes can be any hashable object e.g. a text string,
+# an image, an XML object, another Graph, a customized node object, etc.
+
+G.add_node('1')
+G.add_node(1)
+G.add_node('second')
+\stoptyping
+
+\type{G.nodes()} will give a list of nodes.
+
+\starttyping
+# Now let's talk about edges.
+# Edge between two nodes means that they share some property/relationship
+# G.add_node(H)
+G.add_edge(0, 'second')
+G.add_edge(2, 3)
+G.add_edge('second', 'node4')
+\stoptyping
+
+\type{G.edges()} will give a list of edges.
+
+\subsubsection[measures-and-properties-of-a-network]{Measures and
+properties of a network}
+
+Finding the important nodes in a network is a task frequently
+encountered by network scientists. There are various approaches to this
+like using the nodes with highest degree, i.e connections. or nodes
+which have a high number of paths going through them as removing that
+node can impair mobility in the network. Deciding the measures to use
+depends on the applications and the requirements of the network
+scientist.
+
+Usually one of the most important tasks in network analysis is to find
+the shortest path and there are various algorithm to dot that. We will
+use the algorithms implemented in the NetworkX package to study the
+network.
+
+Structures in a network is also a major network analysis tool like
+finding triangles, cliques, open triangles. A rudimentary recommendation
+engine can be made by looking for open triangles in a network.
+
+From wikipedia, A connected component (or just component) of an
+undirected graph is a subgraph in which any two vertices are connected
+to each other by paths, and which is connected to no additional vertices
+in the supergraph.
+
+NetworkX has algorithms implemented to help us with finding components
+of a network.
+
+\starttyping
+print [len(c) for c in sorted(nx.connected_components(authors_graph),
+    key=len, reverse=True)]
+\stoptyping
+
+This piece of code gives us the components of a network
+\type{authors_graph} where \type{authors_graph} is the Arxiv GR-QC
+(General Relativity and Quantum Cosmology) collaboration network
+{[}12{]}.
+
+The output:
+
+\starttyping
+[4158, 14, 12, 10, 9, 9, 8, 8, 8, 8, 8, 8, 7, 7, 7, 7, 7, 7, 7,
+7, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 5, 5, 5, 5, 5, 5, 5, 5,
+5, 5, 5, 5, 5, 5, 5, 5, 5, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
+4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 3, 3, 3,
+3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
+3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
+3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
+3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
+3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1]
+\stoptyping
+
+As we can see from the output there are a lot of authors who work in
+pairs (they haven't collaborated with anyone other than their partner)
+and triangles. But the majority, 4158, work in a big collaboration
+network, even though we have a lone wolf there.
+
+We can find many other interesting properties of a dataset by doing
+exploratory analysis of the network.
+
+\subsubsection[real-world-data]{Real world data}
+
+There are multiple sources to find real word network datasets like SNAP
+{[}13{]} and KONECT {[}14{]}. We will use a real world network and
+analyse the network using the various tools and measures we learn in
+this tutorial.
+
+\subsection[references]{References}
+
+\startitemize[n,packed][stopper=.,width=2.0em]
+\item
+  Official NetworkX tutorial.
+  https://github.com/networkx/notebooks/blob/\crlf
+  master/tutorial.ipynb
+\item
+  NetworkX documentation. https://networkx.readthedocs.io/en/stable/
+\item
+  EuroSciPy 2016 tutorial. https://github.com/MridulS/euroscipy-networkx
+\item
+  PyCon/SciPy 2017 tutorial.
+  https://github.com/ericmjl/Network-Analysis-Made-Simple
+\item
+  Video Tutorial.
+  https://www.youtube.com/watch?v=E4VKzFmByhE\type{&}t=3139s
+\item
+  DataCamp course.
+  https://www.datacamp.com/courses/network-analysis-in-python-part-1
+\item
+  Datasets (Social Network Analysis project at Stanford).
+  http://snap.stanford.edu/\crlf
+  data/index.html
+\item
+  http://www-personal.umich.edu/\lettertilde{}mejn/netdata/cond-mat-2005.zip
+\item
+  virtualenv. https://virtualenv.pypa.io/en/stable/
+\item
+  conda. https://conda.io/docs/
+\item
+  https://github.com/MridulS/pyconpl-2017-networkx
+\item
+  http://snap.stanford.edu/data/index.html\#canets
+\item
+  SNAP. http://snap.stanford.edu/data/index.html
+\item
+  KONECT (KONECT project at UNamur). http://konect.uni-koblenz.de
+\stopitemize
+
+
+\stoptext

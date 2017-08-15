@@ -1,0 +1,522 @@
+\usemodule[pycon-yyyy]
+\starttext
+
+\Title{Parametrize all the tests! (workshop)}
+\Author{Miro Hrončok}
+\MakeTitlePage
+
+In this workshop you will learn about {\bf pytest} {[}1{]} and why it is
+better than unittest or nose. You will see and try out examples on easy
+and later on more complex scenarios. You will learn how to write
+parametric tests and you will parametrize some test for a common problem
+such as fizzbuzz. Later we'll dive in into fixtures and how they are
+different than setup and teardown. Fixtures can be parametric as well,
+so we'll code some examples for that as well. At the end, you'll learn
+about cross products of parameters and fixtures.
+
+This text can serve as a brief introduction to the topic, but some of
+the parts are intentionally missing and will be presented on the
+workshop.
+
+\subsection[what-is-pytest]{What is pytest}
+
+Pytest is a framework for writing tests for your Python code. When you
+look at testing in Python, you'll probably learn about {\bf unittest}
+{[}2{]}, because it is a part of Python's standard library. However,
+unittest is not very flexible and its syntax and usage is very much
+inspired with JUnit - a Java unit testing framework. I guess writing
+code in Python using a Java inspired API is something no Pythonista
+would desire.
+
+The lack of flexibility when running tests written in unittest inspired
+another project to be created, a once popular tool called {\bf nose}
+{[}3{]}. While nose can make running tests easier and more pleasant, the
+main part - how do we write our tests - remained the same. Not to
+mention nose has been in maintenance mode for the past several years.
+
+{\bf Pytest} on the other hand reinvents the way test are being written.
+Instead of Java-like nonsense, you write very readable, Pythonic code.
+
+Compare this:
+
+\starttyping
+import unittest
+
+class TestStringMethods(unittest.TestCase):
+
+    def test_upper(self):
+        self.assertEqual('foo'.upper(), 'FOO')
+
+    def test_isupper(self):
+        self.assertTrue('FOO'.isupper())
+        self.assertFalse('Foo'.isupper())
+
+if __name__ == '__main__':
+    unittest.main()
+\stoptyping
+
+With this:
+
+\starttyping
+def test_upper():
+    assert 'foo'.upper() == 'FOO'
+
+def test_isupper():
+    assert 'FOO'.isupper()
+    assert not 'Foo'.isupper()
+\stoptyping
+
+Pytest is using a simple assert statement to verify {\em things} in
+tests. Unlike using assert {[}4{]} in regular Python code, it is
+monkeypatched to provide more information about what happened when the
+assertion fails:
+
+\starttyping
+def test_upper():
+    assert 'foo'.upper() == 'FOo'
+\stoptyping
+
+\starttyping
+============================== FAILURES ===============================
+_____________________________ test_upper ______________________________
+
+    def test_upper():
+>       assert 'foo'.upper() == 'FOo'
+E       AssertionError: assert 'FOO' == 'FOo'
+E         - FOO
+E         + FOo
+
+test_example.py:2: AssertionError
+====================== 1 failed in 0.02 seconds =======================
+\stoptyping
+
+\subsection[lets-write-some-tests-for-fizzbuzz]{Let's write some tests
+for fizzbuzz}
+
+Fizzbuzz {[}5{]} is a group word game for children to teach them about
+division. Players take turns to count incrementally, replacing any
+number divisible by three with the word \quotation{fizz}, and any number
+divisible by five with the word \quotation{buzz}. If the number is
+dividable by both, one shall say \quotation{fizzbuzz}.
+
+Let's first write a function that takes an integer and returns a string
+with \quotation{fizz}, \quotation{buzz}, \quotation{fizzbuzz} or the
+number depending on the rules of the game.
+
+\starttyping
+# fizzbuzz.py
+def fizzbuzz(number):
+   ...
+\stoptyping
+
+(The body of the above function is intentionally left out as an exercise
+for the reader.)
+
+Let's create a \type{test_fizzbuzz.py} file in the \type{tests}
+directory. When running \type{python -m pytest}, the tests in this
+directory will be automatically collected if the name of the files
+starts with \type{test_}.
+
+\starttyping
+# tests/test_fizzbuzz.py
+from fizzbuzz import fizzbuzz
+
+
+def test_regular():
+    assert fizzbuz(1) == '1'
+
+
+def test_fizz():
+    assert fizzbuz(3) == 'fizz'
+\stoptyping
+
+Now run the tests with \type{python -m pytest}. (Note that if you have
+an virtual environment set up in the very same directory, pytest will
+likely try to collect the tests from within that. You can either use the
+\type{--ignore} switch to ignore your virtual environment directory or
+specify the path to your tests directory as a first positional
+argument.)
+
+\starttyping
+$ python -m pytest --ignore=env
+$ python -m pytest tests/
+\stoptyping
+
+Writing tests that check that \type{fizzbuzz(5)} is \type{'buzz'} and
+\type{fizzbuzz(15)} is \type{'fizzbuzz'} is left as an exercise for the
+reader.
+
+At the end of this part, you should have a fizzbuzz implementation and
+tests for 1, 3, 5 and 15.
+
+\subsection[parametrize-our-tests-and-why-is-it-better]{Parametrize our
+tests and why is it better}
+
+In reality, we would need to test for other numbers as well, such as 2,
+6, 333 etc. Without parametric tests, we have two options:
+
+Copy pasting tests around, renaming them and changing the tested value.
+
+\starttyping
+def test_fizz3():
+    assert fizzbuz(3) == 'fizz'
+
+
+def test_fizz6():
+    assert fizzbuz(6) == 'fizz'
+
+
+def test_fizz9():
+    assert fizzbuz(9) == 'fizz'
+\stoptyping
+
+Uh\ldots{} copy pasting code around like that is wrong.
+
+Or running one test over a range of numbers:
+
+\starttyping
+def test_fizz():
+    for number in (3, 6, 9, 333, 3003):
+        assert fizzbuz(number) == 'fizz'
+\stoptyping
+
+This does not look so bad on the first glance, but let us intentionally
+break the implementation for large numbers and see how the tests result
+looks like.
+
+\starttyping
+def fizzbuzz(number):
+    if number > 100:
+        return 'Oh no, a bug!'
+    ...
+\stoptyping
+
+From the tests results, do you see what's wrong?
+
+Instead, we'll parametrize the test. That means, we'll have one test
+written - as a template - and it will be run for multiple values.
+
+\starttyping
+import pytest
+
+
+@pytest.mark.parametrize('n', (3, 6, 9, 333, 3003))
+def test_fizz(n):
+    assert fizzbuz(n) == 'fizz'
+\stoptyping
+
+See what happens when you run the tests and try running them with the
+verbose (\type{-v}) switch.
+
+Let's write parametric tests for all our cases. Note that in our
+example, we've used a tuple to represent possible values of our
+parameter. But it can be any (terminal) iterable, such as list, set,
+range or a custom generator. Try to write some parametric test for
+fizzbuzz using a range or a (list) comprehension {[}6{]}.
+
+\subsection[lets-do-something-more-complicated]{Let's do something more
+complicated}
+
+Imagine we'd have a function that accepts boundaries and returns a
+generator of fizzbuzz results, something like this:
+
+\starttyping
+def fizzbuzz_range(*args, **kwargs):
+    for n in range(*args, **kwargs):
+        yield fizzbuzz(n)
+\stoptyping
+
+Now let us write a parametric tests that takes 3 parameters: start, stop
+and result:
+
+\starttyping
+@pytest.mark.parametrize(['start', 'stop', 'result'],
+                         [(0, 3, ['0', '1', '2']),
+                          (3, 7, ['fizz', '4', 'buzz', '6']),
+                          ...])
+def test_fizz(start, stop, result):
+    assert list(fizzbuz_range(start, stop)) == result
+\stoptyping
+
+Notice how \type{@pytest.mark.parametrize} can parametrize multiple
+values.
+
+\subsection[fixtures-and-how-they-work]{Fixtures and how they work}
+
+Sometimes, you want to tests several facts about one thing. Especially
+if that thing is hard to create, you might want to prepare it beforehand
+and use it repetitively in multiple tests. In that case, you might want
+to create a {\em fixture} - something that's needed for multiple tests
+to operate.
+
+Fixture can be created as a simple function with a decorator:
+
+\starttyping
+@pytest.fixture
+def game():
+    '''A fizzbuzz sequence as in the children's game'''
+    return list(fizzbuzz_range(1, 101))
+\stoptyping
+
+Using that fixture from tests boils down to a function parameter with
+the same name:
+
+\starttyping
+def test_game_has_100_items(game):
+    assert len(game) == 100
+
+
+def test_game_startswith_1(game):
+    assert game[0] == '1'
+
+
+def test_game_endswith_buzz(game):
+    assert game[-1] == 'buzz'
+
+...
+\stoptyping
+
+But fixtures are far more powerful than that. They allow you to create a
+context for your tests using a \type{yield} statement. Here is a
+hypothetical example where each test using this fixture would connect to
+a database and close the connection afterwards:
+
+\starttyping
+@pytest.fixture
+def db():
+    database = ExampleDatabase(user='me', password='test')
+    connection = database.connect()
+    yield connection
+    connection.close()
+\stoptyping
+
+Bare in mind that if a test fails, the last line of this fixture would
+never get executed. To make sure the connection get's closed even on
+failed test, you would use a classic \type{try-finally} block:
+
+\starttyping
+@pytest.fixture
+def db():
+    database = ExampleDatabase(user='me', password='test')
+    connection = database.connect()
+    try:
+        yield connection
+    finally:
+        connection.close()
+\stoptyping
+
+Or, if the database API has a context manager, we could use that as
+well:
+
+\starttyping
+@pytest.fixture
+def db():
+    database = ExampleDatabase(user='me', password='test')
+    with database.connect() as connection:
+        yield connection
+\stoptyping
+
+Sometimes, you might want to share a database connection across all the
+tests, for that, you might explicitly set fixture's scope. Without
+specifying a scope, one fixture is recreated every time a test uses it.
+Instead, we'll set the {\em module} scope and this time one instance of
+a fixture is used for all the tests that require it:
+
+\starttyping
+@pytest.fixture(scope='module')
+...
+\stoptyping
+
+One fixture can use another fixture, so imagine a scenario, where we
+want to reuse a connection for all the tests, but we want to set up
+database content before every test and clean it afterwards. We will
+create 2 fixtures - one scoped for the module, one with the default
+scope:
+
+\starttyping
+@pytest.fixture(scope='module')
+def connection():
+    database = ExampleDatabase(user='me', password='test')
+    with database.connect() as connection:
+        yield connection
+
+@pytest.fixture
+def db(connection):
+    connection.query(...)  # fill in the data
+    try:
+        yield connection
+    finally:
+        connection.query(...)  # delete everything
+\stoptyping
+
+Note that using another fixture from a fixture can be done by using it's
+name as a name of a parameter. You can use a module scoped fixture from
+a default scoped fixture, but not the other way around (for obvious
+reasons).
+
+\subsection[already-available-fixtures-in-pytest]{Already available
+fixtures in pytest}
+
+Not only you can create your own fixtures, but you can benefit form some
+fixtures available in pytest by default. You can see the list of them
+with \type{python -m pytest -q --fixtures}.
+
+They include stuff like a temporary directory or more magical things
+like \type{capsys} that allows you to introspect what would normally be
+printed on standard output and stderr.
+
+Pytest normally hides every output if the test passes and displays it if
+the test fails. This is useful for debugging failed tests. You can leave
+you prints in and it doesn't harm. But sometimes you actually want to
+check would would have been printed. The \type{capsys} fixture helps
+here:
+
+\starttyping
+def fizzbuzz_game():
+    for n in fizzbuzz_range(1, 101):
+        print(n)
+\stoptyping
+
+\starttyping
+def test_fizzbuzz_game_prints_100_lines(capsys):
+    fizzbuzz_game()
+    out, _ = capsys.readouterr()
+    assert len(out.strip().split('\n')) == 100
+\stoptyping
+
+You can also use the builtin fixtures to create your own. Here we create
+a git repository and let the test execute within:
+
+\starttyping
+@pytest.fixture
+def gitrepo(tmpdir):
+    with tmpdir.as_cwd():
+        subprocess.run(['git', 'init'])
+        yield tmpdir
+\stoptyping
+
+\subsection[parametrizing-fixtures]{Parametrizing fixtures}
+
+As well as tests, fixtures can also be parametric {[}7{]}. This is very
+helpful if you need to run your tests with multiple backends or if you
+use one parameter repetitively across multiple tests. Let's get back to
+our hypothetical database example and make it parametric:
+
+\starttyping
+@pytest.fixture(scope='module', params=['postgres', 'sqlite'])
+def connection(request):
+    if request.param == 'postgres':
+        database = PostgresDB(...)
+    else:
+        database = SQLiteDB(...)
+    with database.connect() as connection:
+        yield connection
+\stoptyping
+
+Now every test that uses the {\em connection} fixture (even
+transitively) will run twice, once with \type{PostgresDB()} and once
+with \type{SQLiteDB()}.
+
+Note that parametric fixtures have a little different syntax and need to
+accept the special \type{request} function parameter that holds the
+entire context about the test being run.
+
+In our fizzbuzz example, we might want to test multiple facts about
+fizzbuzz calls for 3, 6, 9, 333 etc. Instead of repeating the parameters
+every time or creating a global variable with list of numbers, we can
+crate a parametric fixture:
+
+\starttyping
+@pytest.fixture(scope='module', params=[3, 6, 9, 333])
+def fizznum(request):
+    return request.param
+
+
+def test_fizznum_is_not_divisible_by_5(fizznum):
+    '''A "metatest" that tests the fizznum fixture itself''''
+    assert fizznum % 5 != 0
+
+
+def test_fizz(fizznum):
+    assert fizzbuzz(fizznum) == 'fizz'
+\stoptyping
+
+Notice how we created the fixture module scoped? That's because reusing
+an integer cannot harm (it's immutable anyway).
+
+\subsection[cross-products-of-parameters-andor-parametric-fixtures]{Cross
+products of parameters and/or parametric fixtures}
+
+All the parameters can be combined together to create a cross product of
+test templates. Either you can combine two or more
+\type{@pytest.mark.parametrize} decorators, more fixtures, or both
+together.
+
+Note that the example below is not very well written and I don't
+encourage to write code like that, but it serves a purpose.
+
+\starttyping
+@pytest.fixture(scope='module', params=[3, 6, 9, 333])
+def fizznum(request):
+    return request.param
+
+
+@pytest.fixture(scope='module', params=[5, 10, 500])
+def buzznum(request):
+    return request.param
+
+
+def test_fizzbuzz(fizznum, buzznum):
+    assert fizzbuzz(fizznum * buzznum) == 'fizzbuzz'
+\stoptyping
+
+You can even create a fixture that creates a cross product of fixtures:
+
+\starttyping
+@pytest.fixture(scope='module')
+def fizzbuzznum(fizznum, buzznum):
+    return fizznum * buzznum
+
+
+def test_fizzbuzz(fizzbuzznum):
+    assert fizzbuzz(fizzbuzznum) == 'fizzbuzz'
+\stoptyping
+
+Don't overdo that. If you want to test for all possible values without
+{\em actually testing all possible values}, you might want to look at
+{\bf hypothesis} {[}8{]}.
+
+\subsection[where-to-go-next]{Where to go next}
+
+I highly recommend reading trough the pytest documentation {[}1{]} as it
+is very understandable and has plenty of examples. It has multiple
+sections covering parametric tests and fixtures. Dive in!
+
+\subsection[references]{References}
+
+\startitemize[n,packed][stopper=.]
+\item
+  pytest documentation. https://docs.pytest.org/
+\item
+  unittest in Python documentation.
+  https://docs.python.org/3/library/\crlf
+  unittest.html
+\item
+  nose documentation. http://nose.readthedocs.io/
+\item
+  assert on Python Wiki. https://wiki.python.org/moin/\crlf
+  UsingAssertionsEffectively
+\item
+  Fizz buzz on Wikipedia. https://en.wikipedia.org/wiki/Fizz\type{_}buzz
+\item
+  List comprehensions. https://docs.python.org/3/tutorial/\crlf
+  datastructures.html\#list-comprehensions
+\item
+  Parametrizing fixtures. https://docs.pytest.org/en/latest/\crlf
+  fixture.html\#parametrizing-fixtures
+\item
+  Hypothesis documentation. https://hypothesis.readthedocs.io/
+\stopitemize
+
+
+\stoptext

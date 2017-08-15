@@ -1,0 +1,16 @@
+--- micro.tex
++++ micro.tex
+@@ -1,9 +1,11 @@
+ \usemodule[pycon-yyyy]
+ \starttext
+ 
++\Title{Micropython w domowej automatyce (warsztat)}
++\Author{Szymon Pyżalski, Nikoloz Glonti}
++\MakeTitlePage
+ 
+-\section[korzystanie-z-gpio-mikrokontrolerów]{Korzystanie z GPIO
+-mikrokontrolerów}
++\section[korzystanie-z-gpio-mikrokontrolerów]{Korzystanie z GPIO mikrokontrolerów}
+ 
+ Dla osoby mającej doświadczenie w Pythonie rozpoczęcie pracy ze
+ środowiskiem MicroPython zwykle nie nastręcza problemów od strony

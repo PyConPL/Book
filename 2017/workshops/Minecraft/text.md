@@ -1,58 +1,104 @@
 # Minecraft sterowany Pythonem
 
-Minecraft zapewnia niczym nieskrępowaną kreatywność i swobodę tworzenia. Python jest prosty do czytania i zapisywania, daje duże możliwości tak początkującemu, jak i zaawansowanemu programiście. Dzięki zintegrowaniu Minecrafta z Pythonem możemy uzyskać jeszcze większą kontrolę nad Minecraftem i tym samym wyzwolić większe pokłady kreatywności.
+Minecraft [1] zapewnia niczym nieskrępowaną kreatywność i swobodę tworzenia.
+Python jest prosty do czytania i zapisywania, daje duże możliwości tak
+początkującemu, jak i zaawansowanemu programiście. Dzięki zintegrowaniu
+Minecrafta z Pythonem możemy uzyskać jeszcze większą kontrolę nad Minecraftem
+i tym samym wyzwolić większe pokłady kreatywności [2].
+
+Zalety integracji Minecrafta z Pythonem są następujące:
+
+- poznanie ukrytej magii Minecrafta - urozmaicenie gry i odkrycie jej nieznanych możliwości;
+- zapoznanie się z Pythonem - dla początkujących programistów;
+- nauczanie programowania, w szczególności wśród dzieci (od ok. 10 lat) i młodzieży;
+- ułatwienie poruszania się i budowania w świecie Minecraft.
+
+## Przygotowujemy środowisko
+
+### Instalujemy
+
+Potrzebujemy następujące programy:
+
+- Minecraft [3] w wersji podstawowej;
+- Python [4] - minimum Python 3;
+- Java [5] - najlepiej ostatnia wersja;
+- API Minecraft Python - pobierz Minecraft Tools dla Windows [6], MAC OS [7], Raspberry Pi [11] lub Ubuntu [8];
+- Server Minecraft Spigot [9] - wersja Spigot zgodna z wersją Minecrafta.
+
+Jeśli na komputerze mamy już Minecrafta, Pythona i Javę, należy ściągnąć,
+rozpakować folder "Minecraft Tools" i zainstalować API Minecrafta poprzez
+uruchomienie "Install`_`API" spośród wyodrębnionych plików. Wtedy należy
+pobrać taką wersję serwera Spigot, która jest zgodna z posiadaną wersją
+Minecrafta. Pobrany plik "Spigot.jar" należy podmienić w folderze "server"
+w "Minecraft Tools". Wtedy można już uruchomić serwer poprzez "Start`_`server"
+z folderu "Minecraft Tools". Okna serwera nie należy zamykać.
 
 
-Dlaczego warto?
 
-  - Poznanie ukrytej magii Minecraftu - urozmaicenie gry i odkrycie jej nieznanych możliwości
-  - Zapoznanie się z Pythonem - dla początkujących programistów
-  - Nauczanie programowania, w szczególności wśród dzieci (od ok. 10 lat) i młodzieży
-  - Ułatwienie poruszania się i budowania w świecie Minecraft.
+### Ustawiamy
 
-## Startujemy
+#### Zmiana trybu przetrwania na tryb kreatywny
 
-Co jest potrzebne:
-  - [Minecraft] - Minecraft w wersji podstawowej
-  - [Python] - minimum Python 3
-  - [Java] - najlepiej ostatnia wersja
-  - API Minecraft Python - pobierz  Minecraft Tools dla [Windows], [MAC OS], [Rapsberry Pi lub Ubuntu]
-  - [Server Minecraft Spigot] - wersja Spigot zgodna z wersją Minecraft
+Jeśli pierwszy raz instalujesz Minecraft wystarczy wejść do Minecraft-Tools > server  
+i otworzyć w notatniku plik "server" (plik properties), a następnie wyszukać i zmienić 
+wartości następujących ustawień: 
 
-Jeśli na komputerze mamy już Minecraft, Python i Javę, należy ściągnąć, rozpakować folder "Minecraft Tools" i zainstalować API Minecrafta poprzez uruchomienie "Install_API" spośród wyodrębionych plików. Wtedy należy pobrać taką wersję serwera Spigot, która jest zgodna z posiadaną wersją Minecrafta. Pobrany plik "Spigot.jar" należy podmienić w folderze "server" w "Minecraft Tools". Wtedy można już uruchomić serwer poprzez "Start_server" z folderu "Minecraft Tools". Okna serwera nie należy zamykać.
+```sh
+>>> force-gamemode=true
+>>> gamemode=1   
+```
+W przypadku problemów polecam pobrać i wkleić w folderze Minecraft-Tools > server > plugins 
+następujący plik .jar: ChangeGameMode-3.5 [12]. 
 
-Wtedy wystarczy już tylko:
-1) Uruchomić Minecraft, 
-2) Przejść w tryb Multiplayer,
-3) Dodać serwer: nazwa dowolna, w adresie wpisać "localhost"
-4) Wejść w tryb Multiplayer poprzez utworzony serwer.
+W przeciwnym razie (jeśli na komputerze znajdują się już pliki logowania danego gracza) najlepiej 
+zainstalować NBTExplorer [13], uruchomić i zmienić następujące ustawienia: 
+
+saves >> <nazwa świata> >> level.dat >> data: Nb entries >> **Game Type: 1**
+saves >> <nazwa świata> >> playerdata >> <player name> >> **playerGame Type: 1**
+
+
+
+#### Usiawienie trybu multiplayer na serwerze Spigot
+
+Należy:
+1. uruchomić serwer: Minecraft-Tools > Start server
+2. uruchomić Minecrafta;
+3. przejść w tryb Multiplayer;
+4. dodać serwer: nazwa dowolna, w adresie wpisać "localhost";
+5. wejść w tryb Multiplayer poprzez utworzony serwer.
+
 
 ### Testujemy
 
-Żeby przetestować połączenie serwera i API, a także tworzyć programy współpracujące z Minecraftem, należy mieć uruchomiony serwer oraz Minecraft w trybie Multiplayer (z ustawionym serwerem Spigot).
+Żeby przetestować połączenie serwera i API, a także tworzyć programy
+współpracujące z Minecraftem, należy mieć uruchomiony serwer oraz Minecrafta
+w trybie Multiplayer (z ustawionym serwerem Spigot).
 
 W edytorze Idle wpisujemy:
 ```sh
 >>> from mcpi.minecraft import Minecraft
 >>> mc = Minecraft.create ()
 ```
-Te 2 wierwsze łączą program z Minecraftem. Jeśli po uruchomieniu programu nie pojawił się komunikat o błędzie, możemy kontynuować wpisując np.
+Te 2 pierwsze łączą program z Minecraftem. Jeśli po uruchomieniu programu
+nie pojawił się komunikat o błędzie, możemy kontynuować wpisując np.
 
 ```sh
 >>> mc.player.setTilePos(0,120,0)
 ```
-Dzięki temu poleceniu nasz bohater w Minecrafcie powinien unieść się wysoko nad ziemię. Jeśli tak się stało, wszystko działa sprawnie.
+Dzięki temu poleceniu nasz bohater w Minecrafcie powinien unieść się wysoko
+nad ziemię. Jeśli tak się stało, wszystko działa sprawnie.
 
 ## Misje
 
-W Minecrafcie jest wiele przydatnych akcji, jakie można uruchomić sterując Pythonem. Warto je znać, aby móc się szybciej i efektywniej: wybudować, wyżywić, schronić przed wrogimi bytami czy teleportować.
+W Minecrafcie jest wiele przydatnych akcji, jakie można uruchomić sterując
+Pythonem. Warto je znać, aby móc się szybciej i efektywniej: wybudować,
+wyżywić, schronić przed wrogimi bytami czy teleportować.
 
 ### Teleportacja
 
-Położenie w Minecraft można łatwo ustalić za pomocą klawisza F3.
-![Współrzędne](https://www.dropbox.com/s/xqnk18iqa0xz4xa/Wsp%C3%B3%C5%82rz%C4%99dne.png?dl=0)
+Położenie w Minecrafcie można łatwo ustalić za pomocą klawisza F3.
 
-Jeśli znamy docelowe współrzędne, mozna szybko teleportować się w wybrane miejsce:
+Jeśli znamy docelowe współrzędne, można szybko teleportować się w wybrane miejsce:
 
 ```sh
 from mcpi.minecraft import Minecraft
@@ -63,9 +109,12 @@ y=12
 mc.player.setPos (x, y, z)
 ```
 
-W ten sposób można np. szybko uciec przed zombie w bezpieczne miejsce - jak wnętrze domu, jeśli wcześniej znamy jego współrzędne.
+W ten sposób można np. szybko uciec przed zombie w bezpieczne miejsce - jak
+wnętrze domu, jeśli wcześniej znamy jego współrzędne.
 
-Jeśli chcemy np. "obejść" znane sobie miejsca, tj. przenieść się gdzieś, rozejrzeć się i przenieść znów w inne miejsce, przydatna będzie funkja *sleep*. Żeby ją wykorzystać, musimy dodać do programu moduł *time* poprzez:
+Jeśli chcemy np. "obejść" znane sobie miejsca, tj. przenieść się gdzieś,
+rozejrzeć się i przenieść znów w inne miejsce, przydatna będzie funkcja
+*sleep*. Żeby ją wykorzystać, musimy dodać do programu moduł *time* poprzez:
 
 ```sh
 >>> import time
@@ -86,22 +135,28 @@ mc.player.setPos (20, 110, 50)
 
 ### Stawianie bloków
 
-W Minecraft każdy typ bloku ma swój ID. Pełną listę bloków dostępnych w Minecraft znajdziesz tu: [Lista bloków]. Znając ID bloku oraz współrzędne, gdzie chcemy dany blok postawić, możemy w szybki sposób go umieścić w danym miejscu.
+W Minecrafcie każdy typ bloku ma swój ID, a pełna lista bloków dostępnych
+w Minecrafcie jest na [10]. Znając ID bloku oraz współrzędne,
+gdzie chcemy dany blok postawić, możemy w szybki sposób go umieścić
+w danym miejscu.
 
 ```sh
 from mcpi.minecraft import Minecraft
 mc = Minecraft.create ()
 mc.setBlock (10, 110, 12, 103)
 ```
-W powyższym przypadku postawiliśmy arbuza (kod 103). 
-
-![Arbuz](https://www.dropbox.com/s/vczz6ifydtph7cu/Arbuz.png?dl=0)
+W powyższym przypadku postawiliśmy arbuza (kod 103).
 
 ### Szybkie budowanie
 
-To, co jest nam od początku potrzebne w świecie Minecraft, to odpowiednie schronienie. Dlatego zazwyczaj pierwszy dzień w grze przeznaczamy na budowę domu. Jest to szczególnie istotne w trybie przetrwanie, gdzie dom stanowi schronienie przed wrogimi bytami, jak np. zombie.
+To, co jest nam od początku potrzebne w świecie Minecraft, to odpowiednie
+schronienie. Dlatego zazwyczaj pierwszy dzień w grze przeznaczamy na budowę
+domu. Jest to szczególnie istotne w trybie przetrwanie, gdzie dom stanowi
+schronienie przed wrogimi bytami, jak np. zombie.
 
-Do tworzenia jednego bloku wykorzystaliśmy funkcję *setBlock ()*, a do budowania większych bloków użyjemy funkcji *setBlocks ()*, która pozwoli nam stworzyć prostopadłościan.
+Do tworzenia jednego bloku wykorzystaliśmy funkcję *setBlock ()*,
+a do budowania większych bloków użyjemy funkcji *setBlocks ()*,
+która pozwoli nam stworzyć prostopadłościan.
 
 ```sh
 from mcpi.minecraft import Minecraft
@@ -118,22 +173,64 @@ powietrze = 0
 mc.setBlocks (x,y,z,x+szer, y+wys, z+dlug, typBloku)
 ```
 
-W ten sposób utworzony prostopadłościan jest pełny w środku. Teraz trzeba stworzyć mniejszy prostopadłościan zbudowany z bloków powietrza poprzez zmniejszenie argumentów wcześniej zbudowanego prostopadłościanu o 1. 
+W ten sposób utworzony prostopadłościan jest pełny w środku. Teraz trzeba
+stworzyć mniejszy prostopadłościan zbudowany z bloków powietrza
+poprzez zmniejszenie argumentów wcześniej zbudowanego prostopadłościanu o 1. 
+Następnie, podobnie (poprzez zastąpienie bloków bruku blokami powietrza) 
+w odpowiednich miejscach mozna zrobić miejsce na drzwi.
 
-Istotne jest to, że w powyższym przykładzie użyliśmy funkcji *getPos ()*, która zwraca współrzędne jako wartości rzeczywiste, w przeciwieństwie do funkcji *getTilePos ()*, która zwraca współrzędne jako liczby całkowite. 
+Istotne jest to, że w powyższym przykładzie użyliśmy funkcji *getPos ()*,
+która zwraca współrzędne jako wartości rzeczywiste, w przeciwieństwie
+do funkcji *getTilePos ()*, która zwraca współrzędne jako liczby całkowite.
 
-## Źródła:
-  -   [Minecraft - gamepedia]
-  -   "*Nauka programowania z Minecraftem*" - autor: Craig Richardson, Warszawa, 2016.
+### Check distance from home 
+
+Czasami przechadzając się po świecie w Minecraft możesz zastanawiać się, 
+jak daleko odszedłeś/ odeszłaś od domu. Na szczęście możesz użyć koordynatów domu 
+aby sprawdzić, jak daleko od niego się znajdujesz.
+
+```sh
+import math
+homeX = -53.853
+homeZ = 203.597
+pos = mc.player.getTilePos()
+x = pos.x
+z = pos.z
+distance = math.sqrt((homeX - x) ** 2 + (homeZ - z) ** 2)
+mc.postToChat(distance)
+```
+Informacja wyświetli się w czacie Minecraftu, który można wyświetlić używając "t".
 
 
-   [Minecraft]: <[https://minecraft.net/en-us/download/]>
-   [Python]: <https://www.python.org/downloads/>
-   [Java]: <https://www.java.com/en/download/>
-   [Windows]: <https://sourceforge.net/projects/python-with-minecraft-windows/>
-   [MAC OS]: <https://sourceforge.net/projects/python-with-minecraft-mac/files/?source=navbar>
-   [Rapsberry Pi lub Ubuntu]: <https://github.com/py3minepi/py3minepi>
-   [Rapsberry Juice]: <https://dev.bukkit.org/projects/raspberryjuice>
-   [Server Minecraft Spigot]: <https://getbukkit.org/spigot>
-   [Lista bloków]: <http://minecraft-pl.gamepedia.com/Warto%C5%9Bci_danych>
-   [Minecraft - gamepedia]: <http://minecraft-pl.gamepedia.com/Warto%C5%9Bci_danych>
+### Check if a block is what you think
+
+Czasami ciężko powiedzieć, na jaki typ bloku patrzymy. Czy mogę to zjeść?
+Możesz sprawdzić, czy dany blok jest faktycznie tym czym podejrzewasz, że jest,
+używając operatorów logicznych.
+
+```sh
+from mcpi.minecraft import Minecraft
+mc = Minecraft.create ()
+from mcpi import block
+melon = 103
+block = mc.getBlock(-19, 77, 153)
+noMelon = block != melon
+mc.postToChat ("To nie jest melon: " + str(noMelon))
+```
+
+
+## Bibliografia
+
+1. Minecraft - gamepedia. https://minecraft-pl.gamepedia.com/
+2. Craig Richardson. Nauka programowania z Minecraftem. PWN, Warszawa, 2016.
+3. https://minecraft.net/en-us/download/
+4. https://www.python.org/downloads/
+5. https://www.java.com/en/download/
+6. https://sourceforge.net/projects/python-with-minecraft-windows/
+7. https://sourceforge.net/projects/python-with-minecraft-mac/
+8. https://github.com/py3minepi/py3minepi
+9. https://getbukkit.org/spigot
+10. http://minecraft-pl.gamepedia.com/Wartości`_`danych
+11. https://dev.bukkit.org/projects/raspberryjuice
+12. https://dev.bukkit.org/projects/bw2801
+13. http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-tools/1262665-nbtexplorer-nbt-editor-for-windows-and-mac

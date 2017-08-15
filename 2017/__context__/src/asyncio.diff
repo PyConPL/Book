@@ -1,0 +1,14 @@
+--- asyncio.tex
++++ asyncio.tex
+@@ -1,8 +1,9 @@
+ \usemodule[pycon-yyyy]
+ \starttext
+ 
+-
+-\section[asyncio-w-praktyce-warsztat]{Asyncio w praktyce (warsztat)}
++\Title{Asyncio w praktyce (warsztat)}
++\Author{Sebastian Buczyński}
++\MakeTitlePage
+ 
+ Podczas tych warsztatów nauczysz się korzystać z {\bf asyncio} {[}1{]}
+ na tyle, by móc samodzielnie zaprojektować i zakodować aplikację

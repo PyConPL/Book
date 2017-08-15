@@ -1,3 +1,3 @@
-# Micropython w domowej automatyce
+# MicroPython w domowej automatyce
 
 ## Szymon Pyżalski, Nikoloz Glonti

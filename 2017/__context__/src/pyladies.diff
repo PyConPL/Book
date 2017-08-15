@@ -1,0 +1,12 @@
+--- pyladies.tex
++++ pyladies.tex
+@@ -1,6 +1,9 @@
+ \usemodule[pycon-yyyy]
+ \starttext
+ 
++\Title{PyLadies (warsztat)}
++\Author{Piotr Wasilewski}
++\MakeTitlePage
+ 
+ \section[rozdział-1.-tryb-interaktywny]{Rozdział 1. Tryb interaktywny}
+ 

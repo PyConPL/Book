@@ -1,0 +1,229 @@
+\usemodule[pycon-yyyy]
+\starttext
+
+\Title{Minecraft sterowany Pythonem (warsztat)}
+\Author{Milena Piasecka}
+\MakeTitlePage
+
+Minecraft {[}1{]} zapewnia niczym nieskrępowaną kreatywność i swobodę
+tworzenia. Python jest prosty do czytania i zapisywania, daje duże
+możliwości tak początkującemu, jak i zaawansowanemu programiście. Dzięki
+zintegrowaniu Minecrafta z Pythonem możemy uzyskać jeszcze większą
+kontrolę nad Minecraftem i tym samym wyzwolić większe pokłady
+kreatywności {[}2{]}.
+
+Zalety integracji Minecrafta z Pythonem są następujące:
+
+\startitemize[packed]
+\item
+  poznanie ukrytej magii Minecrafta - urozmaicenie gry i odkrycie jej
+  nieznanych możliwości;
+\item
+  zapoznanie się z Pythonem - dla początkujących programistów;
+\item
+  nauczanie programowania, w szczególności wśród dzieci (od ok. 10 lat)
+  i młodzieży;
+\item
+  ułatwienie poruszania się i budowania w świecie Minecraft.
+\stopitemize
+
+\subsection[startujemy]{Startujemy}
+
+Do rozpoczęcia prac są potrzebne następujące programy:
+
+\startitemize[packed]
+\item
+  Minecraft {[}3{]} w wersji podstawowej;
+\item
+  Python {[}4{]} - minimum Python 3;
+\item
+  Java {[}5{]} - najlepiej ostatnia wersja;
+\item
+  API Minecraft Python - pobierz Minecraft Tools dla Windows {[}6{]},
+  MAC OS {[}7{]}, Raspberry Pi {[}11{]} lub Ubuntu {[}8{]};
+\item
+  Server Minecraft Spigot {[}9{]} - wersja Spigot zgodna z wersją
+  Minecrafta.
+\stopitemize
+
+Jeśli na komputerze mamy już Minecrafta, Pythona i Javę, należy
+ściągnąć, rozpakować folder \quotation{Minecraft Tools} i zainstalować
+API Minecrafta poprzez uruchomienie \quotation{Install\type{_}API}
+spośród wyodrębnionych plików. Wtedy należy pobrać taką wersję serwera
+Spigot, która jest zgodna z posiadaną wersją Minecrafta. Pobrany plik
+\quotation{Spigot.jar} należy podmienić w folderze \quotation{server} w
+\quotation{Minecraft Tools}. Wtedy można już uruchomić serwer poprzez
+\quotation{Start\type{_}server} z folderu \quotation{Minecraft Tools}.
+Okna serwera nie należy zamykać.
+
+Wtedy wystarczy już tylko:
+
+\startitemize[n,packed][stopper=.]
+\item
+  uruchomić Minecrafta;
+\item
+  przejść w tryb Multiplayer;
+\item
+  dodać serwer: nazwa dowolna, w adresie wpisać \quotation{localhost};
+\item
+  wejść w tryb Multiplayer poprzez utworzony serwer.
+\stopitemize
+
+\section[testujemy]{Testujemy}
+
+Żeby przetestować połączenie serwera i API, a także tworzyć programy
+współpracujące z Minecraftem, należy mieć uruchomiony serwer oraz
+Minecrafta w trybie Multiplayer (z ustawionym serwerem Spigot).
+
+W edytorze Idle wpisujemy:
+
+\starttyping
+>>> from mcpi.minecraft import Minecraft
+>>> mc = Minecraft.create ()
+\stoptyping
+
+Te 2 pierwsze łączą program z Minecraftem. Jeśli po uruchomieniu
+programu nie pojawił się komunikat o błędzie, możemy kontynuować
+wpisując np.
+
+\starttyping
+>>> mc.player.setTilePos(0,120,0)
+\stoptyping
+
+Dzięki temu poleceniu nasz bohater w Minecrafcie powinien unieść się
+wysoko nad ziemię. Jeśli tak się stało, wszystko działa sprawnie.
+
+\subsection[misje]{Misje}
+
+W Minecrafcie jest wiele przydatnych akcji, jakie można uruchomić
+sterując Pythonem. Warto je znać, aby móc się szybciej i efektywniej:
+wybudować, wyżywić, schronić przed wrogimi bytami czy teleportować.
+
+\section[teleportacja]{Teleportacja}
+
+Położenie w Minecrafcie można łatwo ustalić za pomocą klawisza F3.
+
+Jeśli znamy docelowe współrzędne, można szybko teleportować się w
+wybrane miejsce:
+
+\starttyping
+from mcpi.minecraft import Minecraft
+mc = Minecraft.create ()
+x=10
+y=110
+y=12
+mc.player.setPos (x, y, z)
+\stoptyping
+
+W ten sposób można np. szybko uciec przed zombie w bezpieczne miejsce -
+jak wnętrze domu, jeśli wcześniej znamy jego współrzędne.
+
+Jeśli chcemy np. \quotation{obejść} znane sobie miejsca, tj. przenieść
+się gdzieś, rozejrzeć się i przenieść znów w inne miejsce, przydatna
+będzie funkcja {\em sleep}. Żeby ją wykorzystać, musimy dodać do
+programu moduł {\em time} poprzez:
+
+\starttyping
+>>> import time
+\stoptyping
+
+Wtedy możemy wykorzystać funkcję {\em sleep}
+
+\starttyping
+>>> time.sleep (5)
+\stoptyping
+
+żeby przenieść się w wybrane miejsce na 5 sekund, a następnie wybrać w
+kolejne miejsce:
+
+\starttyping
+from mcpi.minecraft import Minecraft
+mc = Minecraft.create ()
+mc.player.setPos (10, 110, 12)
+time.sleep (5)
+mc.player.setPos (20, 110, 50)
+\stoptyping
+
+\section[stawianie-bloków]{Stawianie bloków}
+
+W Minecrafcie każdy typ bloku ma swój ID, a pełna lista bloków
+dostępnych w Minecrafcie jest na {[}10{]}. Znając ID bloku oraz
+współrzędne, gdzie chcemy dany blok postawić, możemy w szybki sposób go
+umieścić w danym miejscu.
+
+\starttyping
+from mcpi.minecraft import Minecraft
+mc = Minecraft.create ()
+mc.setBlock (10, 110, 12, 103)
+\stoptyping
+
+W powyższym przypadku postawiliśmy arbuza (kod 103).
+
+\section[szybkie-budowanie]{Szybkie budowanie}
+
+To, co jest nam od początku potrzebne w świecie Minecraft, to
+odpowiednie schronienie. Dlatego zazwyczaj pierwszy dzień w grze
+przeznaczamy na budowę domu. Jest to szczególnie istotne w trybie
+przetrwanie, gdzie dom stanowi schronienie przed wrogimi bytami, jak np.
+zombie.
+
+Do tworzenia jednego bloku wykorzystaliśmy funkcję {\em setBlock ()}, a
+do budowania większych bloków użyjemy funkcji {\em setBlocks ()}, która
+pozwoli nam stworzyć prostopadłościan.
+
+\starttyping
+from mcpi.minecraft import Minecraft
+mc = Minecraft.create ()
+poz = mc.player.getPos ()
+x = poz.x
+y = poz.y
+z = poz.z
+szer = 10
+wys = 5
+dlug = 6
+typBloku = 4
+powietrze = 0
+mc.setBlocks (x,y,z,x+szer, y+wys, z+dlug, typBloku)
+\stoptyping
+
+W ten sposób utworzony prostopadłościan jest pełny w środku. Teraz
+trzeba stworzyć mniejszy prostopadłościan zbudowany z bloków powietrza
+poprzez zmniejszenie argumentów wcześniej zbudowanego prostopadłościanu
+o 1.
+
+Istotne jest to, że w powyższym przykładzie użyliśmy funkcji {\em getPos
+()}, która zwraca współrzędne jako wartości rzeczywiste, w
+przeciwieństwie do funkcji {\em getTilePos ()}, która zwraca współrzędne
+jako liczby całkowite.
+
+\subsection[bibliografia]{Bibliografia}
+
+\startitemize[n,packed][stopper=.,width=2.0em]
+\item
+  Minecraft - gamepedia. https://minecraft-pl.gamepedia.com/
+\item
+  Craig Richardson. Nauka programowania z Minecraftem. PWN, Warszawa,
+  2016.
+\item
+  https://minecraft.net/en-us/download/
+\item
+  https://www.python.org/downloads/
+\item
+  https://www.java.com/en/download/
+\item
+  https://sourceforge.net/projects/python-with-minecraft-windows/
+\item
+  https://sourceforge.net/projects/python-with-minecraft-mac/\crlf
+  files/?source=navbar
+\item
+  https://github.com/py3minepi/py3minepi
+\item
+  https://getbukkit.org/spigot
+\item
+  http://minecraft-pl.gamepedia.com/Wartości\type{_}danych
+\item
+  https://dev.bukkit.org/projects/raspberryjuice
+\stopitemize
+
+
+\stoptext

@@ -1,0 +1,261 @@
+\usemodule[pycon-yyyy]
+\starttext
+
+\Title{Micropython w domowej automatyce (warsztat)}
+\Author{Szymon Pyżalski, Nikoloz Glonti}
+\MakeTitlePage
+
+\section[korzystanie-z-gpio-mikrokontrolerów]{Korzystanie z GPIO mikrokontrolerów}
+
+Dla osoby mającej doświadczenie w Pythonie rozpoczęcie pracy ze
+środowiskiem MicroPython zwykle nie nastręcza problemów od strony
+programistycznej. Z drugiej strony wymaga ona wiedzy elektronicznej w
+celu właściwego bezpiecznego i skutecznego korzystania z pinów GPIO
+(General Purpose Input/Output). W tym artykule omówimy podstawowe
+techniki związane z GPIO, starając się jednocześnie odświeżyć podstawowe
+prawa fizyki dotyczące elektroniki.
+
+\subsection[gpio-jako-wyjście]{GPIO jako wyjście}
+
+\section[bezpośrednie-zasilanie-z-gpio]{Bezpośrednie zasilanie z
+GPIO}
+
+W przypadku elementów działających z małą mocą i wymagających
+niewielkich napięć, takich jak pojedyncze diody LED, możliwe jest
+zasilanie bezpośrednio z pinu GPIO z ewentualnym zastosowaniem
+rezystora. Przykładowa sytuacja - próbujemy zasilić niskoprądową diodę
+LED przy użyciu chipa ESP8266 (rys. 1).
+
+Z dokumentacji technicznej odczytujemy następujące parametry:
+
+\startitemize[packed]
+\item
+  Spadek napięcia diody 2,5 V
+\item
+  Prąd diody: 2 mA
+\item
+  Napięcie GPIO: 3,3 V
+\item
+  Maksymalny prąd dla GPIO chipa: 12 mA
+\stopitemize
+
+\placefigure{Dioda z rezystorem
+ograniczającym}{\externalfigure[ryc1.png]}
+
+Ponieważ napięcie i maksymalny prąd, jaki jest w stanie dostarczyć GPIO,
+są większe od wymaganych przez diodę, możemy zasilić ją bezpośrednio.
+Aby dobrać wielkość rezystora, przypomnijmy sobie II prawo Kirchhoffa i
+prawo Ohma. Pierwsze z nich mówi nam, że spadek napięcia na rezystorze
+musi wynieść tyle, ile wynosi różnica między napięciem na GPIO a
+spadkiem napięcia na diodzie. Prawo Ohma określa zaś, że wartość
+opornika jest stosunkiem spadku napięcia i natężenia prądu. Otrzymujemy
+wzór:
+
+\startformula R = \frac{V_S - V_{LED}}{I} \stopformula
+
+Podstawiając wartości: 3,3V, 2,5V i 2mA otrzymujemy żądaną oporność
+400Ω. Możemy zatem użyć bliskiego tej wartości opornika 470Ω dostępnego
+w większości zestawów.
+
+Ostatnią wartością, którą warto policzyć, jest jeszcze moc rezystora,
+którą uzyskujemy ze znanego wzoru:
+
+\startformula P = U \cdot I \stopformula
+
+Moc naszego rezystora w tym obwodzie wyniesie więc 1,6 mW. Jest to dużo
+mniej niż maksymalna moc standardowych rezystorów wynosząca 250 mW,
+zatem moc rezystora nie będzie stanowiła problemu.
+
+\subsection[uwaga]{Uwaga:}
+
+Prawo Ohma znajduje zastosowanie wyłącznie dla elementów takich jak
+rezystory. Elementy półprzewodnikowe cechują się nieliniową zależnością
+między napięciem a natężeniem prądu. Błędem byłoby stwierdzenie, że
+dioda z powyższego przykładu ma 1,2 kΩ i oczekiwanie, że dla innych
+napięć dioda zachowa ten stosunek U / I. Dioda pracować może tylko w
+wąskim zakresie napięcia. Poniżej niego w ogóle nie włączy się,
+natomiast powyżej jej oporność gwałtownie spadnie, co szybko doprowadzi
+do przepalenia.
+
+\section[tranzystor-jako-przełącznik]{Tranzystor jako przełącznik}
+
+Wachlarz zastosowań tranzystorów w elektronice analogowej i cyfrowej
+jest bardzo szeroki. My jednak skupimy się na jednym - wykorzystaniu
+tranzystora do kontroli obwodu o wysokim natężeniu prądu za pomocą
+znacznie niższego. W tym celu zastosujemy konfigurację
+\quotation{wspólnego emitera}:
+
+\placefigure{Tranzystor NPN jako przełącznik
+diody}{\externalfigure[ryc2.png]}
+
+W układzie tym w momencie, gdy pin znajduje się w stanie niskim,
+tranzystor znajduje się w stanie zatkania - brak przewodnictwa między
+kolektorem a emiterem. Gdy pin przejdzie w stan wysoki - tranzystor
+osiąga stan nasycenia - prąd między kolektorem i emiterem przewodzony
+jest z minimalnym oporem. Spróbujmy za jego pomocą zasilić
+\quotation{żarówkę} LED na 12V o mocy 1,5 W.
+
+Parametry:
+
+\startitemize[packed]
+\item
+  Wzmocnienie tranzystora: β = 200
+\item
+  Maksymalny prąd kolektor-emiter: 1A
+\item
+  Napięcie stanu nasyconego baza-emiter: 0.7 V
+\stopitemize
+
+Mając daną moc i napięcie źródła światła możemy wyliczyć płynący przez
+nie prąd jako 125 mA. Jest to również prąd kolektor-emiter. Wymagany
+prąd baza-emiter wyniesie zatem 125 mA / 200 = 0,63 mA. Stąd też przy
+zastosowaniu wzoru powyżej otrzymujemy oporność 4,73 kΩ. Użyjemy zatem
+na bazie opornik o wartości 4,7 kΩ, który powinien nam zagwarantować
+wymagany prąd baza-emiter, kiedy pin GPIO przejdzie w stan wysoki 3,3V.
+
+\section[tranzystor-a-przekaźnik]{Tranzystor a przekaźnik}
+
+Mimo że tranzystor i przekaźnik mogą spełniać podobną rolę w obwodzie,
+istnieje między nimi duża różnica. Przekaźnik przełącza styki
+mechanicznie za pomocą elektromagnesu. Tranzystor nie posiada elementów
+mechanicznych. Jego działanie opiera się na technologii
+półprzewodnikowej. Aby wybrać, która z tych opcji jest dla nas właściwa,
+należy rozważyć wady i zalety obu rozwiązań.
+
+\section[zalety-przekaźnika]{Zalety przekaźnika}
+
+\startitemize[packed]
+\item
+  Może przewodzić zwykle prąd o znacznie wyższym natężeniu niż
+  tranzystor.
+\item
+  Może przewodzić zarówno prąd zmienny, jak i stały.
+\item
+  Sposób zasilania cewki jest niezależny od tego, jaki prąd przez niego
+  płynie, zatem obwód jest bardziej uniwersalny.
+\stopitemize
+
+\section[zalety-tranzystora]{Zalety tranzystora}
+
+\startitemize[packed]
+\item
+  Ma o kilka rzędów wielkości mniejsze niż przekaźnik opóźnienie
+  pomiędzy kontrolującym go sygnałem, a odpowiedzią.
+\item
+  Ze względu na brak elementów mechanicznych nie ulega zmęczeniu przy
+  przełączaniu.
+\item
+  Wymaga znacznie mniejszego prądu na bazie niż przekaźnik do
+  uruchomienia cewki.
+\item
+  Jego praca jest bezgłośna.
+\item
+  Nie posiadając elementów indukcyjnych nie wywołuje problemu
+  samoindukcji w momencie wyłączenia (przekaźnik może wymagać
+  zastosowania diody ochronnej, która pochłonie przepięcie).
+\stopitemize
+
+Tak więc w sytuacji, gdy mamy do czynienia z prądem zmiennym, lub o
+dużym natężeniu, wybierzemy przekaźnik. Podobnie postępujemy, gdy nie
+znamy parametrów odbiornika energii, który będzie kontrolowany. W
+przypadku sygnału wypełniającego PWM (Pulse-Width Modulation) musimy
+zastosować tranzystor ze względu na małe opóźnienie i zdolność do
+wytrzymania licznych przełączeń. W wielu innych sytuacjach wybór
+pozostaje kwestią priorytetów.
+
+\subsection[gpio-jako-wejście]{GPIO jako wejście}
+
+\section[rezystory-podciągające]{Rezystory podciągające}
+
+Piny niepodłączone mogą negatywnie wpływać na pracę mikrokontrolera.
+Pełnią one role swego rodzaju anteny - zbierają zakłócenia cyfrowe(na
+przykład silne szpilki sygnałowe). Taki stan pinu określamy w języku
+angielskim jako {\em floating}. Rezystory podciągające służą do
+uniknięcia zakłóceń cyfrowych, które mogą prowadzić do nieprawidłowej
+pracy układu.
+
+\placefigure{Zastosowanie rezystora
+podciągającego}{\externalfigure[ryc3.png]}
+
+Na rys. 3 widzimy przykład pinu podciągniętego do stanu wysokiego przez
+rezystor. Jeśli zewrzemy przełącznik, wysoka wartość rezystora sprawia,
+że linia 3,3 V nie jest już w stanie ustalić stanu pinu na wysoki, gdyż
+jego potencjał ustalany jest przez bazę. Stąd pin osiągnie stan niski.
+Wartości rezystorów zależą od częstotliwości zmian stanów na linii. Na
+przykład dla linii I2C należy stosować 4,7kΩ, dla przycisków 10kΩ.
+
+\section[bouncing-sygnału]{Bouncing sygnału}
+
+Zbudowaliśmy już układ według powyższego schematu i postanowiliśmy go
+przetestować. Napiszmy zatem prosty kod:
+
+\starttyping
+import machine
+
+cur_value = 0
+toggle_count = 0
+pin = machine.Pin(5, machine.Pin.IN)
+
+while True:
+    value = pin.value()
+    if value != cur_value:
+        print(toggle_count)
+        cur_value = value
+        toggle count += 1
+\stoptyping
+
+Ten prosty program ma nam zliczać kolejne zmiany stanu pina 16.
+Teoretycznie licznik powinien wzrosnąć o 1 przy każdym wciśnięciu i
+zwolnieniu przycisku. Czasem jednak obserwujemy, że wciśnięcie powoduje
+kilka zmian stanu przycisku. Zjawisko to zwane po angielsku
+{\em bouncing} jest czymś normalnym na mechanicznych stykach. Możemy
+wobec niego zastosować dwa podejścia.
+
+\subsection[podejście-hardwareowe]{Podejście hardware'owe}
+
+W tym podejściu stosujemy odpowiednią modyfikację obwodu. Najprostszym
+rozwiązaniem jest zastosowanie tzw. układu RC składającego się z
+rezystora i kondensatora (rys. 4).
+
+\placefigure{Przycisk z układem RC}{\externalfigure[ryc4.png]}
+
+Obwód ten różni się od poprzedniego obecnością dodatkowego rezystora i
+kondensatora. Po zamknięciu przełącznika przejście pinu w stan wysoki
+zostanie opóźnione do czasu naładowania się kondensatora. Wartości
+rezystora i kondensatora należy dobrać doświadczalnie tak, aby
+wyeliminować {\em bouncing} jednak by wprowadzone opóźnienie nie było
+zbyt wysokie.
+
+\subsection[podejście-softwareowe]{Podejście software'owe}
+
+Zjawisko {\em bouncingu} możemy obsłużyć również programowo. W tym celu
+wprowadzamy stosowne opóźnienie w kodzie:
+
+\starttyping
+    import time
+    # ...
+        value = pin.value()
+        if value != cur_value:
+            time.sleep_ms(300)
+    # ...
+\stoptyping
+
+\subsection[bibliografia]{Bibliografia}
+
+\startitemize[n,packed][stopper=.]
+\item
+  Wyczerpujące samouczki różnych zagadnień elektronicznych.\crlf
+  http://www.electronics-tutorials.ws/
+\item
+  Samouczki nastawione na pracę z mikrokontrolerami.\crlf
+  https://learn.sparkfun.com/tutorials/
+\item
+  Materiały ze szkolenia MicroPythonowego Radomira Dopieralskiego.\crlf
+  http://micropython-on-wemos-d1-mini.readthedocs.io/en/latest/
+\item
+  Oficjalna dokumentacja MicroPythona na ESP 8266.\crlf
+  https://docs.micropython.org/en/latest/esp8266/esp8266/tutorial/
+\stopitemize
+
+
+\stoptext

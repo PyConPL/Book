@@ -4,10 +4,13 @@
 
 import os
 import glob
+import time
 
 import pl_txt
 
-verbose = 1
+created_pdf = time.strftime("pyconbook-%Y.pdf")
+master_al = time.strftime("pycon%Y")
+verbose = 0
 if os.getenv('PLAIN'):
     create_pdfs = 0
     omit_diffs = 1
@@ -27,82 +30,97 @@ if 'TEXINPUTS' not in os.environ:
 os.environ['TEXINPUTS'] = (
     ".:..:../..:../../sty:" +
     os.environ['TEXINPUTS'] )
-env = Environment( ENV=os.environ)
+env = Environment(ENV=os.environ)
 
-def remove_comments(line):
-    return line.split('%')[0]
+genart_file = 'genart.txt'
 
-articles = []
-artlist_file = 'artlist.txt'
-build = "build"
-for line in open(artlist_file):
-    line = remove_comments(line)
-    words = line.split()
-    if words:
-        alias, location = words[:2]
-        articles.append([alias, location])
+def prepare_art(artlist_file):
+    al_loc_ls = []
+    for line in open(artlist_file):
+        line = pl_txt.remove_comments(line)
+        words = line.split()
+        if words:
+            alias, location = words[:2]
+            al_loc_ls.append([alias, location])
 
-if only_first_article_for_testing:
-    articles = articles[:1]
+    if only_first_article_for_testing:
+        al_loc_ls = al_loc_ls[:1]
 
-selected = os.getenv('SELECTED')
-if selected:
-    sel_ls = selected.split()
-    articles = filter(lambda x: x[0] in sel_ls, articles)
+    selected = os.getenv('SELECTED')
+    if selected:
+        sel_ls = selected.split()
+        al_loc_ls = filter(lambda x: x[0] in sel_ls, al_loc_ls)
+    return al_loc_ls
+
+al_loc_ls = prepare_art('artlist.txt')
+new_data = pl_txt.prepare_file(al_loc_ls)
+pl_txt.write_if_needed(genart_file, new_data)
 
 final_pdfs = map(
-    (lambda x: "{}/{}/{}.pdf".format(build, x[0], x[0])),
-    articles)
+    lambda x: pl_txt.art_file_pdf(x[0]),
+    al_loc_ls)
 
-env.Command("pyconbook-yyyy.pdf",
+slave_ls = filter(lambda x: x[0] != master_al, al_loc_ls)
+
+slave_pdfs = map(
+    lambda x: pl_txt.art_file_pdf(x[0]),
+    slave_ls)
+
+pl_txt.env_command(
+    env,
+    created_pdf,
     final_pdfs,
-    "texexec --pdfcopy --result=$TARGET $SOURCES")
+    "texexec --pdfcopy --result=$TARGET $SOURCES",
+    )
 
-for alias, location in articles:
-    if tty_columns:
-        dash_count = tty_columns - 5 - len(alias) - len(location)
-        txt_line = ''.join([
-            '-' * dash_count,
-            ' ',
-            alias,
-            ' ',
-            location,
-            ])
-    else:
-        txt_line = ''
-    root = "{}/{}/{}".format(build, alias, alias)
+for alias, location in al_loc_ls:
+    txt_line = pl_txt.prepare_line(tty_columns, alias, location)
+    root = pl_txt.art_file_core(alias)
+    src_ls = (
+        [
+            root + ".tex",
+            genart_file,
+            pl_txt.art_pages_file(),
+            ] +
+        glob.glob("sty/*") +
+        glob.glob("src/" + alias + "/*"))
+    if alias == master_al:
+       src_ls.extend(slave_pdfs)
     small_pdf_ls = [
             "pwd",
             "# " + txt_line,
             pl_txt.link_src(alias),
             ]
     if copy_images:
+        small_pdf_ls.extend([
+            "[ ${TARGET.file} != cyber.pdf ] || cp ../../../presentations/with_python_security/000_notpetya.png .",
+            "[ ${TARGET.file} != cyber.pdf ] || cp ../../../presentations/with_python_security/001_attacks_per_day.png .",
+            "[ ${TARGET.file} != cyber.pdf ] || cp ../../../presentations/with_python_security/002_batman.png .",
+            ])
         small_pdf_ls.append(
-            "[ ${TARGET.file} != async.pdf ] || cp ../../../presentations/async_pod_maska/yield_from.png .",
+            "[ ${TARGET.file} != real.pdf ] || cp ../../../presentations/django_in_the_real_world/diagram.png .",
             )
         small_pdf_ls.append(
-            "[ ${TARGET.file} != microservices.pdf ] || cp ../../../presentations/tdd_of_python_microservices/fixtures.png .",
+            "[ ${TARGET.file} != zodb.pdf ] || cp ../../../presentations/zodb_ecosystem/ZODBTitleGraphics.png .",
             )
+        small_pdf_ls.extend([
+            "[ ${TARGET.file} != micro.pdf ] || cp ../../../workshops/micropython/ryc1.png .",
+            "[ ${TARGET.file} != micro.pdf ] || cp ../../../workshops/micropython/ryc2.png .",
+            "[ ${TARGET.file} != micro.pdf ] || cp ../../../workshops/micropython/ryc3.png .",
+            "[ ${TARGET.file} != micro.pdf ] || cp ../../../workshops/micropython/ryc4.png .",
+            ])
         small_pdf_ls.append(
-            "[ ${TARGET.file} != microservices.pdf ] || cp ../../../presentations/tdd_of_python_microservices/test_pyramid.png .",
-            )
-        small_pdf_ls.append(
-            "[ ${TARGET.file} != microservices.pdf ] || cp ../../../presentations/tdd_of_python_microservices/tdd_cycle.png .",
+            "[ ${TARGET.file} != networkx.pdf ] || cp ../../../workshops/Network_Analysis_using_Python/network.png .",
             )
     if create_pdfs:
         small_pdf_ls.append("texexec --pdf " + alias)
     small_pdf_ls.append("mv artpages.inc .. 2>/dev/null || true")
-    env.Command(
+    pl_txt.env_command(
+        env,
         root + ".pdf",
-        [
-            root + ".tex",
-            artlist_file,
-            build + "/artpages.inc",
-            glob.glob("sty/*"),
-            glob.glob("src/" + alias + "/*")
-            ],
+        src_ls,
         small_pdf_ls,
-        chdir = "%s/%s" % (build, alias),
+        chdir=pl_txt.art_home(alias),
         )
     loc_src  = "src/" + alias + "/text.tex"
     main_src = "../" + location + "/text.tex"
@@ -116,20 +134,32 @@ for alias, location in articles:
     if os.path.exists(loc_src):
         if verbose:
             print 'Found:', loc_src
-        env.Command( root + ".tex", loc_src,
-                     Copy('$TARGET','$SOURCE') )
+        pl_txt.env_command(
+            env,
+            root + ".tex",
+            loc_src,
+            Copy('$TARGET','$SOURCE'),
+            )
     elif os.path.exists(main_src):
         if verbose:
             print 'Found:', main_src
-        env.Command( root + ".tex", main_src,
-                     Copy('$TARGET','$SOURCE') )
+        pl_txt.env_command(
+            env,
+            root + ".tex",
+            main_src,
+            Copy('$TARGET','$SOURCE'),
+            )
     elif os.path.exists(main_md):
+        if alias == 'pyladies':
+            pyladies = 1
+        else:
+            pyladies = 0
         if verbose:
             print 'Found:', main_md
         pandoc_patch_ls = [
             Delete(".tmp"),
             Mkdir(".tmp"),
-            pl_txt.run_pandoc(main_md),
+            pl_txt.run_pandoc(main_md, pyladies=pyladies),
             ]
         if diffsrc:
             pandoc_patch_ls.append(
@@ -138,7 +168,8 @@ for alias, location in articles:
         pandoc_patch_ls.append(
             Copy("$TARGET", ".tmp/${TARGET.file}")
             )
-        env.Command(
+        pl_txt.env_command(
+            env,
             root + ".tex",
             [main_md] + diffsrc + Glob("src/*.inc.tex"),
             pandoc_patch_ls,
@@ -149,7 +180,12 @@ for alias, location in articles:
         raise RuntimeError("Not found: %s" % repr(main_md))
 
 
-env.Command("build/artpages.inc", [], [])
+pl_txt.env_command(
+    env,
+    pl_txt.art_pages_file(),
+    [],
+    [],
+    )
 
 # Local Variables:
 # mode: python

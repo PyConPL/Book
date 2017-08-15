@@ -1,0 +1,111 @@
+--- cyber.tex
++++ cyber.tex
+@@ -1,9 +1,9 @@
+ \usemodule[pycon-yyyy]
+ \starttext
+ 
+-
+-\section[with-python-security---piotr-dyba]{with python: security() -
+-Piotr Dyba}
++\Title{with python: security()}
++\Author{Piotr Dyba}
++\MakeTitlePage
+ 
+ \section[about-author]{About author}
+ 
+@@ -502,10 +502,18 @@
+ \NC DB Action
+ \NC Login
+ \NC Logout
+-\NC Read blog
+-\NC Write blog
+-\NC Delete blog
+-\NC Manage Users
++\NC Read
++\NC Write
++\NC Delete
++\NC Manage
++\AR
++\NC
++\NC
++\NC
++\NC blog
++\NC blog
++\NC blog
++\NC Users
+ \NC\AR
+ \HL
+ \NC DB Read
+@@ -547,11 +555,19 @@
+ \HL
+ \NC Method
+ \NC /
+-\NC /api/login
+-\NC /api/blog
+-\NC /api/blog/
+-\NC /api/user
+-\NC /api/user/
++\NC /api/
++\NC /api/
++\NC /api/
++\NC /api/
++\NC /api/
++\NC\AR
++\NC
++\NC
++\NC login
++\NC blog
++\NC blog/
++\NC user
++\NC user/
+ \NC\AR
+ \HL
+ \NC GET
+@@ -590,10 +606,18 @@
+ \NC user type
+ \NC Login
+ \NC Logout
+-\NC Read blog
+-\NC Write blog
+-\NC Delete blog
+-\NC Manage Users
++\NC Read
++\NC Write
++\NC Delete
++\NC Manage
++\NC\AR
++\NC
++\NC
++\NC
++\NC blog
++\NC blog
++\NC blog
++\NC Users
+ \NC\AR
+ \HL
+ \NC Anonymous
+@@ -631,11 +655,19 @@
+ \HL
+ \NC User type
+ \NC /
+-\NC /api/login
+-\NC /api/blog
+-\NC /api/blog/
+-\NC /api/user
+-\NC /api/user/
++\NC /api/
++\NC /api/
++\NC /api/
++\NC /api/
++\NC /api/
++\NC\AR
++\NC
++\NC
++\NC login
++\NC blog
++\NC blog/
++\NC user
++\NC user/
+ \NC\AR
+ \HL
+ \NC Anonymous

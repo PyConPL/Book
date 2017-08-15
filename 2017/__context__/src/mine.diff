@@ -1,0 +1,14 @@
+--- mine.tex
++++ mine.tex
+@@ -1,8 +1,9 @@
+ \usemodule[pycon-yyyy]
+ \starttext
+ 
+-
+-\section[minecraft-sterowany-pythonem]{Minecraft sterowany Pythonem}
++\Title{Minecraft sterowany Pythonem (warsztat)}
++\Author{Milena Piasecka}
++\MakeTitlePage
+ 
+ Minecraft {[}1{]} zapewnia niczym nieskrępowaną kreatywność i swobodę
+ tworzenia. Python jest prosty do czytania i zapisywania, daje duże
