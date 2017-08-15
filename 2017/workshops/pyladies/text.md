@@ -391,9 +391,15 @@ find(...)
     Return -1 on failure.
 ```
 
-Dokumentacja pokazuje wszystkie argumenty jakie przyjmuje dana metoda,
-informuje jakiego typu wynik jest zwracany oraz w skrócie wyjaśnia co
-ta metoda robi.  Dzięki temu możemy ją sobie bardzo szybko przypomnieć.
+Czytanie dokumentacji nie jest łatwe, ale nie zrażaj się. Warto oswajać się
+z nią od samego początku. Przeczytaj fragment powyżej jeszcze raz, a zaraz
+udzielimy Ci kilku wskazówek, jak czytać dokumentację.
+
+Dokumentacja pokazuje wszystkie argumenty jakie przyjmuje dana metoda.
+Tę informację zawiera linia "S.find(sub [,start [,end]])".
+Dalej dokumentacja informuje jakiego typu wynik jest zwracany oraz w skrócie
+wyjaśnia co ta metoda robi.  Dzięki temu możemy ją sobie bardzo szybko
+przypomnieć.
 
 Zwróć uwagę, że w tym przykładzie nie otworzyliśmy nawiasu przy nazwie
 metody `find`, a co za tym idzie, nie podaliśmy jej żadnych argumentów.
@@ -458,7 +464,7 @@ Liczby możemy dodawać i odejmować:
 13254776280841401
 ```
 
-...albo sprawdzić resztę z dzielenia:
+...albo sprawdzić resztę z dzielenia (ang. modulo):
 
 ```python
 >>> 20 % 17
@@ -537,9 +543,9 @@ z najniższym.
 
 Operatory | Znaczenie
 --------- | ---------
-`+`, `-`  | Dodawanie, odejmowanie
-`*`, `/`, `//`, `%` | Mnożenie, dzielenie, dzielenie całkowite, modulo
 `**` | Potęgowanie
+`*`, `/`, `//`, `%` | Mnożenie, dzielenie, dzielenie całkowite, modulo
+`+`, `-`  | Dodawanie, odejmowanie
 
 ## :pushpin: Podsumowanie
 
@@ -560,9 +566,13 @@ W tym rozdziale:
 Tworząc programy nigdy nie jesteśmy w stanie przewidzieć wszystkich
 sytuacji jakie mogą się wydarzyć.  Czasami stanie się coś, czego się nie
 spodziewaliśmy, a czasami po prostu użyjemy języka w nieprawidłowy sposób.
-Na każdą taką sytuację Python zareaguje zgłaszając błąd.  Dzięki temu
-dowiemy się na czym polegała nasza pomyłka i będziemy mogli poprawić kod
-programu, żeby uniknąć tego samego problemu w przyszłości.
+Na każdą taką sytuację Python zareaguje zgłaszając błąd lub wyjątek. Między
+tymi pojęciami jest różnica, ale nie musimy ich na razie rozróżniać.
+
+Kiedy Python natrafi na taką sytuację, przerwie działanie programu i wyświetli
+nam komunikat, dzięki któremu dowiemy się na czym polegała nasza pomyłka
+i będziemy mogli poprawić kod programu, żeby uniknąć tego samego problemu
+w przyszłości.
 
 Słowa "błąd" czy "problem" są bardzo ogólne, ponieważ mogą dotyczyć rzeczy
 na które jako programiści nie mamy wpływu.  Dlatego posługujemy są terminem
@@ -579,43 +589,48 @@ podczas zapisywania jakiegoś pliku.  Nie sposób wymienić wszystkie takie
 możliwości - z czasem poznasz zestaw najczęściej występujących wyjątków
 i nauczysz się przewidywać jakie operacje mogą skutkować rzuceniem wyjątku.
 
-## Jak czytać wyjątki
+## Jak czytać komunikaty o błędach i wyjątkach
 
-Spróbujmy wywołać wyjątek, dodając tekst do liczby:
+Spróbujmy wywołać błąd i zobaczyć jak zachowa się nasz program.
+Pamiętasz, jak informowaliśmy o tym, że stringi wstawiamy w pojedyńczy lub
+podwójny cudzysłów, ale musisz pamiętać, żeby cudzysłów zamykający był taki
+sam jak otwierający? Zróbmy eksperyment i sprawdźmy, co się stanie, kiedy
+złamiemy tę zasadę.
 
 ```python
->>> 123 + 'ala ma kota'
+>>> 'ala ma kota"
 Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-TypeError: unsupported operand type(s) for +: 'int' and 'str'
+  File "python", line 1
+    'ala ma kota"
+                ^
+SyntaxError: EOL while scanning string literal
 ```
 
-Jak widzisz, zamiast zwrócić wynik operacji, Python zgłosił wyjątek.
+Jak widzisz, zamiast wyświetlić tę frazę, Python zgłosił błąd.
 Przeczytajmy go linijka po linijce.
 
 * Na samym początku widzimy zawsze wiadomość
 `Traceback (most recent call last):`.  Słowem "Traceback" określa się listę
 operacji, których wykonanie spowodowało błąd.  W tym przypadku wykonana
-została tylko jedna operacja (dodawanie), ale w przyszłości spotkasz się
-z sytuacjami, w których wyjątek został rzucony w skutek wykonania całego
-ciągu poleceń.  Python zawsze pokazuje cały traceback, aby programista
-mógł zrozumieć co poszło nie tak.  Zdanie `most recent call last`
+została tylko jedna operacja (zwrócenie wpisanej frazy), ale w przyszłości
+spotkasz się z sytuacjami, w których wyjątek czy błąd został rzucony wskutek
+wykonania całego ciągu poleceń.  Python zawsze pokazuje cały traceback, aby
+programista mógł zrozumieć co poszło nie tak.  Zdanie `most recent call last`
 informuje, że ostatnia operacja na liście została wykonana najpóźniej
 spośród wszystkich.
-* `File "<stdin>", line 1, in <module>` to właśnie traceback. W naszym
+* `File "python", line 1` to właśnie traceback. W naszym
 przypadku jest to tylko jedna linijka.  Widzimy tutaj opis miejsca,
-w którym wystąpił błąd: `File <stdin>`, co oznacza po prostu "standardowe
-wejście" (*standard input*), jak określa się sposób wprowadzania informacji
-do komputera z użyciem samego tekstu.  Oznacza to tyle, że błąd powstał
-w trybie interaktywnym.
+w którym wystąpił błąd.
 * Ostatnia linijka zawiera najważniejszą informację, czyli bezpośrednią
 przyczynę błędu.  Zaczyna się od typu wyjątku.  W tym przypadku to
-`TypeError`.  Typ można rozumieć jako kategorię: nie mówi on czego
-dokładnie dotyczył błąd, ale pozwala zaklasyfikować różne wyjątki, aby
-łatwiej byłe je zrozumieć.  `TypeError` oznacza niepoprawne użycie jakiegoś
-typu, w tym przypadku typów *integer* i *string*.  Dalej widzimy szczegóły
-błędu: operator dodawania został użyty na liczbie całkowitej (*integer*)
-oraz łańcuchu znaków (*string*), co nie jest dozwolone.
+`SyntaxError` - błąd składni.  Typ błędu można rozumieć jako kategorię: nie
+mówi on czego dokładnie dotyczył błąd, ale pozwala zaklasyfikować różne
+wyjątki, aby łatwiej było je zrozumieć.  `SyntaxError` oznacza błąd w składni
+ciągu znaków, które powinny po sobie następować zgodnie ze składnią języka.
+Rozszyfrujmy jeszcze skrót EOL - end of line, koniec linii. Po takim
+komunikacie wiemy trochę więcej na temat tego, któremu fragmentowi naszego kodu się
+dokładnie przyjrzeć. Odkrycie powodu, dlaczego nasz kod nie działa, wciąż może
+być niełatwą zagadką.
 
 Tworząc bardziej zaawansowane programy spotkasz się z jeszcze dłuższymi
 komunikatami o błędach.  Nie zniechęcaj się tym: każdy wyjątek sprowadza
@@ -627,9 +642,9 @@ możliwe, że ktoś już kiedyś spotkał się z takim problemem i znalazł
 rozwiązanie.
 
 :snake: Wywołaj błędy i przeczytaj ze zrozumieniem wyjątki spowodowane
-następującymi operacjami: dzielenie przez zero; wywołanie na dowolnym
-stringu metody, która nie istnieje; wykonanie kodu, który nie ma sensu
-(możesz wpisać losowy ciąg znaków).
+następującymi operacjami: dzielenie przez zero; wywołanie metody lower() na
+dowolnej cyfrze; wywołanie na dowolnym stringu metody, która nie istnieje;
+wykonanie kodu, który nie ma sensu (możesz wpisać losowy ciąg znaków).
 
 ## :pushpin: Podsumowanie
 
