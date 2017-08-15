@@ -13,9 +13,11 @@ Zalety integracji Minecrafta z Pythonem są następujące:
 - nauczanie programowania, w szczególności wśród dzieci (od ok. 10 lat) i młodzieży;
 - ułatwienie poruszania się i budowania w świecie Minecraft.
 
-## Startujemy
+## Przygotowujemy środowisko
 
-Do rozpoczęcia prac są potrzebne następujące programy:
+### Instalujemy
+
+Potrzebujemy następujące programy:
 
 - Minecraft [3] w wersji podstawowej;
 - Python [4] - minimum Python 3;
@@ -31,12 +33,40 @@ Minecrafta. Pobrany plik "Spigot.jar" należy podmienić w folderze "server"
 w "Minecraft Tools". Wtedy można już uruchomić serwer poprzez "Start`_`server"
 z folderu "Minecraft Tools". Okna serwera nie należy zamykać.
 
-Wtedy wystarczy już tylko:
 
-1. uruchomić Minecrafta;
-2. przejść w tryb Multiplayer;
-3. dodać serwer: nazwa dowolna, w adresie wpisać "localhost";
-4. wejść w tryb Multiplayer poprzez utworzony serwer.
+
+### Ustawiamy
+
+#### Zmiana trybu przetrwania na tryb kreatywny
+
+Jeśli pierwszy raz instalujesz Minecraft wystarczy wejść do Minecraft-Tools > server  
+i otworzyć w notatniku plik "server" (plik properties), a następnie wyszukać i zmienić 
+wartości następujących ustawień: 
+
+```sh
+>>> force-gamemode=true
+>>> gamemode=1   
+```
+W przypadku problemów polecam pobrać i wkleić w folderze Minecraft-Tools > server > plugins 
+następujący plik .jar: ChangeGameMode-3.5 [12]. 
+
+W przeciwnym razie (jeśli na komputerze znajdują się już pliki logowania danego gracza) najlepiej 
+zainstalować NBTExplorer [13], uruchomić i zmienić następujące ustawienia: 
+
+saves >> <nazwa świata> >> level.dat >> data: Nb entries >> **Game Type: 1**
+saves >> <nazwa świata> >> playerdata >> <player name> >> **playerGame Type: 1**
+
+
+
+#### Usiawienie trybu multiplayer na serwerze Spigot
+
+Należy:
+1. uruchomić serwer: Minecraft-Tools > Start server
+2. uruchomić Minecrafta;
+3. przejść w tryb Multiplayer;
+4. dodać serwer: nazwa dowolna, w adresie wpisać "localhost";
+5. wejść w tryb Multiplayer poprzez utworzony serwer.
+
 
 ### Testujemy
 
@@ -145,11 +175,49 @@ mc.setBlocks (x,y,z,x+szer, y+wys, z+dlug, typBloku)
 
 W ten sposób utworzony prostopadłościan jest pełny w środku. Teraz trzeba
 stworzyć mniejszy prostopadłościan zbudowany z bloków powietrza
-poprzez zmniejszenie argumentów wcześniej zbudowanego prostopadłościanu o 1.
+poprzez zmniejszenie argumentów wcześniej zbudowanego prostopadłościanu o 1. 
+Następnie, podobnie (poprzez zastąpienie bloków bruku blokami powietrza) 
+w odpowiednich miejscach mozna zrobić miejsce na drzwi.
 
 Istotne jest to, że w powyższym przykładzie użyliśmy funkcji *getPos ()*,
 która zwraca współrzędne jako wartości rzeczywiste, w przeciwieństwie
 do funkcji *getTilePos ()*, która zwraca współrzędne jako liczby całkowite.
+
+### Check distance from home 
+
+Czasami przechadzając się po świecie w Minecraft możesz zastanawiać się, 
+jak daleko odszedłeś/ odeszłaś od domu. Na szczęście możesz użyć koordynatów domu 
+aby sprawdzić, jak daleko od niego się znajdujesz.
+
+```sh
+import math
+homeX = -53.853
+homeZ = 203.597
+pos = mc.player.getTilePos()
+x = pos.x
+z = pos.z
+distance = math.sqrt((homeX - x) ** 2 + (homeZ - z) ** 2)
+mc.postToChat(distance)
+```
+Informacja wyświetli się w czacie Minecraftu, który można wyświetlić używając "t".
+
+
+### Check if a block is what you think
+
+Czasami ciężko powiedzieć, na jaki typ bloku patrzymy. Czy mogę to zjeść?
+Możesz sprawdzić, czy dany blok jest faktycznie tym czym podejrzewasz, że jest,
+używając operatorów logicznych.
+
+```sh
+from mcpi.minecraft import Minecraft
+mc = Minecraft.create ()
+from mcpi import block
+melon = 103
+block = mc.getBlock(-19, 77, 153)
+noMelon = block != melon
+mc.postToChat ("To nie jest melon: " + str(noMelon))
+```
+
 
 ## Bibliografia
 
@@ -159,9 +227,10 @@ do funkcji *getTilePos ()*, która zwraca współrzędne jako liczby całkowite.
 4. https://www.python.org/downloads/
 5. https://www.java.com/en/download/
 6. https://sourceforge.net/projects/python-with-minecraft-windows/
-7. https://sourceforge.net/projects/python-with-minecraft-mac/\crlf
-files/?source=navbar
+7. https://sourceforge.net/projects/python-with-minecraft-mac/
 8. https://github.com/py3minepi/py3minepi
 9. https://getbukkit.org/spigot
 10. http://minecraft-pl.gamepedia.com/Wartości`_`danych
 11. https://dev.bukkit.org/projects/raspberryjuice
+12. https://dev.bukkit.org/projects/bw2801
+13. http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-tools/1262665-nbtexplorer-nbt-editor-for-windows-and-mac
