@@ -942,7 +942,7 @@ Takie funkcje wywołujemy podobnie jak te z jednym argumentem:
 ```
 
 :snake: Napisz funkcję `cena_brutto`, która przyjmuje argumenty
-`cena_netto` oraz `vat` i zwraca wartość netto obliczoną według wzoru
+`cena_netto` oraz `vat` i zwraca wartość brutto obliczoną według wzoru
 `netto * (1 + vat)`.
 
 :snake: Napisz funkcję `imie_nazwisko`, która przyjmuje argumenty `imie`
