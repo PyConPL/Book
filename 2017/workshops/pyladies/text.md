@@ -64,6 +64,13 @@ dzięki temu sami możemy teraz na nie odpowiadać.
 16. Biblioteka standardowa
 17. Podsumowanie
 
+## Dodatki
+
+1. Instalacja Pythona
+2. Moduły
+2. Funkcja `input`
+4. Operacje na plikach
+
 # Rozdział 1. Tryb interaktywny
 
 Warsztaty zaczniemy od wyjaśnienia w jaki sposób będziemy programowali
@@ -2680,18 +2687,19 @@ korzystać,
 
 # Podsumowanie
 
-Dobiegamy do końca kursu, ale to jeszcze nie koniec warsztatów!  Mentorzy
-mają dla Ciebie jeszcze garść zadań.  Możesz też skorzystać z okazji
-i zadać mentorom tyle pytań na ile tylko starczy czasu - między innymi
-dlatego zorganizowaliśmy te warsztaty!
+Dobiegamy do końca kursu, ale to jeszcze nie koniec warsztatów!  Czekają
+na Ciebie jeszcze dodatkowe rozdziały - znajdziesz je w sekcji "Dodatki"
+pod spisem treści. Poza tym mentorzy mają dla Ciebie jeszcze garść zadań.
+Możesz też skorzystać z okazji i zadać mentorom tyle pytań na ile tylko
+starczy czasu - między innymi dlatego zorganizowaliśmy te warsztaty!
 
 
 ## O czym nie powiedzieliśmy
 
 Niestety czas na warsztaty jest organiczony, więc i zakres tematów jakie
 poruszyliśmy nie jest wyczerpujący.  Znasz już podstawy Pythona.  Możesz
-już samodzielnie pisać programy, a czytanie cudzych nie będzie już takie
-trudne.  Jednak na tym etapie często trafisz na kod, którego nie
+już samodzielnie pisać własne programy, a czytanie cudzych nie będzie już
+takie trudne.  Jednak na tym etapie często trafisz na kod, którego nie
 zrozumiesz.  A może już teraz wiesz o tematach, które wydają się
 interesujące, ale nie wiesz jak zacząć.  Dlatego przygotowaliśmy dla Ciebie
 listę zagadnień, którą możesz potraktować jako kontynuację tych warsztatów.
@@ -2745,14 +2753,332 @@ obiektu:
 help(d.update)
 ```
 
-
-
 Dziękujemy za udział w warsztatach!  Jeszcze raz zachęcamy do rozmowy
 z mentorami - chętnie odpowiedzą na wszystkie pytania i wyjaśnią
 niezrozumiałe tematy.
 
 Jeżeli masz uwagi do tego kursu, podziel się nimi pisząc do autorów,
 albo przekaż je mentorom.  Twoje zdanie jest dla nas bardzo ważne!
+
+# Dodatek 1. Instalacja Pythona
+
+Praca na stronie repl.it jest wygodna podczas nauki, jednak aby w pełni
+korzystać z Pythona, warto go zainstalować na własnym komputerze.  Poniżej
+znajdziesz intrukcję instalacji Pythona na systemie Windows.  Jeżeli
+używasz innego systemu operacyjnego - poproś o pomoc mentora.
+
+
+## Krok 1: podbierz program instalacyjny
+
+Wejdź na stronę https://www.python.org/ a następnie otwórz zakładkę
+"Downloads" i odszukaj w niej przycisk "Python 3.6.2".  Kliknij w niego.
+W ten sposób pobierzesz program instalacyjny Pythona.
+
+![krok 1](./obrazy/d01/krok_1.jpg)
+
+
+## Krok 2: uruchom program instalacyjny
+
+Odszukaj na dysku program instalacyjny i uruchom go.  Zobaczysz okno
+zatytułowane "Install Python 3.6.2".  Upewnij się, że opcja "Add Python
+3.6 to PATH" jest zaznaczona, a następnie kliknij przycisk "Install Now".
+
+![krok 2](./obrazy/d01/krok_2.jpg)
+
+
+## Krok 3: czekaj aż instalacja dobiegnie końca
+
+Instalacja Pythona może potrwać nawet kilkanaście minut.
+
+![krok 3](./obrazy/d01/krok_3.jpg)
+
+
+## Krok 4: upewnij się, że instalacja przebiegła prawidłowo
+
+Jeżeli instalacja powiedzie się, w oknie programu instalacyjnego pojawi
+się napis "Setup was successful".  Gdyby tak się nie stało, poproś o pomoc
+mentora.
+
+![krok 4](./obrazy/d01/krok_4.jpg)
+
+
+## Krok 5: uruchom program IDLE
+
+Wraz z Pythonem został zainstalowany program IDLE, w którym możesz edytować
+pliki z kodem.  Jest tam też dostępny tryb interaktywny.  IDLE to kompletne
+środowisko programistyczne, w którym możesz tworzyć nawet zaawansowane
+programy.
+
+Odszukaj IDLE wśród programów zainstalowanych na Twoim komputerze i uruchom
+go.
+
+![krok 5](./obrazy/d01/krok_5.jpg)
+
+
+## Krok 6: tryb interaktywny
+
+Po pierwszym uruchomieniu domyślnie otworzy się tryb interaktywny.
+Spróbuj wpisać kilka znanych Ci poleceń.
+
+![krok 6](./obrazy/d01/krok_6.jpg)
+
+
+## Krok 7: napisz i uruchom swój pierwszy program
+
+Kliknij opcję "File" w pasku u góry okna, a następnie wybierz "New File".
+Pojawi się okno edytora.  Wpisz w nim kod jakiegoś programu, np.
+`print('PyLadies')`.  Zapisz plik wybierając "File", a następnie "Save".
+Aby uruchomić program kliknij w "Run" i "Run Module" (albo wciśnij klawisz
+F5).  Program zostanie uruchomiony.  Jeżeli wypisze jakiś tekst na ekran,
+to zobaczysz go w oknie trybu interaktywnego.
+
+![krok 7](./obrazy/d01/krok_7.jpg)
+
+To wszystko.  Masz już na swoim komputerze środowisko do programowania
+w Pythonie.  Możesz pisać kod programów, zapisywać go w plikach, otwierać
+je i uruchamiać.  Możesz również pracować w trybie interaktywnym.
+
+# Dodatek 2. Moduły
+
+Jak wspomnieliśmy w rozdziale ["Biblioteka standardowa"](./16_biblioteka_standardowa.md),
+każdy może utworzyć własny moduł (bibliotekę) do Pythona i udostępniać
+go innym, lub po prostu używać go w różnych projektach.  Poniżej
+przeczytasz jak tworzyć moduły i w jaki sposób z nich korzystać.
+
+
+## Pisanie modułu
+
+Jeżeli masz na swoim komputerze [program IDLE](./d01_instalacja_pythona.md'),
+to pewnie wiesz już, że kod programów napisanych w Pythonie jest zapisywany
+w plikach z rozszerzeniem `.py`.  Jest to konwencja, która pozwala w łatwy
+sposób odróżnić kod Pythona od innych plików, które go nie zawierają.
+
+Każdy plik z rozszerzeniem `.py` jest jednocześnie programem, który możemy
+uruchomić w Pythonie.  Innymi słowy: jeżeli uruchomimy Pythona i otworzymy
+w nim plik z rozszerzeniem `.py`, to kod zawarty w tym pliku zostanie
+wykonany.
+
+Równocześnie każdy plik z rozszerzeniem `.py` jest też modułem.  Oznacza
+to, że możemy go zaimportować w innym pliku instrukcją `import` i w ten
+sposób uzyskać dostęp do wszystkich obiektów w nim zdefiniowanych: funkcji,
+zmiennych itd.
+
+Podsumowując: aby napisać moduł wystarczy umieścić dowolny kod w pliku
+z rozszerzeniem `.py`.  Każdy taki plik może być potencjalnie wykorzystany
+jako moduł.
+
+## Importowanie modułów
+
+Gotowy moduł możemy wykorzystać w dowolnym innym programie lub module,
+importując go tam.  Ważne jest, aby oba pliki znajdowały się **w tym
+samym katalogu**, w przeciwnym wypadu Python rzuci wyjątek `ImportError`.
+
+Moduł importujemy instrukcją `import`, w której podajemy jego nazwę, która
+jest taka sama jak nazwa pliku w którym go zapisaliśmy, ale bez
+rozszerzenia `.py`.
+
+Załóżmy, że utworzyliśmy plik o nazwie `funkcje.py` i zapisaliśmy w nim
+taki kod:
+
+```python
+def suma(a, b):
+    return a + b
+```
+
+Teraz w tym samym katalogu możemy utworzyć plik `obliczenia.py` i wpisać
+w nim następujący kod:
+
+```python
+import funkcje
+
+print(funkcje.suma(2000, 17))
+```
+
+Jeżeli uruchomimy program `obliczenia.py`, to na ekran zostanie wypisana
+liczba `2017`.
+
+
+## Zastosowanie modułów
+
+Moduły to jeden z najpotężniejszych mechanizów w Pythonie.  Pozwalają
+podzielić programy na logicznie odseparowane fragmenty.  Przykładowo,
+w jednym module możemy umieścić wszystkie funkcje odpowiedzialne za
+obliczenia matematyczne, w drugim funkcje wypisujące dane na ekran,
+a w trzecim połączyć wszystko w całość korzystając z dwóch pozostałych
+modułów.
+
+Pisząc programy zawsze miej na uwadze, że podział na moduły zwiększa
+czytelnośc Twojego kodu.  Również Tobie łatwiej będzie wrócić do programu,
+którego kod został w taki sposób uporządkowany.
+
+# Dodatek 3. Funkcja `input`
+
+Pisząc program bardzo często oczekujemy, że jego użytkownik poda nam jakieś
+dane: swoje imię i nazwisko, parametry liczbowe, czy inne wartości, które
+wpłyną na przebieg programu.  Najprostszą metodą na pozyskanie takich
+danych jest funkcja wbudowana `input`, która po wywołaniu zatrzymuje
+działanie programu, czeka aż użytkownik wpisze coś i wciśnie enter, po
+czym zwraca wpisany tekst w postaci stringa:
+
+```python
+print('Podaj swój wiek:')
+wiek = input()
+print('Masz {} lat'.format(wiek))
+```
+
+W powyższym przykładzie wypisujemy na ekran komunikat - prośbę o podanie
+wieku - następnie pobieramy tę wartość od użytkownika i wypisujemy ją
+w kolejnym komunikacie.
+
+Pamiętaj, że tak otrzymana wartość zawsze będzie stringiem.  Jeżeli chcesz
+zamienić ją na liczbę, możesz posłużyć się funkcją wbudowaną [`int`](https://docs.python.org/3/library/functions.html#int).
+
+# Dodatek 4. Operacje na plikach
+
+Często źródłem danych w programach są pliki.  Jeżeli plik zawiera tekst,
+czyli znaki, które możemy wyświetlić na ekranie, to nazywamy go **plikiem
+tekstowym**.  Taki plik możemy odczytać w edytorze tekstu, na przykład
+w Notatniku.  Istnieją również pliki, których treści nie interpretujemy
+jako tekst, na przykład obrazy.  Nazywamy je **plikami binarnymi**.
+
+Oba rodzaje plików możemy odczytywać i zapisywać w Pythonie, jednak
+w tym artykule skupimy się na plikach tekstowych.  Kiedy nauczysz się
+pracować z nimi, operacje na plikach binarnych nie będą już dla Ciebie
+stanowiły żadnego problemu.
+
+## Ścieżka pliku
+
+Najważniejszym atrybutem pliku jest jego **ścieżka**, która mówi w jakim
+miejscu w strukturze katalogów i pod jaką nazwą się znajduje.  Przykładowo,
+jeżeli w systemie Windows zalogujesz się jako użytkownik "Ala" i utworzysz
+plik "kot.txt" w katalogu "Moje Dokumenty", to ścieżka tego pliku będzie
+najprawdopodobniej wyglądała tak: `C:\Users\Ala\Documents\kot.txt`.
+
+Ścieżki w Pythonie trzymamy w stringach, na przykład:
+
+```python
+>>> sciezka_pliku_kot = 'C:\Users\Ala\Documents\kot.txt'
+>>> print(sciezka_pliku_kot)
+C:\Users\Ala\Documents\kot.txt
+```
+
+W powyższym przykładzie zdefiniowaliśmy **ścieżkę bezwzględną**, czyli
+taką, która dokładnie określa katalog w jakim znajduje się plik
+(`C:\Users\Ala\Documents`).  Jeżeli odnosimy się do pliku względem
+katalogu, w którym znajduje się nasz program, możemy zdefiniować **ścieżkę
+względną**.  Na przykład możemy podać tylko nazwę pliku: `kot.txt`.  Wtedy
+Python uzna, że szukamy pliku w tym samym katalogu co program.  Możemy też
+powiedzieć, że plik znajduje się w katalogu "wyżej": `..\kot.txt`.
+
+Niezależnie od wybranej metody, aby operować na pliku będziemy potrzebowali
+jego ścieżki.
+
+
+## Czytanie pliku
+
+Dostęp do pliku daje nam funkcja wbudowana `open`, która jako argument
+przyjmuje ścieżkę:
+
+```python
+>>> plik = open(sciezka)
+```
+
+Gdy zdefiniujemy sobie plik, możemy odczytać całą jego treść wywołując
+metodę `read`:
+
+```python
+>>> dane = plik.read()
+>>> print(dane)
+zawartość pliku
+```
+
+Możemy również iterować po pliku, linijka po linijce:
+
+```python
+for linia in plik:
+    print(linia)
+```
+
+Gdy odczytamy plik, ponowna próba odczytu zwróci nam pusty string.  Dzieje
+się tak, ponieważ Python trzyma informację o miejscu w którym skończyliśmy
+odczyt pliku i kolejne odczyty zaczyna od tego miejsca.  Jeżeli ta pozycja
+to koniec pliku, ponowna próba odczytu nic nie zwróci.  Chcąc przeczytać
+plik od nowa musimy wywołać metodę `seek` z argumentem `0`, co przestawi
+pozycję odczytu na sam początek:
+
+```python
+>>> plik = open('kot.txt')
+>>> plik.read()
+'ala ma kota'
+>>> plik.read()
+''
+>>> plik.seek(0)
+>>> plik.read()
+'ala ma kota'
+>>> plik.read()
+''
+```
+
+## Pisanie do pliku
+
+Otwierając plik funkcją `open` możemy zdecydować, czy będziemy wykonywali
+na nim odczyt czy zapis.  Domyślnie Python zakłada odczyt.  Jeżeli chcemy
+wprost określić **tryb** (*mode*) pracy z plikiem, musimy przekazać drugi
+argument, który powinien być stringiem.  Jeżeli wybierzemy `'r'` (*read*),
+to plik będziemy mogli tylko odczytywać.  Jeżeli `'w'` (*write*),
+to możliwy będzie tylko zapis.  Dostępnych trybów jest więcej, o wszystkich
+przeczytasz w [dokumentacji metody `open`](https://docs.python.org/3/library/functions.html#open).
+
+Po otwarciu pliku w trybie zapisu, możemy wpisać do pliku tekst metodą
+`write`:
+
+```python
+>>> plik = open('kot.txt', 'w')
+>>> plik.write('ala ma kota')
+```
+
+Jeżeli przed otwarciem pliku znajdował się w nim jakiś tekst, to po
+wywołaniu metody `write` zostanie on **nadpisany**.  Jednak kolejne zapisy
+na już otwartym pliku spowodują, że tekst będzie dopisywany na końcu.
+
+```python
+>>> sciezka = 'kot.txt'
+>>> open(sciezka).read()
+'na początku był taki tekst'
+>>> plik = open(sciezka, 'w')
+>>> plik.write('teraz nadpiszemy')
+>>> plik.write(' tamten tekst')
+>>> plik.close()
+>>> open(sciezka).read()
+'teraz nadpiszemy tamten tekst'
+```
+
+Zwróć uwagę, że w powyższym przykładzie po zapisaniu tekstu wywołaliśmy
+metodę `close`.  W ten sposób zamknęliśmy plik, powodując zachowanie danych
+na dysku.  Gdybyśmy tego nie zrobili, wywołanie metody `read` zwróciłoby
+pierwotną zawartość pliku.  Metodę `close` należy stosować jeżeli po
+zapisie chcemy ponownie odczytać ten sam plik.  W przeciwnym wypadku Python
+sam zadba o zamknięcie pliku: zrobi to jeżeli zakończy się funkcja,
+w której otworzyliśmy plik albo gdy program zakończy swoje działanie.
+
+## Znak nowej linii
+
+Operując na plikach tekstowych natkniemy się na **znak nowej linii**,
+który w Pythonie jest reprezentowany jako string o treści `\n`.  Oznacza
+on miejsce, w którym kończy się linia tekstu.  Sam znak nie ma w sobie
+nic szczególnego, jest po prostu znakiem jak `a` czy `7`.  Natomiast
+przyjmuje się, że znak nowej linii ma specjalne znaczenie, aby umożliwić
+podział tekstu na osobne linie.  Dlatego też jest on traktowany inaczej
+niż inne znaki, np. funkcja `print` zastąpi go przejściem do nowej linii.
+Co istotne, znak ten nie jest bezpośrednio związany z plikami - może być
+częścią dowolnego stringa.
+
+```python
+>>> s = 'pierwsza linia\ndruga linia'
+>>> print(s)
+pierwsza linia
+druga linia
+```
 
 ## Bibliografia
 
