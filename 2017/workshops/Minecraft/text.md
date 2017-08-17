@@ -79,14 +79,16 @@ W edytorze Idle wpisujemy:
 >>> from mcpi.minecraft import Minecraft
 >>> mc = Minecraft.create ()
 ```
-Te 2 pierwsze łączą program z Minecraftem. Jeśli po uruchomieniu programu
-nie pojawił się komunikat o błędzie, możemy kontynuować wpisując np.
+Te 2 pierwsze łączą program z Minecraftem. Będziemy je wykorzystywać za każdym razem, gdy tworzymy nowy program. 
+
+Jeśli po uruchomieniu programu nie pojawił się komunikat o błędzie, możemy kontynuować wpisując np.
 
 ```sh
 >>> mc.player.setTilePos(0,120,0)
 ```
 Dzięki temu poleceniu nasz bohater w Minecrafcie powinien unieść się wysoko
 nad ziemię. Jeśli tak się stało, wszystko działa sprawnie.
+
 
 ## Misje
 
@@ -101,8 +103,6 @@ Położenie w Minecrafcie można łatwo ustalić za pomocą klawisza F3.
 Jeśli znamy docelowe współrzędne, można szybko teleportować się w wybrane miejsce:
 
 ```sh
-from mcpi.minecraft import Minecraft
-mc = Minecraft.create ()
 x=10
 y=110
 y=12
@@ -126,8 +126,6 @@ Wtedy możemy wykorzystać funkcję *sleep*
 ```
 żeby przenieść się w wybrane miejsce na 5 sekund, a następnie wybrać w kolejne miejsce:
 ```sh
-from mcpi.minecraft import Minecraft
-mc = Minecraft.create ()
 mc.player.setPos (10, 110, 12)
 time.sleep (5)
 mc.player.setPos (20, 110, 50)
@@ -141,8 +139,6 @@ gdzie chcemy dany blok postawić, możemy w szybki sposób go umieścić
 w danym miejscu.
 
 ```sh
-from mcpi.minecraft import Minecraft
-mc = Minecraft.create ()
 mc.setBlock (10, 110, 12, 103)
 ```
 W powyższym przypadku postawiliśmy arbuza (kod 103).
@@ -159,8 +155,6 @@ a do budowania większych bloków użyjemy funkcji *setBlocks ()*,
 która pozwoli nam stworzyć prostopadłościan.
 
 ```sh
-from mcpi.minecraft import Minecraft
-mc = Minecraft.create ()
 poz = mc.player.getPos ()
 x = poz.x
 y = poz.y
@@ -183,7 +177,7 @@ Istotne jest to, że w powyższym przykładzie użyliśmy funkcji *getPos ()*,
 która zwraca współrzędne jako wartości rzeczywiste, w przeciwieństwie
 do funkcji *getTilePos ()*, która zwraca współrzędne jako liczby całkowite.
 
-### Check distance from home 
+### Sprawdź, jak daleko od domu jesteś
 
 Czasami przechadzając się po świecie w Minecraft możesz zastanawiać się, 
 jak daleko odszedłeś/ odeszłaś od domu. Na szczęście możesz użyć koordynatów domu 
@@ -202,21 +196,35 @@ mc.postToChat(distance)
 Informacja wyświetli się w czacie Minecraftu, który można wyświetlić używając "t".
 
 
-### Check if a block is what you think
+### Sprawdź, czy dany blok jest tym, co myślisz
 
 Czasami ciężko powiedzieć, na jaki typ bloku patrzymy. Czy mogę to zjeść?
 Możesz sprawdzić, czy dany blok jest faktycznie tym czym podejrzewasz, że jest,
 używając operatorów logicznych.
 
 ```sh
-from mcpi.minecraft import Minecraft
-mc = Minecraft.create ()
 from mcpi import block
 melon = 103
 block = mc.getBlock(-19, 77, 153)
 noMelon = block != melon
 mc.postToChat ("To nie jest melon: " + str(noMelon))
 ```
+
+
+### Chroń swój świat
+
+Czasami można zniszczyć więcej niż by się chciało. Aby uczynić świat "niezmiennym" (eng. immutable), czyli uniemożliwić rozbijanie bloków, uzyjemy specjalnej funkcji oraz warunku i polecenia przekazywanego w czacie.
+
+```sh
+answer = input("Do you want blocks to be immutable? Y/N”)
+if  answer == „Y”:
+    mc.setting("world_immutable", True)
+    mc.postToChat("World is immutable")
+else:
+    mc.setting("world_immutable", False)
+    mc.postToChat("World is mutable")
+```
+
 
 
 ## Bibliografia
