@@ -177,6 +177,23 @@ Istotne jest to, że w powyższym przykładzie użyliśmy funkcji *getPos ()*,
 która zwraca współrzędne jako wartości rzeczywiste, w przeciwieństwie
 do funkcji *getTilePos ()*, która zwraca współrzędne jako liczby całkowite.
 
+### Posadź sobie drzewo... albo cały las 
+
+Drzewo do drewno i liście. Nie musisz sadzić sadzonek i czekać aż urośnie.
+Wystarczy użyć funkcji _setBlock()_ albo _setBlocks()_. 
+Zdefiniuj funkcję, żeby móc szybko sadzić kolejne drzewa.
+
+```sh
+def growTree(x, y, z):
+    _// Write your code to make a tree here_
+pos = mc.player.getTilePos()
+x = pos.x
+y = pos.y
+z = pos.z
+growTree(x + 1, y, z)
+```
+
+
 ### Sprawdź, jak daleko od domu jesteś
 
 Czasami przechadzając się po świecie w Minecraft możesz zastanawiać się, 
@@ -224,6 +241,26 @@ else:
     mc.setting("world_immutable", False)
     mc.postToChat("World is mutable")
 ```
+
+### Zbuduj schody do nieba
+
+
+Wykorzystaj pętlę _while_ żeby zbudować schody do nieba.
+
+```sh
+pos = mc.player.getTilePos()
+x, y, z = pos.x, pos.y, pos.z
+stairBlock = 53
+step = 0
+while step < 10:
+mc.setblock(x + step, y + step, z, stairBlock)
+step += 1
+```
+
+Takie same schody możesz zrobyc wykorzystując pętlę _for_. 
+
+Wykorzystując pętle możesz budować szybciej. Spróbuj teraz zbudować piramidę 
+wykorzystując dowolną z pętli, jakie znasz.
 
 
 
