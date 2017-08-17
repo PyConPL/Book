@@ -1496,7 +1496,7 @@ Definicja pętli zaczyna się od słowa `for`, następnie należy podać nazwę
 zmiennej, do której będą przypisywane wartości kolejnych elementów, dalej
 wpisujemy słowo `in`, nazwę listy oraz dwukropek.  W kolejnych linijkach
 znajdują się operacje, które zostaną wykonane dla każdego elementu.
-Pamiętaj, że przed każdą operacją musi się znaleźć jednakowe wciącie
+Pamiętaj, że przed każdą operacją musi się znaleźć jednakowe wcięcie
 w kodzie.  Ich szerokość nie ma znaczenia, ważne żeby były takie same.
 
 Jeżeli pętla znajduje się wewnątrz funkcji, to wcięcie wewnątrz `for`
