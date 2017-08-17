@@ -1237,7 +1237,7 @@ jej końcu taki sam element jaki jest na samym jej początku.
 ### `pop`
 
 Metoda `pop` nie przyjmuje żadnych argumentów, a zwraca ostatni element
-lity, jednocześnie usuwając go z niej:
+listy, jednocześnie usuwając go z niej:
 
 ```python
 >>> litery = ['a', 'b', 'c', 'd']
