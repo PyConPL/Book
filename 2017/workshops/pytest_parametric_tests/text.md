@@ -179,8 +179,8 @@ def fizzbuzz(number):
 
 From the tests results, do you see what's wrong?
 
-Instead, we'll parametrize the test. That means, we'll have one test written
-- as a template - and it will be run for multiple values.
+Instead, we'll parametrize the test. That means, we'll have one test
+written - as a template - and it will be run for multiple values.
 
 ```python
 import pytest
