@@ -1,0 +1,603 @@
+\enableregime[utf8]
+
+\newif \ifFinalPrint 
+\FinalPrintfalse
+\FinalPrinttrue
+
+\input oddpage.sty
+
+%% Chcę tylko pdf,
+\setupoutput[pdftex]
+\pdfcompresslevel=0 % Lepiej sie rsyncuje!
+\pdfminorversion=4
+
+% Kwaw mówił, że rozmiar B5 jest taki właśnie
+\definepapersize
+        [KuranB5]
+        [height=250mm, width=170mm]
+
+
+\newbox   \PingBugBox 
+\setbox   \PingBugBox = \box\voidb@x
+
+\definelayer[pagepictures][width=\paperwidth,height=\paperheight]
+
+
+
+\ifFinalPrint
+   \setuppapersize[KuranB5][KuranB5]
+   \def \BUG#{\setbox \PingBugBox = \vbox}
+   \setupbackgrounds[page][page][background=pagepictures]\relax
+\else
+  \setuppapersize[KuranB5][A4]
+  \definecolor[tlo1][k=0.2]
+  \definelayer[PingBugLayer]
+     [width=\paperwidth,
+      height=\paperheight]
+
+  \setupbackgrounds[paper][paper][background={color,PingBugLayer},
+                                backgroundcolor=tlo1]
+  \setupbackgrounds[page][page][background={color,pagepictures},
+                                backgroundcolor=white]
+
+  \useexternalfigure[biedrona][../sty/biedrona.pdf]
+  \def \BUGBiedrona#1{%  #1 -- rotation, #2 -- width
+      \setbox \scratchbox \hbox{\rotate[rotation=%
+             \numexpr45*\PingBugSubCnt\relax]{%
+              \externalfigure[biedrona][width=#1]}}%
+      \setbox \scratchbox \hbox{\raise\dp\scratchbox\box\scratchbox}%
+      \dp\scratchbox=0pt\ht\scratchbox=0pt
+      \box\scratchbox}
+      
+
+  \newcount \PingBugCnt
+  \newcount \PingBugSubCnt
+  \unprotect
+  \def \BUG#{\ifvmode
+       \errmessage{\string \BUG in vertical mode, no good}
+     \fi
+     \global \advance \PingBugCnt 1
+     \ifnum 0\getvariable{PingBug}{\number \PingBugCnt}
+          = 0\getvariable{PingBug}{\number \numexpr
+                                      \PingBugCnt-1\relax}\relax
+        \global \advance \PingBugSubCnt 1
+     \else
+        \global \PingBugSubCnt=0
+     \fi
+     \hbox to0pt{\hss \BUGBiedrona{8pt}\hss}%
+     \expanded {\relax
+        \noexpand\writeutilitycommand{%
+        \noexpand \setgvariables[PingBug][\number \PingBugCnt
+           =\noexpand \number \noexpand \realpageno]}}%
+        \global\setbox \PingBugBox \vbox \bgroup
+           \ifvoid \PingBugBox \else 
+              \unvbox \PingBugBox
+              \vskip1ex
+           \fi
+        \leftskip=0pt \rightskip=0pt
+        \startalignment[right]
+        \hsize=18cm
+        \bgroup
+        \aftergroup \stopalignment
+        \aftergroup \egroup
+        \aftergroup \BUG!A
+        \noindent
+        \llap{\BUGBiedrona{8pt}}%
+        \tfx \setupinterlinespace
+        \let \bgroup}
+
+  \def \BUG!A {%
+     \ifnum 0\getvariable{PingBug}{\number \PingBugCnt}
+          = 0\getvariable{PingBug}{\number \numexpr
+                                      \PingBugCnt+1\relax}\relax
+          \message{BUG: \number \PingBugCnt\space same page.
+             \number \PingBugCnt:\number \numexpr
+                                      \PingBugCnt+1\relax;
+             --0\getvariable{PingBug}{\number \PingBugCnt}--
+             --0\getvariable{PingBug}{\number \numexpr
+                                      \PingBugCnt+1\relax}--
+                                      }%
+     \else
+          \message{BUG: \number \PingBugCnt\space shipping}%
+        \ifvoid \PingBugBox\else
+           \setlayer[PingBugLayer][x=1cm,y=26cm,
+                page=\getvariable{PingBug}{\number\PingBugCnt}]{%
+              \framed[background=color,backgroundcolor=white,
+              framecolor=darkgreen]
+              {~\kern10pt\vtop{\kern3pt
+               \setbox\scratchbox=\vsplit \PingBugBox to 3cm
+               \unvbox\scratchbox
+              \kern10pt}~}}%              
+        \fi
+     \fi}
+  \protect
+
+
+\fi
+
+
+\setupcolors[state=start]
+
+\setuptolerance[tolerant]
+
+\setupitemize[indentnext=no]
+
+\setuplayout[
+        marking=off,
+        topspace=1.5cm,
+        header=20pt,
+        bottomspace=1cm,
+        backspace=2cm,
+        cutspace=2cm,
+        margin=0pt,
+        width=fit,
+        height=fit,
+        location=doublesided
+]
+
+
+\setuptyping[indentnext=no,bodyfont=8pt]
+
+% Bez tego nie widać Antykwy Toruńskiej, nie wiem dlaczego
+\loadmapfile [pdftex.map]
+
+\definefloat[rys][rysunki]
+\definefloat[tabela][tabele]
+
+\setuphead[section][number=no]
+
+
+% Standardowy dziubek do \startitemize
+\definesymbol[1][\hbox{~$\diamond$}]
+\def \startlist{\startitemize[l]}
+\def \stoplist{\stopitemize}
+
+% Kwadrat: To byl jakies makro, ale ono sie
+% podstawialo w Bayesian A/B testing with Python - Bogdan Kulynych (PyCon PL 2014)
+% \def|{\errmessage{Invalid tenteges}}
+
+% Nasze cyferki hex, używa się \inhex number, bez {}
+\def \hexdigit #1{%
+        \ifcase #1\relax 0\or 1\or 2\or 3\or 4\or 5\or
+        6\or 7\or 8\or 9\or A\or B\or C\or D\or E\or
+        F\else \gulpundefined\fi}
+\def \inhex  {\begingroup \afterassignment \inhexA \count0=}
+\def \inhexA {\count1=0
+   \loop \ifnum \count0>15 
+     \advance \count0 by-16
+      \advance \count1 by 1
+   \repeat
+   \edef \x{\endgroup \hexdigit{\count1}\hexdigit{\count0}}%
+   \x}
+
+
+
+\newcount \NoOfArticles
+\def \ArtPage#1{\csname ArtPage::#1\endcsname}
+\def \ArtPageSet#1#2{\global \expandafter \expandafter \expandafter \def \ArtPage{#1}{#2}}
+\let \Article=\relax
+
+\begingroup
+    \let \par\empty
+    \NoOfArticles=0
+    \toks0={}
+    \def \a{
+        \edef \fileline{\fileline\space0\space0\relax}%
+        \expandafter \b \fileline\relax
+        }%
+    \def \A{
+       \edef \fileline{\fileline\space}
+       \expandafter \B \fileline \relax
+    }%
+    \def \B #1 {\b #1 0 0 }
+    \def \b #1 {
+       \if$#1$\expandafter \d \else
+          \def\r{#1}%
+          \afterassignment \c
+          \count0=\fi}%
+    \def \c#1\relax{%
+        \edef \R{\noexpand \ArtPageSet{\r}{\number\count0 }}\R
+        \edef \R{\noexpand \ArtPageSet{\r::firstpage}{\number\numexpr\count1+1\relax}}\R
+        \advance \count1 by \count0
+        \edef \R{\noexpand \ArtPageSet{\r::lastpage}{\number\count1}}\R
+        \ifFirstOdd \ifodd \count1 \advance \count1 1\fi \fi
+        \edef \R{\Article{\r}{\noexpand \ArtPage{\r}}}%
+        \toks0=\expandafter{\the\toks0\R}%
+    }
+    \def \d#1\relax{}
+    \doprocessfile \scratchread{genart.txt}\A
+    \xdef \PingArticles{\the\toks0}
+    \count1=0
+    \doprocessfile \scratchread{artpages.inc}\a
+
+\endgroup
+
+
+\def \CheckPingPages{%\loggingall
+%\showthe \numexpr \ArtPage{\jobname}\relax
+%\showthe \numexpr \lastpage\relax
+\ifnum \ArtPage{\jobname}=\lastpage
+\else \loggingall \begingroup
+   \ArtPageSet{\jobname}{\number \lastpage}%
+   \immediate\openout \scratchwrite=artpages.inc\relax
+   \def \Article##1##2{\immediate\write\scratchwrite{##1 ##2}}%
+   \PingArticles
+   \immediate \closeout \scratchwrite
+   \endgroup
+\fi%\tracingnone
+}
+%\appendtoks \CheckPingPages \to \everystarttext
+%\show \starttext
+%\CheckPingPages
+\appendtoks \enableregime[utf-8]\to \everystarttext
+
+
+
+% I z tego powodu właśnie wyłączamy automat stronicujący
+%\setuppagenumbering[state=stop]
+%\expandafter \show \csname ArtPage::\jobname::firstpage\endcsname
+\setuppagenumber[number=0\ArtPage{\jobname::firstpage}]
+
+
+\def \noang #1){\leavevmode{\english \it #1\/})}
+\def \ang {\leavevmode \tf ang.~\noang}
+
+\newtoks \HeaderAuthor
+\newtoks \HeaderTitle
+
+\newtoks \PageAuthor
+\newtoks \PageTitle
+
+\newbox \AbstractBox \setbox\AbstractBox=\vbox{}
+
+
+\usetypescriptfile [type-gyr]
+\usetypescript [type-gyre][qx]
+\usetypescript [antykwa-torunska][qx]
+
+\definetypeface [pagella] [rm] [serif] [pagella] [default] [encoding=qx]
+\definetypeface [pagella] [tt] [mono]  [cursor]  [default] [encoding=qx]
+\definetypeface [pagella] [mm] [math]  [pagella] [default] [encoding=qx]
+
+
+\definetypeface [bonum] [rm] [serif] [bonum] [default] [encoding=qx]
+\definetypeface [bonum] [tt] [mono]  [cursor]  [default] [encoding=qx,rscale=1.05]
+\definetypeface [bonum] [mm] [math]  [bonum] [default] [encoding=qx,rscale=1.1]
+
+
+
+\setupbodyfont [bonum,9pt]
+
+\mainlanguage[polish]\language[polish]
+\hyphenation{
+        także
+        source-forge
+}
+
+     \fontdimen 3 \the\font = 0.25\fontdimen 6 \the\font
+     \fontdimen 4 \the\font = 0.12\fontdimen 6 \the\font
+
+%\showframe
+%\showgrid
+
+        
+
+
+\def \pingheader{\vbox{%
+   \hbox to \hsize {%
+     \ifnum \realpageno=1 \hss\else
+     \ifodd \pageno
+        \hfil\quad\HeaderTitle\quad\hfil\llap{\inhex\pageno}%
+     \else
+        \rlap{\inhex\pageno}\hfil\quad \HeaderAuthor\quad\hfil
+     \fi\fi}}}
+   
+\def \AddToToks#1#2{#1=\expandafter{\the #1#2}}
+
+\def \Author#1{\begingroup
+        \edef \h{\the \HeaderAuthor}%
+        \ifx \h \empty
+           \endgroup 
+        \else
+           \endgroup \AddToToks \HeaderAuthor {, }%
+        \fi
+        \AddToToks \HeaderAuthor {#1}%
+        \AddToToks \PageAuthor{\AuthorLine{#1}}%
+}
+
+\def \AuthAffil#1{\AddToToks \PageAuthor{\AuthorAffilLine{#1}}}
+
+\def \Title#1{\HeaderTitle{#1}\PageTitle{#1}}
+
+% \ignorespacesandpars ignores all spaces and \par
+% It assumes ~ is active and doesn't ignore it
+\begingroup 
+  % define the following with ~ fixed as active
+  \catcode`\~=13
+  \def ~ {\endgroup
+     \def \ignorespacesandpars{\begingroup
+       \let ~\relax
+       % it's tempting to use \let\par\empty but it's dangerous,
+       % for instance what if we encounter \csname \number
+       % 0...\par..
+       \let \par=\space 
+       \begingroup
+       \aftergroup \futurelet
+       \aftergroup ~\aftergroup \ignorespacesandparsA
+       \begingroup
+          \def ~{\begingroup\aftergroup \noexpand \expandafter
+          \aftergroup \endgroup}%          
+          \edef~{\endgroup~~~~~~~~}~\endgroup}%
+     \def \ignorespacesandparsA{%
+       \ifx ~^^20% one space
+         \aftergroup \ignorespacesandpars
+         \afterassignment \endgroup
+         % as a side effect a space is eaten 
+         \count0=0%
+       \else
+         \expandafter \endgroup
+       \fi}}~
+
+
+\def \startabstract{\setbox \AbstractBox = \vbox \bgroup
+   \startnarrower[2*left,2*right]
+        \def \stopabstract{\stopnarrower \egroup}
+        \noindent \tfx {\sc Streszczenie:~}\ignorespacesandpars}
+
+\def \AuthorLine#1{#1\crlf}
+\def \AuthorAffilLine#1{~~~#1\crlf}
+
+\font \TitleFont = qx-anttb at 18pt
+
+\newif \iftitpage \titpagefalse
+
+\def \MakeTitlePage{
+        %% \ifodd \pageno \else         
+        %%        \ifFinalPrint\else
+        %%        ===tu będzie pusta strona, bo parzysta==\par
+        %%        ===tego tekstu na finalnym wydruku nie będzie==\par
+        %%        \fi
+        %%         \noheaderandfooterlines\null\vfill\break
+        %% \fi
+        \setbox0 = \vbox {\titpagetrue
+            \startalignment[right,broad,nothyphenated]
+                 \TitleFont\setupinterlinespace
+                  \noindent 
+                  \let \TitleBreak=\crlf
+                 \the \PageTitle\par
+            \stopalignment
+            \blank[big]
+            \startalignment[right]
+                \noindent {\tfa
+                \the \PageAuthor}
+            \stopalignment
+            \blank[big]
+            \vfill 
+            \unvbox \AbstractBox
+            \blank[big]
+            \hbox{}
+        }
+        \ifdim \ht0<.5\vsize
+          \setbox0=\vbox to 0.5\vsize{\unvbox0\vfil}
+        \fi
+        \noheaderandfooterlines
+        \box0
+        \CheckPingPages
+}
+
+\setupheadertexts[{%
+   \let \TitleBreak=\empty
+   \ifodd \pageno
+      \hfill~~~\the \HeaderTitle~~~\hfill
+      \llap{\inhex\pageno}%
+   \else
+      \rlap{\inhex\pageno}%
+      \hfill~~~\the \HeaderAuthor~~~\hfill
+   \fi}]
+        
+
+\setupindenting[medium,yes]
+\setuplabeltext[pl][figure=Rys.~]
+\setupfootnotes[margindistance=5pt]
+
+
+% różności
+\def \emph#{\leavevmode \bgroup \it \bgroup
+        \aftergroup \/%
+        \aftergroup \egroup
+        \let \bgroup}
+
+
+\def \startbibl {\startitemize[n]}
+\def \stopbibl{\stopitemize}
+\def \bibitem{\item}
+
+
+\iffalse % OLD URLS
+% URL
+\def \URLciachciach{:/\URLciach}
+\def\URLciach{\egroup
+        \discretionary{\hbox{/$\Rightarrow$}}{\hbox{$\Rightarrow/$}}{/}%
+        \hbox\bgroup}
+\def \URLunciachciach #1://#2\URLunciachciach {%
+        \ifx$#2$%
+            #1%
+        \else
+            \URLunciachciach #1\URLciachciach#2\URLunciachciach
+        \fi}
+\def \URLunciach #1/#2\URLunciach{%
+        \ifx$#2$%
+           #1%
+        \else
+           \URLunciach#1\URLciach #2\URLunciach
+        \fi}
+\def \URL#{\leavevmode \begingroup
+        \catcode`\_=12 \catcode`\#=12
+        \catcode`\%=12 \catcode`\&=12
+        \catcode`~=13
+        \def~{\char`\~}%
+        \tt \URLA}
+\def \URLA#1{\hbox{%
+          \URLunciachciach
+          \URLunciach
+          #1%
+          /\URLunciach
+          ://\URLunciachciach
+        }\endgroup\afterURL}
+\def \afterURL{}
+
+\else
+
+\def \URL#{\leavevmode
+  \bgroup % it will be ended by closing \}
+    % define \a as expandafter \URLprepare \string with
+    % sufficient number of \expandafter to eat the following
+    % \else, \or or \fi
+    \def \a{%
+      \expandafter
+        \expandafter
+      \expandafter
+        \URLprepare
+      \expandafter
+        \string
+    }%
+    \def \do##1{\catcode`##1=12\relax}%
+    \do\&\do\%\do\\\toks0={}%
+    \count0=1% braces check
+    \afterassignment \URLprepare
+    \let \bgroup=}
+
+\def \URLprepare{\futurelet \URL \URLprepareA}
+
+\def \URLprepareA{%
+  \ifcase 
+      \ifcat \noexpand \URL \bgroup  0\else
+      \ifcat \noexpand \URL \egroup  1\else
+      \ifcat \noexpand \URL \space   2\else
+      \ifcat \noexpand \URL +3\else  4\fi\fi\fi\fi
+      \space % this space gets eaten by number
+    % Case 0  begingroup, 
+    \CaseZero
+    \advance \count0 1 \a 
+  \or
+    % Case 1: endgroup
+    \advance \count0-1
+    \ifnum \count0=0
+      \URLtypeset
+    \else
+       \expandafter\a
+    \fi
+  \or
+    % Case 2: space
+     \CaseThree
+    \toks0=\expandafter{\the\toks0 \URLspace}%
+    \afterassignment \URLprepare
+    \count1=0% 
+  \or
+    % case 3: other character, put it to toks0 interpretting
+    \expandafter \URLprepareB
+  \else
+    % case 4: non-other character, make it other
+    \a
+  \fi}
+
+\def \URLprepareB#1{%
+   \ifcase 0%
+      \ifnum`#1=`&1\fi
+      \ifnum`#1=`/2\fi
+      \ifnum`#1=`?1\fi
+      \toks0=\expandafter{\the\toks0 #1}%
+   \or
+      \toks0=\expandafter{\the\toks0 \URLbreakable{#1}}%
+   \else
+      \toks0=\expandafter{\the\toks0 \URLciach}%
+   \fi
+   \URLprepare}
+
+\def \URLciach#1{%
+  \ifx #1\URLciach \expandafter \firstoftwoarguments
+  \else \expandafter \secondoftwoarguments \fi
+  \URLciachciach
+  {\URLbreakable{/}#1}}
+
+\def \URLciachciach{\setbox0=\hbox{/}/\kern-0.3\wd0/}
+
+\def \URLtypeset{\tt 
+  \def\URLbreakable##1{%
+    \discretionary{\hbox{##1$\Rightarrow$}}{\hbox{$\Rightarrow/$}}{##1}}%
+  \the\toks0 }
+\def \afterURL{}
+
+\fi
+
+% Sometimes we need to have indented paragraph in itemize or
+% parshape. Therefore I created \pseudopar. It indents but
+% doesn't end the current paragraph. After \pseudopar you can
+% have arbitrary number of spaces and \pars
+
+\def \afterwhite#1{% #1 MUST be a single token.
+  \begingroup
+     \aftergroup #1\relax\relax
+     \edef \par{\let \par= \space}\par
+     \afterwhiteA
+}
+
+\def \afterwhiteA{\futurelet \afterwhite \afterwhiteB}
+
+\def \afterwhiteB{%
+  \ifx \afterwhite \par
+     \def \afterwhite{\let \afterwhite = }%
+     \afterassignment \afterwhiteA
+  \else
+     \def \afterwhite{\endgroup}%
+  \fi
+  \afterwhite}
+
+\def \pseudopar{\hfil\break\null\kern\parindent\afterwhite\relax}
+
+
+% Bibliografie
+\definenumber [bibnum]
+\def \bibitemindent{25pt}
+\def \bibit{\dosingleargument \dobibit}
+\def \dobibit[#1]{\par\incrementnumber[bibnum]
+\begingroup
+\noindent\begingroup
+\llap{\hbox to \bibitemindent{[\getnumber[bibnum]]\hss}}%
+\begingroup 
+   \edef \a{\endgroup
+   \if$#1$\relax
+   \else
+      \noexpand\reference
+      [bib:#1]{\getnumber[bibnum]}%
+   \fi}\a
+\def \title##{\bgroup \it \let \bgroup=}%
+\def \aut##{\bgroup \tf \let \bgroup=}%
+\def \par{\endgroup\parshape 1 \bibitemindent 
+  \dimexpr \hsize-\bibitemindent\par\endgroup}\ignorespaces}
+\newif \ifbibcitenext
+\def \dobibcite#1{\ifbibcitenext,\kern0.1em\relax\else\bibcitenexttrue\fi
+  \in{}[bib:#1]}
+\def \bibcite[#1]{[%
+    \bibcitenextfalse
+    \processcommalist[#1]\dobibcite]}
+
+\def\cite[#1]{\leavevmode \nobreak \kern 0.3em\nobreak\bibcite[#1]}
+
+% Vreserve
+% Usage:
+% \vreserve[20pt][-3000] % reserve 20pt with penalty -3000
+% default vreserve is \baselineskip, default penalty is -300
+% default unit is \baselineskip
+\def \vreserve{\dodoubleargument \dovreserve}
+\def \dovreserve[#1][#2]{\ifhmode\par\fi
+     \begingroup 
+        \afterassignment \gobbleuntilrelax
+        \count0=#2 -300 \relax
+        \afterassignment \gobbleuntilrelax
+        \dimen0=#1\baselineskip\relax
+        \edef \a {\endgroup
+        \vskip 0pt plus \the\dimen0
+        \penalty \the\count0
+        \vskip 0pt plus -\the\dimen0
+        }\a}
