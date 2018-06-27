@@ -1,4 +1,4 @@
-Książka Konferencyjna/Conference book, PyCon PL 2017
+Książka Konferencyjna/Conference book, PyCon PL 2018
 
 Zobacz plik `wytyczne.md`
 
