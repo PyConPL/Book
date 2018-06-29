@@ -28,8 +28,8 @@ Kwestie techniczne:
 ---
   * Artykuły przyjmujemy w formacie Markdown (książka docelowo będzie złożona z wykorzystaniem ConTeXa) poprzez konto
   PyCon PL na Githubie. Jeśli nic Ci to nie mówi, nie znasz Githuba, nie wiesz jak zacząć i już czujesz się
-  przerośnięty/przerośnięta pierwszym zdaniem to skontaktuj się z Radomirem Dopieralskim (mail radomir@dopieralski.pl),
-  chętnie pomoże.
+  przerośnięty/przerośnięta pierwszym zdaniem to skontaktuj się z organizatorami (mail pyconpl@python.org),
+  chętnie pomogą.
   * Artykuł może zawierać grafikę (schematy, zrzuty ekranów i tak dalej), przy czym należy zachować rozsądne granice
   w tym względzie. Sugerowane formaty wektorowe (SVG, EPS), ewentualnie rastrowe (PNG, JPG) tam, gdzie grafika
   wektorowa się nie sprawdza (wspomniane zrzuty ekranu). W tym drugim przypadku proszę zadbać o odpowiednią
