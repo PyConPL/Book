@@ -26,7 +26,7 @@ Let's get started.
 
 First ingredient is the Block. It is a fundamental construct of the blockchain that stores the payload, i.e. transactions.
 
-<img src="img/block.png">
+<img src="block.png">
 
 The minimalistic block consists of the following attributes:  
 - index - which defines the height of the blockchain  
@@ -82,7 +82,7 @@ class Block:
 
 ### The Chain
 
-<img src="img/blockchain.png">
+<img src="blockchain.png">
 
 Second ingredient is the Blockchain. It stores a sequence of blocks and creates a link between them during addition to the chain.
 
@@ -253,9 +253,9 @@ In such form the blockchain is very vulnerable. Anyone can alter it and recomput
 
 Mining is a computationally-intensive task. For each block a "miner" tries to find a solution such that when applied to a block, its hash will fit into an expected characteristic. Specifically - there is a dedicated field (called a "nonce") in the block that is being constantly increased. Upon each iteration, the block's hash changes unpredictably. If the first _k_ bits of the hash come out as _0's_ then the solution is found and the block is "mined". The _nonce_ is included in the block, so that others can easily verify that the work was done (this is called "proof-of-work").
 
-<img src="img/difficulty.png">
+<img src="difficulty.png">
 
-<img src="img/blockchain2.png">
+<img src="blockchain2.png">
 
 The process was designed that way to provide a steady inflow of blocks each day. The probability of finding the solution is constant, so the only factor that controls the mean time between blocks is _k_ (number of 0-bits). It's called the "difficulty" of mining and can be adjusted when the hashing power of the whole network changes. For Bitcoin the process is designed to produce one block roughly every 10 minutes. After every 2016 blocks, which corresponds to ~2 weeks, the algorithm compares the time it took to mine them against the expected 2 weeks and increases/decreases the difficulty accordingly.
 
