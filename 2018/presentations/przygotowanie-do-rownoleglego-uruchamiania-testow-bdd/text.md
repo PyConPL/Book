@@ -52,13 +52,12 @@ niezależne scenariusze.
 
 
 ## Źródła:
-http://behave.readthedocs.io/en/latest/
-https://pl.wikipedia.org/wiki/Behavior-driven_development
-https://pl.wikipedia.org/wiki/Ci%C4%85g%C5%82a_integracja
-https://en.wikipedia.org/wiki/Operational_acceptance_testing
-http://selenium-python.readthedocs.io/
-http://docs.behat.org/en/v2.5/guides/1.gherkin.html
-BDD in Action - John Ferguson Smart
-Specification by Example: How Successful Teams Deliver the Right Software - Gojko Adzic
-Testuj oprogramowanie jak Google. Metody automatyzacji - James A. Whittaker, Jason Arbon, Jeff Carollo
-
+* http://behave.readthedocs.io/en/latest/
+* https://pl.wikipedia.org/wiki/Behavior-driven_development
+* https://pl.wikipedia.org/wiki/Ci%C4%85g%C5%82a_integracja
+* https://en.wikipedia.org/wiki/Operational_acceptance_testing
+* http://selenium-python.readthedocs.io/
+* http://docs.behat.org/en/v2.5/guides/1.gherkin.html
+* BDD in Action - John Ferguson Smart
+* Specification by Example: How Successful Teams Deliver the Right Software - Gojko Adzic
+* Testuj oprogramowanie jak Google. Metody automatyzacji - James A. Whittaker, Jason Arbon, Jeff Carollo
