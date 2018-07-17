@@ -43,13 +43,12 @@ Test powinien bezpośrednio mówić, dlaczego nie przeszedł. W przypadku Seleni
 
 ## Podsumowanie
 Aby osiągnąć zadowalający efekt przy pracy z testami, potrzebnych jest sporo różnych kompetencji. Zakres pracy wymaga od zespołu automatyzacji środowisk (devops), zaprojektowania architektury testów, konfiguracji Jenkinsa oraz narzędzi pomocniczych (dev), stworzeniu scenariuszy testów (qa) oraz sprawnego poruszania się po selektorach oraz obsługi widgetów w przeglądarce (frontend dev). Stabilny kod testów, gotowy do skalowalności, powinien posiadać:
-pozytywny, “zielony” build na Jenkinsie (testy zawsze przechodzą, gdy aplikacja działa poprawnie),
-zautomatyzowane środowiska uruchamiania testów,
-zautomatyzowane środowiska z aplikacją i danymi testowymi,
-brak wyników typu false negative/positive,
-opracowany, jasny i klarowny system raportowania i prezentowania wyników,
-niezależne scenariusze.
-
+* pozytywny, “zielony” build na Jenkinsie (testy zawsze przechodzą, gdy aplikacja działa poprawnie),
+* zautomatyzowane środowiska uruchamiania testów,
+* zautomatyzowane środowiska z aplikacją i danymi testowymi,
+* brak wyników typu false negative/positive,
+* opracowany, jasny i klarowny system raportowania i prezentowania wyników,
+* niezależne scenariusze.
 
 ## Źródła:
 * http://behave.readthedocs.io/en/latest/
