@@ -52,8 +52,8 @@ Aby osiągnąć zadowalający efekt przy pracy z testami, potrzebnych jest sporo
 
 ## Źródła:
 * http://behave.readthedocs.io/en/latest/
-* https://pl.wikipedia.org/wiki/Behavior-driven_development
-* https://pl.wikipedia.org/wiki/Ci%C4%85g%C5%82a_integracja
+* https://en.wikipedia.org/wiki/Behavior-driven_development
+* https://en.wikipedia.org/wiki/Continuous_integration
 * https://en.wikipedia.org/wiki/Operational_acceptance_testing
 * http://selenium-python.readthedocs.io/
 * http://docs.behat.org/en/v2.5/guides/1.gherkin.html
