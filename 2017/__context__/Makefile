@@ -6,4 +6,4 @@ compare:
 diffs:
 	../../tools/gen_diff.sh
 clean:
-	rm -rf build .tmp_* pyconbook-????.log pyconbook-????.pdf *.pyc .sconsign.dblite genart.txt
+	rm -rf build .tmp_* log_b[12].txt pyconbook-????.log pyconbook-????.pdf *.pyc .sconsign.dblite genart.txt
