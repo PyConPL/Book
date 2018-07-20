@@ -159,7 +159,7 @@ for alias, location in al_loc_ls:
         if verbose:
             print 'Found:', main_md
         uniq_counter += 1
-        gm_dir = uniq_prefix + str(uniq_counter)
+        gm_dir = '%s%02d' % (uniq_prefix, uniq_counter)
         pandoc_patch_ls = [
             Delete(gm_dir),
             Mkdir(gm_dir),
