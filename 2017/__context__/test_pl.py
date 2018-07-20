@@ -1,6 +1,10 @@
 #!/usr/bin/env python2
 # -*- coding: UTF-8 -*-
 
+'''
+./test_pl.py; red_green_bar.py $? $COLUMNS
+'''
+
 import unittest
 import sys
 
