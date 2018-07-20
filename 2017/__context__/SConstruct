@@ -73,6 +73,8 @@ pl_txt.env_command(
     "texexec --pdfcopy --result=$TARGET $SOURCES",
     )
 
+uniq_prefix = ".tmp_%f_" % time.time()
+uniq_counter = 0
 for alias, location in al_loc_ls:
     txt_line = pl_txt.prepare_line(tty_columns, alias, location)
     root = pl_txt.art_file_core(alias)
@@ -156,7 +158,8 @@ for alias, location in al_loc_ls:
             pyladies = 0
         if verbose:
             print 'Found:', main_md
-        gm_dir = ".tmp"
+        uniq_counter += 1
+        gm_dir = uniq_prefix + str(uniq_counter)
         pandoc_patch_ls = [
             Delete(gm_dir),
             Mkdir(gm_dir),
