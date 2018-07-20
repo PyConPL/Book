@@ -10,7 +10,7 @@ def apply_patch(diffsrc, gm_dir, test_mode=0):
     src_file = diffsrc + ["/dev/null"]
     return "cat " + src_file[test_mode] + " | patch -d " + gm_dir
 
-def run_pandoc(main_md, pyladies=0):
+def run_pandoc(main_md, gm_dir, pyladies=0):
     if pyladies:
         tag_replace = r" -e 's/:snake:/$\\sim$/g' -e 's/:pushpin:/$\\swarrow$/g'"
     else:
@@ -20,7 +20,9 @@ def run_pandoc(main_md, pyladies=0):
         main_md,
         "| sed -e s/subsubsection/section/",
         tag_replace,
-        " > .tmp/${TARGET.file}",
+        " > ",
+        gm_dir,
+        "/${TARGET.file}",
         ])
 
 def art_src_dir(alias):

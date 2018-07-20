@@ -160,7 +160,7 @@ for alias, location in al_loc_ls:
         pandoc_patch_ls = [
             Delete(gm_dir),
             Mkdir(gm_dir),
-            pl_txt.run_pandoc(main_md, pyladies=pyladies),
+            pl_txt.run_pandoc(main_md, gm_dir, pyladies=pyladies),
             ]
         if diffsrc:
             pandoc_patch_ls.append(
