@@ -158,8 +158,8 @@ for alias, location in al_loc_ls:
             print 'Found:', main_md
         gm_dir = ".tmp"
         pandoc_patch_ls = [
-            Delete(".tmp"),
-            Mkdir(".tmp"),
+            Delete(gm_dir),
+            Mkdir(gm_dir),
             pl_txt.run_pandoc(main_md, pyladies=pyladies),
             ]
         if diffsrc:
@@ -167,7 +167,7 @@ for alias, location in al_loc_ls:
                 pl_txt.apply_patch(diffsrc, test_mode=omit_diffs)
                 )
         pandoc_patch_ls.append(
-            Copy("$TARGET", ".tmp/${TARGET.file}")
+            Copy("$TARGET", gm_dir + "/${TARGET.file}")
             )
         pl_txt.env_command(
             env,
