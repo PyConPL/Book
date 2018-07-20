@@ -16,11 +16,16 @@ class TestPL(unittest.TestCase):
         TestPL:
         '''
         self.assertEqual(
-            pl_txt.apply_patch(diffsrc=['a']),
+            pl_txt.apply_patch(
+                diffsrc=['a'],
+                ),
             'cat a | patch -d .tmp',
             )
         self.assertEqual(
-            pl_txt.apply_patch(diffsrc=['a'], test_mode=1),
+            pl_txt.apply_patch(
+                diffsrc=['a'],
+                test_mode=1,
+                ),
             'cat /dev/null | patch -d .tmp',
             )
 
@@ -29,11 +34,16 @@ class TestPL(unittest.TestCase):
         TestPL:
         '''
         self.assertEqual(
-            pl_txt.run_pandoc(main_md='a'),
+            pl_txt.run_pandoc(
+                main_md='a',
+                ),
             'pandoc -t context --template=src/template.pandoc a| sed -e s/subsubsection/section/ > .tmp/${TARGET.file}',
             )
         self.assertEqual(
-            pl_txt.run_pandoc(main_md='a', pyladies=1),
+            pl_txt.run_pandoc(
+                main_md='a',
+                pyladies=1,
+                ),
             r"pandoc -t context --template=src/template.pandoc a| sed -e s/subsubsection/section/ -e 's/:snake:/$\\sim$/g' -e 's/:pushpin:/$\\swarrow$/g' > .tmp/${TARGET.file}",
             )
 
