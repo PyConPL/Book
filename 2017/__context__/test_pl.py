@@ -18,15 +18,17 @@ class TestPL(unittest.TestCase):
         self.assertEqual(
             pl_txt.apply_patch(
                 diffsrc=['a'],
+                gm_dir='spruce',
                 ),
-            'cat a | patch -d .tmp',
+            'cat a | patch -d spruce',
             )
         self.assertEqual(
             pl_txt.apply_patch(
                 diffsrc=['a'],
+                gm_dir='larch',
                 test_mode=1,
                 ),
-            'cat /dev/null | patch -d .tmp',
+            'cat /dev/null | patch -d larch',
             )
 
     def test_md_to_tex_conversion(self):

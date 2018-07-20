@@ -6,9 +6,9 @@ import os
 debug = 0
 build_dir = "build"
 
-def apply_patch(diffsrc, test_mode=0):
+def apply_patch(diffsrc, gm_dir, test_mode=0):
     src_file = diffsrc + ["/dev/null"]
-    return "cat " + src_file[test_mode] + " | patch -d .tmp"
+    return "cat " + src_file[test_mode] + " | patch -d " + gm_dir
 
 def run_pandoc(main_md, pyladies=0):
     if pyladies:
