@@ -195,6 +195,18 @@ def fl_dump(label, fl_name):
             print 'no file (yet).'
 
 
+def check_for_source(alias, fl_name):
+    if os.path.exists(fl_name):
+        result = 1
+        if verbose:
+            print '%s - found: %s' % (alias, fl_name)
+    else:
+        result = 0
+        if verbose:
+            print '%s - not found: %s' % (alias, fl_name)
+    return result
+
+
 class OneTalk(object):
     def __init__(self, tty_columns, alias, location, copy_images, create_pdfs):
         '''
