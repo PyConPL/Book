@@ -5,6 +5,7 @@ import os
 import re
 
 debug = 0
+verbose = 0
 build_dir = "build"
 
 master_pattern = re.compile(
@@ -76,6 +77,21 @@ def link_src(alias):
     return "[ -L src -o ! -d %(source)s ] || ln -s %(source)s src" % dict(
         source=source,
         )
+
+def link_do_src(alias):
+    '''
+    Current directory: build/a
+    Link to src/a directory, assuming it exists.
+    '''
+    tmp_sr_dir = 'src'
+    source = art_src_dir(alias)
+    if verbose:
+        print 'Preparing to create symlink %(source)s -> %(tmp_sr_dir)s' % dict(
+            source=source,
+            tmp_sr_dir=tmp_sr_dir,
+            )
+    if not os.path.islink(tmp_sr_dir) and os.path.isdir(source):
+        os.symlink(source, tmp_sr_dir)
 
 def pass_line(one_line):
     if one_line and not one_line.strip().startswith('%'):
