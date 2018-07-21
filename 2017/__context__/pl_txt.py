@@ -17,6 +17,34 @@ $
 re.VERBOSE
 )
 
+files_to_copy = {
+    'cyber': [
+        '../../../presentations/with_python_security/',
+        '000_notpetya.png',
+        '001_attacks_per_day.png',
+        '002_batman.png',
+        ],
+    'real': [
+        '../../../presentations/django_in_the_real_world/',
+        'diagram.png',
+        ],
+    'zodb': [
+        '../../../presentations/zodb_ecosystem/',
+        'ZODBTitleGraphics.png',
+        ],
+    'micro': [
+        '../../../workshops/micropython/',
+        'ryc1.png',
+        'ryc2.png',
+        'ryc3.png',
+        'ryc4.png',
+        ],
+    'networkx': [
+        '../../../workshops/Network_Analysis_using_Python/',
+        'network.png',
+        ],
+}
+
 def apply_patch(diffsrc, gm_dir, test_mode=0):
     src_file = diffsrc + ["/dev/null"]
     return "cat " + src_file[test_mode] + " | patch -d " + gm_dir
