@@ -9,6 +9,7 @@ diagnose_article_pages = 0
 
 debug = 0
 verbose = 0
+tex_to_file = 0
 build_dir = "build"
 
 master_pattern = re.compile(
@@ -217,7 +218,9 @@ def sanity_check():
 
 
 def final_command():
-    cmd = "texexec --pdfcopy --result=$TARGET $SOURCES >log_b1.txt 2>log_b2.txt"
+    cmd = "texexec --pdfcopy --result=$TARGET $SOURCES"
+    if tex_to_file:
+        cmd = cmd + " >log_b1.txt 2>log_b2.txt"
     return cmd
 
 
@@ -253,7 +256,9 @@ class OneTalk(object):
         '''
         OneTalk:
         '''
-        cmd = "texexec --pdf " + self.alias + " >log_a1.txt 2>log_a2.txt"
+        cmd = "texexec --pdf " + self.alias
+        if tex_to_file:
+            cmd = cmd + " >log_a1.txt 2>log_a2.txt"
         if verbose:
             print cmd
         fl_dump('ABOVE1', '../artpages.inc')
