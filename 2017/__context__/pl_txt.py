@@ -196,13 +196,15 @@ def fl_dump(label, fl_name):
 
 
 class OneTalk(object):
-    def __init__(self, tty_columns, alias, location):
+    def __init__(self, tty_columns, alias, location, copy_images, create_pdfs):
         '''
         OneTalk:
         '''
         self.tty_columns = tty_columns
         self.alias = alias
         self.location = location
+        self.copy_images = copy_images
+        self.create_pdfs = create_pdfs
 
     def copy_needed_files(self):
         '''

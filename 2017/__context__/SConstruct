@@ -91,9 +91,7 @@ for alias, location in al_loc_ls:
         glob.glob("src/" + alias + "/*"))
     if pl_txt.is_master(alias):
        src_ls.extend(slave_pdfs)
-    one_talk = pl_txt.OneTalk(tty_columns, alias, location)
-    one_talk.copy_on_demand(copy_images)
-    one_talk.prepare_for_creating_pdfs(create_pdfs)
+    one_talk = pl_txt.OneTalk(tty_columns, alias, location, copy_images, create_pdfs)
     pl_txt.env_command(
         env,
         root + ".pdf",
