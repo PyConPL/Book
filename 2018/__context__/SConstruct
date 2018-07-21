@@ -73,7 +73,7 @@ pl_txt.env_command(
     env,
     created_pdf,
     final_pdfs,
-    "texexec >log_b1.txt 2>log_b2.txt --pdfcopy --result=$TARGET $SOURCES",
+    "texexec --pdfcopy --result=$TARGET $SOURCES >log_b1.txt 2>log_b2.txt",
     )
 
 uniq_prefix = ".tmp_%f_" % time.time()

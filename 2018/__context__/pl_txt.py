@@ -239,7 +239,7 @@ class OneTalk(object):
         '''
         OneTalk:
         '''
-        cmd = "texexec >log_a1.txt 2>log_a2.txt --pdf " + self.alias
+        cmd = "texexec --pdf " + self.alias + " >log_a1.txt 2>log_a2.txt"
         if verbose:
             print cmd
         fl_dump('ABOVE1', '../artpages.inc')
