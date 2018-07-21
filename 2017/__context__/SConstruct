@@ -91,40 +91,14 @@ for alias, location in al_loc_ls:
         glob.glob("src/" + alias + "/*"))
     if pl_txt.is_master(alias):
        src_ls.extend(slave_pdfs)
-    small_pdf_ls = [
-            "pwd",
-            "# " + txt_line,
-            pl_txt.link_src(alias),
-            ]
-    if copy_images:
-        small_pdf_ls.extend([
-            "[ ${TARGET.file} != cyber.pdf ] || cp ../../../presentations/with_python_security/000_notpetya.png .",
-            "[ ${TARGET.file} != cyber.pdf ] || cp ../../../presentations/with_python_security/001_attacks_per_day.png .",
-            "[ ${TARGET.file} != cyber.pdf ] || cp ../../../presentations/with_python_security/002_batman.png .",
-            ])
-        small_pdf_ls.append(
-            "[ ${TARGET.file} != real.pdf ] || cp ../../../presentations/django_in_the_real_world/diagram.png .",
-            )
-        small_pdf_ls.append(
-            "[ ${TARGET.file} != zodb.pdf ] || cp ../../../presentations/zodb_ecosystem/ZODBTitleGraphics.png .",
-            )
-        small_pdf_ls.extend([
-            "[ ${TARGET.file} != micro.pdf ] || cp ../../../workshops/micropython/ryc1.png .",
-            "[ ${TARGET.file} != micro.pdf ] || cp ../../../workshops/micropython/ryc2.png .",
-            "[ ${TARGET.file} != micro.pdf ] || cp ../../../workshops/micropython/ryc3.png .",
-            "[ ${TARGET.file} != micro.pdf ] || cp ../../../workshops/micropython/ryc4.png .",
-            ])
-        small_pdf_ls.append(
-            "[ ${TARGET.file} != networkx.pdf ] || cp ../../../workshops/Network_Analysis_using_Python/network.png .",
-            )
-    if create_pdfs:
-        small_pdf_ls.append("texexec >log_a1.txt 2>log_a2.txt --pdf " + alias)
-    small_pdf_ls.append("mv artpages.inc .. 2>/dev/null || true")
+    one_talk = pl_txt.OneTalk(tty_columns, alias, location)
+    one_talk.copy_on_demand(copy_images)
+    one_talk.prepare_for_creating_pdfs(create_pdfs)
     pl_txt.env_command(
         env,
         root + ".pdf",
         src_ls,
-        small_pdf_ls,
+        one_talk.small_fn,
         chdir=pl_txt.art_home(alias),
         )
     loc_src  = "src/" + alias + "/text.tex"
