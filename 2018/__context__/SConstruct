@@ -103,36 +103,25 @@ for alias, location in al_loc_ls:
     main_src = "../" + location + "/text.tex"
     main_md  = "../" + location + "/text.md"
     diffsrc  = glob.glob("src/" + alias + ".diff")
-    if verbose:
-        print "Checking '%s' in:" % alias
-        print loc_src
-        print main_src
-        print main_md
-    if os.path.exists(loc_src):
-        if verbose:
-            print 'Found:', loc_src
+    if pl_txt.check_for_source(alias, loc_src):
         pl_txt.env_command(
             env,
             root + ".tex",
             loc_src,
             Copy('$TARGET','$SOURCE'),
             )
-    elif os.path.exists(main_src):
-        if verbose:
-            print 'Found:', main_src
+    elif pl_txt.check_for_source(alias, main_src):
         pl_txt.env_command(
             env,
             root + ".tex",
             main_src,
             Copy('$TARGET','$SOURCE'),
             )
-    elif os.path.exists(main_md):
+    elif pl_txt.check_for_source(alias, main_md):
         if alias == 'pyladies':
             pyladies = 1
         else:
             pyladies = 0
-        if verbose:
-            print 'Found:', main_md
         uniq_counter += 1
         gm_dir = '%s%02d' % (uniq_prefix, uniq_counter)
         pandoc_patch_ls = [
@@ -154,9 +143,7 @@ for alias, location in al_loc_ls:
             pandoc_patch_ls,
            )
     else:
-        if verbose:
-            print "Full path:", os.path.abspath(main_md)
-        raise RuntimeError("Not found: %s" % repr(main_md))
+        raise RuntimeError("Main file not found.")
 
 
 pl_txt.env_command(
