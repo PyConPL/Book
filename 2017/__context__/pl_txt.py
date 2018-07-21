@@ -4,6 +4,8 @@
 import os
 import re
 
+diagnose_article_pages = 0
+
 debug = 0
 verbose = 0
 build_dir = "build"
@@ -190,3 +192,12 @@ def is_master(one_alias):
     else:
         result = 0
     return result
+
+
+def fl_dump(label, fl_name):
+    if diagnose_article_pages:
+        print label, fl_name
+        if os.path.isfile(fl_name):
+            print open(fl_name, 'rb').read()
+        else:
+            print 'no file (yet).'
