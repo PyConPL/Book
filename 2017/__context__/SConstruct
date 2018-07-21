@@ -60,7 +60,7 @@ final_pdfs = map(
     lambda x: pl_txt.art_file_pdf(x[0]),
     al_loc_ls)
 
-slave_ls = filter(lambda x: x[0] != master_al, al_loc_ls)
+slave_ls = filter(lambda x: not pl_txt.is_master(x[0]), al_loc_ls)
 
 slave_pdfs = map(
     lambda x: pl_txt.art_file_pdf(x[0]),
@@ -86,7 +86,7 @@ for alias, location in al_loc_ls:
             ] +
         glob.glob("sty/*") +
         glob.glob("src/" + alias + "/*"))
-    if alias == master_al:
+    if pl_txt.is_master(alias):
        src_ls.extend(slave_pdfs)
     small_pdf_ls = [
             "pwd",
