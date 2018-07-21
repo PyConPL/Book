@@ -59,10 +59,6 @@ class TestPL(unittest.TestCase):
             pl_txt.art_src_dir(alias='a'),
             '../../src/a',
             )
-        self.assertEqual(
-            pl_txt.link_src(alias='a'),
-            '[ -L src -o ! -d ../../src/a ] || ln -s ../../src/a src',
-            )
 
     def test_article_selection(self):
         '''

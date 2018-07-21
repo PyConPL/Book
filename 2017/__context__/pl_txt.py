@@ -71,15 +71,6 @@ def run_pandoc(main_md, gm_dir, pyladies=0):
 def art_src_dir(alias):
     return "../../src/" + alias
 
-def link_src(alias):
-    '''
-    Current directory: build/a
-    Link to src/a directory, assuming it exists.
-    '''
-    source = art_src_dir(alias)
-    return "[ -L src -o ! -d %(source)s ] || ln -s %(source)s src" % dict(
-        source=source,
-        )
 
 def link_do_src(alias):
     '''
