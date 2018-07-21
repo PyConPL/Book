@@ -55,6 +55,7 @@ def prepare_art(artlist_file):
         al_loc_ls = filter(lambda x: x[0] in sel_ls, al_loc_ls)
     return al_loc_ls
 
+pl_txt.sanity_check()
 al_loc_ls = prepare_art('artlist.txt')
 new_data = pl_txt.prepare_file(al_loc_ls)
 pl_txt.write_if_needed(genart_file, new_data)

@@ -207,6 +207,15 @@ def check_for_source(alias, fl_name):
     return result
 
 
+def sanity_check():
+    src_dir = 'src'
+    if not os.path.isdir(src_dir):
+        raise RuntimeError("No directory: '%s'" % src_dir)
+    pndc_tmpl = 'src/template.pandoc'
+    if not os.path.isfile(pndc_tmpl):
+        raise RuntimeError("No file: '%s'" % pndc_tmpl)
+
+
 class OneTalk(object):
     def __init__(self, tty_columns, alias, location, copy_images, create_pdfs):
         '''
