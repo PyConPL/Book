@@ -3,6 +3,7 @@
 
 import os
 import re
+import shutil
 
 diagnose_article_pages = 0
 
@@ -201,3 +202,99 @@ def fl_dump(label, fl_name):
             print open(fl_name, 'rb').read()
         else:
             print 'no file (yet).'
+
+
+class OneTalk(object):
+    def __init__(self, tty_columns, alias, location):
+        '''
+        OneTalk:
+        '''
+        self.tty_columns = tty_columns
+        self.alias = alias
+        self.location = location
+
+    def copy_needed_files(self):
+        '''
+        OneTalk:
+        '''
+        one_ls = files_to_copy.get(self.alias)
+        if one_ls:
+            src_dir = one_ls[0]
+            for src_file in one_ls[1:]:
+                full_src = src_dir + src_file
+                full_dst = src_file
+                if verbose:
+                    print 'Copy %(full_src)s to %(full_dst)s' % dict(
+                        full_src=full_src,
+                        full_dst=full_dst,
+                        )
+                shutil.copyfile(full_src, full_dst)
+
+    def run_tex_for_chapter(self):
+        '''
+        OneTalk:
+        '''
+        cmd = "texexec >log_a1.txt 2>log_a2.txt --pdf " + self.alias
+        if verbose:
+            print cmd
+        fl_dump('ABOVE1', '../artpages.inc')
+        fl_dump('HERE1', 'artpages.inc')
+        os.system(cmd)
+        fl_dump('ABOVE2', '../artpages.inc')
+        fl_dump('HERE2', 'artpages.inc')
+
+    def move_page_numbers_file(self):
+        '''
+        OneTalk:
+        '''
+        full_src = 'artpages.inc'
+        full_dst = '../' + full_src
+        fl_dump('ABOVE3', '../artpages.inc')
+        fl_dump('HERE3', 'artpages.inc')
+        if verbose:
+            print 'Move %(full_src)s to %(full_dst)s' % dict(
+                full_src=full_src,
+                full_dst=full_dst,
+                )
+        if os.path.isfile(full_src):
+            result = os.rename(full_src, full_dst)
+            if verbose:
+                print 'Move result:', result
+        else:
+            print 'No file to move:', full_src
+        fl_dump('ABOVE4', '../artpages.inc')
+        fl_dump('HERE4', 'artpages.inc')
+
+    def small_fn(self, env, target, source):
+        '''
+        OneTalk:
+        '''
+        my_stars = '*' * 50 + ' '
+        if verbose:
+            print my_stars + 'START ' + self.alias
+        if 0 and verbose:
+            tmp_format = 'self.alias, self.copy_images, env, target, source'
+            print('Eval: %s %s' % (tmp_format, eval(tmp_format)))
+        print os.getcwd()
+        txt_line = prepare_line(self.tty_columns, self.alias, self.location)
+        print '# ' + txt_line
+        link_do_src(self.alias)
+        if self.copy_images:
+            self.copy_needed_files()
+        if self.create_pdfs:
+            self.run_tex_for_chapter()
+        self.move_page_numbers_file()
+        if verbose:
+            print my_stars + 'END ' + self.alias
+
+    def copy_on_demand(self, copy_images):
+        '''
+        OneTalk:
+        '''
+        self.copy_images = copy_images
+
+    def prepare_for_creating_pdfs(self, create_pdfs):
+        '''
+        OneTalk:
+        '''
+        self.create_pdfs = create_pdfs
