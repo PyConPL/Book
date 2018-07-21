@@ -279,15 +279,3 @@ class OneTalk(object):
         self.move_page_numbers_file()
         if verbose:
             print my_stars + 'END ' + self.alias
-
-    def copy_on_demand(self, copy_images):
-        '''
-        OneTalk:
-        '''
-        self.copy_images = copy_images
-
-    def prepare_for_creating_pdfs(self, create_pdfs):
-        '''
-        OneTalk:
-        '''
-        self.create_pdfs = create_pdfs
