@@ -113,6 +113,8 @@ class TestPL(unittest.TestCase):
         self.assertEqual(pl_txt.is_master(''), 0)
         self.assertEqual(pl_txt.is_master('pycon2018'), 1)
         self.assertEqual(pl_txt.is_master('pycon_us'), 0)
+        self.assertEqual(pl_txt.is_master('otherpycon2018text'), 0)
+        self.assertEqual(pl_txt.is_master('pycon2018text'), 0)
 
 def make_tests():
     suite = unittest.TestSuite()

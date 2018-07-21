@@ -9,8 +9,10 @@ build_dir = "build"
 
 master_pattern = re.compile(
 '''
+^
 pycon
 \d{4}
+$
 ''',
 re.VERBOSE
 )
