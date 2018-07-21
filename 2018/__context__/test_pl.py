@@ -1,6 +1,10 @@
 #!/usr/bin/env python2
 # -*- coding: UTF-8 -*-
 
+'''
+./test_pl.py; red_green_bar.py $? $COLUMNS
+'''
+
 import unittest
 import sys
 
@@ -12,12 +16,19 @@ class TestPL(unittest.TestCase):
         TestPL:
         '''
         self.assertEqual(
-            pl_txt.apply_patch(diffsrc=['a']),
-            'cat a | patch -d .tmp',
+            pl_txt.apply_patch(
+                diffsrc=['a'],
+                gm_dir='spruce',
+                ),
+            'cat a | patch -d spruce',
             )
         self.assertEqual(
-            pl_txt.apply_patch(diffsrc=['a'], test_mode=1),
-            'cat /dev/null | patch -d .tmp',
+            pl_txt.apply_patch(
+                diffsrc=['a'],
+                gm_dir='larch',
+                test_mode=1,
+                ),
+            'cat /dev/null | patch -d larch',
             )
 
     def test_md_to_tex_conversion(self):
@@ -25,12 +36,19 @@ class TestPL(unittest.TestCase):
         TestPL:
         '''
         self.assertEqual(
-            pl_txt.run_pandoc(main_md='a'),
-            'pandoc -t context --template=src/template.pandoc a| sed -e s/subsubsection/section/ > .tmp/${TARGET.file}',
+            pl_txt.run_pandoc(
+                main_md='a',
+                gm_dir='pine',
+                ),
+            'pandoc -t context --template=src/template.pandoc a| sed -e s/subsubsection/section/ > pine/${TARGET.file}',
             )
         self.assertEqual(
-            pl_txt.run_pandoc(main_md='a', pyladies=1),
-            r"pandoc -t context --template=src/template.pandoc a| sed -e s/subsubsection/section/ -e 's/:snake:/$\\sim$/g' -e 's/:pushpin:/$\\swarrow$/g' > .tmp/${TARGET.file}",
+            pl_txt.run_pandoc(
+                main_md='a',
+                gm_dir='oak',
+                pyladies=1,
+                ),
+            r"pandoc -t context --template=src/template.pandoc a| sed -e s/subsubsection/section/ -e 's/:snake:/$\\sim$/g' -e 's/:pushpin:/$\\swarrow$/g' > oak/${TARGET.file}",
             )
 
     def test_linking_source_directory(self):
@@ -40,10 +58,6 @@ class TestPL(unittest.TestCase):
         self.assertEqual(
             pl_txt.art_src_dir(alias='a'),
             '../../src/a',
-            )
-        self.assertEqual(
-            pl_txt.link_src(alias='a'),
-            '[ -L src -o ! -d ../../src/a ] || ln -s ../../src/a src',
             )
 
     def test_article_selection(self):
@@ -87,6 +101,16 @@ class TestPL(unittest.TestCase):
         TestPL:
         '''
         self.assertEqual(pl_txt.art_pages_file(), 'build/artpages.inc')
+
+    def test_main_document(self):
+        '''
+        TestPL:
+        '''
+        self.assertEqual(pl_txt.is_master(''), 0)
+        self.assertEqual(pl_txt.is_master('pycon2018'), 1)
+        self.assertEqual(pl_txt.is_master('pycon_us'), 0)
+        self.assertEqual(pl_txt.is_master('otherpycon2018text'), 0)
+        self.assertEqual(pl_txt.is_master('pycon2018text'), 0)
 
 def make_tests():
     suite = unittest.TestSuite()

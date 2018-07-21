@@ -2,15 +2,58 @@
 # -*- coding: UTF-8 -*-
 
 import os
+import re
+import shutil
+
+diagnose_article_pages = 0
 
 debug = 0
+verbose = 0
 build_dir = "build"
 
-def apply_patch(diffsrc, test_mode=0):
-    src_file = diffsrc + ["/dev/null"]
-    return "cat " + src_file[test_mode] + " | patch -d .tmp"
+master_pattern = re.compile(
+'''
+^
+pycon
+\d{4}
+$
+''',
+re.VERBOSE
+)
 
-def run_pandoc(main_md, pyladies=0):
+files_to_copy = {
+    'cyber': [
+        '../../../presentations/with_python_security/',
+        '000_notpetya.png',
+        '001_attacks_per_day.png',
+        '002_batman.png',
+        ],
+    'real': [
+        '../../../presentations/django_in_the_real_world/',
+        'diagram.png',
+        ],
+    'zodb': [
+        '../../../presentations/zodb_ecosystem/',
+        'ZODBTitleGraphics.png',
+        ],
+    'micro': [
+        '../../../workshops/micropython/',
+        'ryc1.png',
+        'ryc2.png',
+        'ryc3.png',
+        'ryc4.png',
+        ],
+    'networkx': [
+        '../../../workshops/Network_Analysis_using_Python/',
+        'network.png',
+        ],
+}
+
+def apply_patch(diffsrc, gm_dir, test_mode=0):
+    src_file = diffsrc + ["/dev/null"]
+    return "cat " + src_file[test_mode] + " | patch -d " + gm_dir
+
+def run_pandoc(main_md, gm_dir, pyladies=0):
     if pyladies:
         tag_replace = r" -e 's/:snake:/$\\sim$/g' -e 's/:pushpin:/$\\swarrow$/g'"
     else:
@@ -20,21 +63,29 @@ def run_pandoc(main_md, pyladies=0):
         main_md,
         "| sed -e s/subsubsection/section/",
         tag_replace,
-        " > .tmp/${TARGET.file}",
+        " > ",
+        gm_dir,
+        "/${TARGET.file}",
         ])
 
 def art_src_dir(alias):
     return "../../src/" + alias
 
-def link_src(alias):
+
+def link_do_src(alias):
     '''
     Current directory: build/a
     Link to src/a directory, assuming it exists.
     '''
+    tmp_sr_dir = 'src'
     source = art_src_dir(alias)
-    return "[ -L src -o ! -d %(source)s ] || ln -s %(source)s src" % dict(
-        source=source,
-        )
+    if verbose:
+        print 'Preparing to create symlink %(source)s -> %(tmp_sr_dir)s' % dict(
+            source=source,
+            tmp_sr_dir=tmp_sr_dir,
+            )
+    if not os.path.islink(tmp_sr_dir) and os.path.isdir(source):
+        os.symlink(source, tmp_sr_dir)
 
 def pass_line(one_line):
     if one_line and not one_line.strip().startswith('%'):
@@ -125,3 +176,106 @@ def art_file_pdf(alias):
 
 def art_pages_file():
     return art_home('artpages.inc')
+
+
+def is_master(one_alias):
+    if master_pattern.search(one_alias):
+        result = 1
+    else:
+        result = 0
+    return result
+
+
+def fl_dump(label, fl_name):
+    if diagnose_article_pages:
+        print label, fl_name
+        if os.path.isfile(fl_name):
+            print open(fl_name, 'rb').read()
+        else:
+            print 'no file (yet).'
+
+
+class OneTalk(object):
+    def __init__(self, tty_columns, alias, location, copy_images, create_pdfs):
+        '''
+        OneTalk:
+        '''
+        self.tty_columns = tty_columns
+        self.alias = alias
+        self.location = location
+        self.copy_images = copy_images
+        self.create_pdfs = create_pdfs
+
+    def copy_needed_files(self):
+        '''
+        OneTalk:
+        '''
+        one_ls = files_to_copy.get(self.alias)
+        if one_ls:
+            src_dir = one_ls[0]
+            for src_file in one_ls[1:]:
+                full_src = src_dir + src_file
+                full_dst = src_file
+                if verbose:
+                    print 'Copy %(full_src)s to %(full_dst)s' % dict(
+                        full_src=full_src,
+                        full_dst=full_dst,
+                        )
+                shutil.copyfile(full_src, full_dst)
+
+    def run_tex_for_chapter(self):
+        '''
+        OneTalk:
+        '''
+        cmd = "texexec >log_a1.txt 2>log_a2.txt --pdf " + self.alias
+        if verbose:
+            print cmd
+        fl_dump('ABOVE1', '../artpages.inc')
+        fl_dump('HERE1', 'artpages.inc')
+        os.system(cmd)
+        fl_dump('ABOVE2', '../artpages.inc')
+        fl_dump('HERE2', 'artpages.inc')
+
+    def move_page_numbers_file(self):
+        '''
+        OneTalk:
+        '''
+        full_src = 'artpages.inc'
+        full_dst = '../' + full_src
+        fl_dump('ABOVE3', '../artpages.inc')
+        fl_dump('HERE3', 'artpages.inc')
+        if verbose:
+            print 'Move %(full_src)s to %(full_dst)s' % dict(
+                full_src=full_src,
+                full_dst=full_dst,
+                )
+        if os.path.isfile(full_src):
+            result = os.rename(full_src, full_dst)
+            if verbose:
+                print 'Move result:', result
+        else:
+            print 'No file to move:', full_src
+        fl_dump('ABOVE4', '../artpages.inc')
+        fl_dump('HERE4', 'artpages.inc')
+
+    def small_fn(self, env, target, source):
+        '''
+        OneTalk:
+        '''
+        my_stars = '*' * 50 + ' '
+        if verbose:
+            print my_stars + 'START ' + self.alias
+        if 0 and verbose:
+            tmp_format = 'self.alias, self.copy_images, env, target, source'
+            print('Eval: %s %s' % (tmp_format, eval(tmp_format)))
+        print os.getcwd()
+        txt_line = prepare_line(self.tty_columns, self.alias, self.location)
+        print '# ' + txt_line
+        link_do_src(self.alias)
+        if self.copy_images:
+            self.copy_needed_files()
+        if self.create_pdfs:
+            self.run_tex_for_chapter()
+        self.move_page_numbers_file()
+        if verbose:
+            print my_stars + 'END ' + self.alias

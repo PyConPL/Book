@@ -2,6 +2,10 @@
 # -*- coding: UTF-8 -*-
 # Get articles and directories list
 
+'''
+COLUMNS=$COLUMNS time scons; red_green_bar.py $? $COLUMNS
+'''
+
 import os
 import glob
 import time
@@ -9,7 +13,6 @@ import time
 import pl_txt
 
 created_pdf = time.strftime("pyconbook-%Y.pdf")
-master_al = time.strftime("pycon%Y")
 verbose = 0
 if os.getenv('PLAIN'):
     create_pdfs = 0
@@ -60,7 +63,7 @@ final_pdfs = map(
     lambda x: pl_txt.art_file_pdf(x[0]),
     al_loc_ls)
 
-slave_ls = filter(lambda x: x[0] != master_al, al_loc_ls)
+slave_ls = filter(lambda x: not pl_txt.is_master(x[0]), al_loc_ls)
 
 slave_pdfs = map(
     lambda x: pl_txt.art_file_pdf(x[0]),
@@ -70,9 +73,11 @@ pl_txt.env_command(
     env,
     created_pdf,
     final_pdfs,
-    "texexec --pdfcopy --result=$TARGET $SOURCES",
+    "texexec >log_b1.txt 2>log_b2.txt --pdfcopy --result=$TARGET $SOURCES",
     )
 
+uniq_prefix = ".tmp_%f_" % time.time()
+uniq_counter = 0
 for alias, location in al_loc_ls:
     txt_line = pl_txt.prepare_line(tty_columns, alias, location)
     root = pl_txt.art_file_core(alias)
@@ -84,23 +89,14 @@ for alias, location in al_loc_ls:
             ] +
         glob.glob("sty/*") +
         glob.glob("src/" + alias + "/*"))
-    if alias == master_al:
+    if pl_txt.is_master(alias):
        src_ls.extend(slave_pdfs)
-    small_pdf_ls = [
-            "pwd",
-            "# " + txt_line,
-            pl_txt.link_src(alias),
-            ]
-    if copy_images:
-        pass
-    if create_pdfs:
-        small_pdf_ls.append("texexec --pdf " + alias)
-    small_pdf_ls.append("mv artpages.inc .. 2>/dev/null || true")
+    one_talk = pl_txt.OneTalk(tty_columns, alias, location, copy_images, create_pdfs)
     pl_txt.env_command(
         env,
         root + ".pdf",
         src_ls,
-        small_pdf_ls,
+        one_talk.small_fn,
         chdir=pl_txt.art_home(alias),
         )
     loc_src  = "src/" + alias + "/text.tex"
@@ -137,17 +133,19 @@ for alias, location in al_loc_ls:
             pyladies = 0
         if verbose:
             print 'Found:', main_md
+        uniq_counter += 1
+        gm_dir = '%s%02d' % (uniq_prefix, uniq_counter)
         pandoc_patch_ls = [
-            Delete(".tmp"),
-            Mkdir(".tmp"),
-            pl_txt.run_pandoc(main_md, pyladies=pyladies),
+            Delete(gm_dir),
+            Mkdir(gm_dir),
+            pl_txt.run_pandoc(main_md, gm_dir, pyladies=pyladies),
             ]
         if diffsrc:
             pandoc_patch_ls.append(
-                pl_txt.apply_patch(diffsrc, test_mode=omit_diffs)
+                pl_txt.apply_patch(diffsrc, gm_dir, test_mode=omit_diffs)
                 )
         pandoc_patch_ls.append(
-            Copy("$TARGET", ".tmp/${TARGET.file}")
+            Copy("$TARGET", gm_dir + "/${TARGET.file}")
             )
         pl_txt.env_command(
             env,
