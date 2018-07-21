@@ -1,0 +1,288 @@
+\usemodule[pycon-yyyy]
+\starttext
+\Title{{\tt \char`\_\char`\_init\char`\_\char`\_}}
+\HeaderTitle{}
+\gobbleoneargument \MakeTitlePage
+\CheckPingPages
+
+
+% Strona pierwsza, czyli okładka znaczy
+
+\null
+\noheaderandfooterlines
+\vskip 0.2\vsize
+\centerline{%
+  \tfd PyCon PL 2018
+  %\externalfigure[ping-ascii.100][width=0.7\hsize]
+}
+
+
+\vskip 0pt plus 1filll
+
+\centerline{Polska Grupa Użytkowników Linuxa}
+\break
+\noheaderandfooterlines
+
+\def \ListaPlac#1:{\blank[2*big]
+     \begingroup
+     \let \PAR=\par
+     \def \par{\PAR\endgroup}
+     \catcode`\^^M=13
+     \noindent \begingroup \sc #1:%
+     %\lccode `\~=`\^^M%
+     \lowercase{\endgroup\def~{\hfil\break\hbox
+     to2em{}\ignorespaces
+}}
+}%
+
+
+\ListaPlac Komitet Organizacyjny:
+ Filip Kłębczyk (przewodniczący)
+ Piotr Wójcik
+ Anna Wszeborowska
+ Grzegorz Neblik
+ Daria Ratyńska
+ Ewa Jodłowska
+ Kinga Kięczkowska
+ Maciej Szulik
+ Radomir Dopieralski
+ Jakub Wasielak
+ Dawid Osuchowski
+ Michał Rokita
+ Piotr Wasilewski
+
+\ListaPlac Komitet Programowy:
+ Piotr Wójcik (przewodniczący)
+ Maciej Szulik (wiceprzewodniczący)
+ Radomir Dopieralski (wiceprzewodniczący)
+ Piotr Kasprzyk
+ Jakub Wiśniowski
+ Marcin Jabrzyk
+ Grzegorz Szczepańczyk
+ Jarosław Szymla
+ Mateusz Flieger
+ Paweł Stoworowicz
+ Katarzyna Jachim
+ Jacek Rzeszutek
+ Wojciech Lichota
+ Piotr Roksela
+ Christian Barra (PyData)
+
+% \ListaPlac Redakcja:
+%  Sebastian Pawluś
+%  Jakub Janoszek
+%  Piotr Kasprzyk
+%  % Ja nie robię, ja tylko makra --K.L.
+%  % Krzysztof Leszczyński
+%  Filip Kłębczyk
+%  Maciej Wiśniowski
+%  Piotr Wójcik
+
+\vfill \break
+
+\ListaPlac Główny partner:~\par%\blank[2*big]
+\centerline{\externalfigure[src/PSF.png][width=0.45\hsize]}
+
+\ListaPlac Złoci Sponsorzy:~\par%\blank[2*big]
+\centerline{}
+\centerline{\externalfigure[src/dreamlab.png][width=0.45\hsize]\hskip10mm\externalfigure[src/daftcode.png][width=0.45\hsize]}
+
+\ListaPlac Srebrni Sponsorzy:\par
+\vskip12mm
+\centerline{\externalfigure[src/compendium.png][width=0.40\hsize]\hskip12mm\externalfigure[src/stx.png][width=0.40\hsize]}
+\vskip12mm
+\centerline{\externalfigure[src/maxiv.png][width=0.40\hsize]\hskip12mm\externalfigure[src/acaisoft.png][width=0.40\hsize]}
+\vfil\break
+\ListaPlac Srebrni Sponsorzy:\par
+\centerline{\externalfigure[src/logo_JetBrains_1.png][width=0.40\hsize]}
+
+\ListaPlac Brązowi Sponsorzy:\par
+\vskip2mm
+\centerline{\externalfigure[src/xcaliber.png][width=0.40\hsize]\hskip12mm\externalfigure[src/codeinstitute.png][width=0.40\hsize]}
+
+\ListaPlac Grafitowi Sponsorzy:\par
+\vskip12mm
+\centerline{\externalfigure[src/sunscrapers.png][width=0.40\hsize]\hskip12mm\externalfigure[src/strefakursow.png][width=0.40\hsize]}
+
+\break
+
+\iffalse
+  % wersja prezesa
+
+Witajcie. Znowu.
+
+
+\else
+
+\begingroup
+\setupwhitespace[big]
+\setupindenting[none,never]
+
+Witamy na jedenastej edycji konferencji PyCon PL!
+
+Nasze wydarzenie już po raz czwarty gości w Hotelu Ossa.
+
+Na koniec tego wstępniaka, już tradycyjnie pozostaje sobie życzyć dobrze
+spędzonego czasu, udanej integracji i sporo wyniesionej wiedzy na PyCon PL 2018.
+
+\endgroup
+
+\fi
+
+\vfil\break
+\begingroup
+
+\setupwhitespace[big]
+
+\null\vfill
+\noindent{https://github.com/PyConPL/Book}
+
+\noindent{https://github.com/PyConPL/pyladies-workshop}
+
+\noindent{\sc Kolofon:}
+
+\blank[big]\parindent=0pt \rightskip=0pt
+plus 1fill
+
+Wszystkie prace związane z~przygotowaniem publikacji do~druku
+zostały wykonane wyłącznie w~systemie Linux (m.in. Ubuntu 16.04.1 LTS).
+
+Skład został wykonany w systemie \TeX\ z~wykorzystaniem,
+opracowanego na~potrzeby konferencji, środowiska redakcyjnego
+opartego na~formacie \CONTEXT.
+
+Teksty referatów złożono krojem Bonum z kolekcji \TeX-Gyre.
+Tytuły referatów złożono krojem Antykwa Toruńska, opracowanym
+przez Janusza Nowackiego na~podstawie rysunków Zygfryda
+Gardzielewskiego.
+
+
+\endgroup
+\break
+
+
+\iffalse
+\def \defEvent{\dodoubleargumentwithset \dodefEvent}
+\def \dodefEvent[#1][#2]{\getparameters[Event::#1::][#2]}
+
+\def \vskipreserve #1#2{\vskip #1\nobreak
+                        \vskip 0pt plus \dimexpr #2\relax\penalty-1000
+                        \vskip 0pt plus -\dimexpr #2\relax}
+
+\def \startDay#1{\vskipreserve{3\baselineskip}{0.3\vsize}
+     \centerline{\tfa #1}
+     \blank[big]
+}
+
+\def \AgendaEvent[#1]{\par
+     \def \AgendaEventfrom{\errmessage{Undefined AgendaEvent from}}
+     \def \AgendaEventto{\errmessage{Undefined AgendaEvent to}}
+     \def \AgendaEventid{\errmessage{Undefined AgendaEvent id}}
+     \getparameters[AgendaEvent][#1]%
+     \begingroup\edef \a{\endgroup
+       \noexpand\doAgendaEvent
+       \AgendaEventid \space \AgendaEventfrom \space \AgendaEventto\relax}\a
+     }
+
+\def \numifty#1{\ifnum 99=0#1\relax\infty \else #1\fi}
+
+\setvalue{start::ref}{}
+\setvalue{stop::ref}{}
+\setvalue{start::event}{\qquad --- \vrule width 0pt height 5ex depth 0ex\relax}
+\setvalue{stop::event}{ ---\vrule width 0pt height 0ex depth 3ex\relax}
+
+\def \doAgendaEvent #1 #2:#3 #4:#5\relax{
+     \hbox to \hsize \bgroup
+     \hbox to 6em{\hfil
+       $\numifty{#2}^{\numifty{#3}}$~--~%
+       $\numifty{#4}^{\numifty{#5}}$\quad}%
+     \vtop \bgroup
+       \advance \hsize -9em
+       \noindent \rightskip=0pt plus 1fil
+       \vrule width 0pt height 3ex
+       \if $\getvalue{Event::#1::author}$\else
+          {\sc \getvalue{Event::#1::author}}\hfil\break
+       \fi
+       \getvalue{start::\getvalue{Event::#1::type}}
+      {\it \getvalue{Event::#1::title}}%
+       \getvalue{stop::\getvalue{Event::#1::type}}
+      \ifnum 0=0\ArtPage{#1::firstpage}\relax
+      \else
+      \parfillskip=0pt \dotfill\null
+      \rlap{\tt \inhex\ArtPage{#1::firstpage}}
+      \setgvalue{Art::#1::found}{1}
+      \fi\par
+     \egroup\hfil\egroup}
+\def \stopDay{}
+
+\catcode `\_=13
+\def_{{\tt \char `\_}}
+% \input agenda
+
+\iffalse
+\startDay{pozostałe artykuły}
+      \setgvalue{Art::ping2008::found}{1}
+
+\def \Article#1#2{\ifnum1=0\getvalue{Art::#1::found}\relax
+     \else #1\par\doAgendaEvent #1 ~:~ ~:~\relax\fi}
+
+\PingArticles
+
+\fi
+\fi
+%\xxxxxxxxxxxxxxxxx
+
+
+\centerline{\bf Spis treści}
+\blank[2*big]
+\toks0={}
+
+\newread \testarticle
+\def \Article#1#2{\message{**ARTICLE: #1 ***}%
+     \toks0=\expandafter{\the\toks0\relax\Article{#1}}
+     \toks1={}% Authors
+     \toks2={}% Title
+     \openin \testarticle=#1/#1.tex\relax
+     \ifeof \testarticle
+        \closein \testarticle
+     \else
+        \closein \testarticle
+        \expandafter \ScanArt \normalinput #1/#1.tex\relax\ScanArt
+     \fi}
+
+\def \ScanArt {\afterassignment \ScanArtA \let \next}
+\def \ScanArtA{%
+     \ifcase 0%
+            \ifx\next \ScanArt 1\fi
+            \ifx\next \Title   2\fi
+            \ifx\next \Author  2\fi
+            \ifx\next \MakeTitlePage 2\fi
+            \relax
+            % case 0, unknown token
+            \expandafter \ScanArt
+            \or
+            % case 1, found \ScanArt, i.e. endofinput
+            \expandafter \FinishScan
+            \or
+            % case 2
+            \expandafter \next
+            \else
+              \errmessage{internal if/fi error}
+            \fi}
+
+\def \Title#1{\toks2=\expandafter{\the\toks2\relax #1\relax}%
+     \ScanArt}
+\def  \Author#1{\toks1=\expandafter{\the\toks1, #1}\ScanArt}
+\def \MakeTitlePage{\endinput\ScanArt}
+\def \FinishScan{\edef\next{{\the\toks1}{\the\toks2}}%
+     \toks0=\expandafter{\the\toks0\next}}
+\PingArticles
+\def \Article#1#2#3{\bTR
+     \bTD \tt 0x00\inhex \ArtPage{#1::firstpage}\relax\eTD
+     \bTD #3\relax~--~\it \gobbleoneargument#2\relax\eTD
+     \eTR}
+\bTABLE
+        \the\toks0
+\eTABLE
+
+\stoptext
