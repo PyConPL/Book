@@ -16,6 +16,10 @@
 
 pycon2018 pycon2018
 % Prezentacje po angielsku
+block presentations/Lets_build_a_Blockchain
+student presentations/student_pm_and_iot
 % Warsztaty po angielsku
 % Prezentacje po polsku
+behave presentations/przygotowanie-do-rownoleglego-uruchamiania-testow-bdd
+azure presentations/Python_Microsoft_Azure
 % Warsztaty po polsku
