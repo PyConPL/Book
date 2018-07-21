@@ -3,7 +3,7 @@
 # Get articles and directories list
 
 '''
-COLUMNS=$COLUMNS scons; red_green_bar.py $? $COLUMNS
+COLUMNS=$COLUMNS time scons; red_green_bar.py $? $COLUMNS
 '''
 
 import os
