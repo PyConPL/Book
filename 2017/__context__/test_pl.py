@@ -106,6 +106,14 @@ class TestPL(unittest.TestCase):
         '''
         self.assertEqual(pl_txt.art_pages_file(), 'build/artpages.inc')
 
+    def test_main_document(self):
+        '''
+        TestPL:
+        '''
+        self.assertEqual(pl_txt.is_master(''), 0)
+        self.assertEqual(pl_txt.is_master('pycon2018'), 1)
+        self.assertEqual(pl_txt.is_master('pycon_us'), 0)
+
 def make_tests():
     suite = unittest.TestSuite()
     suite.addTest(unittest.makeSuite(TestPL))

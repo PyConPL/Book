@@ -2,9 +2,18 @@
 # -*- coding: UTF-8 -*-
 
 import os
+import re
 
 debug = 0
 build_dir = "build"
+
+master_pattern = re.compile(
+'''
+pycon
+\d{4}
+''',
+re.VERBOSE
+)
 
 def apply_patch(diffsrc, gm_dir, test_mode=0):
     src_file = diffsrc + ["/dev/null"]
@@ -127,3 +136,11 @@ def art_file_pdf(alias):
 
 def art_pages_file():
     return art_home('artpages.inc')
+
+
+def is_master(one_alias):
+    if master_pattern.search(one_alias):
+        result = 1
+    else:
+        result = 0
+    return result
