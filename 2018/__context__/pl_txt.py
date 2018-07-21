@@ -216,6 +216,11 @@ def sanity_check():
         raise RuntimeError("No file: '%s'" % pndc_tmpl)
 
 
+def final_command():
+    cmd = "texexec --pdfcopy --result=$TARGET $SOURCES >log_b1.txt 2>log_b2.txt"
+    return cmd
+
+
 class OneTalk(object):
     def __init__(self, tty_columns, alias, location, copy_images, create_pdfs):
         '''
