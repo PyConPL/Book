@@ -2,7 +2,7 @@
 
 Wadim Sokołowski
 
-<wlasek1412a@gmail.com>
+<wlasek1412@gmail.com>
 
 Pycon PL 2019
 
