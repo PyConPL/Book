@@ -33,7 +33,7 @@ przedstawić kilka faktów i spekulacji związanych z najnowszym Pythonem.
 
 # Kość niezgody, czyli PEP 572
 
-Operator przypisania `:=` (_walrus operator_, ang. walrus = mors) ma na celu
+Operator przypisania `:=` (_walrus operator_, ang. _walrus_ = mors) ma na celu
 uproszczenie kodu przez umożliwienie przypisywania wartości do zmiennych
 wewnątrz wyrażeń.
 Istnieje on w wielu językach, choćby w tych C-podobnych, gdzie niewątpliwie
@@ -226,9 +226,8 @@ cyfrowego gada.
 
 # Żródła
 
-* <https://docs.python.org/3.8/whatsnew/3.8.html>: Co nowego w Pythonie 3.8
-* <https://www.python.org/dev/peps/pep-0572/>: PEP 572 - Assignment Expressions
-* <https://www.python.org/dev/peps/pep-0570/>: PEP 570 - Python Positional-Only Parameters
-* <https://www.python.org/dev/peps/pep-0574/>: PEP 574 - Pickle protocol 5 with out-of-band data
-* <https://www.linuxjournal.com/content/guido-van-rossum-stepping-down-role-pythons-benevolent-dictator-life>:
-  Guido van Rossum Stepping Down from Role as Python's Benevolent Dictator For Life
+* <https://docs.python.org/3.8/whatsnew/3.8.html> Co nowego w Pythonie 3.8
+* <https://www.python.org/dev/peps/pep-0572/> PEP 572 - Assignment Expressions
+* <https://www.python.org/dev/peps/pep-0570/> PEP 570 - Python Positional-Only Parameters
+* <https://www.python.org/dev/peps/pep-0574/> PEP 574 - Pickle protocol 5 with out-of-band data
+* <https://www.mail-archive.com/python-committers@python.org/msg05628.html> \[python-committers\] Transfer of power
