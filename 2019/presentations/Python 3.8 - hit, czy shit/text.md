@@ -121,7 +121,7 @@ Czy Python potrzebował PEP 572? Trudno powiedzieć, ale na pewno konsekwencje
 wojny wokół tego dokumentu są bardzo poważne i wpłyną długofalowo na przyszłość
 języka.
 
-# Co poza tym w wersji 3.8
+# Co ponadto w wersji 3.8?
 
 Nowy Python, to nie tylko PEP 572 - mamy szereg zmian, zarówno w samym języku,
 jak i w bibliotece standardowej. Poniżej pokrótce omówię niektóre z nich.
