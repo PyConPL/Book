@@ -121,7 +121,7 @@ Czy Python potrzebował PEP 572? Trudno powiedzieć, ale na pewno konsekwencje
 wojny wokół tego dokumentu są bardzo poważne i wpłyną długofalowo na przyszłość
 języka.
 
-# Pozostałe zmiany w wersji 3.8
+# Co poza tym w wersji 3.8
 
 Nowy Python, to nie tylko PEP 572 - mamy szereg zmian, zarówno w samym języku,
 jak i w bibliotece standardowej. Poniżej pokrótce omówię niektóre z nich.
@@ -190,6 +190,7 @@ Nowy modyfikator f-łańcuchów produkuje zapis w postaci `nazwa=wartość` i mo
 oszczędzić nieco czasu programistom:
 
 ```python
+>>> a = 1
 >>> f"{a=}"  # Samoopisująca się wartość
 'a=1'
 >>> f"{(mors:=1)=}"  # O to też zadbano
