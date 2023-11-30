@@ -62,15 +62,15 @@ al_loc_ls = prepare_art('artlist.txt')
 new_data = pl_txt.prepare_file(al_loc_ls)
 pl_txt.write_if_needed(genart_file, new_data)
 
-final_pdfs = map(
+final_pdfs = list(map(
     lambda x: pl_txt.art_file_pdf(x[0]),
-    al_loc_ls)
+    al_loc_ls))
 
 slave_ls = filter(lambda x: not pl_txt.is_master(x[0]), al_loc_ls)
 
-slave_pdfs = map(
+slave_pdfs = list(map(
     lambda x: pl_txt.art_file_pdf(x[0]),
-    slave_ls)
+    slave_ls))
 
 pl_txt.env_command(
     env,
