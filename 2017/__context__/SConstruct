@@ -57,6 +57,7 @@ def prepare_art(artlist_file):
     return al_loc_ls
 
 
+pl_txt.sanity_check()
 al_loc_ls = prepare_art('artlist.txt')
 new_data = pl_txt.prepare_file(al_loc_ls)
 pl_txt.write_if_needed(genart_file, new_data)
@@ -75,7 +76,7 @@ pl_txt.env_command(
     env,
     created_pdf,
     final_pdfs,
-    "texexec >log_b1.txt 2>log_b2.txt --pdfcopy --result=$TARGET $SOURCES",
+    pl_txt.final_command(),
     )
 
 uniq_prefix = ".tmp_%f_" % time.time()
@@ -110,31 +111,25 @@ for alias, location in al_loc_ls:
         print(loc_src)
         print(main_src)
         print(main_md)
-    if os.path.exists(loc_src):
-        if verbose:
-            print('Found: %s' % loc_src)
+    if pl_txt.check_for_source(alias, loc_src):
         pl_txt.env_command(
             env,
             root + ".tex",
             loc_src,
             Copy('$TARGET', '$SOURCE'),
             )
-    elif os.path.exists(main_src):
-        if verbose:
-            print('Found: %s' % main_src)
+    elif pl_txt.check_for_source(alias, main_src):
         pl_txt.env_command(
             env,
             root + ".tex",
             main_src,
             Copy('$TARGET', '$SOURCE'),
             )
-    elif os.path.exists(main_md):
+    elif pl_txt.check_for_source(alias, main_md):
         if alias == 'pyladies':
             pyladies = 1
         else:
             pyladies = 0
-        if verbose:
-            print('Found: %s' % main_md)
         uniq_counter += 1
         gm_dir = '%s%02d' % (uniq_prefix, uniq_counter)
         pandoc_patch_ls = [
