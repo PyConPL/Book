@@ -19,14 +19,16 @@ copy_images = 1
 only_first_article_for_testing = 0
 
 if 'TEXINPUTS' not in os.environ:
-    os.environ['TEXINPUTS']=''
+    os.environ['TEXINPUTS'] = ''
 os.environ['TEXINPUTS'] = (
-    ".:..:../..:../../sty:" +
-    os.environ['TEXINPUTS'] )
-env = Environment( ENV=os.environ)
+    ".:..:../..:../../sty:"
+    + os.environ['TEXINPUTS'])
+env = Environment(ENV=os.environ)
+
 
 def remove_comments(line):
     return line.split('%')[0]
+
 
 articles = []
 artlist = 'artlist.txt'
@@ -46,18 +48,19 @@ if selected:
     sel_ls = selected.split()
     articles = filter(lambda x: x[0] in sel_ls, articles)
 
-final_pdfs = map((lambda x: "{}/{}/{}.pdf".format(build,x[0],x[0])),articles)
+final_pdfs = map((lambda x: "{}/{}/{}.pdf".format(build, x[0], x[0])), articles)
 
-env.Command("pyconbook-2015.pdf",
+env.Command(
+    "pyconbook-2015.pdf",
     final_pdfs,
     "texexec --pdfcopy --result=$TARGET $SOURCES")
 
 for alias, location in articles:
     root = "{}/{}/{}".format(build, alias, alias)
     small_pdf_ls = [
-            "pwd",
-            pl_txt.link_src(alias),
-            ]
+        "pwd",
+        pl_txt.link_src(alias),
+        ]
     if copy_images:
         small_pdf_ls.append(
             "[ ${TARGET.file} != machine.pdf ] || cp ../../../presentations/Building_better_machine_learning_model_Power_of_ensembles/ensemble_1.png .",
@@ -84,25 +87,27 @@ for alias, location in articles:
             glob.glob("src/" + alias + "/*")
             ],
         small_pdf_ls,
-        chdir = "%s/%s" % (build, alias),
+        chdir="%s/%s" % (build, alias),
         )
-    loc_src  = "src/" + alias + "/text.tex"
+    loc_src = "src/" + alias + "/text.tex"
     main_src = "../" + location + "/text.tex"
-    main_md  = "../" + location + "/text.md"
-    diffsrc  = glob.glob("src/" + alias + ".diff")
+    main_md = "../" + location + "/text.md"
+    diffsrc = glob.glob("src/" + alias + ".diff")
     if verbose:
-        print 'Checking in:'
-        print loc_src
-        print main_src
-        print main_md
+        print("Checking '%s' in:" % alias)
+        print(loc_src)
+        print(main_src)
+        print(main_md)
     if os.path.exists(loc_src):
-        env.Command( root + ".tex", loc_src,
-                     Copy('$TARGET','$SOURCE') )
+        env.Command(
+            root + ".tex", loc_src,
+            Copy('$TARGET', '$SOURCE'))
     elif os.path.exists(main_src):
-        env.Command( root + ".tex", main_src,
-                     Copy('$TARGET','$SOURCE') )
+        env.Command(
+            root + ".tex", main_src,
+            Copy('$TARGET', '$SOURCE'))
     elif os.path.exists(main_md):
-        print ">>>" + main_md
+        print(">>>" + main_md)
         env.Command(
             root + ".tex",
             [main_md] + diffsrc + Glob("src/*.inc.tex"),
@@ -113,15 +118,15 @@ for alias, location in articles:
                 pl_txt.apply_patch(diffsrc, test_mode=omit_diffs),
                 Copy("$TARGET", ".tmp/${TARGET.file}"),
                 ],
-           )
+            )
     else:
-        print "Thing ", main_md
+        print("Thing %s" % main_md)
         if verbose:
-            print "Full path:", os.path.abspath(main_md)
-        raise RuntimeError("Gulp")
+            print("Full path: %s" % os.path.abspath(main_md))
+        raise RuntimeError("Not found: %s" % repr(main_md))
 
 
-env.Command("build/artpages.inc",[],[])
+env.Command("build/artpages.inc", [], [])
 
 # Local Variables:
 # mode: python

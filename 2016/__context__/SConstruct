@@ -23,14 +23,16 @@ copy_images = 1
 only_first_article_for_testing = 0
 
 if 'TEXINPUTS' not in os.environ:
-    os.environ['TEXINPUTS']=''
+    os.environ['TEXINPUTS'] = ''
 os.environ['TEXINPUTS'] = (
-    ".:..:../..:../../sty:" +
-    os.environ['TEXINPUTS'] )
-env = Environment( ENV=os.environ)
+    ".:..:../..:../../sty:"
+    + os.environ['TEXINPUTS'])
+env = Environment(ENV=os.environ)
+
 
 def remove_comments(line):
     return line.split('%')[0]
+
 
 articles = []
 artlist_file = 'artlist.txt'
@@ -54,7 +56,8 @@ final_pdfs = map(
     (lambda x: "{}/{}/{}.pdf".format(build, x[0], x[0])),
     articles)
 
-env.Command("pyconbook-2016.pdf",
+env.Command(
+    "pyconbook-2016.pdf",
     final_pdfs,
     "texexec --pdfcopy --result=$TARGET $SOURCES")
 
@@ -72,10 +75,10 @@ for alias, location in articles:
         txt_line = ''
     root = "{}/{}/{}".format(build, alias, alias)
     small_pdf_ls = [
-            "pwd",
-            "# " + txt_line,
-            pl_txt.link_src(alias),
-            ]
+        "pwd",
+        "# " + txt_line,
+        pl_txt.link_src(alias),
+        ]
     if copy_images:
         small_pdf_ls.append(
             "[ ${TARGET.file} != async.pdf ] || cp ../../../presentations/async_pod_maska/yield_from.png .",
@@ -102,30 +105,34 @@ for alias, location in articles:
             glob.glob("src/" + alias + "/*")
             ],
         small_pdf_ls,
-        chdir = "%s/%s" % (build, alias),
+        chdir="%s/%s" % (build, alias),
         )
-    loc_src  = "src/" + alias + "/text.tex"
+    loc_src = "src/" + alias + "/text.tex"
     main_src = "../" + location + "/text.tex"
-    main_md  = "../" + location + "/text.md"
-    diffsrc  = glob.glob("src/" + alias + ".diff")
+    main_md = "../" + location + "/text.md"
+    diffsrc = glob.glob("src/" + alias + ".diff")
     if verbose:
-        print "Checking '%s' in:" % alias
-        print loc_src
-        print main_src
-        print main_md
+        print("Checking '%s' in:" % alias)
+        print(loc_src)
+        print(main_src)
+        print(main_md)
     if os.path.exists(loc_src):
         if verbose:
-            print 'Found:', loc_src
-        env.Command( root + ".tex", loc_src,
-                     Copy('$TARGET','$SOURCE') )
+            print('Found: %s' % loc_src)
+        env.Command(
+            root + ".tex",
+            loc_src,
+            Copy('$TARGET', '$SOURCE'))
     elif os.path.exists(main_src):
         if verbose:
-            print 'Found:', main_src
-        env.Command( root + ".tex", main_src,
-                     Copy('$TARGET','$SOURCE') )
+            print('Found: %s' % main_src)
+        env.Command(
+            root + ".tex",
+            main_src,
+            Copy('$TARGET', '$SOURCE'))
     elif os.path.exists(main_md):
         if verbose:
-            print 'Found:', main_md
+            print('Found: %s' % main_md)
         pandoc_patch_ls = [
             Delete(".tmp"),
             Mkdir(".tmp"),
@@ -142,10 +149,10 @@ for alias, location in articles:
             root + ".tex",
             [main_md] + diffsrc + Glob("src/*.inc.tex"),
             pandoc_patch_ls,
-           )
+            )
     else:
         if verbose:
-            print "Full path:", os.path.abspath(main_md)
+            print("Full path: %s" % os.path.abspath(main_md))
         raise RuntimeError("Not found: %s" % repr(main_md))
 
 

@@ -10,14 +10,16 @@ import pl_txt
 only_first_article_for_testing = 0
 
 if 'TEXINPUTS' not in os.environ:
-    os.environ['TEXINPUTS']=''
+    os.environ['TEXINPUTS'] = ''
 os.environ['TEXINPUTS'] = (
-    ".:..:../..:../../sty:" +
-    os.environ['TEXINPUTS'] )
-env = Environment( ENV=os.environ)
+    ".:..:../..:../../sty:"
+    + os.environ['TEXINPUTS'])
+env = Environment(ENV=os.environ)
+
 
 def remove_comments(line):
     return line.split('%')[0]
+
 
 articles = []
 artlist = 'artlist.txt'
@@ -32,9 +34,10 @@ for line in open(artlist):
 if only_first_article_for_testing:
     articles = articles[:1]
 
-final_pdfs = map((lambda x: "{}/{}/{}.pdf".format(build,x[0],x[0])),articles)
+final_pdfs = map((lambda x: "{}/{}/{}.pdf".format(build, x[0], x[0])), articles)
 
-env.Command("pyconbook-2014.pdf",
+env.Command(
+    "pyconbook-2014.pdf",
     final_pdfs,
     "texexec --pdfcopy --result=$TARGET $SOURCES")
 
@@ -57,20 +60,22 @@ for alias, location in articles:
             "texexec --pdf " + alias,
             "mv artpages.inc .. 2>/dev/null || true"
             ],
-        chdir = "%s/%s" % (build, alias),
+        chdir="%s/%s" % (build, alias),
         )
-    loc_src  = "src/" + alias + "/text.tex"
+    loc_src = "src/" + alias + "/text.tex"
     main_src = "../" + location + "/text.tex"
-    main_md  = "../" + location + "/text.md"
-    diffsrc  = glob.glob("src/" + alias + ".diff")
+    main_md = "../" + location + "/text.md"
+    diffsrc = glob.glob("src/" + alias + ".diff")
     if os.path.exists(loc_src):
-        env.Command( root + ".tex", loc_src,
-                     Copy('$TARGET','$SOURCE') )
+        env.Command(
+            root + ".tex", loc_src,
+            Copy('$TARGET', '$SOURCE'))
     elif os.path.exists(main_src):
-        env.Command( root + ".tex", main_src,
-                     Copy('$TARGET','$SOURCE') )
+        env.Command(
+            root + ".tex", main_src,
+            Copy('$TARGET', '$SOURCE'))
     elif os.path.exists(main_md):
-        print ">>>" + main_md
+        print(">>>" + main_md)
         env.Command(
             root + ".tex",
             [main_md] + diffsrc + Glob("src/*.inc.tex"),
@@ -81,13 +86,13 @@ for alias, location in articles:
                 pl_txt.apply_patch(diffsrc),
                 Copy("$TARGET", ".tmp/${TARGET.file}"),
                 ],
-           )
+            )
     else:
-        print "Thing ", main_md
-        raise RuntimeError("Gulp")
+        print("Thing %s" % main_md)
+        raise RuntimeError("Not found: %s" % repr(main_md))
 
 
-env.Command("build/artpages.inc",[],[])
+env.Command("build/artpages.inc", [], [])
 
 # Local Variables:
 # mode: python

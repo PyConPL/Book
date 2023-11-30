@@ -29,13 +29,14 @@ copy_images = 1
 only_first_article_for_testing = 0
 
 if 'TEXINPUTS' not in os.environ:
-    os.environ['TEXINPUTS']=''
+    os.environ['TEXINPUTS'] = ''
 os.environ['TEXINPUTS'] = (
-    ".:..:../..:../../sty:" +
-    os.environ['TEXINPUTS'] )
+    ".:..:../..:../../sty:"
+    + os.environ['TEXINPUTS'])
 env = Environment(ENV=os.environ)
 
 genart_file = 'genart.txt'
+
 
 def prepare_art(artlist_file):
     al_loc_ls = []
@@ -54,6 +55,7 @@ def prepare_art(artlist_file):
         sel_ls = selected.split()
         al_loc_ls = filter(lambda x: x[0] in sel_ls, al_loc_ls)
     return al_loc_ls
+
 
 al_loc_ls = prepare_art('artlist.txt')
 new_data = pl_txt.prepare_file(al_loc_ls)
@@ -86,11 +88,11 @@ for alias, location in al_loc_ls:
             root + ".tex",
             genart_file,
             pl_txt.art_pages_file(),
-            ] +
-        glob.glob("sty/*") +
-        glob.glob("src/" + alias + "/*"))
+            ]
+        + glob.glob("sty/*")
+        + glob.glob("src/" + alias + "/*"))
     if pl_txt.is_master(alias):
-       src_ls.extend(slave_pdfs)
+        src_ls.extend(slave_pdfs)
     one_talk = pl_txt.OneTalk(tty_columns, alias, location, copy_images, create_pdfs)
     pl_txt.env_command(
         env,
@@ -99,32 +101,32 @@ for alias, location in al_loc_ls:
         one_talk.small_fn,
         chdir=pl_txt.art_home(alias),
         )
-    loc_src  = "src/" + alias + "/text.tex"
+    loc_src = "src/" + alias + "/text.tex"
     main_src = "../" + location + "/text.tex"
-    main_md  = "../" + location + "/text.md"
-    diffsrc  = glob.glob("src/" + alias + ".diff")
+    main_md = "../" + location + "/text.md"
+    diffsrc = glob.glob("src/" + alias + ".diff")
     if verbose:
-        print "Checking '%s' in:" % alias
-        print loc_src
-        print main_src
-        print main_md
+        print("Checking '%s' in:" % alias)
+        print(loc_src)
+        print(main_src)
+        print(main_md)
     if os.path.exists(loc_src):
         if verbose:
-            print 'Found:', loc_src
+            print('Found: %s' % loc_src)
         pl_txt.env_command(
             env,
             root + ".tex",
             loc_src,
-            Copy('$TARGET','$SOURCE'),
+            Copy('$TARGET', '$SOURCE'),
             )
     elif os.path.exists(main_src):
         if verbose:
-            print 'Found:', main_src
+            print('Found: %s' % main_src)
         pl_txt.env_command(
             env,
             root + ".tex",
             main_src,
-            Copy('$TARGET','$SOURCE'),
+            Copy('$TARGET', '$SOURCE'),
             )
     elif os.path.exists(main_md):
         if alias == 'pyladies':
@@ -132,7 +134,7 @@ for alias, location in al_loc_ls:
         else:
             pyladies = 0
         if verbose:
-            print 'Found:', main_md
+            print('Found: %s' % main_md)
         uniq_counter += 1
         gm_dir = '%s%02d' % (uniq_prefix, uniq_counter)
         pandoc_patch_ls = [
@@ -152,10 +154,10 @@ for alias, location in al_loc_ls:
             root + ".tex",
             [main_md] + diffsrc + Glob("src/*.inc.tex"),
             pandoc_patch_ls,
-           )
+            )
     else:
         if verbose:
-            print "Full path:", os.path.abspath(main_md)
+            print("Full path: %s" % os.path.abspath(main_md))
         raise RuntimeError("Not found: %s" % repr(main_md))
 
 
