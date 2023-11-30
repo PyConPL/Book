@@ -13,13 +13,13 @@ tex_to_file = 0
 build_dir = "build"
 
 master_pattern = re.compile(
-'''
+    r'''
 ^
 pycon
 \d{4}
 $
 ''',
-re.VERBOSE
+    re.VERBOSE
 )
 
 files_to_copy = {
@@ -50,9 +50,11 @@ files_to_copy = {
         ],
 }
 
+
 def apply_patch(diffsrc, gm_dir, test_mode=0):
     src_file = diffsrc + ["/dev/null"]
     return "cat " + src_file[test_mode] + " | patch -d " + gm_dir
+
 
 def run_pandoc(main_md, gm_dir, pyladies=0):
     if pyladies:
@@ -69,6 +71,7 @@ def run_pandoc(main_md, gm_dir, pyladies=0):
         "/${TARGET.file}",
         ])
 
+
 def art_src_dir(alias):
     return "../../src/" + alias
 
@@ -81,12 +84,13 @@ def link_do_src(alias):
     tmp_sr_dir = 'src'
     source = art_src_dir(alias)
     if verbose:
-        print 'Preparing to create symlink %(source)s -> %(tmp_sr_dir)s' % dict(
+        print('Preparing to create symlink %(source)s -> %(tmp_sr_dir)s' % dict(
             source=source,
             tmp_sr_dir=tmp_sr_dir,
-            )
+            ))
     if not os.path.islink(tmp_sr_dir) and os.path.isdir(source):
         os.symlink(source, tmp_sr_dir)
+
 
 def pass_line(one_line):
     if one_line and not one_line.strip().startswith('%'):
@@ -95,8 +99,10 @@ def pass_line(one_line):
         result = 0
     return result
 
+
 def remove_comments(line):
     return line.split('%')[0]
+
 
 def env_command(
         env,
@@ -107,10 +113,18 @@ def env_command(
         ):
     if debug:
         print('')
-        tmp_format = 'target'; print('Eval: %s %s' % (tmp_format, eval(tmp_format)))
-        tmp_format = 'source'; print('Eval: %s %s' % (tmp_format, eval(tmp_format)))
-        tmp_format = 'action'; print('Eval: %s %s' % (tmp_format, eval(tmp_format)))
-        tmp_format = 'kwargs'; print('Eval: %s %s' % (tmp_format, eval(tmp_format)))
+        if 1:
+            tmp_format = 'target'
+            print('Eval: %s %s' % (tmp_format, eval(tmp_format)))
+        if 1:
+            tmp_format = 'source'
+            print('Eval: %s %s' % (tmp_format, eval(tmp_format)))
+        if 1:
+            tmp_format = 'action'
+            print('Eval: %s %s' % (tmp_format, eval(tmp_format)))
+        if 1:
+            tmp_format = 'kwargs'
+            print('Eval: %s %s' % (tmp_format, eval(tmp_format)))
     env.Command(
         target,
         source,
@@ -118,11 +132,13 @@ def env_command(
         **kwargs
         )
 
+
 def read_file(name):
     fd = open(name, 'rb')
     data = fd.read()
     fd.close()
     return data
+
 
 def write_file(name, data):
     fd = open(name, 'wb')
@@ -133,6 +149,7 @@ def write_file(name, data):
         name,
         ))
 
+
 def write_if_needed(name, new_data):
     if os.path.isfile(name):
         prev_data = read_file(name)
@@ -141,12 +158,14 @@ def write_if_needed(name, new_data):
     if prev_data != new_data:
         write_file(name, new_data)
 
+
 def prepare_file(al_loc_ls):
     line_ls = []
     for alias, location in al_loc_ls:
         elem = '%s %s\n' % (alias, location)
         line_ls.append(elem)
     return ''.join(line_ls)
+
 
 def prepare_line(tty_columns, alias, location):
     if tty_columns:
@@ -162,8 +181,10 @@ def prepare_line(tty_columns, alias, location):
         txt_line = ''
     return txt_line
 
+
 def art_home(alias):
     return "%s/%s" % (build_dir, alias)
+
 
 def art_file_core(alias):
     return ''.join([
@@ -172,8 +193,10 @@ def art_file_core(alias):
         alias,
         ])
 
+
 def art_file_pdf(alias):
     return art_file_core(alias) + '.pdf'
+
 
 def art_pages_file():
     return art_home('artpages.inc')
@@ -189,11 +212,11 @@ def is_master(one_alias):
 
 def fl_dump(label, fl_name):
     if diagnose_article_pages:
-        print label, fl_name
+        print('%s %s' % (label, fl_name))
         if os.path.isfile(fl_name):
-            print open(fl_name, 'rb').read()
+            print(open(fl_name, 'rb').read())
         else:
-            print 'no file (yet).'
+            print('no file (yet).')
 
 
 class OneTalk(object):
@@ -218,10 +241,10 @@ class OneTalk(object):
                 full_src = src_dir + src_file
                 full_dst = src_file
                 if verbose:
-                    print 'Copy %(full_src)s to %(full_dst)s' % dict(
+                    print('Copy %(full_src)s to %(full_dst)s' % dict(
                         full_src=full_src,
                         full_dst=full_dst,
-                        )
+                        ))
                 shutil.copyfile(full_src, full_dst)
 
     def run_tex_for_chapter(self):
@@ -232,7 +255,7 @@ class OneTalk(object):
         if tex_to_file:
             cmd = cmd + " >log_a1.txt 2>log_a2.txt"
         if verbose:
-            print cmd
+            print(cmd)
         fl_dump('ABOVE1', '../artpages.inc')
         fl_dump('HERE1', 'artpages.inc')
         os.system(cmd)
@@ -248,16 +271,16 @@ class OneTalk(object):
         fl_dump('ABOVE3', '../artpages.inc')
         fl_dump('HERE3', 'artpages.inc')
         if verbose:
-            print 'Move %(full_src)s to %(full_dst)s' % dict(
+            print('Move %(full_src)s to %(full_dst)s' % dict(
                 full_src=full_src,
                 full_dst=full_dst,
-                )
+                ))
         if os.path.isfile(full_src):
             result = os.rename(full_src, full_dst)
             if verbose:
-                print 'Move result:', result
+                print('Move result: %s' % result)
         else:
-            print 'No file to move:', full_src
+            print('No file to move: %s' % full_src)
         fl_dump('ABOVE4', '../artpages.inc')
         fl_dump('HERE4', 'artpages.inc')
 
@@ -267,13 +290,13 @@ class OneTalk(object):
         '''
         my_stars = '*' * 50 + ' '
         if verbose:
-            print my_stars + 'START ' + self.alias
+            print(my_stars + 'START ' + self.alias)
         if 0 and verbose:
             tmp_format = 'self.alias, self.copy_images, env, target, source'
             print('Eval: %s %s' % (tmp_format, eval(tmp_format)))
-        print os.getcwd()
+        print(os.getcwd())
         txt_line = prepare_line(self.tty_columns, self.alias, self.location)
-        print '# ' + txt_line
+        print('# ' + txt_line)
         link_do_src(self.alias)
         if self.copy_images:
             self.copy_needed_files()
@@ -281,4 +304,4 @@ class OneTalk(object):
             self.run_tex_for_chapter()
         self.move_page_numbers_file()
         if verbose:
-            print my_stars + 'END ' + self.alias
+            print(my_stars + 'END ' + self.alias)
