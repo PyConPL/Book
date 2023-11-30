@@ -1,6 +1,7 @@
 #!/usr/bin/env python2
 # -*- coding: UTF-8 -*-
 
+import sys
 import os
 import re
 import shutil
@@ -142,6 +143,8 @@ def read_file(name):
 
 def write_file(name, data):
     fd = open(name, 'wb')
+    if sys.version >= '3' and type(data) is str:
+        data = data.encode('utf-8')
     fd.write(data)
     fd.close()
     print("Written %d bytes to '%s'" % (
