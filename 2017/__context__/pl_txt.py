@@ -219,6 +219,34 @@ def fl_dump(label, fl_name):
             print('no file (yet).')
 
 
+def check_for_source(alias, fl_name):
+    if os.path.exists(fl_name):
+        result = 1
+        if verbose:
+            print('%s - found: %s' % (alias, fl_name))
+    else:
+        result = 0
+        if verbose:
+            print('%s - not found: %s' % (alias, fl_name))
+    return result
+
+
+def sanity_check():
+    src_dir = 'src'
+    if not os.path.isdir(src_dir):
+        raise RuntimeError("No directory: '%s'" % src_dir)
+    pndc_tmpl = 'src/template.pandoc'
+    if not os.path.isfile(pndc_tmpl):
+        raise RuntimeError("No file: '%s'" % pndc_tmpl)
+
+
+def final_command():
+    cmd = "texexec --pdfcopy --result=$TARGET $SOURCES"
+    if tex_to_file:
+        cmd = cmd + " >log_b1.txt 2>log_b2.txt"
+    return cmd
+
+
 class OneTalk(object):
     def __init__(self, tty_columns, alias, location, copy_images, create_pdfs):
         '''
